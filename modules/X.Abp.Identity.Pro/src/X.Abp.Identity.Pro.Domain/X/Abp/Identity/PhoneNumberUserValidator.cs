@@ -52,7 +52,7 @@ public class PhoneNumberUserValidator : IUserValidator<IdentityUser>
         {
             errors.Add(new IdentityError
             {
-                Code = "010014",
+                Code = IdentityProErrorCodes.PhoneNumberAlreadyInUse,
                 Description = Localizer[IdentityProErrorCodes.PhoneNumberAlreadyInUse, phoneNumber]
             });
         }

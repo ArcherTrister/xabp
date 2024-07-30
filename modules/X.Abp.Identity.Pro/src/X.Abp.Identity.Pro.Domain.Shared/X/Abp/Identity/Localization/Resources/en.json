@@ -172,7 +172,7 @@
     "Description:Abp.Identity.RequireHttpsMetadata": "Require Https Metadata",
     "Feature:MaximumUserCount": "Maximum user count",
     "Feature:MaximumUserCountDescription": "0 = unlimited",
-    "Volo.Abp.Identity:010010": "Reached maximum allowed user count! This tenant is allowed to have a maximum of {MaxUserCount} users.",
+    "Volo.Abp.Identity:010010": "Reached maximum allowed user count! This tenant is allowed to have a maximum of {0} users.",
     "Volo.Abp.Identity:010014": "Phone number '{0}' is already in use.",
     "LdapPasswordPlaceholder": "Enter to update password",
     "LdapLoginSettings": "Ldap Login Settings",

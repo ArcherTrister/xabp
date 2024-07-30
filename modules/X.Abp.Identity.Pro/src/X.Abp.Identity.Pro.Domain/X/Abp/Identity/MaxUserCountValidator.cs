@@ -57,9 +57,8 @@ public class MaxUserCountValidator : IUserValidator<IdentityUser>
             {
                 errors.Add(new IdentityError
                 {
-                    Code = "010010",
-                    Description = Localizer[IdentityProErrorCodes.MaximumUserCount].Value
-                    .Replace("{MaxUserCount}", $"{maxUserCount}", StringComparison.OrdinalIgnoreCase)
+                    Code = IdentityProErrorCodes.MaximumUserCount,
+                    Description = Localizer[IdentityProErrorCodes.MaximumUserCount, maxUserCount]
                 });
             }
         }

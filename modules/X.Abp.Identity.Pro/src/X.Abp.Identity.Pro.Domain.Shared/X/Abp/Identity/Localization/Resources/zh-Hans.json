@@ -171,7 +171,7 @@
     "Description:Abp.Identity.RequireHttpsMetadata": "要求 Https 元数据",
     "Feature:MaximumUserCount": "最大用户数",
     "Feature:MaximumUserCountDescription": "0 = 无限制",
-    "Volo.Abp.Identity:010010": "已达到允许的最大用户数！允许此租户最多拥有{MaxUserCount}名用户.",
+    "Volo.Abp.Identity:010010": "已达到允许的最大用户数！允许此租户最多拥有{0}名用户.",
     "Volo.Abp.Identity:010014": "手机号 '{0}' 已被使用.",
     "LdapPasswordPlaceholder": "输入来更新密码",
     "LdapLoginSettings": "Ldap登录设置",
