@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  serviceName: {{ .Release.Name }}-{{ .Chart.Name }}
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - image: docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+          name: {{ .Release.Name }}-{{ .Chart.Name }}        
+          ports:
+            - name: elasticsearch
+              containerPort: 9200
+          env:
+          - name: "xpack.watcher.enabled"
+            value: "false"
+          - name: "ES_JAVA_OPTS"
+            value: "-Xms512m -Xmx512m"
+          - name: "discovery.type"
+            value: "single-node" 
+          - name: "network.host"
+            value: "0.0.0.0"  

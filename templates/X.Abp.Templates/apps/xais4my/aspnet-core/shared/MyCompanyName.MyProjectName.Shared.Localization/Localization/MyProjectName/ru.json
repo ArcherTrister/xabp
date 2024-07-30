@@ -1,0 +1,8 @@
+{
+  "culture": "ru",
+  "texts": {
+    "Menu:Home": "Дома",
+    "Login": "Авторизоваться",
+    "Menu:Dashboard": "Панель приборов"
+  }
+}

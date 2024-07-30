@@ -1,0 +1,18 @@
+@mixin table-background-color($type, $alpha) {
+  @include light-dark-switch($type) using ($resolved-type) {
+    background-color: lp-var-rgb($resolved-type, $alpha);
+  }
+}
+
+@include run-through-all-colors() using ($type) {
+  .table-#{$type} {
+    @include table-background-color($type, 0.1);
+
+    @include light-dark-switch($type) using ($resolved-type) {
+      --#{$variable-prefix}table-bg: #{lp-var-rgb($resolved-type, 0.1)};
+    }
+
+    border-color: $border-color;
+    color: $global-text;
+  }
+}

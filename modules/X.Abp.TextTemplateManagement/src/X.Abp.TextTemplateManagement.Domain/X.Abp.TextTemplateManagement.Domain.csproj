@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>X.Abp.TextTemplateManagement.Domain</AssemblyName>
+    <PackageId>X.Abp.TextTemplateManagement.Domain</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Core" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.MultiTenancy" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.TextTemplating" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.TextTemplating.Core" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.TextTemplateManagement.Domain.Shared\X.Abp.TextTemplateManagement.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

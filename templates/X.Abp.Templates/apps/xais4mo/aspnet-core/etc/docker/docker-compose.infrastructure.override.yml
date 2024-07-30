@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  rabbitmq:
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  redis:
+    ports:
+      - "6379:6379"
+      
+  elasticsearch:
+    environment:
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      
+  kibana:
+    environment:
+      - ELASTICSEARCH_URL=http://host.docker.internal:9200
+    ports: 
+      - "5601:5601"
+      
+  sql-server-db:
+    ports:
+      - "1434:1433"
+    environment:
+      SA_PASSWORD: "myPassw0rd"
+      ACCEPT_EULA: "Y"
+      
+  grafana:
+    ports:
+      - "3000:3000"
+ 
+  prometheus:
+    ports:
+      - "9090:9090"

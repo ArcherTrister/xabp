@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MyCompanyName.MyProjectName.SaasService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\..\src\MyCompanyName.MyProjectName.SaasService.Application\MyCompanyName.MyProjectName.SaasService.Application.csproj" />
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.SaasService.Domain.Tests\MyCompanyName.MyProjectName.SaasService.Domain.Tests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+</Project>

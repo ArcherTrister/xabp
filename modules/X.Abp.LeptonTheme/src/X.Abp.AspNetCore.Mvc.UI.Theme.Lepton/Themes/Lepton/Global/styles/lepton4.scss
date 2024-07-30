@@ -1,0 +1,37 @@
+$theme: (
+  logo: url(/images/logo/logo-light.png),
+  logo-reverse: url(/images/logo/logo-light.png),
+  brand-text: #fff,
+  brand: #29cabf,
+  primary: #3a6af0,
+  secondary: #7731f1,
+  success: #29cabf,
+  info: #5c9afe,
+  warning: #efbc00,
+  danger: #c32d5c,
+  light: #4d5782,
+  dark: #fff,
+  default: #fff,
+  global-text: #ffffff,
+  global-bg: #2c3146,
+  text-color: #ffffff,
+  background: #24293e,
+  sidebar-bg: #2c3146,
+  sidebar-bg-gradient: #2c3146,
+  sidebar-text: #ffffff,
+  shadow: (
+    0px 0px 15px rgba(0, 0, 0, 0.1),
+    inset 0px 0px 3px rgba(255, 255, 255, 0.05),
+  ),
+  shadow-big: (
+    0px 0px 35px rgba(0, 0, 0, 0.1),
+    inset 0px 0px 5px rgba(255, 255, 255, 0.05),
+  ),
+  shadow-sm: (
+    0px 0px 5px rgba(0, 0, 0, 0.1),
+    inset 0px 0px 1px rgba(255, 255, 255, 0.05),
+  ),
+  radius: 5px,
+);
+
+@import "builder";

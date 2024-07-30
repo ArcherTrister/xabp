@@ -1,0 +1,32 @@
+﻿@page "Requests/{Id}/products"
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageSearchBox;
+@using X.Abp.Payment.Admin.Web.Menus;
+@using X.Abp.Payment.Admin.Web.Pages.Payment.Requests.Products;
+@using X.Abp.Payment.Admin.Web.Pages;
+@using X.Abp.Payment.Admin.Web.Pages.Payment;
+
+@inherits PaymentAdminPageBase
+
+@model IndexModel
+
+@{
+    PageLayout.Content.Title = L["Products"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:PaymentManagement"].Value);
+    PageLayout.Content.BreadCrumb.Add(L["Menu:PaymentRequests"].Value);
+    PageLayout.Content.BreadCrumb.Add(Model.PaymentRequest.Id.ToString());
+    PageLayout.Content.MenuItemName = AbpPaymentAdminMenus.PaymentRequests.PaymentRequestsMenu;
+}
+
+<div id="ProductsWrapper">
+    <abp-card>
+        <abp-card-body>
+            <abp-row>
+                <abp-column>
+                    @await Component.InvokeAsync(typeof(AbpPageSearchBoxViewComponent))
+                </abp-column>
+            </abp-row>
+        </abp-card-body>
+    </abp-card>
+    <abp-table id="ProductsTable" striped-rows="true" class="nowrap"></abp-table>
+</div>

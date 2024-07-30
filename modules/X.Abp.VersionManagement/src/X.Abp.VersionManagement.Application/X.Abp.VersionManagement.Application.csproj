@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.VersionManagement.Application</AssemblyName>
+    <PackageId>X.Abp.VersionManagement.Application</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="YamlDotNet" />
+    <ProjectReference
+      Include="..\X.Abp.VersionManagement.Application.Contracts\X.Abp.VersionManagement.Application.Contracts.csproj" />
+    <ProjectReference
+      Include="..\X.Abp.VersionManagement.Domain\X.Abp.VersionManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "ArcherTrister",
+  "classifications": ["Abp Vnext Pro/IdentityServer4/Web/WebAPI"],
+  "name": "Abp Vnext Pro IdentityServer4 SeparatedTenantSchema Template",
+  "identity": "X.Abp.IdentityServer4.SeparatedTenantSchema",
+  "shortName": "xais4sts",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MyCompanyName.MyProjectName",
+  "preferNameDirectory": true,
+  "constraints": {
+    "sdk-only": {
+      "type": "host",
+      "args": [
+        {
+          "hostname": "dotnetcli",
+          "version": "[8.0,)"
+        },
+        {
+          "hostname": "vs",
+          "version": "[8.0,)"
+        }
+      ]
+    }
+  },
+  "symbols": {
+    "IncludeVue": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "包含Vue项目"
+    },
+    "EnableSwaggerEnumFilter": {
+      "type": "parameter",
+      "dataType": "bool",
+      "defaultValue": "true",
+      "description": "启用Swagger枚举类型过滤器"
+    },
+    "DatabaseManagementSystem": {
+      "type": "parameter",
+      "description": "Database Management System",
+      "dataType": "choice",
+      "defaultValue": "SqlServer",
+      "isRequired": false,
+      "choices": [
+        {
+          "choice": "SqlServer",
+          "description": "Sql Server"
+        },
+        {
+          "choice": "MySQL",
+          "description": "My SQL"
+        },
+        {
+          "choice": "Sqlite",
+          "description": "Sqlite"
+        },
+        {
+          "choice": "Oracle",
+          "description": "Oracle"
+        },
+        {
+          "choice": "OracleDevart",
+          "description": "Oracle Devart Driver"
+        },
+        {
+          "choice": "PostgreSql",
+          "description": "Postgre Sql"
+        }
+      ]
+    },
+    "SqlServer": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"SqlServer\")"
+    },
+    "MySQL": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"MySQL\")"
+    },
+    "Sqlite": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"Sqlite\")"
+    },
+    "Oracle": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"Oracle\")"
+    },
+    "OracleDevart": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"Oracle.Devart\")"
+    },
+    "PostgreSql": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"PostgreSql\")"
+    }
+  },
+  "SpecialCustomOperations": {
+    "**/*.md": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "if": ["---#if"],
+            "else": ["---#else"],
+            "elseif": ["---#elseif", "---#elif"],
+            "endif": ["---#endif"],
+            "trim": "true",
+            "wholeLine": "true"
+          }
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!IncludeVue)",
+          "exclude": ["vue/**/*"]
+        },
+        {
+          "condition": "(!EnableSwaggerEnumFilter)",
+          "exclude": [
+            "aspnet-core/src/MyCompanyName.MyProjectName.HttpApi.Host/Filters/*"
+          ]
+        }
+      ]
+    }
+  ],
+  "postActions": [
+    {
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    }
+  ]
+}

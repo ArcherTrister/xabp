@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>X.Abp.Account.Pro.Public.Application.Contracts</AssemblyName>
+    <PackageId>X.Abp.Account.Pro.Public.Application.Contracts</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\X.Abp.Account.Pro.Shared.Application.Contracts\X.Abp.Account.Pro.Shared.Application.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="X\Abp\Account\Emailing\Templates\*.tpl" />
+    <None Remove="X\Abp\Account\Emailing\Templates\*.tpl" />
+  </ItemGroup>
+
+</Project>

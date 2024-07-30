@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.OpenIddict.Pro.HttpApi</AssemblyName>
+    <PackageId>X.Abp.OpenIddict.Pro.HttpApi</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.OpenIddict.Pro.Application.Contracts\X.Abp.OpenIddict.Pro.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

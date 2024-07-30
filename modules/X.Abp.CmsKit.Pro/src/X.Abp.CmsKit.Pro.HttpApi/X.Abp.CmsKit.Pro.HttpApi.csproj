@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>X.Abp.CmsKit.Pro.HttpApi</AssemblyName>
+    <PackageId>X.Abp.CmsKit.Pro.HttpApi</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.CmsKit.HttpApi" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.CmsKit.Pro.Admin.HttpApi\X.Abp.CmsKit.Pro.Admin.HttpApi.csproj" />
+    <ProjectReference
+      Include="..\X.Abp.CmsKit.Pro.Application.Contracts\X.Abp.CmsKit.Pro.Application.Contracts.csproj" />
+    <ProjectReference
+      Include="..\X.Abp.CmsKit.Pro.Public.HttpApi\X.Abp.CmsKit.Pro.Public.HttpApi.csproj" />
+  </ItemGroup>
+
+</Project>

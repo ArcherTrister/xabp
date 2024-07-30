@@ -1,0 +1,54 @@
+// FOOTER
+/* ~ */
+/* ---------- FOOTER STYLES - START */
+.lp-footer { 
+    color: $global-text;
+    background: rgba($global-bg, .35);
+    padding: $grid*2/3;
+    transition: .2s all;
+    min-height: 52px;
+    opacity: .8;
+
+    .navbar-brand {
+        background: var(--logo-reverse) top left no-repeat;
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        opacity: 1;
+    }
+
+    a {
+        color: $global-text;
+
+        &.btn-link {
+            color: $global-text;
+        }
+
+        opacity: .7;
+
+        &:hover {
+            opacity: 1;
+            text-decoration: none;
+        }
+    }
+    .lp-content {
+        min-height: unset;
+        height: unset;
+    }
+    span.text-muted {
+        opacity: .15;
+    }
+}
+.stickyFooter {
+    padding-bottom: 60px;
+    .lp-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        z-index: 1;
+    }
+}
+/* ---------- FOOTER STYLES - END */
+/* ~ */

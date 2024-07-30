@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>X.Abp.OpenIddict.Pro.Application.Contracts</AssemblyName>
+    <PackageId>X.Abp.OpenIddict.Pro.Application.Contracts</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.Openiddict.Pro.Domain.Shared\X.Abp.Openiddict.Pro.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

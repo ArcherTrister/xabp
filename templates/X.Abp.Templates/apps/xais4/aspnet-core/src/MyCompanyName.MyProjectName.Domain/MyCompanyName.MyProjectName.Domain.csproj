@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.Domain.Shared\MyCompanyName.MyProjectName.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Sms" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Gdpr.Domain" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Identity.Pro.Domain" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.IdentityServer.Pro.Domain"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.Domain"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.Domain"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Saas.Domain" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

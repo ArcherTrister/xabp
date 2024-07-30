@@ -1,0 +1,122 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@using Volo.Abp.Data;
+@using Volo.Abp.Identity;
+@using Volo.Abp.Identity.Localization;
+@using Volo.Abp.Identity.Settings;
+@using Volo.Abp.Localization;
+@using Volo.Abp.ObjectExtending;
+@using Volo.Abp.Settings;
+@using X.Abp.Identity.Web.Pages.Identity.Users;
+@model CreateModalModel
+@inject ISettingProvider SettingProvider
+@inject IHtmlLocalizer<IdentityResource> L
+@inject IStringLocalizerFactory StringLocalizerFactory
+@{
+    Layout = null;
+}
+<form method="post" asp-page="/Identity/Users/CreateModal">
+    <abp-modal>
+        <abp-modal-header title="@L["NewUser"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-tabs name="create-user-modal-tabs">
+                <abp-tab title="@L["UserInformations"].Value">
+                    <abp-input asp-for="UserInfo.UserName" />
+                    <abp-input asp-for="UserInfo.Name" />
+                    <abp-input asp-for="UserInfo.Surname" />
+                    <div class="mb-3">
+                        <label asp-for="UserInfo.Password" class="form-label">@L["Password"] *</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" maxlength="@IdentityUserConsts.MaxPasswordLength" asp-for="UserInfo.Password" />
+                            <button class="btn btn-secondary" type="button" id="PasswordVisibilityButton"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                        </div>
+                        <span asp-validation-for="UserInfo.Password"></span>
+                    </div>
+                    <abp-input asp-for="UserInfo.Email" label="@(L["EmailAddress"].Value + " * ")" />
+                    @foreach (var propertyInfo in ObjectExtensionManager.Instance.GetProperties<CreateModalModel.UserInfoViewModel>())
+                    {
+                        if (!propertyInfo.Name.EndsWith("_Text"))
+                        {
+                            if (propertyInfo.Type.IsEnum || !propertyInfo.Lookup.Url.IsNullOrEmpty())
+                            {
+                                if (propertyInfo.Type.IsEnum)
+                                {
+                                    Model.UserInfo.ExtraProperties.ToEnum(propertyInfo.Name, propertyInfo.Type);
+                                }
+                                <abp-select asp-for="UserInfo.ExtraProperties[propertyInfo.Name]"
+                                            label="@propertyInfo.GetLocalizedDisplayName(StringLocalizerFactory)"
+                                            autocomplete-api-url="@propertyInfo.Lookup.Url"
+                                            autocomplete-selected-item-name="@Model.UserInfo.GetProperty(propertyInfo.Name+"_Text")"
+                                            autocomplete-selected-item-value="@Model.UserInfo.GetProperty(propertyInfo.Name)"
+                                            autocomplete-filter-param-name="@propertyInfo.Lookup.FilterParamName"
+                                            autocomplete-items-property-name="@propertyInfo.Lookup.ResultListPropertyName"
+                                            autocomplete-display-property-name="@propertyInfo.Lookup.DisplayPropertyName"
+                                            autocomplete-value-property-name="@propertyInfo.Lookup.ValuePropertyName"></abp-select>
+                            }
+                            else
+                            {
+                                <abp-input type="@propertyInfo.GetInputType()"
+                                           asp-for="UserInfo.ExtraProperties[propertyInfo.Name]"
+                                           label="@propertyInfo.GetLocalizedDisplayName(StringLocalizerFactory)"
+                                           asp-format="@propertyInfo.GetInputFormatOrNull()"
+                                           value="@propertyInfo.GetInputValueOrNull(Model.UserInfo.GetProperty(propertyInfo.Name))" />
+                            }
+                        }
+                    }
+                    <abp-input asp-for="UserInfo.PhoneNumber" />
+                    <abp-input asp-for="UserInfo.IsActive" />
+                    <abp-input asp-for="UserInfo.LockoutEnabled" />
+                    @if (await SettingProvider.IsTrueAsync(IdentitySettingNames.SignIn.RequireConfirmedEmail))
+                    {
+                        <abp-input asp-for="UserInfo.SendConfirmationEmail" />
+                    }
+                </abp-tab>
+                <abp-tab title="@L["Roles"].Value">
+                    @for (var i = 0; i < Model.Roles.Length; i++)
+                    {
+                        var role = Model.Roles[i];
+                        if (role.IsDefault)
+                        {
+
+                            <abp-input asp-for="@role.IsAssigned" abp-id-name="@Model.Roles[i].IsAssigned" label="@HtmlEncoder.Encode(role.Name)" checked="checked" />
+                        }
+                        else
+                        {
+                            <abp-input asp-for="@role.IsAssigned" abp-id-name="@Model.Roles[i].IsAssigned" label="@HtmlEncoder.Encode(role.Name)" />
+                        }
+
+                        <input asp-for="@role.Name" abp-id-name="@Model.Roles[i].Name" />
+                    }
+                </abp-tab>
+                @if (Model.OrganizationUnits.Any())
+                {
+                    <abp-tab name="OrganizationUnits" title="@L.GetString("OrganizationUnits", Model.OrganizationUnits.Count(r => r.IsAssigned))">
+                        <div id="JsTreeCheckable" class="tree jstree jstree-2 jstree-default jstree-checkbox-no-clicked jstree-checkbox-selection" role="tree" aria-multiselectable="true" tabindex="0" aria-activedescendant="j2_1" aria-busy="false" aria-selected="false">
+                            <ul class="jstree-container-ul jstree-children" role="group">
+                                @for (int i = 0; i < Model.OrganizationUnitTreeRootNode.Children.Count; i++)
+                                {
+                                    @await Html.PartialAsync("OrganizationUnitTreeNode", new OrganizationUnitTreeNodeModel
+                                    {
+                                        Depth = 0,
+                                        Node = Model.OrganizationUnitTreeRootNode.Children[i],
+                                        OrganizationUnits = Model.OrganizationUnits
+                                    })
+                                }
+                            </ul>
+                        </div>
+                        @for (var i = 0; i < Model.OrganizationUnits.Length; i++)
+                        {
+                            var organizationUnits = Model.OrganizationUnits[i];
+                            <input asp-for="@organizationUnits.IsAssigned" abp-id-name="@Model.OrganizationUnits[i].IsAssigned" />
+                            <input asp-for="@organizationUnits.DisplayName" abp-id-name="@Model.OrganizationUnits[i].DisplayName" />
+                            <input asp-for="@organizationUnits.Id" abp-id-name="@Model.OrganizationUnits[i].Id" />
+                        }
+                    </abp-tab>
+                }
+            </abp-tabs>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

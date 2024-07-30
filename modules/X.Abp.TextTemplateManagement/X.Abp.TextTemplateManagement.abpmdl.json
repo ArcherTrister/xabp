@@ -1,0 +1,111 @@
+{
+    "folders": {
+        "items": {
+            "src": {},
+            "test": {},
+            "host": {}
+        }
+    },
+    "packages": {
+        "X.Abp.TextTemplateManagement.Domain.Shared": {
+            "path": "src/X.Abp.TextTemplateManagement.Domain.Shared/X.Abp.TextTemplateManagement.Domain.Shared.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.Domain": {
+            "path": "src/X.Abp.TextTemplateManagement.Domain/X.Abp.TextTemplateManagement.Domain.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.Application.Contracts": {
+            "path": "src/X.Abp.TextTemplateManagement.Application.Contracts/X.Abp.TextTemplateManagement.Application.Contracts.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.Application": {
+            "path": "src/X.Abp.TextTemplateManagement.Application/X.Abp.TextTemplateManagement.Application.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.EntityFrameworkCore": {
+            "path": "src/X.Abp.TextTemplateManagement.EntityFrameworkCore/X.Abp.TextTemplateManagement.EntityFrameworkCore.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.MongoDB": {
+            "path": "src/X.Abp.TextTemplateManagement.MongoDB/X.Abp.TextTemplateManagement.MongoDB.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.HttpApi": {
+            "path": "src/X.Abp.TextTemplateManagement.HttpApi/X.Abp.TextTemplateManagement.HttpApi.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.HttpApi.Client": {
+            "path": "src/X.Abp.TextTemplateManagement.HttpApi.Client/X.Abp.TextTemplateManagement.HttpApi.Client.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.TestBase": {
+            "path": "test/X.Abp.TextTemplateManagement.TestBase/X.Abp.TextTemplateManagement.TestBase.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.TextTemplateManagement.EntityFrameworkCore.Tests": {
+            "path": "test/X.Abp.TextTemplateManagement.EntityFrameworkCore.Tests/X.Abp.TextTemplateManagement.EntityFrameworkCore.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.TextTemplateManagement.MongoDB.Tests": {
+            "path": "test/X.Abp.TextTemplateManagement.MongoDB.Tests/X.Abp.TextTemplateManagement.MongoDB.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.TextTemplateManagement.Domain.Tests": {
+            "path": "test/X.Abp.TextTemplateManagement.Domain.Tests/X.Abp.TextTemplateManagement.Domain.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.TextTemplateManagement.Application.Tests": {
+            "path": "test/X.Abp.TextTemplateManagement.Application.Tests/X.Abp.TextTemplateManagement.Application.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.TextTemplateManagement.HttpApi.Host": {
+            "path": "host/X.Abp.TextTemplateManagement.HttpApi.Host/X.Abp.TextTemplateManagement.HttpApi.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.TextTemplateManagement.Web": {
+            "path": "src/X.Abp.TextTemplateManagement.Web/X.Abp.TextTemplateManagement.Web.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.HttpApi.Client.ConsoleTestApp": {
+            "path": "test/X.Abp.TextTemplateManagement.HttpApi.Client.ConsoleTestApp/X.Abp.TextTemplateManagement.HttpApi.Client.ConsoleTestApp.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.TextTemplateManagement.Web.Host": {
+            "path": "host/X.Abp.TextTemplateManagement.Web.Host/X.Abp.TextTemplateManagement.Web.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.TextTemplateManagement.AuthServer": {
+            "path": "host/X.Abp.TextTemplateManagement.AuthServer/X.Abp.TextTemplateManagement.AuthServer.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.TextTemplateManagement.Host.Shared": {
+            "path": "host/X.Abp.TextTemplateManagement.Host.Shared/X.Abp.TextTemplateManagement.Host.Shared.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.TextTemplateManagement.Web.Unified": {
+            "path": "host/X.Abp.TextTemplateManagement.Web.Unified/X.Abp.TextTemplateManagement.Web.Unified.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.TextTemplateManagement.Blazor": {
+            "path": "src/X.Abp.TextTemplateManagement.Blazor/X.Abp.TextTemplateManagement.Blazor.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.Blazor.Host": {
+            "path": "host/X.Abp.TextTemplateManagement.Blazor.Host/X.Abp.TextTemplateManagement.Blazor.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.TextTemplateManagement.Blazor.Server": {
+            "path": "src/X.Abp.TextTemplateManagement.Blazor.Server/X.Abp.TextTemplateManagement.Blazor.Server.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.Blazor.WebAssembly": {
+            "path": "src/X.Abp.TextTemplateManagement.Blazor.WebAssembly/X.Abp.TextTemplateManagement.Blazor.WebAssembly.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.TextTemplateManagement.Blazor.Server.Host": {
+            "path": "host/X.Abp.TextTemplateManagement.Blazor.Server.Host/X.Abp.TextTemplateManagement.Blazor.Server.Host.abppkg.json",
+            "folder": "host"
+        }
+    }
+}

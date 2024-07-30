@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\modules.props" />
+
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.Account.Pro.Admin.Application</AssemblyName>
+    <PackageId>X.Abp.Account.Pro.Admin.Application</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Account.Pro.Shared.Application\X.Abp.Account.Pro.Shared.Application.csproj" />
+    <ProjectReference Include="..\X.Abp.Account.Pro.Admin.Application.Contracts\X.Abp.Account.Pro.Admin.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

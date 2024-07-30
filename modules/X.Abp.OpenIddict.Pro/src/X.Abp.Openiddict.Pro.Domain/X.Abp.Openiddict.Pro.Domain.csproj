@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.OpenIddict.Pro.Domain</AssemblyName>
+    <PackageId>X.Abp.OpenIddict.Pro.Domain</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Openiddict.Domain" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Openiddict.Pro.Domain.Shared\X.Abp.Openiddict.Pro.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

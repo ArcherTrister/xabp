@@ -1,0 +1,347 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar;
+@using Volo.Abp.AuditLogging.Localization;
+@using X.Abp.AuditLogging.Web.Menus;
+@using X.Abp.AuditLogging.Web.Pages.AuditLogging;
+@model X.Abp.AuditLogging.Web.Pages.AuditLogging.IndexModel
+@inject IStringLocalizer<AuditLoggingResource> L
+@inject IAuthorizationService Authorization
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["AuditLogs"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:AuditLogging"].Value);
+    PageLayout.Content.MenuItemName = AbpAuditLoggingMainMenuNames.GroupName;
+}
+@section Styles{
+    <abp-style-bundle name="@nameof(IndexModel)">
+        <abp-style src="/Pages/AuditLogging/description.css" />
+        <abp-style src="/libs/daterangepicker/daterangepicker.css" />
+    </abp-style-bundle>
+}
+@section Scripts{
+    <abp-script-bundle name="@nameof(IndexModel)">
+        <abp-script src="/Pages/AuditLogging/index.js" />
+        <abp-script src="/libs/moment/min/moment.min.js" />
+        <abp-script src="/libs/moment/min/locales.min.js" />
+        <abp-script src="/libs/daterangepicker/daterangepicker.js" />
+    </abp-script-bundle>
+}
+
+<abp-row>
+    <abp-column size-md="_6">
+        <abp-card-title>@L["AuditLogs"]</abp-card-title>
+    </abp-column>
+    <abp-column size-md="_6" class="text-end">
+        @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new { pageName = typeof(IndexModel).FullName })
+    </abp-column>
+</abp-row>
+<abp-tabs>
+    <abp-tab title="@L["AuditLogging"]">
+        <abp-card id="AuditLogsWrapper">
+            <abp-card-body>
+                <div class="row">
+                    <div class="col">
+                        <select class="form-control" id="search_httpMethod">
+                            <option selected></option>
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PATCH">PATCH</option>
+                            <option value="DELETE">DELETE</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="search_url" placeholder="@L["Placeholder", L["Url"]]" />
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="search_httpStatusCode" placeholder="@L["Placeholder", L["HttpStatusCode"]]" />
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="search_date" />
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" id="search">@L["Search"]</button>
+                        <button class="btn btn-primary" id="reset">@L["Reset"]</button>
+                    </div>
+                </div>
+                <abp-table id="AuditLogsTable" striped-rows="true" class="nowrap"></abp-table>
+            </abp-card-body>
+        </abp-card>
+
+    </abp-tab>
+    <abp-tab title="@L["EntityChanges"]">
+        <abp-card id="EntityChangesWrapper">
+            <abp-card-body>
+                <div class="row">
+                    <div class="col">
+                        <select class="form-control" id="search_httpMethod">
+                            <option selected></option>
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PATCH">PATCH</option>
+                            <option value="DELETE">DELETE</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="search_url" placeholder="@L["Placeholder", L["Url"]]" />
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="search_httpStatusCode" placeholder="@L["Placeholder", L["HttpStatusCode"]]" />
+                    </div>
+                    <div class="col">
+                        <input class="form-control" id="search_date" />
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" id="search">@L["Search"]</button>
+                        <button class="btn btn-primary" id="reset">@L["Reset"]</button>
+                    </div>
+                </div>
+                <abp-table id="EntityChangesTable" striped-rows="true" class="nowrap"></abp-table>
+            </abp-card-body>
+        </abp-card>
+    </abp-tab>
+</abp-tabs>
+
+@*<div class="row entry-row">
+    <div class="col-auto">
+        <h1 class="content-header-title">@L["AuditLogs"]</h1>
+
+    </div>
+    <div class="col-lg-auto ps-lg-0">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> </a></li>
+            <li class="breadcrumb-item active" aria-current="page">@L["AuditLogs"]</li>
+        </ol>
+
+    </div>
+    <div class="col">
+        <div class="text-lg-end pt-2" id="AbpContentToolbar">
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <ul class="nav nav-tabs" id="T732d7639cc5f4f4eba4181c904a96e1b" role="tablist">
+        <li class="nav-item" role="presentation"><a aria-controls="AuditLogging" aria-selected="true" class="nav-link   active" data-bs-toggle="tab" href="#AuditLogging" id="AuditLogging-tab" role="tab">审计日志</a></li>
+        <li class="nav-item" role="presentation"><a aria-controls="EntityChanges" aria-selected="false" class="nav-link  " data-bs-toggle="tab" href="#EntityChanges" id="EntityChanges-tab" role="tab" tabindex="-1">实体变更</a></li>
+    </ul>
+    <div class="tab-content" id="T732d7639cc5f4f4eba4181c904a96e1bContent">
+        <div aria-labelledby="AuditLogging-tab" class="tab-pane fade   show active" id="AuditLogging" role="tabpanel">
+            <div class="card">
+                <div class="pb-lg-3 card-body">
+                    <form id="FilterFormId" method="post">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4">
+                                <div class="input-daterange row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="mb-3"><label class="form-label" for="StartTime">开始时间</label><input type="text" value="2023/11/17" id="StartTime" name="StartTime" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="StartTime" data-valmsg-replace="true"></span></div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="mb-3"><label class="form-label" for="EndTime">结束时间</label><input type="text" id="EndTime" name="EndTime" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="EndTime" data-valmsg-replace="true"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3"><label class="form-label" for="UserName">用户名</label><input type="text" id="UserName" name="UserName" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3"><label class="form-label" for="UrlFilter">Url过滤</label><input type="text" id="UrlFilter" name="UrlFilter" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="UrlFilter" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3"><label class="form-label" for="MinExecutionDuration">最小持续时间</label><input type="number" id="MinExecutionDuration" name="MinExecutionDuration" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="MinExecutionDuration" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3"><label class="form-label" for="MaxExecutionDuration">最大持续时间</label><input type="number" id="MaxExecutionDuration" name="MaxExecutionDuration" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="MaxExecutionDuration" data-valmsg-replace="true"></span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3">
+                                    <label class="form-label" for="HttpMethod">Http方法</label>
+                                    <select class="form-select form-control" id="HttpMethod" name="HttpMethod">
+                                        <option value=""></option>
+                                        <option value="GET">GET</option>
+                                        <option value="POST">POST</option>
+                                        <option value="DELETE">DELETE</option>
+                                        <option value="PUT">PUT</option>
+                                        <option value="HEAD">HEAD</option>
+                                        <option value="CONNECT">CONNECT</option>
+                                        <option value="OPTIONS">OPTIONS</option>
+                                        <option value="TRACE">TRACE</option>
+                                    </select>
+
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="HttpMethod" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3">
+                                    <label class="form-label" for="HttpStatusCode">Http状态码</label>
+                                    <select class="form-select form-control" id="HttpStatusCode" name="HttpStatusCode">
+                                        <option value=""></option>
+                                        <option value="100">100 - Continue</option>
+                                        <option value="101">101 - Switching Protocols</option>
+                                        <option value="102">102 - Processing</option>
+                                        <option value="103">103 - Early Hints</option>
+                                        <option value="200">200 - OK</option>
+                                        <option value="201">201 - Created</option>
+                                        <option value="202">202 - Accepted</option>
+                                        <option value="203">203 - Non Authoritative Information</option>
+                                        <option value="204">204 - No Content</option>
+                                        <option value="205">205 - Reset Content</option>
+                                        <option value="206">206 - Partial Content</option>
+                                        <option value="207">207 - Multi Status</option>
+                                        <option value="208">208 - Already Reported</option>
+                                        <option value="226">226 - I M Used</option>
+                                        <option value="300">300 - Multiple Choices</option>
+                                        <option value="300">300 - Ambiguous</option>
+                                        <option value="301">301 - Moved Permanently</option>
+                                        <option value="301">301 - Moved</option>
+                                        <option value="302">302 - Found</option>
+                                        <option value="302">302 - Redirect</option>
+                                        <option value="303">303 - See Other</option>
+                                        <option value="303">303 - Redirect Method</option>
+                                        <option value="304">304 - Not Modified</option>
+                                        <option value="305">305 - Use Proxy</option>
+                                        <option value="306">306 - Unused</option>
+                                        <option value="307">307 - Temporary Redirect</option>
+                                        <option value="307">307 - Redirect Keep Verb</option>
+                                        <option value="308">308 - Permanent Redirect</option>
+                                        <option value="400">400 - Bad Request</option>
+                                        <option value="401">401 - Unauthorized</option>
+                                        <option value="402">402 - Payment Required</option>
+                                        <option value="403">403 - Forbidden</option>
+                                        <option value="404">404 - Not Found</option>
+                                        <option value="405">405 - Method Not Allowed</option>
+                                        <option value="406">406 - Not Acceptable</option>
+                                        <option value="407">407 - Proxy Authentication Required</option>
+                                        <option value="408">408 - Request Timeout</option>
+                                        <option value="409">409 - Conflict</option>
+                                        <option value="410">410 - Gone</option>
+                                        <option value="411">411 - Length Required</option>
+                                        <option value="412">412 - Precondition Failed</option>
+                                        <option value="413">413 - Request Entity Too Large</option>
+                                        <option value="414">414 - Request Uri Too Long</option>
+                                        <option value="415">415 - Unsupported Media Type</option>
+                                        <option value="416">416 - Requested Range Not Satisfiable</option>
+                                        <option value="417">417 - Expectation Failed</option>
+                                        <option value="421">421 - Misdirected Request</option>
+                                        <option value="422">422 - Unprocessable Entity</option>
+                                        <option value="423">423 - Locked</option>
+                                        <option value="424">424 - Failed Dependency</option>
+                                        <option value="426">426 - Upgrade Required</option>
+                                        <option value="428">428 - Precondition Required</option>
+                                        <option value="429">429 - Too Many Requests</option>
+                                        <option value="431">431 - Request Header Fields Too Large</option>
+                                        <option value="451">451 - Unavailable For Legal Reasons</option>
+                                        <option value="500">500 - Internal Server Error</option>
+                                        <option value="501">501 - Not Implemented</option>
+                                        <option value="502">502 - Bad Gateway</option>
+                                        <option value="503">503 - Service Unavailable</option>
+                                        <option value="504">504 - Gateway Timeout</option>
+                                        <option value="505">505 - Http Version Not Supported</option>
+                                        <option value="506">506 - Variant Also Negotiates</option>
+                                        <option value="507">507 - Insufficient Storage</option>
+                                        <option value="508">508 - Loop Detected</option>
+                                        <option value="510">510 - Not Extended</option>
+                                        <option value="511">511 - Network Authentication Required</option>
+                                    </select>
+
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="HttpStatusCode" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3"><label class="form-label" for="ApplicationName">应用名称</label><input type="text" id="ApplicationName" name="ApplicationName" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="ApplicationName" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3"><label class="form-label" for="ClientIpAddress">IP地址</label><input type="text" id="ClientIpAddress" name="ClientIpAddress" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="ClientIpAddress" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3"><label class="form-label" for="CorrelationId">关联Id</label><input type="text" id="CorrelationId" name="CorrelationId" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="CorrelationId" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="mb-3">
+                                    <label class="form-label" for="HasException">存在异常</label>
+                                    <select class="form-select form-control" id="HasException" name="HasException">
+                                        <option value=""></option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="HasException" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-lg-2">
+                                <div class="d-grid gap-2">
+                                    <button class="mt-md-4 btn btn-primary" type="submit" data-busy-text="处理中...">
+                                        <i class="fa fa-search" aria-hidden="true"></i> 搜索
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-2">
+                                <div class="d-grid gap-2">
+                                    <button class="mt-md-4 btn btn-primary" id="ClearFilterButton" type="submit" data-busy-text="处理中...">
+                                        <i aria-hidden="true"></i> 清除
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8CxgNjecaDZFv1y9NQzochL26hsbLxGc78cpkLTwDwsLIu0xzBolBusCoxOSaiEkNzRjC4icGvmRvS74EcaRZ7kDere5JDcg2BiHZNMXzmNbcev1Ouuccjdws_--CfXeBcYHzEJroryNfwJ62aOp62iXrv5LeWdhx2Ho4Kfrb5FwcNFkYoHEAtBf7x9yC_bx7Q">
+                    </form>
+
+                </div>
+            </div>
+            <div id="AuditLogsTable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer"><div class="dataTable_filters row"></div><div id="AuditLogsTable_processing" class="dataTables_processing card" style="display: none;">处理中...<div><div></div><div></div><div></div><div></div></div></div><div class="dataTables_scroll"><div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 2017.41px; padding-right: 0px;"><table class="nowrap table table-striped dataTable no-footer" style="margin-left: 0px; width: 2017.41px;"><thead><tr><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 86px;" aria-label="操作">操作</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 479.141px;" aria-label="Http请求">Http请求</th><th class="sorting" tabindex="0" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 25.2031px;" aria-label="用户: activate to sort column ascending">用户</th><th class="sorting" tabindex="0" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 116.25px;" aria-label="IP地址: activate to sort column ascending">IP地址</th><th class="sorting sorting_desc" tabindex="0" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 103px;" aria-sort="descending" aria-label="时间: activate to sort column ascending">时间</th><th class="sorting" tabindex="0" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 85.7188px;" aria-label="持续时间(毫秒): activate to sort column ascending">持续时间(毫秒)</th><th class="sorting" tabindex="0" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 50.4062px;" aria-label="应用名称: activate to sort column ascending">应用名称</th><th class="sorting" tabindex="0" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 269.766px;" aria-label="关联Id: activate to sort column ascending">关联Id</th><th class="sorting" tabindex="0" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 399.516px;" aria-label="Url: activate to sort column ascending">Url</th><th class="sorting" tabindex="0" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 50.4062px;" aria-label="存在异常: activate to sort column ascending">存在异常</th></tr></thead></table></div></div><div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;"><table id="AuditLogsTable" class="nowrap table table-striped dataTable no-footer" aria-describedby="AuditLogsTable_info" style="width: 2015px;"><thead><tr style="height: 0px;"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 86px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="操作"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">操作</div></th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 479.141px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="Http请求"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Http请求</div></th><th class="sorting" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 25.2031px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="用户: activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">用户</div></th><th class="sorting" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 116.25px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="IP地址: activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">IP地址</div></th><th class="sorting sorting_desc" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 103px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-sort="descending" aria-label="时间: activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">时间</div></th><th class="sorting" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 85.7188px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="持续时间(毫秒): activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">持续时间(毫秒)</div></th><th class="sorting" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 50.4062px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="应用名称: activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">应用名称</div></th><th class="sorting" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 269.766px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="关联Id: activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">关联Id</div></th><th class="sorting" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 399.516px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="Url: activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Url</div></th><th class="sorting" aria-controls="AuditLogsTable" rowspan="1" colspan="1" style="width: 50.4062px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="存在异常: activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">存在异常</div></th></tr></thead><tbody><tr class="odd"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-warning">302</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/Account/Login</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:172.16.0.1</span></td><td class="sorting_1">2023/11/24 15:29</td><td>114</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">6d7b3ecdecc64bb6a94a227e50ea2ff3</span></td><td><span class="datatableCell" data-filter-field="Url">/Account/Login</span></td><td></td></tr><tr class="even"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">404</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/ws/v1/cluster/apps/new-application</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:2.56.247.167</span></td><td class="sorting_1">2023/11/24 13:23</td><td>0</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">f727778280064405a7bcdf49fd58b2c9</span></td><td><span class="datatableCell" data-filter-field="Url">/ws/v1/cluster/apps/new-application</span></td><td></td></tr><tr class="odd"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">404</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/ws/v1/cluster/apps/new-application</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:165.227.164.123</span></td><td class="sorting_1">2023/11/24 07:52</td><td>0</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">779eb36722c9421c9da310ffacd7acff</span></td><td><span class="datatableCell" data-filter-field="Url">/ws/v1/cluster/apps/new-application</span></td><td></td></tr><tr class="even"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">404</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/ws/v1/cluster/apps/new-application</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:165.227.141.46</span></td><td class="sorting_1">2023/11/24 01:41</td><td>0</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">3f64fc9ab9ed4776b1317419298876f7</span></td><td><span class="datatableCell" data-filter-field="Url">/ws/v1/cluster/apps/new-application</span></td><td></td></tr><tr class="odd"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">400</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:43.129.97.125</span></td><td class="sorting_1">2023/11/23 23:23</td><td>3</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">dd789b7c6be4475ea642429b74e1138d</span></td><td><span class="datatableCell" data-filter-field="Url">/</span></td><td></td></tr><tr class="even"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">404</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/nation.php</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:43.129.97.125</span></td><td class="sorting_1">2023/11/23 23:23</td><td>0</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">e9f9d910c0b7478894c76b89ced9640a</span></td><td><span class="datatableCell" data-filter-field="Url">/nation.php</span></td><td></td></tr><tr class="odd"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">404</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/wp-content/themes/twentytwentyone/inc/block-css.php</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:43.129.97.125</span></td><td class="sorting_1">2023/11/23 23:23</td><td>0</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">5346ec72d9c64f8d8c91dade22cd91ff</span></td><td><span class="datatableCell" data-filter-field="Url">/wp-content/themes/twentytwentyone/inc/block-css.php</span></td><td></td></tr><tr class="even"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">404</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/categories/Yud</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:43.129.97.125</span></td><td class="sorting_1">2023/11/23 23:23</td><td>0</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">b3051ca16383441a9b0cbac756ea68bf</span></td><td><span class="datatableCell" data-filter-field="Url">/categories/Yud</span></td><td></td></tr><tr class="odd"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">404</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/ws/v1/cluster/apps/new-application</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:94.103.124.139</span></td><td class="sorting_1">2023/11/23 23:06</td><td>0</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">ca7dd523e47b41c287399d92b22fafca</span></td><td><span class="datatableCell" data-filter-field="Url">/ws/v1/cluster/apps/new-application</span></td><td></td></tr><tr class="even"><td><button type="button" class="btn btn-primary abp-action-button"><i class="fa fa-search me-1"></i>详情</button></td><td><span class="badge bg-danger">404</span>&nbsp; <span data-filter-field="HttpMethod" class="datatableCell badge bg-success">POST</span>&nbsp;<span data-filter-field="UrlFilter" class="datatableCell">/ws/v1/cluster/apps/new-application</span></td><td><span class="datatableCell" data-filter-field="UserName"></span></td><td><span class="datatableCell" data-filter-field="ClientIpAddress">::ffff:94.103.124.139</span></td><td class="sorting_1">2023/11/23 22:38</td><td>0</td><td></td><td><span class="datatableCell" data-filter-field="CorrelationId">ece00e34d22f4d4c849a8d0447ccd996</span></td><td><span class="datatableCell" data-filter-field="Url">/ws/v1/cluster/apps/new-application</span></td><td></td></tr></tbody></table></div></div><div class="row dataTable_footer"><div class="col-auto"><div class="dataTables_length" id="AuditLogsTable_length"><label>显示 <select name="AuditLogsTable_length" aria-controls="AuditLogsTable" class="form-select form-select-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> 条数据</label></div></div><div class="col-auto me-auto"><div class="dataTables_info" id="AuditLogsTable_info" role="status" aria-live="polite">显示 99 个条目中的 1 到 10 个.</div></div><div class="col-auto"><div class="dataTables_paginate paging_simple_numbers" id="AuditLogsTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="AuditLogsTable_previous"><a href="#" aria-controls="AuditLogsTable" data-dt-idx="0" tabindex="0" class="page-link">上一页</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="AuditLogsTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="AuditLogsTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="AuditLogsTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="AuditLogsTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="AuditLogsTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item disabled" id="AuditLogsTable_ellipsis"><a href="#" aria-controls="AuditLogsTable" data-dt-idx="6" tabindex="0" class="page-link">…</a></li><li class="paginate_button page-item "><a href="#" aria-controls="AuditLogsTable" data-dt-idx="7" tabindex="0" class="page-link">10</a></li><li class="paginate_button page-item next" id="AuditLogsTable_next"><a href="#" aria-controls="AuditLogsTable" data-dt-idx="8" tabindex="0" class="page-link">下一页</a></li></ul></div></div></div></div>
+        </div>
+        <div aria-labelledby="EntityChanges-tab" class="tab-pane fade  " id="EntityChanges" role="tabpanel">
+            <div class="card">
+                <div class="pb-lg-3 card-body">
+                    <form id="EntityChangesFilterFormId" method="post">
+                        <div class="row">
+                            <div class="input-group input-daterange col-md-12 col-lg-4">
+                                <div style="padding-left: 0" class="col-lg-6">
+                                    <div class="mb-3"><label class="form-label" for="EntityChangeStartTime">最小更改日期</label><input type="text" name="startDate" value="2023/11/17" id="EntityChangeStartTime" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="EntityChangeStartTime" data-valmsg-replace="true"></span></div>
+                                </div>
+                                <div style="padding-right: 0" class="col-lg-6">
+                                    <div class="mb-3"><label class="form-label" for="EntityChangeEndTime">最大更改日期</label><input type="text" name="endDate" id="EntityChangeEndTime" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="EntityChangeEndTime" data-valmsg-replace="true"></span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="EntityChangeChangeType">更改类型</label>
+                                    <select name="entityChangeType" class="form-select form-control" id="EntityChangeChangeType">
+                                        <option value=""></option>
+                                        <option value="0">Created</option>
+                                        <option value="1">Updated</option>
+                                        <option value="2">Deleted</option>
+                                    </select>
+
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="EntityChangeChangeType" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="mb-3"><label class="form-label" for="EntityChangeEntityTypeFullName">实体类型全名</label><input name="entityTypeFullName" type="text" id="EntityChangeEntityTypeFullName" value="" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="EntityChangeEntityTypeFullName" data-valmsg-replace="true"></span></div>
+                            </div>
+                            <div class="col-md-12 col-lg-2">
+                                <div class="d-grid gap-2">
+                                    <button class="mt-md-4 btn btn-primary" type="submit" data-busy-text="处理中...">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8CxgNjecaDZFv1y9NQzochL26hsbLxGc78cpkLTwDwsLIu0xzBolBusCoxOSaiEkNzRjC4icGvmRvS74EcaRZ7kDere5JDcg2BiHZNMXzmNbcev1Ouuccjdws_--CfXeBcYHzEJroryNfwJ62aOp62iXrv5LeWdhx2Ho4Kfrb5FwcNFkYoHEAtBf7x9yC_bx7Q">
+                    </form>
+                </div>
+            </div>
+            <div id="EntityChangesTable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer"><div class="dataTable_filters row"></div><div id="EntityChangesTable_processing" class="dataTables_processing card" style="display: none;">处理中...<div><div></div><div></div><div></div><div></div></div></div><div class="dataTables_scroll"><div class="dataTables_scrollHead" style="overflow: hidden; position: relative; border: 0px; width: 100%;"><div class="dataTables_scrollHeadInner" style="box-sizing: content-box; width: 0px; padding-right: 0px;"><table class="nowrap table table-striped dataTable no-footer" style="margin-left: 0px; width: 0px;"><thead><tr><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;" aria-label="操作">操作</th><th class="sorting sorting_desc" tabindex="0" aria-controls="EntityChangesTable" rowspan="1" colspan="1" style="width: 0px;" aria-sort="descending" aria-label="时间: activate to sort column ascending">时间</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;" aria-label="更改类型">更改类型</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;" aria-label="TenantId">TenantId</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;" aria-label="实体类型全名">实体类型全名</th></tr></thead></table></div></div><div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;"><table id="EntityChangesTable" class="nowrap table table-striped dataTable no-footer" aria-describedby="EntityChangesTable_info" style="width: 0px;"><thead><tr style="height: 0px;"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="操作"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">操作</div></th><th class="sorting sorting_desc" aria-controls="EntityChangesTable" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-sort="descending" aria-label="时间: activate to sort column ascending"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">时间</div></th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="更改类型"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">更改类型</div></th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="TenantId"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">TenantId</div></th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;" aria-label="实体类型全名"><div class="dataTables_sizing" style="height: 0px; overflow: hidden;">实体类型全名</div></th></tr></thead><tbody><tr class="odd"><td valign="top" colspan="5" class="dataTables_empty">No matching records found</td></tr></tbody></table></div></div><div class="row dataTable_footer"><div class="col-auto"><div class="dataTables_length" id="EntityChangesTable_length"><label>显示 <select name="EntityChangesTable_length" aria-controls="EntityChangesTable" class="form-select form-select-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> 条数据</label></div></div><div class="col-auto me-auto"><div class="dataTables_info" id="EntityChangesTable_info" role="status" aria-live="polite">显示 1 个条目中的 1 到 1 个.</div></div><div class="col-auto"><div class="dataTables_paginate paging_simple_numbers" id="EntityChangesTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="EntityChangesTable_previous"><a href="#" aria-controls="EntityChangesTable" data-dt-idx="0" tabindex="0" class="page-link">上一页</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="EntityChangesTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="EntityChangesTable_next"><a href="#" aria-controls="EntityChangesTable" data-dt-idx="2" tabindex="0" class="page-link">下一页</a></li></ul></div></div></div></div>
+        </div>
+    </div>
+</div>*@
+

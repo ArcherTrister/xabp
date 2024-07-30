@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "X.Abp.Account.Pro.Shared.Application.Contracts": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57667;http://localhost:57668"
+    }
+  }
+}

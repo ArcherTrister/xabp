@@ -1,0 +1,28 @@
+{
+  "culture": "en",
+  "texts": {
+    "X.Abp.Gdpr:010001": "There is a personal data download request you have made before. You cannot make a new one until this request is fulfilled.",
+    "X.Abp.Gdpr:010002": "Your personal data is still being prepared. You can download it at {GdprDataReadyTime}.",
+    "PersonalData": "Personal Data",
+    "Menu:PersonalData": "Personal data",
+    "PersonalDataDescription": "Your account contains the personal data that you have given us. This page allows you to download or delete that data.",
+    "RequestPersonalData": "Request Personal Data",
+    "DeletePersonalData": "Delete Personal Data",
+    "CreationTime": "Creation Time",
+    "Action": "Action",
+    "Preparing": "Preparing",
+    "Download": "Download",
+    "ReadyTime": "Ready Time",
+    "DeletePersonalDataWarning": "Deleting this data will remove your account and you will no longer log in to the application! Are you sure you want to proceed?",
+    "PersonalDataDeleteRequestReceived": "Your personal data delete request is being processed... At the end of the data deletion process, your account will be deleted and you will no longer be able to use it.",
+    "PersonalDataPrepareRequestReceived": "Your personal data request is being processed. You can download it from this page, once it's ready!",
+    "NoDataAvailable":  "No data is available.",
+    "Accept": "Accept",
+    "CookiePolicy": "Cookie Policy",
+    "PrivacyPolicy": "Privacy Policy",
+    "ThisWebsiteUsesCookie": "This website uses cookies to ensure you get the best experience on the website.",
+    "CookieConsentAgreePolicies": "If you continue to browse, then you agree to our {0} and {1}.",
+    "CookieConsentAgreePolicy": "If you continue to browse, then you agree to our {0}.",
+    "CanNotGetDownloadToken": "You can't get a download token for this request!"
+  }
+}

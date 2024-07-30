@@ -1,0 +1,26 @@
+<Project>
+  <PropertyGroup>
+    <!-- All XAbp packages -->
+    <XAbpPackageVersion>8.2.0-beta</XAbpPackageVersion>
+
+    <!-- All Abp packages -->
+    <AbpPackageVersion>8.2.0</AbpPackageVersion>
+
+    <!-- All Microsoft AspNetCore packages -->
+    <MicrosoftAspNetCorePackageVersion>8.0.4</MicrosoftAspNetCorePackageVersion>
+
+    <AspNetSecurityOAuthPackageVersion>8.0.4</AspNetSecurityOAuthPackageVersion>
+    <AspNetCoreHealthChecksPackageVersion>8.0.0</AspNetCoreHealthChecksPackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)MyCompanyName.MyProjectName.ruleset</CodeAnalysisRuleSet>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435" PrivateAssets="All" />
+  </ItemGroup>
+</Project>

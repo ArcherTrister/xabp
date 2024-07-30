@@ -1,0 +1,362 @@
+# auth-server sub-chart override
+authserver:
+    config:
+        selfUrl: https://myprojectname-st-authserver
+        corsOrigins: https://myprojectname-st-gateway-web,https://myprojectname-st-gateway-web-public,https://myprojectname-st-identity,https://myprojectname-st-administration,https://myprojectname-st-saas,https://myprojectname-st-product
+        allowedRedirectUrls: https://myprojectname-st-angular
+        identityService:
+            connString: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Identity;User Id=sa;password=myPassw@rd"
+        administrationService:
+            connString: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Administration;User Id=sa;password=myPassw@rd"
+        saasService:
+            connString: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Saas;User Id=sa;password=myPassw@rd"
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    ingress:
+        host: myprojectname-st-authserver
+    image:
+        repository: abpvnext/myprojectname-app-authserver
+        tag: latest
+
+# identity-service sub-chart override
+identity:
+    config:
+        selfUrl: https://myprojectname-st-identity
+        corsOrigins: https://myprojectname-st-gateway-web
+        connectionStrings:
+            identityService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Identity;User Id=sa;password=myPassw@rd"
+            administrationService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Administration;User Id=sa;password=myPassw@rd"
+            saasService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Saas;User Id=sa;password=myPassw@rd"
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    identityServerClients: # Seeded Clients
+        authServerRootUrl: https://myprojectname-st-authserver/
+        angularRootUrl: https://myprojectname-st-angular/
+        webRootUrl: https://myprojectname-st-web/
+        blazorRootUrl: https://myprojectname-st-blazor/
+        blazorServerRootUrl: https://myprojectname-st-blazor-server/
+        publicWebRootUrl: https://myprojectname-st-public-web/
+        webGatewayRootUrl: https://myprojectname-st-gateway-web/
+        publicWebGatewayRootUrl: https://myprojectname-st-gateway-web-public/
+        administrationServiceRootUrl: https://myprojectname-st-administration/
+        identityServiceRootUrl: https://myprojectname-st-identity/
+        saasServiceRootUrl: https://myprojectname-st-saas/
+        productServiceRootUrl: https://myprojectname-st-product/
+    ingress:
+        host: myprojectname-st-identity
+    image:
+        repository: abpvnext/myprojectname-service-identity
+        tag: latest
+
+# administration-service sub-chart override
+administration:
+    config:
+        selfUrl: https://myprojectname-st-administration
+        gatewayUrl: https://myprojectname-st-gateway-internal/
+        corsOrigins: https://myprojectname-st-gateway-web,https://myprojectname-st-gateway-web-public
+        connectionStrings:
+            administrationService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Administration;User Id=sa;password=myPassw@rd"
+            saasService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Saas;User Id=sa;password=myPassw@rd"
+        authServer:
+            authority: http://eshop-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    synchedCommunication: # Used for server-to-server (client-credentials) communication with identityService for user permissions
+        authority: https://myprojectname-st-authserver
+    ingress:
+        host: myprojectname-st-administration
+    image:
+        repository: abpvnext/myprojectname-service-administration
+        tag: latest
+
+# saas-service sub-chart override
+saas:
+    config:
+        selfUrl: https://myprojectname-st-saas
+        corsOrigins: https://myprojectname-st-gateway-web
+        connectionStrings:
+            administrationService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Administration;User Id=sa;password=myPassw@rd"
+            saasService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Saas;User Id=sa;password=myPassw@rd"
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    ingress:
+        host: myprojectname-st-saas
+    image:
+        repository: abpvnext/myprojectname-service-administration
+        tag: latest
+
+# product-service sub-chart override
+product:
+    config:
+        selfUrl: https://myprojectname-st-product
+        corsOrigins: https://myprojectname-st-gateway-web,https://myprojectname-st-gateway-web-public
+        connectionStrings:
+            productService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_ProductService;User Id=sa;password=myPassw@rd"
+            administrationService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Administration;User Id=sa;password=myPassw@rd"
+            saasService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Saas;User Id=sa;password=myPassw@rd"
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    ingress:
+        host: myprojectname-st-product
+    image:
+        repository: abpvnext/myprojectname-service-product
+        tag: latest
+
+# gateway-web sub-chart override
+gateway-web:
+    config:
+        selfUrl: https://myprojectname-st-gateway-web
+        corsOrigins: https://myprojectname-st-angular
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    reRoutes:
+        authserver:
+            url: http://myprojectname-st-authserver
+        identityService:
+            url: http://myprojectname-st-identity
+        administrationService:
+            url: http://myprojectname-st-administration
+        saasService:
+            url: http://myprojectname-st-saas
+        productService:
+            url: http://myprojectname-st-product
+    ingress:
+        host: myprojectname-st-gateway-web
+    image:
+        repository: abpvnext/myprojectname-gateway-web
+        tag: latest
+        pullPolicy: IfNotPresent
+
+# gateway-web-public sub-chart override
+gateway-web-public:
+    config:
+        selfUrl: https://myprojectname-st-gateway-web-public
+        # globalConfigurationBaseUrl: http://myprojectname-st-gateway-web-public
+        corsOrigins: https://myprojectname-st-gateway-web,https://myprojectname-st-gateway-web-public
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    reRoutes:
+        accountService:
+            url: http://myprojectname-st-authserver
+        identityService:
+            url: http://myprojectname-st-identity
+        administrationService:
+            url: http://myprojectname-st-administration
+        saasService:
+            url: http://myprojectname-st-saas
+        productService:
+            url: http://myprojectname-st-product
+    ingress:
+        host: myprojectname-st-gateway-web-public
+        tlsSecret: myprojectname-tls
+    image:
+        repository: abpvnext/myprojectname-gateway-web-public
+        tag: latest
+        pullPolicy: IfNotPresent
+
+kibana:
+    config:
+        elasticsearchUrl: http://myprojectname-st-elasticsearch:9200
+
+# dbmigrator sub-chart override
+dbmigrator:
+    config:
+        connectionStrings:
+            identityService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Identity;User Id=sa;password=myPassw@rd"
+            administrationService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Administration;User Id=sa;password=myPassw@rd"
+            saasService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_Saas;User Id=sa;password=myPassw@rd"
+            productService: "Server=myprojectname-st-sqldb,1433;Database=MyProjectName_ProductService;User Id=sa;password=myPassw@rd"
+        dotnetEnv: Staging
+    identityServerClients: # Seeded Clients
+        authServerRootUrl: https://myprojectname-st-authserver/
+        angularRootUrl: https://myprojectname-st-angular/
+        webRootUrl: https://myprojectname-st-web/
+        blazorRootUrl: https://myprojectname-st-blazor/
+        blazorServerRootUrl: https://myprojectname-st-blazor-server/
+        publicWebRootUrl: https://myprojectname-st-public-web/
+        webGatewayRootUrl: https://myprojectname-st-gateway-web/
+        publicWebGatewayRootUrl: https://myprojectname-st-gateway-web-public/
+        administrationServiceRootUrl: https://myprojectname-st-administration/
+        identityServiceRootUrl: https://myprojectname-st-identity/
+        saasServiceRootUrl: https://myprojectname-st-saas/
+        productServiceRootUrl: https://myprojectname-st-product/
+    image:
+        repository: abpvnext/myprojectname-db-migrator
+        tag: latest
+        pullPolicy: IfNotPresent
+
+# Public Web application sub-chart override
+publicweb:
+    config:
+        selfUrl: https://myprojectname-st-publicweb
+        gatewayUrl: https://myprojectname-st-gateway-web-public
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    ingress:
+        host: myprojectname-st-publicweb
+        tlsSecret: myprojectname-tls
+    image:
+        repository: abpvnext/myprojectname-app-publicweb
+        tag: latest
+        pullPolicy: IfNotPresent
+
+# Web(MVC) backoffice application sub-chart override
+web:
+    config:
+        selfUrl: https://myprojectname-st-web
+        gatewayUrl: https://myprojectname-st-gateway-web
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+        dotnetEnv: Staging
+        redisHost: myprojectname-st-redis
+        rabbitmqHost: myprojectname-st-rabbitmq
+        elasticsearchUrl: http://myprojectname-st-elasticsearch
+    ingress:
+        host: myprojectname-st-web
+        tlsSecret: myprojectname-tls
+    image:
+        repository: abpvnext/myprojectname-app-web
+        tag: latest
+        pullPolicy: IfNotPresent
+
+# Angular backoffice application sub-chart override
+angular:
+    config:
+        selfUrl: https://myprojectname-st-angular
+        gatewayUrl: https://myprojectname-st-gateway-web
+        authServer:
+            authority: http://myprojectname-st-authserver
+            requireHttpsMetadata: "false"
+    ingress:
+        host: myprojectname-st-angular
+        tlsSecret: myprojectname-tls
+    image:
+        repository: abpvnext/myprojectname-app-angular
+        tag: latest
+        pullPolicy: IfNotPresent
+
+# Default values for MyProjectName.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+    repository: nginx
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+    {}
+    # fsGroup: 2000
+
+securityContext:
+    {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+service:
+    type: ClusterIP
+    port: 80
+
+ingress:
+    enabled: false
+    className: ""
+    annotations:
+        {}
+        # kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+    hosts:
+        - host: chart-example.local
+          paths:
+              - path: /
+                pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

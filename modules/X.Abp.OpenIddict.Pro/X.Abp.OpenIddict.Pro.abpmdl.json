@@ -1,0 +1,111 @@
+{
+    "folders": {
+        "items": {
+            "src": {},
+            "test": {},
+            "host": {}
+        }
+    },
+    "packages": {
+        "X.Abp.OpenIddict.Pro.Domain.Shared": {
+            "path": "src/X.Abp.OpenIddict.Pro.Domain.Shared/X.Abp.OpenIddict.Pro.Domain.Shared.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.Domain": {
+            "path": "src/X.Abp.OpenIddict.Pro.Domain/X.Abp.OpenIddict.Pro.Domain.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.Application.Contracts": {
+            "path": "src/X.Abp.OpenIddict.Pro.Application.Contracts/X.Abp.OpenIddict.Pro.Application.Contracts.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.Application": {
+            "path": "src/X.Abp.OpenIddict.Pro.Application/X.Abp.OpenIddict.Pro.Application.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.EntityFrameworkCore": {
+            "path": "src/X.Abp.OpenIddict.Pro.EntityFrameworkCore/X.Abp.OpenIddict.Pro.EntityFrameworkCore.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.MongoDB": {
+            "path": "src/X.Abp.OpenIddict.Pro.MongoDB/X.Abp.OpenIddict.Pro.MongoDB.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.HttpApi": {
+            "path": "src/X.Abp.OpenIddict.Pro.HttpApi/X.Abp.OpenIddict.Pro.HttpApi.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.HttpApi.Client": {
+            "path": "src/X.Abp.OpenIddict.Pro.HttpApi.Client/X.Abp.OpenIddict.Pro.HttpApi.Client.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.TestBase": {
+            "path": "test/X.Abp.OpenIddict.Pro.TestBase/X.Abp.OpenIddict.Pro.TestBase.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.OpenIddict.Pro.EntityFrameworkCore.Tests": {
+            "path": "test/X.Abp.OpenIddict.Pro.EntityFrameworkCore.Tests/X.Abp.OpenIddict.Pro.EntityFrameworkCore.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.OpenIddict.Pro.MongoDB.Tests": {
+            "path": "test/X.Abp.OpenIddict.Pro.MongoDB.Tests/X.Abp.OpenIddict.Pro.MongoDB.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.OpenIddict.Pro.Domain.Tests": {
+            "path": "test/X.Abp.OpenIddict.Pro.Domain.Tests/X.Abp.OpenIddict.Pro.Domain.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.OpenIddict.Pro.Application.Tests": {
+            "path": "test/X.Abp.OpenIddict.Pro.Application.Tests/X.Abp.OpenIddict.Pro.Application.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.OpenIddict.Pro.HttpApi.Host": {
+            "path": "host/X.Abp.OpenIddict.Pro.HttpApi.Host/X.Abp.OpenIddict.Pro.HttpApi.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.OpenIddict.Pro.Web": {
+            "path": "src/X.Abp.OpenIddict.Pro.Web/X.Abp.OpenIddict.Pro.Web.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.HttpApi.Client.ConsoleTestApp": {
+            "path": "test/X.Abp.OpenIddict.Pro.HttpApi.Client.ConsoleTestApp/X.Abp.OpenIddict.Pro.HttpApi.Client.ConsoleTestApp.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.OpenIddict.Pro.Web.Host": {
+            "path": "host/X.Abp.OpenIddict.Pro.Web.Host/X.Abp.OpenIddict.Pro.Web.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.OpenIddict.Pro.AuthServer": {
+            "path": "host/X.Abp.OpenIddict.Pro.AuthServer/X.Abp.OpenIddict.Pro.AuthServer.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.OpenIddict.Pro.Host.Shared": {
+            "path": "host/X.Abp.OpenIddict.Pro.Host.Shared/X.Abp.OpenIddict.Pro.Host.Shared.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.OpenIddict.Pro.Web.Unified": {
+            "path": "host/X.Abp.OpenIddict.Pro.Web.Unified/X.Abp.OpenIddict.Pro.Web.Unified.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.OpenIddict.Pro.Blazor": {
+            "path": "src/X.Abp.OpenIddict.Pro.Blazor/X.Abp.OpenIddict.Pro.Blazor.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.Blazor.Host": {
+            "path": "host/X.Abp.OpenIddict.Pro.Blazor.Host/X.Abp.OpenIddict.Pro.Blazor.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.OpenIddict.Pro.Blazor.Server": {
+            "path": "src/X.Abp.OpenIddict.Pro.Blazor.Server/X.Abp.OpenIddict.Pro.Blazor.Server.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.Blazor.WebAssembly": {
+            "path": "src/X.Abp.OpenIddict.Pro.Blazor.WebAssembly/X.Abp.OpenIddict.Pro.Blazor.WebAssembly.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.OpenIddict.Pro.Blazor.Server.Host": {
+            "path": "host/X.Abp.OpenIddict.Pro.Blazor.Server.Host/X.Abp.OpenIddict.Pro.Blazor.Server.Host.abppkg.json",
+            "folder": "host"
+        }
+    }
+}

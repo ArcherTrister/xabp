@@ -1,0 +1,79 @@
+﻿@page
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageSearchBox;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar;
+@using Volo.Abp.Localization;
+@using Volo.Abp.ObjectExtending;
+@using X.Abp.Payment.Admin.Web.Pages.Payment;
+@using X.Abp.Payment.Admin.Web.Pages.Payment.Requests;
+@using X.Abp.Payment.Localization;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.AspNetCore.Mvc.TagHelpers;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
+@using Volo.Abp.Data;
+@using X.Abp.Payment.Admin.Web.Pages;
+@using X.Abp.Payment.Admin.Web.Menus;
+@using X.Abp.Payment;
+
+@inherits PaymentAdminPageBase
+
+@model IndexModel
+
+@{
+    PageLayout.Content.Title = L["Menu:PaymentRequests"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:PaymentManagement"].Value);
+    PageLayout.Content.MenuItemName = AbpPaymentAdminMenus.PaymentRequests.PaymentRequestsMenu;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/paymentAdmin-proxy.js" />
+        <abp-script src="/Pages/Payment/PaymentRequests/index.js" />
+    </abp-script-bundle>
+}
+
+@section content_toolbar {
+    @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new {pageName = typeof(IndexModel).FullName})
+}
+
+<abp-card class="mb-4">
+    <abp-card-body>
+        <div id="PaymentRequestsWrapper">
+            <form id="PaymentRequestFilterForm" method="post">
+                <abp-row class="align-items-end">
+                    <abp-column size-lg="_4" size-md="_12">
+                        <abp-row>
+                            <abp-column size-lg="_6" size-md="_6">
+                                <abp-input asp-for="@Model.CreationDateMin" class="singledatepicker" label="@L["StartDate"].Value" type="text" />
+                            </abp-column>
+                            <abp-column size-lg="_6" size-md="_6">
+                                <abp-input asp-for="@Model.CreationDateMax" class="singledatepicker" label="@L["EndDate"].Value" type="text" />
+                            </abp-column>
+                        </abp-row>
+                    </abp-column>
+
+                    <abp-column size-lg="_3" size-md="_6">
+                        <abp-input asp-for="@Model.Status" label="@L["Username"].Value" type="text" />
+                    </abp-column>
+
+                    <abp-column size-lg="_3" size-md="_6">
+                        <abp-input asp-for="@Model.PaymentType" label="@L["EntityType"].Value" type="text" />
+                    </abp-column>
+
+                    <abp-column size-lg="_2" size-md="_6">
+                        <abp-button class="mb-3 w-100" button-type="Primary" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </abp-button>
+                    </abp-column>
+                </abp-row>
+            </form>
+        </div>
+    </abp-card-body>
+</abp-card>
+
+<abp-card>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="PaymentRequestsTable" class="nowrap"></abp-table>
+    </abp-card-body>
+</abp-card>

@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.Domain\MyCompanyName.MyProjectName.Domain.csproj" />
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.Application.Contracts\MyCompanyName.MyProjectName.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Admin.Application"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Public.Application"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.AuditLogging.Application"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Gdpr.Application" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Identity.Pro.Application"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.Application"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.OpenIddict.Pro.Application"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.Application"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Saas.Application" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

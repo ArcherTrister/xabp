@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.Payment.Application</AssemblyName>
+    <PackageId>X.Abp.Payment.Application</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\X.Abp.Payment.Application.Contracts\X.Abp.Payment.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Payment.Domain\X.Abp.Payment.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+{
+    "modules": {
+        "X.Abp.LeptonTheme": {
+            "path": "X.Abp.LeptonTheme.abpmdl.json"
+        }
+    }
+}

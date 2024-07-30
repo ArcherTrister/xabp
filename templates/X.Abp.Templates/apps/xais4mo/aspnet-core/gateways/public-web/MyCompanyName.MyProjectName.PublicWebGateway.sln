@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{64D31715-D586-46A0-A180-AEFB67FFFC95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{18CD45E5-575A-447A-B655-F65C9847DE26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCompanyName.MyProjectName.PublicWebGateway", "src\MyCompanyName.MyProjectName.PublicWebGateway\MyCompanyName.MyProjectName.PublicWebGateway.csproj", "{CC783E28-FB15-4B60-B681-0AD732CE8487}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC783E28-FB15-4B60-B681-0AD732CE8487} = {64D31715-D586-46A0-A180-AEFB67FFFC95}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC783E28-FB15-4B60-B681-0AD732CE8487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC783E28-FB15-4B60-B681-0AD732CE8487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC783E28-FB15-4B60-B681-0AD732CE8487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC783E28-FB15-4B60-B681-0AD732CE8487}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

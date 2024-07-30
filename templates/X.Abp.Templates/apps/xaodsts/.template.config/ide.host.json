@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json.schemastore.org/vs-2017.3.host",
+  "icon": "logo.png",
+  "symbolInfo": [
+    {
+      "id": "IncludeVue",
+      "name": {
+        "text": "IncludeVue"
+      },
+      "description": {
+        "text": "包含Vue项目"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "EnableSwaggerEnumFilter",
+      "name": {
+        "text": "EnableSwaggerEnumFilter"
+      },
+      "description": {
+        "text": "启用Swagger枚举类型过滤器"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "DatabaseManagementSystem",
+      "name": {
+        "text": "DatabaseManagementSystem"
+      },
+      "description": {
+        "text": "database management system"
+      },
+      "isVisible": true,
+      "defaultValue": "SqlServer"
+    }
+  ]
+}

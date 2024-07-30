@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>X.Abp.Chat.Domain</AssemblyName>
+    <PackageId>X.Abp.Chat.Domain</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Users.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Chat.Domain.Shared\X.Abp.Chat.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

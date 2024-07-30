@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+data:
+  ocelot.json: |-
+    {
+      "GlobalConfiguration": {
+      "BaseUrl": "{{ .Values.config.globalConfigurationBaseUrl }}"
+    },
+      "Routes": [   
+    {
+      "ServiceKey": "Identity Service",
+      "DownstreamPathTemplate": "/api/account/{everything}",
+      "DownstreamScheme": "{{ .Values.reRoutes.identityService.schema }}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "{{ .Values.reRoutes.identityService.host }}",
+          "Port": {{ .Values.reRoutes.identityService.port }}
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account/{everything}",
+      "UpstreamHttpMethod": [ "Put", "Delete", "Get", "Post" ]
+    },
+    {
+      "ServiceKey": "Administration Service",
+      "DownstreamPathTemplate": "/api/abp/{everything}",
+      "DownstreamScheme": "{{ .Values.reRoutes.administrationService.schema }}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "{{ .Values.reRoutes.administrationService.host }}",
+          "Port": {{ .Values.reRoutes.administrationService.port }}
+        }
+      ],
+      "UpstreamPathTemplate": "/api/abp/{everything}",
+      "UpstreamHttpMethod": [ "Put", "Delete", "Get", "Post" ]
+    },
+    {
+      "ServiceKey": "Product Service",
+      "DownstreamPathTemplate": "/api/product-service/{everything}",
+      "DownstreamScheme": "{{ .Values.reRoutes.productService.host }}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "{{ .Values.reRoutes.productService.host }}",
+          "Port": {{ .Values.reRoutes.productService.port }}
+        }
+      ],
+      "UpstreamPathTemplate": "/api/product-service/{everything}",
+      "UpstreamHttpMethod": [ "Put", "Delete", "Get", "Post" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 2000,
+        "TimeoutValue": 5000
+      }
+    }]
+    }

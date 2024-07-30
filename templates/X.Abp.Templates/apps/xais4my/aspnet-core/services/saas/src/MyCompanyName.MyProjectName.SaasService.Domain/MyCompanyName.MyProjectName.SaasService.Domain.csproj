@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName.SaasService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.Saas.Domain" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Payment.Domain" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.SaasService.Domain.Shared\MyCompanyName.MyProjectName.SaasService.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

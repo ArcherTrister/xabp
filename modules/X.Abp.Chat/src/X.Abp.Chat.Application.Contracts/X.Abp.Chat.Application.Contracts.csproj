@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <AssemblyName>X.Abp.Chat.Application.Contracts</AssemblyName>
+    <PackageId>X.Abp.Chat.Application.Contracts</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Authorization.Abstractions"
+      VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Chat.Domain.Shared\X.Abp.Chat.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

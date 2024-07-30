@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <RootNamespace>X.Abp.Quartz</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="7.3.3" />
+    <ProjectReference Include="..\X.Abp.Quartz.Domain.Shared\X.Abp.Quartz.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

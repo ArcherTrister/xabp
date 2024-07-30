@@ -1,0 +1,51 @@
+.form-switch .form-check-label::after {
+    top: calc(0.25rem + 0px);
+}
+
+.add-option {
+    padding: 0.2em 0 0 0.8em;
+}
+
+.select2-option-icon {
+    padding-right: .5em;
+    padding-left: .5em;
+
+}
+
+ul.select2-results__options > li {
+    /*padding: 1em;*/
+}
+[v-cloak] {
+    display: none;
+}
+.fade-in {
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 1s;
+}
+.fade-out {
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 1s;
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeOutOpacity {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

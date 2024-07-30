@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.Saas.Domain.Shared": {
+      "path": "src/X.Abp.Saas.Domain.Shared/X.Abp.Saas.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.Domain": {
+      "path": "src/X.Abp.Saas.Domain/X.Abp.Saas.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.Application.Contracts": {
+      "path": "src/X.Abp.Saas.Application.Contracts/X.Abp.Saas.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.Application": {
+      "path": "src/X.Abp.Saas.Application/X.Abp.Saas.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.EntityFrameworkCore": {
+      "path": "src/X.Abp.Saas.EntityFrameworkCore/X.Abp.Saas.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.MongoDB": {
+      "path": "src/X.Abp.Saas.MongoDB/X.Abp.Saas.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.HttpApi": {
+      "path": "src/X.Abp.Saas.HttpApi/X.Abp.Saas.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.HttpApi.Client": {
+      "path": "src/X.Abp.Saas.HttpApi.Client/X.Abp.Saas.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.TestBase": {
+      "path": "test/X.Abp.Saas.TestBase/X.Abp.Saas.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Saas.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.Saas.EntityFrameworkCore.Tests/X.Abp.Saas.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Saas.MongoDB.Tests": {
+      "path": "test/X.Abp.Saas.MongoDB.Tests/X.Abp.Saas.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Saas.Domain.Tests": {
+      "path": "test/X.Abp.Saas.Domain.Tests/X.Abp.Saas.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Saas.Application.Tests": {
+      "path": "test/X.Abp.Saas.Application.Tests/X.Abp.Saas.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Saas.HttpApi.Host": {
+      "path": "host/X.Abp.Saas.HttpApi.Host/X.Abp.Saas.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Saas.Web": {
+      "path": "src/X.Abp.Saas.Web/X.Abp.Saas.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.Saas.HttpApi.Client.ConsoleTestApp/X.Abp.Saas.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Saas.Web.Host": {
+      "path": "host/X.Abp.Saas.Web.Host/X.Abp.Saas.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Saas.AuthServer": {
+      "path": "host/X.Abp.Saas.AuthServer/X.Abp.Saas.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Saas.Host.Shared": {
+      "path": "host/X.Abp.Saas.Host.Shared/X.Abp.Saas.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Saas.Web.Unified": {
+      "path": "host/X.Abp.Saas.Web.Unified/X.Abp.Saas.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Saas.Blazor": {
+      "path": "src/X.Abp.Saas.Blazor/X.Abp.Saas.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.Blazor.Host": {
+      "path": "host/X.Abp.Saas.Blazor.Host/X.Abp.Saas.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Saas.Blazor.Server": {
+      "path": "src/X.Abp.Saas.Blazor.Server/X.Abp.Saas.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.Blazor.WebAssembly": {
+      "path": "src/X.Abp.Saas.Blazor.WebAssembly/X.Abp.Saas.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Saas.Blazor.Server.Host": {
+      "path": "host/X.Abp.Saas.Blazor.Server.Host/X.Abp.Saas.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

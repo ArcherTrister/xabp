@@ -1,0 +1,69 @@
+﻿@page "/Forms/{Id}/Responses"
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using X.Abp.Forms.Localization;
+@using X.Abp.Forms.Permissions;
+@using X.Abp.Forms.Web.Menus;
+@using X.Abp.Forms.Web.Pages.Forms.Questions;
+@using X.Abp.Forms.Web.Pages.Forms.Shared.Components.FormResponses;
+
+@model X.Abp.Forms.Web.Pages.Forms.Questions.ResponsesModel
+
+@inject IPageLayout PageLayout
+@inject IAuthorizationService Authorization
+@inject IStringLocalizer<FormsResource> L
+
+@{
+    PageLayout.Content.Title = L["Menu:Responses"].Value;
+    ViewData["Title"] = L["Menu:Responses"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Forms.Management"].Value);
+    PageLayout.Content.MenuItemName = AbpFormsMenus.GroupName;
+}
+
+@section styles {
+    <abp-style-bundle name="@typeof(IndexModel).FullName">
+        <abp-style src="/Pages/Forms/Questions/index.css" />
+    </abp-style-bundle>
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/form-proxy.js" />
+        <abp-script src="/Pages/Forms/sendModal.js" />
+        <abp-script src="/Pages/Forms/Questions/index.js" />
+    </abp-script-bundle>
+}
+
+@section content_toolbar {
+    @if (await Authorization.IsGrantedAsync(AbpFormsPermissions.Forms.Default))
+    {
+        <abp-button id="SendModalBtn" text="@L["Menu:Send"].Value" button-type="Primary"/>
+    }
+}
+
+<input id="formInfo" type="hidden" value="@Model.Id">
+
+<abp-tabs class="questions-responses">
+    <!-- Questions Begins -->
+    @if (await Authorization.IsGrantedAsync(AbpFormsPermissions.Forms.Default))
+    {
+        <abp-tab name="Questions" title="@L["Menu:Questions"].Value"></abp-tab>
+    }
+
+    <!-- Responses Begins -->
+    @if (await Authorization.IsGrantedAsync(AbpFormsPermissions.Response.Default))
+    {
+        var responseString = $"{L["Menu:Responses"].Value} ({Model.ResponseCount})";
+        <abp-tab active="true" name="Responses" title="@responseString">
+
+            @await Component.InvokeAsync(typeof(FormResponsesViewComponent), new
+            {
+                id = Model.Id
+            })
+
+        </abp-tab>
+    }
+    <!-- Responses Ends -->
+
+</abp-tabs>

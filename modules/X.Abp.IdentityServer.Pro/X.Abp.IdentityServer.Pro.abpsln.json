@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "X.Abp.IdentityServer.Pro": {
+      "path": "X.Abp.IdentityServer.Pro.abpmdl.json"
+    }
+  }
+}

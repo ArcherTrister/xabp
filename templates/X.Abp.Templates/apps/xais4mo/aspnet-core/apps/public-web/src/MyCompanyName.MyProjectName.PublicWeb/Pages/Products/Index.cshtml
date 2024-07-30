@@ -1,0 +1,45 @@
+@page
+@model MyCompanyName.MyProjectName.PublicWeb.Pages.Products.Index
+
+@section styles
+{
+    <abp-style src="/Pages/Products/index.css" />
+}
+
+<div class="container">
+        @{
+            if (Model.Products.Count > 0)
+            {
+                <abp-card >
+                    <div class="row">
+                        @foreach (var product in Model.Products)
+                        {
+                            var moneyString = product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("tr-tr"));
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                    <abp-card-body >
+                                        <div class="product-parent product-box-400">
+                                            <a class="product-box">
+                                                <span class="product-name">@product.Name</span>
+                                                <picture>
+                                                    <img src="https://via.placeholder.com/200x200.png?text=product+image">
+                                                </picture>
+                                                <div class="product-price-parent">
+                                                    <div class="product-price">@moneyString</div>
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                    </abp-card-body>
+                            </div>
+                        }
+                    </div>
+                </abp-card>
+            }
+            else
+            {
+                <div>
+                    <p>No product listed yet...</p>
+                </div>
+            }
+        }
+</div>

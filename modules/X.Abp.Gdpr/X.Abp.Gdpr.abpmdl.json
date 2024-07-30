@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.Gdpr.Domain.Shared": {
+      "path": "src/X.Abp.Gdpr.Domain.Shared/X.Abp.Gdpr.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.Domain": {
+      "path": "src/X.Abp.Gdpr.Domain/X.Abp.Gdpr.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.Application.Contracts": {
+      "path": "src/X.Abp.Gdpr.Application.Contracts/X.Abp.Gdpr.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.Application": {
+      "path": "src/X.Abp.Gdpr.Application/X.Abp.Gdpr.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.EntityFrameworkCore": {
+      "path": "src/X.Abp.Gdpr.EntityFrameworkCore/X.Abp.Gdpr.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.MongoDB": {
+      "path": "src/X.Abp.Gdpr.MongoDB/X.Abp.Gdpr.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.HttpApi": {
+      "path": "src/X.Abp.Gdpr.HttpApi/X.Abp.Gdpr.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.HttpApi.Client": {
+      "path": "src/X.Abp.Gdpr.HttpApi.Client/X.Abp.Gdpr.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.TestBase": {
+      "path": "test/X.Abp.Gdpr.TestBase/X.Abp.Gdpr.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Gdpr.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.Gdpr.EntityFrameworkCore.Tests/X.Abp.Gdpr.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Gdpr.MongoDB.Tests": {
+      "path": "test/X.Abp.Gdpr.MongoDB.Tests/X.Abp.Gdpr.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Gdpr.Domain.Tests": {
+      "path": "test/X.Abp.Gdpr.Domain.Tests/X.Abp.Gdpr.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Gdpr.Application.Tests": {
+      "path": "test/X.Abp.Gdpr.Application.Tests/X.Abp.Gdpr.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Gdpr.HttpApi.Host": {
+      "path": "host/X.Abp.Gdpr.HttpApi.Host/X.Abp.Gdpr.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Gdpr.Web": {
+      "path": "src/X.Abp.Gdpr.Web/X.Abp.Gdpr.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.Gdpr.HttpApi.Client.ConsoleTestApp/X.Abp.Gdpr.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Gdpr.Web.Host": {
+      "path": "host/X.Abp.Gdpr.Web.Host/X.Abp.Gdpr.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Gdpr.AuthServer": {
+      "path": "host/X.Abp.Gdpr.AuthServer/X.Abp.Gdpr.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Gdpr.Host.Shared": {
+      "path": "host/X.Abp.Gdpr.Host.Shared/X.Abp.Gdpr.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Gdpr.Web.Unified": {
+      "path": "host/X.Abp.Gdpr.Web.Unified/X.Abp.Gdpr.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Gdpr.Blazor": {
+      "path": "src/X.Abp.Gdpr.Blazor/X.Abp.Gdpr.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.Blazor.Host": {
+      "path": "host/X.Abp.Gdpr.Blazor.Host/X.Abp.Gdpr.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Gdpr.Blazor.Server": {
+      "path": "src/X.Abp.Gdpr.Blazor.Server/X.Abp.Gdpr.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.Blazor.WebAssembly": {
+      "path": "src/X.Abp.Gdpr.Blazor.WebAssembly/X.Abp.Gdpr.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Gdpr.Blazor.Server.Host": {
+      "path": "host/X.Abp.Gdpr.Blazor.Server.Host/X.Abp.Gdpr.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

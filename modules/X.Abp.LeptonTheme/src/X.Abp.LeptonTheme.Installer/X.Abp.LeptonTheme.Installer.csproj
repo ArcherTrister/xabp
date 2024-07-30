@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    
+    
+
+    <PropertyGroup><LangVersion>latest</LangVersion>
+        <TargetFramework>net5.0</TargetFramework>
+        <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+        <RootNamespace />
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="X.Abp.Studio.ModuleInstaller" Version="5.0.0" />
+        <PackageReference Include="X.Abp.VirtualFileSystem" Version="5.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="..\..\X.Abp.LeptonTheme.abpmdl.json" />
+      <EmbeddedResource Include="..\..\X.Abp.LeptonTheme.abpmdl.json" />
+    </ItemGroup>
+    
+</Project>

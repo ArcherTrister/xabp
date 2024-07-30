@@ -1,0 +1,24 @@
+config:
+    selfUrl: #
+    gatewayUrl: #
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: # "false"
+        isOnK8s: # "true"
+        metaAddress: # http://myprojectname-st-authserver
+    dotnetEnv: #
+    redisHost: #
+    rabbitmqHost: #
+    elasticsearchUrl: #
+    stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+ingress:
+    host: # myprojectname-st-blazor-server
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: mycompanyname/myprojectname-app-blazor-server
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

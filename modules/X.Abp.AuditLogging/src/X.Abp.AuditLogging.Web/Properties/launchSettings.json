@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "X.Abp.AuditLogging.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:54015;http://localhost:54016"
+    }
+  }
+}

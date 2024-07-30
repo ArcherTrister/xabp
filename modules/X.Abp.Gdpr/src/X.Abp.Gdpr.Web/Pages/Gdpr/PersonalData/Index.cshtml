@@ -1,0 +1,27 @@
+﻿@page
+@using Microsoft.Extensions.Localization;
+@using X.Abp.Gdpr.Localization;
+@model X.Abp.Gdpr.Web.Pages.Gdpr.PersonalData.IndexModel
+@inject IStringLocalizer<AbpGdprResource> L
+@{
+}
+
+<div id="ProfileManagementWrapper">
+    <p class="alert alert-info"><i class="fas fa-info-circle"></i> @L["PersonalDataDescription"]</p>
+    <abp-card>
+        <abp-card-body>
+            <div class="row">
+                <div class="col">
+                    <div class="my-2 float-end">
+                        <form method="post" id="PersonalDataForm">
+                            <abp-button button-type="Primary" type="submit">@L["RequestPersonalData"]</abp-button>
+                            <abp-button button-type="Danger" id="PersonalDataDeleteBtn" type="button">@L["DeletePersonalData"]</abp-button>
+                            @Html.AntiForgeryToken()
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <abp-table id="PersonalDataTable_wrapper" striped-rows="true" class="nowrap"></abp-table>
+        </abp-card-body>
+    </abp-card>
+</div>

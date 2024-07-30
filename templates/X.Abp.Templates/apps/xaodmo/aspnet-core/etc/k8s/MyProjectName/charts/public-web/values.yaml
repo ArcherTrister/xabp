@@ -1,0 +1,24 @@
+config:
+    selfUrl: #
+    gatewayUrl: #
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: # "false"
+        isOnK8s: # "true"
+        metaAddress: # http://myprojectname-st-authserver
+    dotnetEnv: #
+    redisHost: #
+    rabbitmqHost: #
+    elasticsearchUrl: #
+    stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+ingress:
+    host: # myprojectname-st-public-web
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: mycompanyname/myprojectname-app-public-web
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

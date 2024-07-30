@@ -1,0 +1,61 @@
+﻿@page
+@using System.Net;
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageSearchBox;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar;
+@using Volo.Abp.IdentityServer.Localization;
+@using X.Abp.IdentityServer.Web.Pages.IdentityServer.IdentityResources;
+@using X.Abp.IdentityServer.Web.Menus;
+@model IndexModel
+@inject IHtmlLocalizer<AbpIdentityServerResource> L
+@inject IAuthorizationService Authorization
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["IdentityResources"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:IdentityServer"].Value);
+    PageLayout.Content.MenuItemName = AbpIdentityServerProMenuNames.IdentityResources;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/identityServer-proxy.js" />
+        <abp-script src="/Pages/IdentityServer/IdentityResources/index.js" />
+        <abp-script src="/Pages/IdentityServer/IdentityResources/create.js" />
+        <abp-script src="/Pages/IdentityServer/IdentityResources/edit.js" />
+    </abp-script-bundle>
+}
+
+@section content_toolbar {
+    @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new {pageName = typeof(IndexModel).FullName})
+@*
+<div class="text-lg-end pt-2" id="AbpContentToolbar">
+
+    <button id="CreateStandardIdentityResourcesButton" class="mx-1 btn btn-secondary btn-sm" type="button" data-busy-text="处理中..."><i class="fa fa-gear"></i> <span>创建标准资源</span></button><button id="CreateNewIdentityResourceButton" class="mx-1 btn btn-primary btn-sm" type="button" data-busy-text="处理中..."><i class="fa fa-plus"></i> <span>创建新资源</span></button>
+
+            </div>
+    *@
+}
+
+
+<div id="IdentityResourcesWrapper">
+    <abp-card class="mb-4">
+        <abp-card-body>
+            <abp-row>
+                <abp-column size="_12">
+                    @await Component.InvokeAsync(typeof(AbpPageSearchBoxViewComponent))
+                </abp-column>
+            </abp-row>
+
+        </abp-card-body>
+    </abp-card>
+
+    <abp-card>
+        <abp-card-body>
+            <abp-table striped-rows="true" id="IdentityResourcesTable" class="nowrap"></abp-table>
+        </abp-card-body>
+    </abp-card>
+</div>
+
+

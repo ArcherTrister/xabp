@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.Forms.Domain.Shared": {
+      "path": "src/X.Abp.Forms.Domain.Shared/X.Abp.Forms.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.Domain": {
+      "path": "src/X.Abp.Forms.Domain/X.Abp.Forms.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.Application.Contracts": {
+      "path": "src/X.Abp.Forms.Application.Contracts/X.Abp.Forms.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.Application": {
+      "path": "src/X.Abp.Forms.Application/X.Abp.Forms.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.EntityFrameworkCore": {
+      "path": "src/X.Abp.Forms.EntityFrameworkCore/X.Abp.Forms.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.MongoDB": {
+      "path": "src/X.Abp.Forms.MongoDB/X.Abp.Forms.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.HttpApi": {
+      "path": "src/X.Abp.Forms.HttpApi/X.Abp.Forms.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.HttpApi.Client": {
+      "path": "src/X.Abp.Forms.HttpApi.Client/X.Abp.Forms.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.TestBase": {
+      "path": "test/X.Abp.Forms.TestBase/X.Abp.Forms.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Forms.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.Forms.EntityFrameworkCore.Tests/X.Abp.Forms.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Forms.MongoDB.Tests": {
+      "path": "test/X.Abp.Forms.MongoDB.Tests/X.Abp.Forms.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Forms.Domain.Tests": {
+      "path": "test/X.Abp.Forms.Domain.Tests/X.Abp.Forms.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Forms.Application.Tests": {
+      "path": "test/X.Abp.Forms.Application.Tests/X.Abp.Forms.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Forms.HttpApi.Host": {
+      "path": "host/X.Abp.Forms.HttpApi.Host/X.Abp.Forms.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Forms.Web": {
+      "path": "src/X.Abp.Forms.Web/X.Abp.Forms.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.Forms.HttpApi.Client.ConsoleTestApp/X.Abp.Forms.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Forms.Web.Host": {
+      "path": "host/X.Abp.Forms.Web.Host/X.Abp.Forms.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Forms.AuthServer": {
+      "path": "host/X.Abp.Forms.AuthServer/X.Abp.Forms.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Forms.Host.Shared": {
+      "path": "host/X.Abp.Forms.Host.Shared/X.Abp.Forms.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Forms.Web.Unified": {
+      "path": "host/X.Abp.Forms.Web.Unified/X.Abp.Forms.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Forms.Blazor": {
+      "path": "src/X.Abp.Forms.Blazor/X.Abp.Forms.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.Blazor.Host": {
+      "path": "host/X.Abp.Forms.Blazor.Host/X.Abp.Forms.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Forms.Blazor.Server": {
+      "path": "src/X.Abp.Forms.Blazor.Server/X.Abp.Forms.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.Blazor.WebAssembly": {
+      "path": "src/X.Abp.Forms.Blazor.WebAssembly/X.Abp.Forms.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Forms.Blazor.Server.Host": {
+      "path": "host/X.Abp.Forms.Blazor.Server.Host/X.Abp.Forms.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

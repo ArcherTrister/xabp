@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>X.Abp.CmsKit.Pro.Admin.HttpApi.Client</AssemblyName>
+    <PackageId>X.Abp.CmsKit.Pro.Admin.HttpApi.Client</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.CmsKit.Admin.HttpApi.Client"
+      VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.CmsKit.Pro.Admin.Application.Contracts\X.Abp.CmsKit.Pro.Admin.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

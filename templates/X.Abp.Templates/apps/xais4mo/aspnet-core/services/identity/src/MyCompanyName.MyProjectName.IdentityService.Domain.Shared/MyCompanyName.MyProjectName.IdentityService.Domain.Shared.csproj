@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName.IdentityService</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.Identity.Pro.Domain.Shared"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.IdentityServer.Pro.Domain.Shared"
+      VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\IdentityService\*.json" />
+    <Content Remove="Localization\IdentityService\*.json" />
+  </ItemGroup>
+
+</Project>

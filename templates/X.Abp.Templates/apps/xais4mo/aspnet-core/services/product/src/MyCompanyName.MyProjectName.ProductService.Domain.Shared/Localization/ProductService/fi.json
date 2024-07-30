@@ -1,0 +1,28 @@
+{
+  "culture": "fi",
+  "texts": {
+    "Menu:ProductService": "Tuotehallinta",
+    "Menu:Products": "Tuotteet",
+    "Permission:ProductService": "Tuotepalvelu",
+    "Permission:Products": "Tuotteet",
+    "Permission:Create": "Luoda",
+    "Permission:Edit": "Muokata",
+    "Permission:Delete": "Poistaa",
+    "Products": "Tuotteet",
+    "NewProduct": "Uusi tuote",
+    "Actions": "Toiminnot",
+    "SuccessfullyDeleted": "Poistaminen onnistui",
+    "DeleteConfirmationMessage": "Haluatko varmasti poistaa tämän tuotteen?",
+    "Search": "Hae",
+    "Pick": "Valita",
+    "SeeAdvancedFilters": "Edistyneet suodattimet",
+    "Name": "Nimi",
+    "Price": "Hinta",
+    "MinPrice": "Min hinta",
+    "MaxPrice": "Max hinta",
+    "Product": "Tuote",
+    "AreYouSure": "Oletko varma?",
+    "MinName": "Min nimi",
+    "MaxName": "Max nimi"
+  }
+}

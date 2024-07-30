@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.IdentityServer.Pro.Domain.Shared": {
+      "path": "src/X.Abp.IdentityServer.Pro.Domain.Shared/X.Abp.IdentityServer.Pro.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.Domain": {
+      "path": "src/X.Abp.IdentityServer.Pro.Domain/X.Abp.IdentityServer.Pro.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.Application.Contracts": {
+      "path": "src/X.Abp.IdentityServer.Pro.Application.Contracts/X.Abp.IdentityServer.Pro.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.Application": {
+      "path": "src/X.Abp.IdentityServer.Pro.Application/X.Abp.IdentityServer.Pro.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.EntityFrameworkCore": {
+      "path": "src/X.Abp.IdentityServer.Pro.EntityFrameworkCore/X.Abp.IdentityServer.Pro.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.MongoDB": {
+      "path": "src/X.Abp.IdentityServer.Pro.MongoDB/X.Abp.IdentityServer.Pro.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.HttpApi": {
+      "path": "src/X.Abp.IdentityServer.Pro.HttpApi/X.Abp.IdentityServer.Pro.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.HttpApi.Client": {
+      "path": "src/X.Abp.IdentityServer.Pro.HttpApi.Client/X.Abp.IdentityServer.Pro.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.TestBase": {
+      "path": "test/X.Abp.IdentityServer.Pro.TestBase/X.Abp.IdentityServer.Pro.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.IdentityServer.Pro.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.IdentityServer.Pro.EntityFrameworkCore.Tests/X.Abp.IdentityServer.Pro.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.IdentityServer.Pro.MongoDB.Tests": {
+      "path": "test/X.Abp.IdentityServer.Pro.MongoDB.Tests/X.Abp.IdentityServer.Pro.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.IdentityServer.Pro.Domain.Tests": {
+      "path": "test/X.Abp.IdentityServer.Pro.Domain.Tests/X.Abp.IdentityServer.Pro.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.IdentityServer.Pro.Application.Tests": {
+      "path": "test/X.Abp.IdentityServer.Pro.Application.Tests/X.Abp.IdentityServer.Pro.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.IdentityServer.Pro.HttpApi.Host": {
+      "path": "host/X.Abp.IdentityServer.Pro.HttpApi.Host/X.Abp.IdentityServer.Pro.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.IdentityServer.Pro.Web": {
+      "path": "src/X.Abp.IdentityServer.Pro.Web/X.Abp.IdentityServer.Pro.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.IdentityServer.Pro.HttpApi.Client.ConsoleTestApp/X.Abp.IdentityServer.Pro.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.IdentityServer.Pro.Web.Host": {
+      "path": "host/X.Abp.IdentityServer.Pro.Web.Host/X.Abp.IdentityServer.Pro.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.IdentityServer.Pro.AuthServer": {
+      "path": "host/X.Abp.IdentityServer.Pro.AuthServer/X.Abp.IdentityServer.Pro.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.IdentityServer.Pro.Host.Shared": {
+      "path": "host/X.Abp.IdentityServer.Pro.Host.Shared/X.Abp.IdentityServer.Pro.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.IdentityServer.Pro.Web.Unified": {
+      "path": "host/X.Abp.IdentityServer.Pro.Web.Unified/X.Abp.IdentityServer.Pro.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.IdentityServer.Pro.Blazor": {
+      "path": "src/X.Abp.IdentityServer.Pro.Blazor/X.Abp.IdentityServer.Pro.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.Blazor.Host": {
+      "path": "host/X.Abp.IdentityServer.Pro.Blazor.Host/X.Abp.IdentityServer.Pro.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.IdentityServer.Pro.Blazor.Server": {
+      "path": "src/X.Abp.IdentityServer.Pro.Blazor.Server/X.Abp.IdentityServer.Pro.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.Blazor.WebAssembly": {
+      "path": "src/X.Abp.IdentityServer.Pro.Blazor.WebAssembly/X.Abp.IdentityServer.Pro.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.IdentityServer.Pro.Blazor.Server.Host": {
+      "path": "host/X.Abp.IdentityServer.Pro.Blazor.Server.Host/X.Abp.IdentityServer.Pro.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

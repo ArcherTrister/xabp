@@ -1,0 +1,17 @@
+{
+  "culture": "en",
+  "texts": {
+    "NullNotifier": "Logger notifier",
+    "ReceiveNotifications": "Receive notifications",
+    "DisplayName:ReceiveNotifications": "Receive notifications",
+    "Description:ReceiveNotifications": "Receive notifications",
+    "Feature:NotificationGroup": "Notification Management",
+    "Feature:NotificationEnable": "Enable notification management",
+    "Feature:NotificationEnableDescription": "Enable notification management system in application.",
+    "Permission:Notification": "Notification Management",
+    "Permission:Notifications": "Notification Management",
+    "Permission:Create": "Create",
+    "Permission:Edit": "Edit",
+    "Permission:Delete": "Delete"
+  }
+}

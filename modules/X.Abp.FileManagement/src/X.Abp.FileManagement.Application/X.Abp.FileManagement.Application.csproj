@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.FileManagement.Application</AssemblyName>
+    <PackageId>X.Abp.FileManagement.Application</PackageId>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.FileManagement.Application.Contracts\X.Abp.FileManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.FileManagement.Domain\X.Abp.FileManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

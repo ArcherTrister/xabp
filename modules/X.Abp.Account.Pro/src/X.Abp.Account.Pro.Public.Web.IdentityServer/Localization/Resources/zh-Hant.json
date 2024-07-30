@@ -1,0 +1,33 @@
+{
+    "culture": "zh-Hant",
+    "texts": {
+        "X.Abp.IdentityServer:External:010001": "Code不能爲空",
+        "X.Abp.IdentityServer:External:010002": "未綁定系統用戶",
+        "X.Abp.IdentityServer:External:010003": "登錄失敗",
+        "X.Abp.IdentityServer:External:010003:Success": "登錄成功",
+        "X.Abp.IdentityServer:External:010003:InvalidUserNameOrEmailAddress": "用戶名或郵箱驗證失敗",
+        "X.Abp.IdentityServer:External:010003:InvalidPassword": "密碼驗證失敗",
+        "X.Abp.IdentityServer:External:010003:UserIsNotActive": "用戶未激活",
+        "X.Abp.IdentityServer:External:010003:UserEmailIsNotConfirmed": "用戶郵箱未確認",
+        "X.Abp.IdentityServer:External:010003:UnknownExternalLogin": "未知的登錄方式",
+        "X.Abp.IdentityServer:External:010003:LockedOut": "賬號被鎖定",
+        "X.Abp.IdentityServer:External:010003:UserPhoneNumberIsNotConfirmed": "用戶手機號未確認",
+        "X.Abp.IdentityServer:External:010003:UserAccountIsNotConfirmed": "用戶賬號未通過認證",
+        "X.Abp.IdentityServer:External:010004": "檢索用戶信息時出錯",
+        "X.Abp.IdentityServer:External:010005": "參數錯誤",
+        "X.Abp.IdentityServer:External:010006": "無效的驗證碼",
+        "X.Abp.IdentityServer:External:010007": "創建新用戶失敗",
+        "X.Abp.IdentityServer:External:010008": "用戶不存在",
+        "X.Abp.IdentityServer:External:010009": "第三方提供者密鑰不能爲空",
+        "X.Abp.IdentityServer:External:010010": "第三方提供者名稱不能爲空",
+        "X.Abp.IdentityServer:External:010011": "未找到第三方登錄信息",
+        "X.Abp.IdentityServer:External:010012": "未找到要綁定的用戶信息",
+        "X.Abp.IdentityServer:External:010013": "獲取微信用戶信息失敗",
+        "X.Abp.IdentityServer:External:010014": "用戶不存在或未綁定{LoginProvider}快捷登錄",
+        "DisplayName:ExternalLogin.SPALoginResultUrl": "單頁面程序擴展登錄回調Url",
+        "Description:ExternalLogin.SPALoginResultUrl": "單頁面程序擴展登錄回調Url",
+        "DisplayName:ExternalLogin.SPALinkResultUrl": "單頁面程序擴展登錄綁定回調Url",
+        "Description:ExternalLogin.SPALinkResultUrl": "單頁面程序擴展登錄綁定回調Url",
+        "InvalidGrant:PhoneOrTokenCodeNotFound": "手機號或驗證碼爲空"
+    }
+}

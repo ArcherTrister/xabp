@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="AbpVnext.Pro Rules" Description="This rule set contains rules for the AbpVnext.Pro solution." ToolsVersion="17.0">
+  <IncludeAll Action="Warning" />
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1002" Action="None" />
+    <Rule Id="CA1014" Action="None" />
+    <Rule Id="CA1031" Action="None" />
+    <Rule Id="CA1032" Action="None" />
+    <Rule Id="CA1034" Action="None" />
+    <Rule Id="CA1044" Action="None" />
+    <Rule Id="CA1052" Action="None" />
+    <Rule Id="CA1055" Action="None" />
+    <Rule Id="CA1056" Action="None" />
+    <Rule Id="CA1062" Action="None" />
+    <Rule Id="CA1303" Action="None" />
+    <Rule Id="CA1308" Action="None" />
+    <Rule Id="CA1711" Action="None" />
+    <Rule Id="CA1716" Action="None" />
+    <Rule Id="CA1720" Action="None" />
+    <Rule Id="CA1721" Action="None" />
+    <Rule Id="CA1724" Action="None" />
+    <Rule Id="CA1812" Action="None" />
+    <Rule Id="CA1819" Action="None" />
+    <Rule Id="CA1848" Action="None" />
+    <Rule Id="CA2007" Action="None" />
+    <Rule Id="CA2201" Action="None" />
+    <Rule Id="CA2208" Action="None" />
+    <Rule Id="CA2214" Action="None" />
+    <Rule Id="CA2229" Action="None" />
+    <Rule Id="CA2234" Action="None" />
+    <Rule Id="CA2254" Action="None" />
+    <!-- Ignore -->
+    <!-- <Rule Id="CA1002" Action="None" />
+    <Rule Id="CA2227" Action="None" />
+    <Rule Id="CA1008" Action="None" />
+    <Rule Id="CA1028" Action="None" />
+    <Rule Id="CA1032" Action="None" />
+     -->
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
+    <Rule Id="AD0001" Action="None" />
+    <Rule Id="CS0114" Action="Error" />
+    <!-- Ignore -->
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.Features" RuleNamespace="Microsoft.CodeAnalysis.CSharp.Features">
+    <Rule Id="IDE0004" Action="Error" />
+    <Rule Id="IDE0161" Action="Info" />
+    <!-- Ignore -->
+    <Rule Id="IDE0003" Action="Error" />
+    <Rule Id="IDE0001" Action="Error" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
+    <Rule Id="CA1508" Action="Error" />
+    <!-- Ignore -->
+  </Rules>
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA0001" Action="None" />
+    <Rule Id="SA1100" Action="None" />
+    <Rule Id="SA1101" Action="None" />
+    <Rule Id="SA1116" Action="None" />
+    <Rule Id="SA1129" Action="None" />
+    <Rule Id="SA1201" Action="None" />
+    <Rule Id="SA1202" Action="None" />
+    <Rule Id="SA1203" Action="None" />
+    <Rule Id="SA1204" Action="None" />
+    <Rule Id="SA1309" Action="None" />
+    <Rule Id="SA1413" Action="None" />
+    <Rule Id="SA1600" Action="None" />
+    <Rule Id="SA1623" Action="None" />
+    <Rule Id="SA1629" Action="None" />
+    <Rule Id="SA1642" Action="None" />
+    <Rule Id="SA1649" Action="Info" />
+    <Rule Id="SA1652" Action="None" />
+    <!-- Ignore -->
+  </Rules>
+</RuleSet>

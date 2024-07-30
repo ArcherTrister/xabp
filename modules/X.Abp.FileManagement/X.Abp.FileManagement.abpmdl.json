@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.FileManagement.Domain.Shared": {
+      "path": "src/X.Abp.FileManagement.Domain.Shared/X.Abp.FileManagement.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.Domain": {
+      "path": "src/X.Abp.FileManagement.Domain/X.Abp.FileManagement.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.Application.Contracts": {
+      "path": "src/X.Abp.FileManagement.Application.Contracts/X.Abp.FileManagement.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.Application": {
+      "path": "src/X.Abp.FileManagement.Application/X.Abp.FileManagement.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.EntityFrameworkCore": {
+      "path": "src/X.Abp.FileManagement.EntityFrameworkCore/X.Abp.FileManagement.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.MongoDB": {
+      "path": "src/X.Abp.FileManagement.MongoDB/X.Abp.FileManagement.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.HttpApi": {
+      "path": "src/X.Abp.FileManagement.HttpApi/X.Abp.FileManagement.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.HttpApi.Client": {
+      "path": "src/X.Abp.FileManagement.HttpApi.Client/X.Abp.FileManagement.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.TestBase": {
+      "path": "test/X.Abp.FileManagement.TestBase/X.Abp.FileManagement.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.FileManagement.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.FileManagement.EntityFrameworkCore.Tests/X.Abp.FileManagement.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.FileManagement.MongoDB.Tests": {
+      "path": "test/X.Abp.FileManagement.MongoDB.Tests/X.Abp.FileManagement.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.FileManagement.Domain.Tests": {
+      "path": "test/X.Abp.FileManagement.Domain.Tests/X.Abp.FileManagement.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.FileManagement.Application.Tests": {
+      "path": "test/X.Abp.FileManagement.Application.Tests/X.Abp.FileManagement.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.FileManagement.HttpApi.Host": {
+      "path": "host/X.Abp.FileManagement.HttpApi.Host/X.Abp.FileManagement.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.FileManagement.Web": {
+      "path": "src/X.Abp.FileManagement.Web/X.Abp.FileManagement.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.FileManagement.HttpApi.Client.ConsoleTestApp/X.Abp.FileManagement.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.FileManagement.Web.Host": {
+      "path": "host/X.Abp.FileManagement.Web.Host/X.Abp.FileManagement.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.FileManagement.AuthServer": {
+      "path": "host/X.Abp.FileManagement.AuthServer/X.Abp.FileManagement.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.FileManagement.Host.Shared": {
+      "path": "host/X.Abp.FileManagement.Host.Shared/X.Abp.FileManagement.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.FileManagement.Web.Unified": {
+      "path": "host/X.Abp.FileManagement.Web.Unified/X.Abp.FileManagement.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.FileManagement.Blazor": {
+      "path": "src/X.Abp.FileManagement.Blazor/X.Abp.FileManagement.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.Blazor.Host": {
+      "path": "host/X.Abp.FileManagement.Blazor.Host/X.Abp.FileManagement.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.FileManagement.Blazor.Server": {
+      "path": "src/X.Abp.FileManagement.Blazor.Server/X.Abp.FileManagement.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.Blazor.WebAssembly": {
+      "path": "src/X.Abp.FileManagement.Blazor.WebAssembly/X.Abp.FileManagement.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.FileManagement.Blazor.Server.Host": {
+      "path": "host/X.Abp.FileManagement.Blazor.Server.Host/X.Abp.FileManagement.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

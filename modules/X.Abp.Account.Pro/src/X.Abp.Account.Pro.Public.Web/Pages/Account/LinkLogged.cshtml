@@ -1,0 +1,51 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using X.Abp.Account.Localization;
+@using X.Abp.Account.Public.Web.Pages.Account;
+@using Volo.Abp.MultiTenancy;
+@using Volo.Abp.Users;
+@model X.Abp.Account.Public.Web.Pages.Account.LinkLoggedModel
+@inject Volo.Abp.AspNetCore.Mvc.UI.Layout.IPageLayout PageLayout
+@inject IHtmlLocalizer<AccountResource> L
+@inject ICurrentUser CurrentUser
+@inject ICurrentTenant CurrentTenant
+@{
+    PageLayout.Content.Title = L["LinkLogged"].Value;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(LinkLoggedModel).FullName">
+        <abp-script src="/Pages/Account/LinkLogged.js" />
+    </abp-script-bundle>
+}
+
+@if (@Model.IsSpaReturnUrl)
+{
+    <div>
+        <div class="gap-2 d-grid">
+            <a href="@Model.GetSpaLinkLoginReturnUrl(Model.ReturnUrl)" class="mb-3 btn btn-primary"> &larr; @L["StayWithCurrentAccount"]</a>
+        </div>
+        <div class="gap-2 d-grid">
+            <a href="@Model.GetSpaReturnUrl(Model.ReturnUrl)" class="btn btn-secondary">@L["ReturnToPreviousAccount", Model.TargetLinkTenantAndUserName] &rarr;</a>
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <div class="gap-2 d-grid">
+            <a href="@Url.Content(await Model.GetReturnUrlAsync(Model.ReturnUrl, Model.ReturnUrlHash))" class="mb-3 btn btn-primary"> &larr; @L["StayWithCurrentAccount"]</a>
+        </div>
+        <form method="post" asp-page="/Account/LinkLogin" id="linkUserLoginForm" asp-route-returnUrl="@Model.ReturnUrl" asp-route-returnUrlHash="@Model.ReturnUrlHash">
+            <input type="hidden" name="SourceLinkUserId" value="@CurrentUser.Id">
+            <input type="hidden" name="SourceLinkTenantId" value="@CurrentTenant.Id">
+            <input type="hidden" name="SourceLinkToken" >
+            <input asp-for="TargetLinkTenantId" >
+            <input asp-for="TargetLinkTenantName" >
+            <input asp-for="TargetLinkUserId" >
+            <div class="gap-2 d-grid">
+                <abp-button id="ReturnToPreviousAccount" class="btn-secondary">@L["ReturnToPreviousAccount", Model.TargetLinkTenantAndUserName] &rarr;</abp-button>
+            </div>
+        </form>
+    </div>
+}

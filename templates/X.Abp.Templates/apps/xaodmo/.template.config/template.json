@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "ArcherTrister",
+  "classifications": ["Abp Vnext Pro/Openiddict/Web/WebAPI"],
+  "name": "Abp Vnext Pro Openiddict Microservice Ocelot Template",
+  "identity": "X.Abp.Openiddict.Microservice.Ocelot",
+  "shortName": "xaodmo",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MyCompanyName.MyProjectName",
+  "preferNameDirectory": true,
+  "constraints": {
+    "sdk-only": {
+      "type": "host",
+      "args": [
+        {
+          "hostname": "dotnetcli",
+          "version": "[8.0,)"
+        },
+        {
+          "hostname": "vs",
+          "version": "[8.0,)"
+        }
+      ]
+    }
+  },
+  "symbols": {},
+  "SpecialCustomOperations": {
+    "**/*.md": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "if": ["---#if"],
+            "else": ["---#else"],
+            "elseif": ["---#elseif", "---#elif"],
+            "endif": ["---#endif"],
+            "trim": "true",
+            "wholeLine": "true"
+          }
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "modifiers": []
+    }
+  ],
+  "postActions": [
+    {
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    }
+  ]
+}

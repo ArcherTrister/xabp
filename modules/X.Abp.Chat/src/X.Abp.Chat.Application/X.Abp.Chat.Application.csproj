@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.Chat.Application</AssemblyName>
+    <PackageId>X.Abp.Chat.Application</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.Chat.Application.Contracts\X.Abp.Chat.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Chat.Domain\X.Abp.Chat.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "X.Abp.Quartz": {
+      "path": "X.Abp.Quartz.abpmdl.json"
+    }
+  }
+}

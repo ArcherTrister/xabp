@@ -1,0 +1,26 @@
+/* question/index page-> Responses is opened as default tab -> when navigated back to questions tab -> select2 width is broken */
+/* this fixes it */
+span.select2-container--default {
+    width: inherit !important;
+}
+
+.block-response-container {
+    max-height: 300px;
+    overflow: auto;
+    padding-right: 5px;
+}
+
+.italic-text {
+    font-style: italic;
+}
+
+.custom-menu-button {
+    flex: 1.1 auto;
+    margin-right: 1em
+}
+[v-cloak] {
+    display: none;
+}
+.form-title {
+    font-size: xx-large;
+}

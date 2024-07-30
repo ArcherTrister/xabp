@@ -1,0 +1,1865 @@
+{
+  "modules": {
+    "form": {
+      "rootPath": "form",
+      "remoteServiceName": "Forms",
+      "controllers": {
+        "X.Abp.Forms.Responses.ResponseController": {
+          "controllerName": "Response",
+          "controllerGroupName": "Form",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Forms.Responses.ResponseController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Forms.Responses.IResponseAppService",
+              "name": "IResponseAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Responses.FormResponseDto",
+                    "typeSimple": "X.Abp.Forms.Responses.FormResponseDto"
+                  }
+                },
+                {
+                  "name": "GetQuestionsWithAnswersAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Forms.Questions.QuestionWithAnswersDto>",
+                    "typeSimple": "[X.Abp.Forms.Questions.QuestionWithAnswersDto]"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Responses.GetUserFormListInputDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Responses.GetUserFormListInputDto",
+                      "typeSimple": "X.Abp.Forms.Responses.GetUserFormListInputDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormResponseDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormResponseDto>"
+                  }
+                },
+                {
+                  "name": "GetFormDetailsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "formId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Forms.FormDto",
+                    "typeSimple": "X.Abp.Forms.Forms.FormDto"
+                  }
+                },
+                {
+                  "name": "GetUserFormsByUserIdAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "userId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormWithResponseDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormWithResponseDto>"
+                  }
+                },
+                {
+                  "name": "SaveAnswersAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "formId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Responses.CreateResponseDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Responses.CreateResponseDto",
+                      "typeSimple": "X.Abp.Forms.Responses.CreateResponseDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Responses.FormResponseDto",
+                    "typeSimple": "X.Abp.Forms.Responses.FormResponseDto"
+                  }
+                },
+                {
+                  "name": "UpdateAnswersAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Responses.UpdateResponseDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Responses.UpdateResponseDto",
+                      "typeSimple": "X.Abp.Forms.Responses.UpdateResponseDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Responses.FormResponseDto",
+                    "typeSimple": "X.Abp.Forms.Responses.FormResponseDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/responses/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Responses.FormResponseDto",
+                "typeSimple": "X.Abp.Forms.Responses.FormResponseDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Responses.IResponseAppService"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/responses",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Responses.GetUserFormListInputDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Responses.GetUserFormListInputDto",
+                  "typeSimple": "X.Abp.Forms.Responses.GetUserFormListInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormResponseDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormResponseDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Responses.IResponseAppService"
+            },
+            "GetQuestionsWithAnswersAsyncById": {
+              "uniqueName": "GetQuestionsWithAnswersAsyncById",
+              "name": "GetQuestionsWithAnswersAsync",
+              "httpMethod": "GET",
+              "url": "api/responses/{id}/questions-with-answers",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Forms.Questions.QuestionWithAnswersDto>",
+                "typeSimple": "[X.Abp.Forms.Questions.QuestionWithAnswersDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Responses.IResponseAppService"
+            },
+            "GetFormDetailsAsyncByFormId": {
+              "uniqueName": "GetFormDetailsAsyncByFormId",
+              "name": "GetFormDetailsAsync",
+              "httpMethod": "GET",
+              "url": "api/responses/form-details/{formId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "formId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "formId",
+                  "name": "formId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Forms.FormDto",
+                "typeSimple": "X.Abp.Forms.Forms.FormDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Responses.IResponseAppService"
+            },
+            "GetUserFormsByUserIdAsyncByUserId": {
+              "uniqueName": "GetUserFormsByUserIdAsyncByUserId",
+              "name": "GetUserFormsByUserIdAsync",
+              "httpMethod": "GET",
+              "url": "api/responses/{userId}/response",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userId",
+                  "name": "userId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormWithResponseDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormWithResponseDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Responses.IResponseAppService"
+            },
+            "SaveAnswersAsyncByFormIdAndInput": {
+              "uniqueName": "SaveAnswersAsyncByFormIdAndInput",
+              "name": "SaveAnswersAsync",
+              "httpMethod": "POST",
+              "url": "api/responses",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "formId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Responses.CreateResponseDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Responses.CreateResponseDto",
+                  "typeSimple": "X.Abp.Forms.Responses.CreateResponseDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "formId",
+                  "name": "formId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Responses.CreateResponseDto",
+                  "typeSimple": "X.Abp.Forms.Responses.CreateResponseDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Responses.FormResponseDto",
+                "typeSimple": "X.Abp.Forms.Responses.FormResponseDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Responses.IResponseAppService"
+            },
+            "UpdateAnswersAsyncByIdAndInput": {
+              "uniqueName": "UpdateAnswersAsyncByIdAndInput",
+              "name": "UpdateAnswersAsync",
+              "httpMethod": "POST",
+              "url": "api/responses/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Responses.UpdateResponseDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Responses.UpdateResponseDto",
+                  "typeSimple": "X.Abp.Forms.Responses.UpdateResponseDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Responses.UpdateResponseDto",
+                  "typeSimple": "X.Abp.Forms.Responses.UpdateResponseDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Responses.FormResponseDto",
+                "typeSimple": "X.Abp.Forms.Responses.FormResponseDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Responses.IResponseAppService"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/responses/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Responses.IResponseAppService"
+            }
+          }
+        },
+        "X.Abp.Forms.Questions.QuestionController": {
+          "controllerName": "Question",
+          "controllerGroupName": "Form",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Forms.Questions.QuestionController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Forms.Questions.IQuestionAppService",
+              "name": "IQuestionAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Questions.GetQuestionListDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Questions.GetQuestionListDto",
+                      "typeSimple": "X.Abp.Forms.Questions.GetQuestionListDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Forms.Questions.QuestionDto>",
+                    "typeSimple": "[X.Abp.Forms.Questions.QuestionDto]"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Questions.QuestionDto",
+                    "typeSimple": "X.Abp.Forms.Questions.QuestionDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Questions.UpdateQuestionDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Questions.UpdateQuestionDto",
+                      "typeSimple": "X.Abp.Forms.Questions.UpdateQuestionDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Questions.QuestionDto",
+                    "typeSimple": "X.Abp.Forms.Questions.QuestionDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/questions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Questions.GetQuestionListDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Questions.GetQuestionListDto",
+                  "typeSimple": "X.Abp.Forms.Questions.GetQuestionListDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Questions.GetQuestionListDto",
+                  "typeSimple": "X.Abp.Forms.Questions.GetQuestionListDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Forms.Questions.QuestionDto>",
+                "typeSimple": "[X.Abp.Forms.Questions.QuestionDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Questions.IQuestionAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/questions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Questions.QuestionDto",
+                "typeSimple": "X.Abp.Forms.Questions.QuestionDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Questions.IQuestionAppService"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/questions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Questions.UpdateQuestionDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Questions.UpdateQuestionDto",
+                  "typeSimple": "X.Abp.Forms.Questions.UpdateQuestionDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Questions.UpdateQuestionDto",
+                  "typeSimple": "X.Abp.Forms.Questions.UpdateQuestionDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Questions.QuestionDto",
+                "typeSimple": "X.Abp.Forms.Questions.QuestionDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Questions.IQuestionAppService"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/questions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Forms.Questions.IQuestionAppService"
+            }
+          }
+        },
+        "X.Abp.Forms.Forms.FormController": {
+          "controllerName": "Form",
+          "controllerGroupName": "Form",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Forms.Forms.FormController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Forms.Forms.IFormAppService",
+              "name": "IFormAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Forms.GetFormListInputDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Forms.GetFormListInputDto",
+                      "typeSimple": "X.Abp.Forms.Forms.GetFormListInputDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Forms.FormDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Forms.FormDto>"
+                  }
+                },
+                {
+                  "name": "GetResponsesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Responses.GetResponseListInputDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Responses.GetResponseListInputDto",
+                      "typeSimple": "X.Abp.Forms.Responses.GetResponseListInputDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormResponseDetailedDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormResponseDetailedDto>"
+                  }
+                },
+                {
+                  "name": "GetCsvResponsesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Responses.GetResponseListInputDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Responses.GetResponseListInputDto",
+                      "typeSimple": "X.Abp.Forms.Responses.GetResponseListInputDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                },
+                {
+                  "name": "GetResponsesCountAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Int64",
+                    "typeSimple": "number"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Forms.CreateFormDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Forms.CreateFormDto",
+                      "typeSimple": "X.Abp.Forms.Forms.CreateFormDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Forms.FormDto",
+                    "typeSimple": "X.Abp.Forms.Forms.FormDto"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Forms.FormWithDetailsDto",
+                    "typeSimple": "X.Abp.Forms.Forms.FormWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Forms.UpdateFormDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Forms.UpdateFormDto",
+                      "typeSimple": "X.Abp.Forms.Forms.UpdateFormDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Forms.FormDto",
+                    "typeSimple": "X.Abp.Forms.Forms.FormDto"
+                  }
+                },
+                {
+                  "name": "SetSettingsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Forms.UpdateFormSettingInputDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Forms.UpdateFormSettingInputDto",
+                      "typeSimple": "X.Abp.Forms.Forms.UpdateFormSettingInputDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetSettingsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "formId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Forms.FormSettingsDto",
+                    "typeSimple": "X.Abp.Forms.Forms.FormSettingsDto"
+                  }
+                },
+                {
+                  "name": "GetQuestionsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Questions.GetQuestionListDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Questions.GetQuestionListDto",
+                      "typeSimple": "X.Abp.Forms.Questions.GetQuestionListDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Forms.Questions.QuestionDto>",
+                    "typeSimple": "[X.Abp.Forms.Questions.QuestionDto]"
+                  }
+                },
+                {
+                  "name": "CreateQuestionAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Questions.CreateQuestionDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Questions.CreateQuestionDto",
+                      "typeSimple": "X.Abp.Forms.Questions.CreateQuestionDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Forms.Questions.QuestionDto",
+                    "typeSimple": "X.Abp.Forms.Questions.QuestionDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "DeleteAllResponsesOfFormAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "SendInviteEmailAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Forms.Forms.FormInviteEmailInputDto, X.Abp.Forms.Application.Contracts",
+                      "type": "X.Abp.Forms.Forms.FormInviteEmailInputDto",
+                      "typeSimple": "X.Abp.Forms.Forms.FormInviteEmailInputDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/forms",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Forms.GetFormListInputDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Forms.GetFormListInputDto",
+                  "typeSimple": "X.Abp.Forms.Forms.GetFormListInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Forms.FormDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Forms.FormDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "GetResponsesAsyncByIdAndInput": {
+              "uniqueName": "GetResponsesAsyncByIdAndInput",
+              "name": "GetResponsesAsync",
+              "httpMethod": "GET",
+              "url": "api/forms/{id}/responses",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Responses.GetResponseListInputDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Responses.GetResponseListInputDto",
+                  "typeSimple": "X.Abp.Forms.Responses.GetResponseListInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormResponseDetailedDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Forms.Responses.FormResponseDetailedDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "GetCsvResponsesAsyncByIdAndInput": {
+              "uniqueName": "GetCsvResponsesAsyncByIdAndInput",
+              "name": "GetCsvResponsesAsync",
+              "httpMethod": "GET",
+              "url": "api/forms/{id}/download-responses-csv",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Responses.GetResponseListInputDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Responses.GetResponseListInputDto",
+                  "typeSimple": "X.Abp.Forms.Responses.GetResponseListInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "GetResponsesCountAsyncById": {
+              "uniqueName": "GetResponsesCountAsyncById",
+              "name": "GetResponsesCountAsync",
+              "httpMethod": "GET",
+              "url": "api/forms/{id}/responses-count",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Int64",
+                "typeSimple": "number"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "DeleteAllResponsesOfFormAsyncById": {
+              "uniqueName": "DeleteAllResponsesOfFormAsyncById",
+              "name": "DeleteAllResponsesOfFormAsync",
+              "httpMethod": "DELETE",
+              "url": "api/forms/{id}/responses",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "SendInviteEmailAsyncByInput": {
+              "uniqueName": "SendInviteEmailAsyncByInput",
+              "name": "SendInviteEmailAsync",
+              "httpMethod": "POST",
+              "url": "invite",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Forms.FormInviteEmailInputDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Forms.FormInviteEmailInputDto",
+                  "typeSimple": "X.Abp.Forms.Forms.FormInviteEmailInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Forms.FormInviteEmailInputDto",
+                  "typeSimple": "X.Abp.Forms.Forms.FormInviteEmailInputDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/forms",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Forms.CreateFormDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Forms.CreateFormDto",
+                  "typeSimple": "X.Abp.Forms.Forms.CreateFormDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Forms.CreateFormDto",
+                  "typeSimple": "X.Abp.Forms.Forms.CreateFormDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Forms.FormDto",
+                "typeSimple": "X.Abp.Forms.Forms.FormDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/forms/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Forms.FormWithDetailsDto",
+                "typeSimple": "X.Abp.Forms.Forms.FormWithDetailsDto"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/forms/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Forms.UpdateFormDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Forms.UpdateFormDto",
+                  "typeSimple": "X.Abp.Forms.Forms.UpdateFormDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Forms.UpdateFormDto",
+                  "typeSimple": "X.Abp.Forms.Forms.UpdateFormDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Forms.FormDto",
+                "typeSimple": "X.Abp.Forms.Forms.FormDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "SetSettingsAsyncByIdAndInput": {
+              "uniqueName": "SetSettingsAsyncByIdAndInput",
+              "name": "SetSettingsAsync",
+              "httpMethod": "PUT",
+              "url": "api/forms/{id}/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Forms.UpdateFormSettingInputDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Forms.UpdateFormSettingInputDto",
+                  "typeSimple": "X.Abp.Forms.Forms.UpdateFormSettingInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Forms.UpdateFormSettingInputDto",
+                  "typeSimple": "X.Abp.Forms.Forms.UpdateFormSettingInputDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "GetSettingsAsyncByFormId": {
+              "uniqueName": "GetSettingsAsyncByFormId",
+              "name": "GetSettingsAsync",
+              "httpMethod": "GET",
+              "url": "api/forms/{formId}/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "formId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "formId",
+                  "name": "formId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Forms.FormSettingsDto",
+                "typeSimple": "X.Abp.Forms.Forms.FormSettingsDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "GetQuestionsAsyncByIdAndInput": {
+              "uniqueName": "GetQuestionsAsyncByIdAndInput",
+              "name": "GetQuestionsAsync",
+              "httpMethod": "GET",
+              "url": "api/forms/{id}/questions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Questions.GetQuestionListDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Questions.GetQuestionListDto",
+                  "typeSimple": "X.Abp.Forms.Questions.GetQuestionListDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Questions.GetQuestionListDto",
+                  "typeSimple": "X.Abp.Forms.Questions.GetQuestionListDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Forms.Questions.QuestionDto>",
+                "typeSimple": "[X.Abp.Forms.Questions.QuestionDto]"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "CreateQuestionAsyncByIdAndInput": {
+              "uniqueName": "CreateQuestionAsyncByIdAndInput",
+              "name": "CreateQuestionAsync",
+              "httpMethod": "POST",
+              "url": "api/forms/{id}/questions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Forms.Questions.CreateQuestionDto, X.Abp.Forms.Application.Contracts",
+                  "type": "X.Abp.Forms.Questions.CreateQuestionDto",
+                  "typeSimple": "X.Abp.Forms.Questions.CreateQuestionDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Forms.Questions.CreateQuestionDto",
+                  "typeSimple": "X.Abp.Forms.Questions.CreateQuestionDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Forms.Questions.QuestionDto",
+                "typeSimple": "X.Abp.Forms.Questions.QuestionDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/forms/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Forms.Forms.IFormAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>X.Abp.CmsKit.Pro.Domain</AssemblyName>
+    <PackageId>X.Abp.CmsKit.Pro.Domain</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="X\Abp\CmsKit\Templates\*.tpl" />
+    <None Remove="X\Abp\CmsKit\Templates\*.tpl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.TextTemplating" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.CmsKit.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.CmsKit.Pro.Domain.Shared\X.Abp.CmsKit.Pro.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

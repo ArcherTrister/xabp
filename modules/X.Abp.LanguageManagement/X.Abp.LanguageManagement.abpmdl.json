@@ -1,0 +1,111 @@
+{
+    "folders": {
+        "items": {
+            "src": {},
+            "test": {},
+            "host": {}
+        }
+    },
+    "packages": {
+        "X.Abp.LanguageManagement.Domain.Shared": {
+            "path": "src/X.Abp.LanguageManagement.Domain.Shared/X.Abp.LanguageManagement.Domain.Shared.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.Domain": {
+            "path": "src/X.Abp.LanguageManagement.Domain/X.Abp.LanguageManagement.Domain.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.Application.Contracts": {
+            "path": "src/X.Abp.LanguageManagement.Application.Contracts/X.Abp.LanguageManagement.Application.Contracts.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.Application": {
+            "path": "src/X.Abp.LanguageManagement.Application/X.Abp.LanguageManagement.Application.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.EntityFrameworkCore": {
+            "path": "src/X.Abp.LanguageManagement.EntityFrameworkCore/X.Abp.LanguageManagement.EntityFrameworkCore.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.MongoDB": {
+            "path": "src/X.Abp.LanguageManagement.MongoDB/X.Abp.LanguageManagement.MongoDB.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.HttpApi": {
+            "path": "src/X.Abp.LanguageManagement.HttpApi/X.Abp.LanguageManagement.HttpApi.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.HttpApi.Client": {
+            "path": "src/X.Abp.LanguageManagement.HttpApi.Client/X.Abp.LanguageManagement.HttpApi.Client.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.TestBase": {
+            "path": "test/X.Abp.LanguageManagement.TestBase/X.Abp.LanguageManagement.TestBase.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LanguageManagement.EntityFrameworkCore.Tests": {
+            "path": "test/X.Abp.LanguageManagement.EntityFrameworkCore.Tests/X.Abp.LanguageManagement.EntityFrameworkCore.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LanguageManagement.MongoDB.Tests": {
+            "path": "test/X.Abp.LanguageManagement.MongoDB.Tests/X.Abp.LanguageManagement.MongoDB.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LanguageManagement.Domain.Tests": {
+            "path": "test/X.Abp.LanguageManagement.Domain.Tests/X.Abp.LanguageManagement.Domain.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LanguageManagement.Application.Tests": {
+            "path": "test/X.Abp.LanguageManagement.Application.Tests/X.Abp.LanguageManagement.Application.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LanguageManagement.HttpApi.Host": {
+            "path": "host/X.Abp.LanguageManagement.HttpApi.Host/X.Abp.LanguageManagement.HttpApi.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.LanguageManagement.Web": {
+            "path": "src/X.Abp.LanguageManagement.Web/X.Abp.LanguageManagement.Web.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.HttpApi.Client.ConsoleTestApp": {
+            "path": "test/X.Abp.LanguageManagement.HttpApi.Client.ConsoleTestApp/X.Abp.LanguageManagement.HttpApi.Client.ConsoleTestApp.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LanguageManagement.Web.Host": {
+            "path": "host/X.Abp.LanguageManagement.Web.Host/X.Abp.LanguageManagement.Web.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.LanguageManagement.AuthServer": {
+            "path": "host/X.Abp.LanguageManagement.AuthServer/X.Abp.LanguageManagement.AuthServer.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.LanguageManagement.Host.Shared": {
+            "path": "host/X.Abp.LanguageManagement.Host.Shared/X.Abp.LanguageManagement.Host.Shared.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.LanguageManagement.Web.Unified": {
+            "path": "host/X.Abp.LanguageManagement.Web.Unified/X.Abp.LanguageManagement.Web.Unified.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.LanguageManagement.Blazor": {
+            "path": "src/X.Abp.LanguageManagement.Blazor/X.Abp.LanguageManagement.Blazor.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.Blazor.Host": {
+            "path": "host/X.Abp.LanguageManagement.Blazor.Host/X.Abp.LanguageManagement.Blazor.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.LanguageManagement.Blazor.Server": {
+            "path": "src/X.Abp.LanguageManagement.Blazor.Server/X.Abp.LanguageManagement.Blazor.Server.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.Blazor.WebAssembly": {
+            "path": "src/X.Abp.LanguageManagement.Blazor.WebAssembly/X.Abp.LanguageManagement.Blazor.WebAssembly.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LanguageManagement.Blazor.Server.Host": {
+            "path": "host/X.Abp.LanguageManagement.Blazor.Server.Host/X.Abp.LanguageManagement.Blazor.Server.Host.abppkg.json",
+            "folder": "host"
+        }
+    }
+}

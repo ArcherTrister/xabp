@@ -1,0 +1,31 @@
+﻿@page "/Forms/{Id}/ViewForm"
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@using X.Abp.Forms.Localization;
+@using X.Abp.Forms.Web.Pages.Forms.Shared.Components.ViewForm;
+
+@model X.Abp.Forms.Web.Pages.Forms.ViewFormModel
+
+@inject IPageLayout PageLayout
+@inject IAuthorizationService Authorization
+@inject IStringLocalizer<FormsResource> L
+@inject IThemeManager ThemeManager
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = ThemeManager.CurrentTheme.GetLayout(StandardLayouts.Empty);
+}
+
+@section scripts {
+    <abp-script src="/client-proxies/form-proxy.js" />
+}
+
+@{
+    @await Component.InvokeAsync(typeof(ViewFormViewComponent), new
+    {
+        formId = Model.Id,
+        preview = false
+    })
+}

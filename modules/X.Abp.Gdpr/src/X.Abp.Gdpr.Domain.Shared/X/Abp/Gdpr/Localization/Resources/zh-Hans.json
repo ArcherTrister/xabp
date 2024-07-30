@@ -1,0 +1,27 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "X.Abp.Gdpr:010001": "你已经提交了一个个人数据下载请求。你不能再次提交直到该请求被完成。",
+    "X.Abp.Gdpr:010002": "你的个人数据正在准备中。你可以在{GdprDataReadyTime}下载它。",
+    "PersonalData": "个人数据",
+    "Menu:PersonalData": "个人数据",
+    "PersonalDataDescription": "你的账户包含你给我们提供的个人数据。这个页面允许你下载或删除这些数据。",
+    "RequestPersonalData": "请求个人数据",
+    "DeletePersonalData": "删除个人数据",
+    "CreationTime": "创建时间",
+    "Action": "操作",
+    "Preparing": "准备中",
+    "Download": "下载",
+    "ReadyTime": "就绪时间",
+    "DeletePersonalDataWarning": "删除这些数据将会删除你的账户，并且你将不再登录到应用程序！你确定要继续吗？",
+    "PersonalDataDeleteRequestReceived": "你的个人数据删除请求正在处理中...在数据删除过程结束后，你的账户将被删除，并且你将不再能够使用它。",
+    "PersonalDataPrepareRequestReceived": "你的个人数据请求正在处理中。你可以在这个页面下载它，一旦它就绪！",
+    "NoDataAvailable": "没有数据可用。",
+    "Accept": "接受",
+    "CookiePolicy": "Cookie政策",
+    "PrivacyPolicy": "隐私政策",
+    "ThisWebsiteUsesCookie": "这个网站使用cookies，以确保你在网站上获得最佳体验。",
+    "CookieConsentAgreePolicies": "如果你继续浏览，那么你同意我们的{0}和{1}。",
+    "CookieConsentAgreePolicy": "如果你继续浏览，那么你同意我们的{0}。"
+  }
+}

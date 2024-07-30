@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-{{ .Chart.Name }}
+    spec:
+      containers:
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: {{ .Release.Name }}-{{ .Chart.Name }}
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        env:
+        - name: App__SelfUrl
+          value: "{{ .Values.config.selfUrl }}"
+        - name: App__CorsOrigins
+          value: "{{ .Values.config.corsOrigins }}"
+        - name: "ConnectionStrings__IdentityService"
+          value: {{ .Values.config.connectionStrings.identityService }}
+        - name: "ConnectionStrings__AdministrationService"
+          value: {{ .Values.config.connectionStrings.administrationService }}  
+        - name: "ConnectionStrings__SaasService"
+          value: {{ .Values.config.connectionStrings.saasService }}  
+        - name: "DOTNET_ENVIRONMENT"
+          value: "{{ .Values.config.dotnetEnv }}"
+        - name: "Redis__Configuration"
+          value: "{{ .Values.config.redisHost }}"
+        - name: "RabbitMQ__Connections__Default__HostName"
+          value: "{{ .Values.config.rabbitmqHost }}"
+        - name: "ElasticSearch__Url"
+          value: "{{ .Values.config.elasticsearchUrl }}"   
+        - name: "AuthServer__Authority"
+          value: "{{ .Values.config.authServer.authority }}"
+        - name: "AuthServer__RequireHttpsMetadata"
+          value: "{{ .Values.config.authServer.requireHttpsMetadata }}"
+        - name: "AuthServer__SwaggerClientSecret"
+          value: "{{ .Values.config.authServer.swaggerClientSecret }}"  
+        - name: "StringEncryption__DefaultPassPhrase"
+          value: "{{ .Values.config.stringEncryptionDefaultPassPhrase }}"             
+        - name: "OpenIddict__Applications__AuthServer__RootUrl"
+          value: {{ .Values.openIdDict.applications.authServerRootUrl }}  
+        - name: "OpenIddict__Applications__Web__RootUrl"
+          value: {{ .Values.openIdDict.applications.webRootUrl }}
+        - name: "OpenIddict__Applications__Blazor__RootUrl"
+          value: {{ .Values.openIdDict.applications.blazorRootUrl }}
+        - name: "OpenIddict__Applications__BlazorServer__RootUrl"
+          value: {{ .Values.openIdDict.applications.blazorServerRootUrl }}
+        - name: "OpenIddict__Applications__Angular__RootUrl"
+          value: {{ .Values.openIdDict.applications.angularRootUrl }}  
+        - name: "OpenIddict__Applications__PublicWeb__RootUrl"
+          value: {{ .Values.openIdDict.applications.publicWebRootUrl }}
+        - name: "OpenIddict__Applications__PublicWebGateway__RootUrl"
+          value: {{ .Values.openIdDict.applications.publicWebRootUrl }}
+        - name: "OpenIddict__Applications__WebGateway__RootUrl"
+          value: {{ .Values.openIdDict.applications.webGatewayRootUrl }}
+        - name: "OpenIddict__Resources__AdministrationService__RootUrl"
+          value: {{ .Values.openIdDict.resources.administrationServiceRootUrl }}
+        - name: "OpenIddict__Resources__AccountService__RootUrl"
+          value: {{ .Values.openIdDict.resources.accountServiceRootUrl }}    
+        - name: "OpenIddict__Resources__IdentityService__RootUrl"
+          value: {{ .Values.openIdDict.resources.identityServiceRootUrl }}
+        - name: "OpenIddict__Resources__SaasService__RootUrl"
+          value: {{ .Values.openIdDict.resources.saasServiceRootUrl }}
+        - name: "OpenIddict__Resources__ProductService__RootUrl"
+          value: {{ .Values.openIdDict.resources.productServiceRootUrl }}
+          {{- if .Values.env }}
+{{ toYaml .Values.env | indent 8 }}
+          {{- end }}
+

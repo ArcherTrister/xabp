@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.Application.Contracts\MyCompanyName.MyProjectName.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Admin.HttpApi"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Public.HttpApi"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.AuditLogging.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Gdpr.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Identity.Pro.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.IdentityServer.Pro.HttpApi"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.HttpApi"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.HttpApi"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Saas.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

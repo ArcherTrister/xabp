@@ -1,0 +1,74 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Volo.CmsKit.Localization;
+@model X.Abp.CmsKit.Pro.Public.Web.Pages.Public.Newsletters.SuccessModalModel
+@inject IHtmlLocalizer<CmsKitResource> L
+@{
+    Layout = null;
+}
+
+<form id="newsletterSuccessForm"
+      data-email="@Model.EmailAddress"
+      data-preference="@Model.Preference"
+      data-additional="@Model.RequestAdditionalPreferences"
+      data-source="@Model.Source"
+      data-sourceurl="@Model.SourceUrl"
+      data-ajaxForm="true"
+      asp-page="/Newsletter/SuccessModal"
+      asp-route-Preference="@Model.Preference"
+      asp-route-Source="@Model.Source"
+      asp-route-RequestAdditionalPreferences="@Model.RequestAdditionalPreferences">
+
+    @*    RouteValues.Add("Preference", Model.Preference);
+    RouteValues.Add("Source", Model.Source);
+    RouteValues.Add("RequestAdditionalPreferences", Model.RequestAdditionalPreferences);
+
+    @if (__Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper.RouteValues == null)
+    {
+    throw new InvalidOperationException(InvalidTagHelperIndexerAssignment("asp-route-Preference", "Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper", "RouteValues"));
+    }*@
+
+    <abp-modal id="newsletter-success-modal-@Model.NormalizedSource" centered="true" size="Default">
+        <abp-modal-body>
+            <div>
+                <div class="swal-icon swal-icon--success">
+                    <span class="swal-icon--success__line swal-icon--success__line--long"></span>
+                    <span class="swal-icon--success__line swal-icon--success__line--tip"></span>
+                    <div class="swal-icon--success__ring"></div>
+                    <div class="swal-icon--success__hide-corners"></div>
+                </div>
+                <h3 class="text-center my-5">
+                    @L["NewsletterSuccessMessage"]
+                </h3>
+
+                @if (Model.RequestAdditionalPreferences && Model.AdditionalPreferences.Count > 0)
+                {
+                    <p class="lead">
+                        @L["DoYouPreferAdditionalEmails"]
+                    </p>
+                }
+            </div>
+
+            @if (Model.RequestAdditionalPreferences && Model.AdditionalPreferences.Count > 0)
+            {
+                <div id="additional-preferences">
+                    @for (int i = 0; i < Model.AdditionalPreferences.Count; i++)
+                    {
+                        <div class="mb-3 form-check me-sm-2" data-additional-preference="@Model.AdditionalPreferences[i]">
+                            <input id="additional-@Model.AdditionalPreferences[i]" type="checkbox" data-val="false" data-additional-preference="@Model.AdditionalPreferences[i]" class="form-check-input additional-checkbox form-check-input">
+                            <label class="form-check-label" for="additional-@Model.AdditionalPreferences[i]">
+                                @L["GetDealsAndSpecialOffersForThe", Model.DisplayAdditionalPreferences[i]];
+                            </label>
+                        </div>
+                    }
+                </div>
+            }
+        </abp-modal-body>
+
+        <div class="modal-footer">
+            <button id="newsletterSuccessBtn" type="button" class="btn btn-primary">
+                @L["OK"]
+            </button>
+        </div>
+    </abp-modal>
+</form>

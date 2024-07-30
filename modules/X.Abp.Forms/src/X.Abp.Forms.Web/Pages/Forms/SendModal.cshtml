@@ -1,0 +1,54 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using X.Abp.Forms.Localization;
+@model X.Abp.Forms.Web.Pages.Forms.SendModalModel;
+
+@inject IPageLayout PageLayout
+@inject IAuthorizationService Authorization
+@inject IStringLocalizer<FormsResource> L
+@inject IStringLocalizerFactory StringLocalizerFactory
+
+@{
+    Layout = null;
+}
+<abp-modal size="Large">
+    <abp-modal-header title="@(L["Form:SendFormHeader"].Value)"></abp-modal-header>
+    <input asp-for="Form.Id"/>
+    <abp-modal-body>
+        <abp-tabs name="SendFormTabs" tab-style="PillVertical" vertical-header-size="_4" class="custom-scroll-container">
+            <abp-tab title="Email" name="v-pills-tab-email" active="true">
+                <h4>@L["Email"]</h4>
+                <hr class="mt-2 mb-3"/>
+                <div class="custom-scroll-content">
+                    <div class="pt-1 ps-1">
+                        <form id="inviteEmailForm" method="post">
+                            <abp-input asp-for="Form.To"/>
+
+                            <abp-input asp-for="Form.Subject"/>
+
+                            <abp-input asp-for="Form.Body"/>
+                        </form>
+                    </div>
+                </div>
+            </abp-tab>
+            <abp-tab title="Link" name="v-pills-tab-link">
+                <h4>@L["Link"]</h4>
+                <hr class="mt-2 mb-3"/>
+                <div class="custom-scroll-content">
+                    <div class="pt-1 ps-1">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="linkInput" readonly value="@Model.Form.Link"/>
+                        </div>
+                    </div>
+                </div>
+            </abp-tab>
+        </abp-tabs>
+    </abp-modal-body>
+    <abp-modal-footer>
+        <button class="btn-secondary btn" data-bs-dismiss="modal" type="button">@L["Close"]</button>
+        <button class="btn-primary btn" id="copyBtn" type="button" style="display: none;">@L["Copy"]</button>
+        <button class="btn-primary btn" id="sendBtn" type="button">@L["Send"]</button>
+    </abp-modal-footer>
+</abp-modal>

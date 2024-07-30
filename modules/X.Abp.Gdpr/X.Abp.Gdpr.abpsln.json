@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "X.Abp.Gdpr": {
+      "path": "X.Abp.Gdpr.abpmdl.json"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "MyCompanyName.MyProjectName.AdministrationService.HttpApi": {
+      "path": "src/MyCompanyName.MyProjectName.AdministrationService.HttpApi/MyCompanyName.MyProjectName.AdministrationService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.Application.Contracts": {
+      "path": "src/MyCompanyName.MyProjectName.AdministrationService.Application.Contracts/MyCompanyName.MyProjectName.AdministrationService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.Application": {
+      "path": "src/MyCompanyName.MyProjectName.AdministrationService.Application/MyCompanyName.MyProjectName.AdministrationService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.Domain.Shared": {
+      "path": "src/MyCompanyName.MyProjectName.AdministrationService.Domain.Shared/MyCompanyName.MyProjectName.AdministrationService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.Domain": {
+      "path": "src/MyCompanyName.MyProjectName.AdministrationService.Domain/MyCompanyName.MyProjectName.AdministrationService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.EntityFrameworkCore": {
+      "path": "src/MyCompanyName.MyProjectName.AdministrationService.EntityFrameworkCore/MyCompanyName.MyProjectName.AdministrationService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.HttpApi.Client": {
+      "path": "src/MyCompanyName.MyProjectName.AdministrationService.HttpApi.Client/MyCompanyName.MyProjectName.AdministrationService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host": {
+      "path": "src/MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host/MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.TestBase": {
+      "path": "test/MyCompanyName.MyProjectName.AdministrationService.TestBase/MyCompanyName.MyProjectName.AdministrationService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.Domain.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.AdministrationService.Domain.Tests/MyCompanyName.MyProjectName.AdministrationService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.EntityFrameworkCore.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.AdministrationService.EntityFrameworkCore.Tests/MyCompanyName.MyProjectName.AdministrationService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.Application.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.AdministrationService.Application.Tests/MyCompanyName.MyProjectName.AdministrationService.Application.Tests.abppkg.json",
+      "folder": "test"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "culture": "zh-Hant",
+  "texts": {
+    "NullNotifier": "日誌通知",
+    "ReceiveNotifications": "接收通知",
+    "DisplayName:ReceiveNotifications": "接收通知",
+    "Description:ReceiveNotifications": "接收通知",
+    "Feature:NotificationGroup": "通知管理",
+    "Feature:NotificationEnable": "啟用通知管理",
+    "Feature:NotificationEnableDescription": "在應用程序中啟用通知管理",
+    "Permission:Notification": "通知管理",
+    "Permission:Notifications": "通知管理",
+    "Permission:Create": "創建",
+    "Permission:Edit": "編輯",
+    "Permission:Delete": "刪除"
+  }
+}

@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>AbpVnext.Pro</RootNamespace>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'AbpVnext.Pro.HttpApi.Host' " />
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" VersionOverride="$(AspNetSecurityOAuthPackageVersion)" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI" VersionOverride="$(AspNetCoreHealthChecksPackageVersion)" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" VersionOverride="$(AspNetCoreHealthChecksPackageVersion)" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" VersionOverride="$(AspNetCoreHealthChecksPackageVersion)" />
+    <!--<PackageReference
+    Include="DistributedLock.Redis" Version="1.0.3" />-->
+    <!--<PackageReference
+    Include="Namotion.Reflection" Version="2.1.1" />-->
+    <PackageReference Include="Quartz.Serialization.Json" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Sinks.Async" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" />
+    <PackageReference Include="Volo.Abp.Autofac" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Quartz" VersionOverride="$(AbpPackageVersion)" />
+    <!--<PackageReference
+    Include="Volo.Abp.DistributedLocking" VersionOverride="$(AbpPackageVersion)" />-->
+    <PackageReference Include="Volo.Abp.Swashbuckle" VersionOverride="$(AbpPackageVersion)" />
+    <!--<PackageReference
+    Include="Volo.Abp.Account.Pro.Public.Web.OpenIddict" VersionOverride="$(AbpPackageVersion)"
+    />-->
+    <!--<PackageReference
+    Include="Volo.Abp.Account.Pro.Public.Web.Impersonation" VersionOverride="$(AbpPackageVersion)"
+    />-->
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Public.Web.IdentityServer\X.Abp.Account.Pro.Public.Web.IdentityServer.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Public.Web.Impersonation\X.Abp.Account.Pro.Public.Web.Impersonation.csproj" />
+    <ProjectReference Include="..\AbpVnext.Pro.Application\AbpVnext.Pro.Application.csproj" />
+    <ProjectReference Include="..\AbpVnext.Pro.EntityFrameworkCore\AbpVnext.Pro.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\AbpVnext.Pro.HttpApi\AbpVnext.Pro.HttpApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Customs\Abp\**" />
+    <Compile Remove="Logs\**" />
+    <Content Remove="Customs\Abp\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Customs\Abp\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Customs\Abp\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="idsrv4.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

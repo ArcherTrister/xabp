@@ -1,0 +1,40 @@
+<Project>
+  <Import Project="Version.props" />
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);CS1591;CS0436;CA1305</NoWarn>
+    <Authors>ArcherTrister</Authors>
+    <PackageReleaseNotes>8.2.0-alpha-beta-rc-preview</PackageReleaseNotes>
+    <NeutralLanguage>zh-Hans</NeutralLanguage>
+    <Copyright>Copyright © 2016-2024 LX Incorporated. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://archertrister.github.io/</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/ArcherTrister/xabp/</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Include symbol files (*.pdb) in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+	<!--<Target Name="NoWarnOnRazorViewImportedTypeConflicts" BeforeTargets="RazorCoreCompile">
+		<PropertyGroup>
+			<NoWarn>$(NoWarn);0436</NoWarn>
+		</PropertyGroup>
+	</Target>-->
+
+  <ItemGroup>
+    <EmbeddedResource Include="*.abppkg.analyze.json" />
+    <Content Remove="*.abppkg.analyze.json" />
+    <EmbeddedResource Include="*.abppkg.json" />
+    <Content Remove="*.abppkg.json" />
+  </ItemGroup>
+  <ItemGroup Condition="$(AssemblyName.EndsWith('HttpApi.Client'))">
+    <EmbeddedResource Include="**\*generate-proxy.json" />
+    <Content Remove="**\*generate-proxy.json" />
+  </ItemGroup>
+</Project>

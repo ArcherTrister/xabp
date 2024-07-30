@@ -1,0 +1,28 @@
+{
+  "culture": "ru",
+  "texts": {
+    "Menu:ProductService": "Продукт Сервис",
+    "Menu:Products": "Продукты",
+    "Permission:ProductService": "Продукт Сервис",
+    "Permission:Products": "Продукты",
+    "Permission:Create": "Создавать",
+    "Permission:Edit": "Редактировать",
+    "Permission:Delete": "Удалить",
+    "Products": "Продукты",
+    "NewProduct": "Новый продукт",
+    "Actions": "Действия",
+    "SuccessfullyDeleted": "Успешно удалено",
+    "DeleteConfirmationMessage": "Вы уверены, что хотите удалить этот продукт?",
+    "Search": "Поиск",
+    "Pick": "Выбирать",
+    "SeeAdvancedFilters": "Расширенные фильтры",
+    "Name": "Имя",
+    "Price": "Цена",
+    "MinPrice": "Минимальная цена",
+    "MaxPrice": "Максимальная цена",
+    "Product": "Товар",
+    "AreYouSure": "Вы уверены?",
+    "MinName": "Минимальное имя",
+    "MaxName": "Максимальное имя"
+  }
+}

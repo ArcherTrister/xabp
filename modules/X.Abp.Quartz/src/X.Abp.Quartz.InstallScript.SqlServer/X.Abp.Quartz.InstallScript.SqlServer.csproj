@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>X.Abp.Quartz.InstallScript.SqlServer</AssemblyName>
+    <PackageId>X.Abp.Quartz.InstallScript.SqlServer</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="X\Abp\Quartz\SqlServer\Install.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+    <PackageReference Include="Volo.Abp.Quartz" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

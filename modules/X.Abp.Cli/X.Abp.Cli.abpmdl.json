@@ -1,0 +1,19 @@
+{
+    "folders": {
+        "items": {
+            "src": {},
+            "test": {},
+            "host": {}
+        }
+    },
+    "packages": {
+        "X.Abp.Cli": {
+            "path": "src/X.Abp.Cli/X.Abp.Cli.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Cli.TestBase": {
+            "path": "test/X.Abp.Cli.TestBase/X.Abp.Cli.TestBase.abppkg.json",
+            "folder": "test"
+        }
+    }
+}

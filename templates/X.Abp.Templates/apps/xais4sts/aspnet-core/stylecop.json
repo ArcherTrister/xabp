@@ -1,0 +1,36 @@
+{
+    "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+    "settings": {
+        "documentationRules": {
+            "copyrightText": "Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.\nSee the LICENSE file in the project root for more information.",
+            "documentExposedElements": false,
+            "documentInterfaces": false,
+            "documentInternalElements": false,
+            "documentPrivateElements": false,
+            "documentPrivateFields": false,
+            "fileNamingConvention": "metadata",
+            "xmlHeader": false
+        },
+        "layoutRules": {
+            "newlineAtEndOfFile": "require"
+        },
+        "maintainabilityRules": {},
+        "namingRules": {
+            "allowCommonHungarianPrefixes": true,
+            "allowedHungarianPrefixes": []
+        },
+        "orderingRules": {
+            "elementOrder": [
+                "kind",
+                "accessibility",
+                "constant",
+                "static",
+                "readonly"
+            ],
+            "systemUsingDirectivesFirst": true,
+            "usingDirectivesPlacement": "outsideNamespace"
+        },
+        "readabilityRules": {},
+        "spacingRules": {}
+    }
+}

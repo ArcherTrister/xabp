@@ -1,0 +1,35 @@
+@using Microsoft.AspNetCore.Http.Extensions;
+@using X.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Themes.Lepton.Components.Toolbar.LanguageSwitch;
+@model LanguageSwitchViewComponentModel;
+<div class="dropdown">
+    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @if (@Model.CurrentLanguage.TwoLetterISOLanguageName != null)
+        {
+            <span class="flag-icon flag-icon-squared flag-icon-@Model.CurrentLanguage.TwoLetterISOLanguageName" data-bs-toggle="tooltip" title="@Model.CurrentLanguage.DisplayName"></span>
+        }
+        else
+        {
+            <span class="flag-icon flag-icon-squared flag-icon-@Model.CurrentLanguage.CultureName" data-bs-toggle="tooltip" title="@Model.CurrentLanguage.DisplayName"></span> 
+        }
+    <span class="current-language-name">@Model.CurrentLanguage.DisplayName</span>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+        @foreach (var language in Model.OtherLanguages)
+        {
+            <a class="dropdown-item" href="~/Abp/Languages/Switch?culture=@(language.CultureName)&uiCulture=@(language.UiCultureName)&returnUrl=@(System.Net.WebUtility.UrlEncode(Context.Request.GetEncodedPathAndQuery()))">
+                @if (language.TwoLetterISOLanguageName != null)
+                {
+                    <span class="flag-icon flag-icon-squared me-2 flag-icon-@language.TwoLetterISOLanguageName"></span>
+                }
+                else
+                {
+                    <span class="flag-icon flag-icon-squared me-2 flag-icon-@language.CultureName"></span>
+                }
+                @language.DisplayName
+            </a>
+        }
+    </div>
+</div>
+
+

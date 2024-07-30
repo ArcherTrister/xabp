@@ -1,0 +1,28 @@
+{
+  "culture": "en",
+  "texts": {
+    "X.Abp.IdentityServer:External:010001": "Code cannot be empty",
+    "X.Abp.IdentityServer:External:010002": "Unbound system user",
+    "X.Abp.IdentityServer:External:010003": "Login failed",
+    "X.Abp.IdentityServer:External:010003:Success": "Login success",
+    "X.Abp.IdentityServer:External:010003:InvalidUserNameOrEmailAddress": "Invalid UserName Or EmailAddress",
+    "X.Abp.IdentityServer:External:010003:InvalidPassword": "Invalid Password",
+    "X.Abp.IdentityServer:External:010003:UserIsNotActive": "User Is Not Active",
+    "X.Abp.IdentityServer:External:010003:UserEmailIsNotConfirmed": "User Email Is Not Confirmed",
+    "X.Abp.IdentityServer:External:010003:UnknownExternalLogin": "Unknown External Login",
+    "X.Abp.IdentityServer:External:010003:LockedOut": "Locked Out",
+    "X.Abp.IdentityServer:External:010003:UserPhoneNumberIsNotConfirmed": "User PhoneNumber Is Not Confirmed",
+    "X.Abp.IdentityServer:External:010003:UserAccountIsNotConfirmed": "User Account Is Not Confirmed",
+    "X.Abp.IdentityServer:External:010004": "An error occurred while retrieving user information.",
+    "X.Abp.IdentityServer:External:010005": "Parameter error",
+    "X.Abp.IdentityServer:External:010006": "Invalid verification code",
+    "X.Abp.IdentityServer:External:010007": "Failed to create new user",
+    "X.Abp.IdentityServer:External:010008": "User does not exist",
+    "X.Abp.IdentityServer:External:010009": "Provider key cannot be empty",
+    "X.Abp.IdentityServer:External:010010": "Provider name cannot be empty",
+    "X.Abp.IdentityServer:External:010011": "External login info is not available",
+    "X.Abp.IdentityServer:External:010012": "The user information to be bound was not found",
+    "X.Abp.IdentityServer:External:010013": "Failed to get WeChat user information",
+    "X.Abp.IdentityServer:External:010014": "The user does not exist or is not bound to {LoginProvider} Quick Login"
+  }
+}

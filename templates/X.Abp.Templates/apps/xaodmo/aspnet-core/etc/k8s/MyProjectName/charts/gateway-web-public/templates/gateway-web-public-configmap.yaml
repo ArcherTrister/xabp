@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+data:
+  ocelot.json: |-
+    {
+      "GlobalConfiguration": {
+      "BaseUrl": "{{ .Values.config.globalConfigurationBaseUrl }}"
+    },
+      "Routes": [   
+    {
+      "ServiceKey": "Account Service",
+      "DownstreamPathTemplate": "/api/account/{everything}",
+      "DownstreamScheme": "{{ .Values.reRoutes.accountService.schema }}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "{{ .Values.reRoutes.accountService.host }}",
+          "Port": {{ .Values.reRoutes.accountService.port }}
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account/{everything}",
+      "UpstreamHttpMethod": [ "Put", "Delete", "Get", "Post" ]
+    },
+    {
+      "ServiceKey": "Saas Service",
+      "DownstreamPathTemplate": "/api/payment/{everything}",
+      "DownstreamScheme": "{{ .Values.reRoutes.saasService.schema }}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "{{ .Values.reRoutes.saasService.host }}",
+          "Port": "{{ .Values.reRoutes.saasService.port }}"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/payment/{everything}",
+      "UpstreamHttpMethod": [ "Put", "Delete", "Get", "Post" ]
+    },
+    {
+      "ServiceKey": "Administration Service",
+      "DownstreamPathTemplate": "/api/abp/{everything}",
+      "DownstreamScheme": "{{ .Values.reRoutes.administrationService.schema }}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "{{ .Values.reRoutes.administrationService.host }}",
+          "Port": {{ .Values.reRoutes.administrationService.port }}
+        }
+      ],
+      "UpstreamPathTemplate": "/api/abp/{everything}",
+      "UpstreamHttpMethod": [ "Put", "Delete", "Get", "Post" ]
+    },
+    {
+      "ServiceKey": "Product Service",
+      "DownstreamPathTemplate": "/api/product-service/{everything}",
+      "DownstreamScheme": "{{ .Values.reRoutes.productService.schema }}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "{{ .Values.reRoutes.productService.host }}",
+          "Port": {{ .Values.reRoutes.productService.port }}
+        }
+      ],
+      "UpstreamPathTemplate": "/api/product-service/{everything}",
+      "UpstreamHttpMethod": [ "Put", "Delete", "Get", "Post" ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 2000,
+        "TimeoutValue": 5000
+      }
+    }]
+    }

@@ -1,0 +1,41 @@
+/* ~ */
+/* ---------- HEADER STYLES - START */
+
+header {
+  background: rgba($global-bg, 0.35);
+  color: $text-color;
+  background-attachment: fixed;
+  background-size: cover;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 102;
+  transition: all 0.3s;
+  @import "_header_toolbar.scss";
+
+  @include respond-to($sm) {
+    background: $sidebar-bg;
+    height: 60px;
+  }
+
+  .navbar {
+    padding: 0;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .scrolled:not(.lp-topmenu) {
+    header {
+      background: $global-bg;
+      box-shadow: $shadow;
+    }
+  }
+}
+
+.nav-mobile {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+/* ---------- HEADER STYLES - END */
+/* ~ */

@@ -1,0 +1,28 @@
+{
+  "culture": "hu",
+  "texts": {
+    "Menu:ProductService": "Termék szolgáltatás",
+    "Menu:Products": "Termékek",
+    "Permission:ProductService": "Termék szolgáltatás",
+    "Permission:Products": "Termékek",
+    "Permission:Create": "Létrehozás",
+    "Permission:Edit": "Szerkesztés",
+    "Permission:Delete": "Törlés",
+    "Products": "Termékek",
+    "NewProduct": "Új termék",
+    "Actions": "Műveletek",
+    "SuccessfullyDeleted": "Sikeresen törölve",
+    "DeleteConfirmationMessage": "Biztosan törli ezt a terméket?",
+    "Search": "Keresés",
+    "Pick": "Csippent",
+    "SeeAdvancedFilters": "Speciális szűrők",
+    "Name": "Név",
+    "Price": "Ár",
+    "MinPrice": "Min. ár",
+    "MaxPrice": "Max Ár",
+    "Product": "Termék",
+    "AreYouSure": "Biztos vagy ebben?",
+    "MinName": "Min Név",
+    "MaxName": "Max név"
+  }
+}

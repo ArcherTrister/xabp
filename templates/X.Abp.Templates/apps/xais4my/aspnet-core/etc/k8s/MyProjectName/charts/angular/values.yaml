@@ -1,0 +1,17 @@
+config:
+    selfUrl: #
+    gatewayUrl: #
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: # "false"
+
+ingress:
+    host: # myprojectname-st-angular
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: abpvnext/myprojectname-app-angular
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

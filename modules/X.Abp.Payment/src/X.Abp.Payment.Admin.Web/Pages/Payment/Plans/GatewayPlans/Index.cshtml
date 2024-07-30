@@ -1,0 +1,57 @@
+﻿@page "plans/{Id}/external-plans"
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageSearchBox;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar;
+@using Volo.Abp.Localization;
+@using Volo.Abp.ObjectExtending;
+@using X.Abp.Payment.Admin.Web.Pages.Payment.Plans.GatewayPlans;
+@using X.Abp.Payment.Localization;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.AspNetCore.Mvc.TagHelpers;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
+@using Volo.Abp.Data;
+@using X.Abp.Payment.Admin.Web.Pages;
+@using X.Abp.Payment.Admin.Web.Menus;
+@using X.Abp.Payment.Admin.Web.Pages.Payment;
+
+@inherits PaymentAdminPageBase
+
+@model IndexModel
+
+@{
+    PageLayout.Content.Title = (L)["GatewayPlans"].Value;
+    PageLayout.Content.BreadCrumb.Add((L)["Menu:PaymentManagement"].Value);
+    PageLayout.Content.BreadCrumb.Add((L)["Menu:Plans"].Value);
+    PageLayout.Content.BreadCrumb.Add(Model.Plan.Name);
+    PageLayout.Content.MenuItemName = AbpPaymentAdminMenus.Plans.PlansMenu;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/Pages/Payment/Plans/GatewayPlans/index.js" />
+    </abp-script-bundle>
+}
+
+@section content_toolbar {
+    @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new {pageName = typeof(IndexModel).FullName})
+}
+
+
+<abp-card class="mb-4">
+    <abp-card-body>
+        <div id="GatewayPlansWrapper" data-plan-id="@Model.Id" />
+        <abp-row>
+            <abp-column size="_12">
+                @await Component.InvokeAsync(typeof(AbpPageSearchBoxViewComponent))
+            </abp-column>
+        </abp-row>
+
+    </abp-card-body>
+</abp-card>
+
+<abp-card>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="GatewayPlansTable" class="nowrap"></abp-table>
+    </abp-card-body>
+</abp-card>

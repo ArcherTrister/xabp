@@ -1,0 +1,1552 @@
+{
+  "modules": {
+    "identityServer": {
+      "rootPath": "identityServer",
+      "remoteServiceName": "AbpIdentityServer",
+      "controllers": {
+        "X.Abp.IdentityServer.ApiResourcesController": {
+          "controllerName": "ApiResources",
+          "controllerGroupName": "ApiResources",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.IdentityServer.ApiResourcesController",
+          "interfaces": [
+            {
+              "type": "X.Abp.IdentityServer.ApiResource.IApiResourceAppService",
+              "name": "IApiResourceAppService",
+              "methods": [
+                {
+                  "name": "GetAllListAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto>",
+                    "typeSimple": "[X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto]"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.ApiResource.Dtos.GetApiResourceListInput, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.ApiResource.Dtos.GetApiResourceListInput",
+                      "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.GetApiResourceListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto",
+                      "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto",
+                      "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/api-resources",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.ApiResource.Dtos.GetApiResourceListInput, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.ApiResource.Dtos.GetApiResourceListInput",
+                  "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.GetApiResourceListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto,X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto,System.Guid,X.Abp.IdentityServer.ApiResource.Dtos.GetApiResourceListInput>"
+            },
+            "GetAllListAsync": {
+              "uniqueName": "GetAllListAsync",
+              "name": "GetAllListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/api-resources/all",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto>",
+                "typeSimple": "[X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.IdentityServer.ApiResource.IApiResourceAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/api-resources/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto,X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto,System.Guid,X.Abp.IdentityServer.ApiResource.Dtos.GetApiResourceListInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/identity-server/api-resources",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto",
+                  "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto",
+                  "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto,X.Abp.IdentityServer.ApiResource.Dtos.CreateApiResourceDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/identity-server/api-resources/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto",
+                  "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto",
+                  "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.IdentityServer.ApiResource.Dtos.ApiResourceWithDetailsDto,System.Guid,X.Abp.IdentityServer.ApiResource.Dtos.UpdateApiResourceDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/identity-server/api-resources",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            }
+          }
+        },
+        "X.Abp.IdentityServer.ApiScopeController": {
+          "controllerName": "ApiScope",
+          "controllerGroupName": "ApiScopes",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.IdentityServer.ApiScopeController",
+          "interfaces": [
+            {
+              "type": "X.Abp.IdentityServer.ApiScope.IApiScopeAppService",
+              "name": "IApiScopeAppService",
+              "methods": [
+                {
+                  "name": "GetAllListAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto>",
+                    "typeSimple": "[X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto]"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.ApiScope.Dtos.GetApiScopeListInput, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.ApiScope.Dtos.GetApiScopeListInput",
+                      "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.GetApiScopeListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto",
+                      "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto",
+                      "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/identity-server/api-scopes",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto",
+                  "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto",
+                  "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto,X.Abp.IdentityServer.ApiScope.Dtos.CreateApiScopeDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/identity-server/api-scopes/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/api-scopes/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto,X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto,System.Guid,X.Abp.IdentityServer.ApiScope.Dtos.GetApiScopeListInput>"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/api-scopes",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.ApiScope.Dtos.GetApiScopeListInput, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.ApiScope.Dtos.GetApiScopeListInput",
+                  "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.GetApiScopeListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto,X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto,System.Guid,X.Abp.IdentityServer.ApiScope.Dtos.GetApiScopeListInput>"
+            },
+            "GetAllListAsync": {
+              "uniqueName": "GetAllListAsync",
+              "name": "GetAllListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/api-scopes/all",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto>",
+                "typeSimple": "[X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.IdentityServer.ApiScope.IApiScopeAppService"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/identity-server/api-scopes/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto",
+                  "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto",
+                  "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.IdentityServer.ApiScope.Dtos.ApiScopeWithDetailsDto,System.Guid,X.Abp.IdentityServer.ApiScope.Dtos.UpdateApiScopeDto>"
+            }
+          }
+        },
+        "X.Abp.IdentityServer.ClientsController": {
+          "controllerName": "Clients",
+          "controllerGroupName": "Clients",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.IdentityServer.ClientsController",
+          "interfaces": [
+            {
+              "type": "X.Abp.IdentityServer.Client.IClientAppService",
+              "name": "IClientAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.Client.Dtos.GetClientListInput, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.Client.Dtos.GetClientListInput",
+                      "typeSimple": "X.Abp.IdentityServer.Client.Dtos.GetClientListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.Client.Dtos.CreateClientDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.Client.Dtos.CreateClientDto",
+                      "typeSimple": "X.Abp.IdentityServer.Client.Dtos.CreateClientDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.Client.Dtos.UpdateClientDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.Client.Dtos.UpdateClientDto",
+                      "typeSimple": "X.Abp.IdentityServer.Client.Dtos.UpdateClientDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/clients",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.Client.Dtos.GetClientListInput, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.Client.Dtos.GetClientListInput",
+                  "typeSimple": "X.Abp.IdentityServer.Client.Dtos.GetClientListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto,X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto,System.Guid,X.Abp.IdentityServer.Client.Dtos.GetClientListInput>"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/clients/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto,X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto,System.Guid,X.Abp.IdentityServer.Client.Dtos.GetClientListInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/identity-server/clients",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.Client.Dtos.CreateClientDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.Client.Dtos.CreateClientDto",
+                  "typeSimple": "X.Abp.IdentityServer.Client.Dtos.CreateClientDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.IdentityServer.Client.Dtos.CreateClientDto",
+                  "typeSimple": "X.Abp.IdentityServer.Client.Dtos.CreateClientDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto,X.Abp.IdentityServer.Client.Dtos.CreateClientDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/identity-server/clients/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.Client.Dtos.UpdateClientDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.Client.Dtos.UpdateClientDto",
+                  "typeSimple": "X.Abp.IdentityServer.Client.Dtos.UpdateClientDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.IdentityServer.Client.Dtos.UpdateClientDto",
+                  "typeSimple": "X.Abp.IdentityServer.Client.Dtos.UpdateClientDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.IdentityServer.Client.Dtos.ClientWithDetailsDto,System.Guid,X.Abp.IdentityServer.Client.Dtos.UpdateClientDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/identity-server/clients",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            }
+          }
+        },
+        "X.Abp.IdentityServer.IdentityResourcesController": {
+          "controllerName": "IdentityResources",
+          "controllerGroupName": "IdentityResources",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.IdentityServer.IdentityResourcesController",
+          "interfaces": [
+            {
+              "type": "X.Abp.IdentityServer.IdentityResource.IIdentityResourceAppService",
+              "name": "IIdentityResourceAppService",
+              "methods": [
+                {
+                  "name": "GetAllListAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto>",
+                    "typeSimple": "[X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto]"
+                  }
+                },
+                {
+                  "name": "CreateStandardResourcesAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.IdentityResource.Dtos.GetIdentityResourceListInput, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.IdentityResource.Dtos.GetIdentityResourceListInput",
+                      "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.GetIdentityResourceListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto",
+                      "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                      "type": "X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto",
+                      "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto",
+                    "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/identity-resources",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.IdentityResource.Dtos.GetIdentityResourceListInput, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.IdentityResource.Dtos.GetIdentityResourceListInput",
+                  "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.GetIdentityResourceListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto,X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto,System.Guid,X.Abp.IdentityServer.IdentityResource.Dtos.GetIdentityResourceListInput>"
+            },
+            "GetAllListAsync": {
+              "uniqueName": "GetAllListAsync",
+              "name": "GetAllListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/identity-resources/all",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto>",
+                "typeSimple": "[X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.IdentityServer.IdentityResource.IIdentityResourceAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/identity-resources/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto,X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto,System.Guid,X.Abp.IdentityServer.IdentityResource.Dtos.GetIdentityResourceListInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/identity-server/identity-resources",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto",
+                  "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto",
+                  "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto,X.Abp.IdentityServer.IdentityResource.Dtos.CreateIdentityResourceDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/identity-server/identity-resources/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto, X.Abp.IdentityServer.Pro.Application.Contracts",
+                  "type": "X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto",
+                  "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto",
+                  "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto",
+                "typeSimple": "X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.IdentityServer.IdentityResource.Dtos.IdentityResourceWithDetailsDto,System.Guid,X.Abp.IdentityServer.IdentityResource.Dtos.UpdateIdentityResourceDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/identity-server/identity-resources",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            },
+            "CreateStandardResourcesAsync": {
+              "uniqueName": "CreateStandardResourcesAsync",
+              "name": "CreateStandardResourcesAsync",
+              "httpMethod": "POST",
+              "url": "api/identity-server/identity-resources/create-standard-resources",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.IdentityServer.IdentityResource.IIdentityResourceAppService"
+            }
+          }
+        },
+        "X.Abp.IdentityServer.IdentityServerClaimTypesController": {
+          "controllerName": "IdentityServerClaimTypes",
+          "controllerGroupName": "ClaimTypes",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.IdentityServer.IdentityServerClaimTypesController",
+          "interfaces": [
+            {
+              "type": "X.Abp.IdentityServer.ClaimType.IIdentityServerClaimTypeAppService",
+              "name": "IIdentityServerClaimTypeAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.IdentityServer.ClaimType.Dtos.IdentityClaimTypeDto>",
+                    "typeSimple": "[X.Abp.IdentityServer.ClaimType.Dtos.IdentityClaimTypeDto]"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsync": {
+              "uniqueName": "GetListAsync",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity-server/claim-types",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.IdentityServer.ClaimType.Dtos.IdentityClaimTypeDto>",
+                "typeSimple": "[X.Abp.IdentityServer.ClaimType.Dtos.IdentityClaimTypeDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.IdentityServer.ClaimType.IIdentityServerClaimTypeAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

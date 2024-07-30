@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.Quartz.Domain.Shared": {
+      "path": "src/X.Abp.Quartz.Domain.Shared/X.Abp.Quartz.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.Domain": {
+      "path": "src/X.Abp.Quartz.Domain/X.Abp.Quartz.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.Application.Contracts": {
+      "path": "src/X.Abp.Quartz.Application.Contracts/X.Abp.Quartz.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.Application": {
+      "path": "src/X.Abp.Quartz.Application/X.Abp.Quartz.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.EntityFrameworkCore": {
+      "path": "src/X.Abp.Quartz.EntityFrameworkCore/X.Abp.Quartz.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.MongoDB": {
+      "path": "src/X.Abp.Quartz.MongoDB/X.Abp.Quartz.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.HttpApi": {
+      "path": "src/X.Abp.Quartz.HttpApi/X.Abp.Quartz.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.HttpApi.Client": {
+      "path": "src/X.Abp.Quartz.HttpApi.Client/X.Abp.Quartz.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.TestBase": {
+      "path": "test/X.Abp.Quartz.TestBase/X.Abp.Quartz.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Quartz.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.Quartz.EntityFrameworkCore.Tests/X.Abp.Quartz.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Quartz.MongoDB.Tests": {
+      "path": "test/X.Abp.Quartz.MongoDB.Tests/X.Abp.Quartz.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Quartz.Domain.Tests": {
+      "path": "test/X.Abp.Quartz.Domain.Tests/X.Abp.Quartz.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Quartz.Application.Tests": {
+      "path": "test/X.Abp.Quartz.Application.Tests/X.Abp.Quartz.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Quartz.HttpApi.Host": {
+      "path": "host/X.Abp.Quartz.HttpApi.Host/X.Abp.Quartz.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Quartz.Web": {
+      "path": "src/X.Abp.Quartz.Web/X.Abp.Quartz.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.Quartz.HttpApi.Client.ConsoleTestApp/X.Abp.Quartz.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Quartz.Web.Host": {
+      "path": "host/X.Abp.Quartz.Web.Host/X.Abp.Quartz.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Quartz.AuthServer": {
+      "path": "host/X.Abp.Quartz.AuthServer/X.Abp.Quartz.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Quartz.Host.Shared": {
+      "path": "host/X.Abp.Quartz.Host.Shared/X.Abp.Quartz.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Quartz.Web.Unified": {
+      "path": "host/X.Abp.Quartz.Web.Unified/X.Abp.Quartz.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Quartz.Blazor": {
+      "path": "src/X.Abp.Quartz.Blazor/X.Abp.Quartz.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.Blazor.Host": {
+      "path": "host/X.Abp.Quartz.Blazor.Host/X.Abp.Quartz.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Quartz.Blazor.Server": {
+      "path": "src/X.Abp.Quartz.Blazor.Server/X.Abp.Quartz.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.Blazor.WebAssembly": {
+      "path": "src/X.Abp.Quartz.Blazor.WebAssembly/X.Abp.Quartz.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Quartz.Blazor.Server.Host": {
+      "path": "host/X.Abp.Quartz.Blazor.Server.Host/X.Abp.Quartz.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

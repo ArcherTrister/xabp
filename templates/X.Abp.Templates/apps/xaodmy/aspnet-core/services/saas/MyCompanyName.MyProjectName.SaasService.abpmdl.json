@@ -1,0 +1,58 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "MyCompanyName.MyProjectName.SaasService.HttpApi": {
+      "path": "src/MyCompanyName.MyProjectName.SaasService.HttpApi/MyCompanyName.MyProjectName.SaasService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.Application.Contracts": {
+      "path": "src/MyCompanyName.MyProjectName.SaasService.Application.Contracts/MyCompanyName.MyProjectName.SaasService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.Application": {
+      "path": "src/MyCompanyName.MyProjectName.SaasService.Application/MyCompanyName.MyProjectName.SaasService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.Domain.Shared": {
+      "path": "src/MyCompanyName.MyProjectName.SaasService.Domain.Shared/MyCompanyName.MyProjectName.SaasService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.Domain": {
+      "path": "src/MyCompanyName.MyProjectName.SaasService.Domain/MyCompanyName.MyProjectName.SaasService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.EntityFrameworkCore": {
+      "path": "src/MyCompanyName.MyProjectName.SaasService.EntityFrameworkCore/MyCompanyName.MyProjectName.SaasService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.HttpApi.Client": {
+      "path": "src/MyCompanyName.MyProjectName.SaasService.HttpApi.Client/MyCompanyName.MyProjectName.SaasService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.HttpApi.Host": {
+      "path": "src/MyCompanyName.MyProjectName.SaasService.HttpApi.Host/MyCompanyName.MyProjectName.SaasService.HttpApi.Host.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.TestBase": {
+      "path": "test/MyCompanyName.MyProjectName.SaasService.TestBase/MyCompanyName.MyProjectName.SaasService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.SaasService.Domain.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.SaasService.Domain.Tests/MyCompanyName.MyProjectName.SaasService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.SaasService.EntityFrameworkCore.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.SaasService.EntityFrameworkCore.Tests/MyCompanyName.MyProjectName.SaasService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.MicroserviceName.Application.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.SaasService.Application.Tests/MyCompanyName.MyProjectName.SaasService.Application.Tests.abppkg.json",
+      "folder": "test"
+    }
+  }
+}

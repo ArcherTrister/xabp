@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <Import Project="..\..\modules.props" />
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AutoMapper" Version="6.0.2" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Components.Web.Theming" Version="6.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\X.Abp.Gdpr.Application.Contracts\X.Abp.Gdpr.Application.Contracts.csproj" />
+    </ItemGroup>
+</Project>

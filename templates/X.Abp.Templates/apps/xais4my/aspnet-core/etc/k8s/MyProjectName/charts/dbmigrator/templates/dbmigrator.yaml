@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  activeDeadlineSeconds: 180
+  template:
+    spec:
+      containers:
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: {{ .Release.Name }}-{{ .Chart.Name }}
+        env:
+        - name: "ConnectionStrings__IdentityService"
+          value: {{ .Values.config.connectionStrings.identityService }}
+        - name: "ConnectionStrings__AdministrationService"
+          value: {{ .Values.config.connectionStrings.administrationService }}  
+        - name: "ConnectionStrings__SaasService"
+          value: {{ .Values.config.connectionStrings.saasService }}  
+        - name: "DOTNET_ENVIRONMENT"
+          value: "{{ .Values.config.dotnetEnv }}"
+        - name: "IdentityServerClients__AuthServer__RootUrl"
+          value: {{ .Values.identityServerClients.authServerRootUrl }}  
+        - name: "IdentityServerClients__Web__RootUrl"
+          value: {{ .Values.identityServerClients.webRootUrl }}
+        - name: "IdentityServerClients__PublicWeb__RootUrl"
+          value: {{ .Values.identityServerClients.publicWebRootUrl }}
+        - name: "IdentityServerClients__IdentityService__RootUrl"
+          value: {{ .Values.identityServerClients.identityServiceRootUrl }}
+        - name: "IdentityServerClients__SaasService__RootUrl"
+          value: {{ .Values.identityServerClients.saasServiceRootUrl }}
+        - name: "IdentityServerClients__AdministrationService__RootUrl"
+          value: {{ .Values.identityServerClients.administrationServiceRootUrl }}
+        - name: "IdentityServerClients__PublicWebGateway__RootUrl"
+          value: {{ .Values.identityServerClients.publicWebRootUrl }}
+        - name: "IdentityServerClients__WebGateway__RootUrl"
+          value: {{ .Values.identityServerClients.webGatewayRootUrl }}
+        - name: "IdentityServerClients__AdministrationService__RootUrl"
+          value: {{ .Values.identityServerClients.administrationServiceRootUrl }}
+        - name: "IdentityServerClients__IdentityService__RootUrl"
+          value: {{ .Values.identityServerClients.identityServiceRootUrl }}
+        - name: "IdentityServerClients__SaasService__RootUrl"
+          value: {{ .Values.identityServerClients.saasServiceRootUrl }}
+        - name: "IdentityServerClients__ProductService__RootUrl"
+          value: {{ .Values.identityServerClients.productServiceRootUrl }}
+          {{- if .Values.env }}
+{{ toYaml .Values.env | indent 8 }}
+          {{- end }}
+
+      restartPolicy: Never
+  backoffLimit: 10
+
+  

@@ -1,0 +1,27 @@
+{
+  "culture": "zh-Hant",
+  "texts": {
+    "X.Abp.Gdpr:010001": "你已經提交瞭一箇箇人數據下載請求。你不能再次提交直到該請求被完成。",
+    "X.Abp.Gdpr:010002": "你的箇人數據正在準俻中。你可以在{GdprDataReadyTime}下載牠。",
+    "PersonalData": "箇人數據",
+    "Menu:PersonalData": "箇人數據",
+    "PersonalDataDescription": "你的賬戶包含你給我們提供的箇人數據。這箇頁面允許你下載或刪除這些數據。",
+    "RequestPersonalData": "請求箇人數據",
+    "DeletePersonalData": "刪除箇人數據",
+    "CreationTime": "剏建時間",
+    "Action": "操作",
+    "Preparing": "準俻中",
+    "Download": "下載",
+    "ReadyTime": "就緒時間",
+    "DeletePersonalDataWarning": "刪除這些數據將會刪除你的賬戶，竝且你將不再登録到應用程序！你確定要繼續嗎？",
+    "PersonalDataDeleteRequestReceived": "你的箇人數據刪除請求正在處理中...在數據刪除過程結束後，你的賬戶將被刪除，竝且你將不再能夠使用牠。",
+    "PersonalDataPrepareRequestReceived": "你的箇人數據請求正在處理中。你可以在這箇頁面下載牠，一旦牠就緒！",
+    "NoDataAvailable": "沒有數據可用。",
+    "Accept": "接受",
+    "CookiePolicy": "Cookie政筞",
+    "PrivacyPolicy": "隱私政筞",
+    "ThisWebsiteUsesCookie": "這箇網站使用cookies，以確保你在網站上穫得最佳體騐。",
+    "CookieConsentAgreePolicies": "如果你繼續瀏覽，那麽你衕意我們的{0}和{1}。",
+    "CookieConsentAgreePolicy": "如果你繼續瀏覽，那麽你衕意我們的{0}。"
+  }
+}

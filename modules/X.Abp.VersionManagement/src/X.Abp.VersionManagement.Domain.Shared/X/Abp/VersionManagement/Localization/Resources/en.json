@@ -1,0 +1,14 @@
+{
+  "culture": "en",
+  "texts": {
+    "Menu:VersionManagement": "Edition Management",
+    "Feature:VersionManagementGroup": "Edition management",
+    "Feature:VersionManagementEnable": "Enable edition management",
+    "Feature:VersionManagementEnableDescription": "Enable edition management system in application.",
+    "Permission:VersionManagement": "Edition Management",
+    "Permission:AppEditionManagement": "App edition management",
+    "Permission:Create": "Create",
+    "Permission:Edit": "Edit",
+    "Permission:Delete": "Delete"
+  }
+}

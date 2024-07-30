@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>AbpVnext.Pro</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Admin.Application\X.Abp.Account.Pro.Admin.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Public.Application\X.Abp.Account.Pro.Public.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Shared.Application\X.Abp.Account.Pro.Shared.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.AuditLogging\src\X.Abp.AuditLogging.Application\X.Abp.AuditLogging.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Chat\src\X.Abp.Chat.Application\X.Abp.Chat.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.CmsKit.Pro\src\X.Abp.CmsKit.Pro.Application\X.Abp.CmsKit.Pro.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.FileManagement\src\X.Abp.FileManagement.Application\X.Abp.FileManagement.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Forms\src\X.Abp.Forms.Application\X.Abp.Forms.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Gdpr\src\X.Abp.Gdpr.Application\X.Abp.Gdpr.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.Application\X.Abp.Identity.Pro.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.IdentityServer.Pro\src\X.Abp.IdentityServer.Pro.Application\X.Abp.IdentityServer.Pro.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.LanguageManagement\src\X.Abp.LanguageManagement.Application\X.Abp.LanguageManagement.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Notification\src\X.Abp.Notification.Application\X.Abp.Notification.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.OpenIddict.Pro\src\X.Abp.OpenIddict.Pro.Application\X.Abp.OpenIddict.Pro.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Payment\src\X.Abp.Payment.Admin.Application\X.Abp.Payment.Admin.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Payment\src\X.Abp.Payment.Application\X.Abp.Payment.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Quartz\src\X.Abp.Quartz.Application\X.Abp.Quartz.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Saas\src\X.Abp.Saas.Application\X.Abp.Saas.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.TextTemplateManagement\src\X.Abp.TextTemplateManagement.Application\X.Abp.TextTemplateManagement.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.VersionManagement\src\X.Abp.VersionManagement.Application\X.Abp.VersionManagement.Application.csproj" />
+    <ProjectReference Include="..\AbpVnext.Pro.Domain\AbpVnext.Pro.Domain.csproj" />
+    <ProjectReference Include="..\AbpVnext.Pro.Application.Contracts\AbpVnext.Pro.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

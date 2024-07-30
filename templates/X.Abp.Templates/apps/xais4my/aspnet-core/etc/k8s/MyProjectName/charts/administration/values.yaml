@@ -1,0 +1,33 @@
+config:
+    selfUrl: # https://myprojectname-st-administration
+    gatewayUrl: # https://myprojectname-st-gateway-internal/
+    corsOrigins: # https://myprojectname-st-gateway-web,https://myprojectname-st-gateway-public-web
+    connectionStrings:
+        administrationService: #
+        saasService: #
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: "false"
+    dotnetEnv: #
+    redisHost: #
+    rabbitmqHost: #
+    elasticsearchUrl: #
+    stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+synchedCommunication:
+    grantType: # "client_credentials"
+    clientId: #
+    clientSecret: #
+    authority: # https://myprojectname-st-authserver
+    scope: # "IdentityService"
+
+ingress:
+    host: # myprojectname-st-administration
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: abpvnext/myprojectname-service-administration
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

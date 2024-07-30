@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "X.Abp.CmsKit.Pro": {
+      "path": "X.Abp.CmsKit.Pro.abpmdl.json"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.Account.Pro.Shared.Application</AssemblyName>
+    <PackageId>X.Abp.Account.Pro.Shared.Application</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Encodings.Web" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.UI.Navigation" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.Account.Pro.Shared.Application.Contracts\X.Abp.Account.Pro.Shared.Application.Contracts.csproj" />
+    <ProjectReference
+      Include="..\..\..\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.Domain\X.Abp.Identity.Pro.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

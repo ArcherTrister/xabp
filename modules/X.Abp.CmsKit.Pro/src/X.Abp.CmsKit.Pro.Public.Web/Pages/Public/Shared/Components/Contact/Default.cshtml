@@ -1,0 +1,126 @@
+﻿@using Localization.Resources.AbpUi;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Options;
+@using Volo.CmsKit.Localization;
+@using X.Abp.CmsKit.Contact;
+@using X.Captcha;
+@inject IHtmlLocalizer<CmsKitResource> L
+@inject IHtmlLocalizer<AbpUiResource> AbpLocalizer
+@inject IOptions<CmsKitContactOptions> CmsKitContactOptions
+@model X.Abp.CmsKit.Pro.Public.Web.Pages.Public.Shared.Components.Contact.ContactViewModel
+@{
+    var isCaptchaEnabled = CmsKitContactOptions.Value.IsCaptchaEnabled;
+    var captchaVersion = CaptchaConsts.Re3;
+}
+
+<script>
+    function callback(token) {
+        document.getElementById("CaptchaToken").value = token;
+        document.getElementById("submit").disabled = false;
+    }
+</script>
+
+@section scripts
+{
+    @if (isCaptchaEnabled)
+    {
+        if (captchaVersion == CaptchaConsts.G3)
+        {
+            <g-captcha-v3-script />
+        }
+        else if (captchaVersion == CaptchaConsts.G2)
+        {
+            <g-captcha-v2-script />
+        }
+        else if (captchaVersion == CaptchaConsts.H2)
+        {
+            <h-captcha-v2-script />
+        }
+        else if (captchaVersion == CaptchaConsts.L2)
+        {
+            <l-captcha-v2-script />
+        }
+        else if (captchaVersion == CaptchaConsts.Re2)
+        {
+            <re-captcha-v2-script />
+        }
+        else
+        {
+            <re-captcha-v3-script />
+        }
+    }
+}
+
+<div class="abp-widget-wrapper" data-widget-name="CmsContact" data-refresh-url="/CmsKitProPublicWidgets/Contact" data-widget-auto-init="true">
+    <div class="cms-contact-area container">
+        <form class="contact-form" novalidate="novalidate">
+            <div class="mb-3">
+                <label class="form-label" for="Name">@L["Name"]</label>
+                <span> * </span>
+                <input type="text" data-val="true" data-val-required="The Name field is required." id="Name" name="Name" value="@Model.Name" class="form-control" placeholder="@L["YourFullName"]">
+                <span class="text-danger field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="Subject">@L["Subject"]</label><span> * </span>
+                <input type="text" data-val="true" data-val-required="The Subject field is required." id="Subject" name="Subject" value="@Model.Subject" class="form-control" placeholder="@L["SubjectPlaceholder"]">
+                <span class="text-danger field-validation-valid" data-valmsg-for="Subject" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="EmailAddress">@L["YourEmailAddress"]</label><span> * </span>
+                <input type="text" data-val="true" data-val-required="The E-mail Address field is required." id="EmailAddress" name="EmailAddress" value="@Model.EmailAddress" class="form-control" placeholder="@L["YourEmailAddress"]">
+                <span class="text-danger field-validation-valid" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="Message">@L["YourMessage"]</label><span> * </span>
+                <textarea data-val="true" data-val-required="The Your Message field is required." id="Message" name="Message" rows="3" class="form-control" placeholder="@L["YourMessage"]>@Model.Message</textarea>
+                <span class="text-danger field-validation-valid" data-valmsg-for="Message" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="mb-3">
+                <input type="hidden" id="CaptchaToken" name="CaptchaToken" value="" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <div class="d-grid gap-2">
+                    @if (isCaptchaEnabled)
+                    {
+                        <abp-button disabled="true" id="submit" type="submit" class="btn btn-send-message btn-danger" icon="fa fa-long-arrow-right" busy-text="@L["ProcessingWithThreeDot"]" text="@L["SendMessage"]" />
+
+                        if (captchaVersion == CaptchaConsts.G3)
+                        {
+                            <g-captcha-v3-script-js action="sendMessage" callback="callback" />
+                        }
+                        else if (captchaVersion == CaptchaConsts.G2)
+                        {
+                            <g-captcha-v2-div callback="callback" />
+                        }
+                        else if (captchaVersion == CaptchaConsts.H2)
+                        {
+                            <h-captcha-v2-div callback="callback" />
+                        }
+                        else if (captchaVersion == CaptchaConsts.L2)
+                        {
+                            <l-captcha-v2-div callback="callback" />
+                        }
+                        else if (captchaVersion == CaptchaConsts.Re2)
+                        {
+                            <re-captcha-v2-div callback="callback" />
+                        }
+                        else
+                        {
+                            <re-captcha-v3-script-js action="sendMessage" callback="callback" />
+                        }
+                    }
+                    else
+                    {
+                        <abp-button type="submit" class="btn btn-send-message btn-danger" icon="fa fa-long-arrow-right" busy-text="@L["ProcessingWithThreeDot"]" text="@L["SendMessage"]" />
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

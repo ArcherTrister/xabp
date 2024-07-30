@@ -1,0 +1,29 @@
+.tab-content {
+  padding: 1.75rem;
+}
+
+.nav-tabs {
+  .nav-item {
+    border: 0;
+    color: $nav-link-color;
+    position: relative;
+    transition: border 0.2s ease-in;
+  }
+
+  .dropdown-menu {
+    margin-top: -$nav-tabs-custom-border-width;
+    box-shadow: $shadow;
+    background: $global-bg;
+    border-top: $nav-tabs-custom-border-width solid
+      $nav-tabs-link-active-border-color;
+  }
+}
+.nav-pills {
+  .nav-link {
+    color: $nav-link-color;
+
+    &:not(.active):hover {
+      background-color: $nav-tabs-link-hover-border-color;
+    }
+  }
+}

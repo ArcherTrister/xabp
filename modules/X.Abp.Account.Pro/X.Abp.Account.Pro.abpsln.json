@@ -1,0 +1,7 @@
+{
+    "modules": {
+        "X.Abp.Account.Pro": {
+            "path": "X.Abp.Account.Pro.abpmdl.json"
+        }
+    }
+}

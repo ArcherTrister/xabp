@@ -1,0 +1,56 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using X.Abp.Forms.Localization;
+@using X.Abp.Forms.Permissions;
+@using X.Abp.Forms.Web.Menus;
+@using X.Abp.Forms.Web.Pages.Forms;
+
+@model IndexModel
+
+@inject IPageLayout PageLayout
+@inject IAuthorizationService Authorization
+@inject IStringLocalizer<FormsResource> L
+
+@{
+    PageLayout.Content.Title = L["Menu:Forms"].Value;
+    ViewData["Title"] = L["Menu:Forms.Management"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Forms.Management"].Value);
+    PageLayout.Content.MenuItemName = AbpFormsMenus.GroupName;
+}
+
+@section styles {
+    <abp-style-bundle name="@typeof(IndexModel).FullName">
+        <abp-style src="/Pages/Forms/index.css" />
+    </abp-style-bundle>
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/form-proxy.js" />
+        <abp-script src="/Pages/Forms/sendModal.js" />
+        <abp-script src="/Pages/Forms/index.js" />
+        <abp-script src="/Pages/Forms/Questions/editSettingsModal.js" />
+    </abp-script-bundle>
+}
+
+@section content_toolbar {
+    @if (await Authorization.IsGrantedAsync(AbpFormsPermissions.Forms.Default))
+    {
+        <abp-button id="NewFormButton"
+                    text="@L["Menu:NewForm"].Value"
+                    icon="plus"
+                    button-type="Primary"/>
+    }
+}
+
+<div id="FormsWrapper">
+    <abp-card>
+        <abp-card-body>
+            <abp-row>
+            </abp-row>
+                <abp-table striped-rows="true" class="nowrap"></abp-table>
+        </abp-card-body>
+    </abp-card>
+</div>

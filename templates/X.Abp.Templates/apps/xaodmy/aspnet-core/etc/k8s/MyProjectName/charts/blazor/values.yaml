@@ -1,0 +1,17 @@
+config:
+    selfUrl: #
+    gatewayUrl: #
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        responseType: "code"
+
+ingress:
+    host: # myprojectname-st-blazor
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: mycompanyname/myprojectname-app-blazor
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

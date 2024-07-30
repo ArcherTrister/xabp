@@ -1,0 +1,28 @@
+{
+  "culture": "ar",
+  "texts": {
+    "Menu:ProductService": "ادارة المنتج",
+    "Menu:Products": "منتجات",
+    "Permission:ProductService": "خدمة المنتج",
+    "Permission:Products": "منتجات",
+    "Permission:Create": "يخلق",
+    "Permission:Edit": "يحرر",
+    "Permission:Delete": "حذف",
+    "Products": "منتجات",
+    "NewProduct": "منتج جديد",
+    "Actions": "أجراءات",
+    "SuccessfullyDeleted": "تم الحذف بنجاح",
+    "DeleteConfirmationMessage": "هل أنت متأكد أنك تريد حذف هذا المنتج؟",
+    "Search": "يبحث",
+    "Pick": "قطف او يقطف",
+    "SeeAdvancedFilters": "مرشحات متقدمة",
+    "Name": "اسم",
+    "Price": "سعر",
+    "MinPrice": "سعر دقيقة",
+    "MaxPrice": "أقصى سعر",
+    "Product": "منتج",
+    "AreYouSure": "هل أنت واثق؟",
+    "MinName": "اسم الحد الأدنى",
+    "MaxName": "ماكس الاسم"
+  }
+}

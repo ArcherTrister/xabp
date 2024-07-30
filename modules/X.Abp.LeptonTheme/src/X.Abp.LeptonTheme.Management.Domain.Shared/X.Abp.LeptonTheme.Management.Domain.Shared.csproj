@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource
+      Include="X\Abp\LeptonTheme\Management\Localization\Resources\*.json" />
+    <Content Remove="X\Abp\LeptonTheme\Management\Localization\Resources\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Validation" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Localization" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Features" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+</Project>

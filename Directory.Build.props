@@ -1,0 +1,37 @@
+<Project>
+  <PropertyGroup>
+    <!-- All XAbp packages -->
+    <XAbpPackageVersion>8.2.0-beta</XAbpPackageVersion>
+
+    <!-- All Abp packages -->
+    <AbpPackageVersion>8.2.0</AbpPackageVersion>
+
+    <!-- All Microsoft AspNetCore packages -->
+    <MicrosoftAspNetCorePackageVersion>8.0.4</MicrosoftAspNetCorePackageVersion>
+    
+    <AspNetSecurityOAuthPackageVersion>8.0.4</AspNetSecurityOAuthPackageVersion>
+    <AspNetCoreHealthChecksPackageVersion>8.0.0</AspNetCoreHealthChecksPackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsTestProject Condition="$(MSBuildProjectFullPath.Contains('test')) and ($(MSBuildProjectName.EndsWith('.Tests')) or $(MSBuildProjectName.EndsWith('.TestBase')))">true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Condition="'$(IsTestProject)' == 'true'" Include="coverlet.collector">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup Condition="!$(AssemblyName.EndsWith('HttpApi.Client'))">
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)X.Abp.ruleset</CodeAnalysisRuleSet>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <ItemGroup Condition="!$(AssemblyName.EndsWith('HttpApi.Client'))">
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" />
+  </ItemGroup>
+</Project>

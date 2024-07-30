@@ -1,0 +1,18 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using X.Abp.Account.Localization;
+@model X.Abp.Account.Public.Web.Pages.Account.SendSecurityCodeModel
+@inject Volo.Abp.AspNetCore.Mvc.UI.Layout.IPageLayout PageLayout
+@inject IHtmlLocalizer<AccountResource> L
+@{
+    PageLayout.Content.Title = L["TwoFactorVerification"].Value;
+}
+<form method="post">
+    <p>@L["SendSecurityCode_Information"]</p>
+
+    <abp-input asp-for="RememberMe" />
+
+    <abp-select asp-for="SelectedProvider" asp-items="@Model.Providers" />
+
+    <abp-button type="submit" button-type="Primary" text="@L["Submit"].Value" />
+</form>

@@ -1,0 +1,13 @@
+{
+  "folders": {
+    "items": {
+      "src": {}
+    }
+  },
+  "packages": {
+    "MyCompanyName.MyProjectName.AuthServer": {
+      "path": "src/MyCompanyName.MyProjectName.AuthServer/MyCompanyName.MyProjectName.AuthServer.abppkg.json",
+      "folder": "src"
+    }
+  }
+}

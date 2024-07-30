@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\tools.props" />
+
+  <PropertyGroup>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Description>Use command line</Description>
+    <PackAsTool>true</PackAsTool>
+    <AssemblyName>X.Abp.Cli</AssemblyName>
+    <PackageId>X.Abp.Cli</PackageId>
+    <ToolCommandName>xabp</ToolCommandName>
+    <RootNamespace />
+    <UserSecretsId>548ae5e7-4b5d-4314-ae48-f7636803ac91</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CertificateManager" />
+    <PackageReference Include="Microsoft.CSharp" />
+    <!--<PackageReference
+    Include="Namotion.Reflection" Version="2.1.1" />-->
+    <PackageReference Include="NETStandard.Library" VersionOverride="2.0.3" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Volo.Abp.Autofac" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Cli.Core" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

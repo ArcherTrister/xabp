@@ -1,0 +1,651 @@
+{
+  "modules": {
+    "cms-kit-pro": {
+      "rootPath": "cms-kit-pro",
+      "remoteServiceName": "CmsKitProPublic",
+      "controllers": {
+        "X.Abp.CmsKit.Public.UrlShorting.UrlShortingPublicController": {
+          "controllerName": "UrlShortingPublic",
+          "controllerGroupName": "UrlShortingPublic",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Public.UrlShorting.UrlShortingPublicController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Public.UrlShorting.IUrlShortingPublicAppService",
+              "name": "IUrlShortingPublicAppService",
+              "methods": [
+                {
+                  "name": "FindBySourceAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "source",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Public.UrlShorting.ShortenedUrlDto",
+                    "typeSimple": "X.Abp.CmsKit.Public.UrlShorting.ShortenedUrlDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "FindBySourceAsyncBySource": {
+              "uniqueName": "FindBySourceAsyncBySource",
+              "name": "FindBySourceAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/url-shorting",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "source",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "source",
+                  "name": "source",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Public.UrlShorting.ShortenedUrlDto",
+                "typeSimple": "X.Abp.CmsKit.Public.UrlShorting.ShortenedUrlDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.UrlShorting.IUrlShortingPublicAppService"
+            }
+          }
+        },
+        "X.Abp.CmsKit.Public.Polls.PollPublicController": {
+          "controllerName": "PollPublic",
+          "controllerGroupName": "PollPublic",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Public.Polls.PollPublicController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Public.Polls.IPollPublicAppService",
+              "name": "IPollPublicAppService",
+              "methods": [
+                {
+                  "name": "FindByWidgetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "widgetName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Public.Polls.PollWithDetailsDto",
+                    "typeSimple": "X.Abp.CmsKit.Public.Polls.PollWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "FindByCodeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "code",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Public.Polls.PollWithDetailsDto",
+                    "typeSimple": "X.Abp.CmsKit.Public.Polls.PollWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "GetResultAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Public.Polls.GetResultDto",
+                    "typeSimple": "X.Abp.CmsKit.Public.Polls.GetResultDto"
+                  }
+                },
+                {
+                  "name": "SubmitVoteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Public.Polls.SubmitPollInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Public.Polls.SubmitPollInput",
+                      "typeSimple": "X.Abp.CmsKit.Public.Polls.SubmitPollInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "FindByWidgetAsyncByWidgetName": {
+              "uniqueName": "FindByWidgetAsyncByWidgetName",
+              "name": "FindByWidgetAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/poll/findbywidget",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "widgetName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "widgetName",
+                  "name": "widgetName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Public.Polls.PollWithDetailsDto",
+                "typeSimple": "X.Abp.CmsKit.Public.Polls.PollWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Polls.IPollPublicAppService"
+            },
+            "FindByCodeAsyncByCode": {
+              "uniqueName": "FindByCodeAsyncByCode",
+              "name": "FindByCodeAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/poll/findbycode",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "code",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "code",
+                  "name": "code",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Public.Polls.PollWithDetailsDto",
+                "typeSimple": "X.Abp.CmsKit.Public.Polls.PollWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Polls.IPollPublicAppService"
+            },
+            "GetResultAsyncById": {
+              "uniqueName": "GetResultAsyncById",
+              "name": "GetResultAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/poll/showresult",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Public.Polls.GetResultDto",
+                "typeSimple": "X.Abp.CmsKit.Public.Polls.GetResultDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Polls.IPollPublicAppService"
+            },
+            "SubmitVoteAsyncByIdAndInput": {
+              "uniqueName": "SubmitVoteAsyncByIdAndInput",
+              "name": "SubmitVoteAsync",
+              "httpMethod": "POST",
+              "url": "api/cms-kit-public/poll/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Public.Polls.SubmitPollInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Public.Polls.SubmitPollInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Polls.SubmitPollInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Public.Polls.SubmitPollInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Polls.SubmitPollInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Polls.IPollPublicAppService"
+            }
+          }
+        },
+        "X.Abp.CmsKit.Public.Newsletters.NewsletterRecordPublicController": {
+          "controllerName": "NewsletterRecordPublic",
+          "controllerGroupName": "NewsletterRecordPublic",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Public.Newsletters.NewsletterRecordPublicController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Public.Newsletters.INewsletterRecordPublicAppService",
+              "name": "INewsletterRecordPublicAppService",
+              "methods": [
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Public.Newsletters.CreateNewsletterRecordInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Public.Newsletters.CreateNewsletterRecordInput",
+                      "typeSimple": "X.Abp.CmsKit.Public.Newsletters.CreateNewsletterRecordInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetNewsletterPreferencesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "emailAddress",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.CmsKit.Public.Newsletters.NewsletterPreferenceDetailsDto>",
+                    "typeSimple": "[X.Abp.CmsKit.Public.Newsletters.NewsletterPreferenceDetailsDto]"
+                  }
+                },
+                {
+                  "name": "UpdatePreferencesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Public.Newsletters.UpdatePreferenceRequestInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Public.Newsletters.UpdatePreferenceRequestInput",
+                      "typeSimple": "X.Abp.CmsKit.Public.Newsletters.UpdatePreferenceRequestInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetOptionByPreferenceAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "preference",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Public.Newsletters.NewsletterEmailOptionsDto",
+                    "typeSimple": "X.Abp.CmsKit.Public.Newsletters.NewsletterEmailOptionsDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/cms-kit-public/newsletter",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Public.Newsletters.CreateNewsletterRecordInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Public.Newsletters.CreateNewsletterRecordInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Newsletters.CreateNewsletterRecordInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Public.Newsletters.CreateNewsletterRecordInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Newsletters.CreateNewsletterRecordInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Newsletters.INewsletterRecordPublicAppService"
+            },
+            "GetNewsletterPreferencesAsyncByEmailAddress": {
+              "uniqueName": "GetNewsletterPreferencesAsyncByEmailAddress",
+              "name": "GetNewsletterPreferencesAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/newsletter/emailAddress",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "emailAddress",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "emailAddress",
+                  "name": "emailAddress",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.CmsKit.Public.Newsletters.NewsletterPreferenceDetailsDto>",
+                "typeSimple": "[X.Abp.CmsKit.Public.Newsletters.NewsletterPreferenceDetailsDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Newsletters.INewsletterRecordPublicAppService"
+            },
+            "UpdatePreferencesAsyncByInput": {
+              "uniqueName": "UpdatePreferencesAsyncByInput",
+              "name": "UpdatePreferencesAsync",
+              "httpMethod": "PUT",
+              "url": "api/cms-kit-public/newsletter",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Public.Newsletters.UpdatePreferenceRequestInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Public.Newsletters.UpdatePreferenceRequestInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Newsletters.UpdatePreferenceRequestInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Public.Newsletters.UpdatePreferenceRequestInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Newsletters.UpdatePreferenceRequestInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Newsletters.INewsletterRecordPublicAppService"
+            },
+            "GetOptionByPreferenceAsyncByPreference": {
+              "uniqueName": "GetOptionByPreferenceAsyncByPreference",
+              "name": "GetOptionByPreferenceAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/newsletter/preference-options",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "preference",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "preference",
+                  "name": "preference",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Public.Newsletters.NewsletterEmailOptionsDto",
+                "typeSimple": "X.Abp.CmsKit.Public.Newsletters.NewsletterEmailOptionsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Newsletters.INewsletterRecordPublicAppService"
+            }
+          }
+        },
+        "X.Abp.CmsKit.Public.Contact.ContactPublicController": {
+          "controllerName": "ContactPublic",
+          "controllerGroupName": "ContactPublic",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Public.Contact.ContactPublicController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Public.Contact.IContactPublicAppService",
+              "name": "IContactPublicAppService",
+              "methods": [
+                {
+                  "name": "SendMessageAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Public.Contact.ContactCreateInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Public.Contact.ContactCreateInput",
+                      "typeSimple": "X.Abp.CmsKit.Public.Contact.ContactCreateInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "SendMessageAsyncByInput": {
+              "uniqueName": "SendMessageAsyncByInput",
+              "name": "SendMessageAsync",
+              "httpMethod": "POST",
+              "url": "api/cms-kit-public/contacts",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Public.Contact.ContactCreateInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Public.Contact.ContactCreateInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Contact.ContactCreateInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Public.Contact.ContactCreateInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Contact.ContactCreateInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Contact.IContactPublicAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

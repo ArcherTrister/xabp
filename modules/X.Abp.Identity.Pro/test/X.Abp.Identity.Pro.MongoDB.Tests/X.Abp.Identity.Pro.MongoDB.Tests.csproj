@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>X.Abp.Identity.Pro</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Mongo2Go" Version="3.1.3" />
+    <ProjectReference Include="..\..\src\X.Abp.Identity.Pro.MongoDB\X.Abp.Identity.Pro.MongoDB.csproj" />
+    <ProjectReference Include="..\X.Abp.Identity.Pro.TestBase\X.Abp.Identity.Pro.TestBase.csproj" />
+  </ItemGroup>
+
+</Project>

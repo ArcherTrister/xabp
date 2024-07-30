@@ -1,0 +1,112 @@
+{
+    "folders": {
+        "items": {
+            "src": {},
+            "test": {},
+            "host": {}
+        }
+    },
+    "packages": {
+        "X.Abp.Notification.Domain.Shared": {
+            "path": "src/X.Abp.Notification.Domain.Shared/X.Abp.Notification.Domain.Shared.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.Domain": {
+            "path": "src/X.Abp.Notification.Domain/X.Abp.Notification.Domain.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.Application.Contracts": {
+            "path": "src/X.Abp.Notification.Application.Contracts/X.Abp.Notification.Application.Contracts.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.Application": {
+            "path": "src/X.Abp.Notification.Application/X.Abp.Notification.Application.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.EntityFrameworkCore": {
+            "path": "src/X.Abp.Notification.EntityFrameworkCore/X.Abp.Notification.EntityFrameworkCore.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.MongoDB": {
+            "path": "src/X.Abp.Notification.MongoDB/X.Abp.Notification.MongoDB.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.HttpApi": {
+            "path": "src/X.Abp.Notification.HttpApi/X.Abp.Notification.HttpApi.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.HttpApi.Client": {
+            "path": "src/X.Abp.Notification.HttpApi.Client/X.Abp.Notification.HttpApi.Client.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.TestBase": {
+            "path": "test/X.Abp.Notification.TestBase/X.Abp.Notification.TestBase.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.Notification.EntityFrameworkCore.Tests": {
+            "path": "test/X.Abp.Notification.EntityFrameworkCore.Tests/X.Abp.Notification.EntityFrameworkCore.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.Notification.MongoDB.Tests": {
+            "path": "test/X.Abp.Notification.MongoDB.Tests/X.Abp.Notification.MongoDB.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.Notification.Domain.Tests": {
+            "path": "test/X.Abp.Notification.Domain.Tests/X.Abp.Notification.Domain.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.Notification.Application.Tests": {
+            "path": "test/X.Abp.Notification.Application.Tests/X.Abp.Notification.Application.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.Notification.HttpApi.Host": {
+            "path": "host/X.Abp.Notification.HttpApi.Host/X.Abp.Notification.HttpApi.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.Notification.Web": {
+            "path": "src/X.Abp.Notification.Web/X.Abp.Notification.Web.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.HttpApi.Client.ConsoleTestApp": {
+            "path": "test/X.Abp.Notification.HttpApi.Client.ConsoleTestApp/X.Abp.Notification.HttpApi.Client.ConsoleTestApp.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.Notification.Web.Host": {
+            "path": "host/X.Abp.Notification.Web.Host/X.Abp.Notification.Web.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.Notification.AuthServer": {
+            "path": "host/X.Abp.Notification.AuthServer/X.Abp.Notification.AuthServer.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.Notification.Host.Shared": {
+            "path": "host/X.Abp.Notification.Host.Shared/X.Abp.Notification.Host.Shared.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.Notification.Web.Unified": {
+            "path": "host/X.Abp.Notification.Web.Unified/X.Abp.Notification.Web.Unified.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.Notification.Blazor": {
+            "path": "src/X.Abp.Notification.Blazor/X.Abp.Notification.Blazor.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.Blazor.Host": {
+            "path": "host/X.Abp.Notification.Blazor.Host/X.Abp.Notification.Blazor.Host.abppkg.json",
+            "folder": "host"
+        },
+        "X.Abp.Notification.Blazor.Server": {
+            "path": "src/X.Abp.Notification.Blazor.Server/X.Abp.Notification.Blazor.Server.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.Blazor.WebAssembly": {
+            "path": "src/X.Abp.Notification.Blazor.WebAssembly/X.Abp.Notification.Blazor.WebAssembly.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Notification.Blazor.Server.Host": {
+            "path": "host/X.Abp.Notification.Blazor.Server.Host/X.Abp.Notification.Blazor.Server.Host.abppkg.json",
+            "folder": "host"
+        }
+    }
+}
+

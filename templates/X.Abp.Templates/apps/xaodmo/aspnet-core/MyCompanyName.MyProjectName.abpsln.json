@@ -1,0 +1,59 @@
+{
+  "folders": {
+    "items": {
+      "apps": {},
+      "gateways": {},
+      "services": {}
+    }
+  },
+  "modules": {
+    "MyCompanyName.MyProjectName": {
+      "path": "MyCompanyName.MyProjectName.abpmdl.json"
+    },
+    "MyCompanyName.MyProjectName.AuthServer": {
+      "path": "apps/auth-server/MyCompanyName.MyProjectName.AuthServer.abpmdl.json",
+      "folder": "apps"
+    },
+    "MyCompanyName.MyProjectName.Blazor": {
+      "path": "apps/blazor/MyCompanyName.MyProjectName.Blazor.abpmdl.json",
+      "folder": "apps"
+    },
+    "MyCompanyName.MyProjectName.PublicWeb": {
+      "path": "apps/public-web/MyCompanyName.MyProjectName.PublicWeb.abpmdl.json",
+      "folder": "apps"
+    },
+    "MyCompanyName.MyProjectName.Web": {
+      "path": "apps/web/MyCompanyName.MyProjectName.Web.abpmdl.json",
+      "folder": "apps"
+    },
+    "MyCompanyName.MyProjectName.WebGateway": {
+      "path": "gateways/web/MyCompanyName.MyProjectName.WebGateway.abpmdl.json",
+      "folder": "gateways"
+    },
+    "MyCompanyName.MyProjectName.PublicWebGateway": {
+      "path": "gateways/web-public/MyCompanyName.MyProjectName.PublicWebGateway.abpmdl.json",
+      "folder": "gateways"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService": {
+      "path": "services/administration/MyCompanyName.MyProjectName.AdministrationService.abpmdl.json",
+      "folder": "services"
+    },
+    "MyCompanyName.MyProjectName.IdentityService": {
+      "path": "services/identity/MyCompanyName.MyProjectName.IdentityService.abpmdl.json",
+      "folder": "services"
+    },
+    "MyCompanyName.MyProjectName.ProductService": {
+      "path": "services/product/MyCompanyName.MyProjectName.ProductService.abpmdl.json",
+      "folder": "services"
+    },
+    "MyCompanyName.MyProjectName.SaasService": {
+      "path": "services/saas/MyCompanyName.MyProjectName.SaasService.abpmdl.json",
+      "folder": "services"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/run-profiles/Default.abprun.json"
+    }
+  }
+}

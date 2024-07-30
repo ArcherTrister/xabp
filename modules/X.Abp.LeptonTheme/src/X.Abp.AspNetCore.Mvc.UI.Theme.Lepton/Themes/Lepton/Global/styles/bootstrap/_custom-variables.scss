@@ -1,0 +1,160 @@
+$enable-shadows: true !default;
+
+$spacer: 1rem !default;
+
+$body-bg: $global-bg !default;
+$body-color: $global-text !default;
+
+$box-shadow-inset: none !default;
+
+$grid-gutter-width: 1.25rem !default;
+
+$badge-border-radius: 0.25rem !default;
+
+$border-color: $border-color !default;
+
+$border-radius: $radius !default;
+$border-radius-lg: $radius * 1.125 !default;
+$border-radius-sm: $radius * 0.875 !default;
+
+$font-family-base: $lp-font-family !default;
+
+$font-size-base: 0.875rem !default;
+$font-size-lg: $font-size-base * 1.125 !default;
+
+$lead-font-weight: 400 !default;
+
+$text-muted: $global-text !default;
+
+$input-bg: $background !default;
+$input-disabled-bg: $global-bg !default;
+$form-select-disabled-bg: $global-bg !default;
+
+$input-color: $global-text !default;
+$input-border-color: $border-color !default;
+
+$input-box-shadow: none !default;
+$input-group-addon-bg: $global-bg !default;
+$input-group-addon-color: $global-text !default;
+
+$input-btn-focus-box-shadow: none !default;
+$input-btn-focus-width: 0 !default;
+$input-focus-border-color: $border-color !default;
+
+$form-select-box-shadow: none !default;
+
+$btn-box-shadow: $shadow !default;
+
+$nav-link-color: $global-text !default;
+$nav-link-disabled-color: $disabled-color !default;
+$nav-tabs-border-color: $border-color !default;
+
+$nav-tabs-link-hover-border-color: lp-var-rgb(global-text, 0.08) !default;
+$nav-tabs-link-active-color: $brand !default;
+$nav-tabs-link-active-border-color: $brand !default;
+$nav-tabs-link-active-bg: unset !default;
+
+$nav-pills-link-active-color: $brand !default;
+$nav-pills-link-active-bg: lp-var-rgb(brand, 0.15) !default;
+
+// CUSTOM
+$nav-tabs-custom-border-width: 0 !default;
+$nav-tabs-border-width: 0 !default;
+// !CUSTOM
+
+$dropdown-bg: $global-bg !default;
+$dropdown-border-color: $border-color !default;
+$dropdown-border-radius: $radius !default;
+$dropdown-box-shadow: $shadow !default;
+$dropdown-color: $global-text !default;
+$dropdown-divider-bg: $border-color !default;
+$dropdown-header-color: $brand !default;
+$dropdown-inner-border-radius: $radius !default;
+$dropdown-link-color: $global-text !default;
+$dropdown-link-hover-color: $global-text !default;
+$dropdown-link-hover-bg: lp-var-rgb(brand, 0.1) !default;
+$dropdown-link-active-bg: $brand !default;
+$dropdown-link-active-color: $brand-text !default;
+$dropdown-link-disabled-color: lp-var-rgb(global-text, 0.5) !default;
+
+$pagination-color: $global-text !default;
+$pagination-bg: $global-bg !default;
+$pagination-border-color: $background !default;
+$pagination-hover-color: $global-text !default;
+$pagination-hover-bg: $background !default;
+$pagination-hover-border-color: $background !default;
+$pagination-active-color: white !default;
+$pagination-active-bg: $brand !default;
+$pagination-active-border-color: $background !default;
+$pagination-disabled-color: lp-var-rgb(global-text, 0.35) !default;
+$pagination-disabled-bg: $global-bg !default;
+$pagination-disabled-border-color: $background !default;
+
+$card-bg: $global-bg !default;
+$card-border-color: $border-color !default;
+
+$card-color: $global-text !default;
+$card-cap-bg: transparent !default;
+$card-box-shadow: $shadow !default;
+
+// custom
+$card-margin-bottom: 36px !default;
+
+$tooltip-bg: $dark !default;
+$tooltip-color: $light !default;
+
+$toast-border-color: $border-color !default;
+$toast-border-radius: $radius !default;
+$toast-box-shadow: $shadow !default;
+$toast-header-background-color: $global-bg !default;
+$toast-header-border-color: $border-color !default;
+
+// custom
+$toast-header-font-weight: 500 !default;
+
+$modal-content-bg: $global-bg !default;
+$modal-content-border-width: 0 !default;
+$modal-content-inner-border-radius: $radius !default;
+$modal-content-box-shadow-xs: $shadow !default;
+$modal-content-box-shadow-sm-up: $shadow !default;
+$modal-backdrop-bg: $global-text !default;
+$modal-backdrop-opacity: 0.65 !default;
+
+$progress-bg: $background !default;
+$progress-bar-bg: $primary !default;
+
+$list-group-bg: $global-bg !default;
+$list-group-color: $global-text !default;
+$list-group-border-color: $border-color !default;
+$list-group-active-bg: lp-var-rgb(brand, 0.15) !default;
+$list-group-active-color: $brand !default;
+$list-group-hover-bg: lp-var-rgb(brand, 0.1) !default;
+
+$breadcrumb-active-color: lp-var-rgb(global-text, 0.5) !default;
+$breadcrumb-color: $global-text !default;
+
+$accordion-button-active-color: $brand !default;
+$accordion-button-active-bg: lp-var-rgb(brand, 0.1) !default;
+$accordion-border-color: $border-color !default;
+
+$btn-close-white-filter: unset !default;
+$btn-close-color: $global-text !default;
+
+$font-weight-bold: 600 !default;
+
+$alert-border-width: 2px !default;
+$alert-bg-scale: -100% !default;
+$alert-border-scale: 0% !default;
+$alert-padding-y: 18px !default;
+$alert-padding-x: 18px !default;
+
+$btn-border-width: 2px !default;
+$breadcrumb-padding-y: 12px !default;
+$breadcrumb-margin-bottom: 0 !default;
+$breadcrumb-separator-opacity: 0.65 !default;
+
+$form-check-input-checked-bg-color: $success !default;
+$form-check-input-border: 2px solid $border-color !default;
+$form-check-input-checked-border-color: $border-color !default;
+
+$form-check-input-width: 1.5em !default;

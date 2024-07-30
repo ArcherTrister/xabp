@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.Identity.Pro.Domain</AssemblyName>
+    <PackageId>X.Abp.Identity.Pro.Domain</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Gdpr.Abstractions" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ldap" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Identity.Pro.Domain.Shared\X.Abp.Identity.Pro.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
+  </ItemGroup>
+
+</Project>

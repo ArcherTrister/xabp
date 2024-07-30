@@ -1,0 +1,35 @@
+@page
+@model MyCompanyName.MyProjectName.Web.Pages.IndexModel
+@using MyCompanyName.MyProjectName.Web.Navigation
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.Users
+@inject ICurrentUser CurrentUser
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = "Welcome";
+    PageLayout.Content.MenuItemName = MyProjectNameMenus.Home;
+}
+<abp-card>
+    <abp-card-body>
+        <h2>
+            About This Project
+        </h2>
+
+        <p>
+            This is a startup template to build your own Microservice Solution on top of the <a href="https://commercial.abp.io/" target="_blank">ABP Commercial</a>.
+        </p>
+
+        <h2>
+            Documentation
+        </h2>
+
+        <p>
+            See the <a href="https://docs.abp.io/en/commercial/latest/startup-templates/microservice/index" target="_blank">Microservice Startup Template document</a>
+            to understand the solution and start the development.
+        </p>
+        <hr/>
+        <p class="text-end">
+            <a href="https://commercial.abp.io?ref=tmpl" target="_blank">commercial.abp.io</a>
+        </p>
+    </abp-card-body>
+</abp-card>

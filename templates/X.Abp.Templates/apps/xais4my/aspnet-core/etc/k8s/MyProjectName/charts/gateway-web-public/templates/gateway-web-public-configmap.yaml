@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+data:
+  yarp.json: |-
+    {
+      "ReverseProxy": {
+        "Routes": {
+          "AbpApi": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/abp/{**catch-all}"
+            }
+          },
+          "AdministrationSwagger": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/swagger-json/Administration/swagger/v1/swagger.json"
+            },
+            "Transforms": [
+              { "PathRemovePrefix": "/swagger-json/Administration" }
+            ]
+          },
+          "Account": {
+            "ClusterId": "AuthServer",
+            "Match": {
+              "Path": "/api/account/{**catch-all}"
+            }
+          },
+          "AuthServerSwagger": {
+            "ClusterId": "AuthServer",
+            "Match": {
+              "Path": "/swagger-json/AuthServer/swagger/v1/swagger.json"
+            },
+            "Transforms": [
+              { "PathRemovePrefix": "/swagger-json/AuthServer" }
+            ]
+          },
+          "Product": {
+            "ClusterId": "Product",
+            "Match": {
+              "Path": "/api/product-service/{**catch-all}"
+            }
+          },
+          "ProductSwagger": {
+            "ClusterId": "Product",
+            "Match": {
+              "Path": "/swagger-json/Product/swagger/v1/swagger.json"
+            },
+            "Transforms": [
+              { "PathRemovePrefix": "/swagger-json/Product" }
+            ]
+          }
+        },
+        "Clusters": {
+          "AuthServer": {
+            "Destinations": {
+              "AuthServer": {
+                "Address": "{%{{{ .Values.reRoutes.accountService.url }}}%}"
+              }
+            }
+          },
+          "Administration": {
+            "Destinations": {
+              "Administration": {
+                "Address": "{%{{{ .Values.reRoutes.administrationService.url }}}%}"
+              }
+            }
+          },
+          "Product": {
+            "Destinations": {
+              "Product": {
+                "Address": "{%{{{ .Values.reRoutes.productService.url }}}%}"
+              }
+            }
+          }
+        }
+      }
+    }

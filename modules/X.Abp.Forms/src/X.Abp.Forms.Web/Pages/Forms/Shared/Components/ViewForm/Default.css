@@ -1,0 +1,15 @@
+[v-cloak] {
+    display: none;
+}
+
+.form-title {
+    font-size: xx-large;
+}
+
+.form-description {
+    font-size: small;
+}
+
+.question-label {
+    font-weight: 600;
+}

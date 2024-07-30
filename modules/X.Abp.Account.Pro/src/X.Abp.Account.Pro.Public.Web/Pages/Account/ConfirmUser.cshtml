@@ -1,0 +1,79 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using X.Abp.Account.Localization;
+@using X.Abp.Account.Public.Web.Pages.Account;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@model X.Abp.Account.Public.Web.Pages.Account.ConfirmUserModel
+@inject IHtmlLocalizer<AccountResource> L
+@inject Volo.Abp.AspNetCore.Mvc.UI.Layout.IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["ConfirmUser"].Value;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(ConfirmUserModel).FullName">
+        <abp-script src="/Pages/Account/ConfirmUser.js" />
+    </abp-script-bundle>
+}
+
+<input type="hidden" id="UserId" value="@Model.UserInfo.Id">
+<input type="hidden" id="ReturnUrl" value="@Model.ReturnUrl">
+<input type="hidden" id="ReturnUrlHash" value="@Model.ReturnUrlHash">
+
+@if (Model.UserInfo.RequireConfirmedEmail && !Model.UserInfo.EmailConfirmed)
+{
+    <label for="Email">@L["DisplayName:Email"].Value *</label>
+    <div class="mb-3 input-group">
+        <input type="text" id="Email" name="Email" value="@Model.UserInfo.Email" class="form-control" readonly>
+
+        @if (Model.UserInfo.EmailConfirmed)
+        {
+            <span class="input-group-text">
+                <i class="me-1 text-success fa fa-check-square"> </i><span class="text-success">@L["Verified"]</span>
+            </span>
+        }
+        else
+        {
+            <abp-button id="VerifyEmail" button-type="Warning" >
+                <i class="me-1 fa fa-vcard"></i> @L["Verify"]
+            </abp-button>
+        }
+    </div>
+}
+
+@if (Model.UserInfo.RequireConfirmedPhoneNumber && !Model.UserInfo.PhoneNumberConfirmed)
+{
+    <label for="PhoneNumber">@L["DisplayName:PhoneNumber"].Value *</label>
+    <div class="mb-3 input-group">
+        <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.UserInfo.PhoneNumber" class="form-control" @(Model.UserInfo.PhoneNumber.IsNullOrEmpty() ? "" : "readonly")>
+        @if (Model.UserInfo.PhoneNumberConfirmed)
+        {
+            <span class="input-group-text">
+                <i class="me-1 text-success fa fa-check-square"> </i><span class="text-success">@L["Verified"]</span>
+            </span>
+        }
+        else
+        {
+            <abp-button id="VerifyPhoneNumber" button-type="Warning" >
+                <i class="me-1 fa fa-vcard"></i> @L["Verify"]
+            </abp-button>
+        }
+        @if (Model.UserInfo.PhoneNumber.IsNullOrWhiteSpace())
+        {
+            <small class="form-text text-muted">
+                @L["PhoneNumberEmptyHelpText"]
+            </small>
+        }
+    </div>
+
+    <form id="PhoneNumberForm">
+        <abp-modal size="Small" id="PhoneNumberModal" static="true">
+            <abp-modal-header title="@(L["Verify"].Value)"></abp-modal-header>
+            <abp-modal-body>
+                <p>@L["ConfirmationTokenSentMessage"].Value</p>
+                <abp-input asp-for="PhoneConfirmationToken" id="PhoneConfirmationToken"/>
+            </abp-modal-body>
+            <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+        </abp-modal>
+    </form>
+}

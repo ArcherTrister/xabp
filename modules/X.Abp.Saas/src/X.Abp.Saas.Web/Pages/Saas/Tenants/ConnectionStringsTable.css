@@ -1,0 +1,11 @@
+#Tenant_ConnectionStrings_Wrap table {
+    word-break: break-all;
+}
+
+#Tenant_ConnectionStrings_Wrap table thead tr th:nth-child(1) {
+    width: 25%;
+}
+
+#Tenant_ConnectionStrings_Wrap table thead tr th:nth-child(3) {
+    width: 15%;
+}

@@ -1,0 +1,99 @@
+{
+    "folders": {
+        "items": {
+            "src": {},
+            "demo": {},
+            "test": {}
+        }
+    },
+    "packages": {
+        "X.Abp.AspNetCore.Mvc.UI.Theme.Lepton": {
+            "path": "src/X.Abp.AspNetCore.Mvc.UI.Theme.Lepton/X.Abp.AspNetCore.Mvc.UI.Theme.Lepton.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Demo": {
+            "path": "demo/X.Abp.LeptonTheme.Demo/X.Abp.LeptonTheme.Demo.abppkg.json",
+            "folder": "demo"
+        },
+        "X.Abp.LeptonTheme.Management.Application": {
+            "path": "src/X.Abp.LeptonTheme.Management.Application/X.Abp.LeptonTheme.Management.Application.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.Application.Contracts": {
+            "path": "src/X.Abp.LeptonTheme.Management.Application.Contracts/X.Abp.LeptonTheme.Management.Application.Contracts.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.Domain": {
+            "path": "src/X.Abp.LeptonTheme.Management.Domain/X.Abp.LeptonTheme.Management.Domain.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.Domain.Shared": {
+            "path": "src/X.Abp.LeptonTheme.Management.Domain.Shared/X.Abp.LeptonTheme.Management.Domain.Shared.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.HttpApi": {
+            "path": "src/X.Abp.LeptonTheme.Management.HttpApi/X.Abp.LeptonTheme.Management.HttpApi.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.HttpApi.Client": {
+            "path": "src/X.Abp.LeptonTheme.Management.HttpApi.Client/X.Abp.LeptonTheme.Management.HttpApi.Client.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.Web": {
+            "path": "src/X.Abp.LeptonTheme.Management.Web/X.Abp.LeptonTheme.Management.Web.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.TestBase": {
+            "path": "test/X.Abp.LeptonTheme.Management.TestBase/X.Abp.LeptonTheme.Management.TestBase.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LeptonTheme.Management.Domain.Tests": {
+            "path": "test/X.Abp.LeptonTheme.Management.Domain.Tests/X.Abp.LeptonTheme.Management.Domain.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LeptonTheme.Management.Application.Tests": {
+            "path": "test/X.Abp.LeptonTheme.Management.Application.Tests/X.Abp.LeptonTheme.Management.Application.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.LeptonTheme.Management.Blazor": {
+            "path": "src/X.Abp.LeptonTheme.Management.Blazor/X.Abp.LeptonTheme.Management.Blazor.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Host.Shared": {
+            "path": "demo/X.Abp.LeptonTheme.Host.Shared/X.Abp.LeptonTheme.Host.Shared.abppkg.json",
+            "folder": "demo"
+        },
+        "X.Abp.LeptonTheme.HttpApi.Host": {
+            "path": "demo/X.Abp.LeptonTheme.HttpApi.Host/X.Abp.LeptonTheme.HttpApi.Host.abppkg.json",
+            "folder": "demo"
+        },
+        "X.Abp.LeptonTheme.IdentityServer": {
+            "path": "demo/X.Abp.LeptonTheme.IdentityServer/X.Abp.LeptonTheme.IdentityServer.abppkg.json",
+            "folder": "demo"
+        },
+        "X.Abp.LeptonTheme.Blazor.Host": {
+            "path": "demo/X.Abp.LeptonTheme.Blazor.Host/X.Abp.LeptonTheme.Blazor.Host.abppkg.json",
+            "folder": "demo"
+        },
+        "X.Abp.AspNetCore.Components.WebAssembly.LeptonTheme": {
+            "path": "src/X.Abp.AspNetCore.Components.WebAssembly.LeptonTheme/X.Abp.AspNetCore.Components.WebAssembly.LeptonTheme.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.AspNetCore.Components.Web.LeptonTheme": {
+            "path": "src/X.Abp.AspNetCore.Components.Web.LeptonTheme/X.Abp.AspNetCore.Components.Web.LeptonTheme.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.AspNetCore.Components.Server.LeptonTheme": {
+            "path": "src/X.Abp.AspNetCore.Components.Server.LeptonTheme/X.Abp.AspNetCore.Components.Server.LeptonTheme.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.Blazor.Server": {
+            "path": "src/X.Abp.LeptonTheme.Management.Blazor.Server/X.Abp.LeptonTheme.Management.Blazor.Server.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.LeptonTheme.Management.Blazor.WebAssembly": {
+            "path": "src/X.Abp.LeptonTheme.Management.Blazor.WebAssembly/X.Abp.LeptonTheme.Management.Blazor.WebAssembly.abppkg.json",
+            "folder": "src"
+        }
+    }
+}

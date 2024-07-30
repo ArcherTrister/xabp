@@ -1,0 +1,23 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using X.Abp.Account.Localization;
+@model X.Abp.Account.Public.Web.Pages.Account.VerifySecurityCodeModel
+@inject Volo.Abp.AspNetCore.Mvc.UI.Layout.IPageLayout PageLayout
+@inject IHtmlLocalizer<AccountResource> L
+@{
+    PageLayout.Content.Title = L["TwoFactorVerification"].Value;
+}
+<form method="post">
+    <p>@L["VerifySecurityCode_Information"]</p>
+
+    <abp-input asp-for="RememberMe" />
+    <abp-input asp-for="Provider" />
+    <abp-input asp-for="Code" />
+
+    @if (Model.IsRememberBrowserEnabled)
+    {
+        <abp-input asp-for="RememberBrowser" />
+    }
+
+    <abp-button type="submit" button-type="Primary" text="@L["Submit"].Value" />
+</form>

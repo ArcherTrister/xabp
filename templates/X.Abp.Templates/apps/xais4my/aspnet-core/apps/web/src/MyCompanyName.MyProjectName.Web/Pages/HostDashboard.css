@@ -1,0 +1,25 @@
+#MyDashboardFilterForm button[type=Submit] {
+    margin-top: 25px;
+}
+
+.input-group-prepend {
+    border: 1px solid #d6d6d6;
+}
+
+.input-group-text {
+    border-right: 1px solid #d6d6d6;
+}
+
+.input-daterange input {
+    text-align: left;
+}
+
+@media (max-width: 1250px) {
+    button[type=submit] span {
+        display: none;
+    }
+}
+
+#HostDashboardWidgetsArea .card-body {
+    min-height: 300px;
+}

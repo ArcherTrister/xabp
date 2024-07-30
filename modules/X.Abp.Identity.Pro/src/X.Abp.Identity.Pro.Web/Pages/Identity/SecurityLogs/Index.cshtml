@@ -1,0 +1,89 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@using Volo.Abp.Identity.Localization;
+@using X.Abp.Identity.Web.Menus;
+@using X.Abp.Identity.Web.Pages.Identity.SecurityLogs;
+@inject IThemeManager ThemeManager
+@inject IHtmlLocalizer<IdentityResource> L
+@model IndexModel
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["SecurityLogs"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:SecurityLogs"].Value);
+    PageLayout.Content.MenuItemName = AbpIdentityProMenuNames.SecurityLogs;
+}
+@section styles {
+    <abp-style-bundle name="@typeof(IndexModel).FullName">
+        <abp-style src="/Pages/Identity/SecurityLogs/index.css" />
+    </abp-style-bundle>
+}
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/identity-proxy.js" />
+        <abp-script src="/Pages/Identity/SecurityLogs/index.js" />
+    </abp-script-bundle>
+}
+
+ @section content_toolbar {
+     @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new { pageName = typeof(IndexModel).FullName })
+ }
+
+    <abp-card>
+        <abp-card-body class="pb-lg-3">
+            <form id="FilterFormId" method="post">
+                <abp-row>
+                   <abp-column size-lg="_6" size-md="_6">
+                        <abp-row class="input-daterange">
+                            <abp-column size-lg="_6" size-md="_6">
+                                <abp-input type="text" asp-for="@Model.StartTime" autocomplete="off"/>
+                            </abp-column>
+                            <abp-column size-lg="_6" size-md="_6">
+                                <abp-input type="text" asp-for="@Model.EndTime" autocomplete="off"/>
+                            </abp-column>
+                        </abp-row>
+                    </abp-column>
+                    <abp-column size-lg="_3" size-md="_6">
+                        <abp-input asp-for="@Model.ApplicationName" />
+                    </abp-column>
+                    <abp-column size-lg="_3" size-md="_6">
+                        <abp-input asp-for="@Model.Identity"/>
+                    </abp-column>
+                </abp-row>
+                <abp-row>
+                    <abp-column size-lg="_3" size-md="_6">
+                        <abp-input asp-for="@Model.UserName"/>
+                    </abp-column>
+                    <abp-column size-lg="_3" size-md="_6">
+                        <abp-input asp-for="@Model.Action"/>
+                    </abp-column>
+                    <abp-column size-lg="_3" size-md="_6">
+                        <abp-input asp-for="@Model.ClientId"/>
+                    </abp-column>
+                    <abp-column size-lg="_3" size-md="_6">
+                        <abp-input asp-for="@Model.CorrelationId"/>
+                    </abp-column>
+                </abp-row>
+                 <abp-row>
+                     <abp-column size-lg="_3" size-md="_6">
+                         <div class="gap-2 d-grid">
+                             <abp-button class="mt-md-2 mb-md-2" button-type="Primary" type="submit">
+                                 <i class="fa fa-search" aria-hidden="true"></i> @L["Search"]
+                             </abp-button>
+                         </div>
+                     </abp-column>
+                     <abp-column size-lg="_3" size-md="_6">
+                         <div class="gap-2 d-grid">
+                             <abp-button id="ClearFilterButton" class="mt-md-2 mb-md-2" button-type="Primary" type="submit">
+                                    <i aria-hidden="true"></i> @L["Clear"]
+                             </abp-button>
+                         </div>
+                     </abp-column>
+                 </abp-row>
+            </form>
+        </abp-card-body>
+        </abp-card>
+        <abp-table striped-rows="true" id="IdentitySecurityLogsTable" class="nowrap"></abp-table>
+

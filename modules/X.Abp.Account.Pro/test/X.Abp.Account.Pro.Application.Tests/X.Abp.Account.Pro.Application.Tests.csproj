@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup><LangVersion>latest</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="X/Abp/Account/appsettings.json" />
+    <Content Include="X/Abp/Account/appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <None Remove="X/Abp/Account/appsettings.secrets.json" />
+    <Content Include="X/Abp/Account/appsettings.secrets.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(MicrosoftEntityFrameworkCorePackageVersion)" />
+    <PackageReference Include="NSubstitute" Version="$(NSubstitutePackageVersion)" />
+    <PackageReference Include="Shouldly" Version="$(ShouldlyPackageVersion)" />
+    <PackageReference Include="xunit" Version="$(xUnitPackageVersion)" />
+    <PackageReference Include="xunit.extensibility.execution" Version="$(xUnitExtensibilityExecutionPackageVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xUnitRunnerVisualstudioPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Autofac" Version="5.3.4" />
+    <PackageReference Include="Volo.Abp.Authorization" Version="5.3.4" />
+    <PackageReference Include="Volo.Abp.TestBase" Version="5.3.4" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.3.4" />
+
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="5.3.4" />
+    <PackageReference Include="Volo.Abp.Identity.AspNetCore" Version="5.3.4" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="5.3.4" />
+
+    <ProjectReference Include="..\..\..\X.Identity.Pro\src\X.Abp.Identity.Pro.EntityFrameworkCore\X.Abp.Identity.Pro.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\X.Abp.Account.Pro.Admin.Application\X.Abp.Account.Pro.Admin.Application.csproj" />
+    <ProjectReference Include="..\..\src\X.Abp.Account.Pro.Public.Application\X.Abp.Account.Pro.Public.Application.csproj" />
+  </ItemGroup>
+
+</Project>

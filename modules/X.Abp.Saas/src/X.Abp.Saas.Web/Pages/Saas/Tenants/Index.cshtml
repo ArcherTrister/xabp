@@ -1,0 +1,55 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageSearchBox;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar;
+@using Volo.Abp.FeatureManagement;
+@using X.Abp.Saas.Localization;
+@using X.Abp.Saas.Web.Menus;
+@using X.Abp.Saas.Web.Pages.Saas.Tenants;
+@model IndexModel
+@inject IHtmlLocalizer<SaasResource> L
+@inject IAuthorizationService Authorization
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["Tenants"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Saas"].Value);
+    PageLayout.Content.MenuItemName = AbpSaasMenuNames.Tenants;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/saas-proxy.js" />
+        <abp-script src="/Pages/FeatureManagement/feature-management-modal.js" />
+        <abp-script src="/Pages/Saas/Tenants/ConnectionStringsModal.js" />
+        <abp-script src="/Pages/Saas/Tenants/CreateModal.js" />
+        <abp-script src="/Pages/Saas/Tenants/EditModal.js" />
+        <abp-script src="/Pages/Saas/Tenants/Index.js" />
+        <abp-script src="/Pages/Saas/Tenants/setPassword.js" />
+        <abp-script src="/Pages/Saas/Tenants/enableTenantImpersonation.js" />
+    </abp-script-bundle>
+}
+
+@section styles {
+    <abp-style-bundle name="@typeof(IndexModel).FullName">
+        <abp-style src="/Pages/Saas/Tenants/ConnectionStringsTable.css" />
+    </abp-style-bundle>
+}
+
+@section content_toolbar {
+    @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new { pageName = typeof(IndexModel).FullName })
+}
+
+<div id="TenantsWrapper">
+    <abp-card>
+        <abp-card-body>
+            <abp-row>
+                <abp-column>
+                    @await Component.InvokeAsync(typeof(AbpPageSearchBoxViewComponent))
+                </abp-column>
+            </abp-row>
+        </abp-card-body>
+    </abp-card>
+    <abp-table id="TenantsTable" striped-rows="true" class="nowrap"></abp-table>
+</div>

@@ -1,0 +1,11 @@
+.btn-close {
+  &:hover,
+  &:focus,
+  &:active,
+  &:not(:disabled):not(.disabled):active,
+  &.visible {
+    outline: none;
+    box-shadow: none;
+    opacity: 0.5;
+  }
+}

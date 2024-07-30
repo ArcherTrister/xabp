@@ -1,0 +1,30 @@
+@import "mixins";
+@import "variables";
+@import "bootstrap/index";
+
+@import "Base/_fonts.scss";
+@import "Base/_variables.scss";
+@import "Base/_mixins.scss";
+@import "Base/_placeholders.scss";
+@import "Base/_datepicker.scss";
+
+@import "Base/_general.scss";
+@import "Base/_overrides.scss";
+@import "Base/_tables.scss";
+@import "Base/_jstree.scss";
+@import "Base/_root.scss";
+
+@import "Common/_header.scss";
+@import "Common/_content.scss";
+@import "Common/_footer.scss";
+@import "Common/Menus/_main_menu.scss";
+@import "Common/Menus/_main_menu_top.scss";
+
+@import "Custom/_timeline.scss";
+@import "Custom/_numericinput.scss";
+
+@import "Base/_democolorchange.scss";
+
+/*rtl:begin:ignore*/
+@import "Base/_rtl.scss";
+/*rtl:end:ignore*/

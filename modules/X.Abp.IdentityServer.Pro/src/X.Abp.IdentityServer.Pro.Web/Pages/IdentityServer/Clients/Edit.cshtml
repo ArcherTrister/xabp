@@ -1,0 +1,659 @@
+﻿@page "{id}"
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@using Volo.Abp.Data;
+@using Volo.Abp.IdentityServer.Localization;
+@using Volo.Abp.Localization;
+@using Volo.Abp.ObjectExtending;
+@using X.Abp.IdentityServer.Web.Pages.IdentityServer.Clients;
+@model X.Abp.IdentityServer.Web.Pages.IdentityServer.Clients.EditModel
+@inject IHtmlLocalizer<AbpIdentityServerResource> L
+@inject IStringLocalizerFactory StringLocalizerFactory
+@{
+    Layout = null;
+}
+
+<form asp-page="/IdentityServer/Clients/Edit" method="post" class="form-with-card" id="ClientEditForm" novalidate="novalidate">
+    <abp-card>
+        <abp-card-header title="@L["Edit"].Value"></abp-card-header>
+        <abp-card-body>
+            <abp-tabs>
+                <abp-tab title="详情">
+                    <div>
+                        <abp-input type="hidden" asp-for="Client.Id" />
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.ClientName" label="@L["Client:ClientName"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.Description" label="@L["Client:Description"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.ClientUri" label="@L["Client:ClientUri"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.LogoUri" label="@L["Client:LogoUri"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="Client.RequireConsent" label="@L["Client:RequireConsent"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="Client.RequireRequestObject" label="@L["Client:RequireRequestObject"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="Client.AllowRememberConsent" label="@L["Client:AllowRememberConsent"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="Client.Enabled" label="@L["Client:Enabled"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="Client.AllowOfflineAccess" label="@L["Client:AllowOfflineAccess"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.FrontChannelLogoutUri" label="@L["Client:FrontChannelLogoutUri"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="Client.FrontChannelLogoutSessionRequired" label="@L["Client:FrontChannelLogoutSessionRequired"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.BackChannelLogoutUri" label="@L["Client:BackChannelLogoutUri"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="Client.BackChannelLogoutSessionRequired" label="@L["Client:BackChannelLogoutSessionRequired"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.AllowedIdentityTokenSigningAlgorithms" label="@L["Client:AllowedIdentityTokenSigningAlgorithms"].Value" />
+                        </div>
+                        @foreach (var propertyInfo in ObjectExtensionManager.Instance.GetProperties<ClientUpdateModalView>())
+                        {
+                            if (!propertyInfo.Name.EndsWith("_Text"))
+                            {
+                                if (propertyInfo.Type.IsEnum || !propertyInfo.Lookup.Url.IsNullOrEmpty())
+                                {
+                                    if (propertyInfo.Type.IsEnum)
+                                    {
+                                        Model.Client.ExtraProperties.ToEnum(propertyInfo.Name, propertyInfo.Type);
+                                    }
+                                    <abp-select asp-for="Client.ExtraProperties[propertyInfo.Name]"
+                                                label="@propertyInfo.GetLocalizedDisplayName(StringLocalizerFactory)"
+                                                autocomplete-api-url="@propertyInfo.Lookup.Url"
+                                                autocomplete-selected-item-name="@Model.Client.GetProperty(propertyInfo.Name+"_Text")"
+                                                autocomplete-selected-item-value="@Model.Client.GetProperty(propertyInfo.Name)"
+                                                autocomplete-filter-param-name="@propertyInfo.Lookup.FilterParamName"
+                                                autocomplete-items-property-name="@propertyInfo.Lookup.ResultListPropertyName"
+                                                autocomplete-display-property-name="@propertyInfo.Lookup.DisplayPropertyName"
+                                                autocomplete-value-property-name="@propertyInfo.Lookup.ValuePropertyName"></abp-select>
+                                }
+                                else
+                                {
+                                    <abp-input type="@propertyInfo.GetInputType()"
+                                               asp-for="Client.ExtraProperties[propertyInfo.Name]"
+                                               label="@propertyInfo.GetLocalizedDisplayName(StringLocalizerFactory)"
+                                               asp-format="@propertyInfo.GetInputFormatOrNull()"
+                                               value="@propertyInfo.GetInputValueOrNull(Model.Client.GetProperty(propertyInfo.Name))" />
+                                }
+                            }
+                        }
+                    </div>
+                </abp-tab>
+                <abp-tab-dropdown title="应用程序Urls" name="ContactDropdown">
+                    <abp-tab title="Callback" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h3>回调 Url</h3>
+                            <div class="pt-3 pb-5 clearfix">
+                                <div class="mb-3">
+                                    <abp-input asp-for="SampleCallbackUri" label="@L["SampleCallbackUri"].Value" />
+                                </div>
+                                <abp-button id="AddNewCallbackUriButton" class="float-end mb-2 btn btn-success" type="button"><i class="fa fa-plus"></i> 添加一个新的</abp-button>
+                            </div>
+                            <div class="table-responsive-sm">
+                                <table id="CallbackUriTableId" style="" class="table table-striped">
+                                    <tbody id="CallbackUriTableBodyId">
+                                        @for (int i = 0; i < Model.Client.RedirectUris.Length; i++)
+                                        {
+                                            var redirectUri = Model.Client.RedirectUris[i];
+                                            var iid = $"Client_RedirectUris_{i}_";
+                                            <tr>
+                                                <td>
+                                                    @redirectUri
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm deleteApplicationUriButton float-end"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                                <td hidden="">
+                                                    <input id="@iid" name="Client.RedirectUris[@i]" type="text" value="@redirectUri">
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="Signout" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h3>Signout Url</h3>
+                            <div class="pt-3 pb-5 clearfix">
+                                <div class="mb-3">
+                                    <abp-input asp-for="SampleSignoutUri" label="@L["SampleSignoutUri"].Value" />
+                                </div>
+                                <abp-button id="AddNewSignoutUriButton" class="float-end mb-2 btn btn-success" type="button"><i class="fa fa-plus"></i> 添加一个新的</abp-button>
+                            </div>
+                            <div class="table-responsive-sm">
+                                <table id="SignoutUriTableId" style="" class="table table-striped">
+                                    <tbody id="SignoutUriTableBodyId">
+                                        @for (int i = 0; i < Model.Client.PostLogoutRedirectUris.Length; i++)
+                                        {
+                                            var postLogoutRedirectUri = Model.Client.PostLogoutRedirectUris[i];
+                                            var iid = $"Client_PostLogoutRedirectUris_{i}_";
+                                            <tr>
+                                                <td>
+                                                    @postLogoutRedirectUri
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm deleteApplicationUriButton float-end"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                                <td hidden="">
+                                                    <input id="@iid" name="Client.PostLogoutRedirectUris[@i]" type="text" value="@postLogoutRedirectUri">
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="CORS" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h3>允许的CORS来源</h3>
+                            <div class="pt-3 pb-5 clearfix">
+                                <div class="mb-3">
+                                    <abp-input asp-for="SampleCorsUri" label="@L["SampleCorsUri"].Value" />
+                                </div>
+                                <abp-button id="AddNewCorsUriButton" class="float-end mb-2 btn btn-success" type="button"><i class="fa fa-plus"></i> 添加一个新的</abp-button>
+                            </div>
+                            <div class="table-responsive-sm">
+                                <table id="CorsUriTableId" style="display: none;" class="table table-striped">
+                                    <tbody id="CorsUriTableBodyId">
+                                        @for (int i = 0; i < Model.Client.AllowedCorsOrigins.Length; i++)
+                                        {
+                                            var allowedCorsOrigin = Model.Client.AllowedCorsOrigins[i];
+                                            var iid = $"Client_AllowedCorsOrigins_{i}_";
+                                            <tr>
+                                                <td>
+                                                    @allowedCorsOrigin
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm deleteApplicationUriButton float-end"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                                <td hidden="">
+                                                    <input id="@iid" name="Client.AllowedCorsOrigins[@i]" type="text" value="@allowedCorsOrigin">
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </abp-tab>
+                </abp-tab-dropdown>
+                <abp-tab title="Secrets">
+                    <div>
+                        <div class="pt-3 pb-5 clearfix">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <abp-select asp-for="SampleSecret.Type" asp-items="@Model.SecretTypes" label="@L["SampleSecret:Type"].Value" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <abp-input asp-for="SampleSecret.Value" label="@L["SampleSecret:Value"].Value" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <abp-input asp-for="SampleSecret.Description" label="@L["SampleSecret:Description"].Value" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <abp-input asp-for="SampleSecret.Expiration" label="@L["SampleSecret:Expiration"].Value" />
+                                    </div>
+                                </div>
+                            </div>
+                            <abp-button id="AddNewSecretButton" class="float-end btn btn-success btn-sm" type="button">
+                                <i class="fa fa-plus"></i> 添加一个新的
+                            </abp-button>
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table class="border-bottom table table-striped" id="SecretTableId" style="display: none;">
+                                <thead>
+                                    <tr>
+                                        <th scope="Column">类型</th>
+                                        <th scope="Column">值</th>
+                                        <th scope="Column">描述</th>
+                                        <th scope="Column">到期</th>
+                                        <th scope="Column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="SecretTableBodyId">
+                                    @for (int i = 0; i < Model.Client.ClientSecrets.Length; i++)
+                                    {
+                                        var secret = Model.Client.ClientSecrets[i];
+                                        var typeInputId = $"Client_Secrets_{i}__Type";
+                                        var valueInputId = $"Client_Secrets_{i}__Value";
+                                        var descriptionInputId = $"Client_Secrets_{i}__Description";
+                                        var expirationInputId = $"Client_Secrets_{i}__Expiration";
+                                        <tr>
+                                            <td>
+                                                @secret.Type
+                                            </td>
+                                            <td>
+                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">@secret.Value</span>
+                                            </td>
+                                            <td>
+                                                @secret.Description
+                                            </td>
+                                            <td>
+                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">@secret.Expiration?.ToString("yyyy-MM-dd")</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm deleteSecretButton float-end">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                            <td hidden="">
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Type" label="@L["Secret:Type"].Value" />*@
+                                                    <label class="form-label" for="secret_Type">Type</label>
+                                                    <input id="@typeInputId" name="Client.Secrets[@i].Type" type="text" value="@secret.Type" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Type" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Value" label="@L["Secret:Value"].Value" />*@
+                                                    <label class="form-label" for="secret_Value">Value</label>
+                                                    <input id="@valueInputId" name="Client.Secrets[@i].Value" type="text" value="@secret.Value" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Value" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Description" label="@L["Secret:Description"].Value" />*@
+                                                    <label class="form-label" for="secret_Description">Description</label>
+                                                    <input id="@descriptionInputId" name="Client.Secrets[@i].Description" type="text" value="@secret.Description" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Description" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Expiration" label="@L["Secret:Expiration"].Value" />*@
+                                                    <label class="form-label" for="secret_Expiration">Expiration</label>
+                                                    <input id="@expirationInputId" name="Client.Secrets[@i].Expiration" type="datetime-local" value="@secret.Expiration?.ToString("yyyy-MM-dd")" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Expiration" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </abp-tab>
+                <abp-tab-dropdown title="资源" name="ContactDropdown">
+                    <abp-tab title="Api资源" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h4 class="mb-4">Api资源</h4>
+                            <div class="card bg-light shadow-none">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-header">Assigned</div>
+                                                <div style="height: 320px; overflow: auto;" class="card-body">
+                                                    @foreach (var item in Model.AllApiResources)
+                                                    {
+                                                        var gbid = $"{item.Id}GroupId";
+                                                        var bid = $"{item.Id}OwnedId";
+                                                        <div class="d-grid gap-2">
+                                                            <div class="btn-group" style="display: none" id="@gbid">
+                                                                <button type="button" class="ownedResource btn btn-primary btn-sm mb-1 mt-0 text-truncate text-start" id="@bid" data-bs-toggle="tooltip" data-bs-placement="top" title="" style="display: none;">
+                                                                    <i class="fa fa-long-arrow-right"></i>
+                                                                    @item.DisplayName
+                                                                </button>
+                                                                <button type="button" class="btn btn-primary btn-sm mb-1 mt-0 dropdown-toggle dropdown-toggle-split btn-sm" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                                                <div class="dropdown-menu">
+                                                                    <select class="form-select form-control valid" id="Client_ClientScopes" multiple="multiple" name="Client.ClientScopes" aria-invalid="false">
+                                                                        @foreach (var scope in item.Scopes)
+                                                                        {
+                                                                            <option value="@scope.Scope">@scope.Scope</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-header">Available</div>
+                                                <div style="height: 320px; overflow: auto;" class="card-body">
+                                                    @foreach (var item in Model.AllApiResources)
+                                                    {
+                                                        var bid = $"{item.Id}OtherId";
+                                                        <div class="d-grid gap-2">
+                                                            <button type="button" data-name="@item.Name" class="otherResource btn btn-outline-primary btn-sm mb-2 mt-0 text-truncate text-start" id="@bid" data-bs-toggle="tooltip" data-bs-placement="top" title="" style="display: none;">
+                                                                <i class="fa fa-long-arrow-left "></i>
+                                                                @item.DisplayName
+                                                            </button>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="Identity资源" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h4 class="mb-3">Identity资源</h4>
+
+                            <div class="card bg-light shadow-none">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-header">Assigned</div>
+                                                <div style="height: 320px; overflow: auto;" class="card-body">
+                                                    @for (int i = 0; i < Model.AllIdentityResources.Count; i++)
+                                                    {
+                                                        var identityResource = Model.AllIdentityResources[i];
+                                                        var bid = $"{identityResource.Id}OwnedId";
+                                                        var iid = $"{identityResource.Id}InputId";
+                                                        <div class="d-grid gap-2">
+                                                            <button style="display: none;" type="button" class="ownedResource btn btn-primary btn-sm mb-1 mt-0 text-truncate text-start" id="@bid" data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                                                                <i class="fa fa-long-arrow-right"></i>
+                                                                @identityResource.DisplayName
+                                                            </button>
+                                                        </div>
+                                                        <input id="@iid" type="text" name="Client.Scopes[@i]" value="" hidden="">
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-header">Available</div>
+                                                <div style="height: 320px; overflow: auto;" class="card-body">
+                                                    @foreach (var item in Model.AllIdentityResources)
+                                                    {
+                                                        var bid = $"{item.Id}OtherId";
+                                                        <div class="d-grid gap-2">
+                                                            <button type="button" data-name="@item.Name" class="otherResource btn btn-outline-primary btn-sm mb-1 mt-0 text-truncate text-start" id="@bid" data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                                                                <i class="fa fa-long-arrow-left "></i>
+                                                                @item.DisplayName
+                                                            </button>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </abp-tab>
+                </abp-tab-dropdown>
+                <abp-tab-dropdown title="Advanced" name="ContactDropdown">
+                    <abp-tab title="令牌" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h3>令牌</h3>
+                            <div class="mb-3">
+                                <abp-input type="number" asp-for="Client.AccessTokenLifetime" label="@L["Client.AccessTokenLifetime"].Value" />
+                            </div>
+                            <div class="mb-3">
+                                <abp-input type="number" asp-for="Client.AccessTokenType" label="@L["Client.AccessTokenType"].Value" />
+                            </div>
+                            <div class="mb-3">
+                                <abp-input type="number" asp-for="Client.ConsentLifetime" label="@L["Client.ConsentLifetime"].Value" />
+                            </div>
+                            <div class="mb-3">
+                                <abp-input asp-for="Client.PairWiseSubjectSalt" label="@L["Client.PairWiseSubjectSalt"].Value" />
+                            </div>
+                            <div class="mb-2 custom-checkbox custom-control form-check">
+                                <abp-input type="checkbox" asp-for="Client.IncludeJwtId" label="@L["Client:IncludeJwtId"].Value" />
+                            </div>
+                            <div class="mb-3">
+                                <abp-input type="number" asp-for="Client.UserSsoLifetime" label="@L["Client.UserSsoLifetime"].Value" />
+                            </div>
+                            <div class="mb-3">
+                                <abp-input asp-for="Client.UserCodeType" label="@L["Client.UserCodeType"].Value" />
+                            </div>
+                            <div class="mb-3">
+                                <abp-input type="number" asp-for="Client.DeviceCodeLifetime" label="@L["Client.DeviceCodeLifetime"].Value" />
+                            </div>
+                            <div class="mb-2 custom-checkbox custom-control form-check">
+                                <abp-input type="checkbox" asp-for="Client.RequirePkce" label="@L["Client:RequirePkce"].Value" />
+                            </div>
+                            <div class="mb-2 custom-checkbox custom-control form-check">
+                                <abp-input type="checkbox" asp-for="Client.RequireClientSecret" label="@L["Client:RequireClientSecret"].Value" />
+                            </div>
+                            <div class="mb-2 custom-checkbox custom-control form-check">
+                                <abp-input type="checkbox" asp-for="Client.AllowAccessTokensViaBrowser" label="@L["Client:AllowAccessTokensViaBrowser"].Value" />
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="声明" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h3>声明</h3>
+                            <div class="pt-3 pb-5 clearfix">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <abp-input asp-for="SampleClaim.Type" label="@L["SampleClaim:Type"].Value" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <abp-input asp-for="SampleClaim.Value" label="@L["SampleClaim:Value"].Value" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <abp-button id="AddNewClaimButton" class="float-end mb-2 btn btn-success" type="button">
+                                    <i class="fa fa-plus"></i> 添加一个新的
+                                </abp-button>
+                            </div>
+                            <div class="table-responsive-sm">
+                                <div class="mb-2 custom-checkbox custom-control form-check">
+                                    <abp-input type="checkbox" asp-for="Client.AlwaysSendClientClaims" label="@L["Client:AlwaysSendClientClaims"].Value" />
+                                </div>
+                                <table id="ClaimTableId" style="display: none;" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="Column">类型</th>
+                                            <th scope="Column">值</th>
+                                            <th scope="Column"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ClaimTableBodyId">
+                                        @for (int i = 0; i < Model.Client.Claims.Length; i++)
+                                        {
+                                            var claim = Model.Client.Claims[i];
+                                            var typeInputId = $"{@claim.Type}ClaimInput";
+                                            var valueInputId = $"Client_Claims_{@i}__Value";
+                                            <tr>
+                                                <td>
+                                                    @claim.Type
+                                                </td>
+                                                <td>
+                                                    @claim.Value
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-outline-danger deleteClaimButton float-end">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                                <td hidden="">
+                                                    <input id="@typeInputId" name="Client.Claims[@i].Key" type="text" value="@claim.Type">
+                                                    <input id="@valueInputId" name="Client.Claims[@i].Value" type="text" value="@claim.Value">
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="授予类型" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h3>授予类型</h3>
+                            <div class="pt-3 pb-5 clearfix">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="GrantTypeSelect">Grant Type</label>
+                                        <div class="mb-3">
+                                            <select class="form-control" id="GrantTypeSelect">
+                                                <option value="implicit">implicit</option>
+                                                <option value="authorization_code">authorization_code</option>
+                                                <option value="hybrid">hybrid</option>
+                                                <option value="client_credentials">client_credentials</option>
+                                                <option value="password">password</option>
+                                                <option value="custom">Custom</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3" id="GrantTypeCustomInputGroup" style="display: none;">
+                                            <input class="form-control" type="text" id="GrantTypeCustomInput" placeholder="自定义授予类型">
+                                        </div>
+                                    </div>
+                                </div>
+                                <abp-button id="AddNewGrantTypeButton" class="float-end btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> 添加一个新的</abp-button>
+                            </div>
+                            <div class="table-responsive-sm">
+                                <table id="GrantTypeTableId" style="" class="table table-striped">
+                                    <tbody id="GrantTypeTableBodyId">
+                                        @for (int i = 0; i < Model.Client.AllowedGrantTypes.Length; i++)
+                                        {
+                                            var allowedGrantType = Model.Client.AllowedGrantTypes[i];
+                                            var iid = $"{allowedGrantType}GrantTypeInput";
+                                            <tr>
+                                                <td>
+                                                    @allowedGrantType
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm deleteGrantTypeButton float-end"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                                <td hidden="">
+                                                    <input name="Client.AllowedGrantTypes[@i]" id="@iid" type="text" value="@allowedGrantType">
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="限制" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h3>限制</h3>
+                            <div class="pt-3 pb-5 clearfix">
+                                <div class="mb-3">
+                                    <abp-input asp-for="SampleIdentityProviderRestriction" label="@L["SampleIdentityProviderRestriction"].Value" />
+                                </div>
+                                <abp-button id="AddNewRestrictionButton" class="float-end mb-2 btn btn-success" type="button"><i class="fa fa-plus"></i> 添加一个新的</abp-button>
+                            </div>
+                            <div class="table-responsive-sm">
+                                <table id="RestrictionTableId" style="display: none;" class="table table-striped">
+                                    <tbody id="RestrictionTableBodyId">
+                                        @for (int i = 0; i < Model.Client.IdentityProviderRestrictions.Length; i++)
+                                        {
+                                            var identityProviderRestriction = Model.Client.IdentityProviderRestrictions[i];
+                                            var iid = $"{identityProviderRestriction}RestrictionInput";
+                                            <tr>
+                                                <td>
+                                                    @identityProviderRestriction
+                                                </td>
+                                                <td>
+                                                    <input type="text" hidden="" name="Client.IdentityProviderRestrictions[@i]" value="@identityProviderRestriction" id="@iid">
+                                                    <button type="button" class="btn btn-danger btn-sm float-end deleteRestrictionButton"><i class="fa fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="mb-2 custom-checkbox custom-control form-check">
+                                <abp-input type="checkbox" asp-for="Client.EnableLocalLogin" label="@L["Client:EnableLocalLogin"].Value" />
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="属性" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h3>属性</h3>
+                            <div class="pt-3 pb-5 clearfix">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <abp-input asp-for="SampleProperty.Key" label="@L["SampleProperty:Key"].Value" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <abp-input asp-for="SampleProperty.Value" label="@L["SampleProperty:Value"].Value" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <abp-button id="AddNewPropertyButton" class="float-end mb-2 btn btn-success" type="button">
+                                    <i class="fa fa-plus"></i> 添加一个新的
+                                </abp-button>
+                            </div>
+                            <div class="table-responsive-sm">
+                                <table id="PropertyTableId" style="display: none;" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="Column">Key</th>
+                                            <th scope="Column">值</th>
+                                            <th scope="Column"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="PropertyTableBodyId">
+                                        @for (int i = 0; i < Model.Client.Properties.Length; i++)
+                                        {
+                                            var property = Model.Client.Properties[i];
+                                            var keyInputId = $"{@property.Key}PropertyInput";
+                                            var valueInputId = $"Client_Properties_{@i}__Value";
+                                            <tr>
+                                                <td>
+                                                    @property.Key
+                                                </td>
+                                                <td>
+                                                    @property.Value
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-outline-danger deletePropertyButton float-end">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                                <td hidden="">
+                                                    <input id="@keyInputId" name="Client.Properties[@i].Key" type="text" value="@property.Key">
+                                                    <input id="@valueInputId" name="Client.Properties[@i].Value" type="text" value="@property.Value">
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </abp-tab>
+                </abp-tab-dropdown>
+            </abp-tabs>
+        </abp-card-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-card>
+
+    @Html.AntiForgeryToken()
+</form>
+<input hidden="" id="SecretsStartIndex" value="@Model.Client.ClientSecrets.Length">
+<input hidden="" id="ClaimsStartIndex" value="@Model.Client.Claims.Length">
+<input hidden="" id="GrantTypeStartIndex" value="@Model.Client.AllowedGrantTypes.Length">
+<input hidden="" id="RestrictionStartIndex" value="@Model.Client.IdentityProviderRestrictions.Length">
+<input hidden="" id="CallbackUriStartIndex" value="@Model.Client.RedirectUris.Length">
+<input hidden="" id="SignoutUriStartIndex" value="@Model.Client.PostLogoutRedirectUris.Length">
+<input hidden="" id="CorsUriStartIndex" value="@Model.Client.AllowedCorsOrigins.Length">
+<input hidden="" id="PropertyStartIndex" value="@Model.Client.Properties.Length">
+<input hidden="" id="AppUrisMergedStartIndex" value="@Model.AppUrisMerged.Count">

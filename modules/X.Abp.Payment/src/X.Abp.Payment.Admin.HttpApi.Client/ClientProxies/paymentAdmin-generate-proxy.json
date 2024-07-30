@@ -1,0 +1,965 @@
+{
+  "modules": {
+    "paymentAdmin": {
+      "rootPath": "paymentAdmin",
+      "remoteServiceName": "AbpPaymentAdmin",
+      "controllers": {
+        "X.Abp.Payment.Admin.Requests.PaymentRequestAdminController": {
+          "controllerName": "PaymentRequestAdmin",
+          "controllerGroupName": "PaymentRequestAdmin",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Payment.Admin.Requests.PaymentRequestAdminController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Payment.Admin.Requests.IPaymentRequestAdminAppService",
+              "name": "IPaymentRequestAdminAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Admin.Requests.PaymentRequestGetListInput, X.Abp.Payment.Admin.Application.Contracts",
+                      "type": "X.Abp.Payment.Admin.Requests.PaymentRequestGetListInput",
+                      "typeSimple": "X.Abp.Payment.Admin.Requests.PaymentRequestGetListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Requests.PaymentRequestWithDetailsDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Requests.PaymentRequestWithDetailsDto>"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/payment-admin/payment-requests",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Admin.Requests.PaymentRequestGetListInput, X.Abp.Payment.Admin.Application.Contracts",
+                  "type": "X.Abp.Payment.Admin.Requests.PaymentRequestGetListInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Requests.PaymentRequestGetListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "CreationDateMax",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "CreationDateMin",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PaymentType",
+                  "jsonName": null,
+                  "type": "X.Abp.Payment.Requests.PaymentType?",
+                  "typeSimple": "X.Abp.Payment.Requests.PaymentType?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Status",
+                  "jsonName": null,
+                  "type": "X.Abp.Payment.Requests.PaymentRequestState?",
+                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestState?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Requests.PaymentRequestWithDetailsDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Requests.PaymentRequestWithDetailsDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Payment.Admin.Requests.IPaymentRequestAdminAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/payment-admin/payment-requests/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Payment.Admin.Requests.IPaymentRequestAdminAppService"
+            }
+          }
+        },
+        "X.Abp.Payment.Admin.Plans.PlanAdminController": {
+          "controllerName": "PlanAdmin",
+          "controllerGroupName": "PlanAdmin",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Payment.Admin.Plans.PlanAdminController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Payment.Admin.Plans.IPlanAdminAppService",
+              "name": "IPlanAdminAppService",
+              "methods": [
+                {
+                  "name": "GetGatewayPlansAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "planId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Admin.Plans.GatewayPlanGetListInput, X.Abp.Payment.Admin.Application.Contracts",
+                      "type": "X.Abp.Payment.Admin.Plans.GatewayPlanGetListInput",
+                      "typeSimple": "X.Abp.Payment.Admin.Plans.GatewayPlanGetListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Plans.GatewayPlanDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Plans.GatewayPlanDto>"
+                  }
+                },
+                {
+                  "name": "DeleteGatewayPlanAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "planId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "gateway",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "CreateGatewayPlanAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "planId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Admin.Plans.GatewayPlanCreateInput, X.Abp.Payment.Admin.Application.Contracts",
+                      "type": "X.Abp.Payment.Admin.Plans.GatewayPlanCreateInput",
+                      "typeSimple": "X.Abp.Payment.Admin.Plans.GatewayPlanCreateInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "UpdateGatewayPlanAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "planId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "gateway",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Admin.Plans.GatewayPlanUpdateInput, X.Abp.Payment.Admin.Application.Contracts",
+                      "type": "X.Abp.Payment.Admin.Plans.GatewayPlanUpdateInput",
+                      "typeSimple": "X.Abp.Payment.Admin.Plans.GatewayPlanUpdateInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Payment.Plans.PlanDto",
+                    "typeSimple": "X.Abp.Payment.Plans.PlanDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Admin.Plans.PlanGetListInput, X.Abp.Payment.Admin.Application.Contracts",
+                      "type": "X.Abp.Payment.Admin.Plans.PlanGetListInput",
+                      "typeSimple": "X.Abp.Payment.Admin.Plans.PlanGetListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Plans.PlanDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Plans.PlanDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Admin.Plans.PlanCreateInput, X.Abp.Payment.Admin.Application.Contracts",
+                      "type": "X.Abp.Payment.Admin.Plans.PlanCreateInput",
+                      "typeSimple": "X.Abp.Payment.Admin.Plans.PlanCreateInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Payment.Plans.PlanDto",
+                    "typeSimple": "X.Abp.Payment.Plans.PlanDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Admin.Plans.PlanUpdateInput, X.Abp.Payment.Admin.Application.Contracts",
+                      "type": "X.Abp.Payment.Admin.Plans.PlanUpdateInput",
+                      "typeSimple": "X.Abp.Payment.Admin.Plans.PlanUpdateInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Payment.Plans.PlanDto",
+                    "typeSimple": "X.Abp.Payment.Plans.PlanDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/payment-admin/plans",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Admin.Plans.PlanCreateInput, X.Abp.Payment.Admin.Application.Contracts",
+                  "type": "X.Abp.Payment.Admin.Plans.PlanCreateInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.PlanCreateInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Payment.Admin.Plans.PlanCreateInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.PlanCreateInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Payment.Plans.PlanDto",
+                "typeSimple": "X.Abp.Payment.Plans.PlanDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.Payment.Plans.PlanDto,X.Abp.Payment.Admin.Plans.PlanCreateInput>"
+            },
+            "CreateGatewayPlanAsyncByPlanIdAndInput": {
+              "uniqueName": "CreateGatewayPlanAsyncByPlanIdAndInput",
+              "name": "CreateGatewayPlanAsync",
+              "httpMethod": "POST",
+              "url": "api/payment-admin/plans/{planId}/external-plans",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "planId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Admin.Plans.GatewayPlanCreateInput, X.Abp.Payment.Admin.Application.Contracts",
+                  "type": "X.Abp.Payment.Admin.Plans.GatewayPlanCreateInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.GatewayPlanCreateInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "planId",
+                  "name": "planId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Payment.Admin.Plans.GatewayPlanCreateInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.GatewayPlanCreateInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Payment.Admin.Plans.IPlanAdminAppService"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/payment-admin/plans",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            },
+            "DeleteGatewayPlanAsyncByPlanIdAndGateway": {
+              "uniqueName": "DeleteGatewayPlanAsyncByPlanIdAndGateway",
+              "name": "DeleteGatewayPlanAsync",
+              "httpMethod": "DELETE",
+              "url": "api/payment-admin/plans/{planId}/external-plans/{gateway}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "planId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "gateway",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "planId",
+                  "name": "planId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "gateway",
+                  "name": "gateway",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Payment.Admin.Plans.IPlanAdminAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/payment-admin/plans/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Payment.Plans.PlanDto",
+                "typeSimple": "X.Abp.Payment.Plans.PlanDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.Payment.Plans.PlanDto,X.Abp.Payment.Plans.PlanDto,System.Guid,X.Abp.Payment.Admin.Plans.PlanGetListInput>"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/payment-admin/plans",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Admin.Plans.PlanGetListInput, X.Abp.Payment.Admin.Application.Contracts",
+                  "type": "X.Abp.Payment.Admin.Plans.PlanGetListInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.PlanGetListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Plans.PlanDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Plans.PlanDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.Payment.Plans.PlanDto,X.Abp.Payment.Plans.PlanDto,System.Guid,X.Abp.Payment.Admin.Plans.PlanGetListInput>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/payment-admin/plans/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Admin.Plans.PlanUpdateInput, X.Abp.Payment.Admin.Application.Contracts",
+                  "type": "X.Abp.Payment.Admin.Plans.PlanUpdateInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.PlanUpdateInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Payment.Admin.Plans.PlanUpdateInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.PlanUpdateInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Payment.Plans.PlanDto",
+                "typeSimple": "X.Abp.Payment.Plans.PlanDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.Payment.Plans.PlanDto,System.Guid,X.Abp.Payment.Admin.Plans.PlanUpdateInput>"
+            },
+            "UpdateGatewayPlanAsyncByPlanIdAndGatewayAndInput": {
+              "uniqueName": "UpdateGatewayPlanAsyncByPlanIdAndGatewayAndInput",
+              "name": "UpdateGatewayPlanAsync",
+              "httpMethod": "PUT",
+              "url": "api/payment-admin/plans/{planId}/external-plans/{gateway}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "planId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "gateway",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Admin.Plans.GatewayPlanUpdateInput, X.Abp.Payment.Admin.Application.Contracts",
+                  "type": "X.Abp.Payment.Admin.Plans.GatewayPlanUpdateInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.GatewayPlanUpdateInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "planId",
+                  "name": "planId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "gateway",
+                  "name": "gateway",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Payment.Admin.Plans.GatewayPlanUpdateInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.GatewayPlanUpdateInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Payment.Admin.Plans.IPlanAdminAppService"
+            },
+            "GetGatewayPlansAsyncByPlanIdAndInput": {
+              "uniqueName": "GetGatewayPlansAsyncByPlanIdAndInput",
+              "name": "GetGatewayPlansAsync",
+              "httpMethod": "GET",
+              "url": "api/payment-admin/plans/{planId}/external-plans",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "planId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Admin.Plans.GatewayPlanGetListInput, X.Abp.Payment.Admin.Application.Contracts",
+                  "type": "X.Abp.Payment.Admin.Plans.GatewayPlanGetListInput",
+                  "typeSimple": "X.Abp.Payment.Admin.Plans.GatewayPlanGetListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "planId",
+                  "name": "planId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Plans.GatewayPlanDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Payment.Plans.GatewayPlanDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Payment.Admin.Plans.IPlanAdminAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

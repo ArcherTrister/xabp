@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.EntityFrameworkCore.BulkExtensions.PostgreSql</AssemblyName>
+    <PackageId>X.Abp.EntityFrameworkCore.BulkExtensions.PostgreSql</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="EFCore.BulkExtensions.PostgreSql" />
+  </ItemGroup>
+
+</Project>

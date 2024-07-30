@@ -1,0 +1,25 @@
+﻿@page
+@model X.Abp.Account.Public.Web.Pages.Account.LinkLoginModel
+@{
+    Layout = null;
+}
+
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <base target="_self"/>
+    </head>
+    <body>
+    <form method="post" action="@Model.LinkLoginDomain">
+        <input type="hidden" name="SourceLinkUserId" value="@Model.SourceLinkUserId">
+        <input type="hidden" name="SourceLinkTenantId" value="@Model.SourceLinkTenantId">
+        <input type="hidden" name="SourceLinkToken" value="@Model.SourceLinkToken">
+        <input type="hidden" name="TargetLinkUserId" value="@Model.TargetLinkUserId">
+        <input type="hidden" name="TargetLinkTenantId" value="@Model.TargetLinkTenantId">
+        <noscript><button>Click to continue</button></noscript>
+    </form>
+    <script>
+        window.addEventListener("load", function(){document.forms[0].submit();});
+    </script>
+    </body>
+</html>

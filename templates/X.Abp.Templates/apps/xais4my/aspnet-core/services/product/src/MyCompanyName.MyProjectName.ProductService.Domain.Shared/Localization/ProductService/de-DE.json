@@ -1,0 +1,28 @@
+{
+  "culture": "de-DE",
+  "texts": {
+    "Menu:ProductService": "Produktservice",
+    "Menu:Products": "Produkte",
+    "Permission:ProductService": "Produktservice",
+    "Permission:Products": "Produkte",
+    "Permission:Create": "Schaffen",
+    "Permission:Edit": "Bearbeiten",
+    "Permission:Delete": "Löschen",
+    "Products": "Produkte",
+    "NewProduct": "Neues Produkt",
+    "Actions": "Aktionen",
+    "SuccessfullyDeleted": "Erfolgreich gelöscht",
+    "DeleteConfirmationMessage": "Möchten Sie dieses Produkt wirklich löschen?",
+    "Search": "Suche",
+    "Pick": "Wählen",
+    "SeeAdvancedFilters": "Erweiterte Filter",
+    "Name": "Name",
+    "Price": "Preis",
+    "MinPrice": "Mindestpreis",
+    "MaxPrice": "Höchstpreis",
+    "Product": "Produkt",
+    "AreYouSure": "Bist du sicher?",
+    "MinName": "Mindestname",
+    "MaxName": "Maximaler Name"
+  }
+}

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <Import Project="..\..\common.props" />
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="7.3.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\X.Abp.Chat.Blazor\X.Abp.Chat.Blazor.csproj" />
+        <ProjectReference Include="..\X.Abp.Chat.HttpApi.Client\X.Abp.Chat.HttpApi.Client.csproj" />
+    </ItemGroup>
+
+</Project>

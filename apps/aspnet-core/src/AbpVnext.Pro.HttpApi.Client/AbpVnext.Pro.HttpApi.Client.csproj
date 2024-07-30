@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>AbpVnext.Pro</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Admin.HttpApi.Client\X.Abp.Account.Pro.Admin.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Public.HttpApi.Client\X.Abp.Account.Pro.Public.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.AuditLogging\src\X.Abp.AuditLogging.HttpApi.Client\X.Abp.AuditLogging.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Chat\src\X.Abp.Chat.HttpApi.Client\X.Abp.Chat.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.CmsKit.Pro\src\X.Abp.CmsKit.Pro.HttpApi.Client\X.Abp.CmsKit.Pro.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.FileManagement\src\X.Abp.FileManagement.HttpApi.Client\X.Abp.FileManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Forms\src\X.Abp.Forms.HttpApi.Client\X.Abp.Forms.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Gdpr\src\X.Abp.Gdpr.HttpApi.Client\X.Abp.Gdpr.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.HttpApi.Client\X.Abp.Identity.Pro.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.IdentityServer.Pro\src\X.Abp.IdentityServer.Pro.HttpApi.Client\X.Abp.IdentityServer.Pro.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.LanguageManagement\src\X.Abp.LanguageManagement.HttpApi.Client\X.Abp.LanguageManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Notification\src\X.Abp.Notification.HttpApi.Client\X.Abp.Notification.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.OpenIddict.Pro\src\X.Abp.OpenIddict.Pro.HttpApi.Client\X.Abp.OpenIddict.Pro.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Payment\src\X.Abp.Payment.Admin.HttpApi.Client\X.Abp.Payment.Admin.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Payment\src\X.Abp.Payment.HttpApi.Client\X.Abp.Payment.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Quartz\src\X.Abp.Quartz.HttpApi.Client\X.Abp.Quartz.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Saas\src\X.Abp.Saas.HttpApi.Client\X.Abp.Saas.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.TextTemplateManagement\src\X.Abp.TextTemplateManagement.HttpApi.Client\X.Abp.TextTemplateManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.VersionManagement\src\X.Abp.VersionManagement.HttpApi.Client\X.Abp.VersionManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\AbpVnext.Pro.Application.Contracts\AbpVnext.Pro.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="**\*generate-proxy.json" />
+    <Content Remove="**\*generate-proxy.json" />
+  </ItemGroup>
+
+</Project>

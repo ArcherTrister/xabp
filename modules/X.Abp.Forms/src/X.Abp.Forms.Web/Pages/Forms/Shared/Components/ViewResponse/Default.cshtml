@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using X.Abp.Forms.Localization
+@inject IHtmlLocalizer<FormsResource> L
+@model X.Abp.Forms.Web.Pages.Forms.Shared.Components.ViewResponse.ViewResponseViewModel
+
+<abp-container>
+    <abp-row v-align="Center">
+        <abp-column size="_6" offset="_3">
+            <abp-card>
+                <abp-card-header>
+                    <span style="font-size: 32px">@Model.Form.Title</span>
+                </abp-card-header>
+                <abp-card-body>
+                    <abp-card-text>@L["Response:SavedResponse"]</abp-card-text>
+                    @if (!Model.Form.HasLimitOneResponsePerUser)
+                    {
+                        <div>
+                            <a href="@Model.ViewFormUrl" onclick="clearStorage()" target="_blank">@L["Response:SubmitNewAnswer"]</a>
+                        </div>
+                    }
+                    <div id="edit-div" data-editable="@Model.Form.CanEditResponse" data-id="@Model.FormResponse.Id">
+                        @if (Model.Form.CanEditResponse)
+                        {
+                            <div>
+                                <a href="@Model.ViewFormUrl" onclick="setFormResponseData();">@L["Response:EditYourResponse"]</a>
+                            </div>
+                        }
+                    </div>
+                </abp-card-body>
+            </abp-card>
+        </abp-column>
+    </abp-row>
+</abp-container>

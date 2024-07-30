@@ -1,0 +1,34 @@
+config:
+    selfUrl: # https://gateway-public.myprojectname.dev
+    corsOrigins: # https://myprojectname-st-gateway-web,https://myprojectname-st-gateway-public-web
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: # "false"
+        metadataAddress: # https://authserver.myprojectname.dev/.well-known/openid-configuration
+        swaggerClientId: # WebGateway_Swagger
+    dotnetEnv: Staging
+    redisHost: #
+    rabbitmqHost: #
+    elasticsearchUrl: #
+    AbpLicenseCode: #
+
+reRoutes:
+    accountService:
+        url: http://myprojectname-st-authserver
+    saasService:
+        url: http://saas-st-administration
+    administrationService:
+        url: http://myprojectname-st-administration
+    productService:
+        url: http://myprojectname-st-product
+
+ingress:
+    host: gateway-public.myprojectname.dev
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: mycompanyname/myprojectname-gateway-web-public
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "X.Abp.Chat": {
+      "path": "X.Abp.Chat.abpmdl.json"
+    }
+  }
+}

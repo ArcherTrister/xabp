@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.Localization.Domain.Shared": {
+      "path": "src/X.Abp.Localization.Domain.Shared/X.Abp.Localization.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Localization.Domain": {
+      "path": "src/X.Abp.Localization.Domain/X.Abp.Localization.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Localization.Application.Contracts": {
+      "path": "src/X.Abp.Localization.Application.Contracts/X.Abp.Localization.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Localization.Application": {
+      "path": "src/X.Abp.Localization.Application/X.Abp.Localization.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Localization.EntityFrameworkCore": {
+      "path": "src/X.Abp.Localization.EntityFrameworkCore/X.Abp.Localization.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Localization.MongoDB": {
+      "path": "src/X.Abp.Localization.MongoDB/X.Abp.Localization.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Localization.HttpApi": {
+      "path": "src/X.Abp.Localization.HttpApi/X.Abp.Localization.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Localization.HttpApi.Client": {
+      "path": "src/X.Abp.Localization.HttpApi.Client/X.Abp.Localization.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Localization.TestBase": {
+      "path": "test/X.Abp.Localization.TestBase/X.Abp.Localization.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Localization.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.Localization.EntityFrameworkCore.Tests/X.Abp.Localization.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Localization.MongoDB.Tests": {
+      "path": "test/X.Abp.Localization.MongoDB.Tests/X.Abp.Localization.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Localization.Domain.Tests": {
+      "path": "test/X.Abp.Localization.Domain.Tests/X.Abp.Localization.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Localization.Application.Tests": {
+      "path": "test/X.Abp.Localization.Application.Tests/X.Abp.Localization.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Localization.HttpApi.Host": {
+      "path": "host/X.Abp.Localization.HttpApi.Host/X.Abp.Localization.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Localization.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.Localization.HttpApi.Client.ConsoleTestApp/X.Abp.Localization.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Localization.AuthServer": {
+      "path": "host/X.Abp.Localization.AuthServer/X.Abp.Localization.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Localization.Host.Shared": {
+      "path": "host/X.Abp.Localization.Host.Shared/X.Abp.Localization.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+$lp-breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+) !default;
+
+$lp-all-colors: "brand", "primary", "secondary", "success", "info", "warning",
+  "danger", "light", "dark" !default;
+
+$poppins: "Poppins", sans-serif;
+
+$base-font-family: $poppins !default;
+$head-font-family: $poppins !default;
+$theme-font-family: $poppins !default;
+
+$lp-font-family: $base-font-family !default;
+$lp-font-weight: 400 !default;
+
+$lp-body-bg: lp-var(navbar-color) !default;
+
+$logo: var(--logo) !default;
+$logo-reverse: var(--logo-reverse) !default;
+
+$base: 12px !default;
+
+$global-text: lp-var("global-text");
+$global-bg: lp-var("global-bg");
+
+$text-color: lp-var("text-color");
+$background: lp-var("background");
+
+$sidebar-bg: lp-var("sidebar-bg");
+$sidebar-bg-gradient: lp-var("sidebar-bg-gradient");
+$sidebar-text: lp-var("sidebar-text");
+
+$border-color: lp-var-rgb(text-color, 0.1);
+
+$shadow: lp-var("shadow");
+$shadow-big: lp-var("shadow-big");
+$shadow-sm: lp-var("shadow-sm");
+
+$radius: lp-var("radius");
+
+$brand: lp-var("brand");
+$brand-text: lp-var("brand-text");
+$primary: lp-var("primary");
+$secondary: lp-var("secondary");
+$success: lp-var("success");
+$info: lp-var("info");
+$warning: lp-var("warning");
+$danger: lp-var("danger");
+$light: lp-var("light");
+$dark: lp-var("dark");
+
+$disabled-color: lp-var-rgb(global-text, 0.35) !default;

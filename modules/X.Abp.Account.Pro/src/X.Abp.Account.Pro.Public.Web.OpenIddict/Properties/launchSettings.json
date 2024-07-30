@@ -1,0 +1,12 @@
+{
+    "profiles": {
+        "X.Abp.Account.Pro.Public.Web.OpenIddict": {
+            "commandName": "Project",
+            "launchBrowser": true,
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "applicationUrl": "https://localhost:49719;http://localhost:49720"
+        }
+    }
+}

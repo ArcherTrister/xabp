@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <RootNamespace>X.Abp.CmsKit.Pro</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.MongoDB" Version="7.3.3" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

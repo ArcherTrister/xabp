@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>X.Abp.Payment.Admin.HttpApi.Client</AssemblyName>
+    <PackageId>X.Abp.Payment.Admin.HttpApi.Client</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Payment.Admin.Application.Contracts\X.Abp.Payment.Admin.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Payment.HttpApi.Client\X.Abp.Payment.HttpApi.Client.csproj" />
+  </ItemGroup>
+
+</Project>

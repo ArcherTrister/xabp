@@ -1,0 +1,196 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-configmap
+data:
+  yarp.json: |-
+    {
+      "ReverseProxy": {
+        "Routes": {
+          "AbpApi": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/abp/{**catch-all}"
+            }
+          },
+          "SettingManagement": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/setting-management/{**catch-all}"
+            }
+          },
+          "FeatureManagement": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/feature-management/{**catch-all}"
+            }
+          },
+          "PermissionManagement": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/permission-management/{**catch-all}"
+            }
+          },
+          "AuditLogging": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/audit-logging/{**catch-all}"
+            }
+          },
+          "LanguageManagement": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/language-management/{**catch-all}"
+            }
+          },
+          "TextTemplateManagement": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/text-template-management/{**catch-all}"
+            }
+          },
+          "LeptonThemeManagement": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/lepton-theme-management/{**catch-all}"
+            }
+          },
+          "GDPR": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/api/gdpr/{**catch-all}"
+            }
+          },
+          "AdministrationSwagger": {
+            "ClusterId": "Administration",
+            "Match": {
+              "Path": "/swagger-json/Administration/swagger/v1/swagger.json"
+            },
+            "Transforms": [
+              { "PathRemovePrefix": "/swagger-json/Administration" }
+            ]
+          },
+          "Account": {
+            "ClusterId": "AuthServer",
+            "Match": {
+              "Path": "/api/account/{**catch-all}"
+            }
+          },
+          "AccountAdmin": {
+            "ClusterId": "AuthServer",
+            "Match": {
+              "Path": "/api/account-admin/{**catch-all}"
+            }
+          },
+          "AuthServerSwagger": {
+            "ClusterId": "AuthServer",
+            "Match": {
+              "Path": "/swagger-json/AuthServer/swagger/v1/swagger.json"
+            },
+            "Transforms": [
+              { "PathRemovePrefix": "/swagger-json/AuthServer" }
+            ]
+          },
+          "Identity": {
+            "ClusterId": "Identity",
+            "Match": {
+              "Path": "/api/identity/{**catch-all}"
+            }
+          },
+          "IdentityServer": {
+            "ClusterId": "Identity",
+            "Match": {
+              "Path": "/api/identity-server/{**catch-all}"
+            }
+          },
+          "IdentitySwagger": {
+            "ClusterId": "Identity",
+            "Match": {
+              "Path": "/swagger-json/Identity/swagger/v1/swagger.json"
+            },
+            "Transforms": [
+              { "PathRemovePrefix": "/swagger-json/Identity" }
+            ]
+          },
+          "Saas": {
+            "ClusterId": "Saas",
+            "Match": {
+              "Path": "/api/saas/{**catch-all}"
+            }
+          },
+          "Payment": {
+            "ClusterId": "Saas",
+            "Match": {
+              "Path": "/api/payment/{**catch-all}"
+            }
+          },
+          "PaymentAdmin": {
+            "ClusterId": "Saas",
+            "Match": {
+              "Path": "/api/payment-admin/{**catch-all}"
+            }
+          },
+          "SaasSwagger": {
+            "ClusterId": "Saas",
+            "Match": {
+              "Path": "/swagger-json/Saas/swagger/v1/swagger.json"
+            },
+            "Transforms": [
+              { "PathRemovePrefix": "/swagger-json/Saas" }
+            ]
+          },
+          "Product": {
+            "ClusterId": "Product",
+            "Match": {
+              "Path": "/api/product-service/{**catch-all}"
+            }
+          },
+          "ProductSwagger": {
+            "ClusterId": "Product",
+            "Match": {
+              "Path": "/swagger-json/Product/swagger/v1/swagger.json"
+            },
+            "Transforms": [
+              { "PathRemovePrefix": "/swagger-json/Product" }
+            ]
+          }
+        },
+        "Clusters": {
+          "AuthServer": {
+            "Destinations": {
+              "AuthServer": {
+                "Address": "{%{{{ .Values.reRoutes.accountService.url }}}%}"
+              }
+            }
+          },
+          "Administration": {
+            "Destinations": {
+              "Administration": {
+                "Address": "{%{{{ .Values.reRoutes.administrationService.url }}}%}"
+              }
+            }
+          },
+          "Identity": {
+            "Destinations": {
+              "Identity": {
+                "Address": "{%{{{ .Values.reRoutes.identityService.url }}}%}"
+              }
+            }
+          },
+          "Saas": {
+            "Destinations": {
+              "Saas": {
+                "Address": "{%{{{ .Values.reRoutes.saasService.url }}}%}"
+              }
+            }
+          },
+          "Product": {
+            "Destinations": {
+              "Product": {
+                "Address": "{%{{{ .Values.reRoutes.productService.url }}}%}"
+              }
+            }
+          }
+        }
+      }
+    }

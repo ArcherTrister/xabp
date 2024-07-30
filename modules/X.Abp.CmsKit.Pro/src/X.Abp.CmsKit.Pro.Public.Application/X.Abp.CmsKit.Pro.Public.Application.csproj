@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>X.Abp.CmsKit.Pro.Public.Application</AssemblyName>
+    <PackageId>X.Abp.CmsKit.Pro.Public.Application</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="X\Abp\CmsKit\Public\Emailing\Templates\*.tpl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.UI.Navigation" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.CmsKit.Public.Application"
+      VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.CmsKit.Pro.Public.Application.Contracts\X.Abp.CmsKit.Pro.Public.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "X.Abp.Gdpr.EntityFrameworkCore": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57776;http://localhost:57777"
+    }
+  }
+}

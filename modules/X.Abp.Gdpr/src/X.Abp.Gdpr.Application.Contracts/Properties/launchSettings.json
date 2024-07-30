@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "X.Abp.Gdpr.Application.Contracts": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57770;http://localhost:57771"
+    }
+  }
+}

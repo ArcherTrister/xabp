@@ -1,0 +1,169 @@
+{
+  "folders": {
+    "src": {},
+    "test": {}
+  },
+  "packages": {
+    "MyCompanyName.MyProjectName.ProductService.Domain.Shared": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Domain.Shared/MyCompanyName.MyProjectName.ProductService.Domain.Shared.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.domain.shared": {}
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.Domain": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Domain/MyCompanyName.MyProjectName.ProductService.Domain.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.domain": {}
+      },
+      "contents": {
+        "aggregates": {
+          "MyCompanyName.MyProjectName.ProductService.Products.Product": {
+            "keyType": "Guid",
+            "summary": "Represents a product.",
+            "collectionProperties": {},
+            "navigationProperties": {}
+          }
+        },
+        "repositoryInterfaces": {
+          "MyCompanyName.MyProjectName.ProductService.Products.IProductRepository": {
+            "entity": {
+              "type": "MyCompanyName.MyProjectName.ProductService.Products.Product",
+              "package": "MyCompanyName.MyProjectName.ProductService.Domain"
+            }
+          }
+        }
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.Application.Contracts": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Application.Contracts/MyCompanyName.MyProjectName.ProductService.Application.Contracts.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.application.contracts": {}
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.Application": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Application/MyCompanyName.MyProjectName.ProductService.Application.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.application": {}
+      },
+      "contents": {
+        "applicationServices": {
+          "MyCompanyName.MyProjectName.ProductService.ProductAppService": {}
+        }
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore/MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.ef": {}
+      },
+      "contents": {
+        "efDbContexts": {
+          "MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.ProductServiceDbContext": {
+            "entities": {
+              "MyCompanyName.MyProjectName.ProductService.Products.Product": {
+                "package": "MyCompanyName.MyProjectName.ProductService.Domain",
+                "dbSetPropertyOnDbContext": "Products",
+                "databaseTable": "Products"
+              }
+            }
+          }
+        }
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.HttpApi": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.HttpApi/MyCompanyName.MyProjectName.ProductService.HttpApi.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.http-api": {}
+      },
+      "contents": {
+        "controllers": {
+          "MyCompanyName.MyProjectName.ProductService.Products.ProductController": {},
+          "MyCompanyName.MyProjectName.ProductService.Products.ProductPublicController": {}
+        }
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.HttpApi.Client": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.HttpApi.Client/MyCompanyName.MyProjectName.ProductService.HttpApi.Client.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.http-api-client": {}
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.Web": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Web/MyCompanyName.MyProjectName.ProductService.Web.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.ui.mvc": {}
+      },
+      "contents": {
+        "mvcPages": {
+          "MyCompanyName.MyProjectName.ProductService.Web.Pages.Products.Index.cshtml": {},
+          "MyCompanyName.MyProjectName.ProductService.Web.Pages.Products.CreateModal.cshtml": {},
+          "MyCompanyName.MyProjectName.ProductService.Web.Pages.Products.EditModal.cshtml": {}
+        }
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.Blazor": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Blazor/MyCompanyName.MyProjectName.ProductService.Blazor.csproj",
+      "folder": "src",
+      "includes": {
+        "lib.ui.blazor": {}
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "src/MyCompanyName.MyProjectName.ProductService.HttpApi.Host/MyCompanyName.MyProjectName.ProductService.HttpApi.Host.csproj",
+      "folder": "src",
+      "includes": {
+        "host.http-api": {}
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.TestBase": {
+      "type": "dotnet-project",
+      "path": "test/MyCompanyName.MyProjectName.ProductService.TestBase/MyCompanyName.MyProjectName.ProductService.TestBase.csproj",
+      "folder": "test",
+      "includes": {
+        "lib.test": {}
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.Domain.Tests": {
+      "type": "dotnet-project",
+      "path": "test/MyCompanyName.MyProjectName.ProductService.Domain.Tests/MyCompanyName.MyProjectName.ProductService.Domain.Tests.csproj",
+      "folder": "test",
+      "includes": {
+        "lib.test": {}
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.Tests": {
+      "type": "dotnet-project",
+      "path": "test/MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.Tests/MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.Tests.csproj",
+      "folder": "test",
+      "includes": {
+        "lib.test": {}
+      }
+    },
+    "MyCompanyName.MyProjectName.ProductService.Application.Tests": {
+      "type": "dotnet-project",
+      "path": "test/MyCompanyName.MyProjectName.ProductService.Application.Tests/MyCompanyName.MyProjectName.ProductService.Application.Tests.csproj",
+      "folder": "test",
+      "includes": {
+        "lib.test": {}
+      }
+    }
+  }
+}

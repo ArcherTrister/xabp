@@ -1,0 +1,30 @@
+﻿@page "/Forms/{Id}/FormResponse"
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@using X.Abp.Forms.Localization;
+@using X.Abp.Forms.Web.Pages.Forms.Shared.Components.ViewResponse;
+
+@model X.Abp.Forms.Web.Pages.Forms.FormResponseModel
+
+@inject IPageLayout PageLayout
+@inject IAuthorizationService Authorization
+@inject IStringLocalizer<FormsResource> L
+@inject IThemeManager ThemeManager
+
+@{
+    // ViewData["Title"] = Model.Form.Title;
+    Layout = ThemeManager.CurrentTheme.GetLayout(StandardLayouts.Empty);
+}
+
+@section scripts {
+    <abp-script-bundle>
+        <abp-script src="/client-proxies/form-proxy.js" />
+    </abp-script-bundle>
+}
+
+@await Component.InvokeAsync(typeof(ViewResponseViewComponent), new
+{
+    id = Model.Id
+})

@@ -1,0 +1,23 @@
+.breadcrumb {
+  color: $breadcrumb-color;
+  padding: $breadcrumb-padding-y 0 0;
+  font-size: $font-size-sm;
+
+  .breadcrumb-item {
+    + .breadcrumb-item {
+      &::before {
+        opacity: $breadcrumb-separator-opacity;
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $breadcrumb-color;
+    font-weight: $font-weight-bold;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}

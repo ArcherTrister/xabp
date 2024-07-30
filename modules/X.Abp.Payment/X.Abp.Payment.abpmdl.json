@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.Payment.Domain.Shared": {
+      "path": "src/X.Abp.Payment.Domain.Shared/X.Abp.Payment.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.Domain": {
+      "path": "src/X.Abp.Payment.Domain/X.Abp.Payment.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.Application.Contracts": {
+      "path": "src/X.Abp.Payment.Application.Contracts/X.Abp.Payment.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.Application": {
+      "path": "src/X.Abp.Payment.Application/X.Abp.Payment.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.EntityFrameworkCore": {
+      "path": "src/X.Abp.Payment.EntityFrameworkCore/X.Abp.Payment.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.MongoDB": {
+      "path": "src/X.Abp.Payment.MongoDB/X.Abp.Payment.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.HttpApi": {
+      "path": "src/X.Abp.Payment.HttpApi/X.Abp.Payment.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.HttpApi.Client": {
+      "path": "src/X.Abp.Payment.HttpApi.Client/X.Abp.Payment.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.TestBase": {
+      "path": "test/X.Abp.Payment.TestBase/X.Abp.Payment.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Payment.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.Payment.EntityFrameworkCore.Tests/X.Abp.Payment.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Payment.MongoDB.Tests": {
+      "path": "test/X.Abp.Payment.MongoDB.Tests/X.Abp.Payment.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Payment.Domain.Tests": {
+      "path": "test/X.Abp.Payment.Domain.Tests/X.Abp.Payment.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Payment.Application.Tests": {
+      "path": "test/X.Abp.Payment.Application.Tests/X.Abp.Payment.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Payment.HttpApi.Host": {
+      "path": "host/X.Abp.Payment.HttpApi.Host/X.Abp.Payment.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Payment.Web": {
+      "path": "src/X.Abp.Payment.Web/X.Abp.Payment.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.Payment.HttpApi.Client.ConsoleTestApp/X.Abp.Payment.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Payment.Web.Host": {
+      "path": "host/X.Abp.Payment.Web.Host/X.Abp.Payment.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Payment.AuthServer": {
+      "path": "host/X.Abp.Payment.AuthServer/X.Abp.Payment.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Payment.Host.Shared": {
+      "path": "host/X.Abp.Payment.Host.Shared/X.Abp.Payment.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Payment.Web.Unified": {
+      "path": "host/X.Abp.Payment.Web.Unified/X.Abp.Payment.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Payment.Blazor": {
+      "path": "src/X.Abp.Payment.Blazor/X.Abp.Payment.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.Blazor.Host": {
+      "path": "host/X.Abp.Payment.Blazor.Host/X.Abp.Payment.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Payment.Blazor.Server": {
+      "path": "src/X.Abp.Payment.Blazor.Server/X.Abp.Payment.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.Blazor.WebAssembly": {
+      "path": "src/X.Abp.Payment.Blazor.WebAssembly/X.Abp.Payment.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Payment.Blazor.Server.Host": {
+      "path": "host/X.Abp.Payment.Blazor.Server.Host/X.Abp.Payment.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

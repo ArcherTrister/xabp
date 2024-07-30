@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.Shared.Hosting.AspNetCore\MyCompanyName.MyProjectName.Shared.Hosting.AspNetCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="DistributedLock.Redis" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.RabbitMQ"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.DistributedLocking" VersionOverride="$(AbpPackageVersion)" />
+    <!--        Un-comment if you are using mongodb in any microservice -->
+    <!--        <ProjectReference
+    Include="..\..\..\..\..\..\abp\framework\src\Volo.Abp.MongoDB\Volo.Abp.MongoDB.csproj" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\..\services\administration\src\MyCompanyName.MyProjectName.AdministrationService.EntityFrameworkCore\MyCompanyName.MyProjectName.AdministrationService.EntityFrameworkCore.csproj" />
+    <ProjectReference
+      Include="..\..\services\saas\src\MyCompanyName.MyProjectName.SaasService.EntityFrameworkCore\MyCompanyName.MyProjectName.SaasService.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>

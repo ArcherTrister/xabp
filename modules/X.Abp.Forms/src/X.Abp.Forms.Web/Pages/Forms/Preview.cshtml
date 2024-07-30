@@ -1,0 +1,36 @@
+﻿@page "/Forms/{Id}/Preview"
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@using X.Abp.Forms.Localization;
+@using X.Abp.Forms.Web.Pages.Forms;
+@using X.Abp.Forms.Web.Pages.Forms.Shared.Components.ViewForm;
+
+@model PreviewModel
+
+@inject IPageLayout PageLayout
+@inject IAuthorizationService Authorization
+@inject IStringLocalizer<FormsResource> L
+@inject IThemeManager ThemeManager
+
+@{
+    Layout = ThemeManager.CurrentTheme.GetLayout(StandardLayouts.Empty);
+}
+
+@section styles {
+    <abp-style-bundle name="@typeof(IndexModel).FullName">
+    </abp-style-bundle>
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/form-proxy.js" />
+    </abp-script-bundle>
+}
+
+@await Component.InvokeAsync(typeof(ViewFormViewComponent), new
+{
+    formId = Model.Id,
+    preview = true
+})

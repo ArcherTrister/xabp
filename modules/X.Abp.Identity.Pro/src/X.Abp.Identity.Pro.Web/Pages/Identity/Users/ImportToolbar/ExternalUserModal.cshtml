@@ -1,0 +1,29 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@using Volo.Abp.Identity.Localization;
+@inject IHtmlLocalizer<IdentityResource> L
+@model X.Abp.Identity.Web.Pages.Identity.Users.ImportToolbar.ExternalUserModal
+
+@{
+    Layout = null;
+}
+
+<form asp-page="/Identity/Users/ImportToolbar/ExternalUserModal" method="post">
+    <abp-modal id="ExternalUser">
+        <abp-modal-header title="@L["ExternalUser"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-select asp-for="ExternalUser.Provider" asp-items="Model.ExternalLoginProviderItems"/>
+            <abp-input asp-for="ExternalUser.UserNameOrEmailAddress"/>
+            @{
+                var passwordStyle = Model.ExternalLoginProviders.First().CanObtainUserInfoWithoutPassword?"display:none":"display:block";
+            }
+            <div class="mb-3" style="@passwordStyle">
+                <label class="form-label" for="ExternalUser_Password">@L["Password"]</label>
+                <input type="password" id="ExternalUser_Password" name="ExternalUser.Password" class="form-control ">
+                <span class="text-danger field-validation-valid" data-valmsg-for="ExternalUser.Password" data-valmsg-replace="true"></span>
+            </div>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Save | AbpModalButtons.Close)"></abp-modal-footer>
+    </abp-modal>
+</form>

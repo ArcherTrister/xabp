@@ -1,0 +1,52 @@
+﻿@page
+@using System.Net;
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageSearchBox;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar;
+@using Volo.Abp.IdentityServer.Localization;
+@using X.Abp.IdentityServer.Web.Pages.IdentityServer.ApiResources;
+@using X.Abp.IdentityServer.Web.Menus;
+@model X.Abp.IdentityServer.Web.Pages.IdentityServer.ApiResources.IndexModel
+@inject IHtmlLocalizer<AbpIdentityServerResource> L
+@inject IAuthorizationService Authorization
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["ApiResources"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:IdentityServer"].Value);
+    PageLayout.Content.MenuItemName = AbpIdentityServerProMenuNames.ApiResources;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/identityServer-proxy.js" />
+        <abp-script src="/Pages/IdentityServer/ApiResources/index.js" />
+        <abp-script src="/Pages/IdentityServer/ApiResources/create.js" />
+        <abp-script src="/Pages/IdentityServer/ApiResources/edit.js" />
+    </abp-script-bundle>
+}
+
+@section content_toolbar {
+    @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new {pageName = typeof(IndexModel).FullName})
+}
+
+
+<div id="ApiResourcesWrapper">
+    <abp-card class="mb-4">
+        <abp-card-body>
+            <abp-row>
+                <abp-column size="_12">
+                    @await Component.InvokeAsync(typeof(AbpPageSearchBoxViewComponent))
+                </abp-column>
+            </abp-row>
+
+        </abp-card-body>
+    </abp-card>
+
+    <abp-card>
+        <abp-card-body>
+            <abp-table striped-rows="true" id="ApiResourcesTable" class="nowrap"></abp-table>
+        </abp-card-body>
+    </abp-card>
+</div>

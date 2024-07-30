@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>X.Abp.Identity.Pro.Application.Contracts</AssemblyName>
+    <PackageId>X.Abp.Identity.Pro.Application.Contracts</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Identity.Pro.Domain.Shared\X.Abp.Identity.Pro.Domain.Shared.csproj" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Users.Abstractions" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EventBus.Abstractions" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

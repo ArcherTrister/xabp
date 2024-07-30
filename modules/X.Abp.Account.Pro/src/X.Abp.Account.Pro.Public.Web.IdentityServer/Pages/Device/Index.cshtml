@@ -1,0 +1,144 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using X.Abp.Account.Localization;
+@using X.Abp.Account.Web.Pages.Device;
+@model IndexModel
+@inject IHtmlLocalizer<AccountResource> L
+@if (Model.ShowSuccess)
+{
+    <abp-card>
+        <abp-card-body>
+            <h1>@L["DeviceAuthorizationSuccessfully"]</h1>
+            <p>@L["DeviceAuthorizationSuccessfullyInfo"]</p>
+        </abp-card-body>
+    </abp-card>
+}
+else if (Model.ConsentInput == null)
+{
+    <abp-card>
+        <abp-card-body>
+            <form method="post">
+                <p>@L["DeviceAuthorization"]</p>
+                <abp-input asp-for="UserCode" />
+                <abp-button button-type="Primary" type="submit">@L["Submit"]</abp-button>
+            </form>
+        </abp-card-body>
+    </abp-card>
+}
+else
+{
+    <abp-card id="IdentityServerConsentWrapper">
+        <abp-card-header>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>
+                        @if (Model.ClientInfo.ClientLogoUrl != null)
+                        {
+                            <img src="@Model.ClientInfo.ClientLogoUrl">
+                        }
+
+                        @Model.ClientInfo.ClientName
+                        <small>@L["RequestingYourPermission"]</small>
+                    </h2>
+                </div>
+            </div>
+        </abp-card-header>
+        <abp-card-body>
+            <form method="post" asp-page-handler="confirm">
+
+                <input asp-for="UserCode" type="hidden">
+
+                <div class="mb-3">
+                    @L["UncheckThePermissionsYouDoNotWishToGrant"]
+                </div>
+
+                @if (!Model.ConsentInput.IdentityScopes.IsNullOrEmpty())
+                {
+                    <h3>@L["ConsentPersonalInformation"]</h3>
+
+                    <ul class="list-group">
+                        @for (var i = 0; i < Model.ConsentInput.IdentityScopes.Count; i++)
+                        {
+                            <li class="list-group-item">
+                                <div class="form-check">
+                                    <label asp-for="@Model.ConsentInput.IdentityScopes[i].Checked" class="form-check-label">
+                                        <input asp-for="@Model.ConsentInput.IdentityScopes[i].Checked" class="form-check-input" disabled="@Model.ConsentInput.IdentityScopes[i].Required" />
+                                        @Model.ConsentInput.IdentityScopes[i].DisplayName
+                                        @if (Model.ConsentInput.IdentityScopes[i].Required)
+                                        {
+                                            <span><em>(@L["ScopeRequired"])</em></span>
+                                        }
+                                    </label>
+                                </div>
+                                <input asp-for="@Model.ConsentInput.IdentityScopes[i].Name" type="hidden" /> @* TODO: Use attributes on the view model instead of using hidden here *@
+                                @if (Model.ConsentInput.IdentityScopes[i].Description != null)
+                                {
+                                    <div class="consent-description">
+                                        @Model.ConsentInput.IdentityScopes[i].Description
+                                    </div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+
+                <hr />
+
+                @if (!Model.ConsentInput.ApiScopes.IsNullOrEmpty())
+                {
+                    <h3>@L["ConsentApplicationAccess"]</h3>
+
+                    <ul class="list-group">
+                        @for (var i = 0; i < Model.ConsentInput.ApiScopes.Count; i++)
+                        {
+                            <li class="list-group-item">
+                                <div class="form-check">
+                                    <label asp-for="@Model.ConsentInput.ApiScopes[i].Checked" class="form-check-label">
+                                        <input asp-for="@Model.ConsentInput.ApiScopes[i].Checked" class="form-check-input" disabled="@Model.ConsentInput.ApiScopes[i].Required" />
+                                        @Model.ConsentInput.ApiScopes[i].DisplayName
+                                        @if (Model.ConsentInput.ApiScopes[i].Required)
+                                        {
+                                            <span><em>(@L["ScopeRequired"])</em></span>
+                                        }
+                                    </label>
+                                </div>
+                                <input asp-for="@Model.ConsentInput.ApiScopes[i].Name" type="hidden" /> @* TODO: Use attributes on the view model instead of using hidden here *@
+                                @if (Model.ConsentInput.ApiScopes[i].Description != null)
+                                {
+                                    <div class="consent-description">
+                                        @Model.ConsentInput.ApiScopes[i].Description
+                                    </div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+
+                @if (Model.ClientInfo.AllowRememberConsent)
+                {
+                    <div class="mt-3 form-check">
+                        <br />
+                        <label asp-for="@Model.ConsentInput.RememberConsent" class="form-check-label">
+                            <input asp-for="@Model.ConsentInput.RememberConsent" class="form-check-input" />
+                            <strong>@L["RememberConsent"]</strong>
+                        </label>
+                    </div>
+                }
+
+                <div class="mt-3">
+                    <button name="ConsentInput.UserDecision" value="yes" class="btn btn-primary me-2" autofocus>@L["UserDecisionYes"]</button>
+                    <button name="ConsentInput.UserDecision" value="no" class="btn">@L["UserDecisionNo"]</button>
+                    @if (Model.ClientInfo.ClientUrl != null)
+                    {
+                        <a class="pull-right btn btn-secondary" target="_blank" href="@Model.ClientInfo.ClientUrl">
+                            <strong>@Model.ClientInfo.ClientName</strong>
+                        </a>
+                    }
+                </div>
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+            </form>
+        </abp-card-body>
+    </abp-card>
+}

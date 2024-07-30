@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>X.Abp.CmsKit.Pro.Public.Application.Contracts</AssemblyName>
+    <PackageId>X.Abp.CmsKit.Pro.Public.Application.Contracts</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.CmsKit.Public.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="X.Captcha" />
+    <ProjectReference
+      Include="..\X.Abp.CmsKit.Pro.Domain.Shared\X.Abp.CmsKit.Pro.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

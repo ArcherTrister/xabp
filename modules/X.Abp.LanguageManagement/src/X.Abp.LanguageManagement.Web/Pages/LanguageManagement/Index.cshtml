@@ -1,0 +1,11 @@
+﻿@page
+@using Microsoft.Extensions.Localization;
+@using X.Abp.LanguageManagement.Localization;
+@using X.Abp.LanguageManagement.Web.Pages.LanguageManagement;
+@model X.Abp.LanguageManagement.Web.Pages.LanguageManagement.IndexModel
+@inject IStringLocalizer<LanguageManagementResource> L
+
+@{
+}
+<h1>LanguageManagement</h1>
+<p>@L["SamplePageMessage"]</p>

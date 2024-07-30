@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <Import Project="..\..\modules.props" />
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="6.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\X.Abp.Gdpr.Blazor\X.Abp.Gdpr.Blazor.csproj" />
+        <ProjectReference Include="..\X.Abp.Gdpr.HttpApi.Client\X.Abp.Gdpr.HttpApi.Client.csproj" />
+    </ItemGroup>
+
+</Project>

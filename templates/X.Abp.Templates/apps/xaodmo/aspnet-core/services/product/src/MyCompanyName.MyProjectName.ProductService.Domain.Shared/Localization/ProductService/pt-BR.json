@@ -1,0 +1,28 @@
+{
+  "culture": "pt-BR",
+  "texts": {
+    "Menu:ProductService": "Serviço de Produto",
+    "Menu:Products": "Produtos",
+    "Permission:ProductService": "Serviço de Produto",
+    "Permission:Products": "Produtos",
+    "Permission:Create": "Crio",
+    "Permission:Edit": "Editar",
+    "Permission:Delete": "Excluir",
+    "Products": "Produtos",
+    "NewProduct": "Novo produto",
+    "Actions": "Ações",
+    "SuccessfullyDeleted": "Excluído com sucesso",
+    "DeleteConfirmationMessage": "Tem certeza que deseja excluir este produto?",
+    "Search": "Procurar",
+    "Pick": "Escolha",
+    "SeeAdvancedFilters": "Filtros avançados",
+    "Name": "Nome",
+    "Price": "Preço",
+    "MinPrice": "Preço mínimo",
+    "MaxPrice": "Preço Máx.",
+    "Product": "produtos",
+    "AreYouSure": "Tem certeza?",
+    "MinName": "Nome mínimo",
+    "MaxName": "Nome Máximo"
+  }
+}

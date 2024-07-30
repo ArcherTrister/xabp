@@ -1,0 +1,194 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using X.Abp.Forms.Choices;
+@using X.Abp.Forms.Localization
+@inject IHtmlLocalizer<FormsResource> L
+@model X.Abp.Forms.Web.Pages.Forms.Shared.Components.FormResponses.FormResponsesViewComponent.FormResponsesViewModel
+
+<div id="vue-responses">
+<div ref="other" data-value="@ChoiceConsts.OtherChoice"></div>
+<abp-container>
+<abp-row v-align="Center">
+<abp-column size="_8" offset="_2">
+<div class="card">
+    <div class="card-header">
+        <div class="" style="display: flex; justify-content: space-between;padding: 1em">
+            <div style="font-size: 28px;font-weight: 400;line-height: 36px">
+                <span v-cloak>{{l("Form:Responses:TotalResponses", response.totalCount)}}</span>
+            </div>
+            <div style="display: flex">
+                <div style="flex: 1.1 auto; margin-left: 1em">
+                    <div class="dropdown show">
+                        <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="javascript:void(0)" v-on:click="downloadResponses">
+                                <i class="fa fa-download" aria-hidden="true" style="padding-right: .5em"></i>
+                                <span v-cloak>@L["Form:Responses:DownloadResponses"].Value</span>
+                            </a>
+                            <div v-if="auth.isGranted('Forms.Response.Delete')">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)" v-on:click="deleteResponses">
+                                    <i class="fa fa-trash" aria-hidden="true" style="padding-right: .5em"></i>
+                                    <span v-cloak>@L["Form:Responses:DeleteAllResponses"].Value</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" v-if="response.totalCount > 0">
+            <nav class=" nav-justified">
+                <div ref="tab_header" class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <!--<a class="nav-item nav-link" id="nav-summary-tab" data-bs-toggle="tab" href="#nav-summary" role="tab" aria-controls="nav-summary" aria-selected="true">Summary</a>-->
+                    <a class="nav-item nav-link active" id="nav-individual-tab" data-bs-toggle="tab" href="#nav-individual" role="tab" aria-controls="nav-individual" aria-selected="false">@L["Individual"]</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<div v-if="response.totalCount === 0">
+    <div class="card">
+        <div class="card-body text-center" v-cloak>{{l("Form:Responses:NoResponse")}}</div>
+    </div>
+</div>
+<div v-if="response.totalCount > 0" style="display: none" :style="[response.totalCount > 0 ? {display: 'inline'} : null]">
+<div ref="tab_body" class="tab-content" id="nav-tabContent">
+<!-- Summary Responses Tab -->
+<!--
+<div class="tab-pane fade show active" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab">
+    <div v-for="(question, index) in questions">
+        <div class="card">
+            <div class="card-body">
+                <div v-if="question.questionType === 1 || question.questionType === 2">
+                    <block-response :responses="response.items" :question="question"></block-response>
+                </div>
+                <div v-if="question.questionType === 4">
+                    <response-chart class="summary-chart" type="horizontalBar" :question="question" :responses="response.items" :options="horizontalBar_options"></response-chart>
+                </div>
+                <div v-if="question.questionType === 3  || question.questionType === 5">
+                    <response-chart class="summary-chart" type="pie" :question="question" :responses="response.items"></response-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<!-- Individual Responses Tab -->
+<div class="tab-pane fade show active" id="nav-individual" role="tabpanel" aria-labelledby="nav-individual-tab">
+    <div v-if="response.totalCount>0">
+        <abp-card class="text-center">
+            <abp-card-body>
+                <abp-row v-align="Start">
+                    <abp-column size="_8" v-align="Start">
+                        <div style="display: flex">
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="" v-bind:data-original-title='l("Form:Responses:PreviousResponse")' v-on:click="decreaseSelectedResponseIndex()">
+                                <a class="btn" href="javascript:void(0)">
+                                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <abp-column size="_3">
+                                <input type="number" class="form-control" v-model="selectedResponseIndex" :max="response.totalCount" min="1"/>
+                            </abp-column>
+                            <div class="col-2" style="display: flex; justify-content: center; align-items: center">
+                                <div style="display: flex" class="control-label">
+                                    <span v-cloak>of {{response.totalCount}}</span>
+                                </div>
+                            </div>
+                            <div data-bs-toggle="tooltip" data-bs-placement="top" title="" v-bind:data-original-title='l("Form:Responses:NextResponse")' v-on:click="increaseSelectedResponseIndex()">
+                                <a class="btn" href="javascript:void(0)">
+                                    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </abp-column>
+                    <abp-column size="_2" offset="_2" v-align="End">
+                        <div style="display: flex">
+                            <div class="custom-menu-button" data-bs-toggle="tooltip" data-bs-placement="top" title="" v-bind:data-original-title='l("Form:Responses:PrintResponse")' style="display: none">
+                                <a class="btn" href="javascript:window.print()">
+                                    <i class="fa fa-print" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div v-if="auth.isGranted('Forms.Response.Delete')" class="custom-menu-button" data-bs-toggle="tooltip" data-bs-placement="top" title="" v-on:click="deleteResponse" v-bind:data-original-title='l("Form:Responses:DeleteResponse")'>
+                                <a class="btn" href="javascript:void(0)">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </abp-column>
+                </abp-row>
+
+            </abp-card-body>
+        </abp-card>
+
+        <abp-card>
+            <abp-card-body class="text-center">
+                <div class="mb-3">
+                    <span class="form-title">{{form.title}}</span>
+                </div>
+                <div class="mb-3">
+                    <span placeholder="Description" class="form-description">{{form.description}}</span>
+                </div>
+            </abp-card-body>
+        </abp-card>
+        <!-- email -->
+        <div v-if="selectedResponse.email!==null">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container">
+                        <div>
+                            <div class="mb-3 ">
+                                <label>
+                                    @L["Email"]
+                                </label>
+                            </div>
+                            <label class="form-control">
+                                {{ selectedResponse.email }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- email ends -->
+        
+        <response-answer v-for="(question, index) in questions" :key="question.id"
+                         v-model="questions[index]"
+                         :response="selectedResponse">
+
+        </response-answer>
+        <!-- rows for navigation at the bottom -->
+        <abp-row v-align="Start">
+            <abp-column size="_8" v-align="Start">
+                <div style="display: flex">
+                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="" v-bind:data-original-title='l("Form:Responses:PreviousResponse")' v-on:click="decreaseSelectedResponseIndex()">
+                        <a class="btn" href="javascript:void(0)">
+                            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <abp-column size="_3">
+                        <input type="number" class="form-control" v-model="selectedResponseIndex" :max="response.totalCount" min="1"/>
+                    </abp-column>
+                    <div class="col-2" style="display: flex; justify-content: center; align-items: center">
+                        <div style="display: flex" class="control-label">
+                            <span>of {{response.totalCount}}</span>
+                        </div>
+                    </div>
+                    <div data-bs-toggle="tooltip" data-bs-placement="top" title="" v-bind:data-original-title='l("Form:Responses:NextResponse")' v-on:click="increaseSelectedResponseIndex()">
+                        <a class="btn" href="javascript:void(0)">
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </abp-column>
+        </abp-row>
+    </div>
+</div>
+</div>
+</div>
+</abp-column>
+</abp-row>
+</abp-container>
+</div>

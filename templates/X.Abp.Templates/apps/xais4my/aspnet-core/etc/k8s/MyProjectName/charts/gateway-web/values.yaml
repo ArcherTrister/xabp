@@ -1,0 +1,36 @@
+config:
+    selfUrl: # https://gateway-web.myprojectname.dev
+    corsOrigins: # https://myprojectname-st-angular
+    globalConfigurationBaseUrl: # http://myprojectname-st-gateway-web
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: # "false"
+        metadataAddress: # https://authserver.myprojectname.dev/.well-known/openid-configuration
+        swaggerClientId: # WebGateway_Swagger
+    dotnetEnv: #
+    redisHost: #
+    rabbitmqHost: #
+    elasticsearchUrl: #
+    AbpLicenseCode: #
+
+reRoutes:
+    accountService:
+        url: http://myprojectname-st-authserver
+    saasService:
+        url: http://saas-st-administration
+    administrationService:
+        url: http://myprojectname-st-administration
+    identityService:
+        url: http://myprojectname-st-identity
+    productService:
+        url: http://myprojectname-st-product
+ingress:
+    host: # gateway-web.myprojectname.dev
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: mycompanyname/myprojectname-gateway-web
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

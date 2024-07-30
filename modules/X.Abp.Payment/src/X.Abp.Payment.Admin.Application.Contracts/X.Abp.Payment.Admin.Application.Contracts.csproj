@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>X.Abp.Payment.Admin.Application.Contracts</AssemblyName>
+    <PackageId>X.Abp.Payment.Admin.Application.Contracts</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.Payment.Application.Contracts\X.Abp.Payment.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

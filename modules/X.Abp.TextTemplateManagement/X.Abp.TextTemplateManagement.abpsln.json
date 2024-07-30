@@ -1,0 +1,7 @@
+{
+    "modules": {
+        "X.Abp.TextTemplateManagement": {
+            "path": "X.Abp.TextTemplateManagement.abpmdl.json"
+        }
+    }
+}

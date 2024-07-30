@@ -1,0 +1,62 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "MyCompanyName.MyProjectName.ProductService.Domain.Shared": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Domain.Shared/MyCompanyName.MyProjectName.ProductService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.Domain": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Domain/MyCompanyName.MyProjectName.ProductService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.Application.Contracts": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Application.Contracts/MyCompanyName.MyProjectName.ProductService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.Application": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Application/MyCompanyName.MyProjectName.ProductService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore/MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.HttpApi": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.HttpApi/MyCompanyName.MyProjectName.ProductService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.HttpApi.Client": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.HttpApi.Client/MyCompanyName.MyProjectName.ProductService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.HttpApi.Host": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.HttpApi.Host/MyCompanyName.MyProjectName.ProductService.HttpApi.Host.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.Web": {
+      "path": "src/MyCompanyName.MyProjectName.ProductService.Web/MyCompanyName.MyProjectName.ProductService.Web.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.Application.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.ProductService.Application.Tests/MyCompanyName.MyProjectName.ProductService.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.ProductService.Domain.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.ProductService.Domain.Tests/MyCompanyName.MyProjectName.ProductService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.Tests/MyCompanyName.MyProjectName.ProductService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.ProductService.TestBase": {
+      "path": "test/MyCompanyName.MyProjectName.ProductService.TestBase/MyCompanyName.MyProjectName.ProductService.TestBase.abppkg.json",
+      "folder": "test"
+    }
+  }
+}

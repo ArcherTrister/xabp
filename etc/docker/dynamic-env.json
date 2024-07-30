@@ -1,0 +1,25 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"http://localhost:4200",
+    "name": "Pro",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://localhost:44354",
+    "redirectUri": "http://localhost:4200",
+    "clientId": "Pro_App",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone Pro"
+  },
+  "apis": {
+    "default": {
+      "url": "https://localhost:44354",
+      "rootNamespace": "Pro"
+    },
+    "AbpAccountPublic": {
+      "url": "https://localhost:44354",
+      "rootNamespace": "AbpAccountPublic"
+    }
+  }
+}

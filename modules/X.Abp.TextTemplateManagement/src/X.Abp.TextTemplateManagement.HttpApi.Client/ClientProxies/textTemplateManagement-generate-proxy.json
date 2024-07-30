@@ -1,0 +1,365 @@
+{
+  "modules": {
+    "textTemplateManagement": {
+      "rootPath": "textTemplateManagement",
+      "remoteServiceName": "TextTemplateManagement",
+      "controllers": {
+        "X.Abp.TextTemplateManagement.TextTemplates.TemplateContentController": {
+          "controllerName": "TemplateContent",
+          "controllerGroupName": "TextTemplateContents",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.TextTemplateManagement.TextTemplates.TemplateContentController",
+          "interfaces": [
+            {
+              "type": "X.Abp.TextTemplateManagement.TextTemplates.ITemplateContentAppService",
+              "name": "ITemplateContentAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateContentInput, X.Abp.TextTemplateManagement.Application.Contracts",
+                      "type": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateContentInput",
+                      "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateContentInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.TextTemplateManagement.TextTemplates.TextTemplateContentDto",
+                    "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.TextTemplateContentDto"
+                  }
+                },
+                {
+                  "name": "RestoreToDefaultAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.TextTemplateManagement.TextTemplates.RestoreTemplateContentInput, X.Abp.TextTemplateManagement.Application.Contracts",
+                      "type": "X.Abp.TextTemplateManagement.TextTemplates.RestoreTemplateContentInput",
+                      "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.RestoreTemplateContentInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.TextTemplateManagement.TextTemplates.UpdateTemplateContentInput, X.Abp.TextTemplateManagement.Application.Contracts",
+                      "type": "X.Abp.TextTemplateManagement.TextTemplates.UpdateTemplateContentInput",
+                      "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.UpdateTemplateContentInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.TextTemplateManagement.TextTemplates.TextTemplateContentDto",
+                    "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.TextTemplateContentDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsyncByInput": {
+              "uniqueName": "GetAsyncByInput",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/text-template-management/template-contents",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateContentInput, X.Abp.TextTemplateManagement.Application.Contracts",
+                  "type": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateContentInput",
+                  "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateContentInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "TemplateName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "CultureName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.TextTemplateManagement.TextTemplates.TextTemplateContentDto",
+                "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.TextTemplateContentDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.TextTemplateManagement.TextTemplates.ITemplateContentAppService"
+            },
+            "RestoreToDefaultAsyncByInput": {
+              "uniqueName": "RestoreToDefaultAsyncByInput",
+              "name": "RestoreToDefaultAsync",
+              "httpMethod": "PUT",
+              "url": "api/text-template-management/template-contents/restore-to-default",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.TextTemplateManagement.TextTemplates.RestoreTemplateContentInput, X.Abp.TextTemplateManagement.Application.Contracts",
+                  "type": "X.Abp.TextTemplateManagement.TextTemplates.RestoreTemplateContentInput",
+                  "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.RestoreTemplateContentInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.TextTemplateManagement.TextTemplates.RestoreTemplateContentInput",
+                  "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.RestoreTemplateContentInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.TextTemplateManagement.TextTemplates.ITemplateContentAppService"
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/text-template-management/template-contents",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.TextTemplateManagement.TextTemplates.UpdateTemplateContentInput, X.Abp.TextTemplateManagement.Application.Contracts",
+                  "type": "X.Abp.TextTemplateManagement.TextTemplates.UpdateTemplateContentInput",
+                  "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.UpdateTemplateContentInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.TextTemplateManagement.TextTemplates.UpdateTemplateContentInput",
+                  "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.UpdateTemplateContentInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.TextTemplateManagement.TextTemplates.TextTemplateContentDto",
+                "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.TextTemplateContentDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.TextTemplateManagement.TextTemplates.ITemplateContentAppService"
+            }
+          }
+        },
+        "X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionController": {
+          "controllerName": "TemplateDefinition",
+          "controllerGroupName": "TextTemplateDefinitions",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionController",
+          "interfaces": [
+            {
+              "type": "X.Abp.TextTemplateManagement.TextTemplates.ITemplateDefinitionAppService",
+              "name": "ITemplateDefinitionAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateDefinitionListInput, X.Abp.TextTemplateManagement.Application.Contracts",
+                      "type": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateDefinitionListInput",
+                      "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateDefinitionListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionDto>"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "name",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionDto",
+                    "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/text-template-management/template-definitions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateDefinitionListInput, X.Abp.TextTemplateManagement.Application.Contracts",
+                  "type": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateDefinitionListInput",
+                  "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.GetTemplateDefinitionListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "FilterText",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.TextTemplateManagement.TextTemplates.ITemplateDefinitionAppService"
+            },
+            "GetAsyncByName": {
+              "uniqueName": "GetAsyncByName",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/text-template-management/template-definitions/{name}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "name",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "name",
+                  "name": "name",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionDto",
+                "typeSimple": "X.Abp.TextTemplateManagement.TextTemplates.TemplateDefinitionDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.TextTemplateManagement.TextTemplates.ITemplateDefinitionAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

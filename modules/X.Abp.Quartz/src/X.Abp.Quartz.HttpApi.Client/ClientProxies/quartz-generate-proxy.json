@@ -1,0 +1,2777 @@
+{
+  "modules": {
+    "quartz": {
+      "rootPath": "quartz",
+      "remoteServiceName": "Quartz",
+      "controllers": {
+        "X.Abp.Quartz.CalendarController": {
+          "controllerName": "Calendar",
+          "controllerGroupName": "Calendar",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Quartz.CalendarController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Quartz.Calendars.ICalendarAppService",
+              "name": "ICalendarAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.IReadOnlyCollection<System.String>",
+                    "typeSimple": "[string]"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "calendarName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Quartz.Calendars.Dtos.CalendarDetailDto",
+                    "typeSimple": "X.Abp.Quartz.Calendars.Dtos.CalendarDetailDto"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "calendarName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "replace",
+                      "typeAsString": "System.Boolean, System.Private.CoreLib",
+                      "type": "System.Boolean",
+                      "typeSimple": "boolean",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "updateTriggers",
+                      "typeAsString": "System.Boolean, System.Private.CoreLib",
+                      "type": "System.Boolean",
+                      "typeSimple": "boolean",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "calendarName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncBySchedulerName": {
+              "uniqueName": "GetListAsyncBySchedulerName",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/{schedulerName}/calendars",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.IReadOnlyCollection<System.String>",
+                "typeSimple": "[string]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Calendars.ICalendarAppService"
+            },
+            "GetAsyncBySchedulerNameAndCalendarName": {
+              "uniqueName": "GetAsyncBySchedulerNameAndCalendarName",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/{schedulerName}/calendars/{calendarName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "calendarName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "calendarName",
+                  "name": "calendarName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Quartz.Calendars.Dtos.CalendarDetailDto",
+                "typeSimple": "X.Abp.Quartz.Calendars.Dtos.CalendarDetailDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Calendars.ICalendarAppService"
+            },
+            "CreateAsyncBySchedulerNameAndCalendarNameAndReplaceAndUpdateTriggers": {
+              "uniqueName": "CreateAsyncBySchedulerNameAndCalendarNameAndReplaceAndUpdateTriggers",
+              "name": "CreateAsync",
+              "httpMethod": "PUT",
+              "url": "api/quartz/{schedulerName}/calendars/{calendarName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "calendarName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "replace",
+                  "typeAsString": "System.Boolean, System.Private.CoreLib",
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "updateTriggers",
+                  "typeAsString": "System.Boolean, System.Private.CoreLib",
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "calendarName",
+                  "name": "calendarName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "replace",
+                  "name": "replace",
+                  "jsonName": null,
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "updateTriggers",
+                  "name": "updateTriggers",
+                  "jsonName": null,
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Calendars.ICalendarAppService"
+            },
+            "DeleteAsyncBySchedulerNameAndCalendarName": {
+              "uniqueName": "DeleteAsyncBySchedulerNameAndCalendarName",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/quartz/{schedulerName}/calendars/{calendarName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "calendarName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "calendarName",
+                  "name": "calendarName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Calendars.ICalendarAppService"
+            }
+          }
+        },
+        "X.Abp.Quartz.ExecutionHistoryController": {
+          "controllerName": "ExecutionHistory",
+          "controllerGroupName": "ExecutionHistory",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Quartz.ExecutionHistoryController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Quartz.Histories.IExecutionHistoryAppService",
+              "name": "IExecutionHistoryAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Quartz.Histories.Dtos.GetExecutionHistoryListInput, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Histories.Dtos.GetExecutionHistoryListInput",
+                      "typeSimple": "X.Abp.Quartz.Histories.Dtos.GetExecutionHistoryListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Histories.Dtos.ExecutionHistoryDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Histories.Dtos.ExecutionHistoryDto>"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/execution-histories",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Quartz.Histories.Dtos.GetExecutionHistoryListInput, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Histories.Dtos.GetExecutionHistoryListInput",
+                  "typeSimple": "X.Abp.Quartz.Histories.Dtos.GetExecutionHistoryListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "SchedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Histories.Dtos.ExecutionHistoryDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Histories.Dtos.ExecutionHistoryDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Histories.IExecutionHistoryAppService"
+            }
+          }
+        },
+        "X.Abp.Quartz.JobController": {
+          "controllerName": "Job",
+          "controllerGroupName": "Job",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Quartz.JobController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Quartz.Jobs.IJobAppService",
+              "name": "IJobAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput",
+                      "typeSimple": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Dtos.JobOrTriggerKeyDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Dtos.JobOrTriggerKeyDto>"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Quartz.Jobs.Dtos.JobDetailDto",
+                    "typeSimple": "X.Abp.Quartz.Jobs.Dtos.JobDetailDto"
+                  }
+                },
+                {
+                  "name": "CurrentlyExecutingsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput",
+                      "typeSimple": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Jobs.Dtos.CurrentlyExecutingJobDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Jobs.Dtos.CurrentlyExecutingJobDto>"
+                  }
+                },
+                {
+                  "name": "PauseAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "BatchPauseAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "groupMatcher",
+                      "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "ResumeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "BatchResumeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "groupMatcher",
+                      "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "TriggerAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "InterruptAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "jobName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Quartz.Jobs.Dtos.AddJobInput, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Jobs.Dtos.AddJobInput",
+                      "typeSimple": "X.Abp.Quartz.Jobs.Dtos.AddJobInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncBySchedulerNameAndInput": {
+              "uniqueName": "GetListAsyncBySchedulerNameAndInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/{schedulerName}/jobs",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput",
+                  "typeSimple": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupMatcher.NameContains",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupMatcher.NameEndsWith",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupMatcher.NameStartsWith",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupMatcher.NameEquals",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Dtos.JobOrTriggerKeyDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Dtos.JobOrTriggerKeyDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "GetAsyncBySchedulerNameAndJobGroupAndJobName": {
+              "uniqueName": "GetAsyncBySchedulerNameAndJobGroupAndJobName",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/{schedulerName}/jobs/{jobGroup}/{jobName}/details",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobGroup",
+                  "name": "jobGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobName",
+                  "name": "jobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Quartz.Jobs.Dtos.JobDetailDto",
+                "typeSimple": "X.Abp.Quartz.Jobs.Dtos.JobDetailDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "CurrentlyExecutingsAsyncBySchedulerNameAndInput": {
+              "uniqueName": "CurrentlyExecutingsAsyncBySchedulerNameAndInput",
+              "name": "CurrentlyExecutingsAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/{schedulerName}/jobs/currently-executings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput",
+                  "typeSimple": "X.Abp.Quartz.Jobs.Dtos.GetJobListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupMatcher.NameContains",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupMatcher.NameEndsWith",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupMatcher.NameStartsWith",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupMatcher.NameEquals",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Jobs.Dtos.CurrentlyExecutingJobDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Jobs.Dtos.CurrentlyExecutingJobDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "PauseAsyncBySchedulerNameAndJobGroupAndJobName": {
+              "uniqueName": "PauseAsyncBySchedulerNameAndJobGroupAndJobName",
+              "name": "PauseAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/jobs/{jobGroup}/{jobName}/pause",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobGroup",
+                  "name": "jobGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobName",
+                  "name": "jobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "BatchPauseAsyncBySchedulerNameAndGroupMatcher": {
+              "uniqueName": "BatchPauseAsyncBySchedulerNameAndGroupMatcher",
+              "name": "BatchPauseAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/jobs/pause",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "groupMatcher",
+                  "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "groupMatcher",
+                  "name": "groupMatcher",
+                  "jsonName": null,
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "ResumeAsyncBySchedulerNameAndJobGroupAndJobName": {
+              "uniqueName": "ResumeAsyncBySchedulerNameAndJobGroupAndJobName",
+              "name": "ResumeAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/jobs/{jobGroup}/{jobName}/resume",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobGroup",
+                  "name": "jobGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobName",
+                  "name": "jobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "BatchResumeAsyncBySchedulerNameAndGroupMatcher": {
+              "uniqueName": "BatchResumeAsyncBySchedulerNameAndGroupMatcher",
+              "name": "BatchResumeAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/jobs/resume",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "groupMatcher",
+                  "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "groupMatcher",
+                  "name": "groupMatcher",
+                  "jsonName": null,
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "TriggerAsyncBySchedulerNameAndJobGroupAndJobName": {
+              "uniqueName": "TriggerAsyncBySchedulerNameAndJobGroupAndJobName",
+              "name": "TriggerAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/jobs/{jobGroup}/{jobName}/trigger",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobGroup",
+                  "name": "jobGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobName",
+                  "name": "jobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "DeleteAsyncBySchedulerNameAndJobGroupAndJobName": {
+              "uniqueName": "DeleteAsyncBySchedulerNameAndJobGroupAndJobName",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/quartz/{schedulerName}/jobs/{jobGroup}/{jobName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobGroup",
+                  "name": "jobGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobName",
+                  "name": "jobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "InterruptAsyncBySchedulerNameAndJobGroupAndJobName": {
+              "uniqueName": "InterruptAsyncBySchedulerNameAndJobGroupAndJobName",
+              "name": "InterruptAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/jobs/{jobGroup}/{jobName}/interrupt",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "jobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobGroup",
+                  "name": "jobGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "jobName",
+                  "name": "jobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            },
+            "CreateAsyncBySchedulerNameAndInput": {
+              "uniqueName": "CreateAsyncBySchedulerNameAndInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/jobs",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Quartz.Jobs.Dtos.AddJobInput, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Jobs.Dtos.AddJobInput",
+                  "typeSimple": "X.Abp.Quartz.Jobs.Dtos.AddJobInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Quartz.Jobs.Dtos.AddJobInput",
+                  "typeSimple": "X.Abp.Quartz.Jobs.Dtos.AddJobInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Jobs.IJobAppService"
+            }
+          }
+        },
+        "X.Abp.Quartz.SchedulerController": {
+          "controllerName": "Scheduler",
+          "controllerGroupName": "Scheduler",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Quartz.SchedulerController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Quartz.Schedulers.ISchedulerAppService",
+              "name": "ISchedulerAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Quartz.Schedulers.Dtos.GetSchedulerListInput, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Schedulers.Dtos.GetSchedulerListInput",
+                      "typeSimple": "X.Abp.Quartz.Schedulers.Dtos.GetSchedulerListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Schedulers.Dtos.SchedulerHeaderDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Schedulers.Dtos.SchedulerHeaderDto>"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Quartz.Schedulers.Dtos.SchedulerDto",
+                    "typeSimple": "X.Abp.Quartz.Schedulers.Dtos.SchedulerDto"
+                  }
+                },
+                {
+                  "name": "StartAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "delayMilliseconds",
+                      "typeAsString": "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "type": "System.Int32?",
+                      "typeSimple": "number?",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "StandbyAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "ShutdownAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "waitForJobsToComplete",
+                      "typeAsString": "System.Boolean, System.Private.CoreLib",
+                      "type": "System.Boolean",
+                      "typeSimple": "boolean",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "ClearAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/schedulers",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Quartz.Schedulers.Dtos.GetSchedulerListInput, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Schedulers.Dtos.GetSchedulerListInput",
+                  "typeSimple": "X.Abp.Quartz.Schedulers.Dtos.GetSchedulerListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Schedulers.Dtos.SchedulerHeaderDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Quartz.Schedulers.Dtos.SchedulerHeaderDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Schedulers.ISchedulerAppService"
+            },
+            "GetAsyncBySchedulerName": {
+              "uniqueName": "GetAsyncBySchedulerName",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/schedulers/{schedulerName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Quartz.Schedulers.Dtos.SchedulerDto",
+                "typeSimple": "X.Abp.Quartz.Schedulers.Dtos.SchedulerDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Schedulers.ISchedulerAppService"
+            },
+            "StartAsyncBySchedulerNameAndDelayMilliseconds": {
+              "uniqueName": "StartAsyncBySchedulerNameAndDelayMilliseconds",
+              "name": "StartAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/schedulers/{schedulerName}/start",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "delayMilliseconds",
+                  "typeAsString": "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.Int32?",
+                  "typeSimple": "number?",
+                  "isOptional": true,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "delayMilliseconds",
+                  "name": "delayMilliseconds",
+                  "jsonName": null,
+                  "type": "System.Int32?",
+                  "typeSimple": "number?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Schedulers.ISchedulerAppService"
+            },
+            "StandbyAsyncBySchedulerName": {
+              "uniqueName": "StandbyAsyncBySchedulerName",
+              "name": "StandbyAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/schedulers/{schedulerName}/standby",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Schedulers.ISchedulerAppService"
+            },
+            "ShutdownAsyncBySchedulerNameAndWaitForJobsToComplete": {
+              "uniqueName": "ShutdownAsyncBySchedulerNameAndWaitForJobsToComplete",
+              "name": "ShutdownAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/schedulers/{schedulerName}/shutdown",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "waitForJobsToComplete",
+                  "typeAsString": "System.Boolean, System.Private.CoreLib",
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": true,
+                  "defaultValue": false
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "waitForJobsToComplete",
+                  "name": "waitForJobsToComplete",
+                  "jsonName": null,
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Schedulers.ISchedulerAppService"
+            },
+            "ClearAsyncBySchedulerName": {
+              "uniqueName": "ClearAsyncBySchedulerName",
+              "name": "ClearAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/schedulers/{schedulerName}/clear",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Schedulers.ISchedulerAppService"
+            }
+          }
+        },
+        "X.Abp.Quartz.TriggerController": {
+          "controllerName": "Trigger",
+          "controllerGroupName": "Trigger",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Quartz.TriggerController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Quartz.Triggers.ITriggerAppService",
+              "name": "ITriggerAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "groupMatcher",
+                      "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.IReadOnlyList<X.Abp.Quartz.Dtos.JobOrTriggerKeyDto>",
+                    "typeSimple": "[X.Abp.Quartz.Dtos.JobOrTriggerKeyDto]"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "triggerGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "triggerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Quartz.Triggers.Dtos.TriggerDetailDto",
+                    "typeSimple": "X.Abp.Quartz.Triggers.Dtos.TriggerDetailDto"
+                  }
+                },
+                {
+                  "name": "PauseAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "triggerGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "triggerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "BatchPauseAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "groupMatcher",
+                      "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "ResumeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "triggerGroup",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "triggerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "BatchResumeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "schedulerName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "groupMatcher",
+                      "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                      "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncBySchedulerNameAndGroupMatcher": {
+              "uniqueName": "GetListAsyncBySchedulerNameAndGroupMatcher",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/{schedulerName}/triggers",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "groupMatcher",
+                  "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "groupMatcher",
+                  "name": "NameContains",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "groupMatcher"
+                },
+                {
+                  "nameOnMethod": "groupMatcher",
+                  "name": "NameEndsWith",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "groupMatcher"
+                },
+                {
+                  "nameOnMethod": "groupMatcher",
+                  "name": "NameStartsWith",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "groupMatcher"
+                },
+                {
+                  "nameOnMethod": "groupMatcher",
+                  "name": "NameEquals",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "groupMatcher"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.IReadOnlyList<X.Abp.Quartz.Dtos.JobOrTriggerKeyDto>",
+                "typeSimple": "[X.Abp.Quartz.Dtos.JobOrTriggerKeyDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Triggers.ITriggerAppService"
+            },
+            "GetAsyncBySchedulerNameAndTriggerGroupAndTriggerName": {
+              "uniqueName": "GetAsyncBySchedulerNameAndTriggerGroupAndTriggerName",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/quartz/{schedulerName}/triggers/{triggerGroup}/{triggerName}/details",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "triggerGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "triggerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "triggerGroup",
+                  "name": "triggerGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "triggerName",
+                  "name": "triggerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Quartz.Triggers.Dtos.TriggerDetailDto",
+                "typeSimple": "X.Abp.Quartz.Triggers.Dtos.TriggerDetailDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Triggers.ITriggerAppService"
+            },
+            "PauseAsyncBySchedulerNameAndTriggerGroupAndTriggerName": {
+              "uniqueName": "PauseAsyncBySchedulerNameAndTriggerGroupAndTriggerName",
+              "name": "PauseAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/triggers/{triggerGroup}/{triggerName}/pause",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "triggerGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "triggerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "triggerGroup",
+                  "name": "triggerGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "triggerName",
+                  "name": "triggerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Triggers.ITriggerAppService"
+            },
+            "BatchPauseAsyncBySchedulerNameAndGroupMatcher": {
+              "uniqueName": "BatchPauseAsyncBySchedulerNameAndGroupMatcher",
+              "name": "BatchPauseAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/triggers/pause",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "groupMatcher",
+                  "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "groupMatcher",
+                  "name": "groupMatcher",
+                  "jsonName": null,
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Triggers.ITriggerAppService"
+            },
+            "ResumeAsyncBySchedulerNameAndTriggerGroupAndTriggerName": {
+              "uniqueName": "ResumeAsyncBySchedulerNameAndTriggerGroupAndTriggerName",
+              "name": "ResumeAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/triggers/{triggerGroup}/{triggerName}/resume",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "triggerGroup",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "triggerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "triggerGroup",
+                  "name": "triggerGroup",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "triggerName",
+                  "name": "triggerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Triggers.ITriggerAppService"
+            },
+            "BatchResumeAsyncBySchedulerNameAndGroupMatcher": {
+              "uniqueName": "BatchResumeAsyncBySchedulerNameAndGroupMatcher",
+              "name": "BatchResumeAsync",
+              "httpMethod": "POST",
+              "url": "api/quartz/{schedulerName}/triggers/resume",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "schedulerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "groupMatcher",
+                  "typeAsString": "X.Abp.Quartz.Dtos.GroupMatcherDto, X.Abp.Quartz.Application.Contracts",
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "schedulerName",
+                  "name": "schedulerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "groupMatcher",
+                  "name": "groupMatcher",
+                  "jsonName": null,
+                  "type": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "typeSimple": "X.Abp.Quartz.Dtos.GroupMatcherDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Quartz.Triggers.ITriggerAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

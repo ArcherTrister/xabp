@@ -1,0 +1,16 @@
+@page
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@using X.Abp.Quartz.Localization;
+@using X.Abp.Quartz.Web.Pages.Quartz;
+@model X.Abp.Quartz.Web.Pages.Quartz.Triggers.IndexModel
+@inject IStringLocalizer<QuartzResource> L
+@inject IThemeManager ThemeManager
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Triggers</h1>
+<p>@L["SamplePageMessage"]</p>
+
+

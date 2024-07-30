@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+
+
+
+    <PropertyGroup><LangVersion>latest</LangVersion>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="X.Abp.AspNetCore.Components.Web.Theming" Version="5.0.0" />
+      <PackageReference Include="X.Abp.AutoMapper" Version="5.0.0" />
+      <ProjectReference Include="..\X.Abp.LeptonTheme.Management.Domain.Shared\X.Abp.LeptonTheme.Management.Domain.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

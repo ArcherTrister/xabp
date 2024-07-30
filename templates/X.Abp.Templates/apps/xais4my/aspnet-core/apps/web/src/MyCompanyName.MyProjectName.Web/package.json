@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0",
+  "name": "MyProjectNameWeb",
+  "private": true,
+  "dependencies": {
+    "@volo/abp.aspnetcore.mvc.ui.theme.lepton": "^5.3.4",
+    "@volo/identity": "^5.3.4",
+    "@abp/chart.js": "^5.3.4"
+  }
+}

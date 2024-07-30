@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>X.Abp.Forms.Domain.Shared</AssemblyName>
+    <PackageId>X.Abp.Forms.Domain.Shared</PackageId>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Validation" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Features" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="X\Abp\Forms\Localization\Resources\*.json" />
+    <EmbeddedResource Include="X\Abp\Forms\Localization\Resources\*.json" />
+  </ItemGroup>
+
+</Project>

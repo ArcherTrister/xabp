@@ -1,0 +1,68 @@
+@page "/Dashboard"
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using System.Globalization;
+@using MyCompanyName.MyProjectName.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets;
+@using X.Abp.AuditLogging.Web.Pages.Shared.Components.AverageExecutionDurationPerDayWidget;
+@using X.Abp.AuditLogging.Web.Pages.Shared.Components.ErrorRateWidget;
+@using MyCompanyName.MyProjectName.Web.Pages;
+@inject IHtmlLocalizer<MyProjectNameResource> L
+@inject IWidgetManager WidgetManager
+@model MyCompanyName.MyProjectName.Web.Pages.TenantDashboardModel
+
+@section scripts {
+    <abp-script-bundle name="@typeof(TenantDashboardModel).FullName">
+        <abp-script src="/Pages/TenantDashboard.js" />
+    </abp-script-bundle>
+}
+
+@section styles {
+    <abp-style-bundle name="@typeof(TenantDashboardModel).FullName">
+        <abp-style src="/Pages/TenantDashboard.css" />
+    </abp-style-bundle>
+}
+
+<abp-card>
+    <abp-card-body>
+        <form method="get" id="DashboardFilterForm">
+            <abp-row h-align="Center">
+                <div class="input-daterange input-group input-group-sm" id="datepicker">
+                    <div class="input-group-prepend me-1">
+                        <label class="input-group-text">@L["StartDate"].Value</label>
+                        <input type="text"
+                               class="form-control"
+                               name="StartDate"
+                               value="@DateTime.Now.AddMonths(-1).Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)" />
+                    </div>
+
+                    <div class="input-group-prepend me-1">
+                        <label class="input-group-text">@L["EndDate"].Value</label>
+                        <input type="text"
+                               class="form-control"
+                               name="EndDate"
+                               value="@DateTime.Now.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)" />
+                    </div>
+                    <abp-button button-type="Primary" icon="refresh" size="Medium" type="Submit" text="@L["Refresh"].Value" />
+                </div>
+            </abp-row>
+        </form>
+    </abp-card-body>
+</abp-card>
+
+<div id="TenantDashboardWidgetsArea" data-widget-filter="#DashboardFilterForm">
+    <abp-row class="mt-5">
+        @if (await WidgetManager.IsGrantedAsync(typeof(AuditLoggingErrorRateWidgetViewComponent)))
+        {
+            <abp-column size="_4">
+                @await Component.InvokeAsync(typeof(AuditLoggingErrorRateWidgetViewComponent))
+            </abp-column>
+        }
+        @if (await WidgetManager.IsGrantedAsync(typeof(AuditLoggingAverageExecutionDurationPerDayWidgetViewComponent)))
+        {
+            <abp-column size="_4">
+                @await Component.InvokeAsync(typeof(AuditLoggingAverageExecutionDurationPerDayWidgetViewComponent))
+            </abp-column>
+        }
+    </abp-row>
+</div>

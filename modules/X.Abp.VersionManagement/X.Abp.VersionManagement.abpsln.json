@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "X.Abp.VersionManagement": {
+      "path": "X.Abp.VersionManagement.abpmdl.json"
+    }
+  }
+}

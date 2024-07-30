@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.OpenIddict.Pro.EntityFrameworkCore</AssemblyName>
+    <PackageId>X.Abp.OpenIddict.Pro.EntityFrameworkCore</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Openiddict.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

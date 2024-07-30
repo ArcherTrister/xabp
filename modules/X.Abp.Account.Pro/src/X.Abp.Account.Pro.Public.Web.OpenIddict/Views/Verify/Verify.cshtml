@@ -1,0 +1,57 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Primitives;
+@using Volo.Abp.OpenIddict.Localization;
+@using X.Abp.Account.Localization;
+@using X.Abp.Account.Public.Web.ViewModels.Verify;
+@inject IHtmlLocalizer<AbpOpenIddictResource> OpenIdLocalizer
+@inject IHtmlLocalizer<AccountResource> L
+@model VerifyViewModel
+
+<div class="jumbotron">
+    <h1>@L["DeviceAuthorization"]</h1>
+    @if(string.IsNullOrEmpty(Model.UserCode))
+    {
+        <form method="get" action="~/connect/verify">
+            <div class="mb-3">
+                <div class="mb-3">
+                <label class="form-label" for="UserCode">@L["UserCode"]</label>
+                    <input name="user_code" type="text" id="UserCode" value="" class="form-control " />
+                    <span class="text-danger field-validation-valid" data-valmsg-for="UserCode" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Submit" />
+        </form>
+    }
+    else
+    {
+        if (!string.IsNullOrEmpty(Model.UserCode) && string.IsNullOrEmpty(Model.Error))
+        {
+            <div class="mb-3">
+                <p class="text-left lead">@string.Format(OpenIdLocalizer["DoYouWantToGrantAccessToYourData"].Value, Model.ApplicationName));</p>
+                <p class="fw-light">@L["ScopesRequested"]: @Model.Scope);</p>
+            </div>
+
+            <form method="post" action="~/connect/verify">
+                @Html.AntiForgeryToken()
+                @foreach (var parameter in Request.HasFormContentType ? (IEnumerable<KeyValuePair<string, StringValues>>)Request.Form : Request.Query)
+                {
+                    <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+                }
+                <input class="btn btn-primary" name="accept" type="submit" value="@L["Accept"]" />
+                <input class="btn btn-danger ms-1" name="deny" type="submit" value="@L["Deny"]" />
+            </form>
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(Model.Error) && !string.IsNullOrEmpty(Model.ErrorDescription))
+            {
+                <p class="text-center lead alert alert-warning">
+                    An error occurred:<br />
+                    @Model.ErrorDescription
+                    (@Model.Error)
+                </p>
+            }
+        }
+    }
+</div>

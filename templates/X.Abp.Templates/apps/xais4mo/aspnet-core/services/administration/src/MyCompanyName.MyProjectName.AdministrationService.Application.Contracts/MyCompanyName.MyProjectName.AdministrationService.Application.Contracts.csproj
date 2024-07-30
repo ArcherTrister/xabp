@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName.AdministrationService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="X.Abp.AuditLogging.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LeptonTheme.Management.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.AdministrationService.Domain.Shared\MyCompanyName.MyProjectName.AdministrationService.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

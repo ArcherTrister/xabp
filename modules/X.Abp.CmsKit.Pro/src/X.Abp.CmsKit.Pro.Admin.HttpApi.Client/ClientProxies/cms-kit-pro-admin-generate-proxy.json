@@ -1,0 +1,1204 @@
+{
+  "modules": {
+    "cms-kit-pro-admin": {
+      "rootPath": "cms-kit-pro-admin",
+      "remoteServiceName": "CmsKitAdmin",
+      "controllers": {
+        "X.Abp.CmsKit.Admin.UrlShorting.UrlShortingAdminController": {
+          "controllerName": "UrlShortingAdmin",
+          "controllerGroupName": "UrlShortingAdmin",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Admin.UrlShorting.UrlShortingAdminController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Admin.UrlShorting.IUrlShortingAdminAppService",
+              "name": "IUrlShortingAdminAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.UrlShorting.GetShortenedUrlListInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.UrlShorting.GetShortenedUrlListInput",
+                      "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.GetShortenedUrlListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto",
+                      "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto",
+                      "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/url-shorting",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.UrlShorting.GetShortenedUrlListInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.UrlShorting.GetShortenedUrlListInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.GetShortenedUrlListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "ShortenedUrlFilter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto,X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto,System.Guid,X.Abp.CmsKit.Admin.UrlShorting.GetShortenedUrlListInput>"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/url-shorting/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto,X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto,System.Guid,X.Abp.CmsKit.Admin.UrlShorting.GetShortenedUrlListInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/cms-kit-admin/url-shorting",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto,X.Abp.CmsKit.Admin.UrlShorting.CreateShortenedUrlDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/cms-kit-admin/url-shorting/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.CmsKit.Admin.UrlShorting.ShortenedUrlDto,System.Guid,X.Abp.CmsKit.Admin.UrlShorting.UpdateShortenedUrlDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/cms-kit-admin/url-shorting/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            }
+          }
+        },
+        "X.Abp.CmsKit.Admin.Polls.PollAdminController": {
+          "controllerName": "PollAdmin",
+          "controllerGroupName": "PollAdmin",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Admin.Polls.PollAdminController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Admin.Polls.IPollAdminAppService",
+              "name": "IPollAdminAppService",
+              "methods": [
+                {
+                  "name": "GetWidgetsAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.CmsKit.Admin.Polls.PollWidgetDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.CmsKit.Admin.Polls.PollWidgetDto>"
+                  }
+                },
+                {
+                  "name": "GetResultAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.Polls.GetResultDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.Polls.GetResultDto"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Polls.GetPollListInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Polls.GetPollListInput",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Polls.GetPollListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.Polls.PollDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.Polls.PollDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Polls.CreatePollDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Polls.CreatePollDto",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Polls.CreatePollDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Polls.UpdatePollDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Polls.UpdatePollDto",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Polls.UpdatePollDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/poll",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Polls.GetPollListInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Polls.GetPollListInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Polls.GetPollListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.Polls.PollDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.Polls.PollDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto,X.Abp.CmsKit.Admin.Polls.PollDto,System.Guid,X.Abp.CmsKit.Admin.Polls.GetPollListInput>"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/poll/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto,X.Abp.CmsKit.Admin.Polls.PollDto,System.Guid,X.Abp.CmsKit.Admin.Polls.GetPollListInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/cms-kit-admin/poll",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Polls.CreatePollDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Polls.CreatePollDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Polls.CreatePollDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Admin.Polls.CreatePollDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Polls.CreatePollDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto,X.Abp.CmsKit.Admin.Polls.CreatePollDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/cms-kit-admin/poll/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Polls.UpdatePollDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Polls.UpdatePollDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Polls.UpdatePollDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Admin.Polls.UpdatePollDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Polls.UpdatePollDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.CmsKit.Admin.Polls.PollWithDetailsDto,System.Guid,X.Abp.CmsKit.Admin.Polls.UpdatePollDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/cms-kit-admin/poll/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            },
+            "GetWidgetsAsync": {
+              "uniqueName": "GetWidgetsAsync",
+              "name": "GetWidgetsAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/poll/widgets",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.CmsKit.Admin.Polls.PollWidgetDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.CmsKit.Admin.Polls.PollWidgetDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Polls.IPollAdminAppService"
+            },
+            "GetResultAsyncById": {
+              "uniqueName": "GetResultAsyncById",
+              "name": "GetResultAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/poll/result",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.Polls.GetResultDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.Polls.GetResultDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Polls.IPollAdminAppService"
+            }
+          }
+        },
+        "X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordAdminController": {
+          "controllerName": "NewsletterRecordAdmin",
+          "controllerGroupName": "NewsletterRecordAdmin",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordAdminController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService",
+              "name": "INewsletterRecordAdminAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsRequestInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsRequestInput",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsRequestInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordDto>"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordWithDetailsDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "GetNewsletterRecordsCsvDetailAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordCsvDto>",
+                    "typeSimple": "[X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordCsvDto]"
+                  }
+                },
+                {
+                  "name": "GetNewsletterPreferencesAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<System.String>",
+                    "typeSimple": "[string]"
+                  }
+                },
+                {
+                  "name": "GetCsvResponsesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsRequestInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsRequestInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsRequestInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Preference",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Source",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordWithDetailsDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordWithDetailsDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "GetNewsletterRecordsCsvDetailAsyncByInput": {
+              "uniqueName": "GetNewsletterRecordsCsvDetailAsyncByInput",
+              "name": "GetNewsletterRecordsCsvDetailAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter/csv-detail",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Preference",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Source",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordCsvDto>",
+                "typeSimple": "[X.Abp.CmsKit.Admin.Newsletters.NewsletterRecordCsvDto]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "GetNewsletterPreferencesAsync": {
+              "uniqueName": "GetNewsletterPreferencesAsync",
+              "name": "GetNewsletterPreferencesAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter/preferences",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<System.String>",
+                "typeSimple": "[string]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "GetCsvResponsesAsyncByInput": {
+              "uniqueName": "GetCsvResponsesAsyncByInput",
+              "name": "GetCsvResponsesAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter/export-csv",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetNewsletterRecordsCsvRequestInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Preference",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Source",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            }
+          }
+        },
+        "X.Abp.CmsKit.Admin.Contact.ContactSettingController": {
+          "controllerName": "ContactSetting",
+          "controllerGroupName": "ContactSetting",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Admin.Contact.ContactSettingController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Admin.Contact.IContactSettingsAppService",
+              "name": "IContactSettingsAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.Contact.CmsKitContactSettingDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.Contact.CmsKitContactSettingDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Contact.UpdateCmsKitContactSettingDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Contact.UpdateCmsKitContactSettingDto",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Contact.UpdateCmsKitContactSettingDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/contact/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.Contact.CmsKitContactSettingDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.Contact.CmsKitContactSettingDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Contact.IContactSettingsAppService"
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "POST",
+              "url": "api/cms-kit-admin/contact/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Contact.UpdateCmsKitContactSettingDto, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Contact.UpdateCmsKitContactSettingDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Contact.UpdateCmsKitContactSettingDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Admin.Contact.UpdateCmsKitContactSettingDto",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Contact.UpdateCmsKitContactSettingDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Contact.IContactSettingsAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

@@ -1,0 +1,14 @@
+{
+    "culture": "zh-Hant",
+    "texts": {
+        "Menu:VersionManagement": "版本管理",
+        "Feature:VersionManagementGroup": "版本管理",
+        "Feature:VersionManagementEnable": "啟用版本管理",
+        "Feature:VersionManagementEnableDescription": "在應用程序中啟用版本管理",
+        "Permission:VersionManagement": "版本管理",
+        "Permission:AppEditionManagement": "App版本管理",
+        "Permission:Create": "創建",
+        "Permission:Edit": "編輯",
+        "Permission:Delete": "刪除"
+    }
+}

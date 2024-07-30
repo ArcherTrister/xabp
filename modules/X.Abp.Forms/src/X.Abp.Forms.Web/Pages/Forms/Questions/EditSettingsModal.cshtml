@@ -1,0 +1,41 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using X.Abp.Forms.Localization;
+@using X.Abp.Forms.Web.Pages.Forms.Questions;
+
+@model EditSettingsModalModel
+
+@inject IPageLayout PageLayout
+@inject IAuthorizationService Authorization
+@inject IStringLocalizer<FormsResource> L
+@inject IStringLocalizerFactory StringLocalizerFactory
+
+
+@{
+    Layout = null;
+    var hasLimitOneResponsePerUserDisabled = !Model.FormSettings.RequiresLogin;
+}
+<form method="post" asp-page="/Forms/Questions/EditSettingsModal" asp-route-id="@Model.Id">
+    <abp-modal>
+        <abp-modal-header title="@L["FormSettings:Edit"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <label style="font-weight: bold">@L["FormSettings:FormIs"]</label>
+            <abp-input asp-for="FormSettings.IsAcceptingResponses" label="@L["FormSettings:IsAcceptingResponses"]" />
+            <abp-input asp-for="FormSettings.IsCollectingEmail" label="@L["FormSettings:IsCollectingEmail"]" />
+            <abp-input asp-for="FormSettings.IsQuiz" label="@L["FormSettings:IsQuiz"]" />
+            <hr />
+            <br />
+            <label style="font-weight: bold">@L["FormSettings:Form"]</label>
+            <abp-input asp-for="FormSettings.RequiresLogin" label="@L["FormSettings:RequiresLogin"]" onchange="checkDisabled()" />
+            <abp-input asp-for="FormSettings.HasLimitOneResponsePerUser" label="@L["FormSettings:HasLimitOneResponsePerUser"]" disabled="@hasLimitOneResponsePerUserDisabled" />
+            <br />
+            <hr />
+            <label style="font-weight: bold">@L["FormSettings:Respondents"]</label>
+            <abp-input asp-for="FormSettings.CanEditResponse" label="@L["FormSettings:CanEditResponse"]" />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

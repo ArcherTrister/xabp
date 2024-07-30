@@ -1,0 +1,394 @@
+{
+  "modules": {
+    "chat": {
+      "rootPath": "chat",
+      "remoteServiceName": "Chat",
+      "controllers": {
+        "X.Abp.Chat.Users.ContactController": {
+          "controllerName": "Contact",
+          "controllerGroupName": "Contact",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Chat.Users.ContactController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Chat.Users.IContactAppService",
+              "name": "IContactAppService",
+              "methods": [
+                {
+                  "name": "GetContactsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Chat.Users.GetContactsInput, X.Abp.Chat.Application.Contracts",
+                      "type": "X.Abp.Chat.Users.GetContactsInput",
+                      "typeSimple": "X.Abp.Chat.Users.GetContactsInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Chat.Users.ChatContactDto>",
+                    "typeSimple": "[X.Abp.Chat.Users.ChatContactDto]"
+                  }
+                },
+                {
+                  "name": "GetTotalUnreadMessageCountAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Int32",
+                    "typeSimple": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetContactsAsyncByInput": {
+              "uniqueName": "GetContactsAsyncByInput",
+              "name": "GetContactsAsync",
+              "httpMethod": "GET",
+              "url": "api/chat/contact/contacts",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Chat.Users.GetContactsInput, X.Abp.Chat.Application.Contracts",
+                  "type": "X.Abp.Chat.Users.GetContactsInput",
+                  "typeSimple": "X.Abp.Chat.Users.GetContactsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "IncludeOtherContacts",
+                  "jsonName": null,
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Chat.Users.ChatContactDto>",
+                "typeSimple": "[X.Abp.Chat.Users.ChatContactDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Chat.Users.IContactAppService"
+            },
+            "GetTotalUnreadMessageCountAsync": {
+              "uniqueName": "GetTotalUnreadMessageCountAsync",
+              "name": "GetTotalUnreadMessageCountAsync",
+              "httpMethod": "GET",
+              "url": "api/chat/contact/total-unread-message-count",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Int32",
+                "typeSimple": "number"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Chat.Users.IContactAppService"
+            }
+          }
+        },
+        "X.Abp.Chat.Settings.SettingsController": {
+          "controllerName": "Settings",
+          "controllerGroupName": "Settings",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Chat.Settings.SettingsController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Chat.Settings.ISettingsAppService",
+              "name": "ISettingsAppService",
+              "methods": [
+                {
+                  "name": "SetSendOnEnterSettingAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Chat.Settings.SendOnEnterSettingDto, X.Abp.Chat.Application.Contracts",
+                      "type": "X.Abp.Chat.Settings.SendOnEnterSettingDto",
+                      "typeSimple": "X.Abp.Chat.Settings.SendOnEnterSettingDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "SetSendOnEnterSettingAsyncByInput": {
+              "uniqueName": "SetSendOnEnterSettingAsyncByInput",
+              "name": "SetSendOnEnterSettingAsync",
+              "httpMethod": "POST",
+              "url": "api/chat/settings/send-on-enter",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Chat.Settings.SendOnEnterSettingDto, X.Abp.Chat.Application.Contracts",
+                  "type": "X.Abp.Chat.Settings.SendOnEnterSettingDto",
+                  "typeSimple": "X.Abp.Chat.Settings.SendOnEnterSettingDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Chat.Settings.SendOnEnterSettingDto",
+                  "typeSimple": "X.Abp.Chat.Settings.SendOnEnterSettingDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Chat.Settings.ISettingsAppService"
+            }
+          }
+        },
+        "X.Abp.Chat.Conversations.ConversationController": {
+          "controllerName": "Conversation",
+          "controllerGroupName": "Conversation",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Chat.Conversations.ConversationController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Chat.Conversations.IConversationAppService",
+              "name": "IConversationAppService",
+              "methods": [
+                {
+                  "name": "SendMessageAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Chat.Messages.SendMessageInput, X.Abp.Chat.Application.Contracts",
+                      "type": "X.Abp.Chat.Messages.SendMessageInput",
+                      "typeSimple": "X.Abp.Chat.Messages.SendMessageInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetConversationAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Chat.Conversations.GetConversationInput, X.Abp.Chat.Application.Contracts",
+                      "type": "X.Abp.Chat.Conversations.GetConversationInput",
+                      "typeSimple": "X.Abp.Chat.Conversations.GetConversationInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Chat.Conversations.ChatConversationDto",
+                    "typeSimple": "X.Abp.Chat.Conversations.ChatConversationDto"
+                  }
+                },
+                {
+                  "name": "MarkConversationAsReadAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Chat.Conversations.MarkConversationAsReadInput, X.Abp.Chat.Application.Contracts",
+                      "type": "X.Abp.Chat.Conversations.MarkConversationAsReadInput",
+                      "typeSimple": "X.Abp.Chat.Conversations.MarkConversationAsReadInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "SendMessageAsyncByInput": {
+              "uniqueName": "SendMessageAsyncByInput",
+              "name": "SendMessageAsync",
+              "httpMethod": "POST",
+              "url": "api/chat/conversation/send-message",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Chat.Messages.SendMessageInput, X.Abp.Chat.Application.Contracts",
+                  "type": "X.Abp.Chat.Messages.SendMessageInput",
+                  "typeSimple": "X.Abp.Chat.Messages.SendMessageInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Chat.Messages.SendMessageInput",
+                  "typeSimple": "X.Abp.Chat.Messages.SendMessageInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Chat.Conversations.IConversationAppService"
+            },
+            "GetConversationAsyncByInput": {
+              "uniqueName": "GetConversationAsyncByInput",
+              "name": "GetConversationAsync",
+              "httpMethod": "GET",
+              "url": "api/chat/conversation/conversation",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Chat.Conversations.GetConversationInput, X.Abp.Chat.Application.Contracts",
+                  "type": "X.Abp.Chat.Conversations.GetConversationInput",
+                  "typeSimple": "X.Abp.Chat.Conversations.GetConversationInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "TargetUserId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Chat.Conversations.ChatConversationDto",
+                "typeSimple": "X.Abp.Chat.Conversations.ChatConversationDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Chat.Conversations.IConversationAppService"
+            },
+            "MarkConversationAsReadAsyncByInput": {
+              "uniqueName": "MarkConversationAsReadAsyncByInput",
+              "name": "MarkConversationAsReadAsync",
+              "httpMethod": "POST",
+              "url": "api/chat/conversation/mark-conversation-as-read",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Chat.Conversations.MarkConversationAsReadInput, X.Abp.Chat.Application.Contracts",
+                  "type": "X.Abp.Chat.Conversations.MarkConversationAsReadInput",
+                  "typeSimple": "X.Abp.Chat.Conversations.MarkConversationAsReadInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Chat.Conversations.MarkConversationAsReadInput",
+                  "typeSimple": "X.Abp.Chat.Conversations.MarkConversationAsReadInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Chat.Conversations.IConversationAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

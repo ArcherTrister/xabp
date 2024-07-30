@@ -1,0 +1,7 @@
+{
+    "modules": {
+        "X.Abp.LanguageManagement": {
+            "path": "X.Abp.LanguageManagement.abpmdl.json"
+        }
+    }
+}

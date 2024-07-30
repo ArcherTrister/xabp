@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\templates.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageId>X.Abp.Templates</PackageId>
+    <Summary>X Abp Templates</Summary>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <Title>X Abp Templates</Title>
+    <Description>Templates to use when creating an application for LX Corporation.</Description>
+    <PackageTags>xabp;dotnet-new;templates;abp-vnext-pro</PackageTags>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\X.Abp.Templates.xml</DocumentationFile>
+    <OutputPath>bin\Release</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="apps\**\*" Exclude="apps\**\bin\**;apps\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+</Project>

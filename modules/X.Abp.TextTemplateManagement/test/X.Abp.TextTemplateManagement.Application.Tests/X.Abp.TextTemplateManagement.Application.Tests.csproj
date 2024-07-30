@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>X.Abp.TextTemplateManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\X.Abp.TextTemplateManagement.Application\X.Abp.TextTemplateManagement.Application.csproj" />
+    <ProjectReference Include="..\X.Abp.TextTemplateManagement.Domain.Tests\X.Abp.TextTemplateManagement.Domain.Tests.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+  </ItemGroup>
+
+</Project>

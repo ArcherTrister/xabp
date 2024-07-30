@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "X.Abp.Forms": {
+      "path": "X.Abp.Forms.abpmdl.json"
+    }
+  }
+}

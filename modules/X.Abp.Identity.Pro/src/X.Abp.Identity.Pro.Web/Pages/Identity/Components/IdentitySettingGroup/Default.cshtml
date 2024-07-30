@@ -1,0 +1,143 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.Identity
+@using Volo.Abp.Identity.Localization
+@using X.Abp.Identity.Web.Pages.Identity.Components.IdentitySettingGroup
+@inject IHtmlLocalizer<IdentityResource> L
+@model IdentitySettingGroupViewComponent.IdentitySettingViewModel
+
+<abp-tabs>
+    <abp-tab active="true" title="@L["IdentitySettingsGeneral"].Value">
+        <form id="IdentitySettingsForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <h4>@L["PasswordSettings"]</h4>
+                        <abp-input asp-for="IdentitySettings.Password.RequiredLength"
+                                   label="@L["DisplayName:Abp.Identity.Password.RequiredLength"].Value"
+                                   info="@L["Description:Abp.Identity.Password.RequiredLength"].Value"
+                                   name="Password.RequiredLength" />
+                        <abp-input asp-for="IdentitySettings.Password.RequiredUniqueChars"
+                                   label="@L["DisplayName:Abp.Identity.Password.RequiredUniqueChars"].Value"
+                                   info="@L["Description:Abp.Identity.Password.RequiredUniqueChars"].Value",
+                                   name="Password.RequiredUniqueChars" />
+                        <abp-input asp-for="IdentitySettings.Password.RequireNonAlphanumeric"
+                                   label="@L["DisplayName:Abp.Identity.Password.RequireNonAlphanumeric"].Value"
+                                   info="@L["Description:Abp.Identity.Password.RequireNonAlphanumeric"].Value"
+                                   name="Password.RequireNonAlphanumeric" />
+                        <abp-input asp-for="IdentitySettings.Password.RequireLowercase"
+                                   label="@L["DisplayName:Abp.Identity.Password.RequireLowercase"].Value"
+                                   info="@L["Description:Abp.Identity.Password.RequireLowercase"].Value"
+                                   name="Password.RequireLowercase" />
+                        <abp-input asp-for="IdentitySettings.Password.RequireUppercase"
+                                   label="@L["DisplayName:Abp.Identity.Password.RequireUppercase"].Value"
+                                   info="@L["Description:Abp.Identity.Password.RequireUppercase"].Value"
+                                   name="Password.RequireUppercase"/>
+                        <abp-input asp-for="IdentitySettings.Password.RequireDigit"
+                                   label="@L["DisplayName:Abp.Identity.Password.RequireDigit"].Value"
+                                   info="@L["Description:Abp.Identity.Password.RequireDigit"].Value"
+                                   name="Password.RequireDigit"/>
+                    </div>
+                    <hr class="my-4"/>
+                    <div>
+                        <h4>@L["LockoutSettings"]</h4>
+                        <abp-input asp-for="IdentitySettings.Lockout.AllowedForNewUsers"
+                                   label="@L["DisplayName:Abp.Identity.Lockout.AllowedForNewUsers"].Value"
+                                   info="@L["Description:Abp.Identity.Lockout.AllowedForNewUsers"].Value"
+                                   name="Lockout.AllowedForNewUsers" />
+                        <abp-input asp-for="IdentitySettings.Lockout.LockoutDuration"
+                                   label="@L["DisplayName:Abp.Identity.Lockout.LockoutDuration"].Value"
+                                   info="@L["Description:Abp.Identity.Lockout.LockoutDuration"].Value"
+                                   name="Lockout.LockoutDuration" />
+                        <abp-input asp-for="IdentitySettings.Lockout.MaxFailedAccessAttempts"
+                                   label="@L["DisplayName:Abp.Identity.Lockout.MaxFailedAccessAttempts"].Value"
+                                   info="@L["Description:Abp.Identity.Lockout.MaxFailedAccessAttempts"].Value"
+                                   name="Lockout.MaxFailedAccessAttempts" />
+                    </div>
+                    <hr class="my-4"/>
+                    <div>
+                        <h4>@L["SignInSettings"]</h4>
+                        <abp-input asp-for="IdentitySettings.SignIn.RequireConfirmedEmail"
+                                   label="@L["DisplayName:Abp.Identity.SignIn.RequireConfirmedEmail"].Value"
+                                   info="@L["Description:Abp.Identity.SignIn.RequireConfirmedEmail"].Value"
+                                   name="SignIn.RequireConfirmedEmail" />
+                        <abp-input asp-for="IdentitySettings.SignIn.EnablePhoneNumberConfirmation"
+                                   label="@L["DisplayName:Abp.Identity.SignIn.EnablePhoneNumberConfirmation"].Value"
+                                   info="@L["Description:Abp.Identity.SignIn.EnablePhoneNumberConfirmation"].Value"
+                                   name="SignIn.EnablePhoneNumberConfirmation" />
+                        <abp-input asp-for="IdentitySettings.SignIn.RequireConfirmedPhoneNumber"
+                                   label="@L["DisplayName:Abp.Identity.SignIn.RequireConfirmedPhoneNumber"].Value"
+                                   info="@L["Description:Abp.Identity.SignIn.RequireConfirmedPhoneNumber"].Value"
+                                   name="SignIn.RequireConfirmedPhoneNumber" />
+                    </div>
+                    <hr class="my-4"/>
+                    <div>
+                        <h4>@L["UserSettings"]</h4>
+                        <abp-input asp-for="IdentitySettings.User.IsEmailUpdateEnabled"
+                                   label="@L["DisplayName:Abp.Identity.User.IsEmailUpdateEnabled"].Value"
+                                   info="@L["Description:Abp.Identity.User.IsEmailUpdateEnabled"].Value"
+                                   name="User.IsEmailUpdateEnabled" />
+                        <abp-input asp-for="IdentitySettings.User.IsUserNameUpdateEnabled"
+                                   label="@L["DisplayName:Abp.Identity.User.IsUserNameUpdateEnabled"].Value"
+                                   info="@L["Description:Abp.Identity.User.IsUserNameUpdateEnabled"].Value"
+                                   name="User.IsUserNameUpdateEnabled" />
+                    </div>
+                    <hr class="my-4"/>
+                    <div>
+                        <abp-button button-type="Primary" type="submit">
+                            <i class="fa fa-save"></i> @L["Save"]
+                        </abp-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </abp-tab>
+    @if (Model.IdentityLdapSettings != null)
+    {
+        <abp-tab title="@L["IdentitySettingsLdap"].Value">
+            <form id="IdentityLdapSettingsForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <h4>@L["LdapLoginSettings"]</h4>
+                            <abp-input asp-for="@Model.IdentityLdapSettings.EnableLdapLogin" name="EnableLdapLogin" />
+                            <abp-input asp-for="@Model.IdentityLdapSettings.LdapServerHost" Label="@L["DisplayName:Abp.Ldap.ServerHost"].Value" name="LdapServerHost" />
+                            <abp-input asp-for="@Model.IdentityLdapSettings.LdapServerPort"  Label="@L["DisplayName:Abp.Ldap.ServerPort"].Value" name="LdapServerPort" />
+                            <abp-input asp-for="@Model.IdentityLdapSettings.LdapBaseDc" Label="@L["DisplayName:Abp.Ldap.BaseDc"].Value" name="LdapBaseDc" />
+                            <abp-input asp-for="@Model.IdentityLdapSettings.LdapDomain" Label="@L["DisplayName:Abp.Ldap.Domain"].Value" name="LdapDomain" />
+                            <abp-input asp-for="@Model.IdentityLdapSettings.LdapUserName" Label="@L["DisplayName:Abp.Ldap.UserName"].Value" name="LdapUserName" />
+                            <abp-input asp-for="@Model.IdentityLdapSettings.LdapPassword" type="password" autocomplete="new-password" placeholder="@L["LdapPasswordPlaceholder"].Value" Label="@L["DisplayName:Abp.Ldap.Password"].Value" name="LdapPassword" />
+                        </div>
+                        <hr class="my-4" />
+                        <div>
+                            <abp-button button-type="Primary" type="submit"><i class="fa fa-save"></i> @L["Save"]</abp-button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </abp-tab>
+    }
+    @if (Model.IdentityOAuthSettings != null)
+    {
+        <abp-tab title="@L["IdentitySettingsOAuth"].Value">
+            <form id="IdentityOAuthSettingsForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <h4>@L["OAuthLoginSettings"]</h4>
+                            <abp-input asp-for="@Model.IdentityOAuthSettings.EnableOAuthLogin" name="EnableOAuthLogin" />
+                            <abp-input asp-for="@Model.IdentityOAuthSettings.ClientId" name="ClientId" />
+                            <abp-input asp-for="@Model.IdentityOAuthSettings.ClientSecret" name="ClientSecret" />
+                            <abp-input asp-for="@Model.IdentityOAuthSettings.Authority" name="Authority" />
+                            <abp-input asp-for="@Model.IdentityOAuthSettings.Scope" name="Scope" />
+                            <abp-input asp-for="@Model.IdentityOAuthSettings.RequireHttpsMetadata" name="RequireHttpsMetadata" />
+                        </div>
+                        <hr class="my-4" />
+                        <div>
+                            <abp-button button-type="Primary" type="submit"><i class="fa fa-save"></i> @L["Save"]</abp-button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </abp-tab>
+    }
+</abp-tabs>

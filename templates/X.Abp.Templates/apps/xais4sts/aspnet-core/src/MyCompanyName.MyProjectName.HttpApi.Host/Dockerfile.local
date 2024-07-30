@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+
+# COPY bin/Release/net8.0/publish/ app/
+COPY ./ app/
+WORKDIR /app
+ENV ASPNETCORE_URLS http://+:8080
+ENV TZ=Asia/Shanghai
+EXPOSE 8080
+
+ENTRYPOINT ["dotnet", "MyCompanyName.MyProjectName.HttpApi.Host.dll"]

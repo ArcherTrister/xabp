@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using X.Abp.Forms.Choices;
+@using X.Abp.Forms.Localization
+@inject IHtmlLocalizer<FormsResource> L
+@model X.Abp.Forms.Web.Pages.Forms.Shared.Components.FormQuestions.FormQuestionsViewComponent.FormQuestionsViewModel
+
+<div id="vue-questions">
+    <div ref="other" data-value="@ChoiceConsts.OtherChoice"></div>
+    <input ref="form" type="hidden" value="@Model.Id" data-settings="@Model.IsAcceptingResponses"/>
+    <abp-container v-if="!isLoading" v-cloak>
+        <abp-row v-align="Center">
+            <abp-column size="_8" offset="_2">
+                <abp-card class="items-form-card">
+                    <abp-card-body>
+                        <form v-on:submit.prevent="updateForm" v-on:input="debouncedFormUpdate">
+                            <div class="card-body">
+                                <input v-model="form.id" type="hidden" name="form.id">
+                                <div class="mb-3">
+                                    <input v-model="form.title" v-on:blur="validateFormTitle" type="text" id="form_title" placeholder="Form title" name="form.title" class="items-form-title form-control">
+                                    <span v-cloak v-if="form.title === ''" data-valmsg-for="form.title" data-valmsg-replace="true" class="text-danger field-validation-valid">{{l("Form:TitleRequired")}}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <input v-model="form.description" placeholder="Description" type="text" id="form_description" name="form.description" class="items-form-description form-control ">
+                                </div>
+                            </div>
+                            <div class="can-be-hidden">
+                                <hr/>
+                                <div class="row">
+                                    <div v-on:click="openSettingsModal" class="col col-md-4" style="border-block-end: 0.1px solid;">
+                                        <button type="button" class="btn col-md-12" data-bs-placement="bottom" title="" :data-original-title='l("Form:Questions:Settings")'>
+                                            <i class="fa fa-gear" aria-hidden="true"></i> {{l("Form:Questions:Settings")}}
+                                        </button>
+                                    </div>
+                                    <div class="col col-md-4">
+                                        <button v-on:click="addQuestion" type="button" class="btn col-md-12" data-bs-placement="bottom" title="" :data-original-title='l("Form:Questions:NewQuestion")'>
+                                            <i class="fa fa-plus-circle" aria-hidden="true"></i> {{l("Form:Questions:NewQuestion")}}
+                                        </button>
+                                    </div>
+                                    <div class="col col-md-4" style="border-block-start: 0.1px solid;">
+                                        <button v-on:click="preview" type="button" class="btn col-md-12" data-bs-placement="bottom" title="" :data-original-title='l("Form:Questions:Preview")'>
+                                            <i class="fa fa-eye" aria-hidden="true"></i> {{l("Form:Questions:Preview")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </abp-card-body>
+                </abp-card>
+            </abp-column>
+        </abp-row>
+        <abp-row v-align="Center">
+            <abp-column size="_8" offset="_2">
+                <question v-for="(question, index) in questions" v-bind:key="question.id" :ref="`questions${index}`"
+                          v-model="questions[index]" v-on:question_deleted="questionDeleted">
+                </question>
+            </abp-column>
+        </abp-row>
+        <abp-row v-align="Center">
+            <abp-column class="d-grid" size="_4" offset="_4">
+                <abp-button
+                    text="@L["Form:Questions:NewQuestion"].Value"
+                    button-type="Primary"
+                    icon="plus-circle"
+                    v-on:click="addQuestion">
+                </abp-button>
+            </abp-column>
+        </abp-row>
+    </abp-container>
+</div>

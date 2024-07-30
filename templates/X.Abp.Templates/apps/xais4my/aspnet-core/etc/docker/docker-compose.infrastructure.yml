@@ -1,0 +1,62 @@
+version: '3.7'
+
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.8.11-management-alpine
+    networks:
+      - abpvnext.microservice-network
+      
+  redis:
+    container_name: redis
+    image: redis:6.0.10-alpine
+    networks:
+      - abpvnext.microservice-network
+      
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - abpvnext.microservice-network
+      
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    depends_on:
+      - elasticsearch
+    networks:
+      - abpvnext.microservice-network
+    
+  sql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server
+    volumes:
+      - sqldata:/var/opt/mssql
+    networks:
+      - abpvnext.microservice-network
+ 
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    volumes:
+      - ../grafana/storage:/var/lib/grafana
+    networks:
+      - abpvnext.microservice-network
+      
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    volumes:
+      - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ../prometheus/storage:/prometheus
+    networks:
+      - abpvnext.microservice-network
+      
+volumes:
+  esdata:
+  sqldata:
+networks:
+  abpvnext.microservice-network:
+    external: true

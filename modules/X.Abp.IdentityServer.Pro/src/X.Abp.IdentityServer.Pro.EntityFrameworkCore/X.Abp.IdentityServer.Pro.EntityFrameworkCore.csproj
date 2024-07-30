@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.IdentityServer.Pro.EntityFrameworkCore</AssemblyName>
+    <PackageId>X.Abp.IdentityServer.Pro.EntityFrameworkCore</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.IdentityServer.Pro.Domain\X.Abp.IdentityServer.Pro.Domain.csproj" />
+    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+﻿.tree-view .tree-view {
+    padding-left: 1.4em;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.tree-view-title{
+    display: inline !important;
+}

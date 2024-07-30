@@ -1,0 +1,86 @@
+{
+    "folders": {
+        "items": {
+            "src": {},
+            "test": {}
+        }
+    },
+    "packages": {
+        "X.Abp.Account.Pro.Public.Web": {
+            "path": "src/X.Abp.Account.Pro.Public.Web/X.Abp.Account.Pro.Public.Web.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Shared.Application.Contracts": {
+            "path": "src/X.Abp.Account.Pro.Shared.Application.Contracts/X.Abp.Account.Pro.Shared.Application.Contracts.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Shared.Application": {
+            "path": "src/X.Abp.Account.Pro.Shared.Application/X.Abp.Account.Pro.Shared.Application.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Public.Web.IdentityServer": {
+            "path": "src/X.Abp.Account.Pro.Public.Web.IdentityServer/X.Abp.Account.Pro.Public.Web.IdentityServer.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Application.Tests": {
+            "path": "test/X.Abp.Account.Pro.Application.Tests/X.Abp.Account.Pro.Application.Tests.abppkg.json",
+            "folder": "test"
+        },
+        "X.Abp.Account.Pro.Public.HttpApi": {
+            "path": "src/X.Abp.Account.Pro.Public.HttpApi/X.Abp.Account.Pro.Public.HttpApi.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Public.HttpApi.Client": {
+            "path": "src/X.Abp.Account.Pro.Public.HttpApi.Client/X.Abp.Account.Pro.Public.HttpApi.Client.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Public.Application": {
+            "path": "src/X.Abp.Account.Pro.Public.Application/X.Abp.Account.Pro.Public.Application.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Admin.Application": {
+            "path": "src/X.Abp.Account.Pro.Admin.Application/X.Abp.Account.Pro.Admin.Application.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Public.Application.Contracts": {
+            "path": "src/X.Abp.Account.Pro.Public.Application.Contracts/X.Abp.Account.Pro.Public.Application.Contracts.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Admin.Application.Contracts": {
+            "path": "src/X.Abp.Account.Pro.Admin.Application.Contracts/X.Abp.Account.Pro.Admin.Application.Contracts.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Admin.HttpApi": {
+            "path": "src/X.Abp.Account.Pro.Admin.HttpApi/X.Abp.Account.Pro.Admin.HttpApi.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Admin.HttpApi.Client": {
+            "path": "src/X.Abp.Account.Pro.Admin.HttpApi.Client/X.Abp.Account.Pro.Admin.HttpApi.Client.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Admin.Web": {
+            "path": "src/X.Abp.Account.Pro.Admin.Web/X.Abp.Account.Pro.Admin.Web.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Public.Blazor": {
+            "path": "src/X.Abp.Account.Pro.Public.Blazor/X.Abp.Account.Pro.Public.Blazor.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Admin.Blazor": {
+            "path": "src/X.Abp.Account.Pro.Admin.Blazor/X.Abp.Account.Pro.Admin.Blazor.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Admin.Blazor.Server": {
+            "path": "src/X.Abp.Account.Pro.Admin.Blazor.Server/X.Abp.Account.Pro.Admin.Blazor.Server.abppkg.json",
+            "folder": "src"
+        },
+        "X.Abp.Account.Pro.Admin.Blazor.WebAssembly": {
+            "path": "src/X.Abp.Account.Pro.Admin.Blazor.WebAssembly/X.Abp.Account.Pro.Admin.Blazor.WebAssembly.abppkg.json",
+            "folder": "src"
+        }
+    },
+    "analyze": {
+        "settingNamePrefix": "X.Abp.Account",
+        "featureNamePrefix": "X.Abp.Account"
+    }
+}

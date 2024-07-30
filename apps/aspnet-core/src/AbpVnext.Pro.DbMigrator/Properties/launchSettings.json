@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "AbpVnext.Pro.DbMigrator": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61649;http://localhost:61659"
+    }
+  }
+}

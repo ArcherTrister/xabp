@@ -1,0 +1,285 @@
+﻿@page "{id}"
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@using Volo.Abp.Data;
+@using Volo.Abp.IdentityServer.Localization;
+@using Volo.Abp.Localization;
+@using Volo.Abp.ObjectExtending;
+@using X.Abp.IdentityServer.Web.Pages.IdentityServer.ApiResources;
+@model X.Abp.IdentityServer.Web.Pages.IdentityServer.ApiResources.EditModel
+@inject IHtmlLocalizer<AbpIdentityServerResource> L
+@inject IStringLocalizerFactory StringLocalizerFactory
+@{
+    Layout = null;
+}
+
+<form asp-page="/IdentityServer/ApiResources/Edit" id="ApiResourceEditForm" class="form-with-card">
+    <abp-card>
+        <abp-card-header title="@L["Edit"].Value"></abp-card-header>
+        <abp-card-body>
+            <abp-tabs>
+                <abp-tab title="信息">
+                    <div>
+                        <abp-input asp-for="ApiResource.Id" type="hidden" />
+                        <div class="mb-3">
+                            <abp-input asp-for="ApiResource.Name" label="@L["ApiResource:Name"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="ApiResource.DisplayName" label="@L["ApiResource:DisplayName"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="ApiResource.Description" label="@L["ApiResource:Description"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="ApiResource.AllowedAccessTokenSigningAlgorithms" label="@L["ApiResource:AllowedAccessTokenSigningAlgorithms"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="ApiResource.Enabled" label="@L["ApiResource:Enabled"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="ApiResource.ShowInDiscoveryDocument" label="@L["ApiResource:ShowInDiscoveryDocument"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-select asp-for="@Model.ApiResource.Scopes" />
+                        </div>
+
+                        @foreach (var propertyInfo in ObjectExtensionManager.Instance.GetProperties<ApiResourceUpdateModalView>())
+                        {
+                            if (!propertyInfo.Name.EndsWith("_Text"))
+                            {
+                                if (propertyInfo.Type.IsEnum || !propertyInfo.Lookup.Url.IsNullOrEmpty())
+                                {
+                                    if (propertyInfo.Type.IsEnum)
+                                    {
+                                        Model.ApiResource.ExtraProperties.ToEnum(propertyInfo.Name, propertyInfo.Type);
+                                    }
+                                    <abp-select asp-for="ApiResource.ExtraProperties[propertyInfo.Name]"
+                                                label="@propertyInfo.GetLocalizedDisplayName(StringLocalizerFactory)"
+                                                autocomplete-api-url="@propertyInfo.Lookup.Url"
+                                                autocomplete-selected-item-name="@Model.ApiResource.GetProperty(propertyInfo.Name+"_Text")"
+                                                autocomplete-selected-item-value="@Model.ApiResource.GetProperty(propertyInfo.Name)"
+                                                autocomplete-filter-param-name="@propertyInfo.Lookup.FilterParamName"
+                                                autocomplete-items-property-name="@propertyInfo.Lookup.ResultListPropertyName"
+                                                autocomplete-display-property-name="@propertyInfo.Lookup.DisplayPropertyName"
+                                                autocomplete-value-property-name="@propertyInfo.Lookup.ValuePropertyName"></abp-select>
+                                }
+                                else
+                                {
+                                    <abp-input type="@propertyInfo.GetInputType()"
+                                               asp-for="ApiResource.ExtraProperties[propertyInfo.Name]"
+                                               label="@propertyInfo.GetLocalizedDisplayName(StringLocalizerFactory)"
+                                               asp-format="@propertyInfo.GetInputFormatOrNull()"
+                                               value="@propertyInfo.GetInputValueOrNull(Model.ApiResource.GetProperty(propertyInfo.Name))" />
+                                }
+                            }
+                        }
+                    </div>
+                </abp-tab>
+
+                <abp-tab title="声明">
+                    <div>
+                        <div class="card shadow-none bg-light">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="card">
+                                            <div class="card-header">拥有声明:</div>
+                                            <div style="height: 320px; overflow: auto;" class="card-body">
+                                                @for (int i = 0; i < Model.AllClaims.Length; i++)
+                                                {
+                                                    var claim = Model.AllClaims[i];
+                                                    var buttonId = $"Claims{Model.ApiResource.Id}cf{claim}OwnedId";
+                                                    var inputId = $"Claims{Model.ApiResource.Id}cf{claim}InputId";
+                                                    <div class="d-grid gap-2">
+                                                        <button type="button" claim-name="@claim" class="ownedClaim btn btn-primary btn-sm mb-2 mt-0 text-truncate text-start" id="@buttonId" style="display: none;" data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                                                            <i class="fa fa-long-arrow-right"></i> @claim
+                                                        </button>
+                                                    </div>
+                                                    <input id="@inputId" type="text" name="ApiResource.UserClaims[@i]" value="" hidden="">
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="card">
+                                            <div class="card-header">不拥有声明:</div>
+                                            <div style="height: 320px; overflow: auto;" class="card-body">
+                                                @for (int i = 0; i < Model.AllClaims.Length; i++)
+                                                {
+                                                    var claim = Model.AllClaims[i];
+                                                    var buttonId = $"Claims{Model.ApiResource.Id}cf{claim}OtherId";
+                                                    <div class="d-grid gap-2">
+                                                        <button type="button" claim-name="@claim" class="otherClaim btn btn-outline-primary btn-sm mb-2 mt-0 text-truncate text-start" id="@buttonId" style="" data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                                                            <i class="fa fa-long-arrow-left "></i> @claim
+                                                        </button>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </abp-tab>
+                <abp-tab title="Secrets">
+                    <div>
+                        <div class="pt-3 pb-5 clearfix">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <abp-select asp-for="SampleSecret.Type" asp-items="@Model.SecretTypes" label="@L["SampleSecret:Type"].Value" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <abp-input asp-for="SampleSecret.Value" label="@L["SampleSecret:Value"].Value" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <abp-input asp-for="SampleSecret.Description" label="@L["SampleSecret:Description"].Value" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <abp-input asp-for="SampleSecret.Expiration" label="@L["SampleSecret:Expiration"].Value" />
+                                    </div>
+                                </div>
+                            </div>
+                            <abp-button id="AddNewSecretButton" class="float-end btn btn-success btn-sm" type="button">
+                                <i class="fa fa-plus"></i> 添加一个新的
+                            </abp-button>
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table class="border-bottom table table-striped" id="SecretTableId" style="display: none;">
+                                <thead>
+                                    <tr>
+                                        <th scope="Column">类型</th>
+                                        <th scope="Column">值</th>
+                                        <th scope="Column">描述</th>
+                                        <th scope="Column">到期</th>
+                                        <th scope="Column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="SecretTableBodyId">
+                                    @for (int i = 0; i < Model.ApiResource.Secrets.Length; i++)
+                                    {
+                                        var secret = Model.ApiResource.Secrets[i];
+                                        var typeInputId = $"ApiResource_Secrets_{i}__Type";
+                                        var valueInputId = $"ApiResource_Secrets_{i}__Value";
+                                        var descriptionInputId = $"ApiResource_Secrets_{i}__Description";
+                                        var expirationInputId = $"ApiResource_Secrets_{i}__Expiration";
+                                        <tr>
+                                            <td>
+                                                @secret.Type
+                                            </td>
+                                            <td>
+                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">@secret.Value</span>
+                                            </td>
+                                            <td>
+                                                @secret.Description
+                                            </td>
+                                            <td>
+                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">@secret.Expiration?.ToString("yyyy-MM-dd")</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm deleteSecretButton float-end">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                            <td hidden="">
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Type" label="@L["Secret:Type"].Value" />*@
+                                                    <label class="form-label" for="secret_Type">Type</label>
+                                                    <input id="@typeInputId" name="ApiResource.Secrets[@i].Type" type="text" value="@secret.Type" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Type" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Value" label="@L["Secret:Value"].Value" />*@
+                                                    <label class="form-label" for="secret_Value">Value</label>
+                                                    <input id="@valueInputId" name="ApiResource.Secrets[@i].Value" type="text" value="@secret.Value" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Value" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Description" label="@L["Secret:Description"].Value" />*@
+                                                    <label class="form-label" for="secret_Description">Description</label>
+                                                    <input id="@descriptionInputId" name="ApiResource.Secrets[@i].Description" type="text" value="@secret.Description" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Description" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Expiration" label="@L["Secret:Expiration"].Value" />*@
+                                                    <label class="form-label" for="secret_Expiration">Expiration</label>
+                                                    <input id="@expirationInputId" name="ApiResource.Secrets[@i].Expiration" type="datetime-local" value="@secret.Expiration?.ToString("yyyy-MM-dd")" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Expiration" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </abp-tab>
+
+                <abp-tab title="属性">
+                    <div>
+                        <h3>属性</h3>
+                        <div class="pt-3 pb-5 clearfix">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <abp-input asp-for="SampleProperty.Key" label="@L["SampleProperty:Key"].Value" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <abp-input asp-for="SampleProperty.Value" label="@L["SampleProperty:Value"].Value" />
+                                    </div>
+                                </div>
+                            </div>
+                            <abp-button id="AddNewPropertyButton" class="float-end mb-2 btn btn-success" type="button">
+                                <i class="fa fa-plus"></i> 添加一个新的
+                            </abp-button>
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="PropertyTableId" style="display: none;" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="Column">Key</th>
+                                        <th scope="Column">值</th>
+                                        <th scope="Column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="PropertyTableBodyId">
+                                    @for (int i = 0; i < Model.ApiResource.Properties.Length; i++)
+                                    {
+                                        var property = Model.ApiResource.Properties[i];
+                                        var keyInputId = $"{@property.Key}PropertyInput";
+                                        var valueInputId = $"ApiResource_Properties_{@i}__Value";
+                                        <tr>
+                                            <td>
+                                                @property.Key
+                                            </td>
+                                            <td>
+                                                @property.Value
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-danger deletePropertyButton float-end">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                            <td hidden="">
+                                                <input id="@keyInputId" name="ApiResource.Properties[@i].Key" type="text" value="@property.Key">
+                                                <input id="@valueInputId" name="ApiResource.Properties[@i].Value" type="text" value="@property.Value">
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </abp-tab>
+            </abp-tabs>
+        </abp-card-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-card>
+    @Html.AntiForgeryToken()
+</form>
+<input hidden="" id="SecretsStartIndex" value="@Model.ApiResource.Secrets.Length">
+<input hidden="" id="PropertyStartIndex" value="@Model.ApiResource.Properties.Length">

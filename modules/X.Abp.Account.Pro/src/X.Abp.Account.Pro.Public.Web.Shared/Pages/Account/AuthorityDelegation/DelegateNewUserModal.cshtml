@@ -1,0 +1,26 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Options;
+@using X.Abp.Account.AuthorityDelegation;
+@using X.Abp.Account.Localization;
+@using X.Abp.Account.Public.Web.Pages.Account.AuthorityDelegation;
+@inject IHtmlLocalizer<AccountResource> L
+@inject IOptions<AbpAccountAuthorityDelegationOptions> Options
+@model X.Abp.Account.Public.Web.Pages.Account.AuthorityDelegation.DelegateNewUserModalModel
+@{
+    Layout = null;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(DelegateNewUserModalModel).FullName">
+        <abp-script src="/Pages/Account/AuthorityDelegation/DelegateNewUserModal.js" />
+    </abp-script-bundle>
+}
+
+<abp-modal id="DelegateNewUserModal">
+    <abp-modal-header title="@L["DelegateNewUser"].Value"></abp-modal-header>
+    <abp-modal-body>
+        <form id="DelegateNewUserForm" data-check-form-on-close="false">
+        </form>
+    </abp-modal-body>
+</abp-modal>

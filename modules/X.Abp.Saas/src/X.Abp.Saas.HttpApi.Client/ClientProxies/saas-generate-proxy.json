@@ -1,0 +1,1239 @@
+{
+  "modules": {
+    "saas": {
+      "rootPath": "saas",
+      "remoteServiceName": "Saas",
+      "controllers": {
+        "X.Abp.Saas.EditionController": {
+          "controllerName": "Edition",
+          "controllerGroupName": "Edition",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Saas.EditionController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Saas.IEditionAppService",
+              "name": "IEditionAppService",
+              "methods": [
+                {
+                  "name": "GetUsageStatisticsAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.GetEditionUsageStatisticsResultDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.GetEditionUsageStatisticsResultDto"
+                  }
+                },
+                {
+                  "name": "GetPlanLookupAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Payment.Plans.PlanDto>",
+                    "typeSimple": "[X.Abp.Payment.Plans.PlanDto]"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.EditionDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.EditionDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Saas.Dtos.GetEditionsInput, X.Abp.Saas.Application.Contracts",
+                      "type": "X.Abp.Saas.Dtos.GetEditionsInput",
+                      "typeSimple": "X.Abp.Saas.Dtos.GetEditionsInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Saas.Dtos.EditionDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Saas.Dtos.EditionDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Saas.Dtos.EditionCreateDto, X.Abp.Saas.Application.Contracts",
+                      "type": "X.Abp.Saas.Dtos.EditionCreateDto",
+                      "typeSimple": "X.Abp.Saas.Dtos.EditionCreateDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.EditionDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.EditionDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Saas.Dtos.EditionUpdateDto, X.Abp.Saas.Application.Contracts",
+                      "type": "X.Abp.Saas.Dtos.EditionUpdateDto",
+                      "typeSimple": "X.Abp.Saas.Dtos.EditionUpdateDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.EditionDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.EditionDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/editions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.EditionDto",
+                "typeSimple": "X.Abp.Saas.Dtos.EditionDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.Saas.Dtos.EditionDto,X.Abp.Saas.Dtos.EditionDto,System.Guid,X.Abp.Saas.Dtos.GetEditionsInput>"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/editions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Saas.Dtos.GetEditionsInput, X.Abp.Saas.Application.Contracts",
+                  "type": "X.Abp.Saas.Dtos.GetEditionsInput",
+                  "typeSimple": "X.Abp.Saas.Dtos.GetEditionsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Saas.Dtos.EditionDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Saas.Dtos.EditionDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.Saas.Dtos.EditionDto,X.Abp.Saas.Dtos.EditionDto,System.Guid,X.Abp.Saas.Dtos.GetEditionsInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/saas/editions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Saas.Dtos.EditionCreateDto, X.Abp.Saas.Application.Contracts",
+                  "type": "X.Abp.Saas.Dtos.EditionCreateDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.EditionCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Saas.Dtos.EditionCreateDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.EditionCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.EditionDto",
+                "typeSimple": "X.Abp.Saas.Dtos.EditionDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.Saas.Dtos.EditionDto,X.Abp.Saas.Dtos.EditionCreateDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/saas/editions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Saas.Dtos.EditionUpdateDto, X.Abp.Saas.Application.Contracts",
+                  "type": "X.Abp.Saas.Dtos.EditionUpdateDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.EditionUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Saas.Dtos.EditionUpdateDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.EditionUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.EditionDto",
+                "typeSimple": "X.Abp.Saas.Dtos.EditionDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.Saas.Dtos.EditionDto,System.Guid,X.Abp.Saas.Dtos.EditionUpdateDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/saas/editions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            },
+            "GetUsageStatisticsAsync": {
+              "uniqueName": "GetUsageStatisticsAsync",
+              "name": "GetUsageStatisticsAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/editions/statistics/usage-statistic",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.GetEditionUsageStatisticsResultDto",
+                "typeSimple": "X.Abp.Saas.Dtos.GetEditionUsageStatisticsResultDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Saas.IEditionAppService"
+            },
+            "GetPlanLookupAsync": {
+              "uniqueName": "GetPlanLookupAsync",
+              "name": "GetPlanLookupAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/editions/plan-lookup",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Payment.Plans.PlanDto>",
+                "typeSimple": "[X.Abp.Payment.Plans.PlanDto]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Saas.IEditionAppService"
+            }
+          }
+        },
+        "X.Abp.Saas.SubscriptionController": {
+          "controllerName": "Subscription",
+          "controllerGroupName": "Edition",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Saas.SubscriptionController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Saas.Subscription.ISubscriptionAppService",
+              "name": "ISubscriptionAppService",
+              "methods": [
+                {
+                  "name": "CreateSubscriptionAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "editionId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "tenantId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "CreateSubscriptionAsyncByEditionIdAndTenantId": {
+              "uniqueName": "CreateSubscriptionAsyncByEditionIdAndTenantId",
+              "name": "CreateSubscriptionAsync",
+              "httpMethod": "POST",
+              "url": "api/saas/subscription",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "editionId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "tenantId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "editionId",
+                  "name": "editionId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "tenantId",
+                  "name": "tenantId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Saas.Subscription.ISubscriptionAppService"
+            }
+          }
+        },
+        "X.Abp.Saas.TenantController": {
+          "controllerName": "Tenant",
+          "controllerGroupName": "Tenant",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Saas.TenantController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Saas.ITenantAppService",
+              "name": "ITenantAppService",
+              "methods": [
+                {
+                  "name": "GetDatabasesAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.SaasTenantDatabasesDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.SaasTenantDatabasesDto"
+                  }
+                },
+                {
+                  "name": "GetConnectionStringsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto"
+                  }
+                },
+                {
+                  "name": "UpdateConnectionStringsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto, X.Abp.Saas.Application.Contracts",
+                      "type": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto",
+                      "typeSimple": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "ApplyDatabaseMigrationsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetEditionLookupAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Saas.Dtos.EditionLookupDto>",
+                    "typeSimple": "[X.Abp.Saas.Dtos.EditionLookupDto]"
+                  }
+                },
+                {
+                  "name": "SetPasswordAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Saas.Dtos.SaasTenantSetPasswordDto, X.Abp.Saas.Application.Contracts",
+                      "type": "X.Abp.Saas.Dtos.SaasTenantSetPasswordDto",
+                      "typeSimple": "X.Abp.Saas.Dtos.SaasTenantSetPasswordDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.SaasTenantDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.SaasTenantDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Saas.Dtos.GetTenantsInput, X.Abp.Saas.Application.Contracts",
+                      "type": "X.Abp.Saas.Dtos.GetTenantsInput",
+                      "typeSimple": "X.Abp.Saas.Dtos.GetTenantsInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Saas.Dtos.SaasTenantDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Saas.Dtos.SaasTenantDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Saas.Dtos.SaasTenantCreateDto, X.Abp.Saas.Application.Contracts",
+                      "type": "X.Abp.Saas.Dtos.SaasTenantCreateDto",
+                      "typeSimple": "X.Abp.Saas.Dtos.SaasTenantCreateDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.SaasTenantDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.SaasTenantDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Saas.Dtos.SaasTenantUpdateDto, X.Abp.Saas.Application.Contracts",
+                      "type": "X.Abp.Saas.Dtos.SaasTenantUpdateDto",
+                      "typeSimple": "X.Abp.Saas.Dtos.SaasTenantUpdateDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Saas.Dtos.SaasTenantDto",
+                    "typeSimple": "X.Abp.Saas.Dtos.SaasTenantDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/tenants/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.SaasTenantDto",
+                "typeSimple": "X.Abp.Saas.Dtos.SaasTenantDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.Saas.Dtos.SaasTenantDto,X.Abp.Saas.Dtos.SaasTenantDto,System.Guid,X.Abp.Saas.Dtos.GetTenantsInput>"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/tenants",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Saas.Dtos.GetTenantsInput, X.Abp.Saas.Application.Contracts",
+                  "type": "X.Abp.Saas.Dtos.GetTenantsInput",
+                  "typeSimple": "X.Abp.Saas.Dtos.GetTenantsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "GetEditionNames",
+                  "jsonName": null,
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EditionId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "ExpirationDateMin",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "ExpirationDateMax",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "ActivationState",
+                  "jsonName": null,
+                  "type": "X.Abp.Saas.TenantActivationState?",
+                  "typeSimple": "X.Abp.Saas.TenantActivationState?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Saas.Dtos.SaasTenantDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Saas.Dtos.SaasTenantDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<X.Abp.Saas.Dtos.SaasTenantDto,X.Abp.Saas.Dtos.SaasTenantDto,System.Guid,X.Abp.Saas.Dtos.GetTenantsInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/saas/tenants",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Saas.Dtos.SaasTenantCreateDto, X.Abp.Saas.Application.Contracts",
+                  "type": "X.Abp.Saas.Dtos.SaasTenantCreateDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.SaasTenantCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Saas.Dtos.SaasTenantCreateDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.SaasTenantCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.SaasTenantDto",
+                "typeSimple": "X.Abp.Saas.Dtos.SaasTenantDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<X.Abp.Saas.Dtos.SaasTenantDto,X.Abp.Saas.Dtos.SaasTenantCreateDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/saas/tenants/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Saas.Dtos.SaasTenantUpdateDto, X.Abp.Saas.Application.Contracts",
+                  "type": "X.Abp.Saas.Dtos.SaasTenantUpdateDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.SaasTenantUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Saas.Dtos.SaasTenantUpdateDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.SaasTenantUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.SaasTenantDto",
+                "typeSimple": "X.Abp.Saas.Dtos.SaasTenantDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<X.Abp.Saas.Dtos.SaasTenantDto,System.Guid,X.Abp.Saas.Dtos.SaasTenantUpdateDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/saas/tenants/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            },
+            "GetDatabasesAsync": {
+              "uniqueName": "GetDatabasesAsync",
+              "name": "GetDatabasesAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/tenants/databases",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.SaasTenantDatabasesDto",
+                "typeSimple": "X.Abp.Saas.Dtos.SaasTenantDatabasesDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Saas.ITenantAppService"
+            },
+            "GetConnectionStringsAsyncById": {
+              "uniqueName": "GetConnectionStringsAsyncById",
+              "name": "GetConnectionStringsAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/tenants/{id}/connection-strings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto",
+                "typeSimple": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Saas.ITenantAppService"
+            },
+            "UpdateConnectionStringsAsyncByIdAndInput": {
+              "uniqueName": "UpdateConnectionStringsAsyncByIdAndInput",
+              "name": "UpdateConnectionStringsAsync",
+              "httpMethod": "PUT",
+              "url": "api/saas/tenants/{id}/connection-strings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto, X.Abp.Saas.Application.Contracts",
+                  "type": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.SaasTenantConnectionStringsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Saas.ITenantAppService"
+            },
+            "ApplyDatabaseMigrationsAsyncById": {
+              "uniqueName": "ApplyDatabaseMigrationsAsyncById",
+              "name": "ApplyDatabaseMigrationsAsync",
+              "httpMethod": "POST",
+              "url": "api/saas/tenants/{id}/apply-database-migrations",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Saas.ITenantAppService"
+            },
+            "GetEditionLookupAsync": {
+              "uniqueName": "GetEditionLookupAsync",
+              "name": "GetEditionLookupAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/tenants/lookup/editions",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Saas.Dtos.EditionLookupDto>",
+                "typeSimple": "[X.Abp.Saas.Dtos.EditionLookupDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Saas.ITenantAppService"
+            },
+            "SetPasswordAsyncByIdAndInput": {
+              "uniqueName": "SetPasswordAsyncByIdAndInput",
+              "name": "SetPasswordAsync",
+              "httpMethod": "POST",
+              "url": "api/saas/tenants/{id}/set-password",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Saas.Dtos.SaasTenantSetPasswordDto, X.Abp.Saas.Application.Contracts",
+                  "type": "X.Abp.Saas.Dtos.SaasTenantSetPasswordDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.SaasTenantSetPasswordDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Saas.Dtos.SaasTenantSetPasswordDto",
+                  "typeSimple": "X.Abp.Saas.Dtos.SaasTenantSetPasswordDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Saas.ITenantAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

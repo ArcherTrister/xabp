@@ -1,0 +1,7 @@
+.no-height {
+    min-height: 0 !important;
+}
+
+.selectable:hover {
+    cursor: pointer;
+}

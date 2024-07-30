@@ -1,0 +1,26 @@
+<Project>
+
+  <Import Project="common.props" />
+
+  <PropertyGroup>
+    <SignAssembly>True</SignAssembly>
+    <!-- <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)X.Abp.snk</AssemblyOriginatorKeyFile> -->
+    <PackageIcon>x_abp_nupkg.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\x_abp_nupkg.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release'">
+    <Exec Command="dotNET_Reactor -file &quot;$(ProjectDir)$(OutputPath)$(MSBuildProjectName).dll&quot; -antitamp 1 -anti_debug 1 -control_flow 0 -flow_level 9 -virtualization 1 -necrobit 1 -showloadscreen 0 -q&#xD;&#xA;xcopy /QEY $(ProjectDir)$(OutputPath)$(MSBuildProjectName)_Secure\*.* $(ProjectDir)$(OutputPath)\" />
+  </Target> -->
+</Project>

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.Notification.EntityFrameworkCore</AssemblyName>
+    <PackageId>X.Abp.Notification.EntityFrameworkCore</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Notification.Domain\X.Abp.Notification.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,77 @@
+@mixin in-between($start, $end) {
+  @if (
+    map-has-key($lp-breakpoints, $start) and map-has-key($lp-breakpoints, $end)
+  ) {
+    $min: map-get($lp-breakpoints, $start);
+    $max: map-get($lp-breakpoints, $end);
+    @media only screen and (min-width: $min) and (max-width: $max - 1) {
+      @content;
+    }
+  } @else {
+    @error 'Please choose two of the followings: ' + map-keys($lp-breakpoints);
+  }
+}
+
+@mixin min-width($size) {
+  @include media-query($size, "min") {
+    @content;
+  }
+}
+
+@mixin max-width($size) {
+  @include media-query($size, "max") {
+    @content;
+  }
+}
+
+@mixin media-query($size, $type) {
+  @if (map-has-key($lp-breakpoints, $size)) {
+    $width: map-get($lp-breakpoints, $size);
+    @if ($type == "max") {
+      $width: $width - 1;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  } @else {
+    @error 'Please choose one of the followings: ' + map-keys($lp-breakpoints);
+  }
+}
+
+@mixin run-through-all-colors() {
+  @each $type in $lp-all-colors {
+    @content ($type);
+  }
+}
+
+@mixin not-light-or-dark($type) {
+  @if not($type == "light" or $type == "dark") {
+    @content;
+  }
+}
+
+@mixin light-dark-switch($type, $dark: "dark", $light: "light") {
+  @if $type == "dark" {
+    @content ($dark);
+  } @else if $type == "light" {
+    @content ($light);
+  } @else {
+    @content ($type);
+  }
+}
+
+@function lp-var-of($theme, $key, $fallback: "") {
+  @if ($fallback == "" or not map-has-key($theme, $fallback)) {
+    @return map-get($theme, $key);
+  } @else {
+    @return map-get($theme, $fallback);
+  }
+}
+
+@function lp-var-rgb($key, $alpha) {
+  @return rgba(lp-var($key), $alpha);
+}
+
+@function lp-var($key, $fallback: "") {
+  @return lp-var-of($theme, $key, $fallback);
+}

@@ -1,0 +1,22 @@
+{
+  "culture": "zh-Hant",
+  "texts": {
+    "Menu:LeptonThemeSettings": "Lepton主題",
+    "Permission:LeptonThemeSettings": "Lepton主題設置",
+    "Permission:LeptonThemeManagement": "Lepton主題管理",
+    "DisplayName:BoxedLayout": "Boxed佈局",
+    "DisplayName:MenuPlacement": "菜單位置",
+    "DisplayName:MenuStatus": "菜單狀態",
+    "SuccessfullySaved": "保存成功",
+    "Left": "Left",
+    "Top": "Top",
+    "AlwaysOpened": "縂是打開",
+    "OpenOnHover": "懸停時打開",
+    "DisplayName:Style": "樣式",
+    "DisplayName:PublicLayoutStyle": "公共網站風格",
+    "Authentication:YouAreLoggedOut": "你已經註銷",
+    "Feature:LeptonThemeManagementGroup": "Lepton主題管理",
+    "Feature:LeptonThemeManagementEnable": "啓用Lepton主題管理",
+    "Feature:LeptonThemeManagementEnableDescription": "在應用程序中啓用Lepton主題管理."
+  }
+}

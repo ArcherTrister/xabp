@@ -1,0 +1,29 @@
+config:
+    connectionStrings:
+        identityService: #
+        administrationService: #
+        saasService: #
+        productService: #
+    dotnetEnv: Staging
+
+# Seeded clients
+identityServerClients:
+    authServerRootUrl: #
+    angularRootUrl: #
+    webRootUrl: #
+    blazorRootUrl: #
+    blazorServerRootUrl: #
+    publicWebRootUrl: #
+    webGatewayRootUrl: #
+    publicWebGatewayRootUrl: #
+    administrationServiceRootUrl: #
+    identityServiceRootUrl: #
+    saasServiceRootUrl: #
+    productServiceRootUrl: #
+
+image:
+    repository: abpvnext/myprojectname-db-migrator
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

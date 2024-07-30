@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.Chat.Domain.Shared": {
+      "path": "src/X.Abp.Chat.Domain.Shared/X.Abp.Chat.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.Domain": {
+      "path": "src/X.Abp.Chat.Domain/X.Abp.Chat.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.Application.Contracts": {
+      "path": "src/X.Abp.Chat.Application.Contracts/X.Abp.Chat.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.Application": {
+      "path": "src/X.Abp.Chat.Application/X.Abp.Chat.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.EntityFrameworkCore": {
+      "path": "src/X.Abp.Chat.EntityFrameworkCore/X.Abp.Chat.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.MongoDB": {
+      "path": "src/X.Abp.Chat.MongoDB/X.Abp.Chat.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.HttpApi": {
+      "path": "src/X.Abp.Chat.HttpApi/X.Abp.Chat.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.HttpApi.Client": {
+      "path": "src/X.Abp.Chat.HttpApi.Client/X.Abp.Chat.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.TestBase": {
+      "path": "test/X.Abp.Chat.TestBase/X.Abp.Chat.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Chat.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.Chat.EntityFrameworkCore.Tests/X.Abp.Chat.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Chat.MongoDB.Tests": {
+      "path": "test/X.Abp.Chat.MongoDB.Tests/X.Abp.Chat.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Chat.Domain.Tests": {
+      "path": "test/X.Abp.Chat.Domain.Tests/X.Abp.Chat.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Chat.Application.Tests": {
+      "path": "test/X.Abp.Chat.Application.Tests/X.Abp.Chat.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Chat.HttpApi.Host": {
+      "path": "host/X.Abp.Chat.HttpApi.Host/X.Abp.Chat.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Chat.Web": {
+      "path": "src/X.Abp.Chat.Web/X.Abp.Chat.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.Chat.HttpApi.Client.ConsoleTestApp/X.Abp.Chat.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.Chat.Web.Host": {
+      "path": "host/X.Abp.Chat.Web.Host/X.Abp.Chat.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Chat.AuthServer": {
+      "path": "host/X.Abp.Chat.AuthServer/X.Abp.Chat.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Chat.Host.Shared": {
+      "path": "host/X.Abp.Chat.Host.Shared/X.Abp.Chat.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Chat.Web.Unified": {
+      "path": "host/X.Abp.Chat.Web.Unified/X.Abp.Chat.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Chat.Blazor": {
+      "path": "src/X.Abp.Chat.Blazor/X.Abp.Chat.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.Blazor.Host": {
+      "path": "host/X.Abp.Chat.Blazor.Host/X.Abp.Chat.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.Chat.Blazor.Server": {
+      "path": "src/X.Abp.Chat.Blazor.Server/X.Abp.Chat.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.Blazor.WebAssembly": {
+      "path": "src/X.Abp.Chat.Blazor.WebAssembly/X.Abp.Chat.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.Chat.Blazor.Server.Host": {
+      "path": "host/X.Abp.Chat.Blazor.Server.Host/X.Abp.Chat.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

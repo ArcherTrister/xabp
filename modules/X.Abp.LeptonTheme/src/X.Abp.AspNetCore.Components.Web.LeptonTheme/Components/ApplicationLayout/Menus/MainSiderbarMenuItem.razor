@@ -1,0 +1,39 @@
+﻿@using Volo.Abp.LeptonTheme.Management
+@using Volo.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayout.Navigation
+@if (MenuItem.MenuItem.IsLeaf)
+{
+    var url = MenuItem.MenuItem.Url == null? "#" : MenuItem.MenuItem.Url.TrimStart('/', '~');
+
+    <li class="@(MenuItem.IsActive ? "current" : "") @MenuItem.MenuItem.CssClass" id="@MenuItem.MenuItem.ElementId">
+        <a href="@url" target="@MenuItem.MenuItem.Target">
+            <span class="lp-icon">
+                <i class="@(MenuItem.MenuItem.Icon ?? "")"></i>
+            </span>
+            <span class="lp-text">
+                @MenuItem.MenuItem.DisplayName
+            </span>
+        </a>
+    </li>
+}
+else
+{
+    <li class="@(MenuItem.IsActive ? "current" : "") has-drop">
+        <a href="#" @onclick:preventDefault @onclick="ToggleMenu">
+            <span class="lp-icon">
+                <i class="@(MenuItem.MenuItem.Icon ?? "")"></i>
+            </span>
+            <span class="lp-text">
+                @MenuItem.MenuItem.DisplayName
+            </span>
+            <span class="lp-arrow-icon" for="@MenuItem.MenuItem.ElementId">
+                <i class="fa fa-chevron-down"></i>
+            </span>
+        </a>
+        <ul class="@MenuItem.MenuItem.CssClass" id="@MenuItem.MenuItem.ElementId" style="display:@(MenuItem.IsOpen || MenuItem.IsActive ? "block" : "none")">
+            @foreach (var childMenuItem in MenuItem.Items)
+            {
+                <MainSiderbarMenuItem Menu="@Menu" MenuItem="@childMenuItem"/>
+            }
+        </ul>
+    </li>
+}

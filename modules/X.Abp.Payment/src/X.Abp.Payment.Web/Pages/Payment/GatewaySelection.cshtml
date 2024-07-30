@@ -1,0 +1,50 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using X.Abp.Payment.Localization;
+@using X.Abp.Payment.Web.Pages.Payment;
+@model GatewaySelectionModel
+@inject IHtmlLocalizer<PaymentResource> L
+@{
+    Layout = null;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(GatewaySelectionModel).FullName">
+        <abp-script src="/Pages/Payment/gateway-selection.js" />
+    </abp-script-bundle>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="mx-auto col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="m-0 text-center">Select a Payment Gateway</h4>
+                </div>
+                <div class="card-body">
+                    <form id="frmGatewaySelection" method="post" action="">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                            @foreach (var gateway in Model.Gateways.OrderBy(p => p.Order))
+                            {
+                                var prePaymentUrlId = $"{@gateway.Name}PrePaymentUrl";
+                                <div class="col">
+                                    <input id="@gateway.Name" type="radio" name="GatewayName" value="@gateway.Name" />
+                                    <label for="@gateway.Name">@L["PayWithGateway", gateway.Name].Value</label>
+                                    <input id="@prePaymentUrlId" type="hidden" name="PrePaymentUrl" value="@gateway.PrePaymentUrl" />
+                                </div>
+                            }
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="gap-2 d-grid">
+                        <a id="btnSubmit" href="#" class="btn btn-success @Model.CheckoutButtonStyle">Continue to Checkout <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <p class="mt-2 mb-1 text-center text-muted">
+                        <small><i class="fa fa-info-circle"></i> Next, you will be redirected to the selected payment gateway's website for the transaction</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

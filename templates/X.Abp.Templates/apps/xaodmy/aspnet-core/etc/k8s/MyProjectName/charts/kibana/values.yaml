@@ -1,0 +1,6 @@
+config:
+    elasticsearchUrl: http://myprojectname-st-elasticsearch:9200
+
+ingress:
+    host: myprojectname-st-kibana
+    tlsSecret: myprojectname-tls

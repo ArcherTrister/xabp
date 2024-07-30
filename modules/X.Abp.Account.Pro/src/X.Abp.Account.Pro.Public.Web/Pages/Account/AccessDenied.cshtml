@@ -1,0 +1,16 @@
+﻿@page
+@model X.Abp.Account.Public.Web.Pages.Account.AccessDeniedModel;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using X.Abp.Account.Localization;
+@inject IHtmlLocalizer<AccountResource> L
+@inject Volo.Abp.AspNetCore.Mvc.UI.Layout.IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["AccessDenied"].Value;
+}
+
+<div class="account-module-form">
+        <p>@L["AccessDeniedMessage"]</p>
+    <div class="mt-4">
+        <a abp-button="Primary" asp-page="./Login" asp-all-route-data="@(new Dictionary<string, string> {{"returnUrl", Model.ReturnUrl}, {"returnUrlHash", Model.ReturnUrlHash}})">&larr; @L["BackToLogin"]</a>
+    </div>
+</div>

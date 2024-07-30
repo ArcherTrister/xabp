@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using X.Abp.Forms.Localization
+@inject IHtmlLocalizer<FormsResource> L
+@model X.Abp.Forms.Web.Pages.Forms.Shared.Components.ViewForm.ViewFormViewModel
+
+<div id="vue-form-view" v-cloak>
+    <validation-observer ref="observer" v-slot="{ invalid }">
+        <form method="post" data-preview="@Model.Preview" id="myForm" v-on:submit.prevent="submitAnswers" autocomplete="on">
+            <abp-container>
+                <input ref="form" type="hidden" value="@Model.Id"/>
+                <abp-row v-align="Center">
+                    <abp-column size="_8" offset="_2">
+                        <div class="questions" v-if="form.id != null">
+                            <abp-container>
+                                <div v-if="!form.isAcceptingResponses" class="card text-center">
+                                    <div class="card-body">
+                                        @L["Form:IsNotAcceptingResponses"]
+                                    </div>
+                                </div>
+                                <abp-card>
+                                    <abp-card-body class="text-center">
+                                        <div class="mb-3">
+                                            <span class="form-title" v-cloak>{{form.title}}</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span placeholder="Description" class="form-description" v-cloak>{{form.description}}</span>
+                                        </div>
+                                    </abp-card-body>
+                                </abp-card>
+                            </abp-container>
+                            <fieldset v-bind:disabled="!form.isAcceptingResponses">
+                                <abp-container>
+                                    <!-- Is Collecting Email field -->
+                                    <email-property :display="form.isCollectingEmail"
+                                                    :data="email"
+                                                    v-on:updated:email="updatedEmail">
+                                    </email-property>
+                                    <answer v-for="(question, index) in questions" v-bind:key="question.id" :ref="`questions{index}`"
+                                            v-model="questions[index]" v-on:updated:answer="answerUpdated" :is-editing="editing">
+                                    </answer>
+                                </abp-container>
+                                @if (!Model.Preview)
+                                {
+                                    <div class="mb-3 text-center">
+                                        <button v-if="!editing" type="button" v-on:click="submitAnswers" class="btn btn-primary">@L["Form:Submit"]</button>
+                                        <button v-else type="button" v-on:click="updateAnswers" class="btn btn-primary">@L["Form:Update"]</button>
+                                    </div>
+                                }
+                            </fieldset>
+                        </div>
+                    </abp-column>
+                </abp-row>
+            </abp-container>
+        </form>
+    </validation-observer>
+</div>

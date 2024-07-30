@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.VersionManagement.Domain.Shared": {
+      "path": "src/X.Abp.VersionManagement.Domain.Shared/X.Abp.VersionManagement.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.Domain": {
+      "path": "src/X.Abp.VersionManagement.Domain/X.Abp.VersionManagement.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.Application.Contracts": {
+      "path": "src/X.Abp.VersionManagement.Application.Contracts/X.Abp.VersionManagement.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.Application": {
+      "path": "src/X.Abp.VersionManagement.Application/X.Abp.VersionManagement.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.EntityFrameworkCore": {
+      "path": "src/X.Abp.VersionManagement.EntityFrameworkCore/X.Abp.VersionManagement.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.MongoDB": {
+      "path": "src/X.Abp.VersionManagement.MongoDB/X.Abp.VersionManagement.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.HttpApi": {
+      "path": "src/X.Abp.VersionManagement.HttpApi/X.Abp.VersionManagement.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.HttpApi.Client": {
+      "path": "src/X.Abp.VersionManagement.HttpApi.Client/X.Abp.VersionManagement.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.TestBase": {
+      "path": "test/X.Abp.VersionManagement.TestBase/X.Abp.VersionManagement.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.VersionManagement.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.VersionManagement.EntityFrameworkCore.Tests/X.Abp.VersionManagement.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.VersionManagement.MongoDB.Tests": {
+      "path": "test/X.Abp.VersionManagement.MongoDB.Tests/X.Abp.VersionManagement.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.VersionManagement.Domain.Tests": {
+      "path": "test/X.Abp.VersionManagement.Domain.Tests/X.Abp.VersionManagement.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.VersionManagement.Application.Tests": {
+      "path": "test/X.Abp.VersionManagement.Application.Tests/X.Abp.VersionManagement.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.VersionManagement.HttpApi.Host": {
+      "path": "host/X.Abp.VersionManagement.HttpApi.Host/X.Abp.VersionManagement.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.VersionManagement.Web": {
+      "path": "src/X.Abp.VersionManagement.Web/X.Abp.VersionManagement.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.VersionManagement.HttpApi.Client.ConsoleTestApp/X.Abp.VersionManagement.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.VersionManagement.Web.Host": {
+      "path": "host/X.Abp.VersionManagement.Web.Host/X.Abp.VersionManagement.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.VersionManagement.AuthServer": {
+      "path": "host/X.Abp.VersionManagement.AuthServer/X.Abp.VersionManagement.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.VersionManagement.Host.Shared": {
+      "path": "host/X.Abp.VersionManagement.Host.Shared/X.Abp.VersionManagement.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.VersionManagement.Web.Unified": {
+      "path": "host/X.Abp.VersionManagement.Web.Unified/X.Abp.VersionManagement.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.VersionManagement.Blazor": {
+      "path": "src/X.Abp.VersionManagement.Blazor/X.Abp.VersionManagement.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.Blazor.Host": {
+      "path": "host/X.Abp.VersionManagement.Blazor.Host/X.Abp.VersionManagement.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.VersionManagement.Blazor.Server": {
+      "path": "src/X.Abp.VersionManagement.Blazor.Server/X.Abp.VersionManagement.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.Blazor.WebAssembly": {
+      "path": "src/X.Abp.VersionManagement.Blazor.WebAssembly/X.Abp.VersionManagement.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.VersionManagement.Blazor.Server.Host": {
+      "path": "host/X.Abp.VersionManagement.Blazor.Server.Host/X.Abp.VersionManagement.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

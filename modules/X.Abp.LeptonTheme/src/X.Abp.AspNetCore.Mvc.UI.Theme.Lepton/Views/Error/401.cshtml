@@ -1,0 +1,4 @@
+﻿@using X.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Views.Error.DefaultErrorComponent;
+@model Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Views.Error.AbpErrorViewModel
+
+@(await Component.InvokeAsync<LeptonErrorViewComponent>(new { model = Model, defaultErrorMessageKey = "401Message" }))

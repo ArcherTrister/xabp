@@ -1,0 +1,6 @@
+apiVersion: v2
+name: kibana
+appVersion: "1.0"
+description: Runs Kibana instance
+version: 1.0.0
+type: application

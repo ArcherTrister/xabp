@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace />
+    <AssemblyName>X.Abp.Payment.Admin.Application</AssemblyName>
+    <PackageId>X.Abp.Payment.Admin.Application</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Payment.Admin.Application.Contracts\X.Abp.Payment.Admin.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Payment.Application\X.Abp.Payment.Application.csproj" />
+  </ItemGroup>
+
+</Project>

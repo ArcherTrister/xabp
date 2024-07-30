@@ -1,0 +1,22 @@
+{
+    "name": "X.Abp.AspNetCore.Mvc.UI.Theme.Lepton",
+    "version": "1.0.0",
+    "description": "",
+    "main": "gulpfile.js",
+    "devDependencies": {
+        "bootstrap": "~5.1.0",
+        "del": "^6.0.0",
+        "eslint": "^8.54.0",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^7.0.1",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-rename": "^2.0.0",
+        "gulp-rtlcss": "^1.4.2",
+        "gulp-sass": "~5.0.0",
+        "sass": "^1.42.1"
+    },
+    "scripts": {},
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

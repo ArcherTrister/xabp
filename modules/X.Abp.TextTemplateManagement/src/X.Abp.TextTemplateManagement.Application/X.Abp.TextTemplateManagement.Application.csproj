@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.TextTemplateManagement.Application</AssemblyName>
+    <PackageId>X.Abp.TextTemplateManagement.Application</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference
+      Include="..\X.Abp.TextTemplateManagement.Application.Contracts\X.Abp.TextTemplateManagement.Application.Contracts.csproj" />
+    <ProjectReference
+      Include="..\X.Abp.TextTemplateManagement.Domain\X.Abp.TextTemplateManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

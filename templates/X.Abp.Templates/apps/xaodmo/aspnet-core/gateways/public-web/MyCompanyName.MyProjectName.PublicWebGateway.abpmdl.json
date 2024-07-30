@@ -1,0 +1,13 @@
+{
+  "folders": {
+    "items": {
+      "src": {}
+    }
+  },
+  "packages": {
+    "MyCompanyName.MyProjectName.PublicWebGateway": {
+      "path": "src/MyCompanyName.MyProjectName.PublicWebGateway/MyCompanyName.MyProjectName.PublicWebGateway.abppkg.json",
+      "folder": "src"
+    }
+  }
+}

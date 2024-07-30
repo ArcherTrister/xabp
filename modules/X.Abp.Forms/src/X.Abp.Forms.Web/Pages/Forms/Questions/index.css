@@ -1,0 +1,25 @@
+/* center question and response tabs to middle */
+.questions-responses ul {
+    display: flex;
+    justify-content: center;
+}
+/* align ios switch button  */
+.form-switch .form-check-label::after {
+    top: calc(0.25rem + 0px);
+}
+
+/*.items-form-title {*/
+/*    font-size: xx-large;*/
+/*}*/
+
+/*.items-form-description {*/
+/*    font-size: small;*/
+/*}*/
+
+.selected-question {
+    box-shadow: 0 5px 5px 5px rgba(70, 76, 171, 0.1), 0 0 2px 0 rgba(0, 0, 255, 0.2)
+}
+
+.can-be-hidden {
+    /*display: none;*/
+}

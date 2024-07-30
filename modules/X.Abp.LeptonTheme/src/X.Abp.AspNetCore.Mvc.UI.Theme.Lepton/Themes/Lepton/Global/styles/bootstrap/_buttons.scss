@@ -1,0 +1,10 @@
+.btn {
+  box-shadow: $shadow;
+}
+
+.btn-link {
+  box-shadow: none;
+  border: none;
+  background: none;
+  color: $global-text;
+}

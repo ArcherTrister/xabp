@@ -1,0 +1,337 @@
+{
+  "modules": {
+    "accountAdmin": {
+      "rootPath": "accountAdmin",
+      "remoteServiceName": "AbpAccountAdmin",
+      "controllers": {
+        "X.Abp.Account.AccountSettingsController": {
+          "controllerName": "AccountSettings",
+          "controllerGroupName": "AccountSettings",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Account.AccountSettingsController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Account.IAccountSettingsAppService",
+              "name": "IAccountSettingsAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Account.AccountSettingsDto",
+                    "typeSimple": "X.Abp.Account.AccountSettingsDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Account.AccountSettingsDto, X.Abp.Account.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.Account.AccountSettingsDto",
+                      "typeSimple": "X.Abp.Account.AccountSettingsDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetTwoFactorAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Account.AccountTwoFactorSettingsDto",
+                    "typeSimple": "X.Abp.Account.AccountTwoFactorSettingsDto"
+                  }
+                },
+                {
+                  "name": "UpdateTwoFactorAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Account.AccountTwoFactorSettingsDto, X.Abp.Account.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.Account.AccountTwoFactorSettingsDto",
+                      "typeSimple": "X.Abp.Account.AccountTwoFactorSettingsDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetRecaptchaAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Account.AccountCaptchaSettingsDto",
+                    "typeSimple": "X.Abp.Account.AccountCaptchaSettingsDto"
+                  }
+                },
+                {
+                  "name": "UpdateRecaptchaAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Account.AccountCaptchaSettingsDto, X.Abp.Account.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.Account.AccountCaptchaSettingsDto",
+                      "typeSimple": "X.Abp.Account.AccountCaptchaSettingsDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetExternalProviderAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Account.AccountExternalProviderSettingsDto",
+                    "typeSimple": "X.Abp.Account.AccountExternalProviderSettingsDto"
+                  }
+                },
+                {
+                  "name": "UpdateExternalProviderAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Account.UpdateExternalProviderDto, X.Abp.Account.Pro.Admin.Application.Contracts, Version=7.2.3.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "type": "System.Collections.Generic.List<X.Abp.Account.UpdateExternalProviderDto>",
+                      "typeSimple": "[X.Abp.Account.UpdateExternalProviderDto]",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/account-admin/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Account.AccountSettingsDto",
+                "typeSimple": "X.Abp.Account.AccountSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSettingsAppService"
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/account-admin/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Account.AccountSettingsDto, X.Abp.Account.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.Account.AccountSettingsDto",
+                  "typeSimple": "X.Abp.Account.AccountSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.AccountSettingsDto",
+                  "typeSimple": "X.Abp.Account.AccountSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSettingsAppService"
+            },
+            "GetTwoFactorAsync": {
+              "uniqueName": "GetTwoFactorAsync",
+              "name": "GetTwoFactorAsync",
+              "httpMethod": "GET",
+              "url": "api/account-admin/settings/two-factor",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Account.AccountTwoFactorSettingsDto",
+                "typeSimple": "X.Abp.Account.AccountTwoFactorSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSettingsAppService"
+            },
+            "UpdateTwoFactorAsyncByInput": {
+              "uniqueName": "UpdateTwoFactorAsyncByInput",
+              "name": "UpdateTwoFactorAsync",
+              "httpMethod": "PUT",
+              "url": "api/account-admin/settings/two-factor",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Account.AccountTwoFactorSettingsDto, X.Abp.Account.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.Account.AccountTwoFactorSettingsDto",
+                  "typeSimple": "X.Abp.Account.AccountTwoFactorSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.AccountTwoFactorSettingsDto",
+                  "typeSimple": "X.Abp.Account.AccountTwoFactorSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSettingsAppService"
+            },
+            "GetRecaptchaAsync": {
+              "uniqueName": "GetRecaptchaAsync",
+              "name": "GetRecaptchaAsync",
+              "httpMethod": "GET",
+              "url": "api/account-admin/settings/captcha",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Account.AccountCaptchaSettingsDto",
+                "typeSimple": "X.Abp.Account.AccountCaptchaSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSettingsAppService"
+            },
+            "UpdateRecaptchaAsyncByInput": {
+              "uniqueName": "UpdateRecaptchaAsyncByInput",
+              "name": "UpdateRecaptchaAsync",
+              "httpMethod": "PUT",
+              "url": "api/account-admin/settings/captcha",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Account.AccountCaptchaSettingsDto, X.Abp.Account.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.Account.AccountCaptchaSettingsDto",
+                  "typeSimple": "X.Abp.Account.AccountCaptchaSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.AccountCaptchaSettingsDto",
+                  "typeSimple": "X.Abp.Account.AccountCaptchaSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSettingsAppService"
+            },
+            "GetExternalProviderAsync": {
+              "uniqueName": "GetExternalProviderAsync",
+              "name": "GetExternalProviderAsync",
+              "httpMethod": "GET",
+              "url": "api/account-admin/settings/external-provider",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Account.AccountExternalProviderSettingsDto",
+                "typeSimple": "X.Abp.Account.AccountExternalProviderSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSettingsAppService"
+            },
+            "UpdateExternalProviderAsyncByInput": {
+              "uniqueName": "UpdateExternalProviderAsyncByInput",
+              "name": "UpdateExternalProviderAsync",
+              "httpMethod": "PUT",
+              "url": "api/account-admin/settings/external-provider",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Account.UpdateExternalProviderDto, X.Abp.Account.Pro.Admin.Application.Contracts, Version=7.2.3.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.List<X.Abp.Account.UpdateExternalProviderDto>",
+                  "typeSimple": "[X.Abp.Account.UpdateExternalProviderDto]",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.List<X.Abp.Account.UpdateExternalProviderDto>",
+                  "typeSimple": "[X.Abp.Account.UpdateExternalProviderDto]",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSettingsAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

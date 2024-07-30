@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>X.Abp.CmsKit.Pro</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.EntityFrameworkCore.Tests\X.Abp.CmsKit.Pro.EntityFrameworkCore.Tests.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,20 @@
+config:
+    selfUrl: #
+    gatewayUrl: #
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: # false
+        responseType: "code"
+        strictDiscoveryDocumentValidation: false
+        skipIssuerCheck: true
+
+ingress:
+    host: # myprojectname-st-angular
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: mycompanyname/myprojectname-app-angular
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

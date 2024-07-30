@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Masuit.Tools.Abstractions"
+      Condition="'$(EnableSwaggerEnumFilter)'=='true'" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain.Shared"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain.Shared"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain.Shared"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain.Shared"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.GlobalFeatures" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Gdpr.Domain.Shared" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Identity.Pro.Domain.Shared"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.Domain.Shared"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.OpenIddict.Pro.Domain.Shared"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.Domain.Shared"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Saas.Domain.Shared" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\MyProjectName\*.json" />
+    <Content Remove="Localization\MyProjectName\*.json" />
+  </ItemGroup>
+
+</Project>

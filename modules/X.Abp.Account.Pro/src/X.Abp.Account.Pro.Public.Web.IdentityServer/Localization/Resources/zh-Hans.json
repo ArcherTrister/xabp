@@ -1,0 +1,33 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "X.Abp.IdentityServer:External:010001": "Code不能为空",
+    "X.Abp.IdentityServer:External:010002": "未绑定系统用户",
+    "X.Abp.IdentityServer:External:010003": "登录失败",
+    "X.Abp.IdentityServer:External:010003:Success": "登录成功",
+    "X.Abp.IdentityServer:External:010003:InvalidUserNameOrEmailAddress": "用户名或邮箱验证失败",
+    "X.Abp.IdentityServer:External:010003:InvalidPassword": "密码验证失败",
+    "X.Abp.IdentityServer:External:010003:UserIsNotActive": "用户未激活",
+    "X.Abp.IdentityServer:External:010003:UserEmailIsNotConfirmed": "用户邮箱未确认",
+    "X.Abp.IdentityServer:External:010003:UnknownExternalLogin": "未知的登录方式",
+    "X.Abp.IdentityServer:External:010003:LockedOut": "账号被锁定",
+    "X.Abp.IdentityServer:External:010003:UserPhoneNumberIsNotConfirmed": "用户手机号未确认",
+    "X.Abp.IdentityServer:External:010003:UserAccountIsNotConfirmed": "用户账号未通过认证",
+    "X.Abp.IdentityServer:External:010004": "检索用户信息时出错",
+    "X.Abp.IdentityServer:External:010005": "参数错误",
+    "X.Abp.IdentityServer:External:010006": "无效的验证码",
+    "X.Abp.IdentityServer:External:010007": "创建新用户失败",
+    "X.Abp.IdentityServer:External:010008": "用户不存在",
+    "X.Abp.IdentityServer:External:010009": "第三方提供者密钥不能为空",
+    "X.Abp.IdentityServer:External:010010": "第三方提供者名称不能为空",
+    "X.Abp.IdentityServer:External:010011": "未找到第三方登录信息",
+    "X.Abp.IdentityServer:External:010012": "未找到要绑定的用户信息",
+    "X.Abp.IdentityServer:External:010013": "获取微信用户信息失败",
+    "X.Abp.IdentityServer:External:010014": "用户不存在或未绑定{LoginProvider}快捷登录",
+    "DisplayName:ExternalLogin.SPALoginResultUrl": "单页面程序扩展登录回调Url",
+    "Description:ExternalLogin.SPALoginResultUrl": "单页面程序扩展登录回调Url",
+    "DisplayName:ExternalLogin.SPALinkResultUrl": "单页面程序扩展登录绑定回调Url",
+    "Description:ExternalLogin.SPALinkResultUrl": "单页面程序扩展登录绑定回调Url",
+    "InvalidGrant:PhoneOrTokenCodeNotFound": "手机号或验证码为空"
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "modules": {
+    "productService": {
+      "rootPath": "productService",
+      "remoteServiceName": "ProductService",
+      "controllers": {
+        "MyCompanyName.MyProjectName.ProductService.Products.ProductController": {
+          "controllerName": "Product",
+          "controllerGroupName": "Product",
+          "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductController",
+          "interfaces": [
+            {
+              "type": "MyCompanyName.MyProjectName.ProductService.Products.IProductAppService"
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/product-service/products",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "MyCompanyName.MyProjectName.ProductService.Products.GetProductsInput, MyCompanyName.MyProjectName.ProductService.Application.Contracts",
+                  "type": "MyCompanyName.MyProjectName.ProductService.Products.GetProductsInput",
+                  "typeSimple": "MyCompanyName.MyProjectName.ProductService.Products.GetProductsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "FilterText",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Name",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PriceMin",
+                  "jsonName": null,
+                  "type": "System.Single?",
+                  "typeSimple": "number?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PriceMax",
+                  "jsonName": null,
+                  "type": "System.Single?",
+                  "typeSimple": "number?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<MyCompanyName.MyProjectName.ProductService.Products.ProductDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<MyCompanyName.MyProjectName.ProductService.Products.ProductDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<MyCompanyName.MyProjectName.ProductService.Products.ProductDto,MyCompanyName.MyProjectName.ProductService.Products.ProductDto,System.Guid,MyCompanyName.MyProjectName.ProductService.Products.GetProductsInput>"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/product-service/products/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductDto",
+                "typeSimple": "MyCompanyName.MyProjectName.ProductService.Products.ProductDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<MyCompanyName.MyProjectName.ProductService.Products.ProductDto,MyCompanyName.MyProjectName.ProductService.Products.ProductDto,System.Guid,MyCompanyName.MyProjectName.ProductService.Products.GetProductsInput>"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/product-service/products",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "MyCompanyName.MyProjectName.ProductService.Products.ProductCreateDto, MyCompanyName.MyProjectName.ProductService.Application.Contracts",
+                  "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductCreateDto",
+                  "typeSimple": "MyCompanyName.MyProjectName.ProductService.Products.ProductCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductCreateDto",
+                  "typeSimple": "MyCompanyName.MyProjectName.ProductService.Products.ProductCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductDto",
+                "typeSimple": "MyCompanyName.MyProjectName.ProductService.Products.ProductDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<MyCompanyName.MyProjectName.ProductService.Products.ProductDto,MyCompanyName.MyProjectName.ProductService.Products.ProductCreateDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/product-service/products/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "MyCompanyName.MyProjectName.ProductService.Products.ProductUpdateDto, MyCompanyName.MyProjectName.ProductService.Application.Contracts",
+                  "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductUpdateDto",
+                  "typeSimple": "MyCompanyName.MyProjectName.ProductService.Products.ProductUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductUpdateDto",
+                  "typeSimple": "MyCompanyName.MyProjectName.ProductService.Products.ProductUpdateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductDto",
+                "typeSimple": "MyCompanyName.MyProjectName.ProductService.Products.ProductDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<MyCompanyName.MyProjectName.ProductService.Products.ProductDto,System.Guid,MyCompanyName.MyProjectName.ProductService.Products.ProductUpdateDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/product-service/products/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            }
+          }
+        },
+        "MyCompanyName.MyProjectName.ProductService.Products.ProductPublicController": {
+          "controllerName": "ProductPublic",
+          "controllerGroupName": "ProductPublic",
+          "type": "MyCompanyName.MyProjectName.ProductService.Products.ProductPublicController",
+          "interfaces": [
+            {
+              "type": "MyCompanyName.MyProjectName.ProductService.Products.IProductPublicAppService"
+            }
+          ],
+          "actions": {
+            "GetListAsync": {
+              "uniqueName": "GetListAsync",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/product-service/public/products",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<MyCompanyName.MyProjectName.ProductService.Products.ProductDto>",
+                "typeSimple": "[MyCompanyName.MyProjectName.ProductService.Products.ProductDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "MyCompanyName.MyProjectName.ProductService.Products.IProductPublicAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

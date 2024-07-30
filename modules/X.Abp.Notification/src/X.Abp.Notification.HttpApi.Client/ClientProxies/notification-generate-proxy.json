@@ -1,0 +1,966 @@
+{
+  "modules": {
+    "notification": {
+      "rootPath": "notification",
+      "remoteServiceName": "Notification",
+      "controllers": {
+        "X.Abp.Notification.NotificationController": {
+          "controllerName": "Notification",
+          "controllerGroupName": "Notifications",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Notification.NotificationController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Notification.INotificationAppService",
+              "name": "INotificationAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Notification.Dtos.GetNotificationListResultDto",
+                    "typeSimple": "X.Abp.Notification.Dtos.GetNotificationListResultDto"
+                  }
+                },
+                {
+                  "name": "GetAssignableNotificationsAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<Volo.Abp.NameValue>",
+                    "typeSimple": "[Volo.Abp.NameValue]"
+                  }
+                },
+                {
+                  "name": "GetAssignableNotifiersAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<Volo.Abp.NameValue>",
+                    "typeSimple": "[Volo.Abp.NameValue]"
+                  }
+                },
+                {
+                  "name": "SendByCurrentTenantAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Notification.Dtos.SendNotificationByCurrentTenantInput, X.Abp.Notification.Application.Contracts",
+                      "type": "X.Abp.Notification.Dtos.SendNotificationByCurrentTenantInput",
+                      "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByCurrentTenantInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "SendByTenantsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Notification.Dtos.SendNotificationByTenantsInput, X.Abp.Notification.Application.Contracts",
+                      "type": "X.Abp.Notification.Dtos.SendNotificationByTenantsInput",
+                      "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByTenantsInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "SendByUsersAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Notification.Dtos.SendNotificationByUsersInput, X.Abp.Notification.Application.Contracts",
+                      "type": "X.Abp.Notification.Dtos.SendNotificationByUsersInput",
+                      "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByUsersInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "SendByExcludedUsersAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Notification.Dtos.SendNotificationByExcludedUsersInput, X.Abp.Notification.Application.Contracts",
+                      "type": "X.Abp.Notification.Dtos.SendNotificationByExcludedUsersInput",
+                      "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByExcludedUsersInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetUnPublishedNotificationsAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Notification.Dtos.UnPublishedNotificationOutput>",
+                    "typeSimple": "[X.Abp.Notification.Dtos.UnPublishedNotificationOutput]"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/notification",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Notification.Dtos.GetNotificationListResultDto",
+                "typeSimple": "X.Abp.Notification.Dtos.GetNotificationListResultDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.INotificationAppService"
+            },
+            "GetAssignableNotificationsAsync": {
+              "uniqueName": "GetAssignableNotificationsAsync",
+              "name": "GetAssignableNotificationsAsync",
+              "httpMethod": "GET",
+              "url": "api/notification/assignable-notifications",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<Volo.Abp.NameValue>",
+                "typeSimple": "[Volo.Abp.NameValue]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.INotificationAppService"
+            },
+            "GetAssignableNotifiersAsync": {
+              "uniqueName": "GetAssignableNotifiersAsync",
+              "name": "GetAssignableNotifiersAsync",
+              "httpMethod": "GET",
+              "url": "api/notification/assignable-notifiers",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<Volo.Abp.NameValue>",
+                "typeSimple": "[Volo.Abp.NameValue]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.INotificationAppService"
+            },
+            "SendByCurrentTenantAsyncByInput": {
+              "uniqueName": "SendByCurrentTenantAsyncByInput",
+              "name": "SendByCurrentTenantAsync",
+              "httpMethod": "POST",
+              "url": "api/notification/send-by-current-tenant",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Notification.Dtos.SendNotificationByCurrentTenantInput, X.Abp.Notification.Application.Contracts",
+                  "type": "X.Abp.Notification.Dtos.SendNotificationByCurrentTenantInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByCurrentTenantInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.Dtos.SendNotificationByCurrentTenantInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByCurrentTenantInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.INotificationAppService"
+            },
+            "SendByTenantsAsyncByInput": {
+              "uniqueName": "SendByTenantsAsyncByInput",
+              "name": "SendByTenantsAsync",
+              "httpMethod": "POST",
+              "url": "api/notification/send-by-tenants",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Notification.Dtos.SendNotificationByTenantsInput, X.Abp.Notification.Application.Contracts",
+                  "type": "X.Abp.Notification.Dtos.SendNotificationByTenantsInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByTenantsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.Dtos.SendNotificationByTenantsInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByTenantsInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.INotificationAppService"
+            },
+            "SendByUsersAsyncByInput": {
+              "uniqueName": "SendByUsersAsyncByInput",
+              "name": "SendByUsersAsync",
+              "httpMethod": "POST",
+              "url": "api/notification/send-by-users",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Notification.Dtos.SendNotificationByUsersInput, X.Abp.Notification.Application.Contracts",
+                  "type": "X.Abp.Notification.Dtos.SendNotificationByUsersInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByUsersInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.Dtos.SendNotificationByUsersInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByUsersInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.INotificationAppService"
+            },
+            "SendByExcludedUsersAsyncByInput": {
+              "uniqueName": "SendByExcludedUsersAsyncByInput",
+              "name": "SendByExcludedUsersAsync",
+              "httpMethod": "POST",
+              "url": "api/notification/send-by-excluded-users",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Notification.Dtos.SendNotificationByExcludedUsersInput, X.Abp.Notification.Application.Contracts",
+                  "type": "X.Abp.Notification.Dtos.SendNotificationByExcludedUsersInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByExcludedUsersInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.Dtos.SendNotificationByExcludedUsersInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SendNotificationByExcludedUsersInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.INotificationAppService"
+            },
+            "GetUnPublishedNotificationsAsync": {
+              "uniqueName": "GetUnPublishedNotificationsAsync",
+              "name": "GetUnPublishedNotificationsAsync",
+              "httpMethod": "GET",
+              "url": "api/notification/un-published-notifications",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Notification.Dtos.UnPublishedNotificationOutput>",
+                "typeSimple": "[X.Abp.Notification.Dtos.UnPublishedNotificationOutput]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.INotificationAppService"
+            }
+          }
+        },
+        "X.Abp.Notification.UserNotificationController": {
+          "controllerName": "UserNotification",
+          "controllerGroupName": "Notifications",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Notification.UserNotificationController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Notification.IUserNotificationAppService",
+              "name": "IUserNotificationAppService",
+              "methods": [
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Notification.UserNotificationInfo",
+                    "typeSimple": "X.Abp.Notification.UserNotificationInfo"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Notification.Dtos.PagedUserNotificationDto, X.Abp.Notification.Application.Contracts",
+                      "type": "X.Abp.Notification.Dtos.PagedUserNotificationDto",
+                      "typeSimple": "X.Abp.Notification.Dtos.PagedUserNotificationDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Notification.UserNotificationInfo>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Notification.UserNotificationInfo>"
+                  }
+                },
+                {
+                  "name": "MarkAllAsReadAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "MarkAsReadedAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/notification/user-notification/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserNotificationAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/notification/user-notification/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Notification.UserNotificationInfo",
+                "typeSimple": "X.Abp.Notification.UserNotificationInfo"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserNotificationAppService"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/notification/user-notification",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Notification.Dtos.PagedUserNotificationDto, X.Abp.Notification.Application.Contracts",
+                  "type": "X.Abp.Notification.Dtos.PagedUserNotificationDto",
+                  "typeSimple": "X.Abp.Notification.Dtos.PagedUserNotificationDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "State",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.UserNotificationState?",
+                  "typeSimple": "X.Abp.Notification.UserNotificationState?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "NotificationName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "StartDate",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EndDate",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Notification.UserNotificationInfo>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Notification.UserNotificationInfo>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserNotificationAppService"
+            },
+            "MarkAllAsReadAsync": {
+              "uniqueName": "MarkAllAsReadAsync",
+              "name": "MarkAllAsReadAsync",
+              "httpMethod": "PUT",
+              "url": "api/notification/user-notification",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserNotificationAppService"
+            },
+            "MarkAsReadedAsyncById": {
+              "uniqueName": "MarkAsReadedAsyncById",
+              "name": "MarkAsReadedAsync",
+              "httpMethod": "PUT",
+              "url": "api/notification/user-notification/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserNotificationAppService"
+            }
+          }
+        },
+        "X.Abp.Notification.UserSubscriptionController": {
+          "controllerName": "UserSubscription",
+          "controllerGroupName": "Notifications",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Notification.UserSubscriptionController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Notification.IUserSubscriptionAppService",
+              "name": "IUserSubscriptionAppService",
+              "methods": [
+                {
+                  "name": "SubscribeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Notification.Dtos.SubscribeInput, X.Abp.Notification.Application.Contracts",
+                      "type": "X.Abp.Notification.Dtos.SubscribeInput",
+                      "typeSimple": "X.Abp.Notification.Dtos.SubscribeInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "SubscribeToAllAvailableNotificationsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "user",
+                      "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification",
+                      "type": "X.Abp.Notification.UserIdentifier",
+                      "typeSimple": "X.Abp.Notification.UserIdentifier",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "UnSubscribeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Notification.Dtos.UnsubscribeInput, X.Abp.Notification.Application.Contracts",
+                      "type": "X.Abp.Notification.Dtos.UnsubscribeInput",
+                      "typeSimple": "X.Abp.Notification.Dtos.UnsubscribeInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetSubscribedNotificationsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "user",
+                      "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification",
+                      "type": "X.Abp.Notification.UserIdentifier",
+                      "typeSimple": "X.Abp.Notification.UserIdentifier",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Notification.UserNotificationSubscriptionInfo>",
+                    "typeSimple": "[X.Abp.Notification.UserNotificationSubscriptionInfo]"
+                  }
+                },
+                {
+                  "name": "IsSubscribedAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Notification.Dtos.SubscribeInput, X.Abp.Notification.Application.Contracts",
+                      "type": "X.Abp.Notification.Dtos.SubscribeInput",
+                      "typeSimple": "X.Abp.Notification.Dtos.SubscribeInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "SubscribeAsyncByInput": {
+              "uniqueName": "SubscribeAsyncByInput",
+              "name": "SubscribeAsync",
+              "httpMethod": "POST",
+              "url": "api/notification/user-subscription/subscribe",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Notification.Dtos.SubscribeInput, X.Abp.Notification.Application.Contracts",
+                  "type": "X.Abp.Notification.Dtos.SubscribeInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SubscribeInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.Dtos.SubscribeInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SubscribeInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserSubscriptionAppService"
+            },
+            "SubscribeToAllAvailableNotificationsAsyncByUser": {
+              "uniqueName": "SubscribeToAllAvailableNotificationsAsyncByUser",
+              "name": "SubscribeToAllAvailableNotificationsAsync",
+              "httpMethod": "POST",
+              "url": "api/notification/user-subscription/subscribe-to-all-available-notifications",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "user",
+                  "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification",
+                  "type": "X.Abp.Notification.UserIdentifier",
+                  "typeSimple": "X.Abp.Notification.UserIdentifier",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "user",
+                  "name": "user",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.UserIdentifier",
+                  "typeSimple": "X.Abp.Notification.UserIdentifier",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserSubscriptionAppService"
+            },
+            "UnSubscribeAsyncByInput": {
+              "uniqueName": "UnSubscribeAsyncByInput",
+              "name": "UnSubscribeAsync",
+              "httpMethod": "POST",
+              "url": "api/notification/user-subscription/un-subscribe",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Notification.Dtos.UnsubscribeInput, X.Abp.Notification.Application.Contracts",
+                  "type": "X.Abp.Notification.Dtos.UnsubscribeInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.UnsubscribeInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.Dtos.UnsubscribeInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.UnsubscribeInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserSubscriptionAppService"
+            },
+            "GetSubscribedNotificationsAsyncByUser": {
+              "uniqueName": "GetSubscribedNotificationsAsyncByUser",
+              "name": "GetSubscribedNotificationsAsync",
+              "httpMethod": "GET",
+              "url": "api/notification/user-subscription/subscribed-notifications",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "user",
+                  "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification",
+                  "type": "X.Abp.Notification.UserIdentifier",
+                  "typeSimple": "X.Abp.Notification.UserIdentifier",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "user",
+                  "name": "TenantId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "user"
+                },
+                {
+                  "nameOnMethod": "user",
+                  "name": "UserId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "user"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Notification.UserNotificationSubscriptionInfo>",
+                "typeSimple": "[X.Abp.Notification.UserNotificationSubscriptionInfo]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserSubscriptionAppService"
+            },
+            "IsSubscribedAsyncByInput": {
+              "uniqueName": "IsSubscribedAsyncByInput",
+              "name": "IsSubscribedAsync",
+              "httpMethod": "POST",
+              "url": "api/notification/user-subscription/is-subscribed",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Notification.Dtos.SubscribeInput, X.Abp.Notification.Application.Contracts",
+                  "type": "X.Abp.Notification.Dtos.SubscribeInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SubscribeInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Notification.Dtos.SubscribeInput",
+                  "typeSimple": "X.Abp.Notification.Dtos.SubscribeInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Notification.IUserSubscriptionAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

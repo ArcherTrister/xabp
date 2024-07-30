@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "X.Abp.CmsKit.Pro.Domain.Shared": {
+      "path": "src/X.Abp.CmsKit.Pro.Domain.Shared/X.Abp.CmsKit.Pro.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.Domain": {
+      "path": "src/X.Abp.CmsKit.Pro.Domain/X.Abp.CmsKit.Pro.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.Application.Contracts": {
+      "path": "src/X.Abp.CmsKit.Pro.Application.Contracts/X.Abp.CmsKit.Pro.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.Application": {
+      "path": "src/X.Abp.CmsKit.Pro.Application/X.Abp.CmsKit.Pro.Application.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.EntityFrameworkCore": {
+      "path": "src/X.Abp.CmsKit.Pro.EntityFrameworkCore/X.Abp.CmsKit.Pro.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.MongoDB": {
+      "path": "src/X.Abp.CmsKit.Pro.MongoDB/X.Abp.CmsKit.Pro.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.HttpApi": {
+      "path": "src/X.Abp.CmsKit.Pro.HttpApi/X.Abp.CmsKit.Pro.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.HttpApi.Client": {
+      "path": "src/X.Abp.CmsKit.Pro.HttpApi.Client/X.Abp.CmsKit.Pro.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.TestBase": {
+      "path": "test/X.Abp.CmsKit.Pro.TestBase/X.Abp.CmsKit.Pro.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.CmsKit.Pro.EntityFrameworkCore.Tests": {
+      "path": "test/X.Abp.CmsKit.Pro.EntityFrameworkCore.Tests/X.Abp.CmsKit.Pro.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.CmsKit.Pro.MongoDB.Tests": {
+      "path": "test/X.Abp.CmsKit.Pro.MongoDB.Tests/X.Abp.CmsKit.Pro.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.CmsKit.Pro.Domain.Tests": {
+      "path": "test/X.Abp.CmsKit.Pro.Domain.Tests/X.Abp.CmsKit.Pro.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.CmsKit.Pro.Application.Tests": {
+      "path": "test/X.Abp.CmsKit.Pro.Application.Tests/X.Abp.CmsKit.Pro.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.CmsKit.Pro.HttpApi.Host": {
+      "path": "host/X.Abp.CmsKit.Pro.HttpApi.Host/X.Abp.CmsKit.Pro.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.CmsKit.Pro.Web": {
+      "path": "src/X.Abp.CmsKit.Pro.Web/X.Abp.CmsKit.Pro.Web.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/X.Abp.CmsKit.Pro.HttpApi.Client.ConsoleTestApp/X.Abp.CmsKit.Pro.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "X.Abp.CmsKit.Pro.Web.Host": {
+      "path": "host/X.Abp.CmsKit.Pro.Web.Host/X.Abp.CmsKit.Pro.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.CmsKit.Pro.AuthServer": {
+      "path": "host/X.Abp.CmsKit.Pro.AuthServer/X.Abp.CmsKit.Pro.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.CmsKit.Pro.Host.Shared": {
+      "path": "host/X.Abp.CmsKit.Pro.Host.Shared/X.Abp.CmsKit.Pro.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.CmsKit.Pro.Web.Unified": {
+      "path": "host/X.Abp.CmsKit.Pro.Web.Unified/X.Abp.CmsKit.Pro.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.CmsKit.Pro.Blazor": {
+      "path": "src/X.Abp.CmsKit.Pro.Blazor/X.Abp.CmsKit.Pro.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.Blazor.Host": {
+      "path": "host/X.Abp.CmsKit.Pro.Blazor.Host/X.Abp.CmsKit.Pro.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "X.Abp.CmsKit.Pro.Blazor.Server": {
+      "path": "src/X.Abp.CmsKit.Pro.Blazor.Server/X.Abp.CmsKit.Pro.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.Blazor.WebAssembly": {
+      "path": "src/X.Abp.CmsKit.Pro.Blazor.WebAssembly/X.Abp.CmsKit.Pro.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "X.Abp.CmsKit.Pro.Blazor.Server.Host": {
+      "path": "host/X.Abp.CmsKit.Pro.Blazor.Server.Host/X.Abp.CmsKit.Pro.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

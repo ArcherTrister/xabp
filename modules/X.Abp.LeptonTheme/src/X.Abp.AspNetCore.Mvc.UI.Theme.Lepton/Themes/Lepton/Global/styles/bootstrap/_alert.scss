@@ -1,0 +1,17 @@
+@include run-through-all-colors() using ($type) {
+  .alert-#{$type} {
+    color: lp-var(alert-#{$type}-text-color, global-text);
+    background: lp-var(card-bg);
+
+    a,
+    .icon,
+    .highlight,
+    .alert-link {
+      color: $global-text;
+    }
+  }
+}
+
+.alert {
+  box-shadow: $shadow;
+}

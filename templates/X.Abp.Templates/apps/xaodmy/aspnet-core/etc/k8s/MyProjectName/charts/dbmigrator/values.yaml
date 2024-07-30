@@ -1,0 +1,32 @@
+config:
+    connectionStrings:
+        identityService: #
+        administrationService: #
+        saasService: #
+        productService: #
+    dotnetEnv: Staging
+
+# Seeded applications and resources
+openIdDict:
+    applications:
+        authServerRootUrl: #
+        angularRootUrl: #
+        webRootUrl: #
+        blazorRootUrl: #
+        blazorServerRootUrl: #
+        publicWebRootUrl: #
+        webGatewayRootUrl: #
+        publicWebGatewayRootUrl: #
+    resources:
+        accountServiceRootUrl: #
+        administrationServiceRootUrl: #
+        identityServiceRootUrl: #
+        saasServiceRootUrl: #
+        productServiceRootUrl: #
+
+image:
+    repository: mycompanyname/myprojectname-db-migrator
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

@@ -1,0 +1,104 @@
+{
+  "ReverseProxy": {
+    "Routes": {
+      "AbpApi": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/abp/{**catch-all}"
+        }
+      },
+      "AdministrationSwagger": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/swagger-json/Administration/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/swagger-json/Administration"
+          }
+        ]
+      },
+      "Account": {
+        "ClusterId": "AuthServer",
+        "Match": {
+          "Path": "/api/account/{**catch-all}"
+        }
+      },
+      "AuthServerSwagger": {
+        "ClusterId": "AuthServer",
+        "Match": {
+          "Path": "/swagger-json/AuthServer/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/swagger-json/AuthServer"
+          }
+        ]
+      },
+      "Payment": {
+        "ClusterId": "Payment",
+        "Match": {
+          "Path": "/api/payment-service/{**catch-all}"
+        }
+      },
+      "PaymentSwagger": {
+        "ClusterId": "Payment",
+        "Match": {
+          "Path": "/swagger-json/Payment/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/swagger-json/Payment"
+          }
+        ]
+      },
+      "Product": {
+        "ClusterId": "Product",
+        "Match": {
+          "Path": "/api/product-service/{**catch-all}"
+        }
+      },
+      "ProductSwagger": {
+        "ClusterId": "Product",
+        "Match": {
+          "Path": "/swagger-json/Product/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/swagger-json/Product"
+          }
+        ]
+      }
+    },
+    "Clusters": {
+      "AuthServer": {
+        "Destinations": {
+          "AuthServer": {
+            "Address": "https://localhost:44322/"
+          }
+        }
+      },
+      "Administration": {
+        "Destinations": {
+          "Administration": {
+            "Address": "https://localhost:44367/"
+          }
+        }
+      },
+      "Payment": {
+        "Destinations": {
+          "Payment": {
+            "Address": "https://localhost:44381/"
+          }
+        }
+      },
+      "Product": {
+        "Destinations": {
+          "Product": {
+            "Address": "https://localhost:44361/"
+          }
+        }
+      }
+    }
+  }
+}

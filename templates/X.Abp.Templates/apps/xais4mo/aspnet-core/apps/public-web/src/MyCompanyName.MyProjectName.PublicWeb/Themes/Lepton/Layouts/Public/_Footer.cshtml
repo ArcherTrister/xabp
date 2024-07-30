@@ -1,0 +1,126 @@
+@using Volo.Abp.Ui.Branding
+@inject IBrandingProvider BrandingProvider
+<div class="lp-footer footer-top border-top">
+    <div class="lp-content pb-0">
+        <div class=" text-center ">
+            <a href="#" target="_blank">
+                <i class="fa fa-twitter fa-2x p-3"></i>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fa fa-facebook fa-2x p-3"></i>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fa fa-medium fa-2x p-3"></i>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fa fa-github fa-2x p-3"></i>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fa fa-instagram fa-2x p-3"></i>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fa fa-linkedin fa-2x p-3"></i>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fa fa-youtube fa-2x p-3"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<footer class="py-5 lp-footer">
+    <div class="lp-content">
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <a class="navbar-brand" href="~/" alt="@BrandingProvider.AppName"></a>
+                <div class="my-2">
+                    <span class="copyright-text">@DateTime.Now.Year ? LeptonTheme by <a href="http://www.volosoft.com" target="_blank">Volosoft</a></span>
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="row">
+
+                    <div class="col-6 col-md">
+                        <h5>Features</h5>
+                        <ul class="list-unstyled text-small">
+                            <li>
+                                <a class="text-muted" href="#">Cool stuff</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Random feature</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Team feature</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Stuff for developers</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Another one</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Last time</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md">
+                        <h5>Pages</h5>
+                        <ul class="list-unstyled text-small">
+                            <li>
+                                <a class="text-muted" href="#">Home Page</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Products</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Pricing</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Live Support</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Frequently Asked Questions</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Terms and Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md">
+                        <h5>Resources</h5>
+                        <ul class="list-unstyled text-small">
+                            <li>
+                                <a class="text-muted" href="#">Business</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Education</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Government</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Gaming</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md">
+                        <h5>About</h5>
+                        <ul class="list-unstyled text-small">
+                            <li>
+                                <a class="text-muted" href="#">Team</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="/contact-us">Contact Us</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="/privacy-policy">Privacy</a>
+                            </li>
+                            <li>
+                                <a class="text-muted" href="#">Terms</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

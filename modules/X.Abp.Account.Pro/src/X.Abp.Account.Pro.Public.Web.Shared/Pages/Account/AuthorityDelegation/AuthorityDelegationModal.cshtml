@@ -1,0 +1,33 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Options;
+@using X.Abp.Account.AuthorityDelegation;
+@using X.Abp.Account.Localization;
+@using X.Abp.Account.Public.Web.Pages.Account.AuthorityDelegation;
+@inject IHtmlLocalizer<AccountResource> L
+@inject IOptions<AbpAccountAuthorityDelegationOptions> Options
+@model X.Abp.Account.Public.Web.Pages.Account.AuthorityDelegation.AuthorityDelegationModalModel
+@{
+    Layout = null;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(AuthorityDelegationModalModel).FullName">
+        <abp-script src="/Pages/Account/AuthorityDelegation/AuthorityDelegationModal.js" />
+    </abp-script-bundle>
+}
+
+<abp-modal id="AuthorityDelegationModal" size="Large">
+    <abp-modal-header title="@L["AuthorityDelegation"].Value"></abp-modal-header>
+    <abp-modal-body>
+        <div class="mb-3 text-end">
+            <abp-button button-type="Primary" id="DelegateNewUser" text="@L["DelegateNewUser"].Value" />
+        </div>
+
+        <form id="DelegatedImpersonationForm" data-ajaxForm="false" method="post" action="~/Account/DelegatedImpersonate">
+        </form>
+
+        <abp-table striped-rows="true" id="DelegateNewUsersTable" class="nowrap"></abp-table>
+        <abp-table striped-rows="true" id="MyDelegatedUsersTable" class="nowrap"></abp-table>
+    </abp-modal-body>
+</abp-modal>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MyCompanyName.MyProjectName.SaasService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.Saas.HttpApi.Client" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Payment.Admin.HttpApi.Client"
+      VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.SaasService.Application.Contracts\MyCompanyName.MyProjectName.SaasService.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

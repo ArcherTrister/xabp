@@ -1,0 +1,11 @@
+@using X.Abp.Quartz.Web.Components.Brand
+@using X.Abp.Quartz.Web.Components.Menu
+@using X.Abp.Quartz.Web.Components.Toolbar
+<div id="stats">
+    <ul class="nav nav-pills nav-stacked">
+@*        @foreach (MenuItem item in navBars)
+        {
+            <li class="@(item.Url.Equals(Html.ViewContext.HttpContext.Request.Path.Value, StringComparison.OrdinalIgnoreCase) ? "active" : "")"><a asp-area="@item.AreaName" asp-controller="@item.ControllerName" asp-action="@item.ActionName" asp-route-schedulerName="@LocalSchedulerName" title="@item.Title">@L(item.Name)<span class="badge pull-right">@item.Metrics</span></a></li>
+        }*@
+    </ul>
+</div>

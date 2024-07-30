@@ -1,0 +1,5 @@
+﻿.scrolled {
+    max-height: 640px;
+    overflow-y: auto;
+    overflow-x: clip;
+}

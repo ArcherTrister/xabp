@@ -1,0 +1,28 @@
+{
+  "culture": "tr",
+  "texts": {
+    "Menu:ProductService": "Ürün Servisi",
+    "Menu:Products": "Ürünler",
+    "Permission:ProductService": "Ürün Hizmeti",
+    "Permission:Products": "Ürünler",
+    "Permission:Create": "Oluşturmak",
+    "Permission:Edit": "Düzenlemek",
+    "Permission:Delete": "Silmek",
+    "Products": "Ürünler",
+    "NewProduct": "Yeni ürün",
+    "Actions": "Hareketler",
+    "SuccessfullyDeleted": "Başarıyla silindi",
+    "DeleteConfirmationMessage": "Bu ürünü silmek istediğinizden emin misiniz?",
+    "Search": "Arama",
+    "Pick": "Seçmek",
+    "SeeAdvancedFilters": "Gelişmiş filtreler",
+    "Name": "İsim",
+    "Price": "Fiyat",
+    "MinPrice": "Minimum Fiyat",
+    "MaxPrice": "Maksimum Fiyat",
+    "Product": "Ürün",
+    "AreYouSure": "Emin misin?",
+    "MinName": "Minimum Adı",
+    "MaxName": "Maksimum Ad"
+  }
+}

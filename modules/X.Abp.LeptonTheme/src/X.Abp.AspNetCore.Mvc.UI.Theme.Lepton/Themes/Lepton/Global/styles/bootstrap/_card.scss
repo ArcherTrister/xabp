@@ -1,0 +1,13 @@
+.card {
+  color: $card-color;
+  margin-bottom: $card-margin-bottom;
+}
+
+.card-header {
+  border-bottom: none;
+
+  .card-title {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+}

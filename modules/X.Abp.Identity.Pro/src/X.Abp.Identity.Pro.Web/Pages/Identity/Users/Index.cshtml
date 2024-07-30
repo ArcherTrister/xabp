@@ -1,0 +1,104 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Options;
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout;
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.JsTree;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageSearchBox;
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Pages.Shared.Components.AbpPageToolbar;
+@using Volo.Abp.Identity.Localization;
+@using X.Abp.Identity.Web;
+@using X.Abp.Identity.Web.Menus;
+@using X.Abp.Identity.Web.Pages.Identity.Users;
+@model IndexModel
+@inject IHtmlLocalizer<IdentityResource> L
+@inject IOptions<AbpIdentityWebOptions> IdentityWebOptions
+@inject IAuthorizationService Authorization
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.Title = L["Users"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:IdentityManagement"].Value);
+    PageLayout.Content.MenuItemName = AbpIdentityProMenuNames.Users;
+}
+@section styles {
+    <abp-style-bundle name="@typeof(IndexModel).FullName">
+        <abp-style type="typeof(JsTreeStyleContributor)" />
+        <abp-style src="/Pages/AbpPermissionManagement/permission-management-modal.css" />
+        <abp-style src="/Pages/Identity/Users/index.css" />
+    </abp-style-bundle>
+}
+@section scripts {
+    <abp-script-bundle name="@typeof(IndexModel).FullName">
+        <abp-script src="/client-proxies/identity-proxy.js" />
+        <abp-script type="typeof(JsTreeScriptContributor)" />
+        <abp-script src="/Pages/AbpPermissionManagement/permission-management-modal.js" />
+        <abp-script src="/Pages/Identity/Users/index.js" />
+        @if (IdentityWebOptions.Value.EnableUserImpersonation)
+        {
+            <abp-script src="/Pages/Identity/Users/enableUserImpersonation.js" />
+        }
+        <abp-script src="/Pages/Identity/Users/edit.js" />
+        <abp-script src="/Pages/Identity/Users/create.js" />
+        <abp-script src="/Pages/Identity/Users/setPassword.js" />
+        <abp-script src="/Pages/Identity/Users/ImportToolbar/default.js" />
+        <abp-script src="/Pages/Identity/Shared/claimTypeEdit.js" />
+    </abp-script-bundle>
+}
+@section content_toolbar {
+    @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new { pageName = typeof(IndexModel).FullName })
+}
+<div id="IdentityUsersWrapper">
+    <abp-card>
+        <abp-card-body>
+            <abp-row>
+                <abp-column>
+                    @await Component.InvokeAsync(typeof(AbpPageSearchBoxViewComponent))
+                </abp-column>
+            </abp-row>
+            <abp-row class="mt-3 mb-3">
+                <abp-column size-md="_12">
+                    <a href="javascript:;" id="AdvancedFilterSectionToggler" class="text-decoration-none">@L["SeeAdvancedFilters"]</a>
+                </abp-column>
+            </abp-row>
+            <abp-row id="AdvancedFilterSection" style="display: none;">
+                <abp-column size="_3">
+                    <abp-select id="IdentityRole" asp-for="RoleId" asp-items="@Model.RolesComboboxItems" label="@L["Role"].Value"></abp-select>
+                </abp-column>
+                <abp-column size="_3">
+                    <abp-select id="OrganizationUnit" asp-for="OrganizationUnitId" asp-items="@Model.OrganizationUnitsComboboxItems" label="@L["OrganizationUnit"].Value"></abp-select>
+                </abp-column>
+                <abp-column size="_3">
+                    <abp-input asp-for="UserName" label="@L["UserName"].Value"/>
+                </abp-column>
+                <abp-column size="_3">
+                    <abp-input asp-for="PhoneNumber" label="@L["PhoneNumber"].Value"/>
+                </abp-column>
+                <abp-column size="_3">
+                    <abp-input asp-for="EmailAddress" label="@L["EmailAddress"].Value"/>
+                </abp-column>
+                <abp-column size="_3" class="d-flex">
+                    <div class="align-self-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="IsLockedOut">
+                            <label class="form-check-label" for="IsLockedOut">@L["Lock"].Value</label>
+                        </div>
+                    </div>
+                    <div class="align-self-center ms-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="NotActive">
+                            <label class="form-check-label" for="NotActive">@L["NotActive"].Value</label>
+                        </div>
+                    </div>
+                </abp-column>
+            </abp-row>
+        </abp-card-body>
+    </abp-card>
+    <abp-table striped-rows="true" class="nowrap"></abp-table>
+</div>
+
+@if (IdentityWebOptions.Value.EnableUserImpersonation)
+{
+    <form method="post" data-ajaxForm="false" action="~/Account/ImpersonateUser" id="ImpersonationForm">
+        <input type="hidden" name="UserId">
+    </form>
+}

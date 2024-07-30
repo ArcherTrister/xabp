@@ -1,0 +1,283 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Localization;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal;
+@using Volo.Abp.Data;
+@using Volo.Abp.IdentityServer.Localization;
+@using Volo.Abp.Localization;
+@using Volo.Abp.ObjectExtending;
+@using X.Abp.IdentityServer.Web.Pages.IdentityServer.Clients;
+@model X.Abp.IdentityServer.Web.Pages.IdentityServer.Clients.CreateModel
+@inject IHtmlLocalizer<AbpIdentityServerResource> L
+@inject IStringLocalizerFactory StringLocalizerFactory
+@{
+    Layout = null;
+}
+
+<form asp-page="/IdentityServer/Clients/Create" class="form-with-card">
+    <abp-modal>
+        <abp-modal-header title="@L["New"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-tabs>
+                <abp-tab title="Basic">
+                    <div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.ClientId" label="@L["Client:ClientId"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.ClientName" label="@L["Client:ClientName"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.Description" label="@L["Client:Description"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.ClientUri" label="@L["Client:ClientUri"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.LogoUri" label="@L["Client:LogoUri"].Value" />
+                        </div>
+                        <div class="mb-2 custom-checkbox custom-control form-check">
+                            <abp-input type="checkbox" asp-for="Client.RequireConsent" label="@L["Client:RequireConsent"].Value" />
+                        </div>
+                        @foreach (var propertyInfo in ObjectExtensionManager.Instance.GetProperties<ClientCreateModalView>())
+                        {
+                            if (!propertyInfo.Name.EndsWith("_Text"))
+                            {
+                                if (propertyInfo.Type.IsEnum || !propertyInfo.Lookup.Url.IsNullOrEmpty())
+                                {
+                                    if (propertyInfo.Type.IsEnum)
+                                    {
+                                        Model.Client.ExtraProperties.ToEnum(propertyInfo.Name, propertyInfo.Type);
+                                    }
+                                    <abp-select asp-for="Client.ExtraProperties[propertyInfo.Name]"
+                                                label="@propertyInfo.GetLocalizedDisplayName(StringLocalizerFactory)"
+                                                autocomplete-api-url="@propertyInfo.Lookup.Url"
+                                                autocomplete-selected-item-name="@Model.Client.GetProperty(propertyInfo.Name+"_Text")"
+                                                autocomplete-selected-item-value="@Model.Client.GetProperty(propertyInfo.Name)"
+                                                autocomplete-filter-param-name="@propertyInfo.Lookup.FilterParamName"
+                                                autocomplete-items-property-name="@propertyInfo.Lookup.ResultListPropertyName"
+                                                autocomplete-display-property-name="@propertyInfo.Lookup.DisplayPropertyName"
+                                                autocomplete-value-property-name="@propertyInfo.Lookup.ValuePropertyName"></abp-select>
+                                }
+                                else
+                                {
+                                    <abp-input type="@propertyInfo.GetInputType()"
+                                               asp-for="Client.ExtraProperties[propertyInfo.Name]"
+                                               label="@propertyInfo.GetLocalizedDisplayName(StringLocalizerFactory)"
+                                               asp-format="@propertyInfo.GetInputFormatOrNull()"
+                                               value="@propertyInfo.GetInputValueOrNull(Model.Client.GetProperty(propertyInfo.Name))" />
+                                }
+                            }
+                        }
+                    </div>
+                </abp-tab>
+                <abp-tab title="Uris">
+                    <div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.CallbackUrl" label="@L["Client:CallbackUrl"].Value" />
+                        </div>
+                        <div class="mb-3">
+                            <abp-input asp-for="Client.LogoutUrl" label="@L["Client:LogoutUrl"].Value" />
+                        </div>
+                    </div>
+                </abp-tab>
+                <abp-tab title="Secrets">
+                    <div>
+                        <div class="bg-light shadow-none mb-3 card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <abp-select asp-for="SampleSecret.Type" asp-items="@Model.SecretTypes" label="@L["SampleSecret:Type"].Value" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <abp-input asp-for="SampleSecret.Value" label="@L["SampleSecret:Value"].Value" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <abp-input asp-for="SampleSecret.Description" label="@L["SampleSecret:Description"].Value" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <abp-input asp-for="SampleSecret.Expiration" label="@L["SampleSecret:Expiration"].Value" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <abp-button id="AddNewSecretButton" class="float-end btn btn-success btn-sm" type="button">
+                                    <i class="fa fa-plus"></i> 添加一个新的
+                                </abp-button>
+                            </div>
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table class="border-bottom table table-striped" id="SecretTableId" style="display: none;">
+                                <thead>
+                                    <tr>
+                                        <th scope="Column">类型</th>
+                                        <th scope="Column">值</th>
+                                        <th scope="Column">描述</th>
+                                        <th scope="Column">到期</th>
+                                        <th scope="Column"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="SecretTableBodyId">
+                                    @for (int i = 0; i < Model.Client.Secrets.Length; i++)
+                                    {
+                                        var secret = Model.Client.Secrets[i];
+                                        var typeInputId = $"Client_Secrets_{i}__Type";
+                                        var valueInputId = $"Client_Secrets_{i}__Value";
+                                        var descriptionInputId = $"Client_Secrets_{i}__Description";
+                                        var expirationInputId = $"Client_Secrets_{i}__Expiration";
+                                        <tr>
+                                            <td>
+                                                @secret.Type
+                                            </td>
+                                            <td>
+                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">@secret.Value</span>
+                                            </td>
+                                            <td>
+                                                @secret.Description
+                                            </td>
+                                            <td>
+                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">@secret.Expiration?.ToString("yyyy-MM-dd")</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger btn-sm deleteSecretButton float-end">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                            <td hidden="">
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Type" label="@L["Secret:Type"].Value" />*@
+                                                    <label class="form-label" for="secret_Type">Type</label>
+                                                    <input id="@typeInputId" name="Client.Secrets[@i].Type" type="text" value="@secret.Type" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Type" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Value" label="@L["Secret:Value"].Value" />*@
+                                                    <label class="form-label" for="secret_Value">Value</label>
+                                                    <input id="@valueInputId" name="Client.Secrets[@i].Value" type="text" value="@secret.Value" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Value" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Description" label="@L["Secret:Description"].Value" />*@
+                                                    <label class="form-label" for="secret_Description">Description</label>
+                                                    <input id="@descriptionInputId" name="Client.Secrets[@i].Description" type="text" value="@secret.Description" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Description" data-valmsg-replace="true"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    @*<abp-input asp-for="@secret.Expiration" label="@L["Secret:Expiration"].Value" />*@
+                                                    <label class="form-label" for="secret_Expiration">Expiration</label>
+                                                    <input id="@expirationInputId" name="Client.Secrets[@i].Expiration" type="datetime-local" value="@secret.Expiration?.ToString("yyyy-MM-dd")" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="secret.Expiration" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </abp-tab>
+                <abp-tab-dropdown title="资源" name="ContactDropdown">
+                    <abp-tab title="Api资源" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h2>Api资源</h2>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card">
+                                        <div class="card-header">Assigned</div>
+                                        <div class="custom-body card-body">
+                                            @foreach (var item in Model.AllApiResources)
+                                            {
+                                                var gbid = $"{item.Id}GroupId";
+                                                var bid = $"{item.Id}OwnedId";
+                                                <div class="d-grid gap-2">
+                                                    <div class="btn-group" style="display: none" id="@gbid">
+                                                        <button type="button" class="ownedResource btn btn-primary btn-sm mb-1 mt-0 text-truncate text-start" id="@bid" data-bs-toggle="tooltip" data-bs-placement="top" title="" style="display: none;">
+                                                            <i class="fa fa-long-arrow-right"></i>
+                                                            @item.DisplayName
+                                                        </button>
+                                                        <button type="button" class="btn btn-primary btn-sm mb-1 mt-0 dropdown-toggle dropdown-toggle-split btn-sm" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                                        <div class="dropdown-menu">
+                                                            <select class="form-select form-control valid" id="Client_ClientScopes" multiple="multiple" name="Client.ClientScopes" aria-invalid="false">
+                                                                @foreach (var scope in item.Scopes)
+                                                                {
+                                                                    <option value="@scope.Scope">@scope.Scope</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="card">
+                                        <div class="card-header">Available</div>
+                                        <div class="custom-body card-body">
+                                            @foreach (var item in Model.AllApiResources)
+                                            {
+                                                var bid = $"{item.Id}OtherId";
+                                                <div class="d-grid gap-2">
+                                                    <button type="button" data-name="@item.Name" class="otherResource btn btn-outline-primary btn-sm mb-2 mt-0 text-truncate text-start" id="@bid" data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                                                        <i class="fa fa-long-arrow-left "></i>
+                                                        @item.DisplayName
+                                                    </button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="Identity资源" parent-dropdown-name="ContactDropdown">
+                        <div>
+                            <h2>Identity资源</h2>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card">
+                                        <div class="card-header">Assigned</div>
+                                        <div class="custom-body card-body">
+                                            @for (int i = 0; i < Model.AllIdentityResources.Count; i++)
+                                            {
+                                                var identityResource = Model.AllIdentityResources[i];
+                                                var bid = $"{identityResource.Id}OwnedId";
+                                                var iid = $"{identityResource.Id}InputId";
+                                                <div class="d-grid gap-2">
+                                                    <button style="display: none;" type="button" class="ownedResource btn btn-primary btn-sm mb-2 mt-0 text-truncate text-start" id="@bid" data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                                                        <i class="fa fa-long-arrow-right"></i>
+                                                        @identityResource.DisplayName
+                                                    </button>
+                                                </div>
+                                                <input id="@iid" type="text" name="Client.Scopes[@i]" value="" hidden="">
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="card">
+                                        <div class="card-header">Available</div>
+                                        <div class="custom-body card-body">
+                                            @foreach (var item in Model.AllIdentityResources)
+                                            {
+                                                var bid = $"{item.Id}OtherId";
+                                                <div class="d-grid gap-2">
+                                                    <button type="button" data-name="@item.Name" class="otherResource btn btn-outline-primary btn-sm mb-2 mt-0 text-truncate text-start" id="@bid" data-bs-toggle="tooltip" data-bs-placement="top" title="">
+                                                        <i class="fa fa-long-arrow-left "></i>
+                                                        @item.DisplayName
+                                                    </button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </abp-tab>
+                </abp-tab-dropdown>
+            </abp-tabs>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+    @Html.AntiForgeryToken()
+</form>

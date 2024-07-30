@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.Domain.Shared\MyCompanyName.MyProjectName.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Admin.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Public.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.AuditLogging.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Gdpr.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Identity.Pro.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.IdentityServer.Pro.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Saas.Application.Contracts"
+      VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>
