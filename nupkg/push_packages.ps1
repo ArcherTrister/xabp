@@ -10,11 +10,11 @@
 
 $apiKey = $args[0]
 if (!$apiKey) {
-    Write-Host ("********** ERROR NUGET APIKEY IS NULL") -ForegroundColor Red
-    $apiKey = Read-Host "Please Input The Nuget ApiKey"
+  Write-Host ("********** ERROR NUGET APIKEY IS NULL") -ForegroundColor Red
+  $apiKey = Read-Host "Please Input The Nuget ApiKey"
 }
 
-$nugetUrl = "http://localhost:8081/repository/xabp/"
+$nugetUrl = "http://127.0.0.1:8081/repository/xabp/"
 
 # Get the version
 [xml]$commonPropsXml = Get-Content (Join-Path $rootFolder "common.props")
@@ -27,30 +27,30 @@ $totalProjectsCount = $projects.length
 Set-Location $packFolder
 
 foreach ($project in $projects) {
-    $i += 1
-    $projectFolder = Join-Path $rootFolder $project
-    $projectName = ($project -split '/')[-1]
-    $nugetPackageName = $projectName + "." + $version
-    $nugetPackageName = $nugetPackageName.Trim() + ".nupkg"
-    # $nugetPackageName = $projectName + "." + $version + ".nupkg"
-    $nugetPackageExists = Test-Path $nugetPackageName -PathType leaf
+  $i += 1
+  $projectFolder = Join-Path $rootFolder $project
+  $projectName = ($project -split '/')[-1]
+  $nugetPackageName = $projectName + "." + $version
+  $nugetPackageName = $nugetPackageName.Trim() + ".nupkg"
+  # $nugetPackageName = $projectName + "." + $version + ".nupkg"
+  $nugetPackageExists = Test-Path $nugetPackageName -PathType leaf
 
-    Write-Info "[$i / $totalProjectsCount] - Pushing: $nugetPackageName"
+  Write-Info "[$i / $totalProjectsCount] - Pushing: $nugetPackageName"
 
-    if ($nugetPackageExists) {
-        dotnet nuget push $nugetPackageName --skip-duplicate -s $nugetUrl --api-key "$apiKey"
-        #Write-Host ("Deleting package from local: " + $nugetPackageName)
-        #Remove-Item $nugetPackageName -Force
-    }
-    else {
-        Write-Host ("********** ERROR PACKAGE NOT FOUND: " + $nugetPackageName) -ForegroundColor red
-        $errorCount += 1
-        #Exit
-    }
+  if ($nugetPackageExists) {
+    dotnet nuget push $nugetPackageName --skip-duplicate -s $nugetUrl --api-key "$apiKey"
+    #Write-Host ("Deleting package from local: " + $nugetPackageName)
+    #Remove-Item $nugetPackageName -Force
+  }
+  else {
+    Write-Host ("********** ERROR PACKAGE NOT FOUND: " + $nugetPackageName) -ForegroundColor red
+    $errorCount += 1
+    #Exit
+  }
 
-    Write-Host "--------------------------------------------------------------`r`n"
+  Write-Host "--------------------------------------------------------------`r`n"
 }
 
 if ($errorCount -gt 0) {
-    Write-Host ("******* $errorCount error(s) occured *******") -ForegroundColor red
+  Write-Host ("******* $errorCount error(s) occured *******") -ForegroundColor red
 }

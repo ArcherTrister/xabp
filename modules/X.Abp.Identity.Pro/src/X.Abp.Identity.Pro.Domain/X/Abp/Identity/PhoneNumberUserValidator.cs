@@ -13,6 +13,7 @@ using Volo.Abp.Identity;
 using Volo.Abp.Identity.Localization;
 
 namespace X.Abp.Identity;
+
 public class PhoneNumberUserValidator : IUserValidator<IdentityUser>
 {
     protected IIdentityUserRepository UserRepository { get; }

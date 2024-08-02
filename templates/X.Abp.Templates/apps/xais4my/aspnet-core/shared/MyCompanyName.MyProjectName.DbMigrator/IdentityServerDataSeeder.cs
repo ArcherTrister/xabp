@@ -320,7 +320,7 @@ public class IdentityServerDataSeeder : ITransientDependency
             }
         }
 
-        // Client.ValidateGrantTypes(grantTypes);
+        grantTypes.Validate();
         foreach (var grantType in grantTypes)
         {
             if (client.FindGrantType(grantType) == null)

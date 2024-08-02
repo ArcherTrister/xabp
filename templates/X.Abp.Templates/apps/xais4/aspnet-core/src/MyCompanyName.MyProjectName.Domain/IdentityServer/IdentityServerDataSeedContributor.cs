@@ -14,18 +14,19 @@ using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
+using Volo.Abp.IdentityServer.ApiResources;
+using Volo.Abp.IdentityServer.ApiScopes;
+using Volo.Abp.IdentityServer.Clients;
+using Volo.Abp.IdentityServer.IdentityResources;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-using X.Abp.IdentityServer.ApiResources;
-using X.Abp.IdentityServer.ApiScopes;
-using X.Abp.IdentityServer.Clients;
-using X.Abp.IdentityServer.IdentityResources;
+using X.Abp.IdentityServer;
 
-using ApiResource = X.Abp.IdentityServer.ApiResources.ApiResource;
-using ApiScope = X.Abp.IdentityServer.ApiScopes.ApiScope;
-using Client = X.Abp.IdentityServer.Clients.Client;
+using ApiResource = Volo.Abp.IdentityServer.ApiResources.ApiResource;
+using ApiScope = Volo.Abp.IdentityServer.ApiScopes.ApiScope;
+using Client = Volo.Abp.IdentityServer.Clients.Client;
 
 namespace MyCompanyName.MyProjectName.IdentityServer;
 
@@ -89,12 +90,10 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
                 "role"
             };
 
-        var configurationSection = _configuration.GetSection("IdentityServer:Clients");
-        if (configurationSection.Value == null) { return; }
-        await CreateApiResourceAsync(configurationSection["MyProjectName_App:ClientId"], (configurationSection["MyProjectName_App:ClientSecret"] ?? "1q2w3e*").Sha256(), commonApiUserClaims);
+        await CreateApiResourceAsync("MyProjectName", commonApiUserClaims);
     }
 
-    private async Task<ApiResource> CreateApiResourceAsync(string name, string secret, IEnumerable<string> claims)
+    private async Task<ApiResource> CreateApiResourceAsync(string name, IEnumerable<string> claims)
     {
         var apiResource = await _apiResourceRepository.FindByNameAsync(name);
         if (apiResource == null)
@@ -107,11 +106,6 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
                 ),
                 autoSave: true
             );
-        }
-
-        if (apiResource.FindSecret(secret) == null)
-        {
-            apiResource.AddSecret(secret);
         }
 
         foreach (var claim in claims)
@@ -296,7 +290,7 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
             }
         }
 
-        Client.ValidateGrantTypes(grantTypes);
+        grantTypes.Validate();
         foreach (var grantType in grantTypes)
         {
             if (client.FindGrantType(grantType) == null)
