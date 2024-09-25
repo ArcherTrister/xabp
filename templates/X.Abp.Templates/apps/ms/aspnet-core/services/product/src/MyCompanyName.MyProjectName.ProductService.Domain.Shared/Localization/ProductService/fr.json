@@ -1,0 +1,28 @@
+{
+  "culture": "fr",
+  "texts": {
+    "Menu:ProductService": "Gestion des produits",
+    "Menu:Products": "Produits",
+    "Permission:ProductService": "Service produit",
+    "Permission:Products": "Produits",
+    "Permission:Create": "Créer",
+    "Permission:Edit": "Éditer",
+    "Permission:Delete": "Effacer",
+    "Products": "Produits",
+    "NewProduct": "Nouveau produit",
+    "Actions": "Actions",
+    "SuccessfullyDeleted": "Supprimé avec succès",
+    "DeleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer ce produit?",
+    "Search": "Rechercher",
+    "Pick": "Prendre",
+    "SeeAdvancedFilters": "Filtres avancés",
+    "Name": "Nom",
+    "Price": "Prix",
+    "MinPrice": "Prix min",
+    "MaxPrice": "Prix maximum",
+    "Product": "Produit",
+    "AreYouSure": "Êtes-vous sûr?",
+    "MinName": "Nom min",
+    "MaxName": "Nom max"
+  }
+}

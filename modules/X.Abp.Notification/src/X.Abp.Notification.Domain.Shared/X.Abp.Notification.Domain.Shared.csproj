@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\X.Abp.Notification\X.Abp.Notification.csproj" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+    <ProjectReference Include="..\X.Abp.Notification.Abstractions\X.Abp.Notification.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,10 @@
 ﻿using Volo.Abp.Data;
 using Volo.Abp.MongoDB;
+using Volo.Abp.IdentityServer;
 
 namespace X.Abp.IdentityServer.Pro.MongoDB;
 
-[ConnectionStringName(ProDbProperties.ConnectionStringName)]
+[ConnectionStringName(AbpIdentityServerDbProperties.ConnectionStringName)]
 public class ProMongoDbContext : AbpMongoDbContext, IProMongoDbContext
 {
     /* Add mongo collections here. Example:

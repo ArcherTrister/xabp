@@ -6,7 +6,7 @@ namespace X.Abp.Chat;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(ChatHttpApiClientModule),
+    typeof(AbpChatHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class ChatConsoleApiClientModule : AbpModule

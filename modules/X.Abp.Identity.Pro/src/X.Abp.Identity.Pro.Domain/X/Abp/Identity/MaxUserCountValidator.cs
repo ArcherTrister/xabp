@@ -2,7 +2,6 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,48 +18,48 @@ namespace X.Abp.Identity;
 
 public class MaxUserCountValidator : IUserValidator<IdentityUser>
 {
-    protected IFeatureChecker FeatureChecker { get; }
+  protected IFeatureChecker FeatureChecker { get; }
 
-    protected IIdentityUserRepository UserRepository { get; }
+  protected IIdentityUserRepository UserRepository { get; }
 
-    protected IStringLocalizer<IdentityResource> Localizer { get; }
+  protected IStringLocalizer<IdentityResource> Localizer { get; }
 
-    public MaxUserCountValidator(IFeatureChecker featureChecker, IIdentityUserRepository userRepository, IStringLocalizer<IdentityResource> localizer)
+  public MaxUserCountValidator(IFeatureChecker featureChecker, IIdentityUserRepository userRepository, IStringLocalizer<IdentityResource> localizer)
+  {
+    FeatureChecker = featureChecker;
+    UserRepository = userRepository;
+    Localizer = localizer;
+  }
+
+  public virtual async Task<IdentityResult> ValidateAsync(UserManager<IdentityUser> manager, IdentityUser user)
+  {
+    var errors = new List<IdentityError>();
+
+    await CheckMaxUserCountAsync(user, errors);
+
+    return errors.Count > 0 ? IdentityResult.Failed(errors.ToArray()) : IdentityResult.Success;
+  }
+
+  protected virtual async Task CheckMaxUserCountAsync(IdentityUser user, ICollection<IdentityError> errors)
+  {
+    var maxUserCount = await FeatureChecker.GetAsync<int>(IdentityProFeature.MaxUserCount);
+    if (maxUserCount <= 0)
     {
-        FeatureChecker = featureChecker;
-        UserRepository = userRepository;
-        Localizer = localizer;
+      return;
     }
 
-    public async Task<IdentityResult> ValidateAsync(UserManager<IdentityUser> manager, IdentityUser user)
+    var existUser = await UserRepository.FindAsync(user.Id, false);
+    if (existUser == null)
     {
-        var errors = new List<IdentityError>();
-
-        await CheckMaxUserCountAsync(user, errors);
-
-        return errors.Count > 0 ? IdentityResult.Failed(errors.ToArray()) : IdentityResult.Success;
-    }
-
-    protected virtual async Task CheckMaxUserCountAsync(IdentityUser user, ICollection<IdentityError> errors)
-    {
-        var maxUserCount = await FeatureChecker.GetAsync<int>(IdentityProFeature.MaxUserCount);
-        if (maxUserCount <= 0)
+      var currentUserCount = await UserRepository.GetCountAsync();
+      if (currentUserCount >= maxUserCount)
+      {
+        errors.Add(new IdentityError
         {
-            return;
-        }
-
-        var existUser = await UserRepository.FindAsync(user.Id);
-        if (existUser == null)
-        {
-            var currentUserCount = await UserRepository.GetCountAsync();
-            if (currentUserCount >= maxUserCount)
-            {
-                errors.Add(new IdentityError
-                {
-                    Code = IdentityProErrorCodes.MaximumUserCount,
-                    Description = Localizer[IdentityProErrorCodes.MaximumUserCount, maxUserCount]
-                });
-            }
-        }
+          Code = IdentityProErrorCodes.MaximumUserCount,
+          Description = Localizer[IdentityProErrorCodes.MaximumUserCount, maxUserCount]
+        });
+      }
     }
+  }
 }

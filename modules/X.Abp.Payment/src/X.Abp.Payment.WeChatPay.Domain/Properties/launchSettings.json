@@ -1,0 +1,12 @@
+{
+    "profiles": {
+        "X.Abp.Payment.WeChat.Domain": {
+            "commandName": "Project",
+            "launchBrowser": true,
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "applicationUrl": "https://localhost:53347;http://localhost:53348"
+        }
+    }
+}

@@ -20,6 +20,6 @@ public class TemplateContentCacheKey
 
     public override string ToString()
     {
-        return TemplateDefinitionName + nameof(TemplateContentCacheKey) + Culture;
+        return $"{TemplateDefinitionName}_{Culture}";
     }
 }

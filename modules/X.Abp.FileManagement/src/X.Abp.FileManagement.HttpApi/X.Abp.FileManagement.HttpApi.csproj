@@ -12,8 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.FileManagement.Application.Contracts\X.Abp.FileManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.FileManagement.Application.Contracts\X.Abp.FileManagement.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

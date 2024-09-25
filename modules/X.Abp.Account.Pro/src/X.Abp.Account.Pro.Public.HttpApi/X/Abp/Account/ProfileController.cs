@@ -2,6 +2,7 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Asp.Versioning;
@@ -66,5 +67,12 @@ public class ProfileController : AbpControllerBase, IProfileAppService
     public virtual Task<bool> CanEnableTwoFactorAsync()
     {
         return ProfileAppService.CanEnableTwoFactorAsync();
+    }
+
+    [HttpGet]
+    [Route("timezones")]
+    public virtual Task<List<NameValue>> GetTimezonesAsync()
+    {
+        return ProfileAppService.GetTimezonesAsync();
     }
 }

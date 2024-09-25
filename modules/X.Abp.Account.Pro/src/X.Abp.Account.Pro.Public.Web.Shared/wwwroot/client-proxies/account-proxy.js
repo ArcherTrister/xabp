@@ -28,6 +28,14 @@
       }, ajaxParams));
     };
 
+    x.abp.account.account.verifyPasswordResetToken = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/verify-password-reset-code',
+        type: 'POST',
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
     x.abp.account.account.resetPassword = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/account/reset-password',
@@ -58,6 +66,14 @@
         url: abp.appPath + 'api/account/send-email-confirmation-token',
         type: 'POST',
         dataType: null,
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.account.account.verifyEmailConfirmationToken = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/verify-email-confirmation-token',
+        type: 'POST',
         data: JSON.stringify(input)
       }, ajaxParams));
     };
@@ -113,7 +129,7 @@
 
     x.abp.account.account.getSecurityLogList = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/account/security-logs' + abp.utils.buildQueryString([{ name: 'startTime', value: input.startTime }, { name: 'endTime', value: input.endTime }, { name: 'applicationName', value: input.applicationName }, { name: 'identity', value: input.identity }, { name: 'action', value: input.action }, { name: 'userName', value: input.userName }, { name: 'clientId', value: input.clientId }, { name: 'correlationId', value: input.correlationId }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        url: abp.appPath + 'api/account/security-logs' + abp.utils.buildQueryString([{ name: 'startTime', value: input.startTime }, { name: 'endTime', value: input.endTime }, { name: 'applicationName', value: input.applicationName }, { name: 'identity', value: input.identity }, { name: 'actionName', value: input.actionName }, { name: 'userName', value: input.userName }, { name: 'clientId', value: input.clientId }, { name: 'correlationId', value: input.correlationId }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
@@ -140,9 +156,9 @@
       }, ajaxParams));
     };
 
-    x.abp.account.account.removeLogin = function(input, ajaxParams) {
+    x.abp.account.account.removeExternalLogin = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/account/remove-login',
+        url: abp.appPath + 'api/account/remove-external-login',
         type: 'POST',
         dataType: null,
         data: JSON.stringify(input)
@@ -152,6 +168,13 @@
     x.abp.account.account.getTwoFactorAuthentication = function(ajaxParams) {
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/account/two-factor-authentication',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.account.account.hasAuthenticator = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/has-authenticator',
         type: 'GET'
       }, ajaxParams));
     };
@@ -188,46 +211,6 @@
 
   })();
 
-  // controller x.abp.account.public.web.areas.account.controllers.account
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'x.abp.account.public.web.areas.account.controllers.account');
-
-    x.abp.account.public.web.areas.account.controllers.account.login = function(login, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/account/login',
-        type: 'POST',
-        data: JSON.stringify(login)
-      }, ajaxParams));
-    };
-
-    x.abp.account.public.web.areas.account.controllers.account.linkLogin = function(login, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/account/link-login',
-        type: 'POST',
-        data: JSON.stringify(login)
-      }, ajaxParams));
-    };
-
-    x.abp.account.public.web.areas.account.controllers.account.logout = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/account/logout',
-        type: 'GET',
-        dataType: null
-      }, ajaxParams));
-    };
-
-    x.abp.account.public.web.areas.account.controllers.account.checkPassword = function(login, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/account/check-password',
-        type: 'POST',
-        data: JSON.stringify(login)
-      }, ajaxParams));
-    };
-
-  })();
-
   // controller x.abp.account.accountExternalProvider
 
   (function(){
@@ -245,6 +228,52 @@
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/account/external-provider/by-name' + abp.utils.buildQueryString([{ name: 'tenantId', value: input.tenantId }, { name: 'name', value: input.name }]) + '',
         type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller x.abp.account.accountSession
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.account.accountSession');
+
+    x.abp.account.accountSession.getList = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/sessions' + abp.utils.buildQueryString([{ name: 'device', value: input.device }, { name: 'clientId', value: input.clientId }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }, { name: 'extraProperties', value: input.extraProperties }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.account.accountSession.get = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/sessions/' + id + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.account.accountSession.revoke = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/sessions/' + id + '',
+        type: 'DELETE',
+        dataType: null
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller x.abp.account.dynamicClaims
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.account.dynamicClaims');
+
+    x.abp.account.dynamicClaims.refresh = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/dynamic-claims/refresh',
+        type: 'POST',
+        dataType: null
       }, ajaxParams));
     };
 
@@ -423,6 +452,103 @@
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/account/my-profile/can-enable-two-factor',
         type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.account.profile.getTimezones = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/my-profile/timezones',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller x.abp.account.public.web.areas.account.controllers.account
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.account.public.web.areas.account.controllers.account');
+
+    x.abp.account.public.web.areas.account.controllers.account.login = function(login, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/login',
+        type: 'POST',
+        data: JSON.stringify(login)
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.linkLogin = function(login, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/link-login',
+        type: 'POST',
+        data: JSON.stringify(login)
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.generateQrCode = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/generate-qrcode',
+        type: 'POST'
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.checkQrCode = function(qrCodeKey, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/check-qrcode' + abp.utils.buildQueryString([{ name: 'qrCodeKey', value: qrCodeKey }]) + '',
+        type: 'POST'
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.scanCodeLoginAsyncByQrCodeKey = function(qrCodeKey, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/scancode-login' + abp.utils.buildQueryString([{ name: 'qrCodeKey', value: qrCodeKey }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.scanCodeLoginConfirm = function(qrCodeKey, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/scancode-login-confirm' + abp.utils.buildQueryString([{ name: 'qrCodeKey', value: qrCodeKey }]) + '',
+        type: 'POST'
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.scanCodeLoginAsyncByLogin = function(login, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/scancode-login',
+        type: 'POST',
+        data: JSON.stringify(login)
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.spaExternalLogin = function(provider, clientId, clientSecret, scope, returnUrl, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/spa-external-login' + abp.utils.buildQueryString([{ name: 'provider', value: provider }, { name: 'clientId', value: clientId }, { name: 'clientSecret', value: clientSecret }, { name: 'scope', value: scope }, { name: 'returnUrl', value: returnUrl }]) + '',
+        type: 'POST'
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.spaExternalLoginBind = function(provider, returnUrl, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/spa-external-login-bind' + abp.utils.buildQueryString([{ name: 'provider', value: provider }, { name: 'returnUrl', value: returnUrl }]) + '',
+        type: 'POST'
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.logout = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/logout',
+        type: 'GET',
+        dataType: null
+      }, ajaxParams));
+    };
+
+    x.abp.account.public.web.areas.account.controllers.account.checkPassword = function(login, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/account/check-password',
+        type: 'POST',
+        data: JSON.stringify(login)
       }, ajaxParams));
     };
 

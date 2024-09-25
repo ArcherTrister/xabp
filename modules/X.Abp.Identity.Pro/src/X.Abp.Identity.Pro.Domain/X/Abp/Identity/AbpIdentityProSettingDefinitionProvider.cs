@@ -61,6 +61,21 @@ public class AbpIdentityProSettingDefinitionProvider : SettingDefinitionProvider
                        "false",
                        L("DisplayName:Abp.Identity.RequireHttpsMetadata"),
                        L("Description:Abp.Identity.RequireHttpsMetadata"),
+                       true),
+                    new SettingDefinition(IdentityProSettingNames.OAuthLogin.ValidateEndpoints,
+                       "false",
+                       L("DisplayName:Abp.Identity.ValidateEndpoints"),
+                       L("Description:Abp.Identity.ValidateEndpoints"),
+                       true),
+                    new SettingDefinition(IdentityProSettingNames.OAuthLogin.ValidateIssuerName,
+                       "false",
+                       L("DisplayName:Abp.Identity.ValidateIssuerName"),
+                       L("Description:Abp.Identity.ValidateIssuerName"),
+                       true),
+                    new SettingDefinition(IdentityProSettingNames.Session.PreventConcurrentLogin,
+                       "Disabled",
+                       L("DisplayName:Abp.Identity.PreventConcurrentLogin"),
+                       L("Description:Abp.Identity.PreventConcurrentLogin"),
                        true));
     }
 

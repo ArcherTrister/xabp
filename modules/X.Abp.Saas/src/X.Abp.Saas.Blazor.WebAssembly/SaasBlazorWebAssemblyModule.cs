@@ -5,7 +5,7 @@ namespace X.Abp.Saas.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(SaasBlazorModule),
-    typeof(SaasHttpApiClientModule),
+    typeof(AbpSaasHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class SaasBlazorWebAssemblyModule : AbpModule

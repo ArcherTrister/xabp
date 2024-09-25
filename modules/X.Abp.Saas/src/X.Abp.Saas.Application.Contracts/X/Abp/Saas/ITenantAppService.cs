@@ -24,5 +24,7 @@ public interface ITenantAppService : ICrudAppService<SaasTenantDto, Guid, GetTen
 
     Task<List<EditionLookupDto>> GetEditionLookupAsync();
 
+    Task<bool> CheckConnectionStringAsync(string connectionString);
+
     Task SetPasswordAsync(Guid id, SaasTenantSetPasswordDto input);
 }

@@ -11,6 +11,7 @@ using Volo.Abp.Caching;
 using Volo.Abp.Features;
 using Volo.Abp.TextTemplating;
 
+using X.Abp.TextTemplateManagement.Features;
 using X.Abp.TextTemplateManagement.Permissions;
 
 namespace X.Abp.TextTemplateManagement.TextTemplates;
@@ -41,14 +42,13 @@ ITemplateContentAppService
         Cache = cache;
     }
 
-    public virtual async Task<TextTemplateContentDto> GetAsync(
-      GetTemplateContentInput input)
+    public virtual async Task<TextTemplateContentDto> GetAsync(GetTemplateContentInput input)
     {
-        var contentOrNullAsync = await TemplateContentProvider.GetContentOrNullAsync(await TemplateDefinitionManager.GetAsync(input.TemplateName), input.CultureName, true, false);
+        var content = await TemplateContentProvider.GetContentOrNullAsync(await TemplateDefinitionManager.GetAsync(input.TemplateName), input.CultureName, true, false);
         return new TextTemplateContentDto()
         {
             CultureName = input.CultureName,
-            Content = contentOrNullAsync,
+            Content = content,
             Name = input.TemplateName
         };
     }

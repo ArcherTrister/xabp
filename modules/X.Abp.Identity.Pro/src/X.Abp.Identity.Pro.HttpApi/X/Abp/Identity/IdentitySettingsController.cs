@@ -54,15 +54,29 @@ public class IdentitySettingsController : AbpControllerBase, IIdentitySettingsAp
 
     [HttpGet]
     [Route("oauth")]
-    public Task<IdentityOAuthSettingsDto> GetOAuthAsync()
+    public virtual Task<IdentityOAuthSettingsDto> GetOAuthAsync()
     {
         return IdentitySettingsAppService.GetOAuthAsync();
     }
 
     [HttpPut]
     [Route("oauth")]
-    public Task UpdateOAuthAsync(IdentityOAuthSettingsDto input)
+    public virtual Task UpdateOAuthAsync(IdentityOAuthSettingsDto input)
     {
         return IdentitySettingsAppService.UpdateOAuthAsync(input);
+    }
+
+    [HttpGet]
+    [Route("session")]
+    public virtual Task<IdentitySessionSettingsDto> GetSessionAsync()
+    {
+        return IdentitySettingsAppService.GetSessionAsync();
+    }
+
+    [HttpPut]
+    [Route("session")]
+    public virtual Task UpdateSessionAsync(IdentitySessionSettingsDto input)
+    {
+        return IdentitySettingsAppService.UpdateSessionAsync(input);
     }
 }

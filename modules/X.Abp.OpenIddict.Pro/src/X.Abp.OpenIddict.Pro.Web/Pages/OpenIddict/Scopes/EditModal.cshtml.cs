@@ -14,28 +14,28 @@ namespace X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Scopes;
 
 public class EditModalModel : OpenIddictProPageModel
 {
-    [BindProperty]
-    public ScopeEditModelView Scope { get; set; }
+  [BindProperty]
+  public ScopeEditModelView Scope { get; set; }
 
-    protected IScopeAppService ScopeAppService { get; }
+  protected IScopeAppService ScopeAppService { get; }
 
-    public EditModalModel(IScopeAppService scopeAppService)
-    {
-        ScopeAppService = scopeAppService;
-    }
+  public EditModalModel(IScopeAppService scopeAppService)
+  {
+    ScopeAppService = scopeAppService;
+  }
 
-    public async Task<IActionResult> OnGetAsync(Guid id)
-    {
-        var scopeDto = await ScopeAppService.GetAsync(id);
-        Scope = ObjectMapper.Map<ScopeDto, ScopeEditModelView>(scopeDto);
-        return Page();
-    }
+  public virtual async Task<IActionResult> OnGetAsync(Guid id)
+  {
+    var scopeDto = await ScopeAppService.GetAsync(id);
+    Scope = ObjectMapper.Map<ScopeDto, ScopeEditModelView>(scopeDto);
+    return Page();
+  }
 
-    public async Task<IActionResult> OnPostAsync()
-    {
-        ValidateModel();
-        var updateScopeInput = ObjectMapper.Map<ScopeEditModelView, UpdateScopeInput>(Scope);
-        await ScopeAppService.UpdateAsync(Scope.Id, updateScopeInput);
-        return NoContent();
-    }
+  public virtual async Task<IActionResult> OnPostAsync()
+  {
+    ValidateModel();
+    var updateScopeInput = ObjectMapper.Map<ScopeEditModelView, UpdateScopeInput>(Scope);
+    await ScopeAppService.UpdateAsync(Scope.Id, updateScopeInput);
+    return NoContent();
+  }
 }

@@ -2,6 +2,7 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
+using Volo.Abp.Features;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
@@ -12,7 +13,10 @@ using X.Abp.Notification.Localization;
 
 namespace X.Abp.Notification;
 
-[DependsOn(typeof(AbpNotificationModule), typeof(AbpValidationModule))]
+[DependsOn(
+    typeof(AbpNotificationAbstractionsModule),
+    typeof(AbpValidationModule),
+    typeof(AbpFeaturesModule))]
 public class AbpNotificationDomainSharedModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

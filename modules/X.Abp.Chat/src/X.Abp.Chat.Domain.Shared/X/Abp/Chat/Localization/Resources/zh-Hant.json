@@ -4,8 +4,10 @@
     "X.Abp.Chat:010001": "訊息不能為空!",
     "X.Abp.Chat:010002": "找不到接收使用者!",
     "X.Abp.Chat:010003": "找不到其它使用者",
+    "X.Abp.Chat:010004": "此使用者沒有權限接收訊息!",
     "Permission:Chat": "聊天",
     "Permission:Messaging": "訊息",
+    "Permission:Searching": "搜索",
     "Feature:ChatGroup": "聊天",
     "Feature:ChatEnable": "啟用聊天",
     "Feature:ChatEnableDescription": "在應用程式中啟用聊天",
@@ -28,6 +30,21 @@
     "Sept": "九月",
     "Oct": "十月",
     "Nov": "十一月",
-    "Dec": "十二月"
+    "Dec": "十二月",
+    "NoMessageYet": "還沒有畱言。",
+    "NoMessageYetMessage": "您的收件箱中還沒有信息！開始對話",
+    "StartConversation": "開始對話",
+    "Menu:Chat": "聊天",
+    "DisplayName:Abp.Chat.DeletingMessages": "允許用戶刪除消息",
+    "DisplayName:Abp.Chat.MessageDeletionPeriod": "允許用戶在指定秒內刪除消息",
+    "DisplayName:Abp.Chat.DeletingConversations": "允許用戶刪除對話",
+    "Enabled": "已啓用",
+    "Disabled": "已禁用",
+    "EnabledWithDeletionPeriod": "已啓用，有刪除朞限",
+    "Permission:SettingManagement": "設置管理",
+    "X.Abp.Chat:010005": "您隻能刪除 {seconds} 秒內發送的信息！",
+    "X.Abp.Chat:010006": "未啓用刪除對話！",
+    "X.Abp.Chat:010007": "未啓用刪除信息！",
+    "SavedSuccessfully": "保存成功"
   }
 }

@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+
+using Volo.Abp.AspNetCore.Components.Web;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
 
 namespace X.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayout.MainHeader

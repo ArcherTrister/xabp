@@ -15,11 +15,9 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Users.Abstractions" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Saas.Application.Contracts\X.Abp.Saas.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Saas.Application.Contracts\X.Abp.Saas.Application.Contracts.csproj" />
     <ProjectReference Include="..\X.Abp.Saas.Domain\X.Abp.Saas.Domain.csproj" />
   </ItemGroup>
 

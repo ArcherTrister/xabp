@@ -1,0 +1,36 @@
+config:
+    selfUrl: # https://myprojectname-st-gateway-public-web
+    globalConfigurationBaseUrl: # http://myprojectname-st-gateway-public-web
+    corsOrigins: # https://myprojectname-st-gateway-web,https://myprojectname-st-gateway-public-web
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: # "false"
+    dotnetEnv: Staging
+    redisHost: #
+    rabbitmqHost: #
+    elasticsearchUrl: #
+
+reRoutes:
+    identityService:
+        schema: http
+        host: myprojectname-st-identity
+        port: 80
+    administrationService:
+        schema: http
+        host: myprojectname-st-administration
+        port: 80
+    productService:
+        schema: http
+        host: myprojectname-st-product
+        port: 80
+
+ingress:
+    host: myprojectname-st-gateway-web-public
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: abpvnext/myprojectname-gateway-web-public
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

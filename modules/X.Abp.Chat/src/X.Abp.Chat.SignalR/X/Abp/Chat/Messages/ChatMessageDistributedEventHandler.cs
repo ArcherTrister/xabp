@@ -9,7 +9,7 @@ using Volo.Abp.EventBus.Distributed;
 
 namespace X.Abp.Chat.Messages;
 
-public class ChatMessageDistributedEventHandler : IDistributedEventHandler<ChatMessageEto>, ITransientDependency
+public class ChatMessageDistributedEventHandler : IDistributedEventHandler<ChatMessageEto>, IDistributedEventHandler<ChatDeletedMessageEto>, IDistributedEventHandler<ChatDeletedConversationEto>, ITransientDependency
 {
     private readonly IRealTimeChatMessageSender _realTimeChatMessageSender;
 
@@ -24,11 +24,22 @@ public class ChatMessageDistributedEventHandler : IDistributedEventHandler<ChatM
             eventData.TargetUserId,
             new ChatMessageRdto
             {
+                Id = eventData.MessageId,
                 SenderUserId = eventData.SenderUserId,
                 SenderUsername = eventData.SenderUserName,
                 SenderName = eventData.SenderName,
                 SenderSurname = eventData.SenderSurname,
                 Text = eventData.Message
             });
+    }
+
+    public async Task HandleEventAsync(ChatDeletedMessageEto eventData)
+    {
+        await _realTimeChatMessageSender.DeleteMessageAsync(eventData.TargetUserId, eventData.MessageId);
+    }
+
+    public async Task HandleEventAsync(ChatDeletedConversationEto eventData)
+    {
+        await _realTimeChatMessageSender.DeleteConversationAsync(eventData.TargetUserId, eventData.UserId);
     }
 }

@@ -5,14 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Asp.Versioning;
-
 using Microsoft.AspNetCore.Mvc;
-
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.Content;
 
 namespace X.Abp.Identity;
 
@@ -63,6 +61,20 @@ public class IdentityUserController : AbpControllerBase, IIdentityUserAppService
     }
 
     [HttpGet]
+    [Route("by-id/{id}")]
+    public virtual Task<IdentityUserDto> FindByIdAsync(Guid id)
+    {
+        return UserAppService.FindByIdAsync(id);
+    }
+
+    [HttpGet]
+    [Route("by-phone-number/{phoneNumber}")]
+    public virtual Task<IdentityUserDto> FindByPhoneNumberAsync(string phoneNumber)
+    {
+        return UserAppService.FindByPhoneNumberAsync(phoneNumber);
+    }
+
+    [HttpGet]
     [Route("{id}/roles")]
     public virtual Task<ListResultDto<IdentityRoleDto>> GetRolesAsync(Guid id)
     {
@@ -71,14 +83,16 @@ public class IdentityUserController : AbpControllerBase, IIdentityUserAppService
 
     [HttpGet]
     [Route("assignable-roles")]
-    public Task<ListResultDto<IdentityRoleDto>> GetAssignableRolesAsync()
+    public virtual Task<ListResultDto<IdentityRoleDto>> GetAssignableRolesAsync()
     {
         return UserAppService.GetAssignableRolesAsync();
     }
 
     [HttpGet]
     [Route("available-organization-units")]
-    public Task<ListResultDto<OrganizationUnitWithDetailsDto>> GetAvailableOrganizationUnitsAsync()
+    public virtual Task<
+        ListResultDto<OrganizationUnitWithDetailsDto>
+    > GetAvailableOrganizationUnitsAsync()
     {
         return UserAppService.GetAvailableOrganizationUnitsAsync();
     }
@@ -120,7 +134,7 @@ public class IdentityUserController : AbpControllerBase, IIdentityUserAppService
 
     [HttpPut]
     [Route("{id}/lock/{lockoutEnd}")]
-    public Task LockAsync(Guid id, DateTime lockoutEnd)
+    public virtual Task LockAsync(Guid id, DateTime lockoutEnd)
     {
         return UserAppService.LockAsync(id, lockoutEnd);
     }
@@ -148,14 +162,14 @@ public class IdentityUserController : AbpControllerBase, IIdentityUserAppService
 
     [HttpGet]
     [Route("{id}/two-factor-enabled")]
-    public Task<bool> GetTwoFactorEnabledAsync(Guid id)
+    public virtual Task<bool> GetTwoFactorEnabledAsync(Guid id)
     {
         return UserAppService.GetTwoFactorEnabledAsync(id);
     }
 
     [HttpPut]
     [Route("{id}/two-factor/{enabled}")]
-    public Task SetTwoFactorEnabledAsync(Guid id, bool enabled)
+    public virtual Task SetTwoFactorEnabledAsync(Guid id, bool enabled)
     {
         return UserAppService.SetTwoFactorEnabledAsync(id, enabled);
     }
@@ -190,7 +204,7 @@ public class IdentityUserController : AbpControllerBase, IIdentityUserAppService
 
     [HttpPost]
     [Route("import-external-user")]
-    public Task<IdentityUserDto> ImportExternalUserAsync(ImportExternalUserInput input)
+    public virtual Task<IdentityUserDto> ImportExternalUserAsync(ImportExternalUserInput input)
     {
         return UserAppService.ImportExternalUserAsync(input);
     }
@@ -198,16 +212,61 @@ public class IdentityUserController : AbpControllerBase, IIdentityUserAppService
     /*
     [HttpPut]
     [Route("{id}/admin-reset-password")]
-    public Task AdminResetPasswordAsync(Guid id, AdminResetPasswordInput input)
+    public virtual Task AdminResetPasswordAsync(Guid id, AdminResetPasswordInput input)
     {
         return UserAppService.AdminResetPasswordAsync(id, input);
     }
     */
 
     [HttpGet]
-    [Route("by-phone-number/{phoneNumber}")]
-    public Task<IdentityUserDto> FindByPhoneNumberAsync(string phoneNumber)
+    [Route("export-as-excel")]
+    public virtual Task<IRemoteStreamContent> GetListAsExcelFileAsync(
+        GetIdentityUserListAsFileInput input
+    )
     {
-        return UserAppService.FindByPhoneNumberAsync(phoneNumber);
+        return UserAppService.GetListAsExcelFileAsync(input);
+    }
+
+    [HttpGet]
+    [Route("export-as-csv")]
+    public virtual Task<IRemoteStreamContent> GetListAsCsvFileAsync(
+        GetIdentityUserListAsFileInput input
+    )
+    {
+        return UserAppService.GetListAsCsvFileAsync(input);
+    }
+
+    [HttpGet]
+    [Route("download-token")]
+    public virtual Task<DownloadTokenResultDto> GetDownloadTokenAsync()
+    {
+        return UserAppService.GetDownloadTokenAsync();
+    }
+
+    [HttpGet]
+    [Route("import-users-sample-file")]
+    public virtual Task<IRemoteStreamContent> GetImportUsersSampleFileAsync(
+        GetImportUsersSampleFileInput input
+    )
+    {
+        return UserAppService.GetImportUsersSampleFileAsync(input);
+    }
+
+    [HttpPost]
+    [Route("import-users-from-file")]
+    public virtual Task<ImportUsersFromFileOutput> ImportUsersFromFileAsync(
+        ImportUsersFromFileInputWithStream input
+    )
+    {
+        return UserAppService.ImportUsersFromFileAsync(input);
+    }
+
+    [HttpGet]
+    [Route("download-import-invalid-users-file")]
+    public virtual Task<IRemoteStreamContent> GetImportInvalidUsersFileAsync(
+        GetImportInvalidUsersFileInput input
+    )
+    {
+        return UserAppService.GetImportInvalidUsersFileAsync(input);
     }
 }

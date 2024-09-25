@@ -5,7 +5,7 @@ using Volo.Abp.MongoDB;
 namespace X.Abp.Gdpr.MongoDB;
 
 [DependsOn(
-    typeof(GdprDomainModule),
+    typeof(AbpGdprDomainModule),
     typeof(AbpMongoDbModule)
     )]
 public class GdprMongoDbModule : AbpModule

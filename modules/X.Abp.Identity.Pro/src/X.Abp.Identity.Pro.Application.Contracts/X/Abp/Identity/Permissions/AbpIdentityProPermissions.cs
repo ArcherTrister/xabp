@@ -32,6 +32,10 @@ public static class AbpIdentityProPermissions
         public const string ViewChangeHistory = "AuditLogging.ViewChangeHistory:Volo.Abp.Identity.IdentityUser";
         public const string Impersonation = Default + ".Impersonation";
         public const string Import = Default + ".Import";
+        public const string Export = Default + ".Export";
+        public const string ViewDetails = Default + ".ViewDetails";
+        public const string ManageRoles = Default + ".Update.ManageRoles";
+        public const string ManageOU = Default + ".Update.ManageOU";
     }
 
     public static class ClaimTypes
@@ -58,6 +62,11 @@ public static class AbpIdentityProPermissions
     public static class SecurityLogs
     {
         public const string Default = GroupName + ".SecurityLogs";
+    }
+
+    public static class Sessions
+    {
+        public const string Default = GroupName + ".Sessions";
     }
 
     public static string[] GetAll()

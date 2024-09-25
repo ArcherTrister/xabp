@@ -50,9 +50,9 @@ public class Conversation : Entity<Guid>, IMultiTenant, IAggregateRoot<Guid>
         UnreadMessageCount = 0;
     }
 
-    public void SetLastMessage(string messageText, DateTime messageTime, ChatMessageSide messageSide)
+    public void SetLastMessage(string messageText, DateTime messageTime, ChatMessageSide messageSide, bool ignoreNullOrEmpty = false)
     {
-        LastMessage = Check.NotNullOrWhiteSpace(messageText, nameof(messageText));
+        LastMessage = ignoreNullOrEmpty ? messageText : Check.NotNullOrWhiteSpace(messageText, nameof(messageText));
         LastMessageDate = messageTime;
         LastMessageSide = messageSide;
 

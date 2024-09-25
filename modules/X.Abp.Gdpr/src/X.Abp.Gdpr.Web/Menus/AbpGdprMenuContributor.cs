@@ -14,20 +14,20 @@ namespace X.Abp.Gdpr.Web.Menus;
 
 public class AbpGdprMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.User)
     {
-        if (context.Menu.Name == StandardMenus.User)
-        {
-            await ConfigureUserMenuAsync(context);
-        }
+      await ConfigureUserMenuAsync(context);
     }
+  }
 
-    private static Task ConfigureUserMenuAsync(MenuConfigurationContext context)
-    {
-        var localizer = context.GetLocalizer<AbpGdprResource>();
-        context.Menu.Items.AddIfNotContains(
-            new ApplicationMenuItem(AbpGdprMenus.GdprMenuNames.PersonalData, localizer["Menu:PersonalData"], "/Gdpr/PersonalData", "fa fa-lock").RequireAuthenticated());
+  private static Task ConfigureUserMenuAsync(MenuConfigurationContext context)
+  {
+    var localizer = context.GetLocalizer<AbpGdprResource>();
+    context.Menu.Items.AddIfNotContains(
+        new ApplicationMenuItem(AbpGdprMenus.GdprMenuNames.PersonalData, localizer["Menu:PersonalData"], "/Gdpr/PersonalData", "fa fa-lock").RequireAuthenticated());
 
-        return Task.CompletedTask;
-    }
+    return Task.CompletedTask;
+  }
 }

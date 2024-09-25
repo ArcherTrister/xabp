@@ -10,17 +10,17 @@ namespace X.Abp.CmsKit.Pro.Public.Web.Menus;
 
 public class AbpCmsKitProPublicMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        // Add main menu items.
-        return Task.CompletedTask;
-    }
+  private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    // Add main menu items.
+    return Task.CompletedTask;
+  }
 }

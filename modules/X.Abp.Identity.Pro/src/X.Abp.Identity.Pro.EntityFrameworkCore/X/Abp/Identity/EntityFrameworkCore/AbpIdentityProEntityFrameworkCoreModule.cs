@@ -22,6 +22,7 @@ public class AbpIdentityProEntityFrameworkCoreModule : AbpModule
             options.ReplaceDbContext<IIdentityDbContext, IIdentityProDbContext>();
 
             options.AddRepository<IdentityUser, EfCoreIdentityUserRepository>();
+            options.AddRepository<IdentityRole, EfCoreIdentityRoleRepository>();
         });
     }
 }

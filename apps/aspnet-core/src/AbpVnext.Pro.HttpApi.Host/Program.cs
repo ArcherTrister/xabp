@@ -27,9 +27,14 @@ public class Program
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
             .Enrich.FromLogContext()
-            .WriteTo.Async(c => c.File("Logs/logs_.txt", shared: true, rollingInterval: RollingInterval.Day))
+            // .WriteTo.Async(c => c.File("Logs/logs_.txt", shared: true, rollingInterval: RollingInterval.Day))
+            .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Verbose).WriteTo.Async(q => q.File("Logs/verboses_.txt", rollingInterval: RollingInterval.Day)))
+            .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Debug).WriteTo.Async(q => q.File("Logs/debugs_.txt", rollingInterval: RollingInterval.Day)))
+            .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Information).WriteTo.Async(q => q.File("Logs/infos_.txt", rollingInterval: RollingInterval.Day)))
+            .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Warning).WriteTo.Async(q => q.File("Logs/warnings_.txt", rollingInterval: RollingInterval.Day)))
+            .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Error).WriteTo.Async(q => q.File("Logs/errors_.txt", rollingInterval: RollingInterval.Day)))
+            .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Fatal).WriteTo.Async(q => q.File("Logs/fatals_.txt", rollingInterval: RollingInterval.Day)))
             .WriteTo.Async(c => c.Console())
-            .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level >= LogEventLevel.Warning).WriteTo.Async(q => q.File("Logs/errors_.txt", rollingInterval: RollingInterval.Day)))
             .CreateLogger();
 
         try
@@ -40,7 +45,32 @@ public class Program
                 .AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();
-            await builder.AddApplicationAsync<ProHttpApiHostModule>();
+
+            /*
+````json
+{
+    "ApplicationName": "Services.Ordering"
+}
+````
+
+````csharp
+await builder.AddApplicationAsync<OrderingServiceHttpApiHostModule>(options =>
+{
+    options.ApplicationName = "Services.Ordering";
+});
+````
+             */
+
+            //await builder.AddApplicationAsync<IdentityServerProHttpApiHostModule>(options =>
+            //{
+            //    options.ApplicationName = "Pro";
+            //});
+
+            await builder.AddApplicationAsync<OpenIddictProHttpApiHostModule>(options =>
+            {
+                options.ApplicationName = "Pro";
+            });
+
             var app = builder.Build();
             await app.InitializeApplicationAsync();
             await app.RunAsync();

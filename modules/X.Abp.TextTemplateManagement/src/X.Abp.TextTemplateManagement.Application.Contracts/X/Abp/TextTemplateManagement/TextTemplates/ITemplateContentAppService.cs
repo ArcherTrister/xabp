@@ -14,6 +14,5 @@ public interface ITemplateContentAppService : IApplicationService
 
     Task RestoreToDefaultAsync(RestoreTemplateContentInput input);
 
-    Task<TextTemplateContentDto> UpdateAsync(
-      UpdateTemplateContentInput input);
+    Task<TextTemplateContentDto> UpdateAsync(UpdateTemplateContentInput input);
 }

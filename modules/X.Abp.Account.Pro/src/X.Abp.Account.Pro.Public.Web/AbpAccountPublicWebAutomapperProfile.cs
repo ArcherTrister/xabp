@@ -4,6 +4,8 @@
 
 using AutoMapper;
 
+using Volo.Abp.AutoMapper;
+
 using X.Abp.Account.Dtos;
 using X.Abp.Account.Public.Web.Pages.Account.Components.ProfileManagementGroup.PersonalInfo;
 
@@ -13,6 +15,6 @@ public class AbpAccountPublicWebAutomapperProfile : Profile
 {
     public AbpAccountPublicWebAutomapperProfile()
     {
-        CreateMap<ProfileDto, AccountProfilePersonalInfoManagementGroupViewComponent.PersonalInfoModel>();
+        CreateMap<ProfileDto, AccountProfilePersonalInfoManagementGroupViewComponent.PersonalInfoModel>().Ignore(p => p.TimeZoneItems).MapExtraProperties();
     }
 }

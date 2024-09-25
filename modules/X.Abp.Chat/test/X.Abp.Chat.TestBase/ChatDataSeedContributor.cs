@@ -8,25 +8,25 @@ namespace X.Abp.Chat;
 
 public class ChatDataSeedContributor : IDataSeedContributor, ITransientDependency
 {
-    private readonly IGuidGenerator _guidGenerator;
-    private readonly ICurrentTenant _currentTenant;
+  private readonly IGuidGenerator _guidGenerator;
+  private readonly ICurrentTenant _currentTenant;
 
-    public ChatDataSeedContributor(
-        IGuidGenerator guidGenerator, ICurrentTenant currentTenant)
+  public ChatDataSeedContributor(
+      IGuidGenerator guidGenerator, ICurrentTenant currentTenant)
+  {
+    _guidGenerator = guidGenerator;
+    _currentTenant = currentTenant;
+  }
+
+  public virtual Task SeedAsync(DataSeedContext context)
+  {
+    /* Instead of returning the Task.CompletedTask, you can insert your test data
+     * at this point!
+     */
+
+    using (_currentTenant.Change(context?.TenantId))
     {
-        _guidGenerator = guidGenerator;
-        _currentTenant = currentTenant;
+      return Task.CompletedTask;
     }
-
-    public Task SeedAsync(DataSeedContext context)
-    {
-        /* Instead of returning the Task.CompletedTask, you can insert your test data
-         * at this point!
-         */
-
-        using (_currentTenant.Change(context?.TenantId))
-        {
-            return Task.CompletedTask;
-        }
-    }
+  }
 }

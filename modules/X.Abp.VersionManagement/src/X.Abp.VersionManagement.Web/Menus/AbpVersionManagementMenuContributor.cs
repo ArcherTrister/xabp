@@ -12,20 +12,20 @@ namespace X.Abp.VersionManagement.Web.Menus;
 
 public class AbpVersionManagementMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        // Add main menu items.
-        var localizer = context.GetLocalizer<VersionManagementResource>();
-        context.Menu.AddItem(new ApplicationMenuItem(AbpVersionManagementMenus.Prefix, localizer["Menu:VersionManagement"], "~/VersionManagement", icon: "fa fa-globe"));
+  private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    // Add main menu items.
+    var localizer = context.GetLocalizer<VersionManagementResource>();
+    context.Menu.AddItem(new ApplicationMenuItem(AbpVersionManagementMenus.Prefix, localizer["Menu:VersionManagement"], "~/VersionManagement", icon: "fa fa-globe"));
 
-        return Task.CompletedTask;
-    }
+    return Task.CompletedTask;
+  }
 }

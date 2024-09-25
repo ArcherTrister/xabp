@@ -7,13 +7,12 @@ using System;
 using JetBrains.Annotations;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.DependencyInjection;
 
 using Volo.Abp;
 
 using X.Abp.Account.ExternalProviders;
 
-namespace X.Abp.Account.Public.Web.ExternalProviders;
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class AbpAccountAuthenticationBuilderExtensions
 {

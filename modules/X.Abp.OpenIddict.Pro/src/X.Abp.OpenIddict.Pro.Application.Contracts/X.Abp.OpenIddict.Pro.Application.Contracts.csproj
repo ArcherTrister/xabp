@@ -12,10 +12,8 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts"
-      VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Openiddict.Pro.Domain.Shared\X.Abp.Openiddict.Pro.Domain.Shared.csproj" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Openiddict.Pro.Domain.Shared\X.Abp.Openiddict.Pro.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

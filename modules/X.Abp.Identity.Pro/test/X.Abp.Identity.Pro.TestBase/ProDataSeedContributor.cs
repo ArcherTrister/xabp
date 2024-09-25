@@ -18,7 +18,7 @@ public class ProDataSeedContributor : IDataSeedContributor, ITransientDependency
         _currentTenant = currentTenant;
     }
 
-    public Task SeedAsync(DataSeedContext context)
+    public virtual Task SeedAsync(DataSeedContext context)
     {
         /* Instead of returning the Task.CompletedTask, you can insert your test data
          * at this point!

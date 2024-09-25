@@ -10,30 +10,30 @@ using X.Abp.Payment.Admin.Plans;
 
 namespace X.Abp.Payment.Admin.Web.Pages.Payment.Plans
 {
-    public class CreateModalModel : PaymentPageModel
+  public class CreateModalModel : PaymentPageModel
+  {
+    protected IPlanAdminAppService PlanAdminAppService { get; }
+
+    [BindProperty]
+    public PlanCreateViewModel Plan { get; set; }
+
+    public CreateModalModel(IPlanAdminAppService planAdminAppService)
     {
-        protected IPlanAdminAppService PlanAdminAppService { get; }
-
-        [BindProperty]
-        public PlanCreateViewModel Plan { get; set; }
-
-        public CreateModalModel(IPlanAdminAppService planAdminAppService)
-        {
-            PlanAdminAppService = planAdminAppService;
-        }
-
-        public virtual Task<IActionResult> OnGetAsync()
-        {
-            Plan = new PlanCreateViewModel();
-            return Task.FromResult<IActionResult>(Page());
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            ValidateModel();
-            PlanCreateInput planCreateInput = ObjectMapper.Map<PlanCreateViewModel, PlanCreateInput>(Plan);
-            await PlanAdminAppService.CreateAsync(planCreateInput);
-            return NoContent();
-        }
+      PlanAdminAppService = planAdminAppService;
     }
+
+    public virtual Task<IActionResult> OnGetAsync()
+    {
+      Plan = new PlanCreateViewModel();
+      return Task.FromResult<IActionResult>(Page());
+    }
+
+    public virtual async Task<IActionResult> OnPostAsync()
+    {
+      ValidateModel();
+      PlanCreateInput planCreateInput = ObjectMapper.Map<PlanCreateViewModel, PlanCreateInput>(Plan);
+      await PlanAdminAppService.CreateAsync(planCreateInput);
+      return NoContent();
+    }
+  }
 }

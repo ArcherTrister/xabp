@@ -21,7 +21,7 @@ public interface IEditionRepository : IBasicRepository<Edition, Guid>
 
     Task<List<EditionWithTenantCount>> GetListWithTenantCountAsync(
       string sorting = null,
-      int maxResultCount = 2147483647,
+      int maxResultCount = int.MaxValue,
       int skipCount = 0,
       string filter = null,
       bool includeDetails = false,

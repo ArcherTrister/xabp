@@ -15,35 +15,35 @@ namespace X.Abp.LanguageManagement;
 
 public class DynamicLocalizationResourceContributor : ILocalizationResourceContributor
 {
-    public bool IsDynamic => true;
+  public bool IsDynamic => true;
 
-    protected LocalizationResourceBase Resource { get; private set; }
+  protected LocalizationResourceBase Resource { get; private set; }
 
-    protected IDynamicResourceLocalizer DynamicResourceLocalizer { get; set; }
+  protected IDynamicResourceLocalizer DynamicResourceLocalizer { get; set; }
 
-    public void Initialize(LocalizationResourceInitializationContext context)
-    {
-        Resource = context.Resource;
-        DynamicResourceLocalizer = context.ServiceProvider.GetRequiredService<IDynamicResourceLocalizer>();
-    }
+  public void Initialize(LocalizationResourceInitializationContext context)
+  {
+    Resource = context.Resource;
+    DynamicResourceLocalizer = context.ServiceProvider.GetRequiredService<IDynamicResourceLocalizer>();
+  }
 
-    public LocalizedString GetOrNull(string cultureName, string name)
-    {
-        return DynamicResourceLocalizer.GetOrNull(Resource, cultureName, name);
-    }
+  public LocalizedString GetOrNull(string cultureName, string name)
+  {
+    return DynamicResourceLocalizer.GetOrNull(Resource, cultureName, name);
+  }
 
-    public void Fill(string cultureName, Dictionary<string, LocalizedString> dictionary)
-    {
-        DynamicResourceLocalizer.Fill(Resource, cultureName, dictionary);
-    }
+  public void Fill(string cultureName, Dictionary<string, LocalizedString> dictionary)
+  {
+    DynamicResourceLocalizer.Fill(Resource, cultureName, dictionary);
+  }
 
-    public Task FillAsync(string cultureName, Dictionary<string, LocalizedString> dictionary)
-    {
-        return DynamicResourceLocalizer.FillAsync(Resource, cultureName, dictionary);
-    }
+  public virtual Task FillAsync(string cultureName, Dictionary<string, LocalizedString> dictionary)
+  {
+    return DynamicResourceLocalizer.FillAsync(Resource, cultureName, dictionary);
+  }
 
-    public async Task<IEnumerable<string>> GetSupportedCulturesAsync()
-    {
-        return await Task.FromResult(Array.Empty<string>());
-    }
+  public virtual async Task<IEnumerable<string>> GetSupportedCulturesAsync()
+  {
+    return await Task.FromResult(Array.Empty<string>());
+  }
 }

@@ -27,71 +27,71 @@ namespace X.Abp.CmsKit.Admin.Newsletters;
 [Authorize(AbpCmsKitProAdminPermissions.Newsletters.Default)]
 public class NewsletterRecordAdminAppService : CmsKitProAdminAppServiceBase, INewsletterRecordAdminAppService
 {
-    protected INewsletterRecordRepository NewsletterRecordsRepository { get; }
+  protected INewsletterRecordRepository NewsletterRecordsRepository { get; }
 
-    protected NewsletterRecordManager NewsletterRecordManager { get; }
+  protected NewsletterRecordManager NewsletterRecordManager { get; }
 
-    protected SecurityCodeProvider SecurityCodeProvider { get; }
+  protected SecurityCodeProvider SecurityCodeProvider { get; }
 
-    public NewsletterRecordAdminAppService(
-      INewsletterRecordRepository newsletterRecordsRepository,
-      NewsletterRecordManager newsletterRecordManager,
-      SecurityCodeProvider securityCodeProvider)
+  public NewsletterRecordAdminAppService(
+    INewsletterRecordRepository newsletterRecordsRepository,
+    NewsletterRecordManager newsletterRecordManager,
+    SecurityCodeProvider securityCodeProvider)
+  {
+    NewsletterRecordsRepository = newsletterRecordsRepository;
+    NewsletterRecordManager = newsletterRecordManager;
+    SecurityCodeProvider = securityCodeProvider;
+  }
+
+  public virtual async Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(GetNewsletterRecordsRequestInput input)
+  {
+    var count = await NewsletterRecordsRepository.GetCountByFilterAsync(input.Preference, input.Source);
+    var summaryQueryResultItemList = await NewsletterRecordsRepository.GetListAsync(input.Preference, input.Source, input.SkipCount, input.MaxResultCount);
+    return new PagedResultDto<NewsletterRecordDto>(count, ObjectMapper.Map<List<NewsletterSummaryQueryResultItem>, List<NewsletterRecordDto>>(summaryQueryResultItemList));
+  }
+
+  public virtual async Task<NewsletterRecordWithDetailsDto> GetAsync(
+    Guid id)
+  {
+    var newsletterRecord = await NewsletterRecordsRepository.GetAsync(id, true);
+    return ObjectMapper.Map<NewsletterRecord, NewsletterRecordWithDetailsDto>(newsletterRecord);
+  }
+
+  public virtual async Task<List<NewsletterRecordCsvDto>> GetNewsletterRecordsCsvDetailAsync(GetNewsletterRecordsCsvRequestInput input)
+  {
+    var newsletterSummaryQueryResultItems = await NewsletterRecordsRepository.GetListAsync(input.Preference, input.Source);
+    var newsletterRecords = ObjectMapper.Map<List<NewsletterSummaryQueryResultItem>, List<NewsletterRecordCsvDto>>(newsletterSummaryQueryResultItems);
+    foreach (var newsletterRecordCsvDto in newsletterRecords)
     {
-        NewsletterRecordsRepository = newsletterRecordsRepository;
-        NewsletterRecordManager = newsletterRecordManager;
-        SecurityCodeProvider = securityCodeProvider;
+      newsletterRecordCsvDto.SecurityCode = SecurityCodeProvider.GetSecurityCode(newsletterRecordCsvDto.EmailAddress);
     }
 
-    public async Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(GetNewsletterRecordsRequestInput input)
-    {
-        var count = await NewsletterRecordsRepository.GetCountByFilterAsync(input.Preference, input.Source);
-        var summaryQueryResultItemList = await NewsletterRecordsRepository.GetListAsync(input.Preference, input.Source, input.SkipCount, input.MaxResultCount);
-        return new PagedResultDto<NewsletterRecordDto>(count, ObjectMapper.Map<List<NewsletterSummaryQueryResultItem>, List<NewsletterRecordDto>>(summaryQueryResultItemList));
-    }
+    return newsletterRecords;
+  }
 
-    public async Task<NewsletterRecordWithDetailsDto> GetAsync(
-      Guid id)
-    {
-        var newsletterRecord = await NewsletterRecordsRepository.GetAsync(id, true);
-        return ObjectMapper.Map<NewsletterRecord, NewsletterRecordWithDetailsDto>(newsletterRecord);
-    }
+  public virtual async Task<List<string>> GetNewsletterPreferencesAsync()
+  {
+    return (await NewsletterRecordManager.GetNewsletterPreferencesAsync()).Select(newsletterPreference => newsletterPreference.Preference).ToList();
+  }
 
-    public async Task<List<NewsletterRecordCsvDto>> GetNewsletterRecordsCsvDetailAsync(GetNewsletterRecordsCsvRequestInput input)
-    {
-        var summaryQueryResultItemList = await NewsletterRecordsRepository.GetListAsync(input.Preference, input.Source);
-        var recordsCsvDetailAsync = ObjectMapper.Map<List<NewsletterSummaryQueryResultItem>, List<NewsletterRecordCsvDto>>(summaryQueryResultItemList);
-        foreach (var newsletterRecordCsvDto in recordsCsvDetailAsync)
-        {
-            newsletterRecordCsvDto.SecurityCode = SecurityCodeProvider.GetSecurityCode(newsletterRecordCsvDto.EmailAddress);
-        }
+  public virtual async Task<IRemoteStreamContent> GetCsvResponsesAsync(GetNewsletterRecordsCsvRequestInput input)
+  {
+    var newsletterRecordCsvDtoList = await GetNewsletterRecordsCsvDetailAsync(input);
+    input.Preference = input.Preference?.Insert(0, "-");
+    input.Source = input.Source?.Insert(0, "-");
+    var csvConfiguration = new CsvConfiguration(new CultureInfo(CultureInfo.CurrentUICulture.Name));
 
-        return recordsCsvDetailAsync;
-    }
+    using var memoryStream = new MemoryStream();
+    using var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(true));
+    using var csvWriter = new CsvWriter(streamWriter, csvConfiguration);
+    await csvWriter.WriteRecordsAsync(newsletterRecordCsvDtoList);
 
-    public async Task<List<string>> GetNewsletterPreferencesAsync()
-    {
-        return (await NewsletterRecordManager.GetNewsletterPreferencesAsync()).Select(newsletterPreference => newsletterPreference.Preference).ToList();
-    }
+    await streamWriter.FlushAsync();
+    memoryStream.Seek(0L, SeekOrigin.Begin);
+    var ms = new MemoryStream();
+    await memoryStream.CopyToAsync(ms);
 
-    public async Task<IRemoteStreamContent> GetCsvResponsesAsync(GetNewsletterRecordsCsvRequestInput input)
-    {
-        var newsletterRecordCsvDtoList = await GetNewsletterRecordsCsvDetailAsync(input);
-        input.Preference = input.Preference?.Insert(0, "-");
-        input.Source = input.Source?.Insert(0, "-");
-        var csvConfiguration = new CsvConfiguration(new CultureInfo(CultureInfo.CurrentUICulture.Name));
-
-        using var memoryStream = new MemoryStream();
-        using var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(true));
-        using var csvWriter = new CsvWriter(streamWriter, csvConfiguration);
-        await csvWriter.WriteRecordsAsync(newsletterRecordCsvDtoList);
-
-        await streamWriter.FlushAsync();
-        memoryStream.Seek(0L, SeekOrigin.Begin);
-        var ms = new MemoryStream();
-        await memoryStream.CopyToAsync(ms);
-
-        ms.Seek(0L, SeekOrigin.Begin);
-        return new RemoteStreamContent(ms, $"newsletter-emails-{DateTime.Now:yyyyMMddHHmmss}{input.Preference}{input.Source}.csv", "text/csv");
-    }
+    ms.Seek(0L, SeekOrigin.Begin);
+    return new RemoteStreamContent(ms, $"newsletter-emails-{DateTime.Now:yyyyMMddHHmmss}{input.Preference}{input.Source}.csv", "text/csv");
+  }
 }

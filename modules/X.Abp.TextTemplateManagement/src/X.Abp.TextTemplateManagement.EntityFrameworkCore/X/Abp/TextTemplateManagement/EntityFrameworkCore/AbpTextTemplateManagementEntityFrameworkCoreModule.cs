@@ -23,6 +23,8 @@ public class AbpTextTemplateManagementEntityFrameworkCoreModule : AbpModule
             options.AddDefaultRepositories<ITextTemplateManagementDbContext>();
 
             options.AddRepository<TextTemplateContent, EfCoreTextTemplateContentRepository>();
+            options.AddRepository<TextTemplateDefinitionRecord, EfCoreTextTemplateDefinitionRecordRepository>();
+            options.AddRepository<TextTemplateDefinitionContentRecord, EfCoreTextTemplateDefinitionContentRecordRepository>();
         });
     }
 }

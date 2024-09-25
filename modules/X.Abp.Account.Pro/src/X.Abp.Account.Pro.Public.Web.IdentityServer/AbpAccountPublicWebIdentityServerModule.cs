@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 
 using IdentityServer4.Configuration;
 
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.RequestLocalization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.Identity.AspNetCore;
@@ -21,6 +23,7 @@ using Volo.Abp.IdentityServer.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.VirtualFileSystem;
 
 using X.Abp.Account.Localization;
@@ -28,6 +31,7 @@ using X.Abp.Account.Public.Web;
 using X.Abp.Account.Public.Web.Security.Claims;
 using X.Abp.Account.Web.ExtensionGrantValidators;
 using X.Abp.Account.Web.Pages.Account;
+using X.Abp.Account.Web.Services;
 using X.Abp.IdentityServer;
 
 namespace X.Abp.Account.Web;
@@ -63,6 +67,7 @@ public class AbpAccountPublicWebIdentityServerModule : AbpModule
             // builder.AddResponseGenerators
             // AddResourceOwnerValidator
             // CustomTokenValidator
+            identityServerBuilder.AddProfileService<ExtraClaimsProfileService>();
             identityServerBuilder.AddExtensionGrantValidator<LinkLoginExtensionGrantValidator>();
             identityServerBuilder.AddExtensionGrantValidator<ImpersonationExtensionGrantValidator>();
             identityServerBuilder.AddExtensionGrantValidator<SpaExternalLoginExtensionGrantValidator>();
@@ -107,7 +112,8 @@ public class AbpAccountPublicWebIdentityServerModule : AbpModule
 
         Configure<AbpClaimsServiceOptions>(options =>
         {
-            options.RequestedClaims.Add(CustomClaimTypes.ProviderKey);
+            options.RequestedClaims.Add(AbpClaimTypes.SessionId);
+            options.RequestedClaims.Add(ExtraClaimTypes.ProviderKey);
         });
 
         context.Services
@@ -117,6 +123,9 @@ public class AbpAccountPublicWebIdentityServerModule : AbpModule
                 o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
             })
             .AddIdentityCookies();
+
+        context.Services.Replace(
+           ServiceDescriptor.Transient<IAuthenticationService, IdentitySessionAuthenticationService>());
 
         context.Services.AddHttpClient(ExternalLoginConsts.ExternalLoginHttpClientName,
             options =>

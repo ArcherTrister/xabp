@@ -22,13 +22,6 @@ public class ConfirmPhoneNumberModalModel : AccountPageModel
     [Required]
     public string PhoneConfirmationToken { get; set; }
 
-    protected IAccountAppService AccountAppService { get; }
-
-    public ConfirmPhoneNumberModalModel(IAccountAppService accountAppService)
-    {
-        AccountAppService = accountAppService;
-    }
-
     public virtual async Task OnGetAsync()
     {
         if (!await SettingProvider.GetAsync(IdentitySettingNames.SignIn.EnablePhoneNumberConfirmation, true))

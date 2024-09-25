@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
@@ -61,26 +62,6 @@ public class ChangePasswordModel : AccountPageModel
     [BindProperty]
     public string NewPasswordConfirm { get; set; }
 
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
-
-    protected IOptions<IdentityOptions> IdentityOptions { get; }
-
-    public ChangePasswordModel(
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
-        IOptions<IdentityOptions> identityOptions)
-    {
-        SignInManager = signInManager;
-        UserManager = userManager;
-        IdentitySecurityLogManager = identitySecurityLogManager;
-        IdentityOptions = identityOptions;
-    }
-
     public virtual async Task<IActionResult> OnGetAsync()
     {
         UserInfo = await RetrieveChangePasswordUser();
@@ -97,47 +78,91 @@ public class ChangePasswordModel : AccountPageModel
 
     public virtual async Task<IActionResult> OnPostAsync()
     {
-        var userInfo = await RetrieveChangePasswordUser();
-        if (userInfo != null && !(userInfo.TenantId != CurrentTenant.Id))
+        if (CurrentPassword == NewPassword)
         {
-            try
-            {
-                await IdentityOptions.SetAsync();
-                var user = await UserManager.GetByIdAsync(userInfo.Id);
-                if (user.PasswordHash == null)
-                {
-                    (await UserManager.AddPasswordAsync(user, NewPassword)).CheckIdentityErrors();
-                }
-                else
-                {
-                    (await UserManager.ChangePasswordAsync(user, CurrentPassword, NewPassword)).CheckIdentityErrors();
-                }
+            Alerts.Warning(L["NewPasswordSameAsOld"]);
+            return Page();
+        }
 
-                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
-                {
-                    Identity = IdentitySecurityLogIdentityConsts.Identity,
-                    Action = IdentitySecurityLogActionConsts.ChangePassword
-                });
-                user.SetShouldChangePasswordOnNextLogin(false);
-                (await UserManager.UpdateAsync(user)).CheckIdentityErrors();
-                await HttpContext.SignOutAsync(ChangePasswordScheme);
-                await SignInManager.SignInAsync(user, RememberMe);
-                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
-                {
-                    Identity = IdentitySecurityLogIdentityConsts.IdentityExternal,
-                    Action = IdentitySecurityLogActionConsts.LoginSucceeded,
-                    UserName = user.UserName
-                });
-                return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
-            }
-            catch (Exception ex)
+        UserInfoModel userInfo = await RetrieveChangePasswordUser();
+        if (userInfo != null)
+        {
+            Guid? tenantId = userInfo.TenantId;
+            Guid? id = CurrentTenant.Id;
+            if (tenantId.HasValue == id.HasValue && (!tenantId.HasValue || tenantId.GetValueOrDefault() == id.GetValueOrDefault()))
             {
-                Alerts.Warning(GetLocalizeExceptionMessage(ex));
-                return Page();
+                try
+                {
+                    await IdentityOptions.SetAsync();
+                    IdentityUser user = await UserManager.GetByIdAsync(userInfo.Id);
+                    if (user.PasswordHash == null)
+                    {
+                        (await UserManager.AddPasswordAsync(user, NewPassword)).CheckIdentityErrors();
+                    }
+                    else
+                    {
+                        (await UserManager.ChangePasswordAsync(user, CurrentPassword, NewPassword)).CheckIdentityErrors();
+                    }
+
+                    await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
+                    {
+                        Identity = IdentitySecurityLogIdentityConsts.Identity,
+                        Action = IdentitySecurityLogActionConsts.ChangePassword
+                    });
+                    user.SetShouldChangePasswordOnNextLogin(false);
+                    (await UserManager.UpdateAsync(user)).CheckIdentityErrors();
+                    await HttpContext.SignOutAsync(ChangePasswordScheme);
+                    Microsoft.AspNetCore.Identity.SignInResult signInResult = await SignInManager.CallSignInOrTwoFactorAsync(user, RememberMe);
+                    if (!signInResult.Succeeded)
+                    {
+                        if (signInResult.RequiresTwoFactor)
+                        {
+                            return RedirectToPage("./SendSecurityCode", new
+                            {
+                                returnUrl = ReturnUrl,
+                                returnUrlHash = ReturnUrlHash
+                            });
+                        }
+                        else
+                        {
+                            if (signInResult.IsLockedOut)
+                            {
+                                return RedirectToPage("./LockedOut", new
+                                {
+                                    returnUrl = ReturnUrl,
+                                    returnUrlHash = ReturnUrlHash
+                                });
+                            }
+                            else
+                            {
+                                return RedirectToPage("./Login", new
+                                {
+                                    ReturnUrl = ReturnUrl,
+                                    ReturnUrlHash = ReturnUrlHash
+                                });
+                            }
+                        }
+                    }
+
+                    await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
+                    {
+                        Identity = IdentitySecurityLogIdentityConsts.IdentityExternal,
+                        Action = IdentitySecurityLogActionConsts.LoginSucceeded,
+                        UserName = user.UserName
+                    });
+                    await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(user.Id, user.TenantId);
+                    return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
+                }
+                catch (Exception ex)
+                {
+                    Alerts.Warning(GetLocalizeExceptionMessage(ex));
+                    return Page();
+                }
             }
         }
 
         await HttpContext.SignOutAsync(ChangePasswordScheme);
+
         return RedirectToPage("./Login", new { ReturnUrl, ReturnUrlHash });
     }
 

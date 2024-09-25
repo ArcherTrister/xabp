@@ -18,12 +18,10 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.TextTemplating" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.CmsKit.Domain" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Domain.Shared\X.Abp.CmsKit.Pro.Domain.Shared.csproj" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain.Shared\X.Abp.CmsKit.Pro.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

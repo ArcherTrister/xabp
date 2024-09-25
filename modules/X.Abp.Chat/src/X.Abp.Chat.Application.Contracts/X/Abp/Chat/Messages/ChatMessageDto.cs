@@ -8,6 +8,8 @@ namespace X.Abp.Chat.Messages;
 
 public class ChatMessageDto
 {
+    public Guid Id { get; set; }
+
     public string Message { get; set; }
 
     public DateTime MessageDate { get; set; }

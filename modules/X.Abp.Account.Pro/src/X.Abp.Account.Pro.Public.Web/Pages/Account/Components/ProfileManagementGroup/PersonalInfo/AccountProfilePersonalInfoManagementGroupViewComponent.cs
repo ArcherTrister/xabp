@@ -2,13 +2,16 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Identity;
+using Volo.Abp.ObjectExtending;
 using Volo.Abp.Validation;
 
 using X.Abp.Account.Dtos;
@@ -36,7 +39,7 @@ public class AccountProfilePersonalInfoManagementGroupViewComponent : AbpViewCom
         return View("~/Pages/Account/Components/ProfileManagementGroup/PersonalInfo/Default.cshtml", model);
     }
 
-    public class PersonalInfoModel
+    public class PersonalInfoModel : ExtensibleObject
     {
         [Required]
         [DynamicStringLength(typeof(IdentityUserConsts), nameof(IdentityUserConsts.MaxUserNameLength))]
@@ -63,5 +66,11 @@ public class AccountProfilePersonalInfoManagementGroupViewComponent : AbpViewCom
         public bool PhoneNumberConfirmed { get; set; }
 
         public bool EmailConfirmed { get; set; }
+
+        public bool SupportsMultipleTimezone { get; set; }
+
+        public string Timezone { get; set; }
+
+        public List<SelectListItem> TimeZoneItems { get; set; }
     }
 }

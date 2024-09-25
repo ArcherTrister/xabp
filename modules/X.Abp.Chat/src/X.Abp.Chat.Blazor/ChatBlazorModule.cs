@@ -9,7 +9,7 @@ using Volo.Abp.UI.Navigation;
 namespace X.Abp.Chat.Blazor;
 
 [DependsOn(
-    typeof(ChatApplicationContractsModule),
+    typeof(AbpChatApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
     typeof(AbpAutoMapperModule)
     )]

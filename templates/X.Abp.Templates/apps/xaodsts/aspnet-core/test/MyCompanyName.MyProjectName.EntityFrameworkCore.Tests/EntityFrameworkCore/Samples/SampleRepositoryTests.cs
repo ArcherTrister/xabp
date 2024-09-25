@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 using Shouldly;
 
 using Volo.Abp.Domain.Repositories;
-
-using X.Abp.Identity;
+using Volo.Abp.Identity;
 
 using Xunit;
 

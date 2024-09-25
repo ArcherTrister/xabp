@@ -5,7 +5,6 @@
 using System;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -63,30 +62,9 @@ public class VerifySecurityCodeModel : AccountPageModel
 
     protected ICurrentPrincipalAccessor CurrentPrincipalAccessor { get; }
 
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
-
-    protected IIdentityLinkUserAppService IdentityLinkUserAppService { get; }
-
-    protected IOptions<IdentityOptions> IdentityOptions { get; }
-
-    public VerifySecurityCodeModel(
-        ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
-        IIdentityLinkUserAppService identityLinkUserAppService,
-        IOptions<IdentityOptions> identityOptions)
+    public VerifySecurityCodeModel(ICurrentPrincipalAccessor currentPrincipalAccessor)
     {
         CurrentPrincipalAccessor = currentPrincipalAccessor;
-        SignInManager = signInManager;
-        UserManager = userManager;
-        IdentitySecurityLogManager = identitySecurityLogManager;
-        IdentityLinkUserAppService = identityLinkUserAppService;
-        IdentityOptions = identityOptions;
     }
 
     [UnitOfWork]
@@ -103,94 +81,124 @@ public class VerifySecurityCodeModel : AccountPageModel
     [UnitOfWork]
     public virtual async Task<IActionResult> OnPostAsync()
     {
-        // TODO: CheckCurrentTenant(await SignInManager.GetVerifiedTenantIdAsync());
         await IdentityOptions.SetAsync();
 
-        var result = await SignInManager.TwoFactorSignInAsync(
-            Provider,
-            Code,
-            RememberMe,
-            await IsRememberBrowserEnabledAsync() && RememberBrowser);
+        Microsoft.AspNetCore.Identity.SignInResult signInResult = await SignInManager.TwoFactorSignInAsync(Provider, Code, RememberMe, await IsRememberBrowserEnabledAsync() && RememberBrowser);
 
-        if (result.Succeeded)
+        IdentityUser user;
+        if (!signInResult.Succeeded)
         {
-            if (await VerifyLinkTokenAsync())
+            if (signInResult.IsLockedOut)
             {
-                var user = await SignInManager.GetTwoFactorAuthenticationUserAsync();
-                using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(user)))
-                {
-                    await IdentityLinkUserAppService.LinkAsync(new LinkUserInput
-                    {
-                        UserId = LinkUserId.Value,
-                        TenantId = LinkTenantId,
-                        Token = LinkToken
-                    });
-
-                    await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
-                    {
-                        Identity = IdentitySecurityLogIdentityConsts.Identity,
-                        Action = IdentityProSecurityLogActionConsts.LinkUser,
-                        UserName = user.UserName,
-                        ExtraProperties =
-                            {
-                                { IdentityProSecurityLogActionConsts.LinkTargetTenantId, LinkTenantId },
-                                { IdentityProSecurityLogActionConsts.LinkTargetUserId, LinkUserId }
-                            }
-                    });
-
-                    using (CurrentTenant.Change(LinkTenantId))
-                    {
-                        var targetUser = await UserManager.GetByIdAsync(LinkUserId.Value);
-                        using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(targetUser)))
-                        {
-                            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
-                            {
-                                Identity = IdentitySecurityLogIdentityConsts.Identity,
-                                Action = IdentityProSecurityLogActionConsts.LinkUser,
-                                UserName = targetUser.UserName,
-                                ExtraProperties =
-                                    {
-                                        { IdentityProSecurityLogActionConsts.LinkTargetTenantId, targetUser.TenantId },
-                                        { IdentityProSecurityLogActionConsts.LinkTargetUserId, targetUser.Id }
-                                    }
-                            });
-                        }
-                    }
-                }
-            }
-
-            return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
-        }
-
-        if (result.IsLockedOut)
-        {
-            return RedirectToPage("./LockedOut", new
-            {
-                returnUrl = ReturnUrl,
-                returnUrlHash = ReturnUrlHash
-            });
-        }
-
-        if (result.IsNotAllowed)
-        {
-            var notAllowedUser = await SignInManager.GetTwoFactorAuthenticationUserAsync();
-            if (notAllowedUser != null && notAllowedUser.IsActive)
-            {
-                await StoreConfirmUserAsync(notAllowedUser);
-                return RedirectToPage("./ConfirmUser", new
+                return RedirectToPage("./LockedOut", new
                 {
                     returnUrl = ReturnUrl,
                     returnUrlHash = ReturnUrlHash
                 });
             }
 
-            Alerts.Warning(L["LoginIsNotAllowed"]);
+            if (!signInResult.IsNotAllowed)
+            {
+                Alerts.Warning(L["LoginIsNotAllowed"]);
+                return Page();
+            }
+
+            user = await SignInManager.GetTwoFactorAuthenticationUserAsync();
+            if (user != null)
+            {
+                bool shouldChangePasswordOnNextLogin;
+                if (!(shouldChangePasswordOnNextLogin = user.ShouldChangePasswordOnNextLogin))
+                {
+                    shouldChangePasswordOnNextLogin = await UserManager.ShouldPeriodicallyChangePasswordAsync(user);
+                }
+
+                if (!shouldChangePasswordOnNextLogin)
+                {
+                    if (user.IsActive)
+                    {
+                        await StoreConfirmUserAsync(user);
+
+                        return RedirectToPage("./ConfirmUser", new
+                        {
+                            returnUrl = ReturnUrl,
+                            returnUrlHash = ReturnUrlHash
+                        });
+                    }
+                }
+                else
+                {
+                    await StoreChangePasswordUserAsync(user);
+
+                    return RedirectToPage("./ChangePassword", new
+                    {
+                        returnUrl = ReturnUrl,
+                        returnUrlHash = ReturnUrlHash
+                    });
+                }
+            }
+
+            Alerts.Warning(L["InvalidSecurityCode"]);
             return Page();
         }
 
-        Alerts.Warning(L["InvalidSecurityCode"]);
+        user = await SignInManager.GetTwoFactorAuthenticationUserAsync();
+        if (await VerifyLinkTokenAsync())
+        {
+            using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(user)))
+            {
+                await IdentityLinkUserAppService.LinkAsync(new LinkUserInput
+                {
+                    UserId = LinkUserId.Value,
+                    TenantId = LinkTenantId,
+                    Token = LinkToken
+                });
 
-        return Page();
+                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
+                {
+                    Identity = IdentitySecurityLogIdentityConsts.Identity,
+                    Action = IdentityProSecurityLogActionConsts.LinkUser,
+                    UserName = user.UserName,
+                    ExtraProperties =
+                    {
+                      {
+                         IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                         LinkTenantId
+                      },
+                      {
+                         IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                         LinkUserId
+                      }
+                    }
+                });
+                using (CurrentTenant.Change(LinkTenantId))
+                {
+                    IdentityUser targetUser = await UserManager.GetByIdAsync(LinkUserId.Value);
+                    using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(targetUser)))
+                    {
+                        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
+                        {
+                            Identity = IdentitySecurityLogIdentityConsts.Identity,
+                            Action = IdentityProSecurityLogActionConsts.LinkUser,
+                            UserName = targetUser.UserName,
+                            ExtraProperties =
+                            {
+                              {
+                                 IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                                 targetUser.TenantId
+                              },
+                              {
+                                 IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                                 targetUser.Id
+                              }
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
+        await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(user.Id, user.TenantId);
+        return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
     }
 
     protected virtual async Task<bool> VerifyLinkTokenAsync()

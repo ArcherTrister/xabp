@@ -3,7 +3,7 @@ using Volo.Abp.MongoDB;
 
 namespace X.Abp.Chat.MongoDB;
 
-[ConnectionStringName(ChatDbProperties.ConnectionStringName)]
+[ConnectionStringName(AbpChatDbProperties.ConnectionStringName)]
 public class ChatMongoDbContext : AbpMongoDbContext, IChatMongoDbContext
 {
     /* Add mongo collections here. Example:

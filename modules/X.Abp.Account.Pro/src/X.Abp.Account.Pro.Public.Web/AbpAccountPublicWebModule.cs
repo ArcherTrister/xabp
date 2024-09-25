@@ -15,9 +15,10 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Packages.CropperJs;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.QRCode;
 using Volo.Abp.AspNetCore.Mvc.UI.Packages.Uppy;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.Zxcvbn;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Emailing;
@@ -40,7 +41,6 @@ using X.Abp.Account.Public.Web.Pages.Account;
 using X.Abp.Account.Public.Web.Pages.Account.Components.ProfileManagementGroup.PersonalInfo;
 using X.Abp.Account.Public.Web.ProfileManagement;
 using X.Abp.Account.Public.Web.Security.Captcha;
-using X.Abp.Identity;
 using X.Abp.Identity.AspNetCore;
 using X.Captcha;
 using X.Captcha.G;
@@ -51,17 +51,16 @@ using X.Captcha.Re;
 namespace X.Abp.Account.Public.Web;
 
 [DependsOn(
-    typeof(AbpIdentityProAspNetCoreModule),
+    typeof(AbpAspNetCoreMultiTenancyModule),
+    typeof(AbpAutoMapperModule),
     typeof(AbpEmailingModule),
     typeof(AbpSmsModule),
+    typeof(AbpIdentityProAspNetCoreModule),
     typeof(AbpAccountPublicApplicationContractsModule),
-    typeof(AbpIdentityProDomainModule),
+    typeof(AbpAccountPublicWebSharedModule),
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpExceptionHandlingModule),
-    typeof(AbpAccountPublicWebSharedModule),
-    typeof(AbpAspNetCoreMultiTenancyModule),
-    typeof(AbpSecurityModule),
-    typeof(AbpAutoMapperModule))]
+    typeof(AbpSecurityModule))]
 public class AbpAccountPublicWebModule : AbpModule
 {
     private static readonly OneTimeRunner OneTimeRunner = new();
@@ -75,7 +74,7 @@ public class AbpAccountPublicWebModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpVirtualFileSystemOptions>(options => options.FileSets.AddEmbedded<AbpAccountPublicWebModule>());
-        Configure<AbpNavigationOptions>(options => options.MenuContributors.Add(new AbpAccountPublicMenuContributor()));
+        Configure<AbpNavigationOptions>(options => options.MenuContributors.Add(new AbpAccountUserMenuContributor()));
         Configure<AbpToolbarOptions>(options => options.Contributors.Add(new AccountModuleToolbarContributor()));
         context.Services.AddAutoMapperObjectMapper<AbpAccountPublicWebModule>();
         Configure<AbpAutoMapperOptions>(options => options.AddProfile<AbpAccountPublicWebAutomapperProfile>(true));
@@ -95,6 +94,16 @@ public class AbpAccountPublicWebModule : AbpModule
         });
 
         context.Services.AddAuthentication().AddCookie(ChangePasswordModel.ChangePasswordScheme, options =>
+        {
+            options.LoginPath = new PathString("/Account/Login");
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+            options.Events = new CookieAuthenticationEvents
+            {
+                OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync
+            };
+        });
+
+        context.Services.AddAuthentication().AddCookie(LockedOut.LockedUserScheme, options =>
         {
             options.LoginPath = new PathString("/Account/Login");
             options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
@@ -124,25 +133,22 @@ public class AbpAccountPublicWebModule : AbpModule
 
         Configure<AbpBundlingOptions>(options =>
         {
-            options.ScriptBundles.Configure(
-                StandardBundles.Scripts.Global,
-                configuration =>
-                {
-                    configuration.AddFiles("/client-proxies/account-proxy.js");
-                    configuration.AddFiles("/Pages/Account/LinkUsers/account-link-user-global.js");
-                });
-
             options.ScriptBundles
                 .Configure(typeof(ManageModel).FullName,
                     configuration =>
                     {
                         configuration.AddFiles("/client-proxies/account-proxy.js");
+                        configuration.AddFiles("/Pages/Account/Manage.js");
+                        configuration.AddFiles("/Pages/Account/PasswordComplexityIndicator.js");
+                        configuration.AddFiles("/Pages/Account/Components/ProfileManagementGroup/AuthenticatorApp/Default.js");
                         configuration.AddFiles("/Pages/Account/Components/ProfileManagementGroup/Password/Default.js");
                         configuration.AddFiles("/Pages/Account/Components/ProfileManagementGroup/ProfilePicture/Default.js");
                         configuration.AddFiles("/Pages/Account/Components/ProfileManagementGroup/PersonalInfo/Default.js");
                         configuration.AddFiles("/Pages/Account/Components/ProfileManagementGroup/TwoFactor/Default.js");
                         configuration.AddContributors(typeof(UppyScriptContributor));
                         configuration.AddContributors(typeof(CropperJsScriptContributor));
+                        configuration.AddContributors(typeof(QRCodeScriptContributor));
+                        configuration.AddContributors(typeof(ZxcvbnScriptContributor));
                     });
             options.StyleBundles
                 .Configure(typeof(ManageModel).FullName,

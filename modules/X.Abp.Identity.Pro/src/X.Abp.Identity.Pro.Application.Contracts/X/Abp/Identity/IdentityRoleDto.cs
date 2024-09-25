@@ -13,13 +13,13 @@ public class IdentityRoleDto : ExtensibleEntityDto<Guid>, IHasConcurrencyStamp
 {
     public string Name { get; set; }
 
-    public string DisplayName { get; set; }
-
     public bool IsDefault { get; set; }
 
     public bool IsStatic { get; set; }
 
     public bool IsPublic { get; set; }
+
+    public long UserCount { get; set; }
 
     public string ConcurrencyStamp { get; set; }
 }

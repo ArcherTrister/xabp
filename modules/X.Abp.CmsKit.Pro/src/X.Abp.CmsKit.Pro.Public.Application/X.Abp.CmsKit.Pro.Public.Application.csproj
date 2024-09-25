@@ -17,10 +17,8 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.UI.Navigation" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.CmsKit.Public.Application"
-      VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Public.Application.Contracts\X.Abp.CmsKit.Pro.Public.Application.Contracts.csproj" />
+    <PackageReference Include="Volo.CmsKit.Public.Application" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Public.Application.Contracts\X.Abp.CmsKit.Pro.Public.Application.Contracts.csproj" />
     <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />
   </ItemGroup>
 

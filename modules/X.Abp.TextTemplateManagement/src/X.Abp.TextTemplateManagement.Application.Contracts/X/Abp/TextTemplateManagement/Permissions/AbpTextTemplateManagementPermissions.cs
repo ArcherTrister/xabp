@@ -10,7 +10,7 @@ public class AbpTextTemplateManagementPermissions
 
     public static class TextTemplates
     {
-        public const string Default = "TextTemplateManagement.TextTemplates";
-        public const string EditContents = "TextTemplateManagement.TextTemplates.EditContents";
+        public const string Default = GroupName + ".TextTemplates";
+        public const string EditContents = Default + ".EditContents";
     }
 }

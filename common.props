@@ -4,10 +4,11 @@
     <LangVersion>latest</LangVersion>
     <NoWarn>$(NoWarn);CS1591;CS0436;CA1305</NoWarn>
     <Authors>ArcherTrister</Authors>
-    <PackageReleaseNotes>8.2.0-alpha-beta-rc-preview</PackageReleaseNotes>
+    <!--<PackageVersion>8.3.0-alpha-beta-rc-preview</PackageVersion>-->
+    <PackageReleaseNotes>8.3.0-beta</PackageReleaseNotes>
     <NeutralLanguage>zh-Hans</NeutralLanguage>
     <Copyright>Copyright © 2016-2024 LX Incorporated. All rights reserved.</Copyright>
-    <PackageProjectUrl>https://archertrister.github.io/</PackageProjectUrl>
+    <PackageProjectUrl>https://freeabp.github.io/</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/ArcherTrister/xabp/</RepositoryUrl>

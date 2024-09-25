@@ -9,32 +9,32 @@ namespace X.Abp.CmsKit.Pro.HttpApi.Client.ConsoleTestApp;
 
 public class ConsoleTestAppHostedService : IHostedService
 {
-    private readonly IConfiguration _configuration;
+  private readonly IConfiguration _configuration;
 
-    public ConsoleTestAppHostedService(IConfiguration configuration)
+  public ConsoleTestAppHostedService(IConfiguration configuration)
+  {
+    _configuration = configuration;
+  }
+
+  public virtual async Task StartAsync(CancellationToken cancellationToken)
+  {
+    using (var application = await AbpApplicationFactory.CreateAsync<ProConsoleApiClientModule>(options =>
     {
-        _configuration = configuration;
-    }
-
-    public async Task StartAsync(CancellationToken cancellationToken)
+      options.Services.ReplaceConfiguration(_configuration);
+      options.UseAutofac();
+    }))
     {
-        using (var application = await AbpApplicationFactory.CreateAsync<ProConsoleApiClientModule>(options =>
-        {
-           options.Services.ReplaceConfiguration(_configuration);
-           options.UseAutofac();
-        }))
-        {
-            await application.InitializeAsync();
+      await application.InitializeAsync();
 
-            var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
-            await demo.RunAsync();
+      var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
+      await demo.RunAsync();
 
-            await application.ShutdownAsync();
-        }
+      await application.ShutdownAsync();
     }
+  }
 
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
+  public virtual Task StopAsync(CancellationToken cancellationToken)
+  {
+    return Task.CompletedTask;
+  }
 }

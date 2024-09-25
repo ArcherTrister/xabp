@@ -17,8 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ldap.Abstractions" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.Identity.Domain.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.Domain.Shared" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

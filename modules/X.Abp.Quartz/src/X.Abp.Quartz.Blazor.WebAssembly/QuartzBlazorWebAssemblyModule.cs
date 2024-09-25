@@ -5,7 +5,7 @@ namespace X.Abp.Quartz.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(QuartzBlazorModule),
-    typeof(QuartzHttpApiClientModule),
+    typeof(AbpQuartzHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class QuartzBlazorWebAssemblyModule : AbpModule

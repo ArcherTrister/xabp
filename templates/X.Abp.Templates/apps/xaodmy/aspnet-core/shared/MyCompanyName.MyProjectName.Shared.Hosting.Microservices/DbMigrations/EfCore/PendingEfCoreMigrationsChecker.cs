@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -49,11 +49,11 @@ public abstract class PendingEfCoreMigrationsChecker<TDbContext> : PendingMigrat
     {
         await using (var handle = await DistributedLock.TryAcquireAsync("Migration_" + DatabaseName))
         {
-            Logger.LogInformation($"Lock is acquired for db migration and seeding on database named: {DatabaseName}...");
+            Logger.LogInformation("Lock is acquired for db migration and seeding on database named: {DatabaseName}...", DatabaseName);
 
             if (handle is null)
             {
-                Logger.LogInformation($"Handle is null because of the locking for : {DatabaseName}");
+                Logger.LogInformation("Handle is null because of the locking for : {DatabaseName}", DatabaseName);
                 return;
             }
 
@@ -79,7 +79,7 @@ public abstract class PendingEfCoreMigrationsChecker<TDbContext> : PendingMigrat
                 }
             }
             
-            Logger.LogInformation($"Lock is released for db migration and seeding on database named: {DatabaseName}...");
+            Logger.LogInformation("Lock is released for db migration and seeding on database named: {DatabaseName}...", DatabaseName);
         }
     }
 }

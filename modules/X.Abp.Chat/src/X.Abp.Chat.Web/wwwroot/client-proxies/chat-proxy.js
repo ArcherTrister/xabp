@@ -5,23 +5,49 @@
 
 (function(){
 
-  // controller x.abp.chat.users.contact
+  // controller x.abp.chat.conversations.conversation
 
   (function(){
 
-    abp.utils.createNamespace(window, 'x.abp.chat.users.contact');
+    abp.utils.createNamespace(window, 'x.abp.chat.conversations.conversation');
 
-    x.abp.chat.users.contact.getContacts = function(input, ajaxParams) {
+    x.abp.chat.conversations.conversation.sendMessage = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/chat/contact/contacts' + abp.utils.buildQueryString([{ name: 'filter', value: input.filter }, { name: 'includeOtherContacts', value: input.includeOtherContacts }]) + '',
+        url: abp.appPath + 'api/chat/conversation/send-message',
+        type: 'POST',
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.chat.conversations.conversation.getConversation = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/chat/conversation/conversation' + abp.utils.buildQueryString([{ name: 'targetUserId', value: input.targetUserId }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
 
-    x.abp.chat.users.contact.getTotalUnreadMessageCount = function(ajaxParams) {
+    x.abp.chat.conversations.conversation.markConversationAsRead = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/chat/contact/total-unread-message-count',
-        type: 'GET'
+        url: abp.appPath + 'api/chat/conversation/mark-conversation-as-read',
+        type: 'POST',
+        dataType: null,
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.chat.conversations.conversation.deleteMessage = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/chat/conversation/delete-message' + abp.utils.buildQueryString([{ name: 'targetUserId', value: input.targetUserId }, { name: 'messageId', value: input.messageId }]) + '',
+        type: 'DELETE',
+        dataType: null
+      }, ajaxParams));
+    };
+
+    x.abp.chat.conversations.conversation.deleteConversation = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/chat/conversation/delete-conversation' + abp.utils.buildQueryString([{ name: 'targetUserId', value: input.targetUserId }]) + '',
+        type: 'DELETE',
+        dataType: null
       }, ajaxParams));
     };
 
@@ -42,36 +68,41 @@
       }, ajaxParams));
     };
 
-  })();
-
-  // controller x.abp.chat.conversations.conversation
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'x.abp.chat.conversations.conversation');
-
-    x.abp.chat.conversations.conversation.sendMessage = function(input, ajaxParams) {
+    x.abp.chat.settings.settings.get = function(ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/chat/conversation/send-message',
-        type: 'POST',
-        dataType: null,
-        data: JSON.stringify(input)
-      }, ajaxParams));
-    };
-
-    x.abp.chat.conversations.conversation.getConversation = function(input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/chat/conversation/conversation' + abp.utils.buildQueryString([{ name: 'targetUserId', value: input.targetUserId }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        url: abp.appPath + 'api/chat/settings',
         type: 'GET'
       }, ajaxParams));
     };
 
-    x.abp.chat.conversations.conversation.markConversationAsRead = function(input, ajaxParams) {
+    x.abp.chat.settings.settings.update = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/chat/conversation/mark-conversation-as-read',
-        type: 'POST',
+        url: abp.appPath + 'api/chat/settings',
+        type: 'PUT',
         dataType: null,
         data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller x.abp.chat.users.contact
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.chat.users.contact');
+
+    x.abp.chat.users.contact.getContacts = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/chat/contact/contacts' + abp.utils.buildQueryString([{ name: 'filter', value: input.filter }, { name: 'includeOtherContacts', value: input.includeOtherContacts }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.chat.users.contact.getTotalUnreadMessageCount = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/chat/contact/total-unread-message-count',
+        type: 'GET'
       }, ajaxParams));
     };
 

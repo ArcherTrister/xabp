@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -17,27 +17,25 @@ public abstract class MyProjectNameDbContextFactoryBase<TDbContext> : IDesignTim
 {
     public TDbContext CreateDbContext(string[] args)
     {
+#if PostgreSql
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+#endif
         MyProjectNameEfCoreEntityExtensionMappings.Configure();
 
         var configuration = BuildConfiguration();
 
+        var builder = new DbContextOptionsBuilder<MyProjectNameDbContext>()
 #if MySQL
-        var builder = new DbContextOptionsBuilder<TDbContext>()
             .UseMySql(configuration.GetConnectionString("Default"), MySqlServerVersion.LatestSupportedServerVersion);
-#elif SqlServer 
-        var builder = new DbContextOptionsBuilder<TDbContext>()
+#elif SQLServer
             .UseSqlServer(configuration.GetConnectionString("Default"));
-#elif Sqlite 
-        var builder = new DbContextOptionsBuilder<TDbContext>()
+#elif SQLite
             .UseSqlite(configuration.GetConnectionString("Default"));
-#elif Oracle 
-        var builder = new DbContextOptionsBuilder<TDbContext>()
+#elif Oracle
             .UseOracle(configuration.GetConnectionString("Default"));
-#elif OracleDevart 
-        var builder = new DbContextOptionsBuilder<TDbContext>()
+#elif OracleDevart
             .UseOracle(configuration.GetConnectionString("Default"));
-#elif PostgreSql 
-        var builder = new DbContextOptionsBuilder<TDbContext>()
+#else
             .UseNpgsql(configuration.GetConnectionString("Default"));
 #endif
         // builder.EnableSensitiveDataLogging();

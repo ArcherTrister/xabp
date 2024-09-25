@@ -17,8 +17,6 @@ using Volo.Abp.Security.Claims;
 
 using X.Abp.Account.Dtos;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
-
 namespace X.Abp.Account.Public.Web.Pages.Account;
 
 [IgnoreAntiforgeryToken]
@@ -60,26 +58,14 @@ public class LinkLoginModel : AccountPageModel
 
     protected ITenantStore TenantStore { get; }
 
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    protected IIdentityLinkUserAppService IdentityLinkUserAppService { get; }
-
     public LinkLoginModel(
         ICurrentPrincipalAccessor currentPrincipalAccessor,
         IOptions<AbpAccountOptions> accountOptions,
-        ITenantStore tenantStore,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IIdentityLinkUserAppService identityLinkUserAppService)
+        ITenantStore tenantStore)
     {
         CurrentPrincipalAccessor = currentPrincipalAccessor;
         AccountOptions = accountOptions.Value;
         TenantStore = tenantStore;
-        SignInManager = signInManager;
-        UserManager = userManager;
-        IdentityLinkUserAppService = identityLinkUserAppService;
     }
 
     public virtual Task<IActionResult> OnGetAsync()
@@ -132,6 +118,7 @@ public class LinkLoginModel : AccountPageModel
                         {
                             var targetUser = await UserManager.GetByIdAsync(TargetLinkUserId);
                             await SignInManager.SignInAsync(targetUser, isPersistent);
+                            await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(targetUser.Id, targetUser.TenantId);
                         }
 
                         return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);

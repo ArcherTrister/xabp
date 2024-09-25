@@ -18,4 +18,8 @@ public interface IEditionAppService : ICrudAppService<EditionDto, Guid, GetEditi
     Task<GetEditionUsageStatisticsResultDto> GetUsageStatisticsAsync();
 
     Task<List<PlanDto>> GetPlanLookupAsync();
+
+    Task<List<EditionDto>> GetAllListAsync();
+
+    Task MoveAllTenantsAsync(Guid id, Guid? targetEditionId);
 }

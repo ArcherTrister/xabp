@@ -20,7 +20,7 @@ public class AbpSaasApplicationAutoMapperProfile : Profile
                         .ForMember(dest => dest.HasDefaultConnectionString,
                         op => op.MapFrom(src => src.FindDefaultConnectionString != null));
 
-        CreateMap<Edition, EditionDto>().MapExtraProperties().Ignore(x => x.PlanName);
+        CreateMap<Edition, EditionDto>().MapExtraProperties().Ignore(x => x.PlanName).Ignore(p => p.TenantCount);
 
         CreateMap<Edition, EditionLookupDto>().MapExtraProperties();
     }

@@ -344,7 +344,7 @@
               "uniqueName": "DeleteAsyncById",
               "name": "DeleteAsync",
               "httpMethod": "DELETE",
-              "url": "api/identity-server/api-resources",
+              "url": "api/identity-server/api-resources/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -365,8 +365,8 @@
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
                   "descriptorName": ""
                 }
               ],
@@ -1071,7 +1071,7 @@
               "uniqueName": "DeleteAsyncById",
               "name": "DeleteAsync",
               "httpMethod": "DELETE",
-              "url": "api/identity-server/clients",
+              "url": "api/identity-server/clients/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -1092,8 +1092,8 @@
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
                   "descriptorName": ""
                 }
               ],
@@ -1454,7 +1454,7 @@
               "uniqueName": "DeleteAsyncById",
               "name": "DeleteAsync",
               "httpMethod": "DELETE",
-              "url": "api/identity-server/identity-resources",
+              "url": "api/identity-server/identity-resources/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -1475,8 +1475,8 @@
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
                   "descriptorName": ""
                 }
               ],

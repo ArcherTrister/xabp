@@ -12,8 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.CmsKit.Admin.HttpApi" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Admin.Application.Contracts\X.Abp.CmsKit.Pro.Admin.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Admin.Application.Contracts\X.Abp.CmsKit.Pro.Admin.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,7 @@ using Volo.Abp.Features;
 using Volo.Abp.Localization;
 using Volo.Abp.MultiTenancy;
 
+using X.Abp.TextTemplateManagement.Features;
 using X.Abp.TextTemplateManagement.Localization;
 
 namespace X.Abp.TextTemplateManagement.Permissions;

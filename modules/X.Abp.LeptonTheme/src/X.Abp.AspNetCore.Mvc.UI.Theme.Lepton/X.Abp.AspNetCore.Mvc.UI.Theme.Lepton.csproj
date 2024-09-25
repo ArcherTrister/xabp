@@ -58,12 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.LeptonTheme.Management.Domain.Shared\X.Abp.LeptonTheme.Management.Domain.Shared.csproj" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.LeptonTheme.Management.Domain.Shared\X.Abp.LeptonTheme.Management.Domain.Shared.csproj" />
   </ItemGroup>
 </Project>

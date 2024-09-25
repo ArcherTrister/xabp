@@ -34,5 +34,15 @@ public static class IdentityProSettingNames
         public const string Authority = OAuthLoginPrefix + ".Authority";
 
         public const string RequireHttpsMetadata = OAuthLoginPrefix + ".RequireHttpsMetadata";
+
+        public const string ValidateEndpoints = OAuthLoginPrefix + ".ValidateEndpoints";
+
+        public const string ValidateIssuerName = OAuthLoginPrefix + ".ValidateIssuerName";
+    }
+
+    public static class Session
+    {
+        private const string SessionPrefix = Prefix + ".Session";
+        public const string PreventConcurrentLogin = SessionPrefix + ".PreventConcurrentLogin";
     }
 }

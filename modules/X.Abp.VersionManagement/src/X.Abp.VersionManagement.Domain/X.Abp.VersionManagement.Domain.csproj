@@ -12,8 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Domain" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.VersionManagement.Domain.Shared\X.Abp.VersionManagement.Domain.Shared.csproj" />
+    <ProjectReference Include="..\X.Abp.VersionManagement.Domain.Shared\X.Abp.VersionManagement.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

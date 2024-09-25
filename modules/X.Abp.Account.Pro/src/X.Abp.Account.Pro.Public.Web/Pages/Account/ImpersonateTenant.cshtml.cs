@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -29,9 +30,16 @@ namespace X.Abp.Account.Public.Web.Pages.Account;
 [IgnoreAntiforgeryToken]
 public class ImpersonateTenantModel : AccountPageModel
 {
-    [BindProperty(SupportsGet = true)]
     [Required]
+    [BindProperty(SupportsGet = true)]
     public Guid TenantId { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public string TenantUserName { get; set; }
+
+    [HiddenInput]
+    [BindProperty(SupportsGet = true)]
+    public string ReturnUrl { get; set; }
 
     protected AbpAccountOptions AccountOptions { get; }
 
@@ -39,26 +47,14 @@ public class ImpersonateTenantModel : AccountPageModel
 
     protected ICurrentPrincipalAccessor CurrentPrincipalAccessor { get; }
 
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
-
     public ImpersonateTenantModel(
         IOptions<AbpAccountOptions> accountOptions,
         IPermissionChecker permissionChecker,
-        ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager)
+        ICurrentPrincipalAccessor currentPrincipalAccessor)
     {
         AccountOptions = accountOptions.Value;
         PermissionChecker = permissionChecker;
         CurrentPrincipalAccessor = currentPrincipalAccessor;
-        SignInManager = signInManager;
-        UserManager = userManager;
-        IdentitySecurityLogManager = identitySecurityLogManager;
     }
 
     public virtual Task<IActionResult> OnGetAsync()
@@ -68,49 +64,65 @@ public class ImpersonateTenantModel : AccountPageModel
 
     public virtual async Task<IActionResult> OnPostAsync()
     {
-        if (CurrentUser.FindImpersonatorUserId() != null)
+        try
         {
-            throw new BusinessException("Volo.Account:NestedImpersonationIsNotAllowed");
-        }
-
-        if (CurrentTenant.Id != null)
-        {
-            throw new BusinessException("Volo.Account:ImpersonateTenantOnlyAvailableForHost");
-        }
-
-        if (AccountOptions.ImpersonationTenantPermission.IsNullOrWhiteSpace() ||
-            !await PermissionChecker.IsGrantedAsync(AccountOptions.ImpersonationTenantPermission))
-        {
-            throw new BusinessException("Volo.Account:RequirePermissionToImpersonateTenant")
-                .WithData("PermissionName", AccountOptions.ImpersonationTenantPermission);
-        }
-
-        var currentUserId = CurrentUser.Id;
-        using (CurrentTenant.Change(TenantId))
-        {
-            var adminUser = await UserManager.FindByNameAsync(AccountOptions.TenantAdminUserName);
-            if (adminUser != null)
+            if (ReturnUrl != null && !Url.IsLocalUrl(ReturnUrl) && !ReturnUrl.StartsWith(UriHelper.BuildAbsolute(Request.Scheme, Request.Host, Request.PathBase).RemovePostFix("/"), StringComparison.InvariantCultureIgnoreCase) && !await AppUrlProvider.IsRedirectAllowedUrlAsync(ReturnUrl))
             {
-                var isPersistent = (await HttpContext.AuthenticateAsync(IdentityConstants.ApplicationScheme))?.Properties?.IsPersistent ?? false;
+                ReturnUrl = null;
+            }
+
+            if (CurrentUser.FindImpersonatorUserId().HasValue)
+            {
+                throw new BusinessException("Volo.Account:NestedImpersonationIsNotAllowed");
+            }
+
+            if (CurrentTenant.Id.HasValue)
+            {
+                throw new BusinessException("Volo.Account:ImpersonateTenantOnlyAvailableForHost");
+            }
+
+            if (AccountOptions.ImpersonationTenantPermission.IsNullOrWhiteSpace() ||
+                !await PermissionChecker.IsGrantedAsync(AccountOptions.ImpersonationTenantPermission))
+            {
+                throw new BusinessException("Volo.Account:RequirePermissionToImpersonateTenant")
+                    .WithData("PermissionName", AccountOptions.ImpersonationTenantPermission);
+            }
+
+            using (CurrentTenant.Change(TenantId))
+            {
+                if (TenantUserName.IsNullOrWhiteSpace())
+                {
+                    TenantUserName = AccountOptions.TenantAdminUserName;
+                }
+
+                IdentityUser adminUser = await UserManager.FindByNameAsync(TenantUserName);
+                if (adminUser == null)
+                {
+                    throw new BusinessException("Volo.Account:ThereIsNoUserWithUserName").WithData("UserName", AccountOptions.TenantAdminUserName);
+                }
+
+                bool isPersistent = (await HttpContext.AuthenticateAsync(IdentityConstants.ApplicationScheme))?.Properties?.IsPersistent ?? false;
                 await SignInManager.SignOutAsync();
+                List<Claim> additionalClaims = new List<Claim>()
+          {
+            new Claim(AbpClaimTypes.ImpersonatorUserId, CurrentUser.Id.ToString()),
+            new Claim(AbpClaimTypes.ImpersonatorUserName, CurrentUser.UserName)
+          };
+                Claim claim = CurrentUser.FindClaim(AbpClaimTypes.RememberMe);
+                if (claim != null)
+                {
+                    additionalClaims.Add(claim);
+                }
 
-                var additionalClaims = new List<Claim>
-                    {
-                        new Claim(AbpClaimTypes.ImpersonatorUserId, currentUserId.ToString()),
-                        new Claim(AbpClaimTypes.ImpersonatorUserName, CurrentUser.UserName)
-                    };
+                AuthenticationProperties authenticationProperties = new AuthenticationProperties
+                {
+                    IsPersistent = isPersistent
+                };
 
-                await SignInManager.SignInWithClaimsAsync(adminUser,
-                    new AuthenticationProperties
-                    {
-                        IsPersistent = isPersistent
-                    },
-                    additionalClaims);
-
-                // save security log to admin user.
-                var userPrincipal = await SignInManager.CreateUserPrincipalAsync(adminUser);
-                userPrincipal.Identities.First().AddClaims(additionalClaims);
-                using (CurrentPrincipalAccessor.Change(userPrincipal))
+                await SignInManager.SignInWithClaimsAsync(adminUser, authenticationProperties, additionalClaims);
+                ClaimsPrincipal principal = await SignInManager.CreateUserPrincipalAsync(adminUser);
+                principal.Identities.First().AddClaims(additionalClaims);
+                using (CurrentPrincipalAccessor.Change(principal))
                 {
                     await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
                     {
@@ -119,11 +131,15 @@ public class ImpersonateTenantModel : AccountPageModel
                     });
                 }
 
+                await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(adminUser.Id, adminUser.TenantId);
+
                 return Redirect("~/");
             }
-
-            throw new BusinessException("Volo.Account:ThereIsNoUserWithUserName")
-                .WithData("UserName", AccountOptions.TenantAdminUserName);
+        }
+        catch (BusinessException ex)
+        {
+            Alerts.Danger(ExceptionToErrorInfoConverter.Convert(ex).Message);
+            return Page();
         }
     }
 }

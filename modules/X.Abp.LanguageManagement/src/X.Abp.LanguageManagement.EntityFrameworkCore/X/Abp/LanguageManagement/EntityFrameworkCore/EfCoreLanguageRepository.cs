@@ -19,51 +19,51 @@ namespace X.Abp.LanguageManagement.EntityFrameworkCore;
 public class EfCoreLanguageRepository : EfCoreRepository<ILanguageManagementDbContext, Language, Guid>,
     ILanguageRepository
 {
-    public EfCoreLanguageRepository(IDbContextProvider<ILanguageManagementDbContext> dbContextProvider)
-        : base(dbContextProvider)
-    {
-    }
+  public EfCoreLanguageRepository(IDbContextProvider<ILanguageManagementDbContext> dbContextProvider)
+      : base(dbContextProvider)
+  {
+  }
 
-    public async Task<List<Language>> GetListByIsEnabledAsync(
-        bool isEnabled,
-        CancellationToken cancellationToken = default)
-    {
-        return await (await GetDbSetAsync())
-            .Where(l => l.IsEnabled == isEnabled)
-            .ToListAsync(GetCancellationToken(cancellationToken));
-    }
-
-    public async Task<List<Language>> GetListAsync(
-        string sorting = null,
-        int maxResultCount = int.MaxValue,
-        int skipCount = 0,
-        string filter = null,
-        CancellationToken cancellationToken = default)
-    {
-        return await (await GetQueryableAsync())
-            .WhereIf(filter != null,
-                x => x.DisplayName.Contains(filter) ||
-                     x.CultureName.Contains(filter))
-            .OrderBy(sorting.IsNullOrWhiteSpace() ? nameof(Language.DisplayName) : sorting)
-            .PageBy(skipCount, maxResultCount)
-            .ToListAsync(GetCancellationToken(cancellationToken));
-    }
-
-    public async Task<long> GetCountAsync(
-        string filter,
-        CancellationToken cancellationToken = default)
-    {
-        return await (await GetQueryableAsync())
-            .WhereIf(filter != null,
-                x => x.DisplayName.Contains(filter) ||
-                     x.CultureName.Contains(filter))
-            .CountAsync(GetCancellationToken(cancellationToken));
-    }
-
-    public virtual async Task<bool> AnyAsync(
-      string cultureName,
+  public virtual async Task<List<Language>> GetListByIsEnabledAsync(
+      bool isEnabled,
       CancellationToken cancellationToken = default)
-    {
-        return await (await GetDbSetAsync()).AnyAsync(language => language.CultureName == cultureName, GetCancellationToken(cancellationToken));
-    }
+  {
+    return await (await GetDbSetAsync())
+        .Where(l => l.IsEnabled == isEnabled)
+        .ToListAsync(GetCancellationToken(cancellationToken));
+  }
+
+  public virtual async Task<List<Language>> GetListAsync(
+      string sorting = null,
+      int maxResultCount = int.MaxValue,
+      int skipCount = 0,
+      string filter = null,
+      CancellationToken cancellationToken = default)
+  {
+    return await (await GetQueryableAsync())
+        .WhereIf(filter != null,
+            x => x.DisplayName.Contains(filter) ||
+                 x.CultureName.Contains(filter))
+        .OrderBy(sorting.IsNullOrWhiteSpace() ? nameof(Language.DisplayName) : sorting)
+        .PageBy(skipCount, maxResultCount)
+        .ToListAsync(GetCancellationToken(cancellationToken));
+  }
+
+  public virtual async Task<long> GetCountAsync(
+      string filter,
+      CancellationToken cancellationToken = default)
+  {
+    return await (await GetQueryableAsync())
+        .WhereIf(filter != null,
+            x => x.DisplayName.Contains(filter) ||
+                 x.CultureName.Contains(filter))
+        .CountAsync(GetCancellationToken(cancellationToken));
+  }
+
+  public virtual async Task<bool> AnyAsync(
+    string cultureName,
+    CancellationToken cancellationToken = default)
+  {
+    return await (await GetDbSetAsync()).AnyAsync(language => language.CultureName == cultureName, GetCancellationToken(cancellationToken));
+  }
 }

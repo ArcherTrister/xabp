@@ -3,7 +3,6 @@
   <Import Project="..\..\..\..\configureawait.props" />
   <Import Project="..\..\..\..\modules.props" />
 
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
@@ -13,13 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.Account.Pro.Shared.Application\X.Abp.Account.Pro.Shared.Application.csproj" />
-    <ProjectReference
-      Include="..\X.Abp.Account.Pro.Public.Application.Contracts\X.Abp.Account.Pro.Public.Application.Contracts.csproj" />
-    <PackageReference Include="Volo.Abp.Sms" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.BlobStoring" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Imaging.ImageSharp" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Sms" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Timing" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Account.Pro.Public.Application.Contracts\X.Abp.Account.Pro.Public.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Account.Pro.Shared.Application\X.Abp.Account.Pro.Shared.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

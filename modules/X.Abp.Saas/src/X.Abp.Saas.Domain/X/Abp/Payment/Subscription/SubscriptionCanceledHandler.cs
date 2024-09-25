@@ -21,30 +21,30 @@ IDistributedEventHandler<SubscriptionCanceledEto>,
 ITransientDependency,
 IEventHandler
 {
-    protected ITenantRepository TenantRepository { get; }
+  protected ITenantRepository TenantRepository { get; }
 
-    protected ILogger<SubscriptionCanceledHandler> Logger { get; }
+  protected ILogger<SubscriptionCanceledHandler> Logger { get; }
 
-    public SubscriptionCanceledHandler(
-      ITenantRepository tenantRepository,
-      ILogger<SubscriptionCanceledHandler> logger)
+  public SubscriptionCanceledHandler(
+    ITenantRepository tenantRepository,
+    ILogger<SubscriptionCanceledHandler> logger)
+  {
+    TenantRepository = tenantRepository;
+    Logger = logger;
+  }
+
+  public virtual async Task HandleEventAsync(SubscriptionCanceledEto eventData)
+  {
+    var tenant = await TenantRepository.FindAsync(Guid.Parse(eventData.ExtraProperties[TenantConsts.TenantIdParameterName]?.ToString()), false);
+
+    if (tenant == null)
     {
-        TenantRepository = tenantRepository;
-        Logger = logger;
+      Logger.LogWarning(TenantConsts.TenantIdParameterName + eventData.PaymentRequestId.ToString());
     }
-
-    public async Task HandleEventAsync(SubscriptionCanceledEto eventData)
+    else
     {
-        var tenant = await TenantRepository.FindAsync(Guid.Parse(eventData.ExtraProperties[TenantConsts.TenantIdParameterName]?.ToString()), false);
-
-        if (tenant == null)
-        {
-            Logger.LogWarning(TenantConsts.TenantIdParameterName + eventData.PaymentRequestId.ToString());
-        }
-        else
-        {
-            tenant.EditionEndDateUtc = eventData.PeriodEndDate;
-            await TenantRepository.UpdateAsync(tenant, false);
-        }
+      tenant.EditionEndDateUtc = eventData.PeriodEndDate;
+      await TenantRepository.UpdateAsync(tenant, false);
     }
+  }
 }

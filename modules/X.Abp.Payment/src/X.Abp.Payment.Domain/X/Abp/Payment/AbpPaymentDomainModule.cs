@@ -2,6 +2,7 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
+using Volo.Abp.Domain;
 using Volo.Abp.Modularity;
 using Volo.Abp.ObjectExtending.Modularity;
 
@@ -10,8 +11,7 @@ using X.Abp.Payment.Plans;
 
 namespace X.Abp.Payment;
 
-[DependsOn(
-    typeof(AbpPaymentDomainSharedModule))]
+[DependsOn(typeof(AbpPaymentDomainSharedModule), typeof(AbpDddDomainModule))]
 public class AbpPaymentDomainModule : AbpModule
 {
     public override void PostConfigureServices(ServiceConfigurationContext context)

@@ -9,7 +9,15 @@
 
   <ItemGroup>
     <ProjectReference
+      Include="..\..\src\MyCompanyName.MyProjectName.Domain\MyCompanyName.MyProjectName.Domain.csproj" />
+    <ProjectReference
       Include="..\MyCompanyName.MyProjectName.EntityFrameworkCore.Tests\MyCompanyName.MyProjectName.EntityFrameworkCore.Tests.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference
+      Include="..\..\src\MyCompanyName.MyProjectName.Domain\MyCompanyName.MyProjectName.Domain.csproj" />
+    <ProjectReference
+      Include="..\MyCompanyName.MyProjectName.TestBase\MyCompanyName.MyProjectName.TestBase.csproj" />
   </ItemGroup>
 
   <ItemGroup>

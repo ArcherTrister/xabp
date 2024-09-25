@@ -18,6 +18,6 @@ public class AbpSaasHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddHttpClientProxies(typeof(AbpSaasApplicationContractsModule).Assembly, AbpSaasRemoteServiceConsts.RemoteServiceName);
+        context.Services.AddStaticHttpClientProxies(typeof(AbpSaasApplicationContractsModule).Assembly, AbpSaasRemoteServiceConsts.RemoteServiceName);
     }
 }

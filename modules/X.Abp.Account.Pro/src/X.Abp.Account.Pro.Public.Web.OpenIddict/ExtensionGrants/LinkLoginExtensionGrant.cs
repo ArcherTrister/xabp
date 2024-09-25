@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 using OpenIddict.Abstractions;
 using OpenIddict.Server;
+using OpenIddict.Server.AspNetCore;
 
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
@@ -23,7 +24,7 @@ using X.Abp.Account.Localization;
 
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
-namespace X.Abp.Account.Public.Web.ExtensionGrants;
+namespace X.Abp.Account.Web.ExtensionGrants;
 
 public class LinkLoginExtensionGrant : TokenExtensionGrantBase
 {
@@ -78,41 +79,49 @@ public class LinkLoginExtensionGrant : TokenExtensionGrantBase
             Token = context.Request.AccessToken
         };
 
-        var notification = new OpenIddictServerEvents.ProcessAuthenticationContext(transaction);
-        await context.HttpContext.RequestServices.GetRequiredService<IOpenIddictServerDispatcher>().DispatchAsync(notification);
-        if (notification.IsRejected)
+        var authorizationRequestContext = new OpenIddictServerEvents.ProcessAuthenticationContext(transaction);
+        await context.HttpContext.RequestServices.GetRequiredService<IOpenIddictServerDispatcher>().DispatchAsync(authorizationRequestContext);
+        if (authorizationRequestContext.IsRejected)
         {
             Logger.LogError("Process authentication rejected");
             return new ForbidResult(new string[1]
             {
-                "OpenIddict.Server.AspNetCore"
+                OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
             },
             new AuthenticationProperties(new Dictionary<string, string>()
             {
-                [".error"] = notification.Error ?? "invalid_request",
-                [".error_description"] = notification.ErrorDescription,
-                [".error_uri"] = notification.ErrorUri
+                [OpenIddictServerAspNetCoreConstants.Properties.Error] = authorizationRequestContext.Error ?? OpenIddictConstants.Errors.InvalidRequest,
+                [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = authorizationRequestContext.ErrorDescription,
+                [OpenIddictServerAspNetCoreConstants.Properties.ErrorUri] = authorizationRequestContext.ErrorUri
+            },
+            new Dictionary<string, object>()
+            {
+                [OpenIddictConstants.Parameters.GrantType] = context.Request.GrantType
             }));
         }
 
-        var principal = notification.GenericTokenPrincipal;
+        var principal = authorizationRequestContext.GenericTokenPrincipal;
         if (principal != null)
         {
             var request = context.HttpContext.GetOpenIddictServerRequest();
-            using (CurrentPrincipalAccessorExtensions.Change(CurrentPrincipalAccessor, principal.Claims))
+            using (CurrentPrincipalAccessor.Change(principal.Claims))
             {
                 var linkUserId = await GetRawValueOrNullAsync(request, "LinkUserId");
                 if (!linkUserId.HasValue)
                 {
                     Logger.LogError("Invalid link user id");
-                    return new ForbidResult(new string[]
-                    {
-                        "OpenIddict.Server.AspNetCore"
-                    },
+                    return new ForbidResult(
+                    [
+                        OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
+                    ],
                     new AuthenticationProperties(new Dictionary<string, string>()
                     {
-                        [".error"] = "invalid_request",
-                        [".error_description"] = "Invalid link user id"
+                        [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidRequest,
+                        [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "Invalid link user id"
+                    },
+                    new Dictionary<string, object>()
+                    {
+                        [OpenIddictConstants.Parameters.GrantType] = context.Request.GrantType
                     }));
                 }
 
@@ -122,25 +131,29 @@ public class LinkLoginExtensionGrant : TokenExtensionGrantBase
                     Logger.LogError("Invalid link tenant id");
                     return new ForbidResult(new string[]
                     {
-                        "OpenIddict.Server.AspNetCore"
+                        OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
                     },
                     new AuthenticationProperties(new Dictionary<string, string>()
                     {
-                        [".error"] = "invalid_request",
-                        [".error_description"] = "Invalid link tenant id"
+                        [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidRequest,
+                        [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "Invalid link tenant id"
+                    },
+                    new Dictionary<string, object>()
+                    {
+                        [OpenIddictConstants.Parameters.GrantType] = context.Request.GrantType
                     }));
                 }
 
                 if (await IdentityLinkUserManager.IsLinkedAsync(new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id), new IdentityLinkUserInfo(linkUserId.Value, linkTenantId), true))
                 {
-                    using (CurrentTenant.Change(linkTenantId, null))
+                    using (CurrentTenant.Change(linkTenantId))
                     {
                         var user = await UserManager.GetByIdAsync(linkUserId.Value);
                         var claimsPrincipal = await UserClaimsPrincipalFactory.CreateAsync(user);
                         var authenticationProperties = new AuthenticationProperties();
                         if (AccountOpenIddictOptions.IsTenantMultiDomain)
                         {
-                            var basicTenantInfo = new BasicTenantInfo(null, null);
+                            var basicTenantInfo = new BasicTenantInfo(null);
                             if (linkTenantId.HasValue)
                             {
                                 var tenantConfiguration = await TenantStore.FindAsync(linkTenantId.Value);
@@ -150,11 +163,12 @@ public class LinkLoginExtensionGrant : TokenExtensionGrantBase
                             authenticationProperties.SetParameter(TenantDomainParameterName, await AccountOpenIddictOptions.GetTenantDomain(context.HttpContext, basicTenantInfo));
                         }
 
+                        await CreateSessionAsync(context, claimsPrincipal);
                         claimsPrincipal.SetScopes(principal.GetScopes());
                         claimsPrincipal.SetResources(await GetResourcesAsync(context, principal.GetScopes()));
 
                         await SetClaimsDestinationsAsync(context, claimsPrincipal);
-                        return new Microsoft.AspNetCore.Mvc.SignInResult("OpenIddict.Server.AspNetCore", claimsPrincipal, authenticationProperties);
+                        return new Microsoft.AspNetCore.Mvc.SignInResult(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
                     }
                 }
                 else
@@ -162,12 +176,16 @@ public class LinkLoginExtensionGrant : TokenExtensionGrantBase
                     Logger.LogError("The target user is not linked to you!");
                     return new ForbidResult(new string[]
                     {
-                        "OpenIddict.Server.AspNetCore"
+                        OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
                     },
                     new AuthenticationProperties(new Dictionary<string, string>()
                     {
-                        [".error"] = "invalid_request",
-                        [".error_description"] = "The target user is not linked to you!"
+                        [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidRequest,
+                        [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "The target user is not linked to you!"
+                    },
+                    new Dictionary<string, object>()
+                    {
+                        [OpenIddictConstants.Parameters.GrantType] = context.Request.GrantType
                     }));
                 }
             }
@@ -177,11 +195,15 @@ public class LinkLoginExtensionGrant : TokenExtensionGrantBase
             Logger.LogError("Process authentication principal is null");
             return new ForbidResult(new string[]
             {
-                "OpenIddict.Server.AspNetCore"
+                OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
             },
             new AuthenticationProperties(new Dictionary<string, string>()
             {
-                [".error"] = "invalid_token"
+                [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidToken
+            },
+            new Dictionary<string, object>()
+            {
+                [OpenIddictConstants.Parameters.GrantType] = context.Request.GrantType
             }));
         }
     }

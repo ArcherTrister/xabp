@@ -50,7 +50,7 @@
 
     x.abp.identityServer.apiResources['delete'] = function(id, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/identity-server/api-resources' + abp.utils.buildQueryString([{ name: 'id', value: id }]) + '',
+        url: abp.appPath + 'api/identity-server/api-resources/' + id + '',
         type: 'DELETE',
         dataType: null
       }, ajaxParams));
@@ -149,7 +149,7 @@
 
     x.abp.identityServer.clients['delete'] = function(id, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/identity-server/clients' + abp.utils.buildQueryString([{ name: 'id', value: id }]) + '',
+        url: abp.appPath + 'api/identity-server/clients/' + id + '',
         type: 'DELETE',
         dataType: null
       }, ajaxParams));
@@ -202,7 +202,7 @@
 
     x.abp.identityServer.identityResources['delete'] = function(id, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/identity-server/identity-resources' + abp.utils.buildQueryString([{ name: 'id', value: id }]) + '',
+        url: abp.appPath + 'api/identity-server/identity-resources/' + id + '',
         type: 'DELETE',
         dataType: null
       }, ajaxParams));

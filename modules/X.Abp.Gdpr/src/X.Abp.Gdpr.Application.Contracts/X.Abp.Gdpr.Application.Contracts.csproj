@@ -11,8 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.Gdpr.Domain.Shared\X.Abp.Gdpr.Domain.Shared.csproj" />
   </ItemGroup>

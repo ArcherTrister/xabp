@@ -16,8 +16,10 @@ public class AbpChatPermissionDefinitionProvider : PermissionDefinitionProvider
     public override void Define(IPermissionDefinitionContext context)
     {
         var group = context.AddGroup(AbpChatPermissions.GroupName, L("Permission:Chat"));
-        group.AddPermission(AbpChatPermissions.Messaging, L("Permission:Messaging"))
-            .RequireFeatures(AbpChatFeatures.Enable);
+        group.AddPermission(AbpChatPermissions.Messaging, L("Permission:Messaging")).RequireFeatures(AbpChatFeatures.Enable)
+            .AddChild("Chat.Searching", L("Permission:Searching")).RequireFeatures(AbpChatFeatures.Enable);
+
+        group.AddPermission(AbpChatPermissions.SettingManagement, L("Permission:SettingManagement"));
     }
 
     private static LocalizableString L(string name)

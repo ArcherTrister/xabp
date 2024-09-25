@@ -18,7 +18,7 @@ namespace MyCompanyName.MyProjectName;
     typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(MyProjectNameDomainModule)
+    typeof(AbpBackgroundJobsAbstractionsModule)
     )]
 public class MyProjectNameTestBaseModule : AbpModule
 {

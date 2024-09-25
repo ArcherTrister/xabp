@@ -25,60 +25,60 @@ namespace X.Abp.CmsKit.Admin.Polls;
 [RemoteService(true, Name = CmsKitAdminRemoteServiceConsts.RemoteServiceName)]
 public class PollAdminController : CmsKitProAdminController, IPollAdminAppService
 {
-    protected IPollAdminAppService PollAdminAppService { get; }
+  protected IPollAdminAppService PollAdminAppService { get; }
 
-    public PollAdminController(IPollAdminAppService pollAdminAppService)
-    {
-        PollAdminAppService = pollAdminAppService;
-    }
+  public PollAdminController(IPollAdminAppService pollAdminAppService)
+  {
+    PollAdminAppService = pollAdminAppService;
+  }
 
-    [HttpGet]
-    public Task<PagedResultDto<PollDto>> GetListAsync(GetPollListInput input)
-    {
-        return PollAdminAppService.GetListAsync(input);
-    }
+  [HttpGet]
+  public virtual Task<PagedResultDto<PollDto>> GetListAsync(GetPollListInput input)
+  {
+    return PollAdminAppService.GetListAsync(input);
+  }
 
-    [HttpGet]
-    [Route("{id}")]
-    public Task<PollWithDetailsDto> GetAsync(Guid id)
-    {
-        return PollAdminAppService.GetAsync(id);
-    }
+  [HttpGet]
+  [Route("{id}")]
+  public virtual Task<PollWithDetailsDto> GetAsync(Guid id)
+  {
+    return PollAdminAppService.GetAsync(id);
+  }
 
-    [Authorize(AbpCmsKitProAdminPermissions.Polls.Create)]
-    [HttpPost]
-    public Task<PollWithDetailsDto> CreateAsync(CreatePollDto input)
-    {
-        return PollAdminAppService.CreateAsync(input);
-    }
+  [Authorize(AbpCmsKitProAdminPermissions.Polls.Create)]
+  [HttpPost]
+  public virtual Task<PollWithDetailsDto> CreateAsync(CreatePollDto input)
+  {
+    return PollAdminAppService.CreateAsync(input);
+  }
 
-    [HttpPut]
-    [Authorize(AbpCmsKitProAdminPermissions.Polls.Update)]
-    [Route("{id}")]
-    public Task<PollWithDetailsDto> UpdateAsync(Guid id, UpdatePollDto input)
-    {
-        return PollAdminAppService.UpdateAsync(id, input);
-    }
+  [HttpPut]
+  [Authorize(AbpCmsKitProAdminPermissions.Polls.Update)]
+  [Route("{id}")]
+  public virtual Task<PollWithDetailsDto> UpdateAsync(Guid id, UpdatePollDto input)
+  {
+    return PollAdminAppService.UpdateAsync(id, input);
+  }
 
-    [Authorize(AbpCmsKitProAdminPermissions.Polls.Delete)]
-    [Route("{id}")]
-    [HttpDelete]
-    public Task DeleteAsync(Guid id)
-    {
-        return PollAdminAppService.DeleteAsync(id);
-    }
+  [Authorize(AbpCmsKitProAdminPermissions.Polls.Delete)]
+  [Route("{id}")]
+  [HttpDelete]
+  public virtual Task DeleteAsync(Guid id)
+  {
+    return PollAdminAppService.DeleteAsync(id);
+  }
 
-    [HttpGet]
-    [Route("widgets")]
-    public Task<ListResultDto<PollWidgetDto>> GetWidgetsAsync()
-    {
-        return PollAdminAppService.GetWidgetsAsync();
-    }
+  [HttpGet]
+  [Route("widgets")]
+  public virtual Task<ListResultDto<PollWidgetDto>> GetWidgetsAsync()
+  {
+    return PollAdminAppService.GetWidgetsAsync();
+  }
 
-    [HttpGet]
-    [Route("result")]
-    public Task<GetResultDto> GetResultAsync(Guid id)
-    {
-        return PollAdminAppService.GetResultAsync(id);
-    }
+  [HttpGet]
+  [Route("result")]
+  public virtual Task<GetResultDto> GetResultAsync(Guid id)
+  {
+    return PollAdminAppService.GetResultAsync(id);
+  }
 }

@@ -5,7 +5,7 @@ using Volo.Abp.MongoDB;
 namespace X.Abp.FileManagement.MongoDB;
 
 [DependsOn(
-    typeof(FileManagementDomainModule),
+    typeof(AbpFileManagementDomainModule),
     typeof(AbpMongoDbModule)
     )]
 public class FileManagementMongoDbModule : AbpModule

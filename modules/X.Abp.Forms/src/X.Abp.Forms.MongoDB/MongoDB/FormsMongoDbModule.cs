@@ -5,7 +5,7 @@ using Volo.Abp.MongoDB;
 namespace X.Abp.Forms.MongoDB;
 
 [DependsOn(
-    typeof(FormsDomainModule),
+    typeof(AbpFormsDomainModule),
     typeof(AbpMongoDbModule)
     )]
 public class FormsMongoDbModule : AbpModule

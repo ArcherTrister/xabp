@@ -163,3 +163,6 @@ csharp_prefer_static_local_function = true:suggestion
 csharp_style_prefer_readonly_struct = true:suggestion
 dotnet_diagnostic.SA1507.severity = error
 dotnet_diagnostic.SA1124.severity = silent
+csharp_style_prefer_primary_constructors = true:suggestion
+csharp_style_prefer_readonly_struct_member = true:suggestion
+dotnet_diagnostic.SA1649.severity = error

@@ -13,8 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Http.Client" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Forms.Application.Contracts\X.Abp.Forms.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Forms.Application.Contracts\X.Abp.Forms.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

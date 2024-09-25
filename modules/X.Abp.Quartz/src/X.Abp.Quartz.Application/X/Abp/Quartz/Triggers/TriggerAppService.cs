@@ -19,52 +19,52 @@ namespace X.Abp.Quartz.Triggers;
 [Authorize(AbpQuartzPermissions.Triggers.Default)]
 public class TriggerAppService : QuartzAppServiceBase, ITriggerAppService
 {
-    public async Task<IReadOnlyList<JobOrTriggerKeyDto>> GetListAsync(string schedulerName, GroupMatcherDto groupMatcher)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        var matcher = (groupMatcher ?? new GroupMatcherDto()).GetTriggerGroupMatcher();
-        var triggerKeys = await scheduler.GetTriggerKeys(matcher);
+  public virtual async Task<IReadOnlyList<JobOrTriggerKeyDto>> GetListAsync(string schedulerName, GroupMatcherDto groupMatcher)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    var matcher = (groupMatcher ?? new GroupMatcherDto()).GetTriggerGroupMatcher();
+    var triggerKeys = await scheduler.GetTriggerKeys(matcher);
 
-        return triggerKeys.Select(x => new JobOrTriggerKeyDto(x)).ToList();
-    }
+    return triggerKeys.Select(x => new JobOrTriggerKeyDto(x)).ToList();
+  }
 
-    public async Task<TriggerDetailDto> GetAsync(string schedulerName, string triggerGroup, string triggerName)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        var trigger = await scheduler.GetTrigger(new TriggerKey(triggerName, triggerGroup));
-        var calendar = trigger.CalendarName != null
-            ? await scheduler.GetCalendar(trigger.CalendarName)
-            : null;
-        return TriggerDetailDto.Create(trigger, calendar);
-    }
+  public virtual async Task<TriggerDetailDto> GetAsync(string schedulerName, string triggerGroup, string triggerName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    var trigger = await scheduler.GetTrigger(new TriggerKey(triggerName, triggerGroup));
+    var calendar = trigger.CalendarName != null
+        ? await scheduler.GetCalendar(trigger.CalendarName)
+        : null;
+    return TriggerDetailDto.Create(trigger, calendar);
+  }
 
-    [Authorize(AbpQuartzPermissions.Triggers.Update)]
-    public async Task PauseAsync(string schedulerName, string triggerGroup, string triggerName)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        await scheduler.PauseTrigger(new TriggerKey(triggerName, triggerGroup));
-    }
+  [Authorize(AbpQuartzPermissions.Triggers.Update)]
+  public virtual async Task PauseAsync(string schedulerName, string triggerGroup, string triggerName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    await scheduler.PauseTrigger(new TriggerKey(triggerName, triggerGroup));
+  }
 
-    [Authorize(AbpQuartzPermissions.Triggers.Update)]
-    public async Task BatchPauseAsync(string schedulerName, GroupMatcherDto groupMatcher)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        var matcher = (groupMatcher ?? new GroupMatcherDto()).GetTriggerGroupMatcher();
-        await scheduler.PauseTriggers(matcher);
-    }
+  [Authorize(AbpQuartzPermissions.Triggers.Update)]
+  public virtual async Task BatchPauseAsync(string schedulerName, GroupMatcherDto groupMatcher)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    var matcher = (groupMatcher ?? new GroupMatcherDto()).GetTriggerGroupMatcher();
+    await scheduler.PauseTriggers(matcher);
+  }
 
-    [Authorize(AbpQuartzPermissions.Triggers.Update)]
-    public async Task ResumeAsync(string schedulerName, string triggerGroup, string triggerName)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        await scheduler.ResumeTrigger(new TriggerKey(triggerName, triggerGroup));
-    }
+  [Authorize(AbpQuartzPermissions.Triggers.Update)]
+  public virtual async Task ResumeAsync(string schedulerName, string triggerGroup, string triggerName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    await scheduler.ResumeTrigger(new TriggerKey(triggerName, triggerGroup));
+  }
 
-    [Authorize(AbpQuartzPermissions.Triggers.Update)]
-    public async Task BatchResumeAsync(string schedulerName, GroupMatcherDto groupMatcher)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        var matcher = (groupMatcher ?? new GroupMatcherDto()).GetTriggerGroupMatcher();
-        await scheduler.ResumeTriggers(matcher);
-    }
+  [Authorize(AbpQuartzPermissions.Triggers.Update)]
+  public virtual async Task BatchResumeAsync(string schedulerName, GroupMatcherDto groupMatcher)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    var matcher = (groupMatcher ?? new GroupMatcherDto()).GetTriggerGroupMatcher();
+    await scheduler.ResumeTriggers(matcher);
+  }
 }

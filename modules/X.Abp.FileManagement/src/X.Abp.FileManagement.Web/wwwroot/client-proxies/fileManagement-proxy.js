@@ -5,6 +5,67 @@
 
 (function(){
 
+  // controller x.abp.fileManagement.directories.directoryDescriptor
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.fileManagement.directories.directoryDescriptor');
+
+    x.abp.fileManagement.directories.directoryDescriptor.get = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/file-management/directory-descriptor/' + id + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.fileManagement.directories.directoryDescriptor.getList = function(parentId, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/file-management/directory-descriptor/sub-directories' + abp.utils.buildQueryString([{ name: 'parentId', value: parentId }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.fileManagement.directories.directoryDescriptor.create = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/file-management/directory-descriptor',
+        type: 'POST',
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.fileManagement.directories.directoryDescriptor.rename = function(id, input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/file-management/directory-descriptor/' + id + '',
+        type: 'POST',
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.fileManagement.directories.directoryDescriptor.getContent = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/file-management/directory-descriptor' + abp.utils.buildQueryString([{ name: 'filter', value: input.filter }, { name: 'sorting', value: input.sorting }, { name: 'id', value: input.id }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.fileManagement.directories.directoryDescriptor['delete'] = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/file-management/directory-descriptor/' + id + '',
+        type: 'DELETE',
+        dataType: null
+      }, ajaxParams));
+    };
+
+    x.abp.fileManagement.directories.directoryDescriptor.move = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/file-management/directory-descriptor/move',
+        type: 'POST',
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+  })();
+
   // controller x.abp.fileManagement.files.fileDescriptor
 
   (function(){
@@ -111,67 +172,6 @@
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/file-management/public-file-descriptor/upload' + abp.utils.buildQueryString([{ name: 'directoryName', value: input.directoryName }]) + '',
         type: 'POST'
-      }, ajaxParams));
-    };
-
-  })();
-
-  // controller x.abp.fileManagement.directories.directoryDescriptor
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'x.abp.fileManagement.directories.directoryDescriptor');
-
-    x.abp.fileManagement.directories.directoryDescriptor.get = function(id, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/file-management/directory-descriptor/' + id + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.fileManagement.directories.directoryDescriptor.getList = function(parentId, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/file-management/directory-descriptor/sub-directories' + abp.utils.buildQueryString([{ name: 'parentId', value: parentId }]) + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.fileManagement.directories.directoryDescriptor.create = function(input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/file-management/directory-descriptor',
-        type: 'POST',
-        data: JSON.stringify(input)
-      }, ajaxParams));
-    };
-
-    x.abp.fileManagement.directories.directoryDescriptor.rename = function(id, input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/file-management/directory-descriptor/' + id + '',
-        type: 'POST',
-        data: JSON.stringify(input)
-      }, ajaxParams));
-    };
-
-    x.abp.fileManagement.directories.directoryDescriptor.getContent = function(input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/file-management/directory-descriptor' + abp.utils.buildQueryString([{ name: 'filter', value: input.filter }, { name: 'sorting', value: input.sorting }, { name: 'id', value: input.id }]) + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.fileManagement.directories.directoryDescriptor['delete'] = function(id, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/file-management/directory-descriptor/' + id + '',
-        type: 'DELETE',
-        dataType: null
-      }, ajaxParams));
-    };
-
-    x.abp.fileManagement.directories.directoryDescriptor.move = function(input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/file-management/directory-descriptor/move',
-        type: 'POST',
-        data: JSON.stringify(input)
       }, ajaxParams));
     };
 

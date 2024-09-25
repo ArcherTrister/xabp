@@ -3,7 +3,6 @@
   <Import Project="..\..\..\..\configureawait.props" />
   <Import Project="..\..\..\..\modules.props" />
 
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>X.Abp.Account.Pro.Public.Web.Impersonation</PackageId>
@@ -19,10 +18,8 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
 </Project>

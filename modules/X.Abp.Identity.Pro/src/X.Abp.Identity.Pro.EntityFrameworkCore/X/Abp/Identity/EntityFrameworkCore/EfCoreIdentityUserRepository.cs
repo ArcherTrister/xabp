@@ -274,7 +274,7 @@ public class EfCoreIdentityUserRepository : EfCoreRepository<IIdentityProDbConte
                     where userRole.UserId == id
                     select role;
 
-        //TODO: Needs improvement
+        // TODO: Needs improvement
         var userOrganizationsQuery = from userOrg in dbContext.Set<IdentityUserOrganizationUnit>()
                                      join ou in dbContext.OrganizationUnits.IncludeDetails(includeDetails) on userOrg.OrganizationUnitId equals ou.Id
                                      where userOrg.UserId == id

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
@@ -7,9 +7,7 @@ namespace MyCompanyName.MyProjectName.Shared.Hosting.Microservices;
 
 public static class JwtBearerConfigurationHelper
 {
-    public static void Configure(
-        ServiceConfigurationContext context,
-        string audience)
+    public static void Configure(ServiceConfigurationContext context, string audience)
     {
         var configuration = context.Services.GetConfiguration();
 
@@ -20,5 +18,11 @@ public static class JwtBearerConfigurationHelper
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 options.Audience = audience;
             });
+
+        Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+        {
+            options.IsDynamicClaimsEnabled = true;
+            options.RemoteRefreshUrl = configuration["AuthServer:Authority"] + options.RemoteRefreshUrl;
+        });
     }
 }

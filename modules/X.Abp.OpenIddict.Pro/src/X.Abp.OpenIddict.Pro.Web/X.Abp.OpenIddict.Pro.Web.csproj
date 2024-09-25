@@ -16,15 +16,12 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Web"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Web" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.OpenIddict.Pro.Application.Contracts\X.Abp.OpenIddict.Pro.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.OpenIddict.Pro.Application.Contracts\X.Abp.OpenIddict.Pro.Application.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

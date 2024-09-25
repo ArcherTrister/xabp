@@ -6,5 +6,5 @@ namespace X.Abp.CmsKit.Settings;
 
 public static class CmsKitProSettings
 {
-    public const string GroupName = "Pro";
+    public const string GroupName = "CmsKitPro";
 }

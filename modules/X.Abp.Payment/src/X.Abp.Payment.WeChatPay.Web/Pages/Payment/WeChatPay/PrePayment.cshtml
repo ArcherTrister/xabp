@@ -1,0 +1,39 @@
+﻿@page
+@using X.Abp.Payment.WeChatPay.Pages.Payment.WeChatPay
+@model PrePaymentModel
+@{
+    Layout = null;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(PrePaymentModel).FullName">
+        <abp-script src="/Pages/Payment/WeChatPay/qrcode.min.js" />
+    </abp-script-bundle>
+}
+
+<main>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mx-auto mb-4">
+                    <p>Please use the wechat app to scan the QR code for payment.</p>
+                    @* //TODO: show payment details *@
+                    <div id="wechatPayQrCode"></div>
+                </div>
+
+                <script>
+                    const codeUrl = @Html.Raw(Model.PaymentRequestStartResult.CheckoutLink);
+                    const qrcode = new QRCode(document.getElementById('wechatPayQrCode'), {
+                        text: codeUrl,
+                        width: 200,
+                        height: 200,
+                        colorDark: '#000000',
+                        colorLight: '#ffffff',
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+</main>
+

@@ -4,11 +4,16 @@
 
 using Volo.Abp.DependencyInjection;
 
-namespace X.Abp.Account.Public.Web.ExternalProviders;
+using X.Abp.Account.Public.Web.ExternalProviders;
+
+namespace X.Abp.Account.Web.ExternalProviders;
 
 public class DefaultTokenGeneratorProvider : ITokenGeneratorProvider, ITransientDependency
 {
     /*
+     * GenerateTokenContext
+     * GenerateIdentityModelToken
+     * See https://github.com/openiddict/openiddict-core/blob/1f630eb4d8f18d52d373ebaec02ebbb9e47760e9/src/OpenIddict.Server/OpenIddictServerHandlers.Protection.cs#L1466
     protected AbpUserClaimsPrincipalFactory ClaimsPrincipalFactory { get; }
 
     /// <summary>
@@ -40,13 +45,13 @@ public class DefaultTokenGeneratorProvider : ITokenGeneratorProvider, ITransient
     }
     */
 
-    public Task<TokenGeneratorResult> CreateSpaExternalLoginAccessTokenAsync(string loginProvider, string providerKey, Guid? tenantId, string clientId, string clientSecret, string scope)
-    {
-        throw new NotImplementedException();
-    }
+    public virtual Task<TokenGeneratorResult> CreateSpaExternalLoginAccessTokenAsync(string loginProvider, string providerKey, Guid? tenantId, string clientId, string clientSecret, string scope)
+  {
+    throw new NotImplementedException();
+  }
 
-    public Task<TokenGeneratorResult> CreateScanCodeLoginAccessTokenAsync(Guid userId, Guid? tenantId, string clientId, string clientSecret, string scope)
-    {
-        throw new NotImplementedException();
-    }
+  public virtual Task<TokenGeneratorResult> CreateScanCodeLoginAccessTokenAsync(Guid userId, Guid? tenantId, string clientId, string clientSecret, string scope)
+  {
+    throw new NotImplementedException();
+  }
 }

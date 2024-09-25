@@ -356,6 +356,47 @@
             }
           }
         },
+        "X.Abp.Identity.IdentityExternalLoginController": {
+          "controllerName": "IdentityExternalLogin",
+          "controllerGroupName": "ExternalLogin",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Identity.IdentityExternalLoginController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Identity.IIdentityExternalLoginAppService",
+              "name": "IIdentityExternalLoginAppService",
+              "methods": [
+                {
+                  "name": "CreateOrUpdateAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "CreateOrUpdateAsync": {
+              "uniqueName": "CreateOrUpdateAsync",
+              "name": "CreateOrUpdateAsync",
+              "httpMethod": "POST",
+              "url": "api/identity/external-login",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityExternalLoginAppService"
+            }
+          }
+        },
         "X.Abp.Identity.IdentityRoleController": {
           "controllerName": "IdentityRole",
           "controllerGroupName": "Role",
@@ -374,31 +415,6 @@
                   "returnValue": {
                     "type": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.Identity.IdentityRoleDto>",
                     "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.Identity.IdentityRoleDto>"
-                  }
-                },
-                {
-                  "name": "UpdateClaimsAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "id",
-                      "typeAsString": "System.Guid, System.Private.CoreLib",
-                      "type": "System.Guid",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    },
-                    {
-                      "name": "input",
-                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityRoleClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=7.2.3.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
-                      "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimDto>",
-                      "typeSimple": "[X.Abp.Identity.IdentityRoleClaimDto]",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "System.Void",
-                    "typeSimple": "System.Void"
                   }
                 },
                 {
@@ -424,6 +440,56 @@
                   "returnValue": {
                     "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimDto>",
                     "typeSimple": "[X.Abp.Identity.IdentityRoleClaimDto]"
+                  }
+                },
+                {
+                  "name": "UpdateClaimsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityRoleClaimUpdateDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.2.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimUpdateDto>",
+                      "typeSimple": "[X.Abp.Identity.IdentityRoleClaimUpdateDto]",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "MoveAllUsersAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "targetRoleId",
+                      "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "type": "System.Guid?",
+                      "typeSimple": "string?",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
                   }
                 },
                 {
@@ -796,9 +862,9 @@
                 },
                 {
                   "name": "input",
-                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityRoleClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=7.2.3.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimDto>",
-                  "typeSimple": "[X.Abp.Identity.IdentityRoleClaimDto]",
+                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityRoleClaimUpdateDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.2.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimUpdateDto>",
+                  "typeSimple": "[X.Abp.Identity.IdentityRoleClaimUpdateDto]",
                   "isOptional": false,
                   "defaultValue": null
                 }
@@ -820,8 +886,8 @@
                   "nameOnMethod": "input",
                   "name": "input",
                   "jsonName": null,
-                  "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimDto>",
-                  "typeSimple": "[X.Abp.Identity.IdentityRoleClaimDto]",
+                  "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimUpdateDto>",
+                  "typeSimple": "[X.Abp.Identity.IdentityRoleClaimUpdateDto]",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -884,6 +950,63 @@
               "returnValue": {
                 "type": "System.Collections.Generic.List<X.Abp.Identity.ClaimTypeDto>",
                 "typeSimple": "[X.Abp.Identity.ClaimTypeDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityRoleAppService"
+            },
+            "MoveAllUsersAsyncByIdAndTargetRoleId": {
+              "uniqueName": "MoveAllUsersAsyncByIdAndTargetRoleId",
+              "name": "MoveAllUsersAsync",
+              "httpMethod": "PUT",
+              "url": "api/identity/roles/{id}/move-all-users",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "targetRoleId",
+                  "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "targetRoleId",
+                  "name": "targetRoleId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Identity.IIdentityRoleAppService"
@@ -1041,7 +1164,7 @@
                 },
                 {
                   "nameOnMethod": "input",
-                  "name": "Action",
+                  "name": "ActionName",
                   "jsonName": null,
                   "type": "System.String",
                   "typeSimple": "string",
@@ -1235,7 +1358,7 @@
                 },
                 {
                   "nameOnMethod": "input",
-                  "name": "Action",
+                  "name": "ActionName",
                   "jsonName": null,
                   "type": "System.String",
                   "typeSimple": "string",
@@ -1364,6 +1487,258 @@
             }
           }
         },
+        "X.Abp.Identity.IdentitySessionController": {
+          "controllerName": "IdentitySession",
+          "controllerGroupName": "Sessions",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Identity.IdentitySessionController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Identity.IIdentitySessionAppService",
+              "name": "IIdentitySessionAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.GetIdentitySessionListInput, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.GetIdentitySessionListInput",
+                      "typeSimple": "X.Abp.Identity.GetIdentitySessionListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Identity.IdentitySessionDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Identity.IdentitySessionDto>"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Identity.IdentitySessionDto",
+                    "typeSimple": "X.Abp.Identity.IdentitySessionDto"
+                  }
+                },
+                {
+                  "name": "RevokeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/sessions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.GetIdentitySessionListInput, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.GetIdentitySessionListInput",
+                  "typeSimple": "X.Abp.Identity.GetIdentitySessionListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "UserId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Device",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "ClientId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "ExtraProperties",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Data.ExtraPropertyDictionary",
+                  "typeSimple": "{string:object}",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Identity.IdentitySessionDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Identity.IdentitySessionDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentitySessionAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/sessions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Identity.IdentitySessionDto",
+                "typeSimple": "X.Abp.Identity.IdentitySessionDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentitySessionAppService"
+            },
+            "RevokeAsyncById": {
+              "uniqueName": "RevokeAsyncById",
+              "name": "RevokeAsync",
+              "httpMethod": "DELETE",
+              "url": "api/identity/sessions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentitySessionAppService"
+            }
+          }
+        },
         "X.Abp.Identity.IdentitySettingsController": {
           "controllerName": "IdentitySettings",
           "controllerGroupName": "Settings",
@@ -1442,6 +1817,31 @@
                       "typeAsString": "X.Abp.Identity.IdentityOAuthSettingsDto, X.Abp.Identity.Pro.Application.Contracts",
                       "type": "X.Abp.Identity.IdentityOAuthSettingsDto",
                       "typeSimple": "X.Abp.Identity.IdentityOAuthSettingsDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetSessionAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Identity.IdentitySessionSettingsDto",
+                    "typeSimple": "X.Abp.Identity.IdentitySessionSettingsDto"
+                  }
+                },
+                {
+                  "name": "UpdateSessionAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.IdentitySessionSettingsDto, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.IdentitySessionSettingsDto",
+                      "typeSimple": "X.Abp.Identity.IdentitySessionSettingsDto",
                       "isOptional": false,
                       "defaultValue": null
                     }
@@ -1610,6 +2010,58 @@
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Identity.IIdentitySettingsAppService"
+            },
+            "GetSessionAsync": {
+              "uniqueName": "GetSessionAsync",
+              "name": "GetSessionAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/settings/session",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Identity.IdentitySessionSettingsDto",
+                "typeSimple": "X.Abp.Identity.IdentitySessionSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentitySettingsAppService"
+            },
+            "UpdateSessionAsyncByInput": {
+              "uniqueName": "UpdateSessionAsyncByInput",
+              "name": "UpdateSessionAsync",
+              "httpMethod": "PUT",
+              "url": "api/identity/settings/session",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.IdentitySessionSettingsDto, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.IdentitySessionSettingsDto",
+                  "typeSimple": "X.Abp.Identity.IdentitySessionSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Identity.IdentitySessionSettingsDto",
+                  "typeSimple": "X.Abp.Identity.IdentitySessionSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentitySettingsAppService"
             }
           }
         },
@@ -1738,7 +2190,7 @@
                     },
                     {
                       "name": "input",
-                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityUserClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=7.2.3.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityUserClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.2.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                       "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityUserClaimDto>",
                       "typeSimple": "[X.Abp.Identity.IdentityUserClaimDto]",
                       "isOptional": false,
@@ -1949,6 +2401,116 @@
                   "returnValue": {
                     "type": "X.Abp.Identity.IdentityUserDto",
                     "typeSimple": "X.Abp.Identity.IdentityUserDto"
+                  }
+                },
+                {
+                  "name": "FindByIdAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Identity.IdentityUserDto",
+                    "typeSimple": "X.Abp.Identity.IdentityUserDto"
+                  }
+                },
+                {
+                  "name": "GetListAsExcelFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.GetIdentityUserListAsFileInput, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.GetIdentityUserListAsFileInput",
+                      "typeSimple": "X.Abp.Identity.GetIdentityUserListAsFileInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                },
+                {
+                  "name": "GetListAsCsvFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.GetIdentityUserListAsFileInput, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.GetIdentityUserListAsFileInput",
+                      "typeSimple": "X.Abp.Identity.GetIdentityUserListAsFileInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                },
+                {
+                  "name": "GetDownloadTokenAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.Identity.DownloadTokenResultDto",
+                    "typeSimple": "X.Abp.Identity.DownloadTokenResultDto"
+                  }
+                },
+                {
+                  "name": "GetImportUsersSampleFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.GetImportUsersSampleFileInput, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.GetImportUsersSampleFileInput",
+                      "typeSimple": "X.Abp.Identity.GetImportUsersSampleFileInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                },
+                {
+                  "name": "ImportUsersFromFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.ImportUsersFromFileInputWithStream, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.ImportUsersFromFileInputWithStream",
+                      "typeSimple": "X.Abp.Identity.ImportUsersFromFileInputWithStream",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Identity.ImportUsersFromFileOutput",
+                    "typeSimple": "X.Abp.Identity.ImportUsersFromFileOutput"
+                  }
+                },
+                {
+                  "name": "GetImportInvalidUsersFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.GetImportInvalidUsersFileInput, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.GetImportInvalidUsersFileInput",
+                      "typeSimple": "X.Abp.Identity.GetImportInvalidUsersFileInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
                   }
                 },
                 {
@@ -2469,6 +3031,80 @@
               "allowAnonymous": null,
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             },
+            "FindByIdAsyncById": {
+              "uniqueName": "FindByIdAsyncById",
+              "name": "FindByIdAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/users/by-id/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Identity.IdentityUserDto",
+                "typeSimple": "X.Abp.Identity.IdentityUserDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
+            },
+            "FindByPhoneNumberAsyncByPhoneNumber": {
+              "uniqueName": "FindByPhoneNumberAsyncByPhoneNumber",
+              "name": "FindByPhoneNumberAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/users/by-phone-number/{phoneNumber}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "phoneNumber",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "phoneNumber",
+                  "name": "phoneNumber",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Identity.IdentityUserDto",
+                "typeSimple": "X.Abp.Identity.IdentityUserDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
+            },
             "GetRolesAsyncById": {
               "uniqueName": "GetRolesAsyncById",
               "name": "GetRolesAsync",
@@ -2699,7 +3335,7 @@
                 },
                 {
                   "name": "input",
-                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityUserClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=7.2.3.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityUserClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.2.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                   "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityUserClaimDto>",
                   "typeSimple": "[X.Abp.Identity.IdentityUserClaimDto]",
                   "isOptional": false,
@@ -3140,39 +3776,670 @@
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
             },
-            "FindByPhoneNumberAsyncByPhoneNumber": {
-              "uniqueName": "FindByPhoneNumberAsyncByPhoneNumber",
-              "name": "FindByPhoneNumberAsync",
+            "GetListAsExcelFileAsyncByInput": {
+              "uniqueName": "GetListAsExcelFileAsyncByInput",
+              "name": "GetListAsExcelFileAsync",
               "httpMethod": "GET",
-              "url": "api/identity/users/by-phone-number/{phoneNumber}",
+              "url": "api/identity/users/export-as-excel",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
-                  "name": "phoneNumber",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.GetIdentityUserListAsFileInput, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.GetIdentityUserListAsFileInput",
+                  "typeSimple": "X.Abp.Identity.GetIdentityUserListAsFileInput",
                   "isOptional": false,
                   "defaultValue": null
                 }
               ],
               "parameters": [
                 {
-                  "nameOnMethod": "phoneNumber",
-                  "name": "phoneNumber",
+                  "nameOnMethod": "input",
+                  "name": "Token",
                   "jsonName": null,
                   "type": "System.String",
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "RoleId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "OrganizationUnitId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "UserName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PhoneNumber",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EmailAddress",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Name",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Surname",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "IsLockedOut",
+                  "jsonName": null,
+                  "type": "System.Boolean?",
+                  "typeSimple": "boolean?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "NotActive",
+                  "jsonName": null,
+                  "type": "System.Boolean?",
+                  "typeSimple": "boolean?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EmailConfirmed",
+                  "jsonName": null,
+                  "type": "System.Boolean?",
+                  "typeSimple": "boolean?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "IsExternal",
+                  "jsonName": null,
+                  "type": "System.Boolean?",
+                  "typeSimple": "boolean?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxCreationTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MinCreationTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxModifitionTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MinModifitionTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
+            },
+            "GetListAsCsvFileAsyncByInput": {
+              "uniqueName": "GetListAsCsvFileAsyncByInput",
+              "name": "GetListAsCsvFileAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/users/export-as-csv",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.GetIdentityUserListAsFileInput, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.GetIdentityUserListAsFileInput",
+                  "typeSimple": "X.Abp.Identity.GetIdentityUserListAsFileInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Token",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "RoleId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "OrganizationUnitId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "UserName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PhoneNumber",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EmailAddress",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Name",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Surname",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "IsLockedOut",
+                  "jsonName": null,
+                  "type": "System.Boolean?",
+                  "typeSimple": "boolean?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "NotActive",
+                  "jsonName": null,
+                  "type": "System.Boolean?",
+                  "typeSimple": "boolean?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EmailConfirmed",
+                  "jsonName": null,
+                  "type": "System.Boolean?",
+                  "typeSimple": "boolean?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "IsExternal",
+                  "jsonName": null,
+                  "type": "System.Boolean?",
+                  "typeSimple": "boolean?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxCreationTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MinCreationTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxModifitionTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MinModifitionTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
+            },
+            "GetDownloadTokenAsync": {
+              "uniqueName": "GetDownloadTokenAsync",
+              "name": "GetDownloadTokenAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/users/download-token",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Identity.DownloadTokenResultDto",
+                "typeSimple": "X.Abp.Identity.DownloadTokenResultDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
+            },
+            "GetImportUsersSampleFileAsyncByInput": {
+              "uniqueName": "GetImportUsersSampleFileAsyncByInput",
+              "name": "GetImportUsersSampleFileAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/users/import-users-sample-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.GetImportUsersSampleFileInput, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.GetImportUsersSampleFileInput",
+                  "typeSimple": "X.Abp.Identity.GetImportUsersSampleFileInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "FileType",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Token",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
+            },
+            "ImportUsersFromFileAsyncByInput": {
+              "uniqueName": "ImportUsersFromFileAsyncByInput",
+              "name": "ImportUsersFromFileAsync",
+              "httpMethod": "POST",
+              "url": "api/identity/users/import-users-from-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.ImportUsersFromFileInputWithStream, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.ImportUsersFromFileInputWithStream",
+                  "typeSimple": "X.Abp.Identity.ImportUsersFromFileInputWithStream",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Identity.ImportUsersFromFileInputWithStream",
+                  "typeSimple": "X.Abp.Identity.ImportUsersFromFileInputWithStream",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
                   "descriptorName": ""
                 }
               ],
               "returnValue": {
-                "type": "X.Abp.Identity.IdentityUserDto",
-                "typeSimple": "X.Abp.Identity.IdentityUserDto"
+                "type": "X.Abp.Identity.ImportUsersFromFileOutput",
+                "typeSimple": "X.Abp.Identity.ImportUsersFromFileOutput"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
+            },
+            "GetImportInvalidUsersFileAsyncByInput": {
+              "uniqueName": "GetImportInvalidUsersFileAsyncByInput",
+              "name": "GetImportInvalidUsersFileAsync",
+              "httpMethod": "GET",
+              "url": "api/identity/users/download-import-invalid-users-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.GetImportInvalidUsersFileInput, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.GetImportInvalidUsersFileInput",
+                  "typeSimple": "X.Abp.Identity.GetImportInvalidUsersFileInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Token",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Identity.IIdentityUserAppService"
@@ -3446,6 +4713,330 @@
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Identity.IIdentityUserLookupAppService"
+            }
+          }
+        },
+        "X.Abp.Identity.Integration.IdentityUserIntegrationController": {
+          "controllerName": "IdentityUserIntegration",
+          "controllerGroupName": "UserIntegration",
+          "isRemoteService": true,
+          "isIntegrationService": true,
+          "apiVersion": null,
+          "type": "X.Abp.Identity.Integration.IdentityUserIntegrationController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Identity.Integration.IIdentityUserIntegrationService",
+              "name": "IIdentityUserIntegrationService",
+              "methods": [
+                {
+                  "name": "FindByIdAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Users.UserData",
+                    "typeSimple": "Volo.Abp.Users.UserData"
+                  }
+                },
+                {
+                  "name": "FindByUserNameAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "userName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Users.UserData",
+                    "typeSimple": "Volo.Abp.Users.UserData"
+                  }
+                },
+                {
+                  "name": "GetCountAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.UserLookupCountInputDto, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.UserLookupCountInputDto",
+                      "typeSimple": "X.Abp.Identity.UserLookupCountInputDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Int64",
+                    "typeSimple": "number"
+                  }
+                },
+                {
+                  "name": "GetRoleNamesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.String[]",
+                    "typeSimple": "[string]"
+                  }
+                },
+                {
+                  "name": "SearchAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Identity.UserLookupSearchInputDto, X.Abp.Identity.Pro.Application.Contracts",
+                      "type": "X.Abp.Identity.UserLookupSearchInputDto",
+                      "typeSimple": "X.Abp.Identity.UserLookupSearchInputDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.ListResultDto<Volo.Abp.Users.UserData>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Volo.Abp.Users.UserData>"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetRoleNamesAsyncById": {
+              "uniqueName": "GetRoleNamesAsyncById",
+              "name": "GetRoleNamesAsync",
+              "httpMethod": "GET",
+              "url": "integration-api/identity/users/{id}/role-names",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.String[]",
+                "typeSimple": "[string]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.Integration.IIdentityUserIntegrationService"
+            },
+            "FindByIdAsyncById": {
+              "uniqueName": "FindByIdAsyncById",
+              "name": "FindByIdAsync",
+              "httpMethod": "GET",
+              "url": "integration-api/identity/users/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Users.UserData",
+                "typeSimple": "Volo.Abp.Users.UserData"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.Integration.IIdentityUserIntegrationService"
+            },
+            "FindByUserNameAsyncByUserName": {
+              "uniqueName": "FindByUserNameAsyncByUserName",
+              "name": "FindByUserNameAsync",
+              "httpMethod": "GET",
+              "url": "integration-api/identity/users/by-username/{userName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userName",
+                  "name": "userName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Users.UserData",
+                "typeSimple": "Volo.Abp.Users.UserData"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.Integration.IIdentityUserIntegrationService"
+            },
+            "SearchAsyncByInput": {
+              "uniqueName": "SearchAsyncByInput",
+              "name": "SearchAsync",
+              "httpMethod": "GET",
+              "url": "integration-api/identity/users/search",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.UserLookupSearchInputDto, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.UserLookupSearchInputDto",
+                  "typeSimple": "X.Abp.Identity.UserLookupSearchInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<Volo.Abp.Users.UserData>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Volo.Abp.Users.UserData>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.Integration.IIdentityUserIntegrationService"
+            },
+            "GetCountAsyncByInput": {
+              "uniqueName": "GetCountAsyncByInput",
+              "name": "GetCountAsync",
+              "httpMethod": "GET",
+              "url": "integration-api/identity/users/count",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Identity.UserLookupCountInputDto, X.Abp.Identity.Pro.Application.Contracts",
+                  "type": "X.Abp.Identity.UserLookupCountInputDto",
+                  "typeSimple": "X.Abp.Identity.UserLookupCountInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Int64",
+                "typeSimple": "number"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Identity.Integration.IIdentityUserIntegrationService"
             }
           }
         },

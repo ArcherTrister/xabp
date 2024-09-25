@@ -10,8 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.LeptonTheme.Management.Application.Contracts\X.Abp.LeptonTheme.Management.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.LeptonTheme.Management.Application.Contracts\X.Abp.LeptonTheme.Management.Application.Contracts.csproj" />
     <PackageReference Include="Volo.Abp.Http.Client" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 

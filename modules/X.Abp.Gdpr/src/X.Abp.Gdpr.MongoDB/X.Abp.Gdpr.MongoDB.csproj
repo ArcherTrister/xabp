@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\modules.props" />
+    <Import Project="..\..\..\..\modules.props" />
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.MongoDB" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.MongoDB" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.Gdpr.Domain\X.Abp.Gdpr.Domain.csproj" />
   </ItemGroup>
 

@@ -51,6 +51,22 @@
 
   })();
 
+  // controller x.abp.identity.identityExternalLogin
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.identity.identityExternalLogin');
+
+    x.abp.identity.identityExternalLogin.createOrUpdate = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/external-login',
+        type: 'POST',
+        dataType: null
+      }, ajaxParams));
+    };
+
+  })();
+
   // controller x.abp.identity.identityRole
 
   (function(){
@@ -125,6 +141,14 @@
       }, ajaxParams));
     };
 
+    x.abp.identity.identityRole.moveAllUsers = function(id, targetRoleId, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/roles/' + id + '/move-all-users' + abp.utils.buildQueryString([{ name: 'targetRoleId', value: targetRoleId }]) + '',
+        type: 'PUT',
+        dataType: null
+      }, ajaxParams));
+    };
+
   })();
 
   // controller x.abp.identity.identitySecurityLog
@@ -135,7 +159,7 @@
 
     x.abp.identity.identitySecurityLog.getList = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/identity/security-logs' + abp.utils.buildQueryString([{ name: 'startTime', value: input.startTime }, { name: 'endTime', value: input.endTime }, { name: 'applicationName', value: input.applicationName }, { name: 'identity', value: input.identity }, { name: 'action', value: input.action }, { name: 'userName', value: input.userName }, { name: 'clientId', value: input.clientId }, { name: 'correlationId', value: input.correlationId }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        url: abp.appPath + 'api/identity/security-logs' + abp.utils.buildQueryString([{ name: 'startTime', value: input.startTime }, { name: 'endTime', value: input.endTime }, { name: 'applicationName', value: input.applicationName }, { name: 'identity', value: input.identity }, { name: 'actionName', value: input.actionName }, { name: 'userName', value: input.userName }, { name: 'clientId', value: input.clientId }, { name: 'correlationId', value: input.correlationId }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
@@ -149,7 +173,7 @@
 
     x.abp.identity.identitySecurityLog.getMyList = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/identity/security-logs/my' + abp.utils.buildQueryString([{ name: 'startTime', value: input.startTime }, { name: 'endTime', value: input.endTime }, { name: 'applicationName', value: input.applicationName }, { name: 'identity', value: input.identity }, { name: 'action', value: input.action }, { name: 'userName', value: input.userName }, { name: 'clientId', value: input.clientId }, { name: 'correlationId', value: input.correlationId }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        url: abp.appPath + 'api/identity/security-logs/my' + abp.utils.buildQueryString([{ name: 'startTime', value: input.startTime }, { name: 'endTime', value: input.endTime }, { name: 'applicationName', value: input.applicationName }, { name: 'identity', value: input.identity }, { name: 'actionName', value: input.actionName }, { name: 'userName', value: input.userName }, { name: 'clientId', value: input.clientId }, { name: 'correlationId', value: input.correlationId }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
@@ -158,6 +182,36 @@
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/identity/security-logs/my/' + id + '',
         type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller x.abp.identity.identitySession
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.identity.identitySession');
+
+    x.abp.identity.identitySession.getList = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/sessions' + abp.utils.buildQueryString([{ name: 'userId', value: input.userId }, { name: 'device', value: input.device }, { name: 'clientId', value: input.clientId }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }, { name: 'extraProperties', value: input.extraProperties }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identitySession.get = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/sessions/' + id + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identitySession.revoke = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/sessions/' + id + '',
+        type: 'DELETE',
+        dataType: null
       }, ajaxParams));
     };
 
@@ -217,6 +271,22 @@
       }, ajaxParams));
     };
 
+    x.abp.identity.identitySettings.getSession = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/settings/session',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identitySettings.updateSession = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/settings/session',
+        type: 'PUT',
+        dataType: null,
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
   })();
 
   // controller x.abp.identity.identityUser
@@ -260,6 +330,20 @@
         url: abp.appPath + 'api/identity/users/' + id + '',
         type: 'DELETE',
         dataType: null
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identityUser.findById = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/users/by-id/' + id + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identityUser.findByPhoneNumber = function(phoneNumber, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/users/by-phone-number/' + phoneNumber + '',
+        type: 'GET'
       }, ajaxParams));
     };
 
@@ -406,9 +490,45 @@
       }, ajaxParams));
     };
 
-    x.abp.identity.identityUser.findByPhoneNumber = function(phoneNumber, ajaxParams) {
+    x.abp.identity.identityUser.getListAsExcelFile = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/identity/users/by-phone-number/' + phoneNumber + '',
+        url: abp.appPath + 'api/identity/users/export-as-excel' + abp.utils.buildQueryString([{ name: 'token', value: input.token }, { name: 'filter', value: input.filter }, { name: 'roleId', value: input.roleId }, { name: 'organizationUnitId', value: input.organizationUnitId }, { name: 'userName', value: input.userName }, { name: 'phoneNumber', value: input.phoneNumber }, { name: 'emailAddress', value: input.emailAddress }, { name: 'name', value: input.name }, { name: 'surname', value: input.surname }, { name: 'isLockedOut', value: input.isLockedOut }, { name: 'notActive', value: input.notActive }, { name: 'emailConfirmed', value: input.emailConfirmed }, { name: 'isExternal', value: input.isExternal }, { name: 'maxCreationTime', value: input.maxCreationTime }, { name: 'minCreationTime', value: input.minCreationTime }, { name: 'maxModifitionTime', value: input.maxModifitionTime }, { name: 'minModifitionTime', value: input.minModifitionTime }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identityUser.getListAsCsvFile = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/users/export-as-csv' + abp.utils.buildQueryString([{ name: 'token', value: input.token }, { name: 'filter', value: input.filter }, { name: 'roleId', value: input.roleId }, { name: 'organizationUnitId', value: input.organizationUnitId }, { name: 'userName', value: input.userName }, { name: 'phoneNumber', value: input.phoneNumber }, { name: 'emailAddress', value: input.emailAddress }, { name: 'name', value: input.name }, { name: 'surname', value: input.surname }, { name: 'isLockedOut', value: input.isLockedOut }, { name: 'notActive', value: input.notActive }, { name: 'emailConfirmed', value: input.emailConfirmed }, { name: 'isExternal', value: input.isExternal }, { name: 'maxCreationTime', value: input.maxCreationTime }, { name: 'minCreationTime', value: input.minCreationTime }, { name: 'maxModifitionTime', value: input.maxModifitionTime }, { name: 'minModifitionTime', value: input.minModifitionTime }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identityUser.getDownloadToken = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/users/download-token',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identityUser.getImportUsersSampleFile = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/users/import-users-sample-file' + abp.utils.buildQueryString([{ name: 'fileType', value: input.fileType }, { name: 'token', value: input.token }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identityUser.importUsersFromFile = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/users/import-users-from-file',
+        type: 'POST',
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.identity.identityUser.getImportInvalidUsersFile = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/identity/users/download-import-invalid-users-file' + abp.utils.buildQueryString([{ name: 'token', value: input.token }]) + '',
         type: 'GET'
       }, ajaxParams));
     };

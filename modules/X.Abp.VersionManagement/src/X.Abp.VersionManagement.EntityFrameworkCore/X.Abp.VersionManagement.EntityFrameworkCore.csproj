@@ -12,8 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.VersionManagement.Domain\X.Abp.VersionManagement.Domain.csproj" />
+    <ProjectReference Include="..\X.Abp.VersionManagement.Domain\X.Abp.VersionManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>

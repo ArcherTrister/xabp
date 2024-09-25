@@ -13,20 +13,18 @@ using OpenIddict.Server;
 using OpenIddict.Server.AspNetCore;
 
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.OpenIddict;
 using Volo.Abp.Security.Claims;
 
 using X.Abp.Account.ExternalProviders;
+using X.Abp.Account.Public.Web;
+using X.Abp.Account.Public.Web.Pages.Account;
 using X.Abp.Account.Security.Captcha;
-using X.Captcha;
 
 using static OpenIddict.Server.OpenIddictServerEvents;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
-
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 [ExposeServices(typeof(LoginModel))]
 public class OpenIddictSupportedLoginModel : LoginModel
@@ -39,14 +37,8 @@ public class OpenIddictSupportedLoginModel : LoginModel
         IAbpCaptchaValidatorFactory captchaValidatorFactory,
         IAccountExternalProviderAppService accountExternalProviderAppService,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
-        IIdentityLinkUserAppService identityLinkUserAppService,
-        IOptions<IdentityOptions> identityOptions,
-        IOptionsSnapshot<CaptchaOptions> captchaOptions,
         AbpOpenIddictRequestHelper openIddictRequestHelper)
-        : base(schemeProvider, accountOptions, captchaValidatorFactory, accountExternalProviderAppService, currentPrincipalAccessor, signInManager, userManager, identitySecurityLogManager, identityLinkUserAppService, identityOptions, captchaOptions)
+        : base(schemeProvider, accountOptions, captchaValidatorFactory, accountExternalProviderAppService, currentPrincipalAccessor)
     {
         OpenIddictRequestHelper = openIddictRequestHelper;
     }
@@ -82,8 +74,8 @@ public class OpenIddictSupportedLoginModel : LoginModel
                 transaction.EndpointType = OpenIddictServerEndpointType.Authorization;
                 transaction.Request = request;
 
-                var notification = new ValidateAuthorizationRequestContext(transaction);
-                transaction.SetProperty(typeof(ValidateAuthorizationRequestContext).FullName!, notification);
+                var authorizationRequestContext = new ValidateAuthorizationRequestContext(transaction);
+                transaction.SetProperty(typeof(ValidateAuthorizationRequestContext).FullName!, authorizationRequestContext);
 
                 return Forbid(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
             }

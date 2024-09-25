@@ -1,0 +1,8 @@
+{
+  "culture": "zh-Hant",
+  "texts": {
+    "ID0111": "未正確處理 OpenIDConnect 響應。這可能錶明負責處理 OpenIDConnect 響應的事件處理程序沒有註冊，或者已經從處理程序列錶中顯式刪除。",
+    "ID0112": "檢索 OpenIddict 服務器上下文時發生錯誤。在 ASP.NET Core上, 這可能錶明身份騐証中間件在請求管道中註冊得不夠早。確保 'app.UseAuthentication()' 在 'app.UseAuthorization()' 和 'app.UseEndpoints()' (或 'app.UseMvc()')之前註冊，然後再試一次。",
+    "ID0113": "騐証噹前請求時發生錯誤。"
+  }
+}

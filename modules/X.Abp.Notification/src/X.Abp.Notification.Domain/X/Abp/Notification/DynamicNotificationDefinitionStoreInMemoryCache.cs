@@ -17,97 +17,97 @@ public class DynamicNotificationDefinitionStoreInMemoryCache :
     IDynamicNotificationDefinitionStoreInMemoryCache,
     ISingletonDependency
 {
-    public string CacheStamp { get; set; }
+  public string CacheStamp { get; set; }
 
-    protected IDictionary<string, NotificationGroupDefinition> NotificationGroupDefinitions { get; }
+  protected IDictionary<string, NotificationGroupDefinition> NotificationGroupDefinitions { get; }
 
-    protected IDictionary<string, NotificationDefinition> NotificationDefinitions { get; }
+  protected IDictionary<string, NotificationDefinition> NotificationDefinitions { get; }
 
-    protected ILocalizableStringSerializer LocalizableStringSerializer { get; }
+  protected ILocalizableStringSerializer LocalizableStringSerializer { get; }
 
-    public SemaphoreSlim SyncSemaphore { get; } = new(1, 1);
+  public SemaphoreSlim SyncSemaphore { get; } = new(1, 1);
 
-    public DateTime? LastCheckTime { get; set; }
+  public DateTime? LastCheckTime { get; set; }
 
-    public DynamicNotificationDefinitionStoreInMemoryCache(
-        ILocalizableStringSerializer localizableStringSerializer)
+  public DynamicNotificationDefinitionStoreInMemoryCache(
+      ILocalizableStringSerializer localizableStringSerializer)
+  {
+    LocalizableStringSerializer = localizableStringSerializer;
+
+    NotificationGroupDefinitions = new Dictionary<string, NotificationGroupDefinition>();
+    NotificationDefinitions = new Dictionary<string, NotificationDefinition>();
+  }
+
+  public virtual Task FillAsync(
+      List<NotificationGroupDefinitionRecord> notificationGroupRecords,
+      List<NotificationDefinitionRecord> notificationRecords)
+  {
+    NotificationGroupDefinitions.Clear();
+    NotificationDefinitions.Clear();
+
+    var context = new NotificationDefinitionContext();
+
+    foreach (var notificationGroupRecord in notificationGroupRecords)
     {
-        LocalizableStringSerializer = localizableStringSerializer;
+      var notificationGroup = context.AddGroup(
+          notificationGroupRecord.Name,
+          LocalizableStringSerializer.Deserialize(notificationGroupRecord.DisplayName));
 
-        NotificationGroupDefinitions = new Dictionary<string, NotificationGroupDefinition>();
-        NotificationDefinitions = new Dictionary<string, NotificationDefinition>();
+      NotificationGroupDefinitions[notificationGroup.Name] = notificationGroup;
+
+      foreach (var property in notificationGroupRecord.ExtraProperties)
+      {
+        notificationGroup[property.Key] = property.Value;
+      }
+
+      var notificationRecordsInThisGroup = notificationRecords
+          .Where(p => p.GroupName == notificationGroup.Name);
+
+      foreach (var notificationRecord in notificationRecordsInThisGroup.Where(x => x.ParentName == null))
+      {
+        AddNotificationRecursively(notificationGroup, notificationRecord, notificationRecords);
+      }
     }
 
-    public Task FillAsync(
-        List<NotificationGroupDefinitionRecord> notificationGroupRecords,
-        List<NotificationDefinitionRecord> notificationRecords)
+    return Task.CompletedTask;
+  }
+
+  public NotificationDefinition GetNotificationOrNull(string name)
+  {
+    return NotificationDefinitions.GetOrDefault(name);
+  }
+
+  public IReadOnlyList<NotificationDefinition> GetNotifications()
+  {
+    return NotificationDefinitions.Values.ToList();
+  }
+
+  public IReadOnlyList<NotificationGroupDefinition> GetGroups()
+  {
+    return NotificationGroupDefinitions.Values.ToList();
+  }
+
+  private void AddNotificationRecursively(ICanCreateChildNotification notificationContainer,
+      NotificationDefinitionRecord notificationRecord,
+      List<NotificationDefinitionRecord> allNotificationRecords)
+  {
+    var notification = notificationContainer.CreateChildNotification(
+        notificationRecord.Name,
+        LocalizableStringSerializer.Deserialize(notificationRecord.DisplayName),
+        LocalizableStringSerializer.Deserialize(notificationRecord.Description),
+        notificationRecord.IsVisibleToClients,
+        notificationRecord.IsAvailableToHost);
+
+    NotificationDefinitions[notification.Name] = notification;
+
+    foreach (var property in notificationRecord.ExtraProperties)
     {
-        NotificationGroupDefinitions.Clear();
-        NotificationDefinitions.Clear();
-
-        var context = new NotificationDefinitionContext();
-
-        foreach (var notificationGroupRecord in notificationGroupRecords)
-        {
-            var notificationGroup = context.AddGroup(
-                notificationGroupRecord.Name,
-                LocalizableStringSerializer.Deserialize(notificationGroupRecord.DisplayName));
-
-            NotificationGroupDefinitions[notificationGroup.Name] = notificationGroup;
-
-            foreach (var property in notificationGroupRecord.ExtraProperties)
-            {
-                notificationGroup[property.Key] = property.Value;
-            }
-
-            var notificationRecordsInThisGroup = notificationRecords
-                .Where(p => p.GroupName == notificationGroup.Name);
-
-            foreach (var notificationRecord in notificationRecordsInThisGroup.Where(x => x.ParentName == null))
-            {
-                AddNotificationRecursively(notificationGroup, notificationRecord, notificationRecords);
-            }
-        }
-
-        return Task.CompletedTask;
+      notification[property.Key] = property.Value;
     }
 
-    public NotificationDefinition GetNotificationOrNull(string name)
+    foreach (var subNotification in allNotificationRecords.Where(p => p.ParentName == notificationRecord.Name))
     {
-        return NotificationDefinitions.GetOrDefault(name);
+      AddNotificationRecursively(notification, subNotification, allNotificationRecords);
     }
-
-    public IReadOnlyList<NotificationDefinition> GetNotifications()
-    {
-        return NotificationDefinitions.Values.ToList();
-    }
-
-    public IReadOnlyList<NotificationGroupDefinition> GetGroups()
-    {
-        return NotificationGroupDefinitions.Values.ToList();
-    }
-
-    private void AddNotificationRecursively(ICanCreateChildNotification notificationContainer,
-        NotificationDefinitionRecord notificationRecord,
-        List<NotificationDefinitionRecord> allNotificationRecords)
-    {
-        var notification = notificationContainer.CreateChildNotification(
-            notificationRecord.Name,
-            LocalizableStringSerializer.Deserialize(notificationRecord.DisplayName),
-            LocalizableStringSerializer.Deserialize(notificationRecord.Description),
-            notificationRecord.IsVisibleToClients,
-            notificationRecord.IsAvailableToHost);
-
-        NotificationDefinitions[notification.Name] = notification;
-
-        foreach (var property in notificationRecord.ExtraProperties)
-        {
-            notification[property.Key] = property.Value;
-        }
-
-        foreach (var subNotification in allNotificationRecords.Where(p => p.ParentName == notificationRecord.Name))
-        {
-            AddNotificationRecursively(notification, subNotification, allNotificationRecords);
-        }
-    }
+  }
 }

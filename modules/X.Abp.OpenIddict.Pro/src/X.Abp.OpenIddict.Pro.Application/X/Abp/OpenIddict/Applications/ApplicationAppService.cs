@@ -69,83 +69,83 @@ public class ApplicationAppService : OpenIddictProAppServiceBase, IApplicationAp
         {
             input.AllowAuthorizationCodeFlow = true;
             input.AllowImplicitFlow = true;
-            applicationDescriptor.Permissions.Add("rst:code id_token");
-            if (string.Equals(input.ClientType, "public", StringComparison.OrdinalIgnoreCase))
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdToken);
+            if (string.Equals(input.ClientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
             {
-                applicationDescriptor.Permissions.Add("rst:code id_token token");
-                applicationDescriptor.Permissions.Add("rst:code token");
+                applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdTokenToken);
+                applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeToken);
             }
         }
 
         if (input.AllowLogoutEndpoint)
         {
-            applicationDescriptor.Permissions.Add("ept:logout");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Logout);
         }
 
         if (input.AllowDeviceEndpoint)
         {
-            applicationDescriptor.Permissions.Add("ept:device");
-            applicationDescriptor.Permissions.Add("gt:urn:ietf:params:oauth:grant-type:device_code");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Device);
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.DeviceCode);
         }
 
         if (input.AllowAuthorizationCodeFlow)
         {
-            applicationDescriptor.Permissions.Add("gt:authorization_code");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode);
         }
 
         if (input.AllowClientCredentialsFlow)
         {
-            applicationDescriptor.Permissions.Add("gt:client_credentials");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.ClientCredentials);
         }
 
         if (input.AllowImplicitFlow)
         {
-            applicationDescriptor.Permissions.Add("gt:implicit");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.Implicit);
         }
 
         if (input.AllowPasswordFlow)
         {
-            applicationDescriptor.Permissions.Add("gt:password");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.Password);
         }
 
         if (input.AllowRefreshTokenFlow)
         {
-            applicationDescriptor.Permissions.Add("gt:refresh_token");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.RefreshToken);
         }
 
         if (input.AllowAuthorizationCodeFlow || input.AllowImplicitFlow)
         {
-            applicationDescriptor.Permissions.Add("ept:authorization");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Authorization);
         }
 
         if (input.AllowAuthorizationCodeFlow || input.AllowClientCredentialsFlow || input.AllowPasswordFlow || input.AllowRefreshTokenFlow || input.AllowDeviceEndpoint)
         {
-            applicationDescriptor.Permissions.Add("ept:token");
-            applicationDescriptor.Permissions.Add("ept:revocation");
-            applicationDescriptor.Permissions.Add("ept:introspection");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Token);
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Revocation);
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Introspection);
         }
 
         if (input.AllowAuthorizationCodeFlow)
         {
-            applicationDescriptor.Permissions.Add("rst:code");
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.Code);
         }
 
         if (input.AllowImplicitFlow)
         {
-            applicationDescriptor.Permissions.Add("rst:id_token");
-            if (string.Equals(input.ClientType, "public", StringComparison.OrdinalIgnoreCase))
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.IdToken);
+            if (string.Equals(input.ClientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
             {
-                applicationDescriptor.Permissions.Add("rst:id_token token");
-                applicationDescriptor.Permissions.Add("rst:token");
+                applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.IdTokenToken);
+                applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.Token);
             }
         }
 
-        foreach (var redirectUri in (input.RedirectUris ?? new HashSet<string>()).Select((string x) => new Uri(x, UriKind.Absolute)))
+        foreach (var redirectUri in (input.RedirectUris ?? new HashSet<string>()).Select((x) => new Uri(x, UriKind.Absolute)))
         {
             applicationDescriptor.RedirectUris.Add(redirectUri);
         }
 
-        foreach (var postLogoutRedirectUri in (input.PostLogoutRedirectUris ?? new HashSet<string>()).Select((string x) => new Uri(x, UriKind.Absolute)))
+        foreach (var postLogoutRedirectUri in (input.PostLogoutRedirectUris ?? new HashSet<string>()).Select((x) => new Uri(x, UriKind.Absolute)))
         {
             applicationDescriptor.PostLogoutRedirectUris.Add(postLogoutRedirectUri);
         }
@@ -156,17 +156,17 @@ public class ApplicationAppService : OpenIddictProAppServiceBase, IApplicationAp
         }
         else
         {
-            input.ExtensionGrantTypes.RemoveAll(x => x == "gt:refresh_token" || x == "gt:password" || x == "gt:authorization_code" || x == "gt:client_credentials" || x == "gt:urn:ietf:params:oauth:grant-type:device_code" || x == "gt:implicit");
+            input.ExtensionGrantTypes.RemoveAll(x => x == OpenIddictConstants.Permissions.GrantTypes.RefreshToken || x == OpenIddictConstants.Permissions.GrantTypes.Password || x == OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode || x == OpenIddictConstants.Permissions.GrantTypes.ClientCredentials || x == OpenIddictConstants.Permissions.GrantTypes.DeviceCode || x == OpenIddictConstants.Permissions.GrantTypes.Implicit);
         }
 
         foreach (string extensionGrantType in input.ExtensionGrantTypes)
         {
-            applicationDescriptor.Permissions.Add("gt:" + extensionGrantType);
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.Prefixes.GrantType + extensionGrantType);
         }
 
         foreach (var scope in input.Scopes ?? new HashSet<string>())
         {
-            applicationDescriptor.Permissions.Add("scp:" + scope);
+            applicationDescriptor.Permissions.Add(OpenIddictConstants.Permissions.Prefixes.Scope + scope);
         }
 
         var application = await ApplicationManager.CreateAsync(applicationDescriptor);
@@ -200,7 +200,7 @@ public class ApplicationAppService : OpenIddictProAppServiceBase, IApplicationAp
             descriptor.ClientSecret = input.ClientSecret;
         }
 
-        if (string.Equals(descriptor.ClientType, "public", StringComparison.OrdinalIgnoreCase))
+        if (string.Equals(descriptor.ClientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
         {
             descriptor.ClientSecret = null;
         }
@@ -209,164 +209,164 @@ public class ApplicationAppService : OpenIddictProAppServiceBase, IApplicationAp
         {
             input.AllowAuthorizationCodeFlow = true;
             input.AllowImplicitFlow = true;
-            descriptor.Permissions.Add("rst:code id_token");
-            if (string.Equals(input.ClientType, "public", StringComparison.OrdinalIgnoreCase))
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdToken);
+            if (string.Equals(input.ClientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
             {
-                descriptor.Permissions.Add("rst:code id_token token");
-                descriptor.Permissions.Add("rst:code token");
+                descriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdTokenToken);
+                descriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeToken);
             }
             else
             {
-                descriptor.Permissions.Remove("rst:code id_token token");
-                descriptor.Permissions.Remove("rst:code token");
+                descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.CodeIdTokenToken);
+                descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.CodeToken);
             }
         }
         else
         {
-            descriptor.Permissions.Remove("rst:code id_token");
-            descriptor.Permissions.Remove("rst:code id_token token");
-            descriptor.Permissions.Remove("rst:code token");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.CodeIdToken);
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.CodeIdTokenToken);
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.CodeToken);
         }
 
         if (input.AllowDeviceEndpoint)
         {
-            descriptor.Permissions.Add("ept:device");
-            descriptor.Permissions.Add("gt:urn:ietf:params:oauth:grant-type:device_code");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Device);
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.DeviceCode);
         }
         else
         {
-            descriptor.Permissions.Remove("ept:device");
-            descriptor.Permissions.Remove("gt:urn:ietf:params:oauth:grant-type:device_code");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.Endpoints.Device);
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.GrantTypes.DeviceCode);
         }
 
         if (input.AllowAuthorizationCodeFlow)
         {
-            descriptor.Permissions.Add("gt:authorization_code");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode);
         }
         else
         {
-            descriptor.Permissions.Remove("gt:authorization_code");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode);
         }
 
         if (input.AllowClientCredentialsFlow)
         {
-            descriptor.Permissions.Add("gt:client_credentials");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.ClientCredentials);
         }
         else
         {
-            descriptor.Permissions.Remove("gt:client_credentials");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.GrantTypes.ClientCredentials);
         }
 
         if (input.AllowImplicitFlow)
         {
-            descriptor.Permissions.Add("gt:implicit");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.Implicit);
         }
         else
         {
-            descriptor.Permissions.Remove("gt:implicit");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.GrantTypes.Implicit);
         }
 
         if (input.AllowPasswordFlow)
         {
-            descriptor.Permissions.Add("gt:password");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.Password);
         }
         else
         {
-            descriptor.Permissions.Remove("gt:password");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.GrantTypes.Password);
         }
 
         if (input.AllowRefreshTokenFlow)
         {
-            descriptor.Permissions.Add("gt:refresh_token");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.GrantTypes.RefreshToken);
         }
         else
         {
-            descriptor.Permissions.Remove("gt:refresh_token");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.GrantTypes.RefreshToken);
         }
 
         if (!input.AllowAuthorizationCodeFlow && !input.AllowImplicitFlow)
         {
-            descriptor.Permissions.Remove("ept:authorization");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.Endpoints.Authorization);
         }
         else
         {
-            descriptor.Permissions.Add("ept:authorization");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Authorization);
         }
 
         if (!input.AllowAuthorizationCodeFlow && !input.AllowClientCredentialsFlow && !input.AllowPasswordFlow && !input.AllowRefreshTokenFlow && !input.AllowDeviceEndpoint)
         {
-            descriptor.Permissions.Remove("ept:token");
-            descriptor.Permissions.Remove("ept:revocation");
-            descriptor.Permissions.Remove("ept:introspection");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.Endpoints.Token);
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.Endpoints.Revocation);
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.Endpoints.Introspection);
         }
         else
         {
-            descriptor.Permissions.Add("ept:token");
-            descriptor.Permissions.Add("ept:revocation");
-            descriptor.Permissions.Add("ept:introspection");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Token);
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Revocation);
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Introspection);
         }
 
         if (input.AllowAuthorizationCodeFlow)
         {
-            descriptor.Permissions.Add("rst:code");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.Code);
         }
         else
         {
-            descriptor.Permissions.Remove("rst:code");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.Code);
         }
 
         if (input.AllowImplicitFlow)
         {
-            descriptor.Permissions.Add("rst:id_token");
-            if (string.Equals(input.ClientType, "public", StringComparison.OrdinalIgnoreCase))
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.IdToken);
+            if (string.Equals(input.ClientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
             {
-                descriptor.Permissions.Add("rst:id_token token");
-                descriptor.Permissions.Add("rst:token");
+                descriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.IdTokenToken);
+                descriptor.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.Token);
             }
             else
             {
-                descriptor.Permissions.Remove("rst:id_token token");
-                descriptor.Permissions.Remove("rst:token");
+                descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.IdTokenToken);
+                descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.Token);
             }
         }
         else
         {
-            descriptor.Permissions.Remove("rst:id_token");
-            descriptor.Permissions.Remove("rst:id_token token");
-            descriptor.Permissions.Remove("rst:token");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.IdToken);
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.IdTokenToken);
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.ResponseTypes.Token);
         }
 
         descriptor.RedirectUris.Clear();
-        foreach (var redirectUri in (input.RedirectUris ?? new HashSet<string>()).Select((string x) => new Uri(x, UriKind.Absolute)))
+        foreach (var redirectUri in (input.RedirectUris ?? new HashSet<string>()).Select((x) => new Uri(x, UriKind.Absolute)))
         {
             descriptor.RedirectUris.Add(redirectUri);
         }
 
         descriptor.PostLogoutRedirectUris.Clear();
-        foreach (var postLogoutRedirectUri in (input.PostLogoutRedirectUris ?? new HashSet<string>()).Select((string x) => new Uri(x, UriKind.Absolute)))
+        foreach (var postLogoutRedirectUri in (input.PostLogoutRedirectUris ?? new HashSet<string>()).Select((x) => new Uri(x, UriKind.Absolute)))
         {
             descriptor.PostLogoutRedirectUris.Add(postLogoutRedirectUri);
         }
 
-        descriptor.Permissions.RemoveAll(x => x.StartsWith("gt:", StringComparison.OrdinalIgnoreCase) && x != "gt:refresh_token" && x != "gt:password" && x != "gt:authorization_code" && x != "gt:client_credentials" && x != "gt:urn:ietf:params:oauth:grant-type:device_code" && x != "gt:implicit");
+        descriptor.Permissions.RemoveAll(x => x.StartsWith(OpenIddictConstants.Permissions.Prefixes.GrantType, StringComparison.OrdinalIgnoreCase) && x != OpenIddictConstants.Permissions.GrantTypes.RefreshToken && x != OpenIddictConstants.Permissions.GrantTypes.Password && x != OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode && x != OpenIddictConstants.Permissions.GrantTypes.ClientCredentials && x != OpenIddictConstants.Permissions.GrantTypes.DeviceCode && x != OpenIddictConstants.Permissions.GrantTypes.Implicit);
         foreach (string extensionGrantType in input.ExtensionGrantTypes ?? new HashSet<string>())
         {
-            descriptor.Permissions.Add("gt:" + extensionGrantType);
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.Prefixes.GrantType + extensionGrantType);
         }
 
         if (input.AllowLogoutEndpoint)
         {
-            descriptor.Permissions.Add("ept:logout");
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Logout);
         }
         else
         {
-            descriptor.Permissions.Remove("ept:logout");
+            descriptor.Permissions.Remove(OpenIddictConstants.Permissions.Endpoints.Logout);
         }
 
-        descriptor.Permissions.RemoveWhere((string permission) => permission.StartsWith("scp:", StringComparison.InvariantCultureIgnoreCase));
+        descriptor.Permissions.RemoveWhere((permission) => permission.StartsWith(OpenIddictConstants.Permissions.Prefixes.Scope, StringComparison.InvariantCultureIgnoreCase));
         foreach (var scope in input.Scopes ?? new HashSet<string>())
         {
-            descriptor.Permissions.Add("scp:" + scope);
+            descriptor.Permissions.Add(OpenIddictConstants.Permissions.Prefixes.Scope + scope);
         }
 
         input.MapExtraPropertiesTo(application.As<OpenIddictApplicationModel>());
@@ -406,12 +406,12 @@ public class ApplicationAppService : OpenIddictProAppServiceBase, IApplicationAp
             }
         }
 
-        if (!dto.ClientSecret.IsNullOrEmpty() && string.Equals(dto.ClientType, "public", StringComparison.OrdinalIgnoreCase))
+        if (!dto.ClientSecret.IsNullOrEmpty() && string.Equals(dto.ClientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
         {
             throw new UserFriendlyException(L["NoClientSecretCanBeSetForPublicApplications"]);
         }
 
-        if (dto.ClientSecret.IsNullOrEmpty() && string.Equals(dto.ClientType, "confidential", StringComparison.OrdinalIgnoreCase) && (application == null || application.ClientSecret.IsNullOrEmpty()))
+        if (dto.ClientSecret.IsNullOrEmpty() && string.Equals(dto.ClientType, OpenIddictConstants.ClientTypes.Confidential, StringComparison.OrdinalIgnoreCase) && (application == null || application.ClientSecret.IsNullOrEmpty()))
         {
             throw new UserFriendlyException(L["TheClientSecretIsRequiredForConfidentialApplications"]);
         }

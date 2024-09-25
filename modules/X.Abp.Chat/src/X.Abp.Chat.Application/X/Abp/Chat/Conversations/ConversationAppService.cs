@@ -4,13 +4,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authorization;
 
 using Volo.Abp;
+using Volo.Abp.Authorization;
+using Volo.Abp.Data;
 using Volo.Abp.Features;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.Uow;
 using Volo.Abp.Users;
 
 using X.Abp.Chat.Features;
@@ -32,43 +37,71 @@ public class ConversationAppService : ChatAppServiceBase, IConversationAppServic
 
     protected IRealTimeChatMessageSender RealTimeChatMessageSender { get; }
 
+    protected IPermissionFinder PermissionFinder { get; }
+
     public ConversationAppService(
         MessagingManager messagingManager,
         IChatUserLookupService chatUserLookupService,
         IConversationRepository conversationRepository,
-        IRealTimeChatMessageSender realTimeChatMessageSender)
+        IRealTimeChatMessageSender realTimeChatMessageSender,
+        IPermissionFinder permissionFinder)
     {
         MessagingManager = messagingManager;
         ChatUserLookupService = chatUserLookupService;
         ConversationRepository = conversationRepository;
         RealTimeChatMessageSender = realTimeChatMessageSender;
+        PermissionFinder = permissionFinder;
     }
 
-    public virtual async Task SendMessageAsync(SendMessageInput input)
+    public virtual async Task<ChatMessageDto> SendMessageAsync(SendMessageInput input)
     {
-        var targetUser = await ChatUserLookupService.FindByIdAsync(input.TargetUserId);
+        ChatUser targetUser = await ChatUserLookupService.FindByIdAsync(input.TargetUserId);
         if (targetUser == null)
         {
             throw new BusinessException("X.Abp.Chat:010002");
         }
 
-        var senderUser = await ChatUserLookupService.FindByIdAsync(CurrentUser.GetId());
+        if (!await PermissionFinder.IsGrantedAsync(targetUser.Id, AbpChatPermissions.Messaging))
+        {
+            throw new BusinessException("X.Abp.Chat:010004");
+        }
 
-        await MessagingManager.CreateNewMessage(
-            CurrentUser.GetId(),
-            targetUser.Id,
-            input.Message);
-
-        await RealTimeChatMessageSender.SendAsync(
-            targetUser.Id,
-            new ChatMessageRdto
+        if (!await AuthorizationService.IsGrantedAsync(AbpChatPermissions.Searching))
+        {
+            if (!await MessagingManager.HasConversationAsync(targetUser.Id))
             {
-                SenderName = senderUser.Name,
-                SenderSurname = senderUser.Surname,
-                SenderUserId = senderUser.Id,
-                SenderUsername = senderUser.UserName,
-                Text = input.Message
-            });
+                throw new AbpAuthorizationException(code: AbpAuthorizationErrorCodes.GivenRequirementHasNotGrantedForGivenResource);
+            }
+        }
+
+        Message message;
+        using (IUnitOfWork uow = UnitOfWorkManager.Begin(true))
+        {
+            message = await MessagingManager.CreateNewMessage(CurrentUser.GetId(), targetUser.Id, input.Message);
+            await uow.CompleteAsync();
+        }
+
+        ChatUser chatUser = await ChatUserLookupService.FindByIdAsync(CurrentUser.GetId());
+        await RealTimeChatMessageSender.SendAsync(targetUser.Id, new ChatMessageRdto()
+        {
+            Id = message.Id,
+            SenderName = chatUser.Name,
+            SenderSurname = chatUser.Surname,
+            SenderUserId = chatUser.Id,
+            SenderUsername = chatUser.UserName,
+            Text = input.Message
+        });
+        ChatMessageDto chatMessageDto = new ChatMessageDto()
+        {
+            Id = message.Id,
+            Message = message.Text,
+            MessageDate = message.CreationTime,
+            ReadDate = message.ReadTime ?? DateTime.MaxValue,
+            IsRead = message.IsAllRead,
+            Side = ChatMessageSide.Sender
+        };
+
+        return chatMessageDto;
     }
 
     public virtual async Task<ChatConversationDto> GetConversationAsync(GetConversationInput input)
@@ -96,6 +129,7 @@ public class ConversationAppService : ChatAppServiceBase, IConversationAppServic
         chatConversation.Messages.AddRange(
             messages.Select(x => new ChatMessageDto
             {
+                Id = x.Message.Id,
                 Message = x.Message.Text,
                 MessageDate = x.Message.CreationTime,
                 ReadDate = x.Message.ReadTime ?? DateTime.MaxValue,
@@ -108,12 +142,36 @@ public class ConversationAppService : ChatAppServiceBase, IConversationAppServic
 
     public virtual async Task MarkConversationAsReadAsync(MarkConversationAsReadInput input)
     {
-        var conversationPair = await ConversationRepository.FindPairAsync(CurrentUser.GetId(), input.TargetUserId);
-
-        if (conversationPair.SenderConversation.LastMessageSide == ChatMessageSide.Receiver)
+        try
         {
-            conversationPair.SenderConversation.ResetUnreadMessageCount();
-            await ConversationRepository.UpdateAsync(conversationPair.SenderConversation);
+            using (IUnitOfWork uow = UnitOfWorkManager.Begin(true, UnitOfWorkManager.Current != null && UnitOfWorkManager.Current.Options.IsTransactional))
+            {
+                ConversationPair conversationPair = await ConversationRepository.FindPairAsync(CurrentUser.GetId(), input.TargetUserId);
+                if (conversationPair.SenderConversation.LastMessageSide == ChatMessageSide.Receiver)
+                {
+                    conversationPair.SenderConversation.ResetUnreadMessageCount();
+                    Conversation conversation = await ConversationRepository.UpdateAsync(conversationPair.SenderConversation);
+                }
+
+                await uow.CompleteAsync();
+            }
         }
+        catch (AbpDbConcurrencyException ex)
+        {
+        }
+    }
+
+    public virtual async Task DeleteMessageAsync(DeleteMessageInput input)
+    {
+        await MessagingManager.DeleteMessage(input.MessageId, CurrentUser.GetId(), input.TargetUserId);
+
+        await RealTimeChatMessageSender.DeleteMessageAsync(input.TargetUserId, input.MessageId);
+    }
+
+    public virtual async Task DeleteConversationAsync(DeleteConversationInput input)
+    {
+        await MessagingManager.DeleteConversationAsync(CurrentUser.GetId(), input.TargetUserId);
+
+        await RealTimeChatMessageSender.DeleteConversationAsync(input.TargetUserId, CurrentUser.GetId());
     }
 }

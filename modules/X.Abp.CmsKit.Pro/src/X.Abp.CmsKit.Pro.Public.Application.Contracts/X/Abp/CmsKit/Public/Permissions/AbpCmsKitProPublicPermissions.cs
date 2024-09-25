@@ -8,7 +8,7 @@ namespace X.Abp.CmsKit.Public.Permissions;
 
 public class AbpCmsKitProPublicPermissions
 {
-    public const string GroupName = "Public";
+    public const string GroupName = "CmsKitProPublic";
 
     public static string[] GetAll()
     {

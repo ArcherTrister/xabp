@@ -15,43 +15,43 @@ public class UrlShortingPublicAppService :
 ApplicationService,
 IUrlShortingPublicAppService
 {
-    protected IShortenedUrlRepository ShortenedUrlRepository { get; }
+  protected IShortenedUrlRepository ShortenedUrlRepository { get; }
 
-    protected IDistributedCache<ShortenedUrlCacheItem, string> DistributedCache { get; }
+  protected IDistributedCache<ShortenedUrlCacheItem, string> DistributedCache { get; }
 
-    public UrlShortingPublicAppService(
-      IShortenedUrlRepository shortenedUrlRepository,
-      IDistributedCache<ShortenedUrlCacheItem, string> shortenedUrlCache)
+  public UrlShortingPublicAppService(
+    IShortenedUrlRepository shortenedUrlRepository,
+    IDistributedCache<ShortenedUrlCacheItem, string> shortenedUrlCache)
+  {
+    ShortenedUrlRepository = shortenedUrlRepository;
+    DistributedCache = shortenedUrlCache;
+  }
+
+  public virtual async Task<ShortenedUrlDto> FindBySourceAsync(string source)
+  {
+    var val = await DistributedCache.GetAsync(source);
+    if (val != null)
     {
-        ShortenedUrlRepository = shortenedUrlRepository;
-        DistributedCache = shortenedUrlCache;
+      return !val.Exists ? null : ObjectMapper.Map<ShortenedUrlCacheItem, ShortenedUrlDto>(val);
     }
 
-    public async Task<ShortenedUrlDto> FindBySourceAsync(string source)
+    var shortenedUrl = await ShortenedUrlRepository.FindBySourceUrlAsync(source);
+    if (shortenedUrl == null)
     {
-        var val = await DistributedCache.GetAsync(source);
-        if (val != null)
-        {
-            return !val.Exists ? null : ObjectMapper.Map<ShortenedUrlCacheItem, ShortenedUrlDto>(val);
-        }
-
-        var shortenedUrl = await ShortenedUrlRepository.FindBySourceUrlAsync(source);
-        if (shortenedUrl == null)
-        {
-            await DistributedCache.SetAsync(source, new ShortenedUrlCacheItem
-            {
-                Exists = false
-            });
-            return null;
-        }
-
-        await DistributedCache.SetAsync(source, new ShortenedUrlCacheItem
-        {
-            Id = shortenedUrl.Id,
-            Source = shortenedUrl.Source,
-            Target = shortenedUrl.Target,
-            Exists = true
-        });
-        return ObjectMapper.Map<ShortenedUrl, ShortenedUrlDto>(shortenedUrl);
+      await DistributedCache.SetAsync(source, new ShortenedUrlCacheItem
+      {
+        Exists = false
+      });
+      return null;
     }
+
+    await DistributedCache.SetAsync(source, new ShortenedUrlCacheItem
+    {
+      Id = shortenedUrl.Id,
+      Source = shortenedUrl.Source,
+      Target = shortenedUrl.Target,
+      Exists = true
+    });
+    return ObjectMapper.Map<ShortenedUrl, ShortenedUrlDto>(shortenedUrl);
+  }
 }

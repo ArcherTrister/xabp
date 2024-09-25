@@ -17,36 +17,36 @@ public class AbpSaasPermissions
 
     public static class Tenants
     {
-        public const string Default = "Saas.Tenants";
+        public const string Default = GroupName + ".Tenants";
 
-        public const string Create = "Saas.Tenants.Create";
+        public const string Create = Default + ".Create";
 
-        public const string Update = "Saas.Tenants.Update";
+        public const string Update = Default + ".Update";
 
-        public const string Delete = "Saas.Tenants.Delete";
+        public const string Delete = Default + ".Delete";
 
-        public const string ManageFeatures = "Saas.Tenants.ManageFeatures";
+        public const string ManageFeatures = Default + ".ManageFeatures";
 
-        public const string ManageConnectionStrings = "Saas.Tenants.ManageConnectionStrings";
+        public const string ManageConnectionStrings = Default + ".ManageConnectionStrings";
 
         public const string ViewChangeHistory = "AuditLogging.ViewChangeHistory:Saas.Tenant";
 
-        public const string Impersonation = "Saas.Tenants.Impersonation";
+        public const string Impersonation = Default + ".Impersonation";
 
-        public const string SetPassword = "Saas.Tenants.SetPassword";
+        public const string SetPassword = Default + ".SetPassword";
     }
 
     public static class Editions
     {
-        public const string Default = "Saas.Editions";
+        public const string Default = GroupName + ".Editions";
 
-        public const string Create = "Saas.Editions.Create";
+        public const string Create = Default + ".Create";
 
-        public const string Update = "Saas.Editions.Update";
+        public const string Update = Default + ".Update";
 
-        public const string Delete = "Saas.Editions.Delete";
+        public const string Delete = Default + ".Delete";
 
-        public const string ManageFeatures = "Saas.Editions.ManageFeatures";
+        public const string ManageFeatures = Default + ".ManageFeatures";
 
         public const string ViewChangeHistory = "AuditLogging.ViewChangeHistory:Saas.Edition";
     }

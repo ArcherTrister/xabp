@@ -32,6 +32,8 @@ public class IdentityServiceDbContext : AbpDbContext<IdentityServiceDbContext>, 
 
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
 
+    public DbSet<IdentitySession> Sessions { get; set; }
+
     public DbSet<ApiResource> ApiResources { get; set; }
 
     public DbSet<ApiResourceSecret> ApiResourceSecrets { get; set; }

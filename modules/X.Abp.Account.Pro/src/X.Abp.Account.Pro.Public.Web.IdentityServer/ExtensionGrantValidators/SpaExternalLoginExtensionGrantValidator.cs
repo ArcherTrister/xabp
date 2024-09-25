@@ -105,7 +105,7 @@ public class SpaExternalLoginExtensionGrantValidator : IExtensionGrantValidator
                 return;
             }
 
-            Logger.LogInformation($"SpaExternalLoginTenantId:{parsedGuid}");
+            Logger.LogInformation("SpaExternalLoginTenantId:{SpaExternalLoginTenantId}", parsedGuid);
             spaExternalLoginTenantId = parsedGuid;
         }
 
@@ -116,7 +116,7 @@ public class SpaExternalLoginExtensionGrantValidator : IExtensionGrantValidator
             {
                 var additionalClaims = new List<Claim>()
                 {
-                    new Claim(CustomClaimTypes.ProviderKey, providerKey)
+                    new Claim(ExtraClaimTypes.ProviderKey, providerKey)
                 };
 
                 if (user.TenantId.HasValue)

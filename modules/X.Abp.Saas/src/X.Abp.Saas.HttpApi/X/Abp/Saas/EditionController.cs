@@ -81,8 +81,22 @@ public class EditionController : AbpControllerBase, IEditionAppService
 
     [Route("plan-lookup")]
     [HttpGet]
-    public Task<List<PlanDto>> GetPlanLookupAsync()
+    public virtual Task<List<PlanDto>> GetPlanLookupAsync()
     {
         return Service.GetPlanLookupAsync();
+    }
+
+    [Route("all")]
+    [HttpGet]
+    public virtual Task<List<EditionDto>> GetAllListAsync()
+    {
+        return Service.GetAllListAsync();
+    }
+
+    [Route("{id}/move-all-tenants")]
+    [HttpPut]
+    public virtual Task MoveAllTenantsAsync(Guid id, Guid? targetEditionId)
+    {
+        return Service.MoveAllTenantsAsync(id, targetEditionId);
     }
 }

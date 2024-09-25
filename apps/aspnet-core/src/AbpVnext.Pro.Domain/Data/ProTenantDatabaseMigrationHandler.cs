@@ -52,8 +52,8 @@ public class ProTenantDatabaseMigrationHandler :
     {
         await MigrateAndSeedForTenantAsync(
             eventData.Id,
-            eventData.Properties.GetOrDefault("AdminEmail") ?? ProConsts.AdminEmailDefaultValue,
-            eventData.Properties.GetOrDefault("AdminPassword") ?? ProConsts.AdminPasswordDefaultValue);
+            eventData.Properties.GetOrDefault(IdentityDataSeedContributor.AdminEmailPropertyName) ?? ProConsts.AdminEmailDefaultValue,
+            eventData.Properties.GetOrDefault(IdentityDataSeedContributor.AdminPasswordPropertyName) ?? ProConsts.AdminPasswordDefaultValue);
     }
 
     public async Task HandleEventAsync(TenantConnectionStringUpdatedEto eventData)

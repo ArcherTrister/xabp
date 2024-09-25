@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Uow;
 
@@ -76,13 +77,13 @@ public class MyProjectNameDbMigrationService : ITransientDependency
                 if (!connectionString.IsNullOrWhiteSpace() && //tenant has a separate database
                     !migratedDatabaseSchemas.Contains(connectionString)) //the database was not migrated yet
                 {
-                    _logger.LogInformation($"Migrating tenant database: {tenant.Name} ({tenant.Id})");
+                    _logger.LogInformation("Migrating tenant database: {TenantName} ({TenantId})", tenant.Name, tenant.Id);
                     await MigrateAllDatabasesAsync(tenant.Id, cancellationToken);
                     migratedDatabaseSchemas.AddIfNotContains(connectionString);
                 }
 
                 //Seed data
-                _logger.LogInformation($"Seeding tenant data: {tenant.Name} ({tenant.Id})");
+                _logger.LogInformation("Seeding tenant data: {TenantName} ({TenantId})", tenant.Name, tenant.Id);
                 await SeedDataAsync();
             }
         }
@@ -107,15 +108,14 @@ public class MyProjectNameDbMigrationService : ITransientDependency
             await uow.CompleteAsync(cancellationToken);
         }
 
-        _logger.LogInformation(
-            $"All databases have been successfully migrated ({(tenantId.HasValue ? $"tenantId: {tenantId}" : "HOST")}).");
+        _logger.LogInformation("All databases have been successfully migrated ({(TenantOrHost)}).", (tenantId.HasValue ? $"tenantId: {tenantId}" : "HOST"));
     }
 
     private async Task MigrateDatabaseAsync<TDbContext>(
         CancellationToken cancellationToken)
         where TDbContext : DbContext, IEfCoreDbContext
     {
-        _logger.LogInformation($"Migrating {typeof(TDbContext).Name.RemovePostFix("DbContext")} database...");
+        _logger.LogInformation("Migrating {DbContextName} database...", typeof(TDbContext).Name.RemovePostFix("DbContext"));
 
         var dbContext = await _unitOfWorkManager.Current.ServiceProvider
             .GetRequiredService<IDbContextProvider<TDbContext>>()
@@ -131,9 +131,9 @@ public class MyProjectNameDbMigrationService : ITransientDependency
         await _dataSeeder.SeedAsync(
             new DataSeedContext(_currentTenant.Id)
                 .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName,
-                    IdentityServiceDbProperties.DefaultAdminEmailAddress)
+                    IdentityDataSeedContributor.AdminEmailDefaultValue)
                 .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName,
-                    IdentityServiceDbProperties.DefaultAdminPassword)
+                    IdentityDataSeedContributor.AdminPasswordDefaultValue)
         );
     }
 }

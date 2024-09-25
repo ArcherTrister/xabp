@@ -27,6 +27,35 @@ public static class TextTemplateManagementDbContextModelBuilderExtensions
             b.ApplyObjectExtensionMappings();
         });
 
+        if (builder.IsHostDatabase())
+        {
+            builder.Entity<TextTemplateDefinitionRecord>(b =>
+            {
+                b.ToTable(TextTemplateManagementDbProperties.DbTablePrefix + "TextTemplateDefinitionRecords", TextTemplateManagementDbProperties.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(definitionRecord => definitionRecord.Name).HasMaxLength(TemplateDefinitionRecordConsts.MaxNameLength).IsRequired(true);
+                b.Property(definitionRecord => definitionRecord.DisplayName).HasMaxLength(TemplateDefinitionRecordConsts.MaxDisplayNameLength);
+                b.Property(definitionRecord => definitionRecord.Layout).HasMaxLength(TemplateDefinitionRecordConsts.MaxLayoutLength);
+                b.Property(definitionRecord => definitionRecord.LocalizationResourceName).HasMaxLength(TemplateDefinitionRecordConsts.MaxLocalizationResourceNameLength);
+                b.Property(definitionRecord => definitionRecord.DefaultCultureName).HasMaxLength(TemplateDefinitionRecordConsts.MaxDefaultCultureNameLength);
+                b.Property(definitionRecord => definitionRecord.RenderEngine).HasMaxLength(TemplateDefinitionRecordConsts.MaxRenderEngineLength);
+                b.HasMany<TextTemplateDefinitionContentRecord>().WithOne().HasForeignKey(definitionContentRecord => definitionContentRecord.DefinitionId);
+                b.HasIndex(definitionRecord => new
+                {
+                    Name = definitionRecord.Name
+                }).IsUnique(true);
+                b.ApplyObjectExtensionMappings();
+            });
+            builder.Entity<TextTemplateDefinitionContentRecord>(b =>
+            {
+                b.ToTable(TextTemplateManagementDbProperties.DbTablePrefix + "TextTemplateDefinitionContentRecords", TextTemplateManagementDbProperties.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(definitionContentRecord => definitionContentRecord.FileName).HasMaxLength(TemplateDefinitionContentRecordConsts.MaxFileNameLength).IsRequired(true);
+                b.HasOne<TextTemplateDefinitionRecord>().WithMany().HasForeignKey(definitionContentRecord => definitionContentRecord.DefinitionId);
+                b.ApplyObjectExtensionMappings();
+            });
+        }
+
         builder.TryConfigureObjectExtensions<TextTemplateManagementDbContext>();
     }
 }

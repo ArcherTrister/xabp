@@ -54,7 +54,7 @@ public class AbpAuditLoggingWebModule : AbpModule
             options.Conventions.AuthorizePage("/AuditLogs/Detail", "AuditLogging.AuditLogs");
             options.Conventions.AuthorizePage("/AuditLogs/EntityChangeDetail", "AuditLogging.AuditLogs");
         });
-        Configure((AbpNavigationOptions options) => options.MenuContributors.Add(new AbpAuditLoggingMainMenuContributor()));
+        Configure<AbpNavigationOptions>(options => options.MenuContributors.Add(new AbpAuditLoggingMainMenuContributor()));
         Configure<AbpBundlingOptions>(options => options.ScriptBundles.Configure(StandardBundles.Scripts.Global,
             configuration =>
             {

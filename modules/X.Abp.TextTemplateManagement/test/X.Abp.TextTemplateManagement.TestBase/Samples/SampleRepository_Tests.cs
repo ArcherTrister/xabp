@@ -11,16 +11,16 @@ namespace X.Abp.TextTemplateManagement.Samples;
 public abstract class SampleRepository_Tests<TStartupModule> : TextTemplateManagementTestBase<TStartupModule>
     where TStartupModule : IAbpModule
 {
-    //private readonly ISampleRepository _sampleRepository;
+  //private readonly ISampleRepository _sampleRepository;
 
-    protected SampleRepository_Tests()
-    {
-        //_sampleRepository = GetRequiredService<ISampleRepository>();
-    }
+  protected SampleRepository_Tests()
+  {
+    //_sampleRepository = GetRequiredService<ISampleRepository>();
+  }
 
-    [Fact]
-    public async Task Method1Async()
-    {
+  [Fact]
+  public virtual async Task Method1Async()
+  {
 
-    }
+  }
 }

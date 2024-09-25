@@ -24,9 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\..\..\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.Domain\X.Abp.Identity.Pro.Domain.csproj" />
-    <ProjectReference Include="..\X.Abp.Notification\X.Abp.Notification.csproj" />
+    <ProjectReference Include="..\..\..\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.Domain\X.Abp.Identity.Pro.Domain.csproj" />
+    <ProjectReference Include="..\X.Abp.Notification.Abstractions\X.Abp.Notification.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

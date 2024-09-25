@@ -28,15 +28,18 @@ public class EditionAppService : SaasAppServiceBase, IEditionAppService
 {
     protected IEditionRepository EditionRepository { get; }
 
+    protected EditionManager EditionManager { get; }
+
     protected ITenantRepository TenantRepository { get; }
 
     protected IPlanAppService PlanAppService { get; }
 
     protected AbpSaasPaymentOptions PaymentOptions { get; }
 
-    public EditionAppService(IEditionRepository editionRepository, ITenantRepository tenantRepository, IServiceProvider serviceProvider, IOptions<AbpSaasPaymentOptions> paymentOptions)
+    public EditionAppService(IEditionRepository editionRepository, EditionManager editionManager, ITenantRepository tenantRepository, IServiceProvider serviceProvider, IOptions<AbpSaasPaymentOptions> paymentOptions)
     {
         EditionRepository = editionRepository;
+        EditionManager = editionManager;
         TenantRepository = tenantRepository;
         PlanAppService = serviceProvider.GetService<IPlanAppService>();
         PaymentOptions = paymentOptions.Value;
@@ -52,24 +55,30 @@ public class EditionAppService : SaasAppServiceBase, IEditionAppService
             editionDto.PlanName = plan?.Name;
         }
 
+        editionDto.TenantCount = await TenantRepository.GetCountAsync(null, edition.Id);
+
         return editionDto;
     }
 
     public virtual async Task<PagedResultDto<EditionDto>> GetListAsync(GetEditionsInput input)
     {
-        var count = await EditionRepository.GetCountAsync(input.Filter);
-        var list = await EditionRepository.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter);
-        var editionDtos = ObjectMapper.Map<List<Edition>, List<EditionDto>>(list);
+        int count = await EditionRepository.GetCountAsync(input.Filter);
+        List<EditionWithTenantCount> editions = await EditionRepository.GetListWithTenantCountAsync(input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter, false);
+        List<EditionDto> editionDtos = ObjectMapper.Map<List<Edition>, List<EditionDto>>(editions.Select(x => x.Edition).ToList());
+        foreach (EditionDto editionDto in editionDtos)
+        {
+            EditionWithTenantCount editionWithTenantCount = editions.FirstOrDefault(x => x.Edition.Id == editionDto.Id);
+            editionDto.TenantCount = editionWithTenantCount != null ? editionWithTenantCount.TenantCount : 0L;
+        }
+
         if (PaymentOptions.IsPaymentSupported)
         {
-            var array = (from x in list
-                         where x.PlanId.HasValue
-                         select x.PlanId.Value).Distinct().ToArray();
-            var source = await PlanAppService.GetManyAsync(array);
-            foreach (var editionDto in editionDtos.Where(x => x.PlanId.HasValue))
+            Guid[] planIds = editions.Select(x => x.Edition).Where(x => x.PlanId.HasValue).Select(x => x.PlanId.Value).Distinct().ToArray();
+            List<PlanDto> plans = await PlanAppService.GetManyAsync(planIds);
+            foreach (EditionDto editionDto in editionDtos.Where(x => x.PlanId.HasValue))
             {
-                var val = source.FirstOrDefault(x => x.Id == editionDto.PlanId.Value);
-                editionDto.PlanName = val?.Name;
+                PlanDto planDto = plans.FirstOrDefault(x => x.Id == editionDto.PlanId.Value);
+                editionDto.PlanName = planDto?.Name;
             }
         }
 
@@ -107,9 +116,23 @@ public class EditionAppService : SaasAppServiceBase, IEditionAppService
         await EditionRepository.DeleteAsync(id);
     }
 
-    public virtual Task<List<PlanDto>> GetPlanLookupAsync()
+    [Authorize(AbpSaasPermissions.Editions.Update)]
+    public virtual async Task MoveAllTenantsAsync(Guid id, Guid? targetEditionId)
     {
-        return PaymentOptions.IsPaymentSupported ? PlanAppService.GetPlanListAsync() : Task.FromResult(new List<PlanDto>());
+        await EditionManager.MoveAllTenantsAsync((await EditionRepository.GetAsync(id)).Id, targetEditionId);
+    }
+
+    public virtual async Task<List<EditionDto>> GetAllListAsync()
+    {
+        List<EditionWithTenantCount> source = await EditionRepository.GetListWithTenantCountAsync();
+        List<EditionDto> editionDtos = ObjectMapper.Map<List<Edition>, List<EditionDto>>(source.Select(x => x.Edition).ToList());
+        foreach (EditionDto editionDto in editionDtos)
+        {
+            EditionWithTenantCount editionWithTenantCount = source.FirstOrDefault(x => x.Edition.Id == editionDto.Id);
+            editionDto.TenantCount = editionWithTenantCount != null ? editionWithTenantCount.TenantCount : 0L;
+        }
+
+        return editionDtos;
     }
 
     public virtual async Task<GetEditionUsageStatisticsResultDto> GetUsageStatisticsAsync()
@@ -137,5 +160,11 @@ public class EditionAppService : SaasAppServiceBase, IEditionAppService
         {
             Data = dictionary
         };
+    }
+
+    [Obsolete("Use `IPlanAppService` to perform this operation. This will be removed in next major version.")]
+    public virtual Task<List<PlanDto>> GetPlanLookupAsync()
+    {
+        return PaymentOptions.IsPaymentSupported ? PlanAppService.GetPlanListAsync() : Task.FromResult(new List<PlanDto>());
     }
 }

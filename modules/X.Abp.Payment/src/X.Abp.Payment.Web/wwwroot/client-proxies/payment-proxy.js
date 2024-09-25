@@ -5,6 +5,64 @@
 
 (function(){
 
+  // controller x.abp.payment.gateways.gateway
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.payment.gateways.gateway');
+
+    x.abp.payment.gateways.gateway.getGatewayConfiguration = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/payment/gateways',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.payment.gateways.gateway.getSubscriptionSupportedGateways = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/payment/gateways/subscription-supported',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller x.abp.payment.plans.plan
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.payment.plans.plan');
+
+    x.abp.payment.plans.plan.getGatewayPlan = function(planId, gateway, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/payment/plans/' + planId + '/' + gateway + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.payment.plans.plan.getPlanList = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/payment/plans',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.payment.plans.plan.get = function(planId, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/payment/plans/' + planId + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.payment.plans.plan.getMany = function(planIds, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/payment/plans/many' + abp.utils.buildQueryString([{ name: 'planIds', value: planIds }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
   // controller x.abp.payment.requests.paymentRequest
 
   (function(){
@@ -49,64 +107,6 @@
         url: abp.appPath + 'api/payment/' + paymentMethod + '/start' + abp.utils.buildQueryString([{ name: 'paymentGateway', value: paymentGateway }]) + '',
         type: 'POST',
         data: JSON.stringify(input)
-      }, ajaxParams));
-    };
-
-  })();
-
-  // controller x.abp.payment.plans.plan
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'x.abp.payment.plans.plan');
-
-    x.abp.payment.plans.plan.getGatewayPlan = function(planId, gateway, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment/plans/' + planId + '/' + gateway + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.payment.plans.plan.getPlanList = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment/plans',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.payment.plans.plan.get = function(planId, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment/plans/' + planId + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.payment.plans.plan.getMany = function(planIds, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment/plans/many' + abp.utils.buildQueryString([{ name: 'planIds', value: planIds }]) + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-  })();
-
-  // controller x.abp.payment.gateways.gateway
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'x.abp.payment.gateways.gateway');
-
-    x.abp.payment.gateways.gateway.getGatewayConfiguration = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment/gateways',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.payment.gateways.gateway.getSubscriptionSupportedGateways = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment/gateways/subscription-supported',
-        type: 'GET'
       }, ajaxParams));
     };
 

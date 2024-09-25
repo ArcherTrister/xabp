@@ -1,0 +1,42 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization;
+@using Microsoft.Extensions.Options
+@using X.Abp.Account.LinkUsers
+@using X.Abp.Account.Localization;
+@using X.Abp.Account.Public.Web.Pages.Account.LinkUsers;
+@using Volo.Abp.MultiTenancy;
+@using Volo.Abp.Users;
+@model LinkUsersModalModel
+@inject IHtmlLocalizer<AccountResource> L
+@inject ICurrentUser CurrentUser
+@inject ICurrentTenant CurrentTenant
+@inject ICurrentTenant CurrentTenant
+@inject IOptions<AbpAccountLinkUserOptions> LinkUserOptions
+@{
+    Layout = null;
+}
+
+@section scripts {
+    <abp-script-bundle name="@typeof(LinkUsersModalModel).FullName">
+        <abp-script src="/Pages/Account/LinkUsers/LinkUsersModal.js" />
+    </abp-script-bundle>
+}
+
+<abp-modal>
+    <abp-modal-header title="@L["LinkedAccounts"].Value"></abp-modal-header>
+    <abp-modal-body>
+        <div class="mb-3 text-end">
+            <abp-button button-type="Primary" id="CreateLinkUser" text="@L["NewLinkAccount"].Value"/>
+        </div>
+
+        <form method="post" data-ajaxForm="false" asp-page="/Account/LinkLogin" id="linkUserLoginForm">
+            <input type="hidden" name="SourceLinkUserId" value="@CurrentUser.Id">
+            <input type="hidden" name="SourceLinkTenantId" value="@CurrentTenant.Id">
+            <input type="hidden" name="SourceLinkToken">
+            <input type="hidden" name="TargetLinkUserId">
+            <input type="hidden" name="TargetLinkTenantId">
+        </form>
+
+        <abp-table striped-rows="true" id="MyLinkUsersTable" class="nowrap"></abp-table>
+    </abp-modal-body>
+</abp-modal>

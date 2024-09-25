@@ -11,8 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource
-      Include="X\Abp\LeptonTheme\Management\Localization\Resources\*.json" />
+    <EmbeddedResource Include="X\Abp\LeptonTheme\Management\Localization\Resources\*.json" />
     <Content Remove="X\Abp\LeptonTheme\Management\Localization\Resources\*.json" />
   </ItemGroup>
 

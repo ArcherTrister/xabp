@@ -12,11 +12,9 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.CmsKit.Public.Application.Contracts"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.CmsKit.Public.Application.Contracts" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="X.Captcha" />
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Domain.Shared\X.Abp.CmsKit.Pro.Domain.Shared.csproj" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain.Shared\X.Abp.CmsKit.Pro.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

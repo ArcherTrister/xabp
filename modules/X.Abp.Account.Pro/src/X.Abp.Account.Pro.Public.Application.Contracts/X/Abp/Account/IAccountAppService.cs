@@ -21,6 +21,8 @@ public interface IAccountAppService : IApplicationService
 
     Task SendPasswordResetCodeAsync(SendPasswordResetCodeDto input);
 
+    Task<bool> VerifyPasswordResetTokenAsync(VerifyPasswordResetTokenInput input);
+
     Task ResetPasswordAsync(ResetPasswordDto input);
 
     Task<IdentityUserConfirmationStateDto> GetConfirmationStateAsync(Guid id);
@@ -28,6 +30,8 @@ public interface IAccountAppService : IApplicationService
     Task SendPhoneNumberConfirmationTokenAsync(SendPhoneNumberConfirmationTokenDto input);
 
     Task SendEmailConfirmationTokenAsync(SendEmailConfirmationTokenDto input);
+
+    Task<bool> VerifyEmailConfirmationTokenAsync(VerifyEmailConfirmationTokenInput input);
 
     Task ConfirmPhoneNumberAsync(ConfirmPhoneNumberInput input);
 
@@ -49,15 +53,17 @@ public interface IAccountAppService : IApplicationService
 
     Task<ExternalLoginsDto> GetExternalLoginsAsync();
 
-    Task RemoveLoginAsync(RemoveLoginInput input);
+    Task RemoveExternalLoginAsync(RemoveExternalLoginInput input);
 
     Task<TwoFactorAuthenticationDto> GetTwoFactorAuthenticationAsync();
 
+    Task<bool> HasAuthenticatorAsync();
+
     Task<AuthenticatorInfoDto> GetAuthenticatorInfoAsync();
 
-    Task<ShowRecoveryCodesDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input);
+    Task<VerifyAuthenticatorCodeDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input);
 
     Task ResetAuthenticatorAsync();
 
-    Task<ShowRecoveryCodesDto> GenerateRecoveryCodesAsync();
+    Task<VerifyAuthenticatorCodeDto> GenerateRecoveryCodesAsync();
 }

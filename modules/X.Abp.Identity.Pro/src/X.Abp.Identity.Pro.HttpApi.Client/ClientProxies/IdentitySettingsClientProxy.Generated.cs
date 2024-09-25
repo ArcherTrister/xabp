@@ -55,4 +55,17 @@ public partial class IdentitySettingsClientProxy : ClientProxyBase<IIdentitySett
             { typeof(IdentityOAuthSettingsDto), input }
         });
     }
+
+    public virtual async Task<IdentitySessionSettingsDto> GetSessionAsync()
+    {
+        return await RequestAsync<IdentitySessionSettingsDto>(nameof(GetSessionAsync));
+    }
+
+    public virtual async Task UpdateSessionAsync(IdentitySessionSettingsDto input)
+    {
+        await RequestAsync(nameof(UpdateSessionAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(IdentitySessionSettingsDto), input }
+        });
+    }
 }

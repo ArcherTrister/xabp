@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -50,14 +50,16 @@ using X.Abp.IdentityServer;
 namespace MyCompanyName.MyProjectName.AuthServer;
 
 [DependsOn(
-    typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
     typeof(AbpCachingStackExchangeRedisModule),
     typeof(AbpEventBusRabbitMqModule),
     typeof(AbpBackgroundJobsRabbitMqModule),
     typeof(AbpAspNetCoreMvcUiLeptonThemeModule),
     typeof(AbpAccountPublicWebIdentityServerModule),
+    typeof(AbpAccountPublicWebImpersonationModule),
     typeof(AbpAccountPublicApplicationModule),
     typeof(AbpAccountPublicHttpApiModule),
+    typeof(AbpAccountAdminApplicationModule),
+    typeof(AbpAccountAdminHttpApiModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(SaasServiceEntityFrameworkCoreModule),
@@ -94,14 +96,21 @@ public class MyProjectNameAuthServerModule : AbpModule
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
         ConfigureSwagger(context, configuration);
-
+        ConfigureSameSiteCookiePolicy(context);
         context.Services.AddAuthentication()
             .AddJwtBearer(options =>
             {
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 options.Audience = "AccountService";
+                options.MapInboundClaims = false;
             });
+
+        Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+        {
+            options.IsDynamicClaimsEnabled = true;
+            //options.IsRemoteRefreshEnabled = false;
+        });
 
         ConfigureExternalProviders(context);
 
@@ -198,6 +207,7 @@ public class MyProjectNameAuthServerModule : AbpModule
         app.UseStaticFiles();
         app.UseRouting();
         app.UseCors();
+        app.UseCookiePolicy();
         app.UseHttpMetrics();
         app.UseAuthentication();
         app.UseJwtTokenMiddleware();
@@ -205,6 +215,7 @@ public class MyProjectNameAuthServerModule : AbpModule
         app.UseAbpSerilogEnrichers();
         app.UseUnitOfWork();
         app.UseIdentityServer();
+        app.UseDynamicClaims();
         app.UseAuthorization();
         app.UseSwagger();
         app.UseAbpSwaggerUI(options =>
@@ -279,5 +290,10 @@ public class MyProjectNameAuthServerModule : AbpModule
             },
             apiTitle: "Account Service API"
         );
+    }
+
+    private void ConfigureSameSiteCookiePolicy(ServiceConfigurationContext context)
+    {
+        context.Services.AddSameSiteCookiePolicy();
     }
 }

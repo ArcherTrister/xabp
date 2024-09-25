@@ -3,15 +3,15 @@
     $(function () {
         var l = abp.localization.getResource('AbpAccount');
 
-        var _accountService = x.abp.account.account;
+        var _accountService = volo.abp.account.account;
 
-        var UPPY_UPLOAD_ENDPOINT = "/api/account/profile-picture";
+        var UPPY_UPLOAD_ENDPOINT = $("#uploadEndpoint").val();
 
         function getUppyHeaders() {
-          var headers = {};
-          headers[abp.security.antiForgery.tokenHeaderName] = abp.security.antiForgery.getToken();
+            var headers = {};
+            headers[abp.security.antiForgery.tokenHeaderName] = abp.security.antiForgery.getToken();
 
-          return headers;
+            return headers;
         }
 
         var UPPY_OPTIONS = {
@@ -22,7 +22,7 @@
             headers: getUppyHeaders(),
         };
 
-        var UPPY = Uppy.Core().use(Uppy.XHRUpload, UPPY_OPTIONS);
+        var UPPY = new Uppy.Uppy().use(Uppy.XHRUpload, UPPY_OPTIONS);
 
         var UPPY_FILE_ID = "uppy-upload-file";
 
@@ -107,6 +107,8 @@
         saveProfilePictureBtn.click(function (e) {
             e.preventDefault();
 
+            var $this = $(this);
+
             var message = null;
             var callBack = null;
 
@@ -121,6 +123,7 @@
                         return;
                     }
 
+                    $this.buttonBusy();
                     _accountService
                         .setProfilePicture({ type: 1 })
                         .then(function (result) {
@@ -135,6 +138,7 @@
                         return;
                     }
 
+                    $this.buttonBusy();
                     _accountService
                         .setProfilePicture({ type: 0 })
                         .then(function (result) {
@@ -151,7 +155,7 @@
 
                 try {
                     canvas = cropper.getCroppedCanvas();
-                } catch (e) {}
+                } catch (e) { }
 
                 if (canvas === null) {
                     abp.message.warn(l("PleaseSelectImage"));
@@ -164,8 +168,10 @@
                         return;
                     }
 
+                    $this.buttonBusy();
+
                     canvas.toBlob(function (blob) {
-                        UPPY.reset();
+                        UPPY.cancelAll();
 
                         UPPY.addFile({
                             id: UPPY_FILE_ID,
@@ -176,12 +182,14 @@
 
                         UPPY.upload().then((result) => {
                             if (result.failed.length > 0) {
+                                $this.buttonBusy(false);
                                 abp.message.error(l("UploadFailedMessage"));
                             } else {
+                                abp.notify.success(l('SavedSuccessfully'));
                                 window.location.reload();
                             }
                         });
-                    });
+                    }, "image/jpeg", 0.95);
                 };
             }
             abp.message.confirm(message, l("AreYouSure")).then(callBack);

@@ -25,13 +25,17 @@
     <PackageReference Include="Volo.Abp.TestBase" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Autofac" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\..\src\MyCompanyName.MyProjectName.Domain\MyCompanyName.MyProjectName.Domain.csproj" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions"
+      VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NSubstitute" />
+    <PackageReference Include="NSubstitute.Analyzers.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Shouldly" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.extensibility.execution" />

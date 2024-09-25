@@ -11,8 +11,7 @@ namespace X.Abp.TextTemplateManagement.TextTemplates;
 
 public interface ITemplateDefinitionAppService : IApplicationService
 {
-    Task<PagedResultDto<TemplateDefinitionDto>> GetListAsync(
-      GetTemplateDefinitionListInput input);
+    Task<PagedResultDto<TemplateDefinitionDto>> GetListAsync(GetTemplateDefinitionListInput input);
 
     Task<TemplateDefinitionDto> GetAsync(string name);
 }

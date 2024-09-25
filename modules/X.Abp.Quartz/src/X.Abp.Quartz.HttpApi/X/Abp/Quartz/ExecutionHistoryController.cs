@@ -19,16 +19,16 @@ namespace X.Abp.Quartz;
 [Route("api/quartz/execution-histories")]
 public class ExecutionHistoryController : QuartzController, IExecutionHistoryAppService
 {
-    protected IExecutionHistoryAppService ExecutionHistoryAppService { get; }
+  protected IExecutionHistoryAppService ExecutionHistoryAppService { get; }
 
-    public ExecutionHistoryController(IExecutionHistoryAppService executionHistoryAppService)
-    {
-        ExecutionHistoryAppService = executionHistoryAppService;
-    }
+  public ExecutionHistoryController(IExecutionHistoryAppService executionHistoryAppService)
+  {
+    ExecutionHistoryAppService = executionHistoryAppService;
+  }
 
-    [HttpGet]
-    public async Task<PagedResultDto<ExecutionHistoryDto>> GetListAsync(GetExecutionHistoryListInput input)
-    {
-        return await ExecutionHistoryAppService.GetListAsync(input);
-    }
+  [HttpGet]
+  public virtual async Task<PagedResultDto<ExecutionHistoryDto>> GetListAsync(GetExecutionHistoryListInput input)
+  {
+    return await ExecutionHistoryAppService.GetListAsync(input);
+  }
 }

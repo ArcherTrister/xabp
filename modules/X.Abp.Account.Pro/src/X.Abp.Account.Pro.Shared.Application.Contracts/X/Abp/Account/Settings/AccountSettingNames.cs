@@ -12,6 +12,9 @@ public static class AccountSettingNames
 
     public const string ProfilePictureSource = "Abp.Account.ProfilePictureSource";
 
+    public const string PreventEmailEnumeration = "Abp.Account.PreventEmailEnumeration";
+    public const string ExternalProviders = "Abp.Account.ExternalProviders";
+
     public static class TwoFactorLogin
     {
         public const string IsRememberBrowserEnabled = "Abp.Account.TwoFactorLogin.IsRememberBrowserEnabled";
@@ -33,6 +36,4 @@ public static class AccountSettingNames
 
         public const string Score = "Abp.Account.Captcha.Score";
     }
-
-    public const string ExternalProviders = "Abp.Account.ExternalProviders";
 }

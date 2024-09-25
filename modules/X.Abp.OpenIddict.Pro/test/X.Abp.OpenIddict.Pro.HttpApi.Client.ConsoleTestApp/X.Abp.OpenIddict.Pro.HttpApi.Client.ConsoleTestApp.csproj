@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>X.Abp.OpenIddict.Pro</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="X.Abp.Http.Client.IdentityModel" Version="6.0.2" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.2" />
+    <PackageReference Include="X.Abp.Http.Client.IdentityModel" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Autofac" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\..\src\X.Abp.OpenIddict.Pro.HttpApi.Client\X.Abp.OpenIddict.Pro.HttpApi.Client.csproj" />
   </ItemGroup>
 

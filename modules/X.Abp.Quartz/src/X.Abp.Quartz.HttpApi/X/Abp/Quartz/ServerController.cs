@@ -33,7 +33,7 @@ namespace X.Abp.Quartz
 
         [HttpGet]
         [Route("api/server/{serverName}/details")]
-        public async Task<ServerDetailsDto> ServerDetails(string serverName)
+        public virtual async Task<ServerDetailsDto> ServerDetails(string serverName)
         {
             var schedulers = await SchedulerRepository.Instance.LookupAll();
             return new ServerDetailsDto(schedulers);

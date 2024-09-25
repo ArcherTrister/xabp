@@ -18,50 +18,50 @@ namespace X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Applications;
 
 public class EditModalModel : OpenIddictProPageModel
 {
-    protected IScopeAppService ScopeAppService { get; }
+  protected IScopeAppService ScopeAppService { get; }
 
-    protected IApplicationAppService ApplicationAppService { get; }
+  protected IApplicationAppService ApplicationAppService { get; }
 
-    [BindProperty]
-    public ApplicationEditModalView Application { get; set; }
+  [BindProperty]
+  public ApplicationEditModalView Application { get; set; }
 
-    public List<ScopeDto> Scopes { get; set; }
+  public List<ScopeDto> Scopes { get; set; }
 
-    public List<SelectListItem> Types { get; set; }
+  public List<SelectListItem> Types { get; set; }
 
-    public List<SelectListItem> ConsentTypes { get; set; }
+  public List<SelectListItem> ConsentTypes { get; set; }
 
-    public EditModalModel(IScopeAppService scopeAppService, IApplicationAppService applicationAppService)
-    {
-        ScopeAppService = scopeAppService;
-        ApplicationAppService = applicationAppService;
-    }
+  public EditModalModel(IScopeAppService scopeAppService, IApplicationAppService applicationAppService)
+  {
+    ScopeAppService = scopeAppService;
+    ApplicationAppService = applicationAppService;
+  }
 
-    public async Task<IActionResult> OnGetAsync(Guid id)
-    {
-        var applicationDto = await ApplicationAppService.GetAsync(id);
-        Application = ObjectMapper.Map<ApplicationDto, ApplicationEditModalView>(applicationDto);
-        Scopes = await ScopeAppService.GetAllScopesAsync();
-        Types = new List<SelectListItem>()
+  public virtual async Task<IActionResult> OnGetAsync(Guid id)
+  {
+    var applicationDto = await ApplicationAppService.GetAsync(id);
+    Application = ObjectMapper.Map<ApplicationDto, ApplicationEditModalView>(applicationDto);
+    Scopes = await ScopeAppService.GetAllScopesAsync();
+    Types = new List<SelectListItem>()
         {
           new SelectListItem("Confidential client", "confidential"),
           new SelectListItem("Public client", "public")
         };
-        ConsentTypes = new List<SelectListItem>()
+    ConsentTypes = new List<SelectListItem>()
         {
           new SelectListItem("Explicit consent", "explicit"),
           new SelectListItem("External consent", "external"),
           new SelectListItem("Implicit consent", "implicit"),
           new SelectListItem("Systematic consent", "systematic")
         };
-        return Page();
-    }
+    return Page();
+  }
 
-    public virtual async Task<IActionResult> OnPostAsync()
-    {
-        ValidateModel();
-        var applicationInput = ObjectMapper.Map<ApplicationEditModalView, UpdateApplicationInput>(Application);
-        await ApplicationAppService.UpdateAsync(Application.Id, applicationInput);
-        return NoContent();
-    }
+  public virtual async Task<IActionResult> OnPostAsync()
+  {
+    ValidateModel();
+    var applicationInput = ObjectMapper.Map<ApplicationEditModalView, UpdateApplicationInput>(Application);
+    await ApplicationAppService.UpdateAsync(Application.Id, applicationInput);
+    return NoContent();
+  }
 }

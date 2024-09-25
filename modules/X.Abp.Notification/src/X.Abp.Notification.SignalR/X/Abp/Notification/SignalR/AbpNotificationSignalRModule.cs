@@ -18,7 +18,7 @@ using X.Abp.Notification.SignalR.RealTime;
 namespace X.Abp.Notification.SignalR
 {
     [DependsOn(
-        typeof(AbpNotificationModule),
+        typeof(AbpNotificationAbstractionsModule),
         typeof(AbpAspNetCoreSignalRModule))]
     public class AbpNotificationSignalRModule : AbpModule
     {

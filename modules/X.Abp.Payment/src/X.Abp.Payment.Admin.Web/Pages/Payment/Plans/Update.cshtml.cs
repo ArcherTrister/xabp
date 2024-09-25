@@ -12,34 +12,34 @@ using X.Abp.Payment.Plans;
 
 namespace X.Abp.Payment.Admin.Web.Pages.Payment.Plans
 {
-    public class UpdateModalModel : PaymentPageModel
+  public class UpdateModalModel : PaymentPageModel
+  {
+    protected IPlanAdminAppService PlanAdminAppService { get; }
+
+    [HiddenInput]
+    [BindProperty(SupportsGet = true)]
+    public Guid Id { get; set; }
+
+    [BindProperty]
+    public PlanUpdateViewModel Plan { get; set; }
+
+    public UpdateModalModel(IPlanAdminAppService planAdminAppService)
     {
-        protected IPlanAdminAppService PlanAdminAppService { get; }
-
-        [HiddenInput]
-        [BindProperty(SupportsGet = true)]
-        public Guid Id { get; set; }
-
-        [BindProperty]
-        public PlanUpdateViewModel Plan { get; set; }
-
-        public UpdateModalModel(IPlanAdminAppService planAdminAppService)
-        {
-            PlanAdminAppService = planAdminAppService;
-        }
-
-        public async Task OnGetAsync()
-        {
-            PlanDto planDto = await PlanAdminAppService.GetAsync(Id);
-            Plan = ObjectMapper.Map<PlanDto, PlanUpdateViewModel>(planDto);
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            ValidateModel();
-            PlanUpdateInput planUpdateInput = ObjectMapper.Map<PlanUpdateViewModel, PlanUpdateInput>(Plan);
-            await PlanAdminAppService.UpdateAsync(Id, planUpdateInput);
-            return NoContent();
-        }
+      PlanAdminAppService = planAdminAppService;
     }
+
+    public virtual async Task OnGetAsync()
+    {
+      PlanDto planDto = await PlanAdminAppService.GetAsync(Id);
+      Plan = ObjectMapper.Map<PlanDto, PlanUpdateViewModel>(planDto);
+    }
+
+    public virtual async Task<IActionResult> OnPostAsync()
+    {
+      ValidateModel();
+      PlanUpdateInput planUpdateInput = ObjectMapper.Map<PlanUpdateViewModel, PlanUpdateInput>(Plan);
+      await PlanAdminAppService.UpdateAsync(Id, planUpdateInput);
+      return NoContent();
+    }
+  }
 }

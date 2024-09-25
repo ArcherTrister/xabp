@@ -23,131 +23,131 @@ namespace X.Abp.Account;
 [Authorize]
 public class IdentityLinkUserAppService : ApplicationService, IIdentityLinkUserAppService
 {
-    protected IdentityLinkUserManager IdentityLinkUserManager { get; }
+  protected IdentityLinkUserManager IdentityLinkUserManager { get; }
 
-    protected IdentityUserManager UserManager { get; }
+  protected IdentityUserManager UserManager { get; }
 
-    protected ITenantStore TenantStore { get; }
+  protected ITenantStore TenantStore { get; }
 
-    public IdentityLinkUserAppService(
-        IdentityLinkUserManager identityLinkUserManager,
-        IdentityUserManager userManager,
-        ITenantStore tenantStore)
+  public IdentityLinkUserAppService(
+      IdentityLinkUserManager identityLinkUserManager,
+      IdentityUserManager userManager,
+      ITenantStore tenantStore)
+  {
+    IdentityLinkUserManager = identityLinkUserManager;
+    UserManager = userManager;
+    TenantStore = tenantStore;
+  }
+
+  public virtual async Task<ListResultDto<LinkUserDto>> GetAllListAsync()
+  {
+    var currentUserId = CurrentUser.GetId();
+    var currentTenantId = CurrentTenant.Id;
+    using (CurrentTenant.Change(null))
     {
-        IdentityLinkUserManager = identityLinkUserManager;
-        UserManager = userManager;
-        TenantStore = tenantStore;
-    }
+      var linkUsers = await IdentityLinkUserManager.GetListAsync(new IdentityLinkUserInfo(currentUserId, currentTenantId), includeIndirect: true);
 
-    public virtual async Task<ListResultDto<LinkUserDto>> GetAllListAsync()
-    {
-        var currentUserId = CurrentUser.GetId();
-        var currentTenantId = CurrentTenant.Id;
-        using (CurrentTenant.Change(null))
+      var allLinkUsers = linkUsers.Select(x => new LinkUserDto
+      {
+        TargetTenantId = x.TargetTenantId,
+        TargetUserId = x.TargetUserId,
+        DirectlyLinked = (x.SourceTenantId == currentTenantId && x.SourceUserId == currentUserId) || (x.TargetTenantId == currentTenantId && x.TargetUserId == currentUserId)
+      }).Concat(linkUsers.Select(x => new LinkUserDto
+      {
+        TargetTenantId = x.SourceTenantId,
+        TargetUserId = x.SourceUserId,
+        DirectlyLinked = (x.SourceTenantId == currentTenantId && x.SourceUserId == currentUserId) || (x.TargetTenantId == currentTenantId && x.TargetUserId == currentUserId)
+      })).GroupBy(x => new { x.TargetTenantId, x.TargetUserId })
+          .Select(x => x.OrderByDescending(y => y.DirectlyLinked).First())
+          .Where(x => x.TargetTenantId != currentTenantId || x.TargetUserId != currentUserId)
+          .ToList();
+
+      var userDto = new List<LinkUserDto>();
+      foreach (var linkUser in allLinkUsers)
+      {
+        TenantConfiguration tenant = null;
+        if (linkUser.TargetTenantId.HasValue)
         {
-            var linkUsers = await IdentityLinkUserManager.GetListAsync(new IdentityLinkUserInfo(currentUserId, currentTenantId), includeIndirect: true);
-
-            var allLinkUsers = linkUsers.Select(x => new LinkUserDto
-            {
-                TargetTenantId = x.TargetTenantId,
-                TargetUserId = x.TargetUserId,
-                DirectlyLinked = (x.SourceTenantId == currentTenantId && x.SourceUserId == currentUserId) || (x.TargetTenantId == currentTenantId && x.TargetUserId == currentUserId)
-            }).Concat(linkUsers.Select(x => new LinkUserDto
-            {
-                TargetTenantId = x.SourceTenantId,
-                TargetUserId = x.SourceUserId,
-                DirectlyLinked = (x.SourceTenantId == currentTenantId && x.SourceUserId == currentUserId) || (x.TargetTenantId == currentTenantId && x.TargetUserId == currentUserId)
-            })).GroupBy(x => new { x.TargetTenantId, x.TargetUserId })
-                .Select(x => x.OrderByDescending(y => y.DirectlyLinked).First())
-                .Where(x => x.TargetTenantId != currentTenantId || x.TargetUserId != currentUserId)
-                .ToList();
-
-            var userDto = new List<LinkUserDto>();
-            foreach (var linkUser in allLinkUsers)
-            {
-                TenantConfiguration tenant = null;
-                if (linkUser.TargetTenantId.HasValue)
-                {
-                    tenant = await TenantStore.FindAsync(linkUser.TargetTenantId.Value);
-                }
-
-                using (CurrentTenant.Change(linkUser.TargetTenantId))
-                {
-                    var user = await UserManager.FindByIdAsync(linkUser.TargetUserId.ToString());
-                    if (user != null)
-                    {
-                        userDto.Add(new LinkUserDto
-                        {
-                            TargetUserId = user.Id,
-                            TargetUserName = user.UserName,
-                            TargetTenantId = tenant?.Id,
-                            TargetTenantName = tenant?.Name,
-                            DirectlyLinked = linkUser.DirectlyLinked
-                        });
-                    }
-                }
-            }
-
-            return new ListResultDto<LinkUserDto>(userDto);
+          tenant = await TenantStore.FindAsync(linkUser.TargetTenantId.Value);
         }
-    }
 
-    public virtual async Task LinkAsync(LinkUserInput input)
-    {
-        if (await IdentityLinkUserManager.VerifyLinkTokenAsync(new IdentityLinkUserInfo(input.UserId, input.TenantId), input.Token, LinkUserTokenProviderConsts.LinkUserTokenPurpose))
+        using (CurrentTenant.Change(linkUser.TargetTenantId))
         {
-            await IdentityLinkUserManager.LinkAsync(new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
-                new IdentityLinkUserInfo(input.UserId, input.TenantId));
+          var user = await UserManager.FindByIdAsync(linkUser.TargetUserId.ToString());
+          if (user != null)
+          {
+            userDto.Add(new LinkUserDto
+            {
+              TargetUserId = user.Id,
+              TargetUserName = user.UserName,
+              TargetTenantId = tenant?.Id,
+              TargetTenantName = tenant?.Name,
+              DirectlyLinked = linkUser.DirectlyLinked
+            });
+          }
         }
-        else
-        {
-            throw new UserFriendlyException("InvalidLinkToken");
-        }
-    }
+      }
 
-    public virtual async Task UnlinkAsync(UnLinkUserInput input)
-    {
-        await IdentityLinkUserManager.UnlinkAsync(new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
-            new IdentityLinkUserInfo(input.UserId, input.TenantId));
+      return new ListResultDto<LinkUserDto>(userDto);
     }
+  }
 
-    public virtual async Task<bool> IsLinkedAsync(IsLinkedInput input)
+  public virtual async Task LinkAsync(LinkUserInput input)
+  {
+    if (await IdentityLinkUserManager.VerifyLinkTokenAsync(new IdentityLinkUserInfo(input.UserId, input.TenantId), input.Token, LinkUserTokenProviderConsts.LinkUserTokenPurpose))
     {
-        return await IdentityLinkUserManager.IsLinkedAsync(
-            new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
-            new IdentityLinkUserInfo(input.UserId, input.TenantId),
-            true);
+      await IdentityLinkUserManager.LinkAsync(new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
+          new IdentityLinkUserInfo(input.UserId, input.TenantId));
     }
+    else
+    {
+      throw new UserFriendlyException("InvalidLinkToken");
+    }
+  }
 
-    public virtual async Task<string> GenerateLinkTokenAsync()
-    {
-        return await IdentityLinkUserManager.GenerateLinkTokenAsync(
-            new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
-            LinkUserTokenProviderConsts.LinkUserTokenPurpose);
-    }
+  public virtual async Task UnlinkAsync(UnLinkUserInput input)
+  {
+    await IdentityLinkUserManager.UnlinkAsync(new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
+        new IdentityLinkUserInfo(input.UserId, input.TenantId));
+  }
 
-    [AllowAnonymous]
-    public virtual async Task<bool> VerifyLinkTokenAsync(VerifyLinkTokenInput input)
-    {
-        return await IdentityLinkUserManager.VerifyLinkTokenAsync(
-            new IdentityLinkUserInfo(input.UserId, input.TenantId),
-            input.Token,
-            LinkUserTokenProviderConsts.LinkUserTokenPurpose);
-    }
+  public virtual async Task<bool> IsLinkedAsync(IsLinkedInput input)
+  {
+    return await IdentityLinkUserManager.IsLinkedAsync(
+        new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
+        new IdentityLinkUserInfo(input.UserId, input.TenantId),
+        true);
+  }
 
-    public async Task<string> GenerateLinkLoginTokenAsync()
-    {
-        return await IdentityLinkUserManager.GenerateLinkTokenAsync(
-            new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
-            LinkUserTokenProviderConsts.LinkUserLoginTokenPurpose);
-    }
+  public virtual async Task<string> GenerateLinkTokenAsync()
+  {
+    return await IdentityLinkUserManager.GenerateLinkTokenAsync(
+        new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
+        LinkUserTokenProviderConsts.LinkUserTokenPurpose);
+  }
 
-    [AllowAnonymous]
-    public async Task<bool> VerifyLinkLoginTokenAsync(VerifyLinkLoginTokenInput input)
-    {
-        return await IdentityLinkUserManager.VerifyLinkTokenAsync(
-            new IdentityLinkUserInfo(input.UserId, input.TenantId),
-            input.Token,
-            LinkUserTokenProviderConsts.LinkUserLoginTokenPurpose);
-    }
+  [AllowAnonymous]
+  public virtual async Task<bool> VerifyLinkTokenAsync(VerifyLinkTokenInput input)
+  {
+    return await IdentityLinkUserManager.VerifyLinkTokenAsync(
+        new IdentityLinkUserInfo(input.UserId, input.TenantId),
+        input.Token,
+        LinkUserTokenProviderConsts.LinkUserTokenPurpose);
+  }
+
+  public virtual async Task<string> GenerateLinkLoginTokenAsync()
+  {
+    return await IdentityLinkUserManager.GenerateLinkTokenAsync(
+        new IdentityLinkUserInfo(CurrentUser.GetId(), CurrentTenant.Id),
+        LinkUserTokenProviderConsts.LinkUserLoginTokenPurpose);
+  }
+
+  [AllowAnonymous]
+  public virtual async Task<bool> VerifyLinkLoginTokenAsync(VerifyLinkLoginTokenInput input)
+  {
+    return await IdentityLinkUserManager.VerifyLinkTokenAsync(
+        new IdentityLinkUserInfo(input.UserId, input.TenantId),
+        input.Token,
+        LinkUserTokenProviderConsts.LinkUserLoginTokenPurpose);
+  }
 }

@@ -16,36 +16,36 @@ namespace X.Abp.Cli.Commands;
 
 public class ShowVersionCommand : IConsoleCommand, ITransientDependency
 {
-    public const string Name = "show-version";
+  public const string Name = "show-version";
 
-    protected ILogger<ShowVersionCommand> Logger { get; set; }
+  protected ILogger<ShowVersionCommand> Logger { get; set; }
 
-    public ShowVersionCommand(ILogger<ShowVersionCommand> logger)
-    {
-        Logger = logger ?? NullLogger<ShowVersionCommand>.Instance;
-    }
+  public ShowVersionCommand(ILogger<ShowVersionCommand> logger)
+  {
+    Logger = logger ?? NullLogger<ShowVersionCommand>.Instance;
+  }
 
-    public Task ExecuteAsync(CommandLineArgs commandLineArgs)
-    {
-        Logger.LogInformation("xabp version is 7.2.3");
-        return Task.CompletedTask;
-    }
+  public virtual Task ExecuteAsync(CommandLineArgs commandLineArgs)
+  {
+    Logger.LogInformation("xabp version is 7.2.3");
+    return Task.CompletedTask;
+  }
 
-    public string GetUsageInfo()
-    {
-        var sb = new StringBuilder();
+  public string GetUsageInfo()
+  {
+    var sb = new StringBuilder();
 
-        sb.AppendLine(string.Empty);
-        sb.AppendLine("'show-version' command is used for version.");
-        sb.AppendLine(string.Empty);
-        sb.AppendLine("Usage:");
-        sb.AppendLine("  xabp show-version");
+    sb.AppendLine(string.Empty);
+    sb.AppendLine("'show-version' command is used for version.");
+    sb.AppendLine(string.Empty);
+    sb.AppendLine("Usage:");
+    sb.AppendLine("  xabp show-version");
 
-        return sb.ToString();
-    }
+    return sb.ToString();
+  }
 
-    public string GetShortDescription()
-    {
-        return "Show xabp version";
-    }
+  public string GetShortDescription()
+  {
+    return "Show xabp version";
+  }
 }

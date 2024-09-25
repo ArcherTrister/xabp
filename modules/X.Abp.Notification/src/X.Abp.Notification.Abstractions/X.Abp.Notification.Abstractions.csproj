@@ -10,25 +10,14 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Localization\Resources\en.json" />
-    <None Remove="Localization\Resources\zh-Hans.json" />
-    <None Remove="Localization\Resources\zh-Hant.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Localization\Resources\en.json" />
-    <EmbeddedResource Include="Localization\Resources\zh-Hans.json" />
-    <EmbeddedResource Include="Localization\Resources\zh-Hant.json" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Json.Abstractions" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Localization" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+    <PackageReference Include="Volo.Abp.MultiTenancy" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Timing" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
 </Project>

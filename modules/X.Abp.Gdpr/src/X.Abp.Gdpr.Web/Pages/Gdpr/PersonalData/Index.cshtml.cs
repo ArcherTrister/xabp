@@ -11,17 +11,17 @@ namespace X.Abp.Gdpr.Web.Pages.Gdpr.PersonalData;
 [Authorize]
 public class IndexModel : GdprPageModel
 {
-    public bool IsNewRequestAllowed { get; set; }
+  public bool IsNewRequestAllowed { get; set; }
 
-    protected IGdprRequestAppService GdprRequestAppService { get; }
+  protected IGdprRequestAppService GdprRequestAppService { get; }
 
-    public IndexModel(IGdprRequestAppService gdprRequestAppService)
-    {
-        GdprRequestAppService = gdprRequestAppService;
-    }
+  public IndexModel(IGdprRequestAppService gdprRequestAppService)
+  {
+    GdprRequestAppService = gdprRequestAppService;
+  }
 
-    public async Task OnGetAsync()
-    {
-        IsNewRequestAllowed = await GdprRequestAppService.IsNewRequestAllowedAsync();
-    }
+  public virtual async Task OnGetAsync()
+  {
+    IsNewRequestAllowed = await GdprRequestAppService.IsNewRequestAllowedAsync();
+  }
 }

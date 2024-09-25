@@ -94,6 +94,14 @@ public partial class TenantClientProxy : ClientProxyBase<ITenantAppService>, ITe
         return await RequestAsync<List<EditionLookupDto>>(nameof(GetEditionLookupAsync));
     }
 
+    public virtual async Task<bool> CheckConnectionStringAsync(string connectionString)
+    {
+        return await RequestAsync<bool>(nameof(CheckConnectionStringAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(string), connectionString }
+        });
+    }
+
     public virtual async Task SetPasswordAsync(Guid id, SaasTenantSetPasswordDto input)
     {
         await RequestAsync(nameof(SetPasswordAsync), new ClientProxyRequestTypeValue

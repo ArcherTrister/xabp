@@ -5,7 +5,7 @@ using Volo.Abp.MongoDB;
 namespace X.Abp.Quartz.MongoDB;
 
 [DependsOn(
-    typeof(QuartzDomainModule),
+    //typeof(AbpQuartzDomainModule),
     typeof(AbpMongoDbModule)
     )]
 public class QuartzMongoDbModule : AbpModule

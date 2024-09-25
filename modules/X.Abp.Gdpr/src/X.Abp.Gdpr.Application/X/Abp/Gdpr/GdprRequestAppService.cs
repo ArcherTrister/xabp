@@ -64,16 +64,16 @@ public class GdprRequestAppService : GdprAppServiceBase, IGdprRequestAppService
     }
 
     [AllowAnonymous]
-    public virtual async Task<IRemoteStreamContent> GetUserDataAsync(Guid id, string token)
+    public virtual async Task<IRemoteStreamContent> GetUserDataAsync(Guid requestId, string token)
     {
         var downloadTokenCacheItem = await DownloadTokenCache.GetAsync(token);
-        if (downloadTokenCacheItem == null || downloadTokenCacheItem.RequestId != id)
+        if (downloadTokenCacheItem == null || downloadTokenCacheItem.RequestId != requestId)
         {
             throw new AbpAuthorizationException();
         }
 
         await DownloadTokenCache.RemoveAsync(token);
-        var gdprRequest = await GdprRequestRepository.GetAsync(id);
+        var gdprRequest = await GdprRequestRepository.GetAsync(requestId);
         if (Clock.Now < gdprRequest.ReadyTime)
         {
             throw new BusinessException(GdprErrorCodes.DataNotPreparedYet).WithData("GdprDataReadyTime", gdprRequest.ReadyTime.ToShortTimeString());
@@ -82,11 +82,11 @@ public class GdprRequestAppService : GdprAppServiceBase, IGdprRequestAppService
         using var memoryStream = new MemoryStream();
         using (ZipArchive archive = new(memoryStream, ZipArchiveMode.Create, true))
         {
-            foreach (var info in (IEnumerable<GdprInfo>)gdprRequest.Infos)
+            foreach (var info in gdprRequest.Infos)
             {
                 using var entry = archive.CreateEntry(GuidGenerator.Create().ToString() + ".json", CompressionLevel.Fastest).Open();
                 var bytes = Encoding.UTF8.GetBytes(info.Data);
-                await entry.WriteAsync(bytes, 0, bytes.Length);
+                await entry.WriteAsync(bytes.AsMemory(0, bytes.Length));
             }
         }
 
@@ -117,12 +117,12 @@ public class GdprRequestAppService : GdprAppServiceBase, IGdprRequestAppService
         };
 
         await downloadTokenCache.SetAsync(token, downloadTokenCacheItem, cacheEntryOptions);
-        var downloadTokenAsync = new DownloadTokenResultDto()
+        var downloadTokenResult = new DownloadTokenResultDto()
         {
             Token = token
         };
 
-        return downloadTokenAsync;
+        return downloadTokenResult;
     }
 
     public virtual async Task<bool> IsNewRequestAllowedAsync()

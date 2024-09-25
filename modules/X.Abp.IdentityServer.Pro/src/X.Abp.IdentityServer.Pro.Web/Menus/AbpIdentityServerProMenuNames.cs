@@ -8,12 +8,12 @@ namespace X.Abp.IdentityServer.Web.Menus
     {
         public const string GroupName = "IdentityServer";
 
-        public const string ApiResources = "IdentityServer.ApiResources";
+        public const string ApiResources = GroupName + ".ApiResources";
 
-        public const string ApiScopes = "IdentityServer.ApiScopes";
+        public const string ApiScopes = GroupName + ".ApiScopes";
 
-        public const string Clients = "IdentityServer.Clients";
+        public const string Clients = GroupName + ".Clients";
 
-        public const string IdentityResources = "IdentityServer.IdentityResources";
+        public const string IdentityResources = GroupName + ".IdentityResources";
     }
 }

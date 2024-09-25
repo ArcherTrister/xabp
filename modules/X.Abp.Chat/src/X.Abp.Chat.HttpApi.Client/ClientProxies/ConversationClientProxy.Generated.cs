@@ -18,9 +18,9 @@ namespace X.Abp.Chat.Conversations;
 [ExposeServices(typeof(IConversationAppService), typeof(ConversationClientProxy))]
 public partial class ConversationClientProxy : ClientProxyBase<IConversationAppService>, IConversationAppService
 {
-    public virtual async Task SendMessageAsync(SendMessageInput input)
+    public virtual async Task<ChatMessageDto> SendMessageAsync(SendMessageInput input)
     {
-        await RequestAsync(nameof(SendMessageAsync), new ClientProxyRequestTypeValue
+        return await RequestAsync<ChatMessageDto>(nameof(SendMessageAsync), new ClientProxyRequestTypeValue
         {
             { typeof(SendMessageInput), input }
         });
@@ -39,6 +39,22 @@ public partial class ConversationClientProxy : ClientProxyBase<IConversationAppS
         await RequestAsync(nameof(MarkConversationAsReadAsync), new ClientProxyRequestTypeValue
         {
             { typeof(MarkConversationAsReadInput), input }
+        });
+    }
+
+    public virtual async Task DeleteMessageAsync(DeleteMessageInput input)
+    {
+        await RequestAsync(nameof(DeleteMessageAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(DeleteMessageInput), input }
+        });
+    }
+
+    public virtual async Task DeleteConversationAsync(DeleteConversationInput input)
+    {
+        await RequestAsync(nameof(DeleteConversationAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(DeleteConversationInput), input }
         });
     }
 }

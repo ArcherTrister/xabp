@@ -30,7 +30,7 @@ public class CertGenerator : ICertGenerator
         Logger = logger ?? NullLogger<CertGenerator>.Instance;
     }
 
-    public async Task GenerateCertAsync(CertGenerateArgs args)
+    public virtual async Task GenerateCertAsync(CertGenerateArgs args)
     {
         using var scope = ServiceScopeFactory.CreateScope();
         var cc = scope.ServiceProvider.GetRequiredService<CreateCertificates>();
@@ -45,19 +45,19 @@ public class CertGenerator : ICertGenerator
             throw new ArgumentNullException($"{typeof(ImportExportCertificate)} is null");
         }
 
-        if (args.CertType.Equals("rsa", StringComparison.OrdinalIgnoreCase))
-        {
-            using var rsaCert = CreateRsaCertificate(cc, args.DnsName, args.ValidityPeriodInYears);
-            var rsaCertPfxBytes = iec.ExportSelfSignedCertificatePfx(args.Password, rsaCert);
-            await File.WriteAllBytesAsync(Path.Combine(args.OutputFolderRoot, $"{args.CertName}.pfx"), rsaCertPfxBytes);
-            Logger.LogInformation("rsa cert file generate success!");
-        }
-        else
+        if (args.CertType.Equals("ecd", StringComparison.OrdinalIgnoreCase))
         {
             using var rsaCert = CreateECDsaCertificate(cc, args.DnsName, args.ValidityPeriodInYears);
             var rsaCertPfxBytes = iec.ExportSelfSignedCertificatePfx(args.Password, rsaCert);
             await File.WriteAllBytesAsync(Path.Combine(args.OutputFolderRoot, $"{args.CertName}.pfx"), rsaCertPfxBytes);
             Logger.LogInformation("ecd cert file generate success!");
+        }
+        else
+        {
+            using var rsaCert = CreateRsaCertificate(cc, args.DnsName, args.ValidityPeriodInYears);
+            var rsaCertPfxBytes = iec.ExportSelfSignedCertificatePfx(args.Password, rsaCert);
+            await File.WriteAllBytesAsync(Path.Combine(args.OutputFolderRoot, $"{args.CertName}.pfx"), rsaCertPfxBytes);
+            Logger.LogInformation("rsa cert file generate success!");
         }
     }
 

@@ -9,7 +9,7 @@ using Volo.Abp.UI.Navigation;
 namespace X.Abp.Forms.Blazor;
 
 [DependsOn(
-    typeof(FormsApplicationContractsModule),
+    typeof(AbpFormsApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
     typeof(AbpAutoMapperModule)
     )]

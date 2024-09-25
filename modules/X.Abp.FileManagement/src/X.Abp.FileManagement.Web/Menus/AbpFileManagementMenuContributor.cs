@@ -17,25 +17,25 @@ namespace X.Abp.FileManagement.Web.Menus;
 
 public class AbpFileManagementMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  private static async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    var featureChecker = context.ServiceProvider.GetService<IFeatureChecker>();
+
+    if (await featureChecker.IsEnabledAsync(FileManagementFeatures.Enable))
     {
-        var featureChecker = context.ServiceProvider.GetService<IFeatureChecker>();
+      var localizer = context.GetLocalizer<FileManagementResource>();
 
-        if (await featureChecker.IsEnabledAsync(FileManagementFeatures.Enable))
-        {
-            var localizer = context.GetLocalizer<FileManagementResource>();
+      var fileManagementMenuItem = new ApplicationMenuItem(AbpFileManagementMenuNames.GroupName, localizer["Menu:FileManagement"], "~/FileManagement", icon: "fa fa-folder-open").RequirePermissions(AbpFileManagementPermissions.DirectoryDescriptor.Default);
 
-            var fileManagementMenuItem = new ApplicationMenuItem(AbpFileManagementMenuNames.GroupName, localizer["Menu:FileManagement"], "~/FileManagement", icon: "fa fa-folder-open").RequirePermissions(AbpFileManagementPermissions.DirectoryDescriptor.Default);
-
-            context.Menu.AddItem(fileManagementMenuItem);
-        }
+      context.Menu.AddItem(fileManagementMenuItem);
     }
+  }
 }

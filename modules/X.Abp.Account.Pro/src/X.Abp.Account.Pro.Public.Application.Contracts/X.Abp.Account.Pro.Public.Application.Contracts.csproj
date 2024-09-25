@@ -3,7 +3,6 @@
   <Import Project="..\..\..\..\configureawait.props" />
   <Import Project="..\..\..\..\modules.props" />
 
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>X.Abp.Account.Pro.Public.Application.Contracts</AssemblyName>
@@ -12,9 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.Account.Pro.Shared.Application.Contracts\X.Abp.Account.Pro.Shared.Application.Contracts.csproj" />
     <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Account.Pro.Shared.Application.Contracts\X.Abp.Account.Pro.Shared.Application.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

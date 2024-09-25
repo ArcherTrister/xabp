@@ -15,7 +15,6 @@ using IdentityServer4.Hosting;
 using IdentityServer4.ResponseHandling;
 using IdentityServer4.Validation;
 
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,10 +35,9 @@ public static class IdentityServerAuthorizeResponse
                   new Claim(JwtClaimTypes.IdentityProvider, "local");
 
         var authTime = context.User.Claims.FirstOrDefault(x => x.Type == JwtClaimTypes.AuthenticationTime) ??
-                       new Claim(JwtClaimTypes.AuthenticationTime,
-                           new DateTimeOffset(context.RequestServices.GetRequiredService<ISystemClock>().UtcNow
-                               .UtcDateTime).ToUnixTimeSeconds().ToString(),
-                           ClaimValueTypes.Integer64);
+               new Claim(JwtClaimTypes.AuthenticationTime,
+                   new DateTimeOffset(TimeProvider.System.GetUtcNow().UtcDateTime).ToUnixTimeSeconds().ToString(),
+                   ClaimValueTypes.Integer64);
 
         var userPrincipal = await context.RequestServices.GetRequiredService<SignInManager<IdentityUser>>().CreateUserPrincipalAsync(user);
         if (userPrincipal.Identity is ClaimsIdentity claimsIdentity)

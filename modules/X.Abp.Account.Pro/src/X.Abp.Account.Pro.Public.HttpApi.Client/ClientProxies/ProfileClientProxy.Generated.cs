@@ -56,4 +56,9 @@ public partial class ProfileClientProxy : ClientProxyBase<IProfileAppService>, I
     {
         return await RequestAsync<bool>(nameof(CanEnableTwoFactorAsync));
     }
+
+    public virtual async Task<List<NameValue>> GetTimezonesAsync()
+    {
+        return await RequestAsync<List<NameValue>>(nameof(GetTimezonesAsync));
+    }
 }

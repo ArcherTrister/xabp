@@ -5,7 +5,7 @@ namespace X.Abp.FileManagement.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(FileManagementBlazorModule),
-    typeof(FileManagementHttpApiClientModule),
+    typeof(AbpFileManagementHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class FileManagementBlazorWebAssemblyModule : AbpModule

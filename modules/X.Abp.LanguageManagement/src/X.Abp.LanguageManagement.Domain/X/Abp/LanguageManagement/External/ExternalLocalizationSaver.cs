@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 
+using Volo.Abp;
 using Volo.Abp.Caching;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.DistributedLocking;
@@ -26,9 +27,7 @@ using Volo.Abp.Localization.External;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Uow;
 
-using X.Abp.LanguageManagement.External;
-
-namespace Volo.Abp.LanguageManagement.External
+namespace X.Abp.LanguageManagement.External
 {
     public class ExternalLocalizationSaver : ITransientDependency, IExternalLocalizationSaver
     {
@@ -190,7 +189,7 @@ namespace Volo.Abp.LanguageManagement.External
 
             context.ResourcesHash = GetResourcesHash(context);
 
-            context.ResourcesShouldBeUpdated = context.ResourcesHash != await GetResourcesHashAsync();
+            context.ResourcesShouldBeUpdated = context.ResourcesHash != await GetResourcesHashByCacheAsync();
 
             return context;
         }
@@ -285,16 +284,16 @@ namespace Volo.Abp.LanguageManagement.External
                 var data in context
                     .NewTextRecords.Select(x => new
                     {
-                        ResourceName = x.ResourceName,
-                        CultureName = x.CultureName
+                        x.ResourceName,
+                        x.CultureName
                     })
                     .Distinct()
                     .Union(
                         context
                             .ChangedTextRecords.Select(x => new
                             {
-                                ResourceName = x.ResourceName,
-                                CultureName = x.CultureName
+                                x.ResourceName,
+                                x.CultureName
                             })
                             .Distinct()))
             {
@@ -483,10 +482,9 @@ namespace Volo.Abp.LanguageManagement.External
                 .ToMd5();
         }
 
-        private async Task<string> GetResourcesHashAsync()
+        private async Task<string> GetResourcesHashByCacheAsync()
         {
-            return (
-                await HashCache.GetAsync(GetResourcesHashKey()))?.Hash;
+            return (await HashCache.GetAsync(GetResourcesHashKey()))?.Hash;
         }
 
         private string GetResourcesHashKey()

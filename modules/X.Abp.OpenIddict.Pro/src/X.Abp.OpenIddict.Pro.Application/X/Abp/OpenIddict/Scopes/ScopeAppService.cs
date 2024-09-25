@@ -68,15 +68,15 @@ public class ScopeAppService : OpenIddictProAppServiceBase, IScopeAppService
 
     public virtual async Task<ScopeDto> GetAsync(Guid id)
     {
-        var obj = await ScopeManager.FindByIdAsync(ConvertIdentifierToString(id)) ?? throw new EntityNotFoundException(typeof(OpenIddictScopeModel), id);
-        return ObjectMapper.Map<OpenIddictScopeModel, ScopeDto>(obj.As<OpenIddictScopeModel>());
+        var scope = await ScopeManager.FindByIdAsync(ConvertIdentifierToString(id)) ?? throw new EntityNotFoundException(typeof(OpenIddictScopeModel), id);
+        return ObjectMapper.Map<OpenIddictScopeModel, ScopeDto>(scope.As<OpenIddictScopeModel>());
     }
 
     public virtual async Task<PagedResultDto<ScopeDto>> GetListAsync(
       GetScopeListInput input)
     {
-        var apps = await ScopeRepository.GetListAsync(input.Sorting, input.SkipCount, input.MaxResultCount, input.Filter);
-        return new PagedResultDto<ScopeDto>(await ScopeRepository.GetCountAsync(input.Filter), ObjectMapper.Map<List<OpenIddictScopeModel>, List<ScopeDto>>(apps.Select(x => x.ToModel()).ToList()));
+        var scopes = await ScopeRepository.GetListAsync(input.Sorting, input.SkipCount, input.MaxResultCount, input.Filter);
+        return new PagedResultDto<ScopeDto>(await ScopeRepository.GetCountAsync(input.Filter), ObjectMapper.Map<List<OpenIddictScopeModel>, List<ScopeDto>>(scopes.Select(x => x.ToModel()).ToList()));
     }
 
     [Authorize(AbpOpenIddictProPermissions.Scope.Create)]

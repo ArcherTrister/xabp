@@ -17,27 +17,27 @@ namespace X.Abp.LanguageManagement.Web.Menus;
 
 public class AbpLanguageManagementMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        IStringLocalizer localizer = context.GetLocalizer<LanguageManagementResource>();
+  private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    IStringLocalizer localizer = context.GetLocalizer<LanguageManagementResource>();
 
-        ApplicationMenuItem menuItem = new ApplicationMenuItem(AbpLanguageManagementMenusNames.GroupName, localizer["Menu:Languages"], icon: "fa fa-globe");
-        context.Menu.GetAdministration().AddItem(menuItem);
-        menuItem.AddItem(new ApplicationMenuItem(AbpLanguageManagementMenusNames.Languages, localizer["Languages"], "~/LanguageManagement")
-            .RequireFeatures(LanguageManagementFeatures.Enable)
-            .RequirePermissions(AbpLanguageManagementPermissions.Languages.Default));
-        menuItem.AddItem(new ApplicationMenuItem(AbpLanguageManagementMenusNames.Texts, localizer["LanguageTexts"], "~/LanguageManagement/Texts")
-            .RequireFeatures(LanguageManagementFeatures.Enable)
-            .RequirePermissions(AbpLanguageManagementPermissions.LanguageTexts.Default));
+    ApplicationMenuItem menuItem = new ApplicationMenuItem(AbpLanguageManagementMenusNames.GroupName, localizer["Menu:Languages"], icon: "fa fa-globe");
+    context.Menu.GetAdministration().AddItem(menuItem);
+    menuItem.AddItem(new ApplicationMenuItem(AbpLanguageManagementMenusNames.Languages, localizer["Languages"], "~/LanguageManagement")
+        .RequireFeatures(LanguageManagementFeatures.Enable)
+        .RequirePermissions(AbpLanguageManagementPermissions.Languages.Default));
+    menuItem.AddItem(new ApplicationMenuItem(AbpLanguageManagementMenusNames.Texts, localizer["LanguageTexts"], "~/LanguageManagement/Texts")
+        .RequireFeatures(LanguageManagementFeatures.Enable)
+        .RequirePermissions(AbpLanguageManagementPermissions.LanguageTexts.Default));
 
-        return Task.CompletedTask;
-    }
+    return Task.CompletedTask;
+  }
 }

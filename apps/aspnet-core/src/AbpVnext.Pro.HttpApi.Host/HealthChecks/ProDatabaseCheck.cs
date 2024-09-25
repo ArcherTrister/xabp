@@ -11,6 +11,8 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
 
+using IIdentityRoleRepository = X.Abp.Identity.IIdentityRoleRepository;
+
 namespace AbpVnext.Pro.HealthChecks;
 
 public class ProDatabaseCheck : IHealthCheck, ITransientDependency
@@ -19,7 +21,7 @@ public class ProDatabaseCheck : IHealthCheck, ITransientDependency
 
     public ProDatabaseCheck(IIdentityRoleRepository identityRoleRepository)
     {
-        this.identityRoleRepository = identityRoleRepository;
+        this.identityRoleRepository = identityRoleRepository ?? throw new ArgumentNullException(nameof(identityRoleRepository));
     }
 
     public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
@@ -28,11 +30,11 @@ public class ProDatabaseCheck : IHealthCheck, ITransientDependency
         {
             await identityRoleRepository.GetListAsync(sorting: nameof(IdentityRole.Id), maxResultCount: 1, cancellationToken: cancellationToken);
 
-            return HealthCheckResult.Healthy($"Could connect to database and get record.");
+            return HealthCheckResult.Healthy("Could connect to database and get record.");
         }
         catch (Exception e)
         {
-            return HealthCheckResult.Unhealthy($"Error when trying to get database record. ", e);
+            return HealthCheckResult.Unhealthy("Error when trying to get database record.", e);
         }
     }
 }

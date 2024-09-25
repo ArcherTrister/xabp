@@ -1,0 +1,8 @@
+{
+  "culture": "en",
+  "texts": {
+    "ID0111": "The OpenID Connect response was not correctly processed. This may indicate that the event handler responsible for processing OpenID Connect responses was not registered or was explicitly removed from the handlers list.",
+    "ID0112": "An error occurred while retrieving the OpenIddict server context. On ASP.NET Core, this may indicate that the authentication middleware was not registered early enough in the request pipeline. Make sure that 'app.UseAuthentication()' is registered before 'app.UseAuthorization()' and 'app.UseEndpoints()' (or 'app.UseMvc()') and try again.",
+    "ID0113": "An error occurred while authenticating the current request."
+  }
+}

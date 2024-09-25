@@ -53,7 +53,7 @@ public class AdministrationServiceDataSeeder : ITransientDependency
                     .Select(p => p.Name)
                     .ToArray();
                 
-                _logger.LogInformation($"Seeding admin permissions.");
+                _logger.LogInformation("Seeding admin permissions.");
                 await _permissionDataSeeder.SeedAsync(
                     RolePermissionValueProvider.ProviderName,
                     "admin",
@@ -61,7 +61,7 @@ public class AdministrationServiceDataSeeder : ITransientDependency
                     tenantId
                 );
                 
-                _logger.LogInformation($"Seeding language data.");
+                _logger.LogInformation("Seeding language data.");
                 await _languageManagementDataSeeder.SeedAsync();
 
                 await uow.CompleteAsync();

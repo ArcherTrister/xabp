@@ -33,9 +33,9 @@ public class IdentityServiceDataSeeder : ITransientDependency
     {
         try
         {
-            _logger.LogInformation($"Seeding IdentityServer data...");
+            _logger.LogInformation("Seeding IdentityServer data...");
             await _identityServerDataSeeder.SeedAsync();
-            _logger.LogInformation($"Seeding Identity data...");
+            _logger.LogInformation("Seeding Identity data...");
             await _identityDataSeeder.SeedAsync(
                 IdentityServiceDbProperties.DefaultAdminEmailAddress,
                 IdentityServiceDbProperties.DefaultAdminPassword
@@ -56,11 +56,11 @@ public class IdentityServiceDataSeeder : ITransientDependency
             {
                 if (tenantId == null)
                 {
-                    _logger.LogInformation($"Seeding IdentityServer data...");
+                    _logger.LogInformation("Seeding IdentityServer data...");
                     await _identityServerDataSeeder.SeedAsync();
                 }
 
-                _logger.LogInformation($"Seeding Identity data...");
+                _logger.LogInformation("Seeding Identity data...");
                 await _identityDataSeeder.SeedAsync(
                     adminEmail,
                     adminPassword,

@@ -9,6 +9,6 @@ public class AbpGdprMenus
     public class GdprMenuNames
     {
         public const string GroupName = "AbpGdpr";
-        public const string PersonalData = "AbpGdpr.PersonalData";
+        public const string PersonalData = GroupName + ".PersonalData";
     }
 }

@@ -8,7 +8,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -16,14 +15,11 @@ using Microsoft.Extensions.Options;
 using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Security.Claims;
 
 using X.Abp.Account.Public.Web;
 using X.Abp.Account.Public.Web.Pages.Account;
-
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
 namespace X.Abp.Account.Web.Pages.Account;
 
@@ -37,11 +33,8 @@ public class IdentityServerImpersonateUserModel : ImpersonateUserModel
         IPermissionChecker permissionChecker,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
         ITenantStore tenantStore,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
         IOptions<AbpAccountOptions> accountOptions)
-        : base(accountOptions, permissionChecker, currentPrincipalAccessor, tenantStore, signInManager, userManager, identitySecurityLogManager)
+        : base(accountOptions, permissionChecker, currentPrincipalAccessor, tenantStore)
     {
         Options = options.Value;
     }

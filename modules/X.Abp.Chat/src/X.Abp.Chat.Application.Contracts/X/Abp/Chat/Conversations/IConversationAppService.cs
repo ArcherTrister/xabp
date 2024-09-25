@@ -12,9 +12,13 @@ namespace X.Abp.Chat.Conversations;
 
 public interface IConversationAppService : IApplicationService
 {
-    Task SendMessageAsync(SendMessageInput input);
+    Task<ChatMessageDto> SendMessageAsync(SendMessageInput input);
+
+    Task DeleteMessageAsync(DeleteMessageInput input);
 
     Task<ChatConversationDto> GetConversationAsync(GetConversationInput input);
 
     Task MarkConversationAsReadAsync(MarkConversationAsReadInput input);
+
+    Task DeleteConversationAsync(DeleteConversationInput input);
 }

@@ -8,23 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Domain"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AuditLogging.Domain" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="X.Abp.LeptonTheme.Management.Domain"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.LanguageManagement.Domain"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.TextTemplateManagement.Domain"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.LeptonTheme.Management.Domain" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.Domain" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.Domain" VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

@@ -24,6 +24,7 @@ public class IdentityServiceDbContext : AbpDbContext<IdentityServiceDbContext>, 
     public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
+    public DbSet<IdentitySession> Sessions { get; set; }
     public DbSet<OpenIddictApplication> Applications { get; set; }
     public DbSet<OpenIddictAuthorization> Authorizations { get; set; }
     public DbSet<OpenIddictScope> Scopes { get; set; }

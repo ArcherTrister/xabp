@@ -5,18 +5,19 @@
 using System.Security.Principal;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
+using OpenIddict.Abstractions;
+
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Security.Claims;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using X.Abp.Account.Public.Web;
+using X.Abp.Account.Public.Web.Pages.Account;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 [ExposeServices(typeof(LinkLoginModel))]
 public class OpenIddictLinkLoginModel : LinkLoginModel
@@ -27,18 +28,15 @@ public class OpenIddictLinkLoginModel : LinkLoginModel
       ICurrentPrincipalAccessor currentPrincipalAccessor,
       IOptions<AbpAccountOptions> accountOptions,
       ITenantStore tenantStore,
-      SignInManager<IdentityUser> signInManager,
-      IdentityUserManager userManager,
-      IIdentityLinkUserAppService identityLinkUserAppService,
       IOptions<AbpAccountOpenIddictOptions> options)
-      : base(currentPrincipalAccessor, accountOptions, tenantStore, signInManager, userManager, identityLinkUserAppService)
+      : base(currentPrincipalAccessor, accountOptions, tenantStore)
     {
         Options = options.Value;
     }
 
     public override async Task<IActionResult> OnPostAsync()
     {
-        if (Request.Query["access_token"].ToString().IsNullOrEmpty())
+        if (Request.Query[OpenIddictConstants.Destinations.AccessToken].ToString().IsNullOrEmpty())
         {
             return await base.OnGetAsync();
         }
@@ -48,6 +46,7 @@ public class OpenIddictLinkLoginModel : LinkLoginModel
         {
             return await base.OnGetAsync();
         }
+
         using (CurrentPrincipalAccessor.Change(authenticateResult.Principal))
         {
             using (CurrentTenant.Change(authenticateResult.Principal.FindTenantId()))

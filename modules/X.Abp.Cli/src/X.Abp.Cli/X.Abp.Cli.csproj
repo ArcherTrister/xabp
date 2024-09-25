@@ -19,8 +19,7 @@
   <ItemGroup>
     <PackageReference Include="CertificateManager" />
     <PackageReference Include="Microsoft.CSharp" />
-    <!--<PackageReference
-    Include="Namotion.Reflection" Version="2.1.1" />-->
+    <!--<PackageReference Include="Namotion.Reflection" Version="2.1.1" />-->
     <PackageReference Include="NETStandard.Library" VersionOverride="2.0.3" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog.Sinks.File" />

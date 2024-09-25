@@ -33,6 +33,39 @@
                   }
                 },
                 {
+                  "name": "GetAllListAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.Saas.Dtos.EditionDto>",
+                    "typeSimple": "[X.Abp.Saas.Dtos.EditionDto]"
+                  }
+                },
+                {
+                  "name": "MoveAllTenantsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "targetEditionId",
+                      "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "type": "System.Guid?",
+                      "typeSimple": "string?",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
                   "name": "GetAsync",
                   "parametersOnMethod": [
                     {
@@ -399,6 +432,78 @@
               },
               "allowAnonymous": false,
               "implementFrom": "X.Abp.Saas.IEditionAppService"
+            },
+            "GetAllListAsync": {
+              "uniqueName": "GetAllListAsync",
+              "name": "GetAllListAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/editions/all",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.Saas.Dtos.EditionDto>",
+                "typeSimple": "[X.Abp.Saas.Dtos.EditionDto]"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Saas.IEditionAppService"
+            },
+            "MoveAllTenantsAsyncByIdAndTargetEditionId": {
+              "uniqueName": "MoveAllTenantsAsyncByIdAndTargetEditionId",
+              "name": "MoveAllTenantsAsync",
+              "httpMethod": "PUT",
+              "url": "api/saas/editions/{id}/move-all-tenants",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "targetEditionId",
+                  "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "targetEditionId",
+                  "name": "targetEditionId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Saas.IEditionAppService"
             }
           }
         },
@@ -587,6 +692,23 @@
                   "returnValue": {
                     "type": "System.Collections.Generic.List<X.Abp.Saas.Dtos.EditionLookupDto>",
                     "typeSimple": "[X.Abp.Saas.Dtos.EditionLookupDto]"
+                  }
+                },
+                {
+                  "name": "CheckConnectionStringAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "connectionString",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
                   }
                 },
                 {
@@ -829,8 +951,8 @@
                   "nameOnMethod": "input",
                   "name": "ActivationState",
                   "jsonName": null,
-                  "type": "X.Abp.Saas.TenantActivationState?",
-                  "typeSimple": "X.Abp.Saas.TenantActivationState?",
+                  "type": "System.String",
+                  "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -1173,10 +1295,47 @@
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Saas.ITenantAppService"
             },
+            "CheckConnectionStringAsyncByConnectionString": {
+              "uniqueName": "CheckConnectionStringAsyncByConnectionString",
+              "name": "CheckConnectionStringAsync",
+              "httpMethod": "GET",
+              "url": "api/saas/tenants/check-connection-string",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "connectionString",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "connectionString",
+                  "name": "connectionString",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Saas.ITenantAppService"
+            },
             "SetPasswordAsyncByIdAndInput": {
               "uniqueName": "SetPasswordAsyncByIdAndInput",
               "name": "SetPasswordAsync",
-              "httpMethod": "POST",
+              "httpMethod": "PUT",
               "url": "api/saas/tenants/{id}/set-password",
               "supportedVersions": [],
               "parametersOnMethod": [

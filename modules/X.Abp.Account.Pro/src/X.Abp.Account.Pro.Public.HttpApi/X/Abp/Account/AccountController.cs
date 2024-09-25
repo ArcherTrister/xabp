@@ -5,15 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Content;
-
 using X.Abp.Account.Dtos;
 using X.Abp.Identity;
 
@@ -46,6 +43,13 @@ public class AccountController : AbpControllerBase, IAccountAppService
     }
 
     [HttpPost]
+    [Route("verify-password-reset-code")]
+    public virtual Task<bool> VerifyPasswordResetTokenAsync(VerifyPasswordResetTokenInput input)
+    {
+        return AccountAppService.VerifyPasswordResetTokenAsync(input);
+    }
+
+    [HttpPost]
     [Route("reset-password")]
     public virtual Task ResetPasswordAsync(ResetPasswordDto input)
     {
@@ -54,35 +58,42 @@ public class AccountController : AbpControllerBase, IAccountAppService
 
     [HttpGet]
     [Route("confirmation-state")]
-    public Task<IdentityUserConfirmationStateDto> GetConfirmationStateAsync(Guid id)
+    public virtual Task<IdentityUserConfirmationStateDto> GetConfirmationStateAsync(Guid id)
     {
         return AccountAppService.GetConfirmationStateAsync(id);
     }
 
     [HttpPost]
     [Route("send-phone-number-confirmation-token")]
-    public Task SendPhoneNumberConfirmationTokenAsync(SendPhoneNumberConfirmationTokenDto input)
+    public virtual Task SendPhoneNumberConfirmationTokenAsync(SendPhoneNumberConfirmationTokenDto input)
     {
         return AccountAppService.SendPhoneNumberConfirmationTokenAsync(input);
     }
 
     [HttpPost]
     [Route("send-email-confirmation-token")]
-    public Task SendEmailConfirmationTokenAsync(SendEmailConfirmationTokenDto input)
+    public virtual Task SendEmailConfirmationTokenAsync(SendEmailConfirmationTokenDto input)
     {
         return AccountAppService.SendEmailConfirmationTokenAsync(input);
     }
 
     [HttpPost]
+    [Route("verify-email-confirmation-token")]
+    public virtual Task<bool> VerifyEmailConfirmationTokenAsync(VerifyEmailConfirmationTokenInput input)
+    {
+        return AccountAppService.VerifyEmailConfirmationTokenAsync(input);
+    }
+
+    [HttpPost]
     [Route("confirm-phone-number")]
-    public Task ConfirmPhoneNumberAsync(ConfirmPhoneNumberInput input)
+    public virtual Task ConfirmPhoneNumberAsync(ConfirmPhoneNumberInput input)
     {
         return AccountAppService.ConfirmPhoneNumberAsync(input);
     }
 
     [HttpPost]
     [Route("confirm-email")]
-    public Task ConfirmEmailAsync(ConfirmEmailInput input)
+    public virtual Task ConfirmEmailAsync(ConfirmEmailInput input)
     {
         return AccountAppService.ConfirmEmailAsync(input);
     }
@@ -118,7 +129,7 @@ public class AccountController : AbpControllerBase, IAccountAppService
 
     [HttpGet]
     [Route("security-logs")]
-    public Task<PagedResultDto<IdentitySecurityLogDto>> GetSecurityLogListAsync([FromQuery] GetIdentitySecurityLogListInput input)
+    public virtual Task<PagedResultDto<IdentitySecurityLogDto>> GetSecurityLogListAsync([FromQuery] GetIdentitySecurityLogListInput input)
     {
         return AccountAppService.GetSecurityLogListAsync(input);
     }
@@ -145,10 +156,10 @@ public class AccountController : AbpControllerBase, IAccountAppService
     }
 
     [HttpPost]
-    [Route("remove-login")]
-    public virtual Task RemoveLoginAsync(RemoveLoginInput input)
+    [Route("remove-external-login")]
+    public virtual Task RemoveExternalLoginAsync(RemoveExternalLoginInput input)
     {
-        return AccountAppService.RemoveLoginAsync(input);
+        return AccountAppService.RemoveExternalLoginAsync(input);
     }
 
     [HttpGet]
@@ -156,6 +167,13 @@ public class AccountController : AbpControllerBase, IAccountAppService
     public virtual Task<TwoFactorAuthenticationDto> GetTwoFactorAuthenticationAsync()
     {
         return AccountAppService.GetTwoFactorAuthenticationAsync();
+    }
+
+    [HttpGet]
+    [Route("has-authenticator")]
+    public virtual Task<bool> HasAuthenticatorAsync()
+    {
+        return AccountAppService.HasAuthenticatorAsync();
     }
 
     [HttpGet]
@@ -167,7 +185,7 @@ public class AccountController : AbpControllerBase, IAccountAppService
 
     [HttpPost]
     [Route("verify-authenticator-code")]
-    public virtual Task<ShowRecoveryCodesDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input)
+    public virtual Task<VerifyAuthenticatorCodeDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input)
     {
         return AccountAppService.VerifyAuthenticatorCodeAsync(input);
     }
@@ -181,7 +199,7 @@ public class AccountController : AbpControllerBase, IAccountAppService
 
     [HttpPost]
     [Route("generate-recovery-codes")]
-    public virtual Task<ShowRecoveryCodesDto> GenerateRecoveryCodesAsync()
+    public virtual Task<VerifyAuthenticatorCodeDto> GenerateRecoveryCodesAsync()
     {
         return AccountAppService.GenerateRecoveryCodesAsync();
     }

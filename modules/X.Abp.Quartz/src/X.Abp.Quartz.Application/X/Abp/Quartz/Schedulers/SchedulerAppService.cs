@@ -23,56 +23,56 @@ namespace X.Abp.Quartz.Schedulers;
 [Authorize(AbpQuartzPermissions.Schedulers.Default)]
 public class SchedulerAppService : QuartzAppServiceBase, ISchedulerAppService
 {
-    public async Task<PagedResultDto<SchedulerHeaderDto>> GetListAsync(GetSchedulerListInput input)
-    {
-        var schedulers = await SchedulerRepository.Instance.LookupAll();
+  public virtual async Task<PagedResultDto<SchedulerHeaderDto>> GetListAsync(GetSchedulerListInput input)
+  {
+    var schedulers = await SchedulerRepository.Instance.LookupAll();
 
-        // return schedulers.Select(x => new SchedulerHeaderDto(x)).ToList();
-        var query = schedulers.Select(x => new SchedulerHeaderDto(x)).AsQueryable();
-        var count = query.LongCount();
-        var list = query.MultiOrderBy(string.IsNullOrWhiteSpace(input.Sorting) ? "Name desc" : input.Sorting).Take(input.MaxResultCount).Skip(input.SkipCount).ToList();
-        return new PagedResultDto<SchedulerHeaderDto>
-        {
-            TotalCount = count,
-            Items = list
-        };
-    }
-
-    public async Task<SchedulerDto> GetAsync(string schedulerName)
+    // return schedulers.Select(x => new SchedulerHeaderDto(x)).ToList();
+    var query = schedulers.Select(x => new SchedulerHeaderDto(x)).AsQueryable();
+    var count = query.LongCount();
+    var list = query.MultiOrderBy(string.IsNullOrWhiteSpace(input.Sorting) ? "Name desc" : input.Sorting).Take(input.MaxResultCount).Skip(input.SkipCount).ToList();
+    return new PagedResultDto<SchedulerHeaderDto>
     {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        var metaData = await scheduler.GetMetaData();
-        return new SchedulerDto(scheduler, metaData);
-    }
+      TotalCount = count,
+      Items = list
+    };
+  }
 
-    public async Task StartAsync(string schedulerName, int? delayMilliseconds = null)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        if (delayMilliseconds == null)
-        {
-            await scheduler.Start();
-        }
-        else
-        {
-            await scheduler.StartDelayed(TimeSpan.FromMilliseconds(delayMilliseconds.Value));
-        }
-    }
+  public virtual async Task<SchedulerDto> GetAsync(string schedulerName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    var metaData = await scheduler.GetMetaData();
+    return new SchedulerDto(scheduler, metaData);
+  }
 
-    public async Task StandbyAsync(string schedulerName)
+  public virtual async Task StartAsync(string schedulerName, int? delayMilliseconds = null)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    if (delayMilliseconds == null)
     {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        await scheduler.Standby();
+      await scheduler.Start();
     }
+    else
+    {
+      await scheduler.StartDelayed(TimeSpan.FromMilliseconds(delayMilliseconds.Value));
+    }
+  }
 
-    public async Task ShutdownAsync(string schedulerName, bool waitForJobsToComplete = false)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        await scheduler.Shutdown(waitForJobsToComplete);
-    }
+  public virtual async Task StandbyAsync(string schedulerName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    await scheduler.Standby();
+  }
 
-    public async Task ClearAsync(string schedulerName)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        await scheduler.Clear();
-    }
+  public virtual async Task ShutdownAsync(string schedulerName, bool waitForJobsToComplete = false)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    await scheduler.Shutdown(waitForJobsToComplete);
+  }
+
+  public virtual async Task ClearAsync(string schedulerName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    await scheduler.Clear();
+  }
 }

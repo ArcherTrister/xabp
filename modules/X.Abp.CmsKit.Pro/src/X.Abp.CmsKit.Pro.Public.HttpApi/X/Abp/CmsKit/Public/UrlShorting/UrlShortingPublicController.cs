@@ -21,16 +21,16 @@ public class UrlShortingPublicController :
 CmsKitProPublicController,
 IUrlShortingPublicAppService
 {
-    protected IUrlShortingPublicAppService UrlShortingPublicAppService { get; }
+  protected IUrlShortingPublicAppService UrlShortingPublicAppService { get; }
 
-    public UrlShortingPublicController(IUrlShortingPublicAppService urlShortingPublicAppService)
-    {
-        UrlShortingPublicAppService = urlShortingPublicAppService;
-    }
+  public UrlShortingPublicController(IUrlShortingPublicAppService urlShortingPublicAppService)
+  {
+    UrlShortingPublicAppService = urlShortingPublicAppService;
+  }
 
-    [HttpGet]
-    public async Task<ShortenedUrlDto> FindBySourceAsync(string source)
-    {
-        return await UrlShortingPublicAppService.FindBySourceAsync(source);
-    }
+  [HttpGet]
+  public virtual async Task<ShortenedUrlDto> FindBySourceAsync(string source)
+  {
+    return await UrlShortingPublicAppService.FindBySourceAsync(source);
+  }
 }

@@ -6,7 +6,7 @@ namespace X.Abp.Account.Dtos;
 
 public class AuthenticatorInfoDto
 {
-    public string SharedKey { get; set; }
+    public string Key { get; set; }
 
-    public string AuthenticatorUri { get; set; }
+    public string Uri { get; set; }
 }

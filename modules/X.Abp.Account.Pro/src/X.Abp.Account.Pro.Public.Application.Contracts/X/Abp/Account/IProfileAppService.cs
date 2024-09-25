@@ -2,8 +2,10 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Volo.Abp;
 using Volo.Abp.Application.Services;
 
 using X.Abp.Account.Dtos;
@@ -23,4 +25,6 @@ public interface IProfileAppService : IApplicationService
     Task SetTwoFactorEnabledAsync(bool enabled);
 
     Task<bool> CanEnableTwoFactorAsync();
+
+    Task<List<NameValue>> GetTimezonesAsync();
 }

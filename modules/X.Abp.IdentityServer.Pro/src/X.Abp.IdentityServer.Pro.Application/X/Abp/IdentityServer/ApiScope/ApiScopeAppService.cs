@@ -125,7 +125,7 @@ public class ApiScopeAppService : IdentityServerAppServiceBase, IApiScopeAppServ
         while (enumerator2.MoveNext())
         {
             var claim = enumerator2.Current;
-            if (input.UserClaims.FirstOrDefault((ApiScopeClaimDto c) => claim.Equals(apiScope.Id, c.Type)) == null)
+            if (input.UserClaims.FirstOrDefault((c) => claim.Equals(apiScope.Id, c.Type)) == null)
             {
                 apiScope.RemoveClaim(claim.Type);
             }
@@ -146,7 +146,7 @@ public class ApiScopeAppService : IdentityServerAppServiceBase, IApiScopeAppServ
         while (enumerator2.MoveNext())
         {
             var property = enumerator2.Current;
-            if (input.Properties.FirstOrDefault((ApiScopePropertyDto c) => property.Equals(apiScope.Id, c.Key, c.Value)) == null)
+            if (input.Properties.FirstOrDefault((c) => property.Equals(apiScope.Id, c.Key, c.Value)) == null)
             {
                 apiScope.RemoveProperty(property.Key);
             }

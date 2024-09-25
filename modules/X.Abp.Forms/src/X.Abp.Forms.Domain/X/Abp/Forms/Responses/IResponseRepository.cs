@@ -13,26 +13,26 @@ namespace X.Abp.Forms.Responses;
 
 public interface IResponseRepository : IBasicRepository<FormResponse, Guid>
 {
-    public Task<List<FormResponse>> GetListAsync(
-        int skipCount = 0,
-        int maxResultCount = int.MaxValue,
-        string sorting = null,
-        string filter = null,
-        CancellationToken cancellationToken = default);
+  Task<List<FormResponse>> GetListAsync(
+      int skipCount = 0,
+      int maxResultCount = int.MaxValue,
+      string sorting = null,
+      string filter = null,
+      CancellationToken cancellationToken = default);
 
-    public Task<List<FormResponse>> GetListByFormIdAsync(
-        Guid formId,
-        int skipCount = 0,
-        int maxResultCount = int.MaxValue,
-        string sorting = null,
-        string filter = null,
-        CancellationToken cancellationToken = default);
+  Task<List<FormResponse>> GetListByFormIdAsync(
+      Guid formId,
+      int skipCount = 0,
+      int maxResultCount = int.MaxValue,
+      string sorting = null,
+      string filter = null,
+      CancellationToken cancellationToken = default);
 
-    public Task<List<FormWithResponse>> GetByUserId(Guid userId, CancellationToken cancellationToken = default);
+  Task<List<FormWithResponse>> GetByUserId(Guid userId, CancellationToken cancellationToken = default);
 
-    public Task<long> GetCountByFormIdAsync(Guid formId, string filter = null, CancellationToken cancellationToken = default);
+  Task<long> GetCountByFormIdAsync(Guid formId, string filter = null, CancellationToken cancellationToken = default);
 
-    public Task<bool> UserResponseExistsAsync(Guid formId, Guid userId, CancellationToken cancellationToken = default);
+  Task<bool> UserResponseExistsAsync(Guid formId, Guid userId, CancellationToken cancellationToken = default);
 
-    public Task<long> GetCountAsync(string filter = null, CancellationToken cancellationToken = default);
+  Task<long> GetCountAsync(string filter = null, CancellationToken cancellationToken = default);
 }

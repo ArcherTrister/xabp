@@ -30,6 +30,10 @@ public class AbpIdentityProPermissionDefinitionProvider : PermissionDefinitionPr
         usersPermission.AddChild(AbpIdentityProPermissions.Users.ViewChangeHistory, L("Permission:ViewChangeHistory"));
         usersPermission.AddChild(AbpIdentityProPermissions.Users.Impersonation, L("Permission:Impersonation"));
         usersPermission.AddChild(AbpIdentityProPermissions.Users.Import, L("Permission:Import"));
+        usersPermission.AddChild(AbpIdentityProPermissions.Users.Export, L("Permission:Export"));
+        usersPermission.AddChild(AbpIdentityProPermissions.Users.ViewDetails, L("Permission:ViewDetails"));
+        usersPermission.AddChild(AbpIdentityProPermissions.Users.ManageRoles, L("Permission:ManageRoles"));
+        usersPermission.AddChild(AbpIdentityProPermissions.Users.ManageOU, L("Permission:ManageOU"));
 
         var organizationUnitsPermission = identityGroup.AddPermission(AbpIdentityProPermissions.OrganizationUnits.Default, L("Permission:OrganizationUnitManagement"));
         organizationUnitsPermission.AddChild(AbpIdentityProPermissions.OrganizationUnits.ManageOU, L("Permission:ManageOU"));
@@ -47,6 +51,7 @@ public class AbpIdentityProPermissionDefinitionProvider : PermissionDefinitionPr
             .AddPermission(AbpIdentityProPermissions.UserLookup.Default, L("Permission:UserLookup"))
             .WithProviders(ClientPermissionValueProvider.ProviderName);
         identityGroup.AddPermission(AbpIdentityProPermissions.SecurityLogs.Default, L("Permission:SecurityLogs"));
+        identityGroup.AddPermission(AbpIdentityProPermissions.Sessions.Default, L("Permission:Sessions"));
     }
 
     private static LocalizableString L(string name)

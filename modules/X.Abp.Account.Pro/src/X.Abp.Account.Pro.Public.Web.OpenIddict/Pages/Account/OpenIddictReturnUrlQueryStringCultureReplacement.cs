@@ -8,7 +8,7 @@ using Volo.Abp.AspNetCore.Mvc.Localization;
 
 using DependencyAttribute = Volo.Abp.DependencyInjection.DependencyAttribute;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 [Dependency(ReplaceServices = true)]
 public class OpenIddictReturnUrlQueryStringCultureReplacement : AbpAspNetCoreMvcQueryStringCultureReplacement

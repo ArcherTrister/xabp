@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Data;
 using Volo.Abp.Identity;
@@ -23,6 +25,10 @@ namespace X.Abp.Identity;
 [Authorize(AbpIdentityProPermissions.Roles.Default)]
 public class IdentityRoleAppService : IdentityAppServiceBase, IIdentityRoleAppService
 {
+    protected IIdentityUserRepository UserRepository { get; }
+
+    protected IdentityUserManager UserManager { get; }
+
     protected IdentityRoleManager RoleManager { get; }
 
     protected IIdentityRoleRepository RoleRepository { get; }
@@ -30,10 +36,14 @@ public class IdentityRoleAppService : IdentityAppServiceBase, IIdentityRoleAppSe
     protected IIdentityClaimTypeRepository IdentityClaimTypeRepository { get; }
 
     public IdentityRoleAppService(
+        IIdentityUserRepository userRepository,
+        IdentityUserManager userManager,
         IdentityRoleManager roleManager,
         IIdentityRoleRepository roleRepository,
         IIdentityClaimTypeRepository identityClaimTypeRepository)
     {
+        UserRepository = userRepository;
+        UserManager = userManager;
         RoleManager = roleManager;
         RoleRepository = roleRepository;
         IdentityClaimTypeRepository = identityClaimTypeRepository;
@@ -41,29 +51,39 @@ public class IdentityRoleAppService : IdentityAppServiceBase, IIdentityRoleAppSe
 
     public virtual async Task<IdentityRoleDto> GetAsync(Guid id)
     {
-        return ObjectMapper.Map<IdentityRole, IdentityRoleDto>(
-            await RoleManager.GetByIdAsync(id));
+        IdentityRoleDto identityRoleDto = ObjectMapper.Map<IdentityRole, IdentityRoleDto>(await RoleManager.GetByIdAsync(id));
+
+        identityRoleDto.UserCount = await UserRepository.GetCountAsync(roleId: id);
+
+        return identityRoleDto;
     }
 
     public virtual async Task<ListResultDto<IdentityRoleDto>> GetAllListAsync()
     {
-        var list = await RoleRepository.GetListAsync();
-        return new ListResultDto<IdentityRoleDto>(
-            ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(list));
+        List<IdentityRoleWithUserCount> source = await RoleRepository.GetListWithUserCountAsync(null, false);
+        ListResultDto<IdentityRoleDto> allList = new ListResultDto<IdentityRoleDto>(ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(source.Select(x => x.Role).ToList()));
+        foreach (IdentityRoleDto identityRoleDto in allList.Items)
+        {
+            identityRoleDto.UserCount = source.First(x => x.Role.Id == identityRoleDto.Id).UserCount;
+        }
+
+        return allList;
     }
 
     public virtual async Task<PagedResultDto<IdentityRoleDto>> GetListAsync(GetIdentityRoleListInput input)
     {
-        var list = await RoleRepository.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter);
-        var totalCount = await RoleRepository.GetCountAsync(input.Filter);
+        List<IdentityRoleWithUserCount> list = await RoleRepository.GetListWithUserCountAsync(input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter, false);
+        PagedResultDto<IdentityRoleDto> pagedResultDto = new PagedResultDto<IdentityRoleDto>(await RoleRepository.GetCountAsync(input.Filter), ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(list.Select(x => x.Role).ToList()));
+        foreach (IdentityRoleDto identityRoleDto in pagedResultDto.Items)
+        {
+            identityRoleDto.UserCount = list.First(x => x.Role.Id == identityRoleDto.Id).UserCount;
+        }
 
-        return new PagedResultDto<IdentityRoleDto>(
-            totalCount,
-            ObjectMapper.Map<List<IdentityRole>, List<IdentityRoleDto>>(list));
+        return pagedResultDto;
     }
 
     [Authorize(AbpIdentityProPermissions.Roles.Update)]
-    public virtual async Task UpdateClaimsAsync(Guid id, List<IdentityRoleClaimDto> input)
+    public virtual async Task UpdateClaimsAsync(Guid id, List<IdentityRoleClaimUpdateDto> input)
     {
         var role = await RoleRepository.GetAsync(id);
 
@@ -76,12 +96,32 @@ public class IdentityRoleAppService : IdentityAppServiceBase, IIdentityRoleAppSe
             }
         }
 
-        // Copied with ToList to avoid modification of the collection in the for loop
         foreach (var claim in role.Claims.ToList())
         {
             if (!input.Any(c => claim.ClaimType == c.ClaimType && claim.ClaimValue == c.ClaimValue))
             {
                 role.RemoveClaim(new Claim(claim.ClaimType, claim.ClaimValue));
+            }
+        }
+
+        if (role.Claims.Count != 0)
+        {
+            var claimTypes = role.Claims.Select(x => x.ClaimType);
+            foreach (IdentityClaimType identityClaimType in (await IdentityClaimTypeRepository.GetListByNamesAsync(claimTypes)).Where(x => x.ValueType == IdentityClaimValueType.String))
+            {
+                IdentityRoleClaim identityRoleClaim = role.Claims.FirstOrDefault(x => x.ClaimType == identityClaimType.Name);
+                if (identityRoleClaim != null)
+                {
+                    if (identityClaimType.Required && identityRoleClaim.ClaimValue.IsNullOrWhiteSpace())
+                    {
+                        throw new UserFriendlyException(L["ClaimValueCanNotBeBlank"]);
+                    }
+
+                    if (!identityClaimType.Regex.IsNullOrWhiteSpace() && !Regex.IsMatch(identityRoleClaim.ClaimValue, identityClaimType.Regex, RegexOptions.None, TimeSpan.FromSeconds(1.0)))
+                    {
+                        throw new UserFriendlyException(L["ClaimValueIsInvalid", identityClaimType.Name]);
+                    }
+                }
             }
         }
 
@@ -108,6 +148,12 @@ public class IdentityRoleAppService : IdentityAppServiceBase, IIdentityRoleAppSe
         var role = await RoleRepository.GetAsync(id);
         return new List<IdentityRoleClaimDto>(
             ObjectMapper.Map<List<IdentityRoleClaim>, List<IdentityRoleClaimDto>>(role.Claims.ToList()));
+    }
+
+    [Authorize(AbpIdentityProPermissions.Roles.Update)]
+    public virtual async Task MoveAllUsersAsync(Guid id, Guid? targetRoleId)
+    {
+        await UserManager.UpdateRoleAsync((await RoleManager.GetByIdAsync(id)).Id, targetRoleId);
     }
 
     [Authorize(AbpIdentityProPermissions.Roles.Create)]
@@ -152,12 +198,8 @@ public class IdentityRoleAppService : IdentityAppServiceBase, IIdentityRoleAppSe
     [Authorize(AbpIdentityProPermissions.Roles.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
-        var role = await RoleManager.FindByIdAsync(id.ToString());
-        if (role == null)
-        {
-            return;
-        }
-
-        (await RoleManager.DeleteAsync(role)).CheckIdentityErrors();
+        IdentityRole role = await RoleManager.GetByIdAsync(id);
+        await UserManager.UpdateRoleAsync(id, null);
+        await RoleManager.DeleteAsync(role);
     }
 }

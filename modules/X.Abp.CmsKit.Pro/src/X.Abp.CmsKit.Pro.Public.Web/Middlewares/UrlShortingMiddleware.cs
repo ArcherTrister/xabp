@@ -17,16 +17,16 @@ namespace X.Abp.CmsKit.Pro.Public.Web.Middlewares;
 
 public class UrlShortingMiddleware : IMiddleware, ITransientDependency
 {
-    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+  public virtual async Task InvokeAsync(HttpContext context, RequestDelegate next)
+  {
+    await next(context);
+    if (GlobalFeatureManager.Instance.IsEnabled<UrlShortingFeature>() && context.Response.StatusCode == 404)
     {
-        await next(context);
-        if (GlobalFeatureManager.Instance.IsEnabled<UrlShortingFeature>() && context.Response.StatusCode == 404)
-        {
-            var shortenedUrlDto = await context.RequestServices.GetRequiredService<IUrlShortingPublicAppService>().FindBySourceAsync(context.Request.Path.ToString());
-            if (shortenedUrlDto != null)
-            {
-                context.Response.Redirect(shortenedUrlDto.Target, true);
-            }
-        }
+      var shortenedUrlDto = await context.RequestServices.GetRequiredService<IUrlShortingPublicAppService>().FindBySourceAsync(context.Request.Path.ToString());
+      if (shortenedUrlDto != null)
+      {
+        context.Response.Redirect(shortenedUrlDto.Target, true);
+      }
     }
+  }
 }

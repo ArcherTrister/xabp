@@ -23,51 +23,51 @@ namespace X.Abp.Account.Public.Web.ProfileManagement;
 
 public class AccountProfileManagementPageContributor : IProfileManagementPageContributor
 {
-    public async Task ConfigureAsync(ProfileManagementPageCreationContext context)
+  public virtual async Task ConfigureAsync(ProfileManagementPageCreationContext context)
+  {
+    var l = context.ServiceProvider.GetRequiredService<IStringLocalizer<AccountResource>>();
+
+    context.Groups.Add(
+        new ProfileManagementPageGroup(
+            "Volo-Abp-Account-Picture",
+            l["ProfileTab:Picture"],
+            typeof(AccountProfilePictureManagementGroupViewComponent)));
+
+    if (await IsPasswordChangeEnabled(context))
     {
-        var l = context.ServiceProvider.GetRequiredService<IStringLocalizer<AccountResource>>();
-
-        context.Groups.Add(
-            new ProfileManagementPageGroup(
-                "Volo-Abp-Account-Picture",
-                l["ProfileTab:Picture"],
-                typeof(AccountProfilePictureManagementGroupViewComponent)));
-
-        if (await IsPasswordChangeEnabled(context))
-        {
-            context.Groups.Add(
-                new ProfileManagementPageGroup(
-                    "Volo-Abp-Account-Password",
-                    l["ProfileTab:Password"],
-                    typeof(AccountProfilePasswordManagementGroupViewComponent)));
-        }
-
-        context.Groups.Add(
-            new ProfileManagementPageGroup(
-                "Volo-Abp-Account-PersonalInfo",
-                l["ProfileTab:PersonalInfo"],
-                typeof(AccountProfilePersonalInfoManagementGroupViewComponent)));
-
-        var identityTwoFactorManager = context.ServiceProvider.GetRequiredService<IdentityTwoFactorManager>();
-        var settingProvider = context.ServiceProvider.GetRequiredService<ISettingProvider>();
-        if (await identityTwoFactorManager.IsOptionalAsync() &&
-            await settingProvider.GetAsync<bool>(IdentityProSettingNames.TwoFactor.UsersCanChange))
-        {
-            context.Groups.Add(
-                new ProfileManagementPageGroup(
-                    "Volo-Abp-Account-TwoFactor",
-                    l["ProfileTab:TwoFactor"],
-                    typeof(AccountProfileTwoFactorManagementGroupViewComponent)));
-        }
+      context.Groups.Add(
+          new ProfileManagementPageGroup(
+              "Volo-Abp-Account-Password",
+              l["ProfileTab:Password"],
+              typeof(AccountProfilePasswordManagementGroupViewComponent)));
     }
 
-    protected virtual async Task<bool> IsPasswordChangeEnabled(ProfileManagementPageCreationContext context)
+    context.Groups.Add(
+        new ProfileManagementPageGroup(
+            "Volo-Abp-Account-PersonalInfo",
+            l["ProfileTab:PersonalInfo"],
+            typeof(AccountProfilePersonalInfoManagementGroupViewComponent)));
+
+    var identityProTwoFactorManager = context.ServiceProvider.GetRequiredService<IdentityProTwoFactorManager>();
+    var settingProvider = context.ServiceProvider.GetRequiredService<ISettingProvider>();
+    if (await identityProTwoFactorManager.IsOptionalAsync() &&
+        await settingProvider.GetAsync<bool>(IdentityProSettingNames.TwoFactor.UsersCanChange))
     {
-        var userManager = context.ServiceProvider.GetRequiredService<IdentityUserManager>();
-        var currentUser = context.ServiceProvider.GetRequiredService<ICurrentUser>();
-
-        var user = await userManager.GetByIdAsync(currentUser.GetId());
-
-        return !user.IsExternal;
+      context.Groups.Add(
+          new ProfileManagementPageGroup(
+              "Volo-Abp-Account-TwoFactor",
+              l["ProfileTab:TwoFactor"],
+              typeof(AccountProfileTwoFactorManagementGroupViewComponent)));
     }
+  }
+
+  protected virtual async Task<bool> IsPasswordChangeEnabled(ProfileManagementPageCreationContext context)
+  {
+    var userManager = context.ServiceProvider.GetRequiredService<IdentityUserManager>();
+    var currentUser = context.ServiceProvider.GetRequiredService<ICurrentUser>();
+
+    var user = await userManager.GetByIdAsync(currentUser.GetId());
+
+    return !user.IsExternal;
+  }
 }

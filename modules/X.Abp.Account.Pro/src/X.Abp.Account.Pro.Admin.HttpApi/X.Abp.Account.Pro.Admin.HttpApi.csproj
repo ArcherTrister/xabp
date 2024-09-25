@@ -3,7 +3,6 @@
   <Import Project="..\..\..\..\configureawait.props" />
   <Import Project="..\..\..\..\modules.props" />
 
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>X.Abp.Account.Pro.Admin.HttpApi</AssemblyName>
@@ -12,9 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Account.Pro.Admin.Application.Contracts\X.Abp.Account.Pro.Admin.Application.Contracts.csproj" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Account.Pro.Admin.Application.Contracts\X.Abp.Account.Pro.Admin.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

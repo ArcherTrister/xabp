@@ -11,14 +11,14 @@ using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Identity;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 using X.Abp.Gdpr;
-using X.Abp.Identity;
 using X.Abp.Identity.EntityFrameworkCore;
-using X.Abp.OpenIddict.EntityFrameworkCore;
 using X.Abp.LanguageManagement.EntityFrameworkCore;
+using X.Abp.OpenIddict.EntityFrameworkCore;
 using X.Abp.Saas.Editions;
 using X.Abp.Saas.EntityFrameworkCore;
 using X.Abp.Saas.Tenants;
@@ -54,6 +54,7 @@ namespace MyCompanyName.MyProjectName.EntityFrameworkCore
         public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
         public DbSet<IdentityLinkUser> LinkUsers { get; set; }
         public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
+        public DbSet<IdentitySession> Sessions { get; set; }
 
         // SaaS
         public DbSet<Tenant> Tenants { get; set; }

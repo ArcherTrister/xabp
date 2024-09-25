@@ -321,7 +321,7 @@
               "uniqueName": "DeleteAsyncById",
               "name": "DeleteAsync",
               "httpMethod": "DELETE",
-              "url": "api/openiddict/applications",
+              "url": "api/openiddict/applications/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -342,8 +342,8 @@
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
                   "descriptorName": ""
                 }
               ],
@@ -681,7 +681,7 @@
               "uniqueName": "DeleteAsyncById",
               "name": "DeleteAsync",
               "httpMethod": "DELETE",
-              "url": "api/openiddict/scopes",
+              "url": "api/openiddict/scopes/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -702,8 +702,8 @@
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
                   "descriptorName": ""
                 }
               ],

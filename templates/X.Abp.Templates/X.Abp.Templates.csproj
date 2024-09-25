@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\templates.props" />
 
@@ -9,12 +9,12 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageId>X.Abp.Templates</PackageId>
-    <Summary>X Abp Templates</Summary>
+    <Summary>XAbp Templates</Summary>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <ContentTargetFolders>content</ContentTargetFolders>
-    <Title>X Abp Templates</Title>
+    <Title>XAbp Templates</Title>
     <Description>Templates to use when creating an application for LX Corporation.</Description>
     <PackageTags>xabp;dotnet-new;templates;abp-vnext-pro</PackageTags>
     <NoDefaultExcludes>true</NoDefaultExcludes>
@@ -28,6 +28,10 @@
   <ItemGroup>
     <Content Include="apps\**\*" Exclude="apps\**\bin\**;apps\**\obj\**" />
     <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="apps\multilayersts\" />
   </ItemGroup>
 
 </Project>

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 
 using X.Abp.Identity;
@@ -59,7 +60,7 @@ namespace MyCompanyName.MyProjectName.Data
             await MigrateDatabaseSchemaAsync();
             await SeedDataAsync();
 
-            Logger.LogInformation($"Successfully completed host database migrations.");
+            Logger.LogInformation("Successfully completed host database migrations.");
 
             var tenants = await _tenantRepository.GetListAsync(true);
 
@@ -85,7 +86,7 @@ namespace MyCompanyName.MyProjectName.Data
                     await SeedDataAsync(tenant);
                 }
 
-                Logger.LogInformation($"Successfully completed {tenant.Name} tenant database migrations.");
+                Logger.LogInformation("Successfully completed {tenantName} tenant database migrations.", tenant.Name);
             }
 
             Logger.LogInformation("Successfully completed all database migrations.");
@@ -105,13 +106,13 @@ namespace MyCompanyName.MyProjectName.Data
 
         private async Task SeedDataAsync(Tenant tenant = null)
         {
-            Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
+            Logger.LogInformation("Executing {hostOrTenant} database seed...", tenant == null ? "host" : tenant.Name + " tenant");
 
             await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
                 .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName,
-                    MyProjectNameConsts.AdminEmailDefaultValue)
+                    IdentityDataSeedContributor.AdminEmailDefaultValue)
                 .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName,
-                    MyProjectNameConsts.AdminPasswordDefaultValue)
+                    IdentityDataSeedContributor.AdminPasswordDefaultValue)
             );
         }
 

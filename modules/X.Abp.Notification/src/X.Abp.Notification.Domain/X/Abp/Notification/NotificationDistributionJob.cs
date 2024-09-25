@@ -9,24 +9,24 @@ using Volo.Abp.DependencyInjection;
 
 namespace X.Abp.Notification
 {
+  /// <summary>
+  /// This background job distributes notifications to users.
+  /// </summary>
+  public class NotificationDistributionJob : IAsyncBackgroundJob<NotificationDistributionJobArgs>, ITransientDependency
+  {
+    protected INotificationDistributer NotificationDistributer { get; }
+
     /// <summary>
-    /// This background job distributes notifications to users.
+    /// Initializes a new instance of the <see cref="NotificationDistributionJob"/> class.
     /// </summary>
-    public class NotificationDistributionJob : IAsyncBackgroundJob<NotificationDistributionJobArgs>, ITransientDependency
+    public NotificationDistributionJob(INotificationDistributer notificationDistributer)
     {
-        protected INotificationDistributer NotificationDistributer { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NotificationDistributionJob"/> class.
-        /// </summary>
-        public NotificationDistributionJob(INotificationDistributer notificationDistributer)
-        {
-            NotificationDistributer = notificationDistributer;
-        }
-
-        public async Task ExecuteAsync(NotificationDistributionJobArgs args)
-        {
-            await NotificationDistributer.DistributeAsync(args.NotificationId);
-        }
+      NotificationDistributer = notificationDistributer;
     }
+
+    public virtual async Task ExecuteAsync(NotificationDistributionJobArgs args)
+    {
+      await NotificationDistributer.DistributeAsync(args.NotificationId);
+    }
+  }
 }

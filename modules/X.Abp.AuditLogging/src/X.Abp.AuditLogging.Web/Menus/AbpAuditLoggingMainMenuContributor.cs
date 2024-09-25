@@ -11,24 +11,24 @@ namespace X.Abp.AuditLogging.Web.Menus;
 
 public class AbpAuditLoggingMainMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        var localizer = context.GetLocalizer<AuditLoggingResource>();
+  private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    var localizer = context.GetLocalizer<AuditLoggingResource>();
 
-        context.Menu.GetAdministration().AddItem(new ApplicationMenuItem(
-            AbpAuditLoggingMainMenuNames.GroupName,
-            displayName: localizer["AuditLogging"],
-            "~/AuditLogging",
-            icon: "fa fa-globe"));
+    context.Menu.GetAdministration().AddItem(new ApplicationMenuItem(
+        AbpAuditLoggingMainMenuNames.GroupName,
+        displayName: localizer["AuditLogging"],
+        "~/AuditLogging",
+        icon: "fa fa-globe"));
 
-        return Task.CompletedTask;
-    }
+    return Task.CompletedTask;
+  }
 }

@@ -13,7 +13,7 @@ namespace AbpVnext.Pro.Data;
  */
 public class NullProDbSchemaMigrator : IProDbSchemaMigrator, ITransientDependency
 {
-    public Task MigrateAsync()
+    public virtual Task MigrateAsync()
     {
         return Task.CompletedTask;
     }

@@ -1,15 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <RootNamespace>X.Abp.FileManagement</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.MongoDB" Version="7.3.3" />
+    <PackageReference Include="Volo.Abp.MongoDB" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.FileManagement.Domain\X.Abp.FileManagement.Domain.csproj" />
   </ItemGroup>
 

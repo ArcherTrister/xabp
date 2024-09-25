@@ -13,10 +13,8 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.IdentityServer.Pro.Application.Contracts\X.Abp.IdentityServer.Pro.Application.Contracts.csproj" />
-    <ProjectReference
-      Include="..\X.Abp.IdentityServer.Pro.Domain\X.Abp.IdentityServer.Pro.Domain.csproj" />
+    <ProjectReference Include="..\X.Abp.IdentityServer.Pro.Application.Contracts\X.Abp.IdentityServer.Pro.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.IdentityServer.Pro.Domain\X.Abp.IdentityServer.Pro.Domain.csproj" />
   </ItemGroup>
 
 </Project>

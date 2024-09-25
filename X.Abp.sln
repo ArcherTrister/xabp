@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configs", "configs", "{5C3E
 		configureawait.props = configureawait.props
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
+		docfx.json = docfx.json
+		.github\FUNDING.yml = .github\FUNDING.yml
 		global.json = global.json
 		latest-versions.json = latest-versions.json
 		LICENSE = LICENSE
@@ -25,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configs", "configs", "{5C3E
 		deploy\nuget-api-key.txt = deploy\nuget-api-key.txt
 		deploy\nuget-pack.ps1 = deploy\nuget-pack.ps1
 		deploy\nuget-push.ps1 = deploy\nuget-push.ps1
+		NuGet.Config = NuGet.Config
 		nupkg\pack.ps1 = nupkg\pack.ps1
 		nupkg\push_packages.ps1 = nupkg\push_packages.ps1
 		README.en.md = README.en.md
@@ -176,8 +179,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{FEB5FB
 		build\build-all.ps1 = build\build-all.ps1
 		build-docs.bat = build-docs.bat
 		build\common.ps1 = build\common.ps1
-		generate-proxy-csharp.bat = generate-proxy-csharp.bat
-		generate-proxy-js.bat = generate-proxy-js.bat
+		generate-proxy-csharp.ps1 = generate-proxy-csharp.ps1
+		generate-proxy-js.ps1 = generate-proxy-js.ps1
 		build\test-all.ps1 = build\test-all.ps1
 	EndProjectSection
 EndProject
@@ -413,8 +416,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Notification.Web", "m
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Notification.SignalR", "modules\X.Abp.Notification\src\X.Abp.Notification.SignalR\X.Abp.Notification.SignalR.csproj", "{03BD7D01-52BA-4207-9BF2-9B59B87788AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Notification", "modules\X.Abp.Notification\src\X.Abp.Notification\X.Abp.Notification.csproj", "{2CA78227-E57E-4284-A5DF-BA15911D0C91}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Notification.Application", "modules\X.Abp.Notification\src\X.Abp.Notification.Application\X.Abp.Notification.Application.csproj", "{E7A2F98D-9264-4D6D-AD49-719AC0AA5193}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Notification.Application.Contracts", "modules\X.Abp.Notification\src\X.Abp.Notification.Application.Contracts\X.Abp.Notification.Application.Contracts.csproj", "{A61648AA-B78E-4DB0-ABF4-7F504F11358C}"
@@ -481,7 +482,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpVnext.Pro.TestBase", "ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.EntityFrameworkCore.FieldEncryption", "modules\X.Abp.EntityFrameworkCore\src\X.Abp.EntityFrameworkCore.FieldEncryption\X.Abp.EntityFrameworkCore.FieldEncryption.csproj", "{B9863E0A-05E8-4631-A37D-C84166FE5D1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Abp.Notification.Abstractions", "modules\X.Abp.Notification\src\X.Abp.Notification.Abstractions\X.Abp.Notification.Abstractions.csproj", "{F01970AF-1732-4D57-8F62-B9636EF087F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Payment.WeChatPay.Domain.Shared", "modules\X.Abp.Payment\src\X.Abp.Payment.WeChatPay.Domain.Shared\X.Abp.Payment.WeChatPay.Domain.Shared.csproj", "{83806847-C56C-4985-9A9A-56BF4C0E25E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Payment.WeChatPay.Domain", "modules\X.Abp.Payment\src\X.Abp.Payment.WeChatPay.Domain\X.Abp.Payment.WeChatPay.Domain.csproj", "{6826B60E-3857-4388-9B9D-CAD5BC306584}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Payment.WeChatPay.Web", "modules\X.Abp.Payment\src\X.Abp.Payment.WeChatPay.Web\X.Abp.Payment.WeChatPay.Web.csproj", "{6730042D-1DA5-4DB4-A3EA-C5B237BC54B5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Notification.Abstractions", "modules\X.Abp.Notification\src\X.Abp.Notification.Abstractions\X.Abp.Notification.Abstractions.csproj", "{6299ED40-2520-41E8-97BC-A2CE6D452CC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.AspNetCore.Components.Web.LeptonTheme", "modules\X.Abp.LeptonTheme\src\X.Abp.AspNetCore.Components.Web.LeptonTheme\X.Abp.AspNetCore.Components.Web.LeptonTheme.csproj", "{FE21D15A-30D8-4995-BB90-DE7CD07E7516}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Quartz.Domain", "modules\X.Abp.Quartz\src\X.Abp.Quartz.Domain\X.Abp.Quartz.Domain.csproj", "{23F82379-965F-40EB-9AA7-4E4419743792}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Quartz.Domain.Shared", "modules\X.Abp.Quartz\src\X.Abp.Quartz.Domain.Shared\X.Abp.Quartz.Domain.Shared.csproj", "{1C9CCABA-6858-41A4-9CD1-3D683DA57E06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1137,10 +1150,6 @@ Global
 		{03BD7D01-52BA-4207-9BF2-9B59B87788AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03BD7D01-52BA-4207-9BF2-9B59B87788AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03BD7D01-52BA-4207-9BF2-9B59B87788AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CA78227-E57E-4284-A5DF-BA15911D0C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CA78227-E57E-4284-A5DF-BA15911D0C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CA78227-E57E-4284-A5DF-BA15911D0C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CA78227-E57E-4284-A5DF-BA15911D0C91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7A2F98D-9264-4D6D-AD49-719AC0AA5193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E7A2F98D-9264-4D6D-AD49-719AC0AA5193}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7A2F98D-9264-4D6D-AD49-719AC0AA5193}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1257,10 +1266,34 @@ Global
 		{B9863E0A-05E8-4631-A37D-C84166FE5D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9863E0A-05E8-4631-A37D-C84166FE5D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9863E0A-05E8-4631-A37D-C84166FE5D1B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F01970AF-1732-4D57-8F62-B9636EF087F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F01970AF-1732-4D57-8F62-B9636EF087F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F01970AF-1732-4D57-8F62-B9636EF087F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F01970AF-1732-4D57-8F62-B9636EF087F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83806847-C56C-4985-9A9A-56BF4C0E25E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83806847-C56C-4985-9A9A-56BF4C0E25E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83806847-C56C-4985-9A9A-56BF4C0E25E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83806847-C56C-4985-9A9A-56BF4C0E25E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6826B60E-3857-4388-9B9D-CAD5BC306584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6826B60E-3857-4388-9B9D-CAD5BC306584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6826B60E-3857-4388-9B9D-CAD5BC306584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6826B60E-3857-4388-9B9D-CAD5BC306584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6730042D-1DA5-4DB4-A3EA-C5B237BC54B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6730042D-1DA5-4DB4-A3EA-C5B237BC54B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6730042D-1DA5-4DB4-A3EA-C5B237BC54B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6730042D-1DA5-4DB4-A3EA-C5B237BC54B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6299ED40-2520-41E8-97BC-A2CE6D452CC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6299ED40-2520-41E8-97BC-A2CE6D452CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6299ED40-2520-41E8-97BC-A2CE6D452CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6299ED40-2520-41E8-97BC-A2CE6D452CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE21D15A-30D8-4995-BB90-DE7CD07E7516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE21D15A-30D8-4995-BB90-DE7CD07E7516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE21D15A-30D8-4995-BB90-DE7CD07E7516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE21D15A-30D8-4995-BB90-DE7CD07E7516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F82379-965F-40EB-9AA7-4E4419743792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F82379-965F-40EB-9AA7-4E4419743792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F82379-965F-40EB-9AA7-4E4419743792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F82379-965F-40EB-9AA7-4E4419743792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C9CCABA-6858-41A4-9CD1-3D683DA57E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C9CCABA-6858-41A4-9CD1-3D683DA57E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C9CCABA-6858-41A4-9CD1-3D683DA57E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C9CCABA-6858-41A4-9CD1-3D683DA57E06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1448,7 +1481,6 @@ Global
 		{5723DD0C-861C-4DBB-B16F-E11E2EAFDE82} = {D60065C8-449A-419F-B790-2F83BCB72EDE}
 		{CCFE7965-AF2C-4072-ADD2-8BF0B73B6E79} = {5723DD0C-861C-4DBB-B16F-E11E2EAFDE82}
 		{03BD7D01-52BA-4207-9BF2-9B59B87788AF} = {5723DD0C-861C-4DBB-B16F-E11E2EAFDE82}
-		{2CA78227-E57E-4284-A5DF-BA15911D0C91} = {5723DD0C-861C-4DBB-B16F-E11E2EAFDE82}
 		{E7A2F98D-9264-4D6D-AD49-719AC0AA5193} = {5723DD0C-861C-4DBB-B16F-E11E2EAFDE82}
 		{A61648AA-B78E-4DB0-ABF4-7F504F11358C} = {5723DD0C-861C-4DBB-B16F-E11E2EAFDE82}
 		{6E5483DF-C8B7-49FB-935F-8AD99FD84423} = {5723DD0C-861C-4DBB-B16F-E11E2EAFDE82}
@@ -1482,7 +1514,13 @@ Global
 		{0A5FFDD3-F473-4CDD-A5C8-7CE8F47FCBBD} = {BCF3EE2F-9274-4EB7-B6BF-E34153A89C66}
 		{E4F73496-A2C7-473A-A103-CC710F953840} = {BCF3EE2F-9274-4EB7-B6BF-E34153A89C66}
 		{B9863E0A-05E8-4631-A37D-C84166FE5D1B} = {464D8104-3807-4D8A-8D07-4178E253F26E}
-		{F01970AF-1732-4D57-8F62-B9636EF087F2} = {5723DD0C-861C-4DBB-B16F-E11E2EAFDE82}
+		{83806847-C56C-4985-9A9A-56BF4C0E25E4} = {9FB75E3E-6AC0-4FE1-84DF-8B66038A1163}
+		{6826B60E-3857-4388-9B9D-CAD5BC306584} = {9FB75E3E-6AC0-4FE1-84DF-8B66038A1163}
+		{6730042D-1DA5-4DB4-A3EA-C5B237BC54B5} = {9FB75E3E-6AC0-4FE1-84DF-8B66038A1163}
+		{6299ED40-2520-41E8-97BC-A2CE6D452CC4} = {5723DD0C-861C-4DBB-B16F-E11E2EAFDE82}
+		{FE21D15A-30D8-4995-BB90-DE7CD07E7516} = {EAF03067-6B0A-4AD6-A898-C3CE9BB835DE}
+		{23F82379-965F-40EB-9AA7-4E4419743792} = {09B829D0-7D17-49C6-81C4-31DA2801C27E}
+		{1C9CCABA-6858-41A4-9CD1-3D683DA57E06} = {09B829D0-7D17-49C6-81C4-31DA2801C27E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CD3B835E-9B30-318A-E466-714FE8A7F5FB}

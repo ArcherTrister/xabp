@@ -1,11 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
 using MyCompanyName.MyProjectName.EntityFrameworkCore;
-#if EnableSwaggerEnumFilter
-using MyCompanyName.MyProjectName.Filters;
-#endif
 using MyCompanyName.MyProjectName.HealthChecks;
 using MyCompanyName.MyProjectName.MultiTenancy;
 
@@ -55,7 +52,6 @@ using X.Abp.Account.Public.Web;
 using X.Abp.Account.Public.Web.ExternalProviders;
 using X.Abp.Account.Public.Web.Impersonation;
 using X.Abp.Account.Web;
-using X.Abp.Account.Web.Extensions;
 using X.Abp.Identity.Permissions;
 using X.Abp.OpenIddict;
 using X.Abp.Saas.Permissions;
@@ -94,18 +90,27 @@ namespace MyCompanyName.MyProjectName
 
             var hostingEnvironment = context.Services.GetHostingEnvironment();
 
+            context.Services.AddSameSiteCookiePolicy();
+
+            ConfigureAuthentication(context);
+            ConfigureUrls(configuration);
+            ConfigureBundles();
+            ConfigureConventionalControllers();
+            ConfigureImpersonation(context);
+            ConfigureSwagger(context, configuration);
+            ConfigureVirtualFileSystem(context);
+            ConfigureCors(context, configuration);
+            ConfigureExternalProviders(context);
+
+            ConfigureHealthChecks(context, configuration);
+
+            /*
             if (hostingEnvironment.IsDevelopment())
             {
                 // You can disable this setting in production to avoid any potential security risks.
                 IdentityModelEventSource.ShowPII = true;
             }
 
-            // context.Services.AddSameSiteCookiePolicy();
-            // context.Services.Configure<CookiePolicyOptions>(options =>
-            // {
-            //     options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-            //     options.Secure = CookieSecurePolicy.SameAsRequest;
-            // });
             context.Services.Configure<IISServerOptions>(options =>
             {
                 options.MaxRequestBodySize = int.MaxValue;
@@ -121,22 +126,11 @@ namespace MyCompanyName.MyProjectName
                 options.Limits.MaxRequestBodySize = int.MaxValue;
             });
 
-            // Configure<CookieAuthenticationOptions>(IdentityConstants.TwoFactorRememberMeScheme, options =>
-            // {
-            //     options.ExpireTimeSpan = TimeSpan.FromDays(30); // override the timeout
-            //     // options.Cookie.Name = "MyRememberMeCookieName"; // override the cookie name
-            // });
-            ConfigureAuthentication(context);
-            ConfigureUrls(configuration);
-            ConfigureBundles();
-            ConfigureConventionalControllers();
-            ConfigureImpersonation(context);
-            ConfigureSwagger(context, configuration);
-            ConfigureVirtualFileSystem(context);
-            ConfigureCors(context, configuration);
-            ConfigureExternalProviders(context);
-
-            // ConfigureHealthChecks(context, configuration);
+            Configure<CookieAuthenticationOptions>(IdentityConstants.TwoFactorRememberMeScheme, options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromDays(30); // override the timeout
+                options.Cookie.Name = "MyRememberMeCookieName"; // override the cookie name
+            });
 
             Configure<AbpAntiForgeryOptions>(options =>
             {
@@ -156,7 +150,6 @@ namespace MyCompanyName.MyProjectName
                 options.DefaultSequentialGuidType = SequentialGuidType.SequentialAsString;
             });
 
-            /*
             Configure<AbpBlobStoringOptions>(options =>
             {
                 options.Containers.ConfigureDefault(container =>
@@ -236,6 +229,10 @@ namespace MyCompanyName.MyProjectName
 
                     return CookieAuthenticationDefaults.AuthenticationScheme;
                 };
+            });
+            context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+            {
+                options.IsDynamicClaimsEnabled = true;
             });
         }
 
@@ -431,6 +428,7 @@ namespace MyCompanyName.MyProjectName
             }
 
             app.UseUnitOfWork();
+            app.UseDynamicClaims();
             app.UseAuthorization();
             app.UseSwagger();
             app.UseAbpSwaggerUI(options =>
@@ -439,8 +437,7 @@ namespace MyCompanyName.MyProjectName
 
                 var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
                 options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-                // options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
-                // options.OAuthScopes("MyProjectName");
+                options.OAuthScopes("MyProjectName");
             });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();

@@ -29,6 +29,8 @@
       VersionOverride="$(XAbpPackageVersion)" />
     <PackageReference Include="X.Abp.Account.Pro.Public.Application"
       VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Admin.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Admin.Application" VersionOverride="$(XAbpPackageVersion)" />
     <PackageReference Include="X.Abp.AspNetCore.Mvc.UI.Theme.Lepton"
       VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>

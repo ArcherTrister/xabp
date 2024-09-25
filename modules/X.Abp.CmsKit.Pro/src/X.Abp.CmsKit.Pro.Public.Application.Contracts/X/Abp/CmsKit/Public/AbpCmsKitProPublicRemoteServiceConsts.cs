@@ -7,5 +7,5 @@ namespace X.Abp.CmsKit.Public;
 public class AbpCmsKitProPublicRemoteServiceConsts
 {
     public const string RemoteServiceName = "CmsKitProPublic";
-    public const string ModuleName = "cms-kit-pro";
+    public const string ModuleName = "cms-kit-pro-common";
 }

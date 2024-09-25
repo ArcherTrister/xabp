@@ -21,76 +21,76 @@ namespace X.Abp.EntityFrameworkCore;
 public class BulkExtensionsEfCoreBulkOperationProvider
     : IEfCoreBulkOperationProvider, ITransientDependency
 {
-    protected IAuditPropertySetter AuditPropertySetter { get; }
+  protected IAuditPropertySetter AuditPropertySetter { get; }
 
-    public BulkExtensionsEfCoreBulkOperationProvider(IAuditPropertySetter auditPropertySetter)
+  public BulkExtensionsEfCoreBulkOperationProvider(IAuditPropertySetter auditPropertySetter)
+  {
+    AuditPropertySetter = auditPropertySetter;
+  }
+
+  public virtual async Task DeleteManyAsync<TDbContext, TEntity>(
+      IEfCoreRepository<TEntity> repository,
+      IEnumerable<TEntity> entities,
+      bool autoSave,
+      CancellationToken cancellationToken)
+      where TDbContext : IEfCoreDbContext
+      where TEntity : class, IEntity
+  {
+    var entityList = (List<TEntity>)entities;
+    foreach (TEntity entity in entityList)
     {
-        AuditPropertySetter = auditPropertySetter;
+      AuditPropertySetter.SetDeletionProperties(entity);
     }
 
-    public async Task DeleteManyAsync<TDbContext, TEntity>(
-        IEfCoreRepository<TEntity> repository,
-        IEnumerable<TEntity> entities,
-        bool autoSave,
-        CancellationToken cancellationToken)
-        where TDbContext : IEfCoreDbContext
-        where TEntity : class, IEntity
+    var dbContext = await repository.GetDbContextAsync();
+    await dbContext.BulkDeleteAsync(entityList, cancellationToken: cancellationToken);
+    if (autoSave)
     {
-        var entityList = (List<TEntity>)entities;
-        foreach (TEntity entity in entityList)
-        {
-            AuditPropertySetter.SetDeletionProperties(entity);
-        }
+      await dbContext.BulkSaveChangesAsync(cancellationToken);
+    }
+  }
 
-        var dbContext = await repository.GetDbContextAsync();
-        await dbContext.BulkDeleteAsync(entityList, cancellationToken: cancellationToken);
-        if (autoSave)
-        {
-            await dbContext.BulkSaveChangesAsync(cancellationToken);
-        }
+  public virtual async Task InsertManyAsync<TDbContext, TEntity>(
+      IEfCoreRepository<TEntity> repository,
+      IEnumerable<TEntity> entities,
+      bool autoSave,
+      CancellationToken cancellationToken)
+      where TDbContext : IEfCoreDbContext
+      where TEntity : class, IEntity
+  {
+    var entityList = (List<TEntity>)entities;
+    foreach (TEntity entity in entityList)
+    {
+      AuditPropertySetter.SetCreationProperties(entity);
     }
 
-    public async Task InsertManyAsync<TDbContext, TEntity>(
-        IEfCoreRepository<TEntity> repository,
-        IEnumerable<TEntity> entities,
-        bool autoSave,
-        CancellationToken cancellationToken)
-        where TDbContext : IEfCoreDbContext
-        where TEntity : class, IEntity
+    var dbContext = await repository.GetDbContextAsync();
+    await dbContext.BulkInsertAsync(entityList, cancellationToken: cancellationToken);
+    if (autoSave)
     {
-        var entityList = (List<TEntity>)entities;
-        foreach (TEntity entity in entityList)
-        {
-            AuditPropertySetter.SetCreationProperties(entity);
-        }
+      await dbContext.BulkSaveChangesAsync(cancellationToken);
+    }
+  }
 
-        var dbContext = await repository.GetDbContextAsync();
-        await dbContext.BulkInsertAsync(entityList, cancellationToken: cancellationToken);
-        if (autoSave)
-        {
-            await dbContext.BulkSaveChangesAsync(cancellationToken);
-        }
+  public virtual async Task UpdateManyAsync<TDbContext, TEntity>(
+      IEfCoreRepository<TEntity> repository,
+      IEnumerable<TEntity> entities,
+      bool autoSave,
+      CancellationToken cancellationToken)
+      where TDbContext : IEfCoreDbContext
+      where TEntity : class, IEntity
+  {
+    var entityList = (List<TEntity>)entities;
+    foreach (TEntity entity in entityList)
+    {
+      AuditPropertySetter.SetModificationProperties(entity);
     }
 
-    public async Task UpdateManyAsync<TDbContext, TEntity>(
-        IEfCoreRepository<TEntity> repository,
-        IEnumerable<TEntity> entities,
-        bool autoSave,
-        CancellationToken cancellationToken)
-        where TDbContext : IEfCoreDbContext
-        where TEntity : class, IEntity
+    var dbContext = await repository.GetDbContextAsync();
+    await dbContext.BulkUpdateAsync(entityList, cancellationToken: cancellationToken);
+    if (autoSave)
     {
-        var entityList = (List<TEntity>)entities;
-        foreach (TEntity entity in entityList)
-        {
-            AuditPropertySetter.SetModificationProperties(entity);
-        }
-
-        var dbContext = await repository.GetDbContextAsync();
-        await dbContext.BulkUpdateAsync(entityList, cancellationToken: cancellationToken);
-        if (autoSave)
-        {
-            await dbContext.BulkSaveChangesAsync(cancellationToken);
-        }
+      await dbContext.BulkSaveChangesAsync(cancellationToken);
     }
+  }
 }

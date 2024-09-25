@@ -11,8 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.CmsKit.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.CmsKit.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />
   </ItemGroup>
 

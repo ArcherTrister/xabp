@@ -42,8 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\..\..\X.Abp.IdentityServer.Pro\src\X.Abp.IdentityServer.Pro.Domain\X.Abp.IdentityServer.Pro.Domain.csproj" />
+    <ProjectReference Include="..\..\..\X.Abp.IdentityServer.Pro\src\X.Abp.IdentityServer.Pro.Domain\X.Abp.IdentityServer.Pro.Domain.csproj" />
     <ProjectReference Include="..\X.Abp.Account.Pro.Public.Web\X.Abp.Account.Pro.Public.Web.csproj" />
   </ItemGroup>
 

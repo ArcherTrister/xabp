@@ -29,7 +29,7 @@ public abstract class PendingMigrationsCheckerBase : ITransientDependency
                 throw;
             }
 
-            _logger.LogWarning($"{ex.GetType().Name} has been thrown. The operation will be tried {retryCount} times more. Exception:\n{ex.Message}");
+            _logger.LogWarning("{TypeName} has been thrown. The operation will be tried {RetryCount} times more. Exception:\n{Message}", ex.GetType().Name, retryCount, ex.Message);
 
             await Task.Delay(RandomHelper.GetRandom(5000, 15000));
 

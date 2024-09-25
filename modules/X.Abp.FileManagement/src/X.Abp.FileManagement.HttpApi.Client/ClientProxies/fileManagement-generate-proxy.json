@@ -4,6 +4,454 @@
       "rootPath": "fileManagement",
       "remoteServiceName": "FileManagement",
       "controllers": {
+        "X.Abp.FileManagement.Directories.DirectoryDescriptorController": {
+          "controllerName": "DirectoryDescriptor",
+          "controllerGroupName": "DirectoryDescriptors",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorController",
+          "interfaces": [
+            {
+              "type": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService",
+              "name": "IDirectoryDescriptorAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
+                    "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "parentId",
+                      "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "type": "System.Guid?",
+                      "typeSimple": "string?",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.FileManagement.Directories.DirectoryDescriptorInfoDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.FileManagement.Directories.DirectoryDescriptorInfoDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.FileManagement.Directories.CreateDirectoryInput, X.Abp.FileManagement.Application.Contracts",
+                      "type": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
+                      "typeSimple": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
+                    "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
+                  }
+                },
+                {
+                  "name": "RenameAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.FileManagement.Directories.RenameDirectoryInput, X.Abp.FileManagement.Application.Contracts",
+                      "type": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
+                      "typeSimple": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
+                    "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
+                  }
+                },
+                {
+                  "name": "GetContentAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput, X.Abp.FileManagement.Application.Contracts",
+                      "type": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput",
+                      "typeSimple": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.FileManagement.Directories.DirectoryContentDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.FileManagement.Directories.DirectoryContentDto>"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "MoveAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.FileManagement.Directories.MoveDirectoryInput, X.Abp.FileManagement.Application.Contracts",
+                      "type": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
+                      "typeSimple": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
+                    "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/file-management/directory-descriptor/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
+                "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
+            },
+            "GetListAsyncByParentId": {
+              "uniqueName": "GetListAsyncByParentId",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/file-management/directory-descriptor/sub-directories",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "parentId",
+                  "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "parentId",
+                  "name": "parentId",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.FileManagement.Directories.DirectoryDescriptorInfoDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.FileManagement.Directories.DirectoryDescriptorInfoDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/file-management/directory-descriptor",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.FileManagement.Directories.CreateDirectoryInput, X.Abp.FileManagement.Application.Contracts",
+                  "type": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
+                  "typeSimple": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
+                  "typeSimple": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
+                "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
+            },
+            "RenameAsyncByIdAndInput": {
+              "uniqueName": "RenameAsyncByIdAndInput",
+              "name": "RenameAsync",
+              "httpMethod": "POST",
+              "url": "api/file-management/directory-descriptor/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.FileManagement.Directories.RenameDirectoryInput, X.Abp.FileManagement.Application.Contracts",
+                  "type": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
+                  "typeSimple": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
+                  "typeSimple": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
+                "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
+            },
+            "GetContentAsyncByInput": {
+              "uniqueName": "GetContentAsyncByInput",
+              "name": "GetContentAsync",
+              "httpMethod": "GET",
+              "url": "api/file-management/directory-descriptor",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput, X.Abp.FileManagement.Application.Contracts",
+                  "type": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput",
+                  "typeSimple": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Filter",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Id",
+                  "jsonName": null,
+                  "type": "System.Guid?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.FileManagement.Directories.DirectoryContentDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.FileManagement.Directories.DirectoryContentDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/file-management/directory-descriptor/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
+            },
+            "MoveAsyncByInput": {
+              "uniqueName": "MoveAsyncByInput",
+              "name": "MoveAsync",
+              "httpMethod": "POST",
+              "url": "api/file-management/directory-descriptor/move",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.FileManagement.Directories.MoveDirectoryInput, X.Abp.FileManagement.Application.Contracts",
+                  "type": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
+                  "typeSimple": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
+                  "typeSimple": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
+                "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
+            }
+          }
+        },
         "X.Abp.FileManagement.Files.FileDescriptorController": {
           "controllerName": "FileDescriptor",
           "controllerGroupName": "FileDescriptors",
@@ -38,7 +486,7 @@
                   "parametersOnMethod": [
                     {
                       "name": "directoryId",
-                      "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
                       "type": "System.Guid?",
                       "typeSimple": "string?",
                       "isOptional": false,
@@ -122,7 +570,7 @@
                   "parametersOnMethod": [
                     {
                       "name": "directoryId",
-                      "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
                       "type": "System.Guid?",
                       "typeSimple": "string?",
                       "isOptional": false,
@@ -164,7 +612,7 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.FileManagement.Files.FileUploadPreInfoRequest, X.Abp.FileManagement.Application.Contracts, Version=7.2.3.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.FileManagement.Files.FileUploadPreInfoRequest, X.Abp.FileManagement.Application.Contracts, Version=8.2.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                       "type": "System.Collections.Generic.List<X.Abp.FileManagement.Files.FileUploadPreInfoRequest>",
                       "typeSimple": "[X.Abp.FileManagement.Files.FileUploadPreInfoRequest]",
                       "isOptional": false,
@@ -260,7 +708,7 @@
               "parametersOnMethod": [
                 {
                   "name": "directoryId",
-                  "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
                   "type": "System.Guid?",
                   "typeSimple": "string?",
                   "isOptional": false,
@@ -297,7 +745,7 @@
               "parametersOnMethod": [
                 {
                   "name": "directoryId",
-                  "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
                   "type": "System.Guid?",
                   "typeSimple": "string?",
                   "isOptional": false,
@@ -403,7 +851,7 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.FileManagement.Files.FileUploadPreInfoRequest, X.Abp.FileManagement.Application.Contracts, Version=7.2.3.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.FileManagement.Files.FileUploadPreInfoRequest, X.Abp.FileManagement.Application.Contracts, Version=8.2.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                   "type": "System.Collections.Generic.List<X.Abp.FileManagement.Files.FileUploadPreInfoRequest>",
                   "typeSimple": "[X.Abp.FileManagement.Files.FileUploadPreInfoRequest]",
                   "isOptional": false,
@@ -847,454 +1295,6 @@
               },
               "allowAnonymous": false,
               "implementFrom": "X.Abp.FileManagement.Files.IPublicFileDescriptorAppService"
-            }
-          }
-        },
-        "X.Abp.FileManagement.Directories.DirectoryDescriptorController": {
-          "controllerName": "DirectoryDescriptor",
-          "controllerGroupName": "DirectoryDescriptors",
-          "isRemoteService": true,
-          "isIntegrationService": false,
-          "apiVersion": null,
-          "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorController",
-          "interfaces": [
-            {
-              "type": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService",
-              "name": "IDirectoryDescriptorAppService",
-              "methods": [
-                {
-                  "name": "GetAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "id",
-                      "typeAsString": "System.Guid, System.Private.CoreLib",
-                      "type": "System.Guid",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
-                    "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
-                  }
-                },
-                {
-                  "name": "GetListAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "parentId",
-                      "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
-                      "type": "System.Guid?",
-                      "typeSimple": "string?",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.FileManagement.Directories.DirectoryDescriptorInfoDto>",
-                    "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.FileManagement.Directories.DirectoryDescriptorInfoDto>"
-                  }
-                },
-                {
-                  "name": "CreateAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "input",
-                      "typeAsString": "X.Abp.FileManagement.Directories.CreateDirectoryInput, X.Abp.FileManagement.Application.Contracts",
-                      "type": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
-                      "typeSimple": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
-                    "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
-                  }
-                },
-                {
-                  "name": "RenameAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "id",
-                      "typeAsString": "System.Guid, System.Private.CoreLib",
-                      "type": "System.Guid",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    },
-                    {
-                      "name": "input",
-                      "typeAsString": "X.Abp.FileManagement.Directories.RenameDirectoryInput, X.Abp.FileManagement.Application.Contracts",
-                      "type": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
-                      "typeSimple": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
-                    "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
-                  }
-                },
-                {
-                  "name": "GetContentAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "input",
-                      "typeAsString": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput, X.Abp.FileManagement.Application.Contracts",
-                      "type": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput",
-                      "typeSimple": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.FileManagement.Directories.DirectoryContentDto>",
-                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.FileManagement.Directories.DirectoryContentDto>"
-                  }
-                },
-                {
-                  "name": "DeleteAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "id",
-                      "typeAsString": "System.Guid, System.Private.CoreLib",
-                      "type": "System.Guid",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "System.Void",
-                    "typeSimple": "System.Void"
-                  }
-                },
-                {
-                  "name": "MoveAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "input",
-                      "typeAsString": "X.Abp.FileManagement.Directories.MoveDirectoryInput, X.Abp.FileManagement.Application.Contracts",
-                      "type": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
-                      "typeSimple": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
-                    "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
-                  }
-                }
-              ]
-            }
-          ],
-          "actions": {
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/file-management/directory-descriptor/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
-                "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
-              },
-              "allowAnonymous": false,
-              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
-            },
-            "GetListAsyncByParentId": {
-              "uniqueName": "GetListAsyncByParentId",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/file-management/directory-descriptor/sub-directories",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "parentId",
-                  "typeAsString": "System.Nullable`1[[System.Guid, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
-                  "type": "System.Guid?",
-                  "typeSimple": "string?",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "parentId",
-                  "name": "parentId",
-                  "jsonName": null,
-                  "type": "System.Guid?",
-                  "typeSimple": "string?",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.FileManagement.Directories.DirectoryDescriptorInfoDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<X.Abp.FileManagement.Directories.DirectoryDescriptorInfoDto>"
-              },
-              "allowAnonymous": false,
-              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
-            },
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/file-management/directory-descriptor",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "X.Abp.FileManagement.Directories.CreateDirectoryInput, X.Abp.FileManagement.Application.Contracts",
-                  "type": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
-                  "typeSimple": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
-                  "typeSimple": "X.Abp.FileManagement.Directories.CreateDirectoryInput",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
-                "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
-              },
-              "allowAnonymous": false,
-              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
-            },
-            "RenameAsyncByIdAndInput": {
-              "uniqueName": "RenameAsyncByIdAndInput",
-              "name": "RenameAsync",
-              "httpMethod": "POST",
-              "url": "api/file-management/directory-descriptor/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "X.Abp.FileManagement.Directories.RenameDirectoryInput, X.Abp.FileManagement.Application.Contracts",
-                  "type": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
-                  "typeSimple": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
-                  "typeSimple": "X.Abp.FileManagement.Directories.RenameDirectoryInput",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
-                "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
-              },
-              "allowAnonymous": false,
-              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
-            },
-            "GetContentAsyncByInput": {
-              "uniqueName": "GetContentAsyncByInput",
-              "name": "GetContentAsync",
-              "httpMethod": "GET",
-              "url": "api/file-management/directory-descriptor",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput, X.Abp.FileManagement.Application.Contracts",
-                  "type": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput",
-                  "typeSimple": "X.Abp.FileManagement.Directories.DirectoryContentRequestInput",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "Filter",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "Sorting",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "Id",
-                  "jsonName": null,
-                  "type": "System.Guid?",
-                  "typeSimple": "string?",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "input"
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.FileManagement.Directories.DirectoryContentDto>",
-                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.FileManagement.Directories.DirectoryContentDto>"
-              },
-              "allowAnonymous": false,
-              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
-            },
-            "DeleteAsyncById": {
-              "uniqueName": "DeleteAsyncById",
-              "name": "DeleteAsync",
-              "httpMethod": "DELETE",
-              "url": "api/file-management/directory-descriptor/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              },
-              "allowAnonymous": false,
-              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
-            },
-            "MoveAsyncByInput": {
-              "uniqueName": "MoveAsyncByInput",
-              "name": "MoveAsync",
-              "httpMethod": "POST",
-              "url": "api/file-management/directory-descriptor/move",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "X.Abp.FileManagement.Directories.MoveDirectoryInput, X.Abp.FileManagement.Application.Contracts",
-                  "type": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
-                  "typeSimple": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
-                  "typeSimple": "X.Abp.FileManagement.Directories.MoveDirectoryInput",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto",
-                "typeSimple": "X.Abp.FileManagement.Directories.DirectoryDescriptorDto"
-              },
-              "allowAnonymous": false,
-              "implementFrom": "X.Abp.FileManagement.Directories.IDirectoryDescriptorAppService"
             }
           }
         }

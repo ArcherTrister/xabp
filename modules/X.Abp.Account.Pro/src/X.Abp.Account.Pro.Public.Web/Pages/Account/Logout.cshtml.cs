@@ -5,12 +5,9 @@
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 using Volo.Abp.Identity;
-
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
 namespace X.Abp.Account.Public.Web.Pages.Account;
 
@@ -23,16 +20,6 @@ public class LogoutModel : AccountPageModel
     [HiddenInput]
     [BindProperty(SupportsGet = true)]
     public string ReturnUrlHash { get; set; }
-
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
-
-    public LogoutModel(SignInManager<IdentityUser> signInManager, IdentitySecurityLogManager identitySecurityLogManager)
-    {
-        SignInManager = signInManager;
-        IdentitySecurityLogManager = identitySecurityLogManager;
-    }
 
     public virtual async Task<IActionResult> OnGetAsync()
     {

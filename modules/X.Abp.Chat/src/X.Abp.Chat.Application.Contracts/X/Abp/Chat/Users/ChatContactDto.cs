@@ -18,6 +18,8 @@ public class ChatContactDto
 
     public string Username { get; set; }
 
+    public bool HasChatPermission { get; set; }
+
     public ChatMessageSide LastMessageSide { get; set; }
 
     public string LastMessage { get; set; }

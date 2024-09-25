@@ -14,7 +14,7 @@
     var captchaVersion = await SettingProvider.GetOrNullAsync(AccountSettingNames.Captcha.Version);
 }
 
-@if (!Model.LocalLoginDisabled)
+@if (!Model.EnableLocalLogin)
 {
     @section scripts
     {

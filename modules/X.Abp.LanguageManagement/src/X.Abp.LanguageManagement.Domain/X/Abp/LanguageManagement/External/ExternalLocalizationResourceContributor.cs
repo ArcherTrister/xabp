@@ -68,7 +68,7 @@ namespace X.Abp.LanguageManagement.External
         public void Fill(string cultureName, Dictionary<string, LocalizedString> dictionary) =>
             InternalFill(dictionary, GetTextsFromCache(cultureName));
 
-        public async Task FillAsync(string cultureName, Dictionary<string, LocalizedString> dictionary)
+        public virtual async Task FillAsync(string cultureName, Dictionary<string, LocalizedString> dictionary)
         {
             InternalFill(dictionary, await GetTextsFromCacheAsync(cultureName));
         }
@@ -100,19 +100,15 @@ namespace X.Abp.LanguageManagement.External
                 });
         }
 
-        private static void InternalFill(
-            Dictionary<string, LocalizedString> dictionary_0,
-            Dictionary<string, string> dictionary_1)
+        private static void InternalFill(Dictionary<string, LocalizedString> dictionary, Dictionary<string, string> texts)
         {
-            foreach (KeyValuePair<string, string> keyValuePair in dictionary_1)
+            foreach (KeyValuePair<string, string> keyValuePair in texts)
             {
-                dictionary_0[keyValuePair.Key] = new LocalizedString(
-                    keyValuePair.Key,
-                    keyValuePair.Value);
+                dictionary[keyValuePair.Key] = new LocalizedString(keyValuePair.Key, keyValuePair.Value);
             }
         }
 
-        public async Task<IEnumerable<string>> GetSupportedCulturesAsync()
+        public virtual async Task<IEnumerable<string>> GetSupportedCulturesAsync()
         {
             ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem localizationResourceRecordCacheItem =
                 await ExternalLocalizationStoreCache.GetResourceCacheItemAsync(

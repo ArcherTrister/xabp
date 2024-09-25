@@ -12,6 +12,10 @@ public class AbpChatPermissions
 
     public const string Messaging = GroupName + ".Messaging";
 
+    public const string Searching = GroupName + ".Searching";
+
+    public const string SettingManagement = GroupName + ".SettingManagement";
+
     public static string[] GetAll()
     {
         return ReflectionHelper.GetPublicConstantsRecursively(typeof(AbpChatPermissions));

@@ -51,10 +51,10 @@ public class AccountExternalProviderOptionsManager<TOptions> : AbpDynamicOptions
 
     protected override async Task OverrideOptionsAsync(string name, TOptions options)
     {
-        TenantConfiguration tenant;
+        TenantConfiguration tenantConfiguration;
         try
         {
-            tenant = await TenantConfigurationProvider.GetAsync(saveResolveResult: false);
+            tenantConfiguration = await TenantConfigurationProvider.GetAsync();
         }
         catch (Exception e)
         {
@@ -64,7 +64,7 @@ public class AccountExternalProviderOptionsManager<TOptions> : AbpDynamicOptions
 
         var externalProviderItemDto = await AccountExternalProviderAppService.GetByNameAsync(new GetByNameInput
         {
-            TenantId = tenant?.Id,
+            TenantId = tenantConfiguration?.Id,
             Name = name
         });
 
@@ -95,5 +95,11 @@ public class AccountExternalProviderOptionsManager<TOptions> : AbpDynamicOptions
         return NullDisposable.Instance;
     }
 
-    public TOptions CurrentValue => Get(Options.DefaultName);
+    public TOptions CurrentValue
+    {
+        get
+        {
+            return Get(Options.DefaultName);
+        }
+    }
 }

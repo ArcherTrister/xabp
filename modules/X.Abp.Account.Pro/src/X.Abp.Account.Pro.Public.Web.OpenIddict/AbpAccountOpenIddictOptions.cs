@@ -6,7 +6,7 @@ using OpenIddict.Validation.AspNetCore;
 
 using Volo.Abp.MultiTenancy;
 
-namespace X.Abp.Account.Public.Web;
+namespace X.Abp.Account.Web;
 
 public class AbpAccountOpenIddictOptions
 {
@@ -18,10 +18,13 @@ public class AbpAccountOpenIddictOptions
 
     public Func<HttpContext, BasicTenantInfo, Task<string>> GetTenantDomain { get; set; }
 
+    public Dictionary<string, string> ClientIdToDeviceMap { get; }
+
     public AbpAccountOpenIddictOptions()
     {
         ImpersonationAuthenticationScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
         LinkLoginAuthenticationScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
         GetTenantDomain = (HttpContext context, BasicTenantInfo _) => Task.FromResult(context.Request.Scheme + "://" + context.Request.Host);
+        ClientIdToDeviceMap = new Dictionary<string, string>();
     }
 }

@@ -20,9 +20,9 @@
 @model IndexModel
 
 @{
-    PageLayout.Content.Title = (L)["GatewayPlans"].Value;
-    PageLayout.Content.BreadCrumb.Add((L)["Menu:PaymentManagement"].Value);
-    PageLayout.Content.BreadCrumb.Add((L)["Menu:Plans"].Value);
+    PageLayout.Content.Title = L["GatewayPlans"].Value;
+    PageLayout.Content.BreadCrumb.Add(L["Menu:PaymentManagement"].Value);
+    PageLayout.Content.BreadCrumb.Add(L["Menu:Plans"].Value);
     PageLayout.Content.BreadCrumb.Add(Model.Plan.Name);
     PageLayout.Content.MenuItemName = AbpPaymentAdminMenus.Plans.PlansMenu;
 }

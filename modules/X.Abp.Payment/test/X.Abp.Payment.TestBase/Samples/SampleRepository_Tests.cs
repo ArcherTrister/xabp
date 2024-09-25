@@ -11,16 +11,16 @@ namespace X.Abp.Payment.Samples;
 public abstract class SampleRepository_Tests<TStartupModule> : PaymentTestBase<TStartupModule>
     where TStartupModule : IAbpModule
 {
-    //private readonly ISampleRepository _sampleRepository;
+  //private readonly ISampleRepository _sampleRepository;
 
-    protected SampleRepository_Tests()
-    {
-        //_sampleRepository = GetRequiredService<ISampleRepository>();
-    }
+  protected SampleRepository_Tests()
+  {
+    //_sampleRepository = GetRequiredService<ISampleRepository>();
+  }
 
-    [Fact]
-    public Task Method1Async()
-    {
-        return Task.CompletedTask;
-    }
+  [Fact]
+  public virtual Task Method1Async()
+  {
+    return Task.CompletedTask;
+  }
 }

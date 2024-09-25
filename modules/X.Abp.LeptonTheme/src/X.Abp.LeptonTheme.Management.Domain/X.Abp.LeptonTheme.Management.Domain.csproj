@@ -10,8 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.LeptonTheme.Management.Domain.Shared\X.Abp.LeptonTheme.Management.Domain.Shared.csproj" />
+    <ProjectReference Include="..\X.Abp.LeptonTheme.Management.Domain.Shared\X.Abp.LeptonTheme.Management.Domain.Shared.csproj" />
     <PackageReference Include="Volo.Abp.Ddd.Domain" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 

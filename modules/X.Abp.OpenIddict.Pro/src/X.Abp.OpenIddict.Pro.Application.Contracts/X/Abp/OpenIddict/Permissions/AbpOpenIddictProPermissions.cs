@@ -17,20 +17,20 @@ public class AbpOpenIddictProPermissions
 
     public static class Application
     {
-        public const string Default = "OpenIddictPro.Application";
-        public const string Delete = "OpenIddictPro.Application.Delete";
-        public const string Update = "OpenIddictPro.Application.Update";
-        public const string Create = "OpenIddictPro.Application.Create";
-        public const string ManagePermissions = "OpenIddictPro.Application.ManagePermissions";
+        public const string Default = GroupName + ".Application";
+        public const string Delete = Default + ".Delete";
+        public const string Update = Default + ".Update";
+        public const string Create = Default + ".Create";
+        public const string ManagePermissions = Default + ".ManagePermissions";
         public const string ViewChangeHistory = "AuditLogging.ViewChangeHistory:Volo.Abp.OpenIddict.Pro.Applications.Application";
     }
 
     public static class Scope
     {
-        public const string Default = "OpenIddictPro.Scope";
-        public const string Delete = "OpenIddictPro.Scope.Delete";
-        public const string Update = "OpenIddictPro.Scope.Update";
-        public const string Create = "OpenIddictPro.Scope.Create";
+        public const string Default = GroupName + ".Scope";
+        public const string Delete = Default + ".Delete";
+        public const string Update = Default + ".Update";
+        public const string Create = Default + ".Create";
         public const string ViewChangeHistory = "AuditLogging.ViewChangeHistory:Volo.Abp.OpenIddict.Pro.Scopes.Scope";
     }
 }

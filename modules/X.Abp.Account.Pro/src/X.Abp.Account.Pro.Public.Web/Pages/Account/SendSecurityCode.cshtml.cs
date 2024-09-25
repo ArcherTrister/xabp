@@ -11,12 +11,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-using Volo.Abp.Identity;
 using Volo.Abp.Uow;
 
 using X.Abp.Account.Dtos;
-
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
 namespace X.Abp.Account.Public.Web.Pages.Account;
 
@@ -50,22 +47,6 @@ public class SendSecurityCodeModel : AccountPageModel
 
     [BindProperty]
     public string SelectedProvider { get; set; }
-
-    protected IAccountAppService AccountAppService { get; }
-
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    public SendSecurityCodeModel(
-        IAccountAppService accountAppService,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager)
-    {
-        AccountAppService = accountAppService;
-        SignInManager = signInManager;
-        UserManager = userManager;
-    }
 
     [UnitOfWork]
     public virtual async Task<IActionResult> OnGetAsync()

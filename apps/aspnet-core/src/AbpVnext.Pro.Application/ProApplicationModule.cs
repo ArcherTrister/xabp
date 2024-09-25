@@ -46,11 +46,11 @@ namespace AbpVnext.Pro;
 [DependsOn(typeof(AbpGdprApplicationModule))]
 [DependsOn(typeof(AbpIdentityProApplicationModule))]
 [DependsOn(typeof(AbpIdentityServerProApplicationModule))]
+[DependsOn(typeof(AbpOpenIddictProApplicationModule))]
 //[DependsOn(typeof(AbpIotApplicationModule))]
 [DependsOn(typeof(AbpLanguageManagementApplicationModule))]
 // LeptonTheme
 [DependsOn(typeof(AbpNotificationApplicationModule))]
-[DependsOn(typeof(AbpOpenIddictProApplicationModule))]
 [DependsOn(typeof(AbpPaymentAdminApplicationModule))]
 [DependsOn(typeof(AbpPaymentApplicationModule))]
 [DependsOn(typeof(AbpQuartzApplicationModule))]

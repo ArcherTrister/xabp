@@ -37,6 +37,8 @@ public abstract class IdentityUserCreateOrUpdateDtoBase : ExtensibleObject
 
     public bool LockoutEnabled { get; set; }
 
+    public bool ShouldChangePasswordOnNextLogin { get; set; }
+
     [CanBeNull]
     public string[] RoleNames { get; set; }
 

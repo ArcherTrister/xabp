@@ -15,34 +15,34 @@ using X.Abp.LanguageManagement.External;
 
 namespace X.Abp.LanguageManagement.EntityFrameworkCore
 {
-    public class EfCoreLocalizationResourceRecordRepository
-        : EfCoreRepository<ILanguageManagementDbContext, LocalizationResourceRecord, Guid>,
-            ILocalizationResourceRecordRepository
+  public class EfCoreLocalizationResourceRecordRepository
+      : EfCoreRepository<ILanguageManagementDbContext, LocalizationResourceRecord, Guid>,
+          ILocalizationResourceRecordRepository
+  {
+    public EfCoreLocalizationResourceRecordRepository(
+        IDbContextProvider<ILanguageManagementDbContext> dbContextProvider
+    )
+        : base(dbContextProvider) { }
+
+    [Obsolete("Use FindAsync() method.")]
+    public LocalizationResourceRecord Find(string name)
     {
-        public EfCoreLocalizationResourceRecordRepository(
-            IDbContextProvider<ILanguageManagementDbContext> dbContextProvider
-        )
-            : base(dbContextProvider) { }
-
-        [Obsolete("Use FindAsync() method.")]
-        public LocalizationResourceRecord Find(string name)
-        {
-            using (Volo.Abp.Uow.UnitOfWorkManager.DisableObsoleteDbContextCreationWarning.SetScoped(true))
-            {
-                return DbSet.FirstOrDefault(localizationResourceRecord => localizationResourceRecord.Name == name);
-            }
-        }
-
-        public async Task<LocalizationResourceRecord> FindAsync(
-            string name,
-            CancellationToken cancellationToken = default
-        )
-        {
-            return await FindAsync(
-                localizationResourceRecord => localizationResourceRecord.Name == name,
-                true,
-                cancellationToken
-            );
-        }
+      using (Volo.Abp.Uow.UnitOfWorkManager.DisableObsoleteDbContextCreationWarning.SetScoped(true))
+      {
+        return DbSet.FirstOrDefault(localizationResourceRecord => localizationResourceRecord.Name == name);
+      }
     }
+
+    public virtual async Task<LocalizationResourceRecord> FindAsync(
+        string name,
+        CancellationToken cancellationToken = default
+    )
+    {
+      return await FindAsync(
+          localizationResourceRecord => localizationResourceRecord.Name == name,
+          true,
+          cancellationToken
+      );
+    }
+  }
 }

@@ -1,15 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
 
-
-
-    <PropertyGroup><LangVersion>latest</LangVersion>
-        <TargetFramework>net7.0</TargetFramework>
-    </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>X.Abp.AspNetCore.Components.Web.LeptonTheme</AssemblyName>
+    <PackageId>X.Abp.AspNetCore.Components.Web.LeptonTheme</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="X.Abp.AspNetCore.Components.Web.Theming" Version="5.0.0" />
-      <PackageReference Include="X.Abp.AutoMapper" Version="5.0.0" />
+      <PackageReference Include="Volo.Abp.AspNetCore.Components.Web.Theming" VersionOverride="$(AbpPackageVersion)" />
+      <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
       <ProjectReference Include="..\X.Abp.LeptonTheme.Management.Domain.Shared\X.Abp.LeptonTheme.Management.Domain.Shared.csproj" />
     </ItemGroup>
 

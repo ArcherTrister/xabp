@@ -55,9 +55,9 @@ namespace X.Abp.Account.Public.Web.Pages.Account
             }
 
             var tenantId = CurrentTenant.Id;
-            Logger.LogInformation($"CurrentTenant:{tenantId}");
+            Logger.LogInformation("CurrentTenant:{TenantId}", tenantId);
             var userId = CurrentUser.GetId();
-            Logger.LogInformation($"CurrentUser:{userId}");
+            Logger.LogInformation("CurrentUser:{UserId}", userId);
 
             var redirectUrl = Url.Page("SpaExternalLogin", pageHandler: "BindCallback", values: new { returnUrl, userId, tenantId });
 
@@ -102,7 +102,7 @@ namespace X.Abp.Account.Public.Web.Pages.Account
 
             using (CurrentTenant.Change(tenantId))
             {
-                Logger.LogInformation($"CurrentTenant:{tenantId}");
+                Logger.LogInformation("CurrentTenant:{TenantId}", tenantId);
 
                 await IdentityOptions.SetAsync();
 

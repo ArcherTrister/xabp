@@ -3,8 +3,6 @@
 // for more information concerning the license and the contributors participating to this project.
 
 using System;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using Volo.Abp;
@@ -47,7 +45,7 @@ public class TenantManager : DomainService, ITenantManager, ITransientDependency
         Check.NotNull(name, nameof(name));
         string normalizedName = TenantNormalizer.NormalizeName(name);
         await ValidateNameAsync(normalizedName, tenant.Id);
-        await LocalEventBus.PublishAsync(new TenantChangedEvent(new Guid?(tenant.Id), tenant.NormalizedName), true);
+        await LocalEventBus.PublishAsync(new TenantChangedEvent(tenant.Id, tenant.NormalizedName), true);
         tenant.SetName(name);
         tenant.SetNormalizedName(normalizedName);
     }

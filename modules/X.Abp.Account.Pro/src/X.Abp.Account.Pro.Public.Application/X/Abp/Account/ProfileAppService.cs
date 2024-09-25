@@ -3,6 +3,7 @@
 // for more information concerning the license and the contributors participating to this project.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
@@ -16,7 +17,9 @@ using Volo.Abp.Data;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.Settings;
 using Volo.Abp.ObjectExtending;
+using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
+using Volo.Abp.Timing;
 using Volo.Abp.Users;
 
 using X.Abp.Account.Dtos;
@@ -36,22 +39,34 @@ public class ProfileAppService : ApplicationService, IProfileAppService
 
     protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
 
-    protected IdentityTwoFactorManager IdentityTwoFactorManager { get; }
+    protected IdentityProTwoFactorManager IdentityProTwoFactorManager { get; }
 
     protected IOptions<IdentityOptions> IdentityOptions { get; }
+
+    protected IdentityUserTwoFactorChecker IdentityUserTwoFactorChecker { get; }
+
+    protected ITimezoneProvider TimezoneProvider { get; }
+
+    protected ISettingManager SettingManager { get; }
 
     public ProfileAppService(
         UrlEncoder urlEncoder,
         IdentityUserManager userManager,
         IdentitySecurityLogManager identitySecurityLogManager,
-        IdentityTwoFactorManager identityTwoFactorManager,
-        IOptions<IdentityOptions> identityOptions)
+        IdentityProTwoFactorManager identityProTwoFactorManager,
+        IOptions<IdentityOptions> identityOptions,
+        IdentityUserTwoFactorChecker identityUserTwoFactorChecker,
+        ITimezoneProvider timezoneProvider,
+        ISettingManager settingManager)
     {
         UrlEncoder = urlEncoder;
         UserManager = userManager;
         IdentitySecurityLogManager = identitySecurityLogManager;
-        IdentityTwoFactorManager = identityTwoFactorManager;
+        IdentityProTwoFactorManager = identityProTwoFactorManager;
         IdentityOptions = identityOptions;
+        IdentityUserTwoFactorChecker = identityUserTwoFactorChecker;
+        TimezoneProvider = timezoneProvider;
+        SettingManager = settingManager;
     }
 
     public virtual async Task<ProfileDto> GetAsync()
@@ -87,7 +102,7 @@ public class ProfileAppService : ApplicationService, IProfileAppService
             if (await SettingProvider.IsTrueAsync(IdentitySettingNames.User.IsEmailUpdateEnabled))
             {
                 (await UserManager.SetEmailAsync(user, input.Email)).CheckIdentityErrors();
-                await CheckAsync(user);
+                await IdentityUserTwoFactorChecker.CheckAsync(user);
                 await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
                 {
                     Identity = IdentitySecurityLogIdentityConsts.Identity,
@@ -96,10 +111,15 @@ public class ProfileAppService : ApplicationService, IProfileAppService
             }
         }
 
+        if (user.PhoneNumber.IsNullOrWhiteSpace() && input.PhoneNumber.IsNullOrWhiteSpace())
+        {
+            input.PhoneNumber = user.PhoneNumber;
+        }
+
         if (!string.Equals(user.PhoneNumber, input.PhoneNumber, StringComparison.OrdinalIgnoreCase))
         {
             (await UserManager.SetPhoneNumberAsync(user, input.PhoneNumber)).CheckIdentityErrors();
-            await CheckAsync(user);
+            await IdentityUserTwoFactorChecker.CheckAsync(user);
             await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
             {
                 Identity = IdentitySecurityLogIdentityConsts.Identity,
@@ -114,9 +134,13 @@ public class ProfileAppService : ApplicationService, IProfileAppService
 
         (await UserManager.UpdateAsync(user)).CheckIdentityErrors();
 
+        await SettingManager.SetForCurrentUserAsync(TimingSettingNames.TimeZone, input.Timezone);
+
+        ProfileDto profileDto = await SetTimezoneInfoAsync(ObjectMapper.Map<IdentityUser, ProfileDto>(user));
+
         await CurrentUnitOfWork.SaveChangesAsync();
 
-        return ObjectMapper.Map<IdentityUser, ProfileDto>(user);
+        return profileDto;
     }
 
     public virtual async Task ChangePasswordAsync(ChangePasswordInput input)
@@ -154,7 +178,7 @@ public class ProfileAppService : ApplicationService, IProfileAppService
 
     public virtual async Task SetTwoFactorEnabledAsync(bool enabled)
     {
-        if (await IdentityTwoFactorManager.IsOptionalAsync())
+        if (await IdentityProTwoFactorManager.IsOptionalAsync())
         {
             if (await SettingProvider.GetAsync<bool>(IdentityProSettingNames.TwoFactor.UsersCanChange))
             {
@@ -163,7 +187,7 @@ public class ProfileAppService : ApplicationService, IProfileAppService
                 {
                     if (enabled)
                     {
-                        if (!await CanEnabledAsync(currentUser))
+                        if (!await IdentityUserTwoFactorChecker.CanEnabledAsync(currentUser))
                         {
                             throw new UserFriendlyException(L["YouHaveToEnableAtLeastOneTwoFactorProvider"]);
                         }
@@ -187,22 +211,20 @@ public class ProfileAppService : ApplicationService, IProfileAppService
     {
         var user = await UserManager.GetByIdAsync(CurrentUser.GetId());
 
-        return await CanEnabledAsync(user);
+        return await IdentityUserTwoFactorChecker.CanEnabledAsync(user);
     }
 
-    protected virtual async Task<bool> CanEnabledAsync(IdentityUser user)
+    public virtual Task<List<NameValue>> GetTimezonesAsync()
     {
-        var providers = await UserManager.GetValidTwoFactorProvidersAsync(user);
-        return providers.Count != 0 && (providers.Count != 1 || !providers.Contains("Authenticator"));
+        return Task.FromResult(TimeZoneHelper.GetTimezones(TimezoneProvider.GetWindowsTimezones()));
     }
 
-    protected virtual async Task CheckAsync(IdentityUser user)
+    protected virtual async Task<ProfileDto> SetTimezoneInfoAsync(
+      ProfileDto profileDto)
     {
-        if (await CanEnabledAsync(user))
-        {
-            return;
-        }
+        profileDto.SupportsMultipleTimezone = Clock.SupportsMultipleTimezone;
+        profileDto.Timezone = await SettingProvider.GetOrNullAsync(TimingSettingNames.TimeZone);
 
-        (await UserManager.SetTwoFactorEnabledAsync(user, false)).CheckIdentityErrors();
+        return profileDto;
     }
 }

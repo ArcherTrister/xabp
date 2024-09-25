@@ -10,13 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.LeptonTheme.Management.Application.Contracts\X.Abp.LeptonTheme.Management.Application.Contracts.csproj" />
-    <ProjectReference
-      Include="..\X.Abp.LeptonTheme.Management.Domain\X.Abp.LeptonTheme.Management.Domain.csproj" />
+    <ProjectReference Include="..\X.Abp.LeptonTheme.Management.Application.Contracts\X.Abp.LeptonTheme.Management.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.LeptonTheme.Management.Domain\X.Abp.LeptonTheme.Management.Domain.csproj" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 

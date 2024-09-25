@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -58,6 +58,8 @@ namespace MyCompanyName.MyProjectName.AuthServer;
     typeof(AbpAccountPublicWebOpenIddictModule),
     typeof(AbpAccountPublicApplicationModule),
     typeof(AbpAccountPublicHttpApiModule),
+    typeof(AbpAccountAdminApplicationModule),
+    typeof(AbpAccountAdminHttpApiModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(SaasServiceEntityFrameworkCoreModule),
@@ -177,6 +179,12 @@ public class MyProjectNameAuthServerModule : AbpModule
             });
         }
 
+        Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+        {
+            options.IsDynamicClaimsEnabled = true;
+            //options.IsRemoteRefreshEnabled = false;
+        });
+
         //Configure<LeptonXThemeOptions>(options =>
         //{
         //    options.DefaultStyle = LeptonXStyleNames.System;
@@ -224,6 +232,7 @@ public class MyProjectNameAuthServerModule : AbpModule
         app.UseMultiTenancy();
         app.UseAbpSerilogEnrichers();
         app.UseUnitOfWork();
+        app.UseDynamicClaims();
         app.UseAuthorization();
         app.UseSwagger();
         app.UseAbpSwaggerUI(options =>

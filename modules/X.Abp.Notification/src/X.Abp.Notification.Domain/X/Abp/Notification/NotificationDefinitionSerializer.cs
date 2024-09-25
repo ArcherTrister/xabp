@@ -15,72 +15,72 @@ namespace X.Abp.Notification;
 
 public class NotificationDefinitionSerializer : INotificationDefinitionSerializer, ITransientDependency
 {
-    protected IGuidGenerator GuidGenerator { get; }
+  protected IGuidGenerator GuidGenerator { get; }
 
-    protected ILocalizableStringSerializer LocalizableStringSerializer { get; }
+  protected ILocalizableStringSerializer LocalizableStringSerializer { get; }
 
-    public NotificationDefinitionSerializer(IGuidGenerator guidGenerator, ILocalizableStringSerializer localizableStringSerializer)
+  public NotificationDefinitionSerializer(IGuidGenerator guidGenerator, ILocalizableStringSerializer localizableStringSerializer)
+  {
+    GuidGenerator = guidGenerator;
+    LocalizableStringSerializer = localizableStringSerializer;
+  }
+
+  public virtual async Task<(NotificationGroupDefinitionRecord[] NotificationGroups, NotificationDefinitionRecord[] Notifications)> SerializeAsync(IEnumerable<NotificationGroupDefinition> notificationGroups)
+  {
+    var notificationGroupRecords = new List<NotificationGroupDefinitionRecord>();
+    var notificationRecords = new List<NotificationDefinitionRecord>();
+
+    foreach (var notificationGroup in notificationGroups)
     {
-        GuidGenerator = guidGenerator;
-        LocalizableStringSerializer = localizableStringSerializer;
+      notificationGroupRecords.Add(await SerializeAsync(notificationGroup));
+
+      foreach (var notification in notificationGroup.GetNotificationsWithChildren())
+      {
+        notificationRecords.Add(await SerializeAsync(notification, notificationGroup));
+      }
     }
 
-    public async Task<(NotificationGroupDefinitionRecord[] NotificationGroups, NotificationDefinitionRecord[] Notifications)> SerializeAsync(IEnumerable<NotificationGroupDefinition> notificationGroups)
+    return (notificationGroupRecords.ToArray(), notificationRecords.ToArray());
+  }
+
+  public virtual Task<NotificationGroupDefinitionRecord> SerializeAsync(NotificationGroupDefinition notificationGroup)
+  {
+    using (CultureHelper.Use(CultureInfo.InvariantCulture))
     {
-        var notificationGroupRecords = new List<NotificationGroupDefinitionRecord>();
-        var notificationRecords = new List<NotificationDefinitionRecord>();
+      var notificationGroupRecord = new NotificationGroupDefinitionRecord(
+          GuidGenerator.Create(),
+          notificationGroup.Name,
+          LocalizableStringSerializer.Serialize(notificationGroup.DisplayName));
 
-        foreach (var notificationGroup in notificationGroups)
-        {
-            notificationGroupRecords.Add(await SerializeAsync(notificationGroup));
+      foreach (var property in notificationGroup.Properties)
+      {
+        notificationGroupRecord.SetProperty(property.Key, property.Value);
+      }
 
-            foreach (var notification in notificationGroup.GetNotificationsWithChildren())
-            {
-                notificationRecords.Add(await SerializeAsync(notification, notificationGroup));
-            }
-        }
-
-        return (notificationGroupRecords.ToArray(), notificationRecords.ToArray());
+      return Task.FromResult(notificationGroupRecord);
     }
+  }
 
-    public Task<NotificationGroupDefinitionRecord> SerializeAsync(NotificationGroupDefinition notificationGroup)
+  public virtual Task<NotificationDefinitionRecord> SerializeAsync(NotificationDefinition notification, NotificationGroupDefinition notificationGroup)
+  {
+    using (CultureHelper.Use(CultureInfo.InvariantCulture))
     {
-        using (CultureHelper.Use(CultureInfo.InvariantCulture))
-        {
-            var notificationGroupRecord = new NotificationGroupDefinitionRecord(
-                GuidGenerator.Create(),
-                notificationGroup.Name,
-                LocalizableStringSerializer.Serialize(notificationGroup.DisplayName));
+      var notificationRecord = new NotificationDefinitionRecord(
+          GuidGenerator.Create(),
+          notificationGroup?.Name,
+          notification.Name,
+          notification.Parent?.Name,
+          LocalizableStringSerializer.Serialize(notification.DisplayName),
+          LocalizableStringSerializer.Serialize(notification.Description),
+          notification.IsVisibleToClients,
+          notification.IsAvailableToHost);
 
-            foreach (var property in notificationGroup.Properties)
-            {
-                notificationGroupRecord.SetProperty(property.Key, property.Value);
-            }
+      foreach (var property in notification.Properties)
+      {
+        notificationRecord.SetProperty(property.Key, property.Value);
+      }
 
-            return Task.FromResult(notificationGroupRecord);
-        }
+      return Task.FromResult(notificationRecord);
     }
-
-    public Task<NotificationDefinitionRecord> SerializeAsync(NotificationDefinition notification, NotificationGroupDefinition notificationGroup)
-    {
-        using (CultureHelper.Use(CultureInfo.InvariantCulture))
-        {
-            var notificationRecord = new NotificationDefinitionRecord(
-                GuidGenerator.Create(),
-                notificationGroup?.Name,
-                notification.Name,
-                notification.Parent?.Name,
-                LocalizableStringSerializer.Serialize(notification.DisplayName),
-                LocalizableStringSerializer.Serialize(notification.Description),
-                notification.IsVisibleToClients,
-                notification.IsAvailableToHost);
-
-            foreach (var property in notification.Properties)
-            {
-                notificationRecord.SetProperty(property.Key, property.Value);
-            }
-
-            return Task.FromResult(notificationRecord);
-        }
-    }
+  }
 }

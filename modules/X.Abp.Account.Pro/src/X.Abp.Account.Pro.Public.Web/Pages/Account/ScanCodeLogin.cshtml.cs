@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using Volo.Abp;
-using Volo.Abp.Identity;
 using Volo.Abp.Users;
 
 using X.Abp.Account.Public.Web.ExternalProviders;
@@ -22,8 +21,6 @@ namespace X.Abp.Account.Public.Web.Pages.Account
         public string QrCodeKey { get; set; }
 
         protected IScanCodeLoginProvider ScanCodeLoginProvider => LazyServiceProvider.LazyGetRequiredService<IScanCodeLoginProvider>();
-
-        protected IdentityUserManager UserManager => LazyServiceProvider.LazyGetRequiredService<IdentityUserManager>();
 
         public virtual async Task<IActionResult> OnGetAsync()
         {

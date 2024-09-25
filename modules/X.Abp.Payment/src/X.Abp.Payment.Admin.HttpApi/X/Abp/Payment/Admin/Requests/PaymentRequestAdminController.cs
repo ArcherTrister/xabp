@@ -16,32 +16,32 @@ using X.Abp.Payment.Requests;
 
 namespace X.Abp.Payment.Admin.Requests
 {
-    [RemoteService(true, Name = AbpPaymentAdminRemoteServiceConsts.RemoteServiceName)]
-    [Route("api/payment-admin/payment-requests")]
-    [Authorize(AbpPaymentAdminPermissions.PaymentRequests.Default)]
-    [Area(AbpPaymentAdminRemoteServiceConsts.ModuleName)]
-    public class PaymentRequestAdminController :
-    PaymentAdminController,
-    IPaymentRequestAdminAppService
+  [RemoteService(true, Name = AbpPaymentAdminRemoteServiceConsts.RemoteServiceName)]
+  [Route("api/payment-admin/payment-requests")]
+  [Authorize(AbpPaymentAdminPermissions.PaymentRequests.Default)]
+  [Area(AbpPaymentAdminRemoteServiceConsts.ModuleName)]
+  public class PaymentRequestAdminController :
+  PaymentAdminController,
+  IPaymentRequestAdminAppService
+  {
+    protected IPaymentRequestAdminAppService PaymentRequestAdminAppService { get; }
+
+    public PaymentRequestAdminController(IPaymentRequestAdminAppService paymentRequestAdminAppService)
     {
-        protected IPaymentRequestAdminAppService PaymentRequestAdminAppService { get; }
-
-        public PaymentRequestAdminController(IPaymentRequestAdminAppService paymentRequestAdminAppService)
-        {
-            PaymentRequestAdminAppService = paymentRequestAdminAppService;
-        }
-
-        [HttpGet]
-        public Task<PagedResultDto<PaymentRequestWithDetailsDto>> GetListAsync(PaymentRequestGetListInput input)
-        {
-            return PaymentRequestAdminAppService.GetListAsync(input);
-        }
-
-        [Route("{id}")]
-        [HttpGet]
-        public Task<PaymentRequestWithDetailsDto> GetAsync(Guid id)
-        {
-            return PaymentRequestAdminAppService.GetAsync(id);
-        }
+      PaymentRequestAdminAppService = paymentRequestAdminAppService;
     }
+
+    [HttpGet]
+    public virtual Task<PagedResultDto<PaymentRequestWithDetailsDto>> GetListAsync(PaymentRequestGetListInput input)
+    {
+      return PaymentRequestAdminAppService.GetListAsync(input);
+    }
+
+    [Route("{id}")]
+    [HttpGet]
+    public virtual Task<PaymentRequestWithDetailsDto> GetAsync(Guid id)
+    {
+      return PaymentRequestAdminAppService.GetAsync(id);
+    }
+  }
 }

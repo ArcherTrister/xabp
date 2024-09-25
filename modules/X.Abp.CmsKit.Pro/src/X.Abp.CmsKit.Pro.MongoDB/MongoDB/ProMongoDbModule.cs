@@ -5,7 +5,7 @@ using Volo.Abp.MongoDB;
 namespace X.Abp.CmsKit.Pro.MongoDB;
 
 [DependsOn(
-    typeof(ProDomainModule),
+    typeof(CmsKitProDomainModule),
     typeof(AbpMongoDbModule)
     )]
 public class ProMongoDbModule : AbpModule

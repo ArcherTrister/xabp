@@ -37,6 +37,7 @@
       VersionOverride="$(XAbpPackageVersion)" />
     <PackageReference Include="X.Abp.Account.Pro.Public.Web.Impersonation"
       VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Swashbuckle" />
   </ItemGroup>
 
   <ItemGroup>

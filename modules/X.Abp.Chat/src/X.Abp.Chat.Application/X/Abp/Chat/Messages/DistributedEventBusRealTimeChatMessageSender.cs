@@ -30,7 +30,26 @@ public class DistributedEventBusRealTimeChatMessageSender : IRealTimeChatMessage
                 SenderName = message.SenderName,
                 SenderSurname = message.SenderSurname,
                 TargetUserId = targetUserId,
-                Message = message.Text
+                Message = message.Text,
+                MessageId = message.Id
             });
+    }
+
+    public virtual async Task DeleteMessageAsync(Guid targetUserId, Guid messageId)
+    {
+        await DistributedEventBus.PublishAsync(new ChatDeletedMessageEto()
+        {
+            TargetUserId = targetUserId,
+            MessageId = messageId
+        });
+    }
+
+    public virtual async Task DeleteConversationAsync(Guid targetUserId, Guid userId)
+    {
+        await DistributedEventBus.PublishAsync(new ChatDeletedConversationEto()
+        {
+            TargetUserId = targetUserId,
+            UserId = userId
+        });
     }
 }

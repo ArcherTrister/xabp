@@ -11,4 +11,8 @@ namespace X.Abp.Chat.Settings;
 public interface ISettingsAppService : IApplicationService
 {
     Task SetSendOnEnterSettingAsync(SendOnEnterSettingDto input);
+
+    Task<ChatSettingsDto> GetAsync();
+
+    Task UpdateAsync(ChatSettingsDto input);
 }

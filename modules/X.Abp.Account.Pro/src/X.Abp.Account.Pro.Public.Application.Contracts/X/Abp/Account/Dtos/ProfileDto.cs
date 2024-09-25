@@ -27,5 +27,9 @@ public class ProfileDto : ExtensibleObject, IHasConcurrencyStamp
 
     public bool HasPassword { get; set; }
 
+    public bool SupportsMultipleTimezone { get; set; }
+
+    public string Timezone { get; set; }
+
     public string ConcurrencyStamp { get; set; }
 }

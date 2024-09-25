@@ -57,8 +57,8 @@ public class IdentityServiceDatabaseMigrationEventHandler
             var schemaMigrated = await MigrateDatabaseSchemaAsync(eventData.TenantId);
             await _identityServiceDataSeeder.SeedAsync(
                 tenantId: eventData.TenantId,
-                adminEmail: IdentityServiceDbProperties.DefaultAdminEmailAddress,
-                adminPassword: IdentityServiceDbProperties.DefaultAdminPassword);
+                adminEmail: IdentityDataSeedContributor.AdminEmailDefaultValue,
+                adminPassword: IdentityDataSeedContributor.AdminPasswordDefaultValue);
 
             if (eventData.TenantId == null && schemaMigrated)
             {
@@ -79,8 +79,8 @@ public class IdentityServiceDatabaseMigrationEventHandler
             await MigrateDatabaseSchemaAsync(eventData.Id);
             await _identityServiceDataSeeder.SeedAsync(
                 tenantId: eventData.Id,
-                adminEmail: eventData.Properties.GetOrDefault(IdentityDataSeedContributor.AdminEmailPropertyName) ?? IdentityServiceDbProperties.DefaultAdminEmailAddress,
-                adminPassword: eventData.Properties.GetOrDefault(IdentityDataSeedContributor.AdminPasswordPropertyName) ?? IdentityServiceDbProperties.DefaultAdminPassword);
+                adminEmail: eventData.Properties.GetOrDefault(IdentityDataSeedContributor.AdminEmailPropertyName) ?? IdentityDataSeedContributor.AdminEmailDefaultValue,
+                adminPassword: eventData.Properties.GetOrDefault(IdentityDataSeedContributor.AdminPasswordPropertyName) ?? IdentityDataSeedContributor.AdminPasswordDefaultValue);
         }
         catch (Exception ex)
         {
@@ -101,8 +101,8 @@ public class IdentityServiceDatabaseMigrationEventHandler
             await MigrateDatabaseSchemaAsync(eventData.Id);
             await _identityServiceDataSeeder.SeedAsync(
                 tenantId: eventData.Id,
-                adminEmail: IdentityServiceDbProperties.DefaultAdminEmailAddress,
-                adminPassword: IdentityServiceDbProperties.DefaultAdminPassword);
+                adminEmail: IdentityDataSeedContributor.AdminEmailDefaultValue,
+                adminPassword: IdentityDataSeedContributor.AdminPasswordDefaultValue);
 
             /* You may want to move your data from the old database to the new database!
              * It is up to you. If you don't make it, new database will be empty

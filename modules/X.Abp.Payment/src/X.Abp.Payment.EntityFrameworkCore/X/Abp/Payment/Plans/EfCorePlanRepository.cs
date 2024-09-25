@@ -71,9 +71,9 @@ public class EfCorePlanRepository : EfCoreRepository<IPaymentDbContext, Plan, Gu
             source = source.OrderBy(sorting);
         }
 
-        var planPagedListAsync = await source.ToListAsync(GetCancellationToken());
+        var plans = await source.ToListAsync(GetCancellationToken());
 
-        return planPagedListAsync;
+        return plans;
     }
 
     public virtual async Task<int> GetGatewayPlanCountAsync(Guid planId, string filter)

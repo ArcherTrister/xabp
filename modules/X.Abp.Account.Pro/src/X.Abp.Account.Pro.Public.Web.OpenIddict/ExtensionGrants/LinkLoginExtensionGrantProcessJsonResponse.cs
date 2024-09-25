@@ -13,7 +13,7 @@ using static OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlerFilte
 using static OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandlers;
 using static OpenIddict.Server.OpenIddictServerEvents;
 
-namespace X.Abp.Account.Public.Web.ExtensionGrants;
+namespace X.Abp.Account.Web.ExtensionGrants;
 
 public class LinkLoginExtensionGrantProcessJsonResponse : IOpenIddictServerHandler<ApplyTokenResponseContext>
 {

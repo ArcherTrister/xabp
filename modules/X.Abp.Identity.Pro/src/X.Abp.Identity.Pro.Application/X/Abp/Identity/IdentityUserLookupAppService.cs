@@ -17,44 +17,45 @@ using X.Abp.Identity.Permissions;
 namespace X.Abp.Identity;
 
 [Authorize(AbpIdentityProPermissions.UserLookup.Default)]
+[Obsolete("Use IdentityUserIntegrationService for module-to-module (or service-to-service) communication.")]
 public class IdentityUserLookupAppService : IdentityAppServiceBase, IIdentityUserLookupAppService
 {
-    protected IdentityUserRepositoryExternalUserLookupServiceProvider UserLookupServiceProvider { get; }
+  protected IdentityUserRepositoryExternalUserLookupServiceProvider UserLookupServiceProvider { get; }
 
-    public IdentityUserLookupAppService(
-        IdentityUserRepositoryExternalUserLookupServiceProvider userLookupServiceProvider)
-    {
-        UserLookupServiceProvider = userLookupServiceProvider;
-    }
+  public IdentityUserLookupAppService(
+      IdentityUserRepositoryExternalUserLookupServiceProvider userLookupServiceProvider)
+  {
+    UserLookupServiceProvider = userLookupServiceProvider;
+  }
 
-    public virtual async Task<UserData> FindByIdAsync(Guid id)
-    {
-        var userData = await UserLookupServiceProvider.FindByIdAsync(id);
-        return userData == null ? null : new UserData(userData);
-    }
+  public virtual async Task<UserData> FindByIdAsync(Guid id)
+  {
+    var userData = await UserLookupServiceProvider.FindByIdAsync(id);
+    return userData == null ? null : new UserData(userData);
+  }
 
-    public virtual async Task<UserData> FindByUserNameAsync(string userName)
-    {
-        var userData = await UserLookupServiceProvider.FindByUserNameAsync(userName);
-        return userData == null ? null : new UserData(userData);
-    }
+  public virtual async Task<UserData> FindByUserNameAsync(string userName)
+  {
+    var userData = await UserLookupServiceProvider.FindByUserNameAsync(userName);
+    return userData == null ? null : new UserData(userData);
+  }
 
-    public async Task<ListResultDto<UserData>> SearchAsync(UserLookupSearchInputDto input)
-    {
-        var users = await UserLookupServiceProvider.SearchAsync(
-            input.Sorting,
-            input.Filter,
-            input.MaxResultCount,
-            input.SkipCount);
+  public virtual async Task<ListResultDto<UserData>> SearchAsync(UserLookupSearchInputDto input)
+  {
+    var users = await UserLookupServiceProvider.SearchAsync(
+        input.Sorting,
+        input.Filter,
+        input.MaxResultCount,
+        input.SkipCount);
 
-        return new ListResultDto<UserData>(
-            users
-                .Select(u => new UserData(u))
-                .ToList());
-    }
+    return new ListResultDto<UserData>(
+        users
+            .Select(u => new UserData(u))
+            .ToList());
+  }
 
-    public async Task<long> GetCountAsync(UserLookupCountInputDto input)
-    {
-        return await UserLookupServiceProvider.GetCountAsync(input.Filter);
-    }
+  public virtual async Task<long> GetCountAsync(UserLookupCountInputDto input)
+  {
+    return await UserLookupServiceProvider.GetCountAsync(input.Filter);
+  }
 }

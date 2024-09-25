@@ -40,10 +40,8 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Forms.Application.Contracts\X.Abp.Forms.Application.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Forms.Application.Contracts\X.Abp.Forms.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

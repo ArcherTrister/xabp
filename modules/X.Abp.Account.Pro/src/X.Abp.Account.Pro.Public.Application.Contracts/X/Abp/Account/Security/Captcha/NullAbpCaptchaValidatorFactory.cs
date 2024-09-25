@@ -10,7 +10,7 @@ public class NullAbpCaptchaValidatorFactory : IAbpCaptchaValidatorFactory
 {
     public static NullAbpCaptchaValidatorFactory Instance { get; } = new NullAbpCaptchaValidatorFactory();
 
-    public Task<ICaptchaValidator> CreateAsync()
+    public virtual Task<ICaptchaValidator> CreateAsync()
     {
         return Task.FromResult((ICaptchaValidator)NullCaptchaValidator.Instance);
     }

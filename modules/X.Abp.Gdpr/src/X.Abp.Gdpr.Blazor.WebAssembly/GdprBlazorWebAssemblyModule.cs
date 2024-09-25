@@ -5,7 +5,7 @@ namespace X.Abp.Gdpr.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(GdprBlazorModule),
-    typeof(GdprHttpApiClientModule),
+    typeof(AbpGdprHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class GdprBlazorWebAssemblyModule : AbpModule

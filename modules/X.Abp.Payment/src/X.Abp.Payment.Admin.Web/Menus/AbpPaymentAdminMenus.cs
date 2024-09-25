@@ -10,11 +10,11 @@ public static class AbpPaymentAdminMenus
 
     public static class Plans
     {
-        public const string PlansMenu = "Payment.Plans";
+        public const string PlansMenu = GroupName + ".Plans";
     }
 
     public static class PaymentRequests
     {
-        public const string PaymentRequestsMenu = "Payment.PaymentRequests";
+        public const string PaymentRequestsMenu = GroupName + ".PaymentRequests";
     }
 }

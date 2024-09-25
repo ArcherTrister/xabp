@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Un-comment this MongoDb Migrations Checker class if you are using MongoDB in any of your microservice.
  * You need to inherit from this DbMigrationChecker in order to use service-specific MongoDb provider 
  */
@@ -73,11 +73,11 @@
 //         {
 //             using (var uow = UnitOfWorkManager.Begin(requiresNew: true, isTransactional: false))
 //             {
-//                 Log.Information($"Lock is acquired for db migration and seeding on database named: {DatabaseName}...");
+//                 Log.Information("Lock is acquired for db migration and seeding on database named: {DatabaseName}...", DatabaseName);
 //
 //                 if (handle is null)
 //                 {
-//                     Log.Information($"Handle is null because of the locking for : {DatabaseName}");
+//                     Log.Information("Handle is null because of the locking for : {DatabaseName}", DatabaseName);
 //                     return false;
 //                 }
 //

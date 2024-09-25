@@ -12,8 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Http.Client" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.OpenIddict.Pro.Application.Contracts\X.Abp.OpenIddict.Pro.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.OpenIddict.Pro.Application.Contracts\X.Abp.OpenIddict.Pro.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

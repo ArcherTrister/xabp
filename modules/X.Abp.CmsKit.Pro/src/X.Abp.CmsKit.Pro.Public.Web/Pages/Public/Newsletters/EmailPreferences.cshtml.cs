@@ -16,42 +16,42 @@ namespace X.Abp.CmsKit.Pro.Public.Web.Pages.Public.Newsletters;
 
 public class EmailPreferencesModel : AbpPageModel
 {
-    protected INewsletterRecordPublicAppService NewsletterRecordPublicAppService { get; }
+  protected INewsletterRecordPublicAppService NewsletterRecordPublicAppService { get; }
 
-    protected SecurityCodeProvider SecurityCodeProvider { get; }
+  protected SecurityCodeProvider SecurityCodeProvider { get; }
 
-    public List<NewsletterPreferenceDetailsViewModel> NewsletterPreferenceDetailsViewModels { get; set; }
+  public List<NewsletterPreferenceDetailsViewModel> NewsletterPreferenceDetailsViewModels { get; set; }
 
-    public string EmailAddress { get; set; }
+  public string EmailAddress { get; set; }
 
-    public EmailPreferencesModel(
-      INewsletterRecordPublicAppService newsletterRecordPublicAppService,
-      SecurityCodeProvider securityCodeProvider)
+  public EmailPreferencesModel(
+    INewsletterRecordPublicAppService newsletterRecordPublicAppService,
+    SecurityCodeProvider securityCodeProvider)
+  {
+    NewsletterRecordPublicAppService = newsletterRecordPublicAppService;
+    SecurityCodeProvider = securityCodeProvider;
+    NewsletterPreferenceDetailsViewModels = new List<NewsletterPreferenceDetailsViewModel>();
+  }
+
+  public virtual async Task<IActionResult> OnGetAsync(string emailAddress, string securityCode)
+  {
+    if (securityCode != SecurityCodeProvider.GetSecurityCode(emailAddress))
     {
-        NewsletterRecordPublicAppService = newsletterRecordPublicAppService;
-        SecurityCodeProvider = securityCodeProvider;
-        NewsletterPreferenceDetailsViewModels = new List<NewsletterPreferenceDetailsViewModel>();
+      return Unauthorized();
     }
 
-    public async Task<IActionResult> OnGetAsync(string emailAddress, string securityCode)
+    EmailAddress = emailAddress;
+    foreach (var preferenceDetailsDto in await NewsletterRecordPublicAppService.GetNewsletterPreferencesAsync(emailAddress))
     {
-        if (securityCode != SecurityCodeProvider.GetSecurityCode(emailAddress))
-        {
-            return Unauthorized();
-        }
-
-        EmailAddress = emailAddress;
-        foreach (var preferenceDetailsDto in await NewsletterRecordPublicAppService.GetNewsletterPreferencesAsync(emailAddress))
-        {
-            NewsletterPreferenceDetailsViewModels.Add(new NewsletterPreferenceDetailsViewModel()
-            {
-                Preference = preferenceDetailsDto.Preference,
-                DisplayPreference = preferenceDetailsDto.DisplayPreference,
-                DisplayDefinition = preferenceDetailsDto.Definition,
-                IsSelectedByEmailAddress = preferenceDetailsDto.IsSelectedByEmailAddress
-            });
-        }
-
-        return Page();
+      NewsletterPreferenceDetailsViewModels.Add(new NewsletterPreferenceDetailsViewModel()
+      {
+        Preference = preferenceDetailsDto.Preference,
+        DisplayPreference = preferenceDetailsDto.DisplayPreference,
+        DisplayDefinition = preferenceDetailsDto.Definition,
+        IsSelectedByEmailAddress = preferenceDetailsDto.IsSelectedByEmailAddress
+      });
     }
+
+    return Page();
+  }
 }

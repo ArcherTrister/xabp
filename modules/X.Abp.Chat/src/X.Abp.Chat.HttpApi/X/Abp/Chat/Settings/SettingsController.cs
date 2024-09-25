@@ -24,8 +24,20 @@ public class SettingsController : ChatController, ISettingsAppService
 
     [HttpPost]
     [Route("send-on-enter")]
-    public Task SetSendOnEnterSettingAsync(SendOnEnterSettingDto input)
+    public virtual Task SetSendOnEnterSettingAsync(SendOnEnterSettingDto input)
     {
         return _settingAppService.SetSendOnEnterSettingAsync(input);
+    }
+
+    [HttpGet]
+    public virtual Task<ChatSettingsDto> GetAsync()
+    {
+        return _settingAppService.GetAsync();
+    }
+
+    [HttpPut]
+    public virtual Task UpdateAsync(ChatSettingsDto input)
+    {
+        return _settingAppService.UpdateAsync(input);
     }
 }

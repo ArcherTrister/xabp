@@ -133,7 +133,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var clientSecret = enumerator.Current;
-            if (input.Secrets.FirstOrDefault((ClientSecretDto s) => clientSecret.Equals(client.Id, s.Value, s.Type)) == null)
+            if (input.Secrets.FirstOrDefault((s) => clientSecret.Equals(client.Id, s.Value, s.Type)) == null)
             {
                 client.RemoveSecret(clientSecret.Value, clientSecret.Type);
             }
@@ -154,7 +154,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var property = enumerator.Current;
-            if (input.Properties.FirstOrDefault((ClientPropertyDto p) => property.Equals(client.Id, p.Key, p.Value)) == null)
+            if (input.Properties.FirstOrDefault((p) => property.Equals(client.Id, p.Key, p.Value)) == null)
             {
                 client.RemoveProperty(property.Key);
             }
@@ -175,7 +175,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var claim = enumerator.Current;
-            if (input.Claims.FirstOrDefault((ClientClaimDto c) => claim.Equals(client.Id, c.Type, c.Value)) == null)
+            if (input.Claims.FirstOrDefault((c) => claim.Equals(client.Id, c.Type, c.Value)) == null)
             {
                 client.RemoveClaim(claim.Type, claim.Value);
             }
@@ -196,7 +196,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var redirectUri = enumerator.Current;
-            if (!input.RedirectUris.Any((string uri) => redirectUri.Equals(client.Id, uri)))
+            if (!input.RedirectUris.Any((uri) => redirectUri.Equals(client.Id, uri)))
             {
                 client.RemoveRedirectUri(redirectUri.RedirectUri);
             }
@@ -217,7 +217,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var corsOrigin = enumerator.Current;
-            if (!input.AllowedCorsOrigins.Any((string uri) => corsOrigin.Equals(client.Id, uri)))
+            if (!input.AllowedCorsOrigins.Any((uri) => corsOrigin.Equals(client.Id, uri)))
             {
                 client.RemoveCorsOrigin(corsOrigin.Origin);
             }
@@ -238,7 +238,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var postLogoutRedirectUri = enumerator.Current;
-            if (!input.PostLogoutRedirectUris.Any((string uri) => postLogoutRedirectUri.Equals(client.Id, uri)))
+            if (!input.PostLogoutRedirectUris.Any((uri) => postLogoutRedirectUri.Equals(client.Id, uri)))
             {
                 client.RemovePostLogoutRedirectUri(postLogoutRedirectUri.PostLogoutRedirectUri);
             }
@@ -259,7 +259,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var idPRestriction = enumerator.Current;
-            if (!input.IdentityProviderRestrictions.Any((string p) => idPRestriction.Equals(client.Id, p)))
+            if (!input.IdentityProviderRestrictions.Any((p) => idPRestriction.Equals(client.Id, p)))
             {
                 client.RemoveIdentityProviderRestriction(idPRestriction.Provider);
             }
@@ -281,7 +281,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var grantType = enumerator.Current;
-            if (!input.AllowedGrantTypes.Any((string g) => grantType.Equals(client.Id, g)))
+            if (!input.AllowedGrantTypes.Any((g) => grantType.Equals(client.Id, g)))
             {
                 client.RemoveGrantType(grantType.GrantType);
             }
@@ -302,7 +302,7 @@ public class ClientAppService : IdentityServerAppServiceBase, IClientAppService
         while (enumerator.MoveNext())
         {
             var scope = enumerator.Current;
-            if (!input.AllowedScopes.Any((string s) => scope.Equals(client.Id, s)))
+            if (!input.AllowedScopes.Any((s) => scope.Equals(client.Id, s)))
             {
                 client.RemoveScope(scope.Scope);
             }

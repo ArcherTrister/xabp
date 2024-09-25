@@ -6,7 +6,10 @@ namespace X.Abp.Account.Dtos;
 
 public class TwoFactorAuthenticationDto
 {
-    public bool HasAuthenticator { get; set; }
+    /// <summary>
+    /// 取代has-authenticator-key接口
+    /// </summary>
+    public bool HasAuthenticatorKey { get; set; }
 
     public bool Is2faEnabled { get; set; }
 

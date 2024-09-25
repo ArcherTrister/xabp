@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0D4743C0-6E23-4FCA-95BC-C31FD4257CA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2C356C85-34E5-4796-8237-D8B8F87A76BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCompanyName.MyProjectName.AuthServer", "src\MyCompanyName.MyProjectName.AuthServer\MyCompanyName.MyProjectName.AuthServer.csproj", "{B937EB47-5CE9-47BB-BDA3-D697A47732FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B937EB47-5CE9-47BB-BDA3-D697A47732FE} = {0D4743C0-6E23-4FCA-95BC-C31FD4257CA6}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B937EB47-5CE9-47BB-BDA3-D697A47732FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B937EB47-5CE9-47BB-BDA3-D697A47732FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B937EB47-5CE9-47BB-BDA3-D697A47732FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B937EB47-5CE9-47BB-BDA3-D697A47732FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

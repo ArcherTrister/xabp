@@ -22,8 +22,6 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Users;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
-
 namespace X.Abp.Account.Public.Web.Pages.Account;
 
 [Authorize]
@@ -42,28 +40,16 @@ public class ImpersonateUserModel : AccountPageModel
 
     protected ITenantStore TenantStore { get; }
 
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
-
     public ImpersonateUserModel(
         IOptions<AbpAccountOptions> accountOptions,
         IPermissionChecker permissionChecker,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
-        ITenantStore tenantStore,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager)
+        ITenantStore tenantStore)
     {
         AccountOptions = accountOptions.Value;
         PermissionChecker = permissionChecker;
         CurrentPrincipalAccessor = currentPrincipalAccessor;
         TenantStore = tenantStore;
-        SignInManager = signInManager;
-        UserManager = userManager;
-        IdentitySecurityLogManager = identitySecurityLogManager;
     }
 
     public virtual Task<IActionResult> OnGetAsync()
@@ -130,6 +116,8 @@ public class ImpersonateUserModel : AccountPageModel
                     Action = "ImpersonateUser"
                 });
             }
+
+            await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(user.Id, user.TenantId);
 
             return Redirect("~/");
         }

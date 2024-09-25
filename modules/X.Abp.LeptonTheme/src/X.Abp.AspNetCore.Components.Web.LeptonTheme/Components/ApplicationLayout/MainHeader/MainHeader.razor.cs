@@ -1,21 +1,30 @@
-﻿using System;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using System;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
-using Volo.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayout.Navigation;
-using Volo.Abp.LeptonTheme.Management;
+
+using Volo.Abp.AspNetCore.Components.Web;
+
+using X.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayout.Menus;
+using X.Abp.LeptonTheme.Management;
 
 namespace X.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayout.MainHeader
 {
     public partial class MainHeader : IDisposable
     {
         public bool IsToolbarNavShown { get; set; }
+
         public bool IsSidebarNavShown { get; set; }
 
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
-         [Inject]
+        [Inject]
         protected MainMenuProvider MainMenuProvider { get; set; }
 
         [Inject]
@@ -48,8 +57,7 @@ namespace X.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayo
 
         private async Task SetBodyClassesAsync()
         {
-            //TODO: Does setting body classes so frequently effects performance?
-
+            // TODO: Does setting body classes so frequently effects performance?
             if (Menu.Placement == MenuPlacement.Top)
             {
                 await UtilsService.AddClassToTagAsync("body", "lp-topmenu");
@@ -85,8 +93,7 @@ namespace X.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayo
 
         private async Task OnNavBarMouseOverAsync()
         {
-            //TODO: MOUSEOVER IS NOT PERFORMANT, WE SHOULD USE MOUSEENTER/MOUSELEAVE
-
+            // TODO: MOUSEOVER IS NOT PERFORMANT, WE SHOULD USE MOUSEENTER/MOUSELEAVE
             if (Menu.NavBarStatus == MenuStatus.OpenOnHover)
             {
                 if (await UtilsService.HasClassOnTagAsync("body", "lp-closed"))

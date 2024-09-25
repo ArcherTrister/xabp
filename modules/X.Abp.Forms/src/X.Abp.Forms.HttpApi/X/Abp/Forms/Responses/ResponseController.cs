@@ -25,64 +25,64 @@ namespace X.Abp.Forms.Responses;
 [Route("api/responses")]
 public class ResponseController : AbpControllerBase, IResponseAppService
 {
-    protected IResponseAppService ResponseAppService { get; }
+  protected IResponseAppService ResponseAppService { get; }
 
-    public ResponseController(IResponseAppService responseAppService)
-    {
-        ResponseAppService = responseAppService;
-    }
+  public ResponseController(IResponseAppService responseAppService)
+  {
+    ResponseAppService = responseAppService;
+  }
 
-    [HttpGet]
-    [Route("{id}")]
-    public virtual Task<FormResponseDto> GetAsync(Guid id)
-    {
-        return ResponseAppService.GetAsync(id);
-    }
+  [HttpGet]
+  [Route("{id}")]
+  public virtual Task<FormResponseDto> GetAsync(Guid id)
+  {
+    return ResponseAppService.GetAsync(id);
+  }
 
-    [HttpGet]
-    public virtual Task<PagedResultDto<FormResponseDto>> GetListAsync(GetUserFormListInputDto input)
-    {
-        return ResponseAppService.GetListAsync(input);
-    }
+  [HttpGet]
+  public virtual Task<PagedResultDto<FormResponseDto>> GetListAsync(GetUserFormListInputDto input)
+  {
+    return ResponseAppService.GetListAsync(input);
+  }
 
-    [HttpGet]
-    [Route("{id}/questions-with-answers")]
-    public Task<List<QuestionWithAnswersDto>> GetQuestionsWithAnswersAsync(Guid id)
-    {
-        return ResponseAppService.GetQuestionsWithAnswersAsync(id);
-    }
+  [HttpGet]
+  [Route("{id}/questions-with-answers")]
+  public virtual Task<List<QuestionWithAnswersDto>> GetQuestionsWithAnswersAsync(Guid id)
+  {
+    return ResponseAppService.GetQuestionsWithAnswersAsync(id);
+  }
 
-    [HttpGet]
-    [Route("form-details/{formId}")]
-    public virtual Task<FormDto> GetFormDetailsAsync(Guid formId)
-    {
-        return ResponseAppService.GetFormDetailsAsync(formId);
-    }
+  [HttpGet]
+  [Route("form-details/{formId}")]
+  public virtual Task<FormDto> GetFormDetailsAsync(Guid formId)
+  {
+    return ResponseAppService.GetFormDetailsAsync(formId);
+  }
 
-    [HttpGet]
-    [Route("{userId}/response")]
-    public virtual Task<PagedResultDto<FormWithResponseDto>> GetUserFormsByUserIdAsync(Guid userId)
-    {
-        return ResponseAppService.GetUserFormsByUserIdAsync(userId);
-    }
+  [HttpGet]
+  [Route("{userId}/response")]
+  public virtual Task<PagedResultDto<FormWithResponseDto>> GetUserFormsByUserIdAsync(Guid userId)
+  {
+    return ResponseAppService.GetUserFormsByUserIdAsync(userId);
+  }
 
-    [HttpPost]
-    public virtual Task<FormResponseDto> SaveAnswersAsync(Guid formId, CreateResponseDto input)
-    {
-        return ResponseAppService.SaveAnswersAsync(formId, input);
-    }
+  [HttpPost]
+  public virtual Task<FormResponseDto> SaveAnswersAsync(Guid formId, CreateResponseDto input)
+  {
+    return ResponseAppService.SaveAnswersAsync(formId, input);
+  }
 
-    [HttpPost]
-    [Route("{id}")]
-    public virtual Task<FormResponseDto> UpdateAnswersAsync(Guid id, UpdateResponseDto input)
-    {
-        return ResponseAppService.UpdateAnswersAsync(id, input);
-    }
+  [HttpPost]
+  [Route("{id}")]
+  public virtual Task<FormResponseDto> UpdateAnswersAsync(Guid id, UpdateResponseDto input)
+  {
+    return ResponseAppService.UpdateAnswersAsync(id, input);
+  }
 
-    [HttpDelete]
-    [Route("{id}")]
-    public Task DeleteAsync(Guid id)
-    {
-        return ResponseAppService.DeleteAsync(id);
-    }
+  [HttpDelete]
+  [Route("{id}")]
+  public virtual Task DeleteAsync(Guid id)
+  {
+    return ResponseAppService.DeleteAsync(id);
+  }
 }

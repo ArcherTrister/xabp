@@ -5,7 +5,7 @@ namespace X.Abp.Chat.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(ChatBlazorModule),
-    typeof(ChatHttpApiClientModule),
+    typeof(AbpChatHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class ChatBlazorWebAssemblyModule : AbpModule

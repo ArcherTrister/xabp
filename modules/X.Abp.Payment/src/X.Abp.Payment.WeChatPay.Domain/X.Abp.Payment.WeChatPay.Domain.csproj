@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>X.Abp.Payment.WeChat.Domain</AssemblyName>
+    <PackageId>X.Abp.Payment.WeChat.Domain</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="X\Abp\Payment\WeChatPay\IPurchaseParameterListGenerator.cs" />
+    <Compile Remove="X\Abp\Payment\WeChatPay\PurchaseParameterListGenerator.cs" />
+    <Compile Remove="X\Abp\Payment\WeChatPay\WeChatPayOptions.cs" />
+    <Compile Remove="X\Abp\Payment\WeChatPay\WeChatPayPaymentRequestExtraParameterConfiguration.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Essensoft.Paylink.WeChatPay" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Json.Abstractions" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Payment.Domain\X.Abp.Payment.Domain.csproj" />
+    <ProjectReference Include="..\X.Abp.Payment.WeChatPay.Domain.Shared\X.Abp.Payment.WeChatPay.Domain.Shared.csproj" />
+  </ItemGroup>
+</Project>

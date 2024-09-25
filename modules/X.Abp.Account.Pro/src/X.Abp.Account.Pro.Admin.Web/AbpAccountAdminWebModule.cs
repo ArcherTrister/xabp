@@ -20,8 +20,8 @@ using X.Abp.Account.Localization;
 namespace X.Abp.Account.Admin.Web;
 
 [DependsOn(
-    typeof(AbpAccountAdminApplicationContractsModule),
     typeof(AbpSettingManagementWebModule),
+    typeof(AbpAccountAdminApplicationContractsModule),
     typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
 public class AbpAccountAdminWebModule : AbpModule
 {

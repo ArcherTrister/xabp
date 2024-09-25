@@ -18,40 +18,40 @@ using X.Abp.LeptonTheme.Management.Web.Pages.LeptonThemeManagement.Components.Le
 
 namespace X.Abp.LeptonTheme.Management.Web.Settings
 {
-    public class LeptonThemeSettingManagementPageContributor : ISettingPageContributor
+  public class LeptonThemeSettingManagementPageContributor : ISettingPageContributor
+  {
+    public virtual async Task ConfigureAsync(SettingPageCreationContext context)
     {
-        public async Task ConfigureAsync(SettingPageCreationContext context)
-        {
-            var featureChecker = context.ServiceProvider.GetRequiredService<IFeatureChecker>();
+      var featureChecker = context.ServiceProvider.GetRequiredService<IFeatureChecker>();
 
-            if (!await featureChecker.IsEnabledAsync(LeptonThemeManagementFeatures.Enable))
-            {
-                return;
-            }
+      if (!await featureChecker.IsEnabledAsync(LeptonThemeManagementFeatures.Enable))
+      {
+        return;
+      }
 
-            if (!await CheckPermissionsInternalAsync(context))
-            {
-                return;
-            }
+      if (!await CheckPermissionsInternalAsync(context))
+      {
+        return;
+      }
 
-            var l = context.ServiceProvider.GetRequiredService<IStringLocalizer<LeptonThemeManagementResource>>();
-            context.Groups.Add(
-                new SettingPageGroup(
-                    "Volo.Abp.LeptonThemeManagement",
-                    l["Menu:LeptonThemeSettings"],
-                    typeof(LeptonThemeSettingGroupViewComponent)));
-        }
-
-        public async Task<bool> CheckPermissionsAsync(SettingPageCreationContext context)
-        {
-            return await CheckPermissionsInternalAsync(context);
-        }
-
-        private static async Task<bool> CheckPermissionsInternalAsync(SettingPageCreationContext context)
-        {
-            var authService = context.ServiceProvider.GetRequiredService<IAuthorizationService>();
-
-            return await authService.IsGrantedAsync(LeptonThemeManagementPermissions.Settings.SettingsGroup);
-        }
+      var l = context.ServiceProvider.GetRequiredService<IStringLocalizer<LeptonThemeManagementResource>>();
+      context.Groups.Add(
+          new SettingPageGroup(
+              "Volo.Abp.LeptonThemeManagement",
+              l["Menu:LeptonThemeSettings"],
+              typeof(LeptonThemeSettingGroupViewComponent)));
     }
+
+    public virtual async Task<bool> CheckPermissionsAsync(SettingPageCreationContext context)
+    {
+      return await CheckPermissionsInternalAsync(context);
+    }
+
+    private static async Task<bool> CheckPermissionsInternalAsync(SettingPageCreationContext context)
+    {
+      var authService = context.ServiceProvider.GetRequiredService<IAuthorizationService>();
+
+      return await authService.IsGrantedAsync(LeptonThemeManagementPermissions.Settings.SettingsGroup);
+    }
+  }
 }

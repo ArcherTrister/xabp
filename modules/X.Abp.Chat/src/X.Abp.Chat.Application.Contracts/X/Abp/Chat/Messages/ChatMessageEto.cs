@@ -19,4 +19,6 @@ public class ChatMessageEto
     public Guid SenderUserId { get; set; }
 
     public string Message { get; set; }
+
+    public Guid MessageId { get; set; }
 }

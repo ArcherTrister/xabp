@@ -10,19 +10,19 @@ namespace X.Abp.Notification.Web.Menus;
 
 public class AbpNotificationMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        // Add main menu items.
-        context.Menu.AddItem(new ApplicationMenuItem(AbpNotificationMenuNames.Prefix, displayName: "Notification", "~/Notification", icon: "fa fa-globe"));
+  private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    // Add main menu items.
+    context.Menu.AddItem(new ApplicationMenuItem(AbpNotificationMenuNames.Prefix, displayName: "Notification", "~/Notification", icon: "fa fa-globe"));
 
-        return Task.CompletedTask;
-    }
+    return Task.CompletedTask;
+  }
 }

@@ -18,16 +18,16 @@ namespace X.Abp.Chat.Web;
 
 public class ChatToolbarContributor : IToolbarContributor
 {
-    public async Task ConfigureToolbarAsync(IToolbarConfigurationContext context)
+  public virtual async Task ConfigureToolbarAsync(IToolbarConfigurationContext context)
+  {
+    if (context.Toolbar.Name == StandardToolbars.Main)
     {
-        if (context.Toolbar.Name == StandardToolbars.Main)
-        {
-            var featureChecker = context.ServiceProvider.GetService<IFeatureChecker>();
-            if (await featureChecker.IsEnabledAsync(AbpChatFeatures.Enable))
-            {
-                context.Toolbar.Items
-                    .Insert(0, new ToolbarItem(typeof(MessagesToolbarItemViewComponent)).RequirePermissions(AbpChatPermissions.Messaging));
-            }
-        }
+      var featureChecker = context.ServiceProvider.GetService<IFeatureChecker>();
+      if (await featureChecker.IsEnabledAsync(AbpChatFeatures.Enable))
+      {
+        context.Toolbar.Items
+            .Insert(0, new ToolbarItem(typeof(MessagesToolbarItemViewComponent)).RequirePermissions(AbpChatPermissions.Messaging));
+      }
     }
+  }
 }

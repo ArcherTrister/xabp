@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 
+using Volo.Abp;
 using Volo.Abp.Caching;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.TextTemplating;
@@ -17,16 +18,28 @@ public class DatabaseTemplateContentContributor : ITemplateContentContributor, I
 {
     protected ITextTemplateContentRepository ContentRepository { get; }
 
+    protected IStaticTemplateDefinitionStore StaticTemplateDefinitionStore { get; }
+
+    protected IDynamicTemplateDefinitionStore DynamicTemplateDefinitionStore { get; }
+
+    protected ITextTemplateDefinitionContentRecordRepository TextTemplateDefinitionContentRecordRepository { get; }
+
     protected IDistributedCache<string, TemplateContentCacheKey> Cache { get; }
 
     protected TextTemplateManagementOptions Options { get; }
 
     public DatabaseTemplateContentContributor(
       ITextTemplateContentRepository contentRepository,
+      StaticTemplateDefinitionStore staticTemplateDefinitionStore,
+      IDynamicTemplateDefinitionStore dynamicTemplateDefinitionStore,
+      ITextTemplateDefinitionContentRecordRepository textTemplateDefinitionContentRecordRepository,
       IDistributedCache<string, TemplateContentCacheKey> cache,
       IOptions<TextTemplateManagementOptions> options)
     {
         ContentRepository = contentRepository;
+        StaticTemplateDefinitionStore = staticTemplateDefinitionStore;
+        DynamicTemplateDefinitionStore = dynamicTemplateDefinitionStore;
+        TextTemplateDefinitionContentRecordRepository = textTemplateDefinitionContentRecordRepository;
         Cache = cache;
         Options = options.Value;
     }
@@ -42,9 +55,38 @@ public class DatabaseTemplateContentContributor : ITemplateContentContributor, I
             });
     }
 
-    protected virtual async Task<string> GetTemplateContentFromDbOrNullAsync(
-      TemplateContentContributorContext context)
+    protected virtual async Task<string> GetTemplateContentFromDbOrNullAsync(TemplateContentContributorContext context)
     {
-        return (await ContentRepository.FindAsync(context.TemplateDefinition.Name, context.Culture))?.Content;
+        TextTemplateContent textTemplateContent = await ContentRepository.FindAsync(context.TemplateDefinition.Name, context.Culture);
+        if (textTemplateContent != null)
+        {
+            return textTemplateContent.Content;
+        }
+
+        TemplateDefinition templateDefinition = await StaticTemplateDefinitionStore.GetOrNullAsync(context.TemplateDefinition.Name);
+        if (templateDefinition != null)
+        {
+            return null;
+        }
+
+        templateDefinition = await DynamicTemplateDefinitionStore.GetOrNullAsync(context.TemplateDefinition.Name);
+        if (templateDefinition == null)
+        {
+            return null;
+        }
+
+        TextTemplateDefinitionContentRecord definitionContentRecord = await TextTemplateDefinitionContentRecordRepository.FindByDefinitionNameAsync(templateDefinition.Name, context.Culture);
+        if (definitionContentRecord != null)
+        {
+            return definitionContentRecord.FileContent;
+        }
+
+        definitionContentRecord = await TextTemplateDefinitionContentRecordRepository.FindByDefinitionNameAsync(templateDefinition.Name, templateDefinition.DefaultCultureName ?? "en");
+        if (definitionContentRecord != null)
+        {
+            return definitionContentRecord.FileContent;
+        }
+
+        return (await TextTemplateDefinitionContentRecordRepository.FindByDefinitionNameAsync(templateDefinition.Name) ?? throw new AbpException("Could not find any content for the dynamic template definition: " + templateDefinition.Name + ".")).FileContent;
     }
 }

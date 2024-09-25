@@ -75,8 +75,8 @@ IEditionRepository
 
         return editions.Select(edition =>
         {
-            EditionWithTenantCount tenantCountAsync = new EditionWithTenantCount();
-            tenantCountAsync.Edition = edition;
+            EditionWithTenantCount editionWithTenantCount = new EditionWithTenantCount();
+            editionWithTenantCount.Edition = edition;
             var data = list.FirstOrDefault(x =>
             {
                 Guid? editionId = x.EditionId;
@@ -88,8 +88,8 @@ IEditionRepository
 
                 return !editionId.HasValue || editionId.GetValueOrDefault() == id;
             });
-            tenantCountAsync.TenantCount = data != null ? data.Count : 0L;
-            return tenantCountAsync;
+            editionWithTenantCount.TenantCount = data != null ? data.Count : 0L;
+            return editionWithTenantCount;
         }).ToList();
     }
 
@@ -100,7 +100,7 @@ IEditionRepository
 
     protected virtual async Task<List<Edition>> GetListInternalAsync(
   string sorting = null,
-  int maxResultCount = 2147483647,
+  int maxResultCount = int.MaxValue,
   int skipCount = 0,
   string filter = null,
   bool includeDetails = false,

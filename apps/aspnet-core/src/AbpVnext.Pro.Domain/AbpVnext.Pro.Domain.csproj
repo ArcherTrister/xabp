@@ -8,12 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="OpenIddict\**" />
-    <EmbeddedResource Remove="OpenIddict\**" />
-    <None Remove="OpenIddict\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\modules\X.Abp.Chat\src\X.Abp.Chat.Domain\X.Abp.Chat.Domain.csproj" />
     <ProjectReference Include="..\..\..\..\modules\X.Abp.CmsKit.Pro\src\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />
     <ProjectReference Include="..\..\..\..\modules\X.Abp.FileManagement\src\X.Abp.FileManagement.Domain\X.Abp.FileManagement.Domain.csproj" />
@@ -34,9 +28,7 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" VersionOverride="$(AbpPackageVersion)" />
-    <!--<PackageReference
-    Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" VersionOverride="$(AbpPackageVersion)"
-    />-->
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AuditLogging.Domain" VersionOverride="$(AbpPackageVersion)" />

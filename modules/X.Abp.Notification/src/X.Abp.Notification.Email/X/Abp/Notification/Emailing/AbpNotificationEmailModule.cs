@@ -17,7 +17,7 @@ namespace X.Abp.Notification.Email
     [DependsOn(
         typeof(AbpIdentityProDomainModule),
         typeof(AbpEmailingModule),
-        typeof(AbpNotificationModule))]
+        typeof(AbpNotificationAbstractionsModule))]
     public class AbpNotificationEmailModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

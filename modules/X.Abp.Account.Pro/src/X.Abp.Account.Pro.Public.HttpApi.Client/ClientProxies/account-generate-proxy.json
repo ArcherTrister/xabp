@@ -51,6 +51,23 @@
                   }
                 },
                 {
+                  "name": "VerifyPasswordResetTokenAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Account.Dtos.VerifyPasswordResetTokenInput, X.Abp.Account.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.Account.Dtos.VerifyPasswordResetTokenInput",
+                      "typeSimple": "X.Abp.Account.Dtos.VerifyPasswordResetTokenInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                },
+                {
                   "name": "ResetPasswordAsync",
                   "parametersOnMethod": [
                     {
@@ -116,6 +133,23 @@
                   "returnValue": {
                     "type": "System.Void",
                     "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "VerifyEmailConfirmationTokenAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Account.Dtos.VerifyEmailConfirmationTokenInput, X.Abp.Account.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.Account.Dtos.VerifyEmailConfirmationTokenInput",
+                      "typeSimple": "X.Abp.Account.Dtos.VerifyEmailConfirmationTokenInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
                   }
                 },
                 {
@@ -280,13 +314,13 @@
                   }
                 },
                 {
-                  "name": "RemoveLoginAsync",
+                  "name": "RemoveExternalLoginAsync",
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "X.Abp.Account.Dtos.RemoveLoginInput, X.Abp.Account.Pro.Public.Application.Contracts",
-                      "type": "X.Abp.Account.Dtos.RemoveLoginInput",
-                      "typeSimple": "X.Abp.Account.Dtos.RemoveLoginInput",
+                      "typeAsString": "X.Abp.Account.Dtos.RemoveExternalLoginInput, X.Abp.Account.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.Account.Dtos.RemoveExternalLoginInput",
+                      "typeSimple": "X.Abp.Account.Dtos.RemoveExternalLoginInput",
                       "isOptional": false,
                       "defaultValue": null
                     }
@@ -302,6 +336,14 @@
                   "returnValue": {
                     "type": "X.Abp.Account.Dtos.TwoFactorAuthenticationDto",
                     "typeSimple": "X.Abp.Account.Dtos.TwoFactorAuthenticationDto"
+                  }
+                },
+                {
+                  "name": "HasAuthenticatorAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
                   }
                 },
                 {
@@ -325,8 +367,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "X.Abp.Account.Dtos.ShowRecoveryCodesDto",
-                    "typeSimple": "X.Abp.Account.Dtos.ShowRecoveryCodesDto"
+                    "type": "X.Abp.Account.Dtos.VerifyAuthenticatorCodeDto",
+                    "typeSimple": "X.Abp.Account.Dtos.VerifyAuthenticatorCodeDto"
                   }
                 },
                 {
@@ -341,8 +383,8 @@
                   "name": "GenerateRecoveryCodesAsync",
                   "parametersOnMethod": [],
                   "returnValue": {
-                    "type": "X.Abp.Account.Dtos.ShowRecoveryCodesDto",
-                    "typeSimple": "X.Abp.Account.Dtos.ShowRecoveryCodesDto"
+                    "type": "X.Abp.Account.Dtos.VerifyAuthenticatorCodeDto",
+                    "typeSimple": "X.Abp.Account.Dtos.VerifyAuthenticatorCodeDto"
                   }
                 }
               ]
@@ -419,6 +461,43 @@
               "returnValue": {
                 "type": "System.Void",
                 "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountAppService"
+            },
+            "VerifyPasswordResetTokenAsyncByInput": {
+              "uniqueName": "VerifyPasswordResetTokenAsyncByInput",
+              "name": "VerifyPasswordResetTokenAsync",
+              "httpMethod": "POST",
+              "url": "api/account/verify-password-reset-code",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Account.Dtos.VerifyPasswordResetTokenInput, X.Abp.Account.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.Account.Dtos.VerifyPasswordResetTokenInput",
+                  "typeSimple": "X.Abp.Account.Dtos.VerifyPasswordResetTokenInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.Dtos.VerifyPasswordResetTokenInput",
+                  "typeSimple": "X.Abp.Account.Dtos.VerifyPasswordResetTokenInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Account.IAccountAppService"
@@ -571,6 +650,43 @@
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Account.IAccountAppService"
             },
+            "VerifyEmailConfirmationTokenAsyncByInput": {
+              "uniqueName": "VerifyEmailConfirmationTokenAsyncByInput",
+              "name": "VerifyEmailConfirmationTokenAsync",
+              "httpMethod": "POST",
+              "url": "api/account/verify-email-confirmation-token",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Account.Dtos.VerifyEmailConfirmationTokenInput, X.Abp.Account.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.Account.Dtos.VerifyEmailConfirmationTokenInput",
+                  "typeSimple": "X.Abp.Account.Dtos.VerifyEmailConfirmationTokenInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.Dtos.VerifyEmailConfirmationTokenInput",
+                  "typeSimple": "X.Abp.Account.Dtos.VerifyEmailConfirmationTokenInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountAppService"
+            },
             "ConfirmPhoneNumberAsyncByInput": {
               "uniqueName": "ConfirmPhoneNumberAsyncByInput",
               "name": "ConfirmPhoneNumberAsync",
@@ -666,8 +782,8 @@
                   "nameOnMethod": "input",
                   "name": "Type",
                   "jsonName": null,
-                  "type": "X.Abp.Account.ProfilePictureType",
-                  "typeSimple": "X.Abp.Account.ProfilePictureType",
+                  "type": "System.String",
+                  "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -884,7 +1000,7 @@
                 },
                 {
                   "nameOnMethod": "input",
-                  "name": "Action",
+                  "name": "ActionName",
                   "jsonName": null,
                   "type": "System.String",
                   "typeSimple": "string",
@@ -1063,18 +1179,18 @@
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Account.IAccountAppService"
             },
-            "RemoveLoginAsyncByInput": {
-              "uniqueName": "RemoveLoginAsyncByInput",
-              "name": "RemoveLoginAsync",
+            "RemoveExternalLoginAsyncByInput": {
+              "uniqueName": "RemoveExternalLoginAsyncByInput",
+              "name": "RemoveExternalLoginAsync",
               "httpMethod": "POST",
-              "url": "api/account/remove-login",
+              "url": "api/account/remove-external-login",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "X.Abp.Account.Dtos.RemoveLoginInput, X.Abp.Account.Pro.Public.Application.Contracts",
-                  "type": "X.Abp.Account.Dtos.RemoveLoginInput",
-                  "typeSimple": "X.Abp.Account.Dtos.RemoveLoginInput",
+                  "typeAsString": "X.Abp.Account.Dtos.RemoveExternalLoginInput, X.Abp.Account.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.Account.Dtos.RemoveExternalLoginInput",
+                  "typeSimple": "X.Abp.Account.Dtos.RemoveExternalLoginInput",
                   "isOptional": false,
                   "defaultValue": null
                 }
@@ -1084,8 +1200,8 @@
                   "nameOnMethod": "input",
                   "name": "input",
                   "jsonName": null,
-                  "type": "X.Abp.Account.Dtos.RemoveLoginInput",
-                  "typeSimple": "X.Abp.Account.Dtos.RemoveLoginInput",
+                  "type": "X.Abp.Account.Dtos.RemoveExternalLoginInput",
+                  "typeSimple": "X.Abp.Account.Dtos.RemoveExternalLoginInput",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -1111,6 +1227,21 @@
               "returnValue": {
                 "type": "X.Abp.Account.Dtos.TwoFactorAuthenticationDto",
                 "typeSimple": "X.Abp.Account.Dtos.TwoFactorAuthenticationDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountAppService"
+            },
+            "HasAuthenticatorAsync": {
+              "uniqueName": "HasAuthenticatorAsync",
+              "name": "HasAuthenticatorAsync",
+              "httpMethod": "GET",
+              "url": "api/account/has-authenticator",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Account.IAccountAppService"
@@ -1161,8 +1292,8 @@
                 }
               ],
               "returnValue": {
-                "type": "X.Abp.Account.Dtos.ShowRecoveryCodesDto",
-                "typeSimple": "X.Abp.Account.Dtos.ShowRecoveryCodesDto"
+                "type": "X.Abp.Account.Dtos.VerifyAuthenticatorCodeDto",
+                "typeSimple": "X.Abp.Account.Dtos.VerifyAuthenticatorCodeDto"
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Account.IAccountAppService"
@@ -1191,148 +1322,11 @@
               "parametersOnMethod": [],
               "parameters": [],
               "returnValue": {
-                "type": "X.Abp.Account.Dtos.ShowRecoveryCodesDto",
-                "typeSimple": "X.Abp.Account.Dtos.ShowRecoveryCodesDto"
+                "type": "X.Abp.Account.Dtos.VerifyAuthenticatorCodeDto",
+                "typeSimple": "X.Abp.Account.Dtos.VerifyAuthenticatorCodeDto"
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Account.IAccountAppService"
-            }
-          }
-        },
-        "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController": {
-          "controllerName": "Account",
-          "controllerGroupName": "Login",
-          "isRemoteService": true,
-          "isIntegrationService": false,
-          "apiVersion": null,
-          "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController",
-          "interfaces": [],
-          "actions": {
-            "LoginByLogin": {
-              "uniqueName": "LoginByLogin",
-              "name": "Login",
-              "httpMethod": "POST",
-              "url": "api/account/login",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "login",
-                  "typeAsString": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo, X.Abp.Account.Pro.Public.Web",
-                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
-                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "login",
-                  "name": "login",
-                  "jsonName": null,
-                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
-                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult",
-                "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
-            },
-            "LinkLoginByLogin": {
-              "uniqueName": "LinkLoginByLogin",
-              "name": "LinkLogin",
-              "httpMethod": "POST",
-              "url": "api/account/link-login",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "login",
-                  "typeAsString": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo, X.Abp.Account.Pro.Public.Web",
-                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo",
-                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "login",
-                  "name": "login",
-                  "jsonName": null,
-                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo",
-                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult",
-                "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
-            },
-            "Logout": {
-              "uniqueName": "Logout",
-              "name": "Logout",
-              "httpMethod": "GET",
-              "url": "api/account/logout",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
-            },
-            "CheckPasswordByLogin": {
-              "uniqueName": "CheckPasswordByLogin",
-              "name": "CheckPassword",
-              "httpMethod": "POST",
-              "url": "api/account/check-password",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "login",
-                  "typeAsString": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo, X.Abp.Account.Pro.Public.Web",
-                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
-                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "login",
-                  "name": "login",
-                  "jsonName": null,
-                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
-                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult",
-                "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
             }
           }
         },
@@ -1440,6 +1434,287 @@
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Account.ExternalProviders.IAccountExternalProviderAppService"
+            }
+          }
+        },
+        "X.Abp.Account.AccountSessionController": {
+          "controllerName": "AccountSession",
+          "controllerGroupName": "Sessions",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Account.AccountSessionController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Account.IAccountSessionAppService",
+              "name": "IAccountSessionAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Account.Dtos.GetAccountIdentitySessionListInput, X.Abp.Account.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.Account.Dtos.GetAccountIdentitySessionListInput",
+                      "typeSimple": "X.Abp.Account.Dtos.GetAccountIdentitySessionListInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Identity.IdentitySessionDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Identity.IdentitySessionDto>"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Identity.IdentitySessionDto",
+                    "typeSimple": "X.Abp.Identity.IdentitySessionDto"
+                  }
+                },
+                {
+                  "name": "RevokeAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/account/sessions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Account.Dtos.GetAccountIdentitySessionListInput, X.Abp.Account.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.Account.Dtos.GetAccountIdentitySessionListInput",
+                  "typeSimple": "X.Abp.Account.Dtos.GetAccountIdentitySessionListInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Device",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "ClientId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "ExtraProperties",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Data.ExtraPropertyDictionary",
+                  "typeSimple": "{string:object}",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Identity.IdentitySessionDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<X.Abp.Identity.IdentitySessionDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSessionAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/account/sessions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Identity.IdentitySessionDto",
+                "typeSimple": "X.Abp.Identity.IdentitySessionDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSessionAppService"
+            },
+            "RevokeAsyncById": {
+              "uniqueName": "RevokeAsyncById",
+              "name": "RevokeAsync",
+              "httpMethod": "DELETE",
+              "url": "api/account/sessions/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IAccountSessionAppService"
+            }
+          }
+        },
+        "X.Abp.Account.DynamicClaimsController": {
+          "controllerName": "DynamicClaims",
+          "controllerGroupName": "DynamicClaims",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Account.DynamicClaimsController",
+          "interfaces": [
+            {
+              "type": "X.Abp.Account.IDynamicClaimsAppService",
+              "name": "IDynamicClaimsAppService",
+              "methods": [
+                {
+                  "name": "RefreshAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "RefreshAsync": {
+              "uniqueName": "RefreshAsync",
+              "name": "RefreshAsync",
+              "httpMethod": "POST",
+              "url": "api/account/dynamic-claims/refresh",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IDynamicClaimsAppService"
             }
           }
         },
@@ -2135,6 +2410,14 @@
                     "type": "System.Boolean",
                     "typeSimple": "boolean"
                   }
+                },
+                {
+                  "name": "GetTimezonesAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<Volo.Abp.NameValue>",
+                    "typeSimple": "[Volo.Abp.NameValue]"
+                  }
                 }
               ]
             }
@@ -2295,6 +2578,495 @@
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.Account.IProfileAppService"
+            },
+            "GetTimezonesAsync": {
+              "uniqueName": "GetTimezonesAsync",
+              "name": "GetTimezonesAsync",
+              "httpMethod": "GET",
+              "url": "api/account/my-profile/timezones",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<Volo.Abp.NameValue>",
+                "typeSimple": "[Volo.Abp.NameValue]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.IProfileAppService"
+            }
+          }
+        },
+        "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController": {
+          "controllerName": "Account",
+          "controllerGroupName": "Login",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController",
+          "interfaces": [],
+          "actions": {
+            "LoginAsyncByLogin": {
+              "uniqueName": "LoginAsyncByLogin",
+              "name": "LoginAsync",
+              "httpMethod": "POST",
+              "url": "api/account/login",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "login",
+                  "typeAsString": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo, X.Abp.Account.Pro.Public.Web",
+                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
+                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "login",
+                  "name": "login",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
+                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult",
+                "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "LinkLoginAsyncByLogin": {
+              "uniqueName": "LinkLoginAsyncByLogin",
+              "name": "LinkLoginAsync",
+              "httpMethod": "POST",
+              "url": "api/account/link-login",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "login",
+                  "typeAsString": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo, X.Abp.Account.Pro.Public.Web",
+                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo",
+                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "login",
+                  "name": "login",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo",
+                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.LinkUserLoginInfo",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult",
+                "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "GenerateQrCodeAsync": {
+              "uniqueName": "GenerateQrCodeAsync",
+              "name": "GenerateQrCodeAsync",
+              "httpMethod": "POST",
+              "url": "api/account/generate-qrcode",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.GenerateQrCodeResult",
+                "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.GenerateQrCodeResult"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "CheckQrCodeAsyncByQrCodeKey": {
+              "uniqueName": "CheckQrCodeAsyncByQrCodeKey",
+              "name": "CheckQrCodeAsync",
+              "httpMethod": "POST",
+              "url": "api/account/check-qrcode",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "qrCodeKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "qrCodeKey",
+                  "name": "qrCodeKey",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Account.Public.Web.ExternalProviders.LoginQrCode",
+                "typeSimple": "X.Abp.Account.Public.Web.ExternalProviders.LoginQrCode"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "ScanCodeLoginAsyncByQrCodeKey": {
+              "uniqueName": "ScanCodeLoginAsyncByQrCodeKey",
+              "name": "ScanCodeLoginAsync",
+              "httpMethod": "GET",
+              "url": "api/account/scancode-login",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "qrCodeKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "qrCodeKey",
+                  "name": "qrCodeKey",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Account.Public.Web.ExternalProviders.LoginQrCode",
+                "typeSimple": "X.Abp.Account.Public.Web.ExternalProviders.LoginQrCode"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "ScanCodeLoginConfirmAsyncByQrCodeKey": {
+              "uniqueName": "ScanCodeLoginConfirmAsyncByQrCodeKey",
+              "name": "ScanCodeLoginConfirmAsync",
+              "httpMethod": "POST",
+              "url": "api/account/scancode-login-confirm",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "qrCodeKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "qrCodeKey",
+                  "name": "qrCodeKey",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "ScanCodeLoginAsyncByLogin": {
+              "uniqueName": "ScanCodeLoginAsyncByLogin",
+              "name": "ScanCodeLoginAsync",
+              "httpMethod": "POST",
+              "url": "api/account/scancode-login",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "login",
+                  "typeAsString": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.ScanCodeLoginInfo, X.Abp.Account.Pro.Public.Web",
+                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.ScanCodeLoginInfo",
+                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.ScanCodeLoginInfo",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "login",
+                  "name": "login",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.ScanCodeLoginInfo",
+                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.ScanCodeLoginInfo",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
+                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "SpaExternalLoginAsyncByProviderAndClientIdAndClientSecretAndScopeAndReturnUrl": {
+              "uniqueName": "SpaExternalLoginAsyncByProviderAndClientIdAndClientSecretAndScopeAndReturnUrl",
+              "name": "SpaExternalLoginAsync",
+              "httpMethod": "POST",
+              "url": "api/account/spa-external-login",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "provider",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "clientId",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "clientSecret",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "scope",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "returnUrl",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "provider",
+                  "name": "provider",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "clientId",
+                  "name": "clientId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "clientSecret",
+                  "name": "clientSecret",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "scope",
+                  "name": "scope",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "returnUrl",
+                  "name": "returnUrl",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
+                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "SpaExternalLoginBindAsyncByProviderAndReturnUrl": {
+              "uniqueName": "SpaExternalLoginBindAsyncByProviderAndReturnUrl",
+              "name": "SpaExternalLoginBindAsync",
+              "httpMethod": "POST",
+              "url": "api/account/spa-external-login-bind",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "provider",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "returnUrl",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "provider",
+                  "name": "provider",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "returnUrl",
+                  "name": "returnUrl",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
+                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "LogoutAsync": {
+              "uniqueName": "LogoutAsync",
+              "name": "LogoutAsync",
+              "httpMethod": "GET",
+              "url": "api/account/logout",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
+            },
+            "CheckPasswordAsyncByLogin": {
+              "uniqueName": "CheckPasswordAsyncByLogin",
+              "name": "CheckPasswordAsync",
+              "httpMethod": "POST",
+              "url": "api/account/check-password",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "login",
+                  "typeAsString": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo, X.Abp.Account.Pro.Public.Web",
+                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
+                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "login",
+                  "name": "login",
+                  "jsonName": null,
+                  "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
+                  "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.UserLoginInfo",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult",
+                "typeSimple": "X.Abp.Account.Public.Web.Areas.Account.Controllers.Models.AbpLoginResult"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Account.Public.Web.Areas.Account.Controllers.AccountController"
             }
           }
         }

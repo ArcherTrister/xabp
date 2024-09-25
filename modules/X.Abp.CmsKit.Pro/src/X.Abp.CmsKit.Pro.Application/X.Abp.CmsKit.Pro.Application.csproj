@@ -13,12 +13,9 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.CmsKit.Application" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Admin.Application\X.Abp.CmsKit.Pro.Admin.Application.csproj" />
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Application.Contracts\X.Abp.CmsKit.Pro.Application.Contracts.csproj" />
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Public.Application\X.Abp.CmsKit.Pro.Public.Application.csproj" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Admin.Application\X.Abp.CmsKit.Pro.Admin.Application.csproj" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Application.Contracts\X.Abp.CmsKit.Pro.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Public.Application\X.Abp.CmsKit.Pro.Public.Application.csproj" />
   </ItemGroup>
 
 </Project>

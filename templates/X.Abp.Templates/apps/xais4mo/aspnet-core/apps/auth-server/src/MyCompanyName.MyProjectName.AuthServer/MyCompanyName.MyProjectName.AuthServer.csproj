@@ -8,30 +8,25 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google"
-      VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount"
-      VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter"
-      VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.RabbitMQ"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="X.Abp.Account.Pro.Public.Web.IdentityServer"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.Account.Pro.Public.HttpApi"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.Account.Pro.Public.Application"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.AspNetCore.Mvc.UI.Theme.Lepton"
-      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.RabbitMQ" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.Account.Pro.Public.Web.IdentityServer" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Public.Web.Impersonation" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Public.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Public.Application" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Admin.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Account.Pro.Admin.Application" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.AspNetCore.Mvc.UI.Theme.Lepton" VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

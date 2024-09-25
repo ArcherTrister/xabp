@@ -20,6 +20,7 @@ using Volo.Abp.IdentityServer.Clients;
 using Volo.Abp.IdentityServer.IdentityResources;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.Uow;
 
 using X.Abp.IdentityServer;
@@ -94,7 +95,10 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
                 "name",
                 "phone_number",
                 "phone_number_verified",
-                "role"
+                "role",
+                AbpClaimTypes.SessionId,
+                AbpClaimTypes.SurName,
+                AbpClaimTypes.Name
         };
 
         await CreateApiResourceAsync("Pro", commonApiUserClaims);

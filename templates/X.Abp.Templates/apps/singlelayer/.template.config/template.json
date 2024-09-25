@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "ArcherTrister",
+  "classifications": [ "XAbp", "Abp Pro", "IdentityServer4", "OpenIddict", "Single-Layer", "Web", "WebAPI" ],
+  "name": "XAbp Single Layer Template",
+  "groupIdentity": "X.Abp.SingleLayer",
+  "identity": "X.Abp.SingleLayer",
+  "shortName": "xasl",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MyCompanyName.MyProjectName",
+  "preferNameDirectory": true,
+  "constraints": {
+    "sdk-only": {
+      "type": "host",
+      "args": [
+        {
+          "hostname": "dotnetcli",
+          "version": "[8.0,)"
+        },
+        {
+          "hostname": "vs",
+          "version": "[8.0,)"
+        }
+      ]
+    }
+  },
+  "symbols": {
+    "TemplateType": {
+      "type": "parameter",
+      "description": "Template Type",
+      "dataType": "choice",
+      "defaultValue": "IdentityServer4",
+      "isRequired": false,
+      "choices": [
+        {
+          "choice": "IdentityServer4",
+          "description": "IdentityServer4"
+        },
+        {
+          "choice": "OpenIddict",
+          "description": "OpenIddict"
+        }
+      ]
+    },
+    "IdentityServer4": {
+      "type": "computed",
+      "value": "(TemplateType == \"IdentityServer4\")"
+    },
+    "OpenIddict": {
+      "type": "computed",
+      "value": "(TemplateType == \"OpenIddict\")"
+    },
+    "DatabaseManagementSystem": {
+      "type": "parameter",
+      "description": "Database Management System",
+      "dataType": "choice",
+      "defaultValue": "MySQL",
+      "isRequired": false,
+      "choices": [
+        {
+          "choice": "MySQL",
+          "description": "MySQL Database"
+        },
+        {
+          "choice": "SQLServer",
+          "description": "SQLServer Database"
+        },
+        {
+          "choice": "SQLite",
+          "description": "SQLite Database"
+        },
+        {
+          "choice": "Oracle",
+          "description": "Oracle Database"
+        },
+        {
+          "choice": "OracleDevart",
+          "description": "Oracle Devart Database"
+        },
+        {
+          "choice": "PostgreSQL",
+          "description": "PostgreSQL Database"
+        }
+      ]
+    },
+    "SQLServer": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"SQLServer\")"
+    },
+    "MySQL": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"MySQL\")"
+    },
+    "SQLite": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"SQLite\")"
+    },
+    "Oracle": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"Oracle\")"
+    },
+    "OracleDevart": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"OracleDevart\")"
+    },
+    "PostgreSQL": {
+      "type": "computed",
+      "value": "(DatabaseManagementSystem == \"PostgreSQL\")"
+    }
+  },
+  "SpecialCustomOperations": {
+    "**/*.md": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "if": [ "---#if" ],
+            "else": [ "---#else" ],
+            "elseif": [ "---#elseif", "---#elif" ],
+            "endif": [ "---#endif" ],
+            "trim": "true",
+            "wholeLine": "true"
+          }
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(TemplateType == \"IdentityServer4\")",
+          "exclude": [
+            "aspnet-core/MyCompanyName.MyProjectName/openiddict.pfx",
+            "aspnet-core/MyCompanyName.MyProjectName/OpenIddict/**/*"
+          ]
+        },
+        {
+          "condition": "(TemplateType == \"OpenIddict\")",
+          "exclude": [
+            "aspnet-core/MyCompanyName.MyProjectName/identityserver4.pfx",
+            "aspnet-core/MyCompanyName.MyProjectName/IdentityServer/**/*"
+          ]
+        }
+      ]
+    }
+  ]
+}

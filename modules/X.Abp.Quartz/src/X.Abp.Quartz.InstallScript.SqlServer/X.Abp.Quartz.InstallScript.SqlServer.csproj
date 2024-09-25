@@ -11,12 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="X\Abp\Quartz\SqlServer\Install.sql" />
+    <EmbeddedResource Include="X\Abp\Quartz\SqlServer\*.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" />
-    <PackageReference Include="Volo.Abp.Quartz" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Quartz.Domain\X.Abp.Quartz.Domain.csproj" />
   </ItemGroup>
 
 </Project>

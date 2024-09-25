@@ -21,30 +21,30 @@ IDistributedEventHandler<SubscriptionUpdatedEto>,
 ITransientDependency,
 IEventHandler
 {
-    protected ITenantRepository TenantRepository { get; }
+  protected ITenantRepository TenantRepository { get; }
 
-    protected ILogger<SubscriptionCreatedHandler> Logger { get; }
+  protected ILogger<SubscriptionCreatedHandler> Logger { get; }
 
-    public SubscriptionUpdatedHandler(
-      ITenantRepository tenantRepository,
-      ILogger<SubscriptionCreatedHandler> logger)
+  public SubscriptionUpdatedHandler(
+    ITenantRepository tenantRepository,
+    ILogger<SubscriptionCreatedHandler> logger)
+  {
+    TenantRepository = tenantRepository;
+    Logger = logger;
+  }
+
+  public virtual async Task HandleEventAsync(SubscriptionUpdatedEto eventData)
+  {
+    var tenant = await TenantRepository.FindAsync(Guid.Parse(eventData.ExtraProperties[TenantConsts.TenantIdParameterName]?.ToString()), false);
+    if (tenant == null)
     {
-        TenantRepository = tenantRepository;
-        Logger = logger;
+      Logger.LogWarning(TenantConsts.TenantIdParameterName + eventData.PaymentRequestId.ToString());
     }
-
-    public async Task HandleEventAsync(SubscriptionUpdatedEto eventData)
+    else
     {
-        var tenant = await TenantRepository.FindAsync(Guid.Parse(eventData.ExtraProperties[TenantConsts.TenantIdParameterName]?.ToString()), false);
-        if (tenant == null)
-        {
-            Logger.LogWarning(TenantConsts.TenantIdParameterName + eventData.PaymentRequestId.ToString());
-        }
-        else
-        {
-            tenant.EditionEndDateUtc = eventData.PeriodEndDate;
-            tenant.EditionId = Guid.Parse(eventData.ExtraProperties[EditionConsts.EditionIdParameterName]?.ToString());
-            await TenantRepository.UpdateAsync(tenant, false);
-        }
+      tenant.EditionEndDateUtc = eventData.PeriodEndDate;
+      tenant.EditionId = Guid.Parse(eventData.ExtraProperties[EditionConsts.EditionIdParameterName]?.ToString());
+      await TenantRepository.UpdateAsync(tenant, false);
     }
+  }
 }

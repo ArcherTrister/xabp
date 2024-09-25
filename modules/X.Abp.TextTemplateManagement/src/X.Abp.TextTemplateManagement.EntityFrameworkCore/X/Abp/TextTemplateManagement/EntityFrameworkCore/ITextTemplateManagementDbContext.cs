@@ -15,4 +15,8 @@ namespace X.Abp.TextTemplateManagement.EntityFrameworkCore;
 public interface ITextTemplateManagementDbContext : IEfCoreDbContext
 {
     DbSet<TextTemplateContent> TextTemplateContents { get; }
+
+    DbSet<TextTemplateDefinitionRecord> TextTemplateDefinitionRecords { get; }
+
+    DbSet<TextTemplateDefinitionContentRecord> TextTemplateDefinitionContentRecords { get; }
 }

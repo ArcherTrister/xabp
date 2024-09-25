@@ -64,7 +64,6 @@ public class IdentityRoleController : AbpControllerBase, IIdentityRoleAppService
     }
 
     [HttpGet]
-    [Route("")]
     public virtual Task<PagedResultDto<IdentityRoleDto>> GetListAsync(GetIdentityRoleListInput input)
     {
         return RoleAppService.GetListAsync(input);
@@ -72,7 +71,7 @@ public class IdentityRoleController : AbpControllerBase, IIdentityRoleAppService
 
     [HttpPut]
     [Route("{id}/claims")]
-    public virtual Task UpdateClaimsAsync(Guid id, List<IdentityRoleClaimDto> input)
+    public virtual Task UpdateClaimsAsync(Guid id, List<IdentityRoleClaimUpdateDto> input)
     {
         return RoleAppService.UpdateClaimsAsync(id, input);
     }
@@ -89,5 +88,12 @@ public class IdentityRoleController : AbpControllerBase, IIdentityRoleAppService
     public virtual Task<List<ClaimTypeDto>> GetAllClaimTypesAsync()
     {
         return RoleAppService.GetAllClaimTypesAsync();
+    }
+
+    [HttpPut]
+    [Route("{id}/move-all-users")]
+    public virtual Task MoveAllUsersAsync(Guid id, Guid? targetRoleId)
+    {
+        return RoleAppService.MoveAllUsersAsync(id, targetRoleId);
     }
 }

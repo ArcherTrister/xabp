@@ -67,7 +67,7 @@ public class ClaimTypeEditModalModel : IdentityPageModel
 
     public virtual async Task<IActionResult> OnPostAsync()
     {
-        var ownedClaims = new List<IdentityRoleClaimDto>();
+        var ownedClaims = new List<IdentityRoleClaimUpdateDto>();
 
         foreach (var claim in Claims)
         {
@@ -76,9 +76,8 @@ public class ClaimTypeEditModalModel : IdentityPageModel
                 if (!value.IsNullOrWhiteSpace())
                 {
                     ownedClaims.Add(
-                        new IdentityRoleClaimDto()
+                        new IdentityRoleClaimUpdateDto()
                         {
-                            RoleId = RoleId,
                             ClaimType = claim.Name,
                             ClaimValue = value
                         });

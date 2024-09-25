@@ -11,11 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.TextTemplateManagement.Domain.Shared\X.Abp.TextTemplateManagement.Domain.Shared.csproj" />
+    <ProjectReference Include="..\X.Abp.TextTemplateManagement.Domain.Shared\X.Abp.TextTemplateManagement.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

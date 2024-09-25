@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 using IdentityServer4.Services;
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -16,8 +15,6 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
 
 using X.Abp.Account.Public.Web.Pages.Account;
-
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
 namespace X.Abp.Account.Web.Pages.Account;
 
@@ -27,10 +24,8 @@ public class IdentityServerSupportedLogoutModel : LogoutModel
     protected IIdentityServerInteractionService Interaction { get; }
 
     public IdentityServerSupportedLogoutModel(
-        SignInManager<IdentityUser> signInManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
         IIdentityServerInteractionService interaction)
-        : base(signInManager, identitySecurityLogManager)
+        : base()
     {
         Interaction = interaction;
     }
@@ -71,7 +66,7 @@ public class IdentityServerSupportedLogoutModel : LogoutModel
                 vm.UICulture = queryUICulture;
             }
 
-            Logger.LogInformation($"Redirecting to LoggedOut Page...");
+            Logger.LogInformation("Redirecting to LoggedOut Page...");
             return RedirectToPage("./LoggedOut", vm);
         }
 

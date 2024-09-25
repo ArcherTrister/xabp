@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 
 using Microsoft.AspNetCore.Builder;
@@ -130,6 +130,12 @@ public class MyProjectNameWebModule : AbpModule
                 options.Scope.Add("ProductService");
             });
 
+        Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+        {
+            options.IsDynamicClaimsEnabled = true;
+            options.RemoteRefreshUrl = configuration["AuthServer:Authority"] + options.RemoteRefreshUrl;
+        });
+
         var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("MyProjectName");
         var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
         dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "MyProjectName-Protection-Keys");
@@ -180,6 +186,7 @@ public class MyProjectNameWebModule : AbpModule
         app.UseAuthentication();
         app.UseMultiTenancy();
         app.UseAbpSerilogEnrichers();
+        app.UseDynamicClaims();
         app.UseAuthorization();
         app.UseConfiguredEndpoints(endpoints =>
         {

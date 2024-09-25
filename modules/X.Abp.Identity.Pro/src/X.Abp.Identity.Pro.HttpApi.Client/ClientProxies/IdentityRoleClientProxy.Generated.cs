@@ -63,12 +63,12 @@ public partial class IdentityRoleClientProxy : ClientProxyBase<IIdentityRoleAppS
         });
     }
 
-    public virtual async Task UpdateClaimsAsync(Guid id, List<IdentityRoleClaimDto> input)
+    public virtual async Task UpdateClaimsAsync(Guid id, List<IdentityRoleClaimUpdateDto> input)
     {
         await RequestAsync(nameof(UpdateClaimsAsync), new ClientProxyRequestTypeValue
         {
             { typeof(Guid), id },
-            { typeof(List<IdentityRoleClaimDto>), input }
+            { typeof(List<IdentityRoleClaimUpdateDto>), input }
         });
     }
 
@@ -83,5 +83,14 @@ public partial class IdentityRoleClientProxy : ClientProxyBase<IIdentityRoleAppS
     public virtual async Task<List<ClaimTypeDto>> GetAllClaimTypesAsync()
     {
         return await RequestAsync<List<ClaimTypeDto>>(nameof(GetAllClaimTypesAsync));
+    }
+
+    public virtual async Task MoveAllUsersAsync(Guid id, Guid? targetRoleId)
+    {
+        await RequestAsync(nameof(MoveAllUsersAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(Guid), id },
+            { typeof(Guid?), targetRoleId }
+        });
     }
 }

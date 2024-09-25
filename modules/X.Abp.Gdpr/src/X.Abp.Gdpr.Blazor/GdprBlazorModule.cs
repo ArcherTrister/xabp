@@ -9,7 +9,7 @@ using Volo.Abp.UI.Navigation;
 namespace X.Abp.Gdpr.Blazor;
 
 [DependsOn(
-    typeof(GdprApplicationContractsModule),
+    typeof(AbpGdprApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
     typeof(AbpAutoMapperModule)
     )]

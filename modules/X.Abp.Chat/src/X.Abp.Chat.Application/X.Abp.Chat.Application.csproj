@@ -13,8 +13,8 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Chat.Application.Contracts\X.Abp.Chat.Application.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Chat.Application.Contracts\X.Abp.Chat.Application.Contracts.csproj" />
     <ProjectReference Include="..\X.Abp.Chat.Domain\X.Abp.Chat.Domain.csproj" />
   </ItemGroup>
 

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Content;
 
 namespace X.Abp.Identity;
 
@@ -52,6 +53,20 @@ public interface IIdentityUserAppService : ICrudAppService<IdentityUserDto, Guid
     Task<List<ExternalLoginProviderDto>> GetExternalLoginProvidersAsync();
 
     Task<IdentityUserDto> ImportExternalUserAsync(ImportExternalUserInput input);
+
+    Task<IdentityUserDto> FindByIdAsync(Guid id);
+
+    Task<IRemoteStreamContent> GetListAsExcelFileAsync(GetIdentityUserListAsFileInput input);
+
+    Task<IRemoteStreamContent> GetListAsCsvFileAsync(GetIdentityUserListAsFileInput input);
+
+    Task<DownloadTokenResultDto> GetDownloadTokenAsync();
+
+    Task<IRemoteStreamContent> GetImportUsersSampleFileAsync(GetImportUsersSampleFileInput input);
+
+    Task<ImportUsersFromFileOutput> ImportUsersFromFileAsync(ImportUsersFromFileInputWithStream input);
+
+    Task<IRemoteStreamContent> GetImportInvalidUsersFileAsync(GetImportInvalidUsersFileInput input);
 
     /*
     /// <summary>

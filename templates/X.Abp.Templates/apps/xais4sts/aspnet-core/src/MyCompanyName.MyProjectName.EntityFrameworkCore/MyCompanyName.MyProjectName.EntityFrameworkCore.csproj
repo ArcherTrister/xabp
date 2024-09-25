@@ -13,45 +13,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySql"
-      VersionOverride="$(AbpPackageVersion)"
-      Condition="'$(MySQL)'=='true'" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer"
-      VersionOverride="$(AbpPackageVersion)" Condition="'$(SqlServer)'=='true'" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite"
-      VersionOverride="$(AbpPackageVersion)"
-      Condition="'$(Sqlite)'=='true'" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Oracle"
-      VersionOverride="$(AbpPackageVersion)"
-      Condition="'$(Oracle)'=='true'" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Oracle.Devart"
-      VersionOverride="$(AbpPackageVersion)" Condition="'$(OracleDevart)'=='true'" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql"
-      VersionOverride="$(AbpPackageVersion)" Condition="'$(PostgreSql)'=='true'" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="X.Abp.Gdpr.EntityFrameworkCore"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.Identity.Pro.EntityFrameworkCore"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.IdentityServer.Pro.EntityFrameworkCore"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.LanguageManagement.EntityFrameworkCore"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.TextTemplateManagement.EntityFrameworkCore"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.Saas.EntityFrameworkCore"
-      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySql" Condition="'$(MySQL)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Condition="'$(SQLServer)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Condition="'$(SQLite)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Oracle" Condition="'$(Oracle)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Oracle.Devart" Condition="'$(OracleDevart)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Condition="'$(PostgreSQL)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Gdpr.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Identity.Pro.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.IdentityServer.Pro.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Saas.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

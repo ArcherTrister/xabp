@@ -34,7 +34,8 @@ using X.Abp.Account.Public.Web.Pages.Account;
 using X.Abp.Account.Security.Captcha;
 using X.Abp.Account.Settings;
 using X.Abp.Identity;
-using X.Captcha;
+
+using static Volo.Abp.Identity.Settings.IdentitySettingNames;
 
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
@@ -55,12 +56,6 @@ public class IdentityServerSupportedLoginModel : LoginModel
         IAbpCaptchaValidatorFactory captchaValidatorFactory,
         IAccountExternalProviderAppService accountExternalProviderAppService,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
-        IIdentityLinkUserAppService identityLinkUserAppService,
-        IOptions<IdentityOptions> identityOptions,
-        IOptionsSnapshot<CaptchaOptions> captchaOptions,
         IIdentityServerInteractionService interaction,
         IClientStore clientStore,
         IEventService identityServerEvents)
@@ -69,13 +64,7 @@ public class IdentityServerSupportedLoginModel : LoginModel
             accountOptions,
             captchaValidatorFactory,
             accountExternalProviderAppService,
-            currentPrincipalAccessor,
-            signInManager,
-            userManager,
-            identitySecurityLogManager,
-            identityLinkUserAppService,
-            identityOptions,
-            captchaOptions)
+            currentPrincipalAccessor)
     {
         Interaction = interaction;
         ClientStore = clientStore;
@@ -152,7 +141,6 @@ public class IdentityServerSupportedLoginModel : LoginModel
         return Page();
     }
 
-    // TODO: Will be removed when we implement action filter
     [UnitOfWork]
     public override async Task<IActionResult> OnPostAsync(string action)
     {
@@ -188,10 +176,10 @@ public class IdentityServerSupportedLoginModel : LoginModel
         {
             if (e is ScoreBelowThresholdException)
             {
-                var onScoreBelowThresholdResult = OnCaptchaScoreBelowThreshold();
+                var onScoreBelowThresholdResult = await OnCaptchaScoreBelowThresholdAsync();
                 if (onScoreBelowThresholdResult != null)
                 {
-                    return await onScoreBelowThresholdResult;
+                    return onScoreBelowThresholdResult;
                 }
             }
 
@@ -243,36 +231,22 @@ public class IdentityServerSupportedLoginModel : LoginModel
             });
         }
 
-        if (result.IsNotAllowed)
+        IdentityUser notAllowedUser;
+        if (!result.IsNotAllowed)
         {
-            var notAllowedUser = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
-            if (notAllowedUser.IsActive && await UserManager.CheckPasswordAsync(notAllowedUser, LoginInput.Password))
+            if (!result.Succeeded)
             {
-                await StoreConfirmUserAsync(notAllowedUser);
-                return RedirectToPage("./ConfirmUser", new
-                {
-                    returnUrl = ReturnUrl,
-                    returnUrlHash = ReturnUrlHash
-                });
+                Alerts.Danger(L["InvalidUserNameOrPassword"]);
+                return Page();
             }
 
-            Alerts.Danger(L["LoginIsNotAllowed"]);
-            return Page();
-        }
+            IdentityUser user = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
+            await IdentityServerEvents.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName, clientId: context?.Client.ClientId));
+            if (!IsLinkLogin)
+            {
+                return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
+            }
 
-        if (!result.Succeeded)
-        {
-            Alerts.Danger(L["InvalidUserNameOrPassword"]);
-            return Page();
-        }
-
-        var user = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
-
-        // TODO: Use user's name once implemented
-        await IdentityServerEvents.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName));
-
-        if (IsLinkLogin)
-        {
             using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(user)))
             {
                 await IdentityLinkUserAppService.LinkAsync(new LinkUserInput
@@ -281,8 +255,7 @@ public class IdentityServerSupportedLoginModel : LoginModel
                     TenantId = LinkTenantId,
                     Token = LinkToken
                 });
-
-                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
                 {
                     Identity = IdentitySecurityLogIdentityConsts.Identity,
                     Action = IdentityProSecurityLogActionConsts.LinkUser,
@@ -290,26 +263,37 @@ public class IdentityServerSupportedLoginModel : LoginModel
                     ClientId = context?.Client?.ClientId,
                     ExtraProperties =
                         {
-                            { IdentityProSecurityLogActionConsts.LinkTargetTenantId, LinkTenantId },
-                            { IdentityProSecurityLogActionConsts.LinkTargetUserId, LinkUserId }
+                          {
+                            IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                            LinkTenantId
+                          },
+                          {
+                            IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                            LinkUserId
+                          }
                         }
                 });
-
                 using (CurrentTenant.Change(LinkTenantId))
                 {
-                    var targetUser = await UserManager.GetByIdAsync(LinkUserId.Value);
-                    using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(targetUser)))
+                    notAllowedUser = await UserManager.GetByIdAsync(LinkUserId.Value);
+                    using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(notAllowedUser)))
                     {
-                        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+                        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
                         {
                             Identity = IdentitySecurityLogIdentityConsts.Identity,
                             Action = IdentityProSecurityLogActionConsts.LinkUser,
-                            UserName = targetUser.UserName,
+                            UserName = notAllowedUser.UserName,
                             ClientId = context?.Client?.ClientId,
                             ExtraProperties =
                                 {
-                                    { IdentityProSecurityLogActionConsts.LinkTargetTenantId, targetUser.TenantId },
-                                    { IdentityProSecurityLogActionConsts.LinkTargetUserId, targetUser.Id }
+                                  {
+                                    IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                                    notAllowedUser.TenantId
+                                  },
+                                  {
+                                    IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                                    notAllowedUser.Id
+                                  }
                                 }
                         });
                     }
@@ -324,8 +308,36 @@ public class IdentityServerSupportedLoginModel : LoginModel
                 });
             }
         }
-
-        return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
+        else
+        {
+            notAllowedUser = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
+            if (notAllowedUser.ShouldChangePasswordOnNextLogin || await UserManager.ShouldPeriodicallyChangePasswordAsync(notAllowedUser))
+            {
+                await StoreChangePasswordUserAsync(notAllowedUser);
+                return RedirectToPage("./ChangePassword", new
+                {
+                    returnUrl = ReturnUrl,
+                    returnUrlHash = ReturnUrlHash
+                });
+            }
+            else
+            {
+                if (notAllowedUser.IsActive || await UserManager.CheckPasswordAsync(notAllowedUser, LoginInput.Password))
+                {
+                    await StoreConfirmUserAsync(notAllowedUser);
+                    return RedirectToPage("./ConfirmUser", new
+                    {
+                        returnUrl = ReturnUrl,
+                        returnUrlHash = ReturnUrlHash
+                    });
+                }
+                else
+                {
+                    Alerts.Danger(L["LoginIsNotAllowed"]);
+                    return Page();
+                }
+            }
+        }
     }
 
     [UnitOfWork]
@@ -352,11 +364,11 @@ public class IdentityServerSupportedLoginModel : LoginModel
                 }
             };
 
-            var id = new ClaimsIdentity(AccountOptions.WindowsAuthenticationSchemeName);
-            id.AddClaim(new Claim(ClaimTypes.NameIdentifier, result.Principal.FindFirstValue(ClaimTypes.PrimarySid)));
-            id.AddClaim(new Claim(ClaimTypes.Name, result.Principal.FindFirstValue(ClaimTypes.Name)));
+            var claimsIdentity = new ClaimsIdentity(AccountOptions.WindowsAuthenticationSchemeName);
+            claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, result.Principal.FindFirstValue(ClaimTypes.PrimarySid)));
+            claimsIdentity.AddClaim(new Claim(ClaimTypes.Name, result.Principal.FindFirstValue(ClaimTypes.Name)));
 
-            await HttpContext.SignInAsync(IdentityConstants.ExternalScheme, new ClaimsPrincipal(id), props);
+            await HttpContext.SignInAsync(IdentityConstants.ExternalScheme, new ClaimsPrincipal(claimsIdentity), props);
 
             return Redirect(props.RedirectUri);
         }

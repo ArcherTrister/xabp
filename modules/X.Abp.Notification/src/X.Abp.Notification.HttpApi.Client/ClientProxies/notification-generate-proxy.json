@@ -517,8 +517,8 @@
                   "nameOnMethod": "input",
                   "name": "State",
                   "jsonName": null,
-                  "type": "X.Abp.Notification.UserNotificationState?",
-                  "typeSimple": "X.Abp.Notification.UserNotificationState?",
+                  "type": "System.String",
+                  "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -693,7 +693,7 @@
                   "parametersOnMethod": [
                     {
                       "name": "user",
-                      "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification",
+                      "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification.Abstractions",
                       "type": "X.Abp.Notification.UserIdentifier",
                       "typeSimple": "X.Abp.Notification.UserIdentifier",
                       "isOptional": false,
@@ -727,7 +727,7 @@
                   "parametersOnMethod": [
                     {
                       "name": "user",
-                      "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification",
+                      "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification.Abstractions",
                       "type": "X.Abp.Notification.UserIdentifier",
                       "typeSimple": "X.Abp.Notification.UserIdentifier",
                       "isOptional": false,
@@ -806,7 +806,7 @@
               "parametersOnMethod": [
                 {
                   "name": "user",
-                  "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification",
+                  "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification.Abstractions",
                   "type": "X.Abp.Notification.UserIdentifier",
                   "typeSimple": "X.Abp.Notification.UserIdentifier",
                   "isOptional": false,
@@ -880,7 +880,7 @@
               "parametersOnMethod": [
                 {
                   "name": "user",
-                  "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification",
+                  "typeAsString": "X.Abp.Notification.UserIdentifier, X.Abp.Notification.Abstractions",
                   "type": "X.Abp.Notification.UserIdentifier",
                   "typeSimple": "X.Abp.Notification.UserIdentifier",
                   "isOptional": false,

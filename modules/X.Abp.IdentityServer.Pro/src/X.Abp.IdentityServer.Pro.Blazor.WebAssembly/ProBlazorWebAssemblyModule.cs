@@ -5,7 +5,7 @@ namespace X.Abp.IdentityServer.Pro.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(ProBlazorModule),
-    typeof(AbpIdentityServerHttpApiClientModule),
+    typeof(AbpIdentityServerProHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class ProBlazorWebAssemblyModule : AbpModule

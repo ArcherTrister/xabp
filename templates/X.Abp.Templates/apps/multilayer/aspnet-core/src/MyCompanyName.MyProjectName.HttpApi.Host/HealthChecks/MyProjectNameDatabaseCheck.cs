@@ -1,0 +1,36 @@
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+using Volo.Abp.DependencyInjection;
+using Volo.Abp.Identity;
+
+using IIdentityRoleRepository = X.Abp.Identity.IIdentityRoleRepository;
+
+namespace MyCompanyName.MyProjectName.HealthChecks;
+
+public class MyProjectNameDatabaseCheck : IHealthCheck, ITransientDependency
+{
+    protected IIdentityRoleRepository IdentityRoleRepository { get; }
+
+    public MyProjectNameDatabaseCheck(IIdentityRoleRepository identityRoleRepository)
+    {
+        IdentityRoleRepository = identityRoleRepository;
+    }
+
+    public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await IdentityRoleRepository.GetListAsync(sorting: nameof(IdentityRole.Id), maxResultCount: 1, cancellationToken: cancellationToken);
+
+            return HealthCheckResult.Healthy("Could connect to database and get record.");
+        }
+        catch (Exception e)
+        {
+            return HealthCheckResult.Unhealthy("Error when trying to get database record.", e);
+        }
+    }
+}

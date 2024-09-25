@@ -18,26 +18,26 @@ public class ShortenedUrlEntityChangeEventHandler :
   ILocalEventHandler<EntityDeletedEventData<ShortenedUrl>>,
   ITransientDependency
 {
-    protected IDistributedCache<ShortenedUrlCacheItem, string> DistributedCache { get; }
+  protected IDistributedCache<ShortenedUrlCacheItem, string> DistributedCache { get; }
 
-    public ShortenedUrlEntityChangeEventHandler(
-      IDistributedCache<ShortenedUrlCacheItem, string> shortenedUrlCache)
-    {
-        DistributedCache = shortenedUrlCache;
-    }
+  public ShortenedUrlEntityChangeEventHandler(
+    IDistributedCache<ShortenedUrlCacheItem, string> shortenedUrlCache)
+  {
+    DistributedCache = shortenedUrlCache;
+  }
 
-    public async Task HandleEventAsync(EntityUpdatedEventData<ShortenedUrl> eventData)
-    {
-        await RemoveShortenedUrlAsync(eventData.Entity);
-    }
+  public virtual async Task HandleEventAsync(EntityUpdatedEventData<ShortenedUrl> eventData)
+  {
+    await RemoveShortenedUrlAsync(eventData.Entity);
+  }
 
-    public async Task HandleEventAsync(EntityDeletedEventData<ShortenedUrl> eventData)
-    {
-        await RemoveShortenedUrlAsync(eventData.Entity);
-    }
+  public virtual async Task HandleEventAsync(EntityDeletedEventData<ShortenedUrl> eventData)
+  {
+    await RemoveShortenedUrlAsync(eventData.Entity);
+  }
 
-    private async Task RemoveShortenedUrlAsync(ShortenedUrl shortenedUrl)
-    {
-        await DistributedCache.RemoveAsync(shortenedUrl.Source);
-    }
+  private async Task RemoveShortenedUrlAsync(ShortenedUrl shortenedUrl)
+  {
+    await DistributedCache.RemoveAsync(shortenedUrl.Source);
+  }
 }

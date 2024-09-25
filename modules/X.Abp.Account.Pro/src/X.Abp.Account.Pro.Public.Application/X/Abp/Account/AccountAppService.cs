@@ -10,7 +10,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +25,7 @@ using Volo.Abp.BlobStoring;
 using Volo.Abp.Content;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.Settings;
+using Volo.Abp.Imaging;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
@@ -72,6 +72,14 @@ public class AccountAppService : ApplicationService, IAccountAppService
 
     protected IIdentitySecurityLogRepository SecurityLogRepository { get; }
 
+    protected IdentityUserTwoFactorChecker IdentityUserTwoFactorChecker { get; }
+
+    protected IImageCompressor ImageCompressor { get; }
+
+    protected IOptions<AbpProfilePictureOptions> ProfilePictureOptions { get; }
+
+    protected IApplicationInfoAccessor ApplicationInfoAccessor { get; }
+
     public AccountAppService(
         IdentityUserManager userManager,
         IAccountEmailer accountEmailer,
@@ -81,7 +89,11 @@ public class AccountAppService : ApplicationService, IAccountAppService
         ISettingManager settingManager,
         IOptionsSnapshot<CaptchaOptions> captchaOptions,
         IOptions<IdentityOptions> identityOptions,
-        IIdentitySecurityLogRepository securityLogRepository)
+        IIdentitySecurityLogRepository securityLogRepository,
+        IdentityUserTwoFactorChecker identityUserTwoFactorChecker,
+        IImageCompressor imageCompressor,
+        IOptions<AbpProfilePictureOptions> profilePictureOptions,
+        IApplicationInfoAccessor applicationInfoAccessor)
     {
         IdentitySecurityLogManager = identitySecurityLogManager;
         UserManager = userManager;
@@ -95,6 +107,10 @@ public class AccountAppService : ApplicationService, IAccountAppService
 
         LocalizationResource = typeof(AccountResource);
         CaptchaValidatorFactory = NullAbpCaptchaValidatorFactory.Instance;
+        IdentityUserTwoFactorChecker = identityUserTwoFactorChecker;
+        ImageCompressor = imageCompressor;
+        ProfilePictureOptions = profilePictureOptions;
+        ApplicationInfoAccessor = applicationInfoAccessor;
     }
 
     public virtual async Task<IdentityUserDto> RegisterAsync(RegisterDto input)
@@ -129,9 +145,24 @@ public class AccountAppService : ApplicationService, IAccountAppService
 
     public virtual async Task SendPasswordResetCodeAsync(SendPasswordResetCodeDto input)
     {
-        var user = await GetUserByEmailAsync(input.Email);
-        var resetToken = await UserManager.GeneratePasswordResetTokenAsync(user);
-        await AccountEmailer.SendPasswordResetLinkAsync(user, resetToken, input.AppName, input.ReturnUrl, input.ReturnUrlHash);
+        IdentityUser user = await UserManager.FindByEmailAsync(input.Email);
+        if (user == null)
+        {
+            if (!await SettingProvider.IsTrueAsync(AccountSettingNames.PreventEmailEnumeration))
+            {
+                throw new UserFriendlyException(L["Volo.Account:InvalidEmailAddress", input.Email]);
+            }
+        }
+        else
+        {
+            string resetToken = await UserManager.GeneratePasswordResetTokenAsync(user);
+            await AccountEmailer.SendPasswordResetLinkAsync(user, resetToken, input.AppName, input.ReturnUrl, input.ReturnUrlHash);
+        }
+    }
+
+    public virtual async Task<bool> VerifyPasswordResetTokenAsync(VerifyPasswordResetTokenInput input)
+    {
+        return await UserManager.VerifyUserTokenAsync(await UserManager.GetByIdAsync(input.UserId), UserManager.Options.Tokens.PasswordResetTokenProvider, UserManager<IdentityUser>.ResetPasswordTokenPurpose, input.ResetToken);
     }
 
     public virtual async Task ResetPasswordAsync(ResetPasswordDto input)
@@ -148,7 +179,7 @@ public class AccountAppService : ApplicationService, IAccountAppService
         });
     }
 
-    public async Task<IdentityUserConfirmationStateDto> GetConfirmationStateAsync(Guid id)
+    public virtual async Task<IdentityUserConfirmationStateDto> GetConfirmationStateAsync(Guid id)
     {
         var user = await UserManager.GetByIdAsync(id);
 
@@ -176,17 +207,22 @@ public class AccountAppService : ApplicationService, IAccountAppService
         await PhoneService.SendConfirmationCodeAsync(user, token);
     }
 
-    public async Task SendEmailConfirmationTokenAsync(SendEmailConfirmationTokenDto input)
+    public virtual async Task SendEmailConfirmationTokenAsync(SendEmailConfirmationTokenDto input)
     {
         var user = await UserManager.GetByIdAsync(input.UserId);
         await SendEmailConfirmationTokenAsync(user, input.AppName, input.ReturnUrl, input.ReturnUrlHash);
     }
 
+    public virtual async Task<bool> VerifyEmailConfirmationTokenAsync(VerifyEmailConfirmationTokenInput input)
+    {
+        return await UserManager.VerifyUserTokenAsync(await UserManager.GetByIdAsync(input.UserId), UserManager.Options.Tokens.EmailConfirmationTokenProvider, UserManager<IdentityUser>.ConfirmEmailTokenPurpose, input.Token);
+    }
+
     protected virtual async Task SendEmailConfirmationTokenAsync(
-        IdentityUser user,
-        string applicationName,
-        string returnUrl,
-        string returnUrlHash)
+      IdentityUser user,
+      string applicationName,
+      string returnUrl,
+      string returnUrlHash)
     {
         var confirmationToken = await UserManager.GenerateEmailConfirmationTokenAsync(user);
         await AccountEmailer.SendEmailConfirmationLinkAsync(user, confirmationToken, applicationName, returnUrl, returnUrlHash);
@@ -218,7 +254,7 @@ public class AccountAppService : ApplicationService, IAccountAppService
         }
 
         (await UserManager.ConfirmEmailAsync(user, input.Token)).CheckIdentityErrors();
-
+        (await UserManager.UpdateSecurityStampAsync(user)).CheckIdentityErrors();
         await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
         {
             Identity = IdentitySecurityLogIdentityConsts.Identity,
@@ -242,12 +278,28 @@ public class AccountAppService : ApplicationService, IAccountAppService
         }
         else
         {
-            if (input.ImageContent == null)
+            Stream imageStream = input.ImageContent != null ? input.ImageContent.GetStream() : throw new NoImageProvidedException();
+
+            if (ProfilePictureOptions.Value.EnableImageCompression)
             {
-                throw new NoImageProvidedException();
+                try
+                {
+                    ImageCompressResult<Stream> compressResult = await ImageCompressor.CompressAsync(imageStream);
+                    if (compressResult.Result != null && imageStream != compressResult.Result && compressResult.Result.CanRead)
+                    {
+                        await imageStream.DisposeAsync();
+                        imageStream = compressResult.Result;
+                    }
+
+                    compressResult = null;
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogWarning(ex, $"Failed to compress the user: {CurrentUser.GetId()} profile picture");
+                }
             }
 
-            await AccountProfilePictureContainer.SaveAsync(userIdText, input.ImageContent.GetStream(), true);
+            await AccountProfilePictureContainer.SaveAsync(userIdText, imageStream, true);
         }
     }
 
@@ -283,15 +335,27 @@ public class AccountAppService : ApplicationService, IAccountAppService
     public virtual async Task<IRemoteStreamContent> GetProfilePictureFileAsync(Guid id)
     {
         var picture = await GetProfilePictureAsync(id);
-        return new RemoteStreamContent(new MemoryStream(picture.FileContent), contentType: "image/jpeg", disposeStream: true);
+        return new RemoteStreamContent(new MemoryStream(picture.FileContent), contentType: "image/jpeg");
     }
 
     public virtual async Task<List<string>> GetTwoFactorProvidersAsync(GetTwoFactorProvidersInput input)
     {
         var user = await UserManager.GetByIdAsync(input.UserId);
-        return await UserManager.VerifyUserTokenAsync(user, TokenOptions.DefaultProvider, nameof(SignInResult.RequiresTwoFactor), input.Token)
-            ? (await UserManager.GetValidTwoFactorProvidersAsync(user)).ToList()
-            : throw new UserFriendlyException(L["Volo.Account:InvalidUserToken"]);
+
+        if (await UserManager.VerifyUserTokenAsync(user, TokenOptions.DefaultProvider, nameof(SignInResult.RequiresTwoFactor), input.Token))
+        {
+            List<string> list = (await UserManager.GetValidTwoFactorProvidersAsync(user)).ToList();
+            if (!user.HasAuthenticator())
+            {
+                list.RemoveAll(x => x == TwoFactorProviderConsts.Authenticator);
+            }
+
+            return list;
+        }
+        else
+        {
+            throw new UserFriendlyException(L["Volo.Account:InvalidUserToken"]);
+        }
     }
 
     public virtual async Task SendTwoFactorCodeAsync(SendTwoFactorCodeInput input)
@@ -301,21 +365,21 @@ public class AccountAppService : ApplicationService, IAccountAppService
         {
             switch (input.Provider)
             {
-                case "Email":
+                case TwoFactorProviderConsts.Email:
                     {
                         var code = await UserManager.GenerateTwoFactorTokenAsync(user, TokenOptions.DefaultEmailProvider);
                         await AccountEmailer.SendEmailSecurityCodeAsync(user, code);
                         return;
                     }
 
-                case "Phone":
+                case TwoFactorProviderConsts.Phone:
                     {
                         var code = await UserManager.GenerateTwoFactorTokenAsync(user, TokenOptions.DefaultPhoneProvider);
                         await PhoneService.SendSecurityCodeAsync(user, code);
                         return;
                     }
 
-                case "Authenticator":
+                case TwoFactorProviderConsts.Authenticator:
                     {
                         return;
                     }
@@ -329,7 +393,7 @@ public class AccountAppService : ApplicationService, IAccountAppService
     }
 
     [Authorize]
-    public async Task<PagedResultDto<IdentitySecurityLogDto>> GetSecurityLogListAsync(GetIdentitySecurityLogListInput input)
+    public virtual async Task<PagedResultDto<IdentitySecurityLogDto>> GetSecurityLogListAsync(GetIdentitySecurityLogListInput input)
     {
         var securityLogs = await SecurityLogRepository.GetListAsync(
             sorting: input.Sorting,
@@ -369,7 +433,7 @@ public class AccountAppService : ApplicationService, IAccountAppService
         await captchaValidator.ValidateAsync(captchaResponse);
     }
 
-    public async Task<ExternalLoginsDto> GetExternalLoginsAsync()
+    public virtual async Task<ExternalLoginsDto> GetExternalLoginsAsync()
     {
         /*
         var currentUser = await UserManager.GetByIdAsync(CurrentUser.GetId());
@@ -412,7 +476,7 @@ public class AccountAppService : ApplicationService, IAccountAppService
         };
     }
 
-    public async Task RemoveLoginAsync(RemoveLoginInput input)
+    public virtual async Task RemoveExternalLoginAsync(RemoveExternalLoginInput input)
     {
         var currentUser = await UserManager.GetByIdAsync(CurrentUser.GetId());
 
@@ -430,73 +494,89 @@ public class AccountAppService : ApplicationService, IAccountAppService
     public virtual async Task<TwoFactorAuthenticationDto> GetTwoFactorAuthenticationAsync()
     {
         var currentUser = await UserManager.GetByIdAsync(CurrentUser.GetId());
-        var hasAuthenticator = await UserManager.GetAuthenticatorKeyAsync(currentUser) != null;
+        var hasAuthenticatorKey = await UserManager.GetAuthenticatorKeyAsync(currentUser) != null;
         var is2faEnabled = await UserManager.GetTwoFactorEnabledAsync(currentUser);
 
         return new TwoFactorAuthenticationDto
         {
-            HasAuthenticator = hasAuthenticator,
+            HasAuthenticatorKey = hasAuthenticatorKey,
             Is2faEnabled = is2faEnabled,
-            CanEnableTwoFactor = hasAuthenticator || is2faEnabled || currentUser.EmailConfirmed || currentUser.PhoneNumberConfirmed,
+            CanEnableTwoFactor = hasAuthenticatorKey || is2faEnabled || currentUser.EmailConfirmed || currentUser.PhoneNumberConfirmed,
             RecoveryCodesLeft = await UserManager.CountRecoveryCodesAsync(currentUser),
         };
     }
 
-    public virtual async Task<AuthenticatorInfoDto> GetAuthenticatorInfoAsync()
+    [Authorize]
+    public virtual async Task<bool> HasAuthenticatorAsync()
     {
-        var currentUser = await UserManager.GetByIdAsync(CurrentUser.GetId());
-
-        var model = new AuthenticatorInfoDto();
-
-        // TODO: add applicationName to setting
-        var applicationName = Configuration["ApplicationName"];
-        if (applicationName.IsNullOrWhiteSpace())
-        {
-            // TODO: Localization 未配置应用程序名称
-            throw new UserFriendlyException("The application name is not configured.");
-        }
-
-        await LoadSharedKeyAndQrCodeUriAsync(applicationName, currentUser, model);
-
-        return model;
+        return (await UserManager.GetByIdAsync(CurrentUser.GetId())).HasAuthenticator();
     }
 
-    public virtual async Task<ShowRecoveryCodesDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input)
+    [Authorize]
+    public virtual async Task<AuthenticatorInfoDto> GetAuthenticatorInfoAsync()
     {
-        var currentUser = await UserManager.GetByIdAsync(CurrentUser.GetId());
+        IdentityUser user = await UserManager.GetByIdAsync(CurrentUser.GetId());
+        string email = await UserManager.GetEmailAsync(user);
+        string unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
+        if (string.IsNullOrEmpty(unformattedKey))
+        {
+            IdentityResult identityResult = await UserManager.ResetAuthenticatorKeyAsync(user);
+            unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
+        }
+
+        string key = AuthenticatorHelper.FormatKey(unformattedKey);
+        string qrCodeUri = AuthenticatorHelper.GenerateQrCodeUri(email, unformattedKey, ApplicationInfoAccessor.ApplicationName);
+        AuthenticatorInfoDto authenticatorInfo = new AuthenticatorInfoDto()
+        {
+            Key = key,
+            Uri = qrCodeUri
+        };
+
+        return authenticatorInfo;
+    }
+
+    [Authorize]
+    public virtual async Task<VerifyAuthenticatorCodeDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input)
+    {
+        IdentityUser user = await UserManager.GetByIdAsync(CurrentUser.GetId());
 
         // Strip spaces and hypens
         var verificationCode = input.Code.Replace(" ", string.Empty, StringComparison.OrdinalIgnoreCase)
             .Replace("-", string.Empty, StringComparison.OrdinalIgnoreCase);
 
         var is2faTokenValid = await UserManager.VerifyTwoFactorTokenAsync(
-            currentUser, UserManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
+            user, UserManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
 
         if (!is2faTokenValid)
         {
-            throw new UserFriendlyException("This TwoFactor Token is not valid.");
+            // throw new UserFriendlyException("This TwoFactor Token is not valid.");
+            throw new UserFriendlyException(L["Volo.Account:InvalidUserToken"]);
         }
 
         // await UserManager.SetTwoFactorEnabledAsync(currentUser, true);
-        Logger.LogInformation("User with ID {UserId} has enabled 2FA with an authenticator app.", currentUser.Id);
-        var recoveryCodes = await UserManager.GenerateNewTwoFactorRecoveryCodesAsync(currentUser, 10);
+        user.SetAuthenticator(true);
+        (await UserManager.UpdateAsync(user)).CheckIdentityErrors();
+        Logger.LogInformation("User with ID {UserId} has enabled 2FA with an authenticator app.", user.Id);
+        var recoveryCodes = await UserManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
 
-        return new ShowRecoveryCodesDto { RecoveryCodes = recoveryCodes.ToArray() };
+        return new VerifyAuthenticatorCodeDto { RecoveryCodes = recoveryCodes.ToArray() };
     }
 
+    [Authorize]
     public virtual async Task ResetAuthenticatorAsync()
     {
-        // var user = await _userManager.GetUserAsync(User);
-        var currentUser = await UserManager.GetByIdAsync(CurrentUser.GetId());
-
-        await UserManager.SetTwoFactorEnabledAsync(currentUser, false);
-        await UserManager.ResetAuthenticatorKeyAsync(currentUser);
-        Logger.LogInformation("User with id '{UserId}' has reset their authentication app key.", currentUser.Id);
+        IdentityUser user = await UserManager.GetByIdAsync(CurrentUser.GetId());
+        IdentityResult identityResult = await UserManager.ResetAuthenticatorKeyAsync(user);
+        await UserManager.ResetRecoveryCodesAsync(user);
+        user.SetAuthenticator(false);
+        (await UserManager.UpdateAsync(user)).CheckIdentityErrors();
+        await IdentityUserTwoFactorChecker.CheckAsync(user);
+        Logger.LogInformation("User with id '${UserId}' has reset their authentication app key.", user.Id);
 
         // return RedirectToAction(nameof(EnableAuthenticator));
     }
 
-    public virtual async Task<ShowRecoveryCodesDto> GenerateRecoveryCodesAsync()
+    public virtual async Task<VerifyAuthenticatorCodeDto> GenerateRecoveryCodesAsync()
     {
         // var user = await _userManager.GetUserAsync(User);
         var currentUser = await UserManager.GetByIdAsync(CurrentUser.GetId());
@@ -509,7 +589,7 @@ public class AccountAppService : ApplicationService, IAccountAppService
         var recoveryCodes = await UserManager.GenerateNewTwoFactorRecoveryCodesAsync(currentUser, 10);
         Logger.LogInformation("User with ID {UserId} has generated new 2FA recovery codes.", currentUser.Id);
 
-        return new ShowRecoveryCodesDto { RecoveryCodes = recoveryCodes.ToArray() };
+        return new VerifyAuthenticatorCodeDto { RecoveryCodes = recoveryCodes.ToArray() };
     }
 
     protected virtual string GetGravatarHash(string emailAddress)
@@ -575,6 +655,7 @@ public class AccountAppService : ApplicationService, IAccountAppService
         return await stream.GetAllBytesAsync();
     }
 
+    /*
     protected async Task LoadSharedKeyAndQrCodeUriAsync(string applicationName, IdentityUser user, AuthenticatorInfoDto model)
     {
         var unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
@@ -584,11 +665,11 @@ public class AccountAppService : ApplicationService, IAccountAppService
             unformattedKey = await UserManager.GetAuthenticatorKeyAsync(user);
         }
 
-        model.SharedKey = FormatKey(unformattedKey);
-        model.AuthenticatorUri = GenerateQrCodeUri(applicationName, user.Email, unformattedKey);
+        model.Key = FormatKey(unformattedKey);
+        model.Uri = GenerateQrCodeUri(applicationName, user.Email, unformattedKey);
     }
 
-    public static string FormatKey(string unformattedKey)
+    private static string FormatKey(string unformattedKey)
     {
         var result = new StringBuilder();
         var currentPosition = 0;
@@ -606,7 +687,7 @@ public class AccountAppService : ApplicationService, IAccountAppService
         return result.ToString().ToLowerInvariant();
     }
 
-    public static string GenerateQrCodeUri(string applicationName, string email, string unformattedKey)
+    private static string GenerateQrCodeUri(string applicationName, string email, string unformattedKey)
     {
         return string.Format(
             "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6",
@@ -614,4 +695,5 @@ public class AccountAppService : ApplicationService, IAccountAppService
             UrlEncoder.Default.Encode(email),
             unformattedKey);
     }
+    */
 }

@@ -27,46 +27,46 @@ namespace X.Abp.CmsKit.Admin.Newsletters;
 [RemoteService(true, Name = CmsKitAdminRemoteServiceConsts.RemoteServiceName)]
 public class NewsletterRecordAdminController : CmsKitProAdminController, INewsletterRecordAdminAppService
 {
-    protected INewsletterRecordAdminAppService NewsletterRecordAdminAppService { get; }
+  protected INewsletterRecordAdminAppService NewsletterRecordAdminAppService { get; }
 
-    public NewsletterRecordAdminController(INewsletterRecordAdminAppService input)
-    {
-        NewsletterRecordAdminAppService = input;
-    }
+  public NewsletterRecordAdminController(INewsletterRecordAdminAppService input)
+  {
+    NewsletterRecordAdminAppService = input;
+  }
 
-    [HttpGet]
-    public Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(GetNewsletterRecordsRequestInput input)
-    {
-        return NewsletterRecordAdminAppService.GetListAsync(input);
-    }
+  [HttpGet]
+  public virtual Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(GetNewsletterRecordsRequestInput input)
+  {
+    return NewsletterRecordAdminAppService.GetListAsync(input);
+  }
 
-    [Route("{id}")]
-    [HttpGet]
-    public Task<NewsletterRecordWithDetailsDto> GetAsync(Guid id)
-    {
-        return NewsletterRecordAdminAppService.GetAsync(id);
-    }
+  [Route("{id}")]
+  [HttpGet]
+  public virtual Task<NewsletterRecordWithDetailsDto> GetAsync(Guid id)
+  {
+    return NewsletterRecordAdminAppService.GetAsync(id);
+  }
 
-    [Route("csv-detail")]
-    [HttpGet]
-    public Task<List<NewsletterRecordCsvDto>> GetNewsletterRecordsCsvDetailAsync(
-      GetNewsletterRecordsCsvRequestInput input)
-    {
-        return NewsletterRecordAdminAppService.GetNewsletterRecordsCsvDetailAsync(input);
-    }
+  [Route("csv-detail")]
+  [HttpGet]
+  public virtual Task<List<NewsletterRecordCsvDto>> GetNewsletterRecordsCsvDetailAsync(
+    GetNewsletterRecordsCsvRequestInput input)
+  {
+    return NewsletterRecordAdminAppService.GetNewsletterRecordsCsvDetailAsync(input);
+  }
 
-    [Route("preferences")]
-    [HttpGet]
-    public Task<List<string>> GetNewsletterPreferencesAsync()
-    {
-        return NewsletterRecordAdminAppService.GetNewsletterPreferencesAsync();
-    }
+  [Route("preferences")]
+  [HttpGet]
+  public virtual Task<List<string>> GetNewsletterPreferencesAsync()
+  {
+    return NewsletterRecordAdminAppService.GetNewsletterPreferencesAsync();
+  }
 
-    [Route("export-csv")]
-    [HttpGet]
-    public async Task<IRemoteStreamContent> GetCsvResponsesAsync(
-      GetNewsletterRecordsCsvRequestInput input)
-    {
-        return await NewsletterRecordAdminAppService.GetCsvResponsesAsync(input);
-    }
+  [Route("export-csv")]
+  [HttpGet]
+  public virtual async Task<IRemoteStreamContent> GetCsvResponsesAsync(
+    GetNewsletterRecordsCsvRequestInput input)
+  {
+    return await NewsletterRecordAdminAppService.GetCsvResponsesAsync(input);
+  }
 }

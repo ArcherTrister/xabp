@@ -3,30 +3,41 @@
     abp.event.on('abp.serviceProxyScriptInitialized', function () {
         $(function () {
 
-            if ($('body').hasClass('abp-application-layout') && abp.currentUser && abp.currentUser.id) {
-
+            if (abp.currentUser && abp.currentUser.id && abp.auth.isGranted('Chat.Messaging')) {
                 var l = abp.localization.getResource('Chat');
                 var isChatPageOpen = $('#chat_wrapper').length > 0;
 
                 if (!isChatPageOpen) {
-                    x.chat.users.contact.getTotalUnreadMessageCount({}).then(function (result) {
+                    volo.chat.users.contact.getTotalUnreadMessageCount({}).then(function (result) {
                         addUnreadMessageToChatIcon(result);
                     });
                 }
 
                 var addUnreadMessageToChatIcon = function (count = 1) {
-                    var chatIcon = $('#navbarToolbar').find('a[href="/Chat"]');
-                    var span = $(chatIcon).find('span');
-                    if (span.length > 0) {
-                        var prevCount = parseInt(span.html().trim());
-                        span.html(prevCount + count);
-                    } else if (count > 0) {
-                        chatIcon.html(chatIcon.html() +
-                            '<span class="badge bg-info" style="top: -10px; left:-5px"> ' +
-                            count +
-                            ' </span>');
+                    var chatIconContainer = $('#lpx-toolbar').find('a[href="/Chat"]');
+                    var span = $(chatIconContainer).find('span');
+
+                    if (span && span.length > 0) {
+                        var unReadMessageSpan = span.find("span.unread-message");
+                        if (unReadMessageSpan && unReadMessageSpan.length > 0) {
+                            var prevCount = parseInt(unReadMessageSpan.data("count").trim("+"));
+                            span.html(getUnReadMessageSpan(prevCount + count));
+                        }
+                        else if (count > 0) {
+                            chatIconContainer.append(getUnReadMessageSpan(count));
+                        }
                     }
                 };
+
+                var getUnReadMessageSpan = function (count) {
+                    var messageCount = count >= 50 ? "50+" : count;
+
+                    return (
+                        '<span class="unread-message badge bg-primary" data-count="' + messageCount + '" style="position: absolute; right: 1rem; display: block; font-size: 0.5rem;"> ' +
+                        messageCount +
+                        ' </span>'
+                    );
+                }
 
                 var connection = new signalR.HubConnectionBuilder().withUrl("/signalr-hubs/chat").build();
 
@@ -47,6 +58,18 @@
                                 window.location.replace("/chat?conversation_id=" + message.senderUserId);
                             }
                         });
+                    }
+                });
+
+                connection.on("DeleteMessage", function (messageId) {
+                    if (isChatPageOpen) {
+                        $(document).trigger("ChatDeleteMessage", messageId);
+                    }
+                });
+
+                connection.on("DeleteConversation", function (userId) {
+                    if (isChatPageOpen) {
+                        $(document).trigger("ChatDeleteConversation", userId);
                     }
                 });
 

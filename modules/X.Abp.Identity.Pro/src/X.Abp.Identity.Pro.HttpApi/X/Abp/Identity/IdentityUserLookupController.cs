@@ -22,38 +22,38 @@ namespace X.Abp.Identity;
 [Route("api/identity/users/lookup")]
 public class IdentityUserLookupController : AbpControllerBase, IIdentityUserLookupAppService
 {
-    protected IIdentityUserLookupAppService LookupAppService { get; }
+  protected IIdentityUserLookupAppService LookupAppService { get; }
 
-    public IdentityUserLookupController(IIdentityUserLookupAppService lookupAppService)
-    {
-        LookupAppService = lookupAppService;
-    }
+  public IdentityUserLookupController(IIdentityUserLookupAppService lookupAppService)
+  {
+    LookupAppService = lookupAppService;
+  }
 
-    [HttpGet]
-    [Route("{id}")]
-    public virtual Task<UserData> FindByIdAsync(Guid id)
-    {
-        return LookupAppService.FindByIdAsync(id);
-    }
+  [HttpGet]
+  [Route("{id}")]
+  public virtual Task<UserData> FindByIdAsync(Guid id)
+  {
+    return LookupAppService.FindByIdAsync(id);
+  }
 
-    [HttpGet]
-    [Route("by-username/{userName}")]
-    public virtual Task<UserData> FindByUserNameAsync(string userName)
-    {
-        return LookupAppService.FindByUserNameAsync(userName);
-    }
+  [HttpGet]
+  [Route("by-username/{userName}")]
+  public virtual Task<UserData> FindByUserNameAsync(string userName)
+  {
+    return LookupAppService.FindByUserNameAsync(userName);
+  }
 
-    [HttpGet]
-    [Route("search")]
-    public Task<ListResultDto<UserData>> SearchAsync(UserLookupSearchInputDto input)
-    {
-        return LookupAppService.SearchAsync(input);
-    }
+  [HttpGet]
+  [Route("search")]
+  public virtual Task<ListResultDto<UserData>> SearchAsync(UserLookupSearchInputDto input)
+  {
+    return LookupAppService.SearchAsync(input);
+  }
 
-    [HttpGet]
-    [Route("count")]
-    public Task<long> GetCountAsync(UserLookupCountInputDto input)
-    {
-        return LookupAppService.GetCountAsync(input);
-    }
+  [HttpGet]
+  [Route("count")]
+  public virtual Task<long> GetCountAsync(UserLookupCountInputDto input)
+  {
+    return LookupAppService.GetCountAsync(input);
+  }
 }

@@ -1,0 +1,58 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "MyCompanyName.MyProjectName.IdentityService.HttpApi": {
+      "path": "src/MyCompanyName.MyProjectName.IdentityService.HttpApi/MyCompanyName.MyProjectName.IdentityService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.Application": {
+      "path": "src/MyCompanyName.MyProjectName.IdentityService.Application/MyCompanyName.MyProjectName.IdentityService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.Domain": {
+      "path": "src/MyCompanyName.MyProjectName.IdentityService.Domain/MyCompanyName.MyProjectName.IdentityService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.Domain.Shared": {
+      "path": "src/MyCompanyName.MyProjectName.IdentityService.Domain.Shared/MyCompanyName.MyProjectName.IdentityService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.EntityFrameworkCore": {
+      "path": "src/MyCompanyName.MyProjectName.IdentityService.EntityFrameworkCore/MyCompanyName.MyProjectName.IdentityService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.HttpApi.Client": {
+      "path": "src/MyCompanyName.MyProjectName.IdentityService.HttpApi.Client/MyCompanyName.MyProjectName.IdentityService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.Application.Contracts": {
+      "path": "src/MyCompanyName.MyProjectName.IdentityService.Application.Contracts/MyCompanyName.MyProjectName.IdentityService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.HttpApi.Host": {
+      "path": "src/MyCompanyName.MyProjectName.IdentityService.HttpApi.Host/MyCompanyName.MyProjectName.IdentityService.HttpApi.Host.abppkg.json",
+      "folder": "src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.TestBase": {
+      "path": "test/MyCompanyName.MyProjectName.IdentityService.TestBase/MyCompanyName.MyProjectName.IdentityService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.Domain.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.IdentityService.Domain.Tests/MyCompanyName.MyProjectName.IdentityService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.EntityFrameworkCore.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.IdentityService.EntityFrameworkCore.Tests/MyCompanyName.MyProjectName.IdentityService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.Application.Tests": {
+      "path": "test/MyCompanyName.MyProjectName.IdentityService.Application.Tests/MyCompanyName.MyProjectName.IdentityService.Application.Tests.abppkg.json",
+      "folder": "test"
+    }
+  }
+}

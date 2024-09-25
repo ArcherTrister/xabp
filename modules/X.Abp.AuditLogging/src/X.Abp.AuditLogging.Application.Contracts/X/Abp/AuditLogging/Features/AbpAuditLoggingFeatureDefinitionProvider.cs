@@ -20,6 +20,11 @@ public class AbpAuditLoggingFeatureDefinitionProvider : FeatureDefinitionProvide
             "true",
             L("Feature:AuditLoggingEnable"),
             L("Feature:AuditLoggingEnableDescription"),
+            new ToggleStringValueType())
+            .CreateChildFeature(AbpAuditLoggingFeatures.SettingManagement,
+            "false",
+            L("Feature:AuditLoggingSettingManagementEnable"),
+            L("Feature:AuditLoggingSettingManagementEnableDescription"),
             new ToggleStringValueType());
     }
 

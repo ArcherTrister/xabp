@@ -5,16 +5,16 @@ namespace X.Abp.CmsKit.Pro.Samples;
 
 public class SampleManager_Tests : ProDomainTestBase
 {
-    //private readonly SampleManager _sampleManager;
+  //private readonly SampleManager _sampleManager;
 
-    public SampleManager_Tests()
-    {
-        //_sampleManager = GetRequiredService<SampleManager>();
-    }
+  public SampleManager_Tests()
+  {
+    //_sampleManager = GetRequiredService<SampleManager>();
+  }
 
-    [Fact]
-    public Task Method1Async()
-    {
-        return Task.CompletedTask;
-    }
+  [Fact]
+  public virtual Task Method1Async()
+  {
+    return Task.CompletedTask;
+  }
 }

@@ -78,13 +78,13 @@ namespace X.Abp.Notification.Sms.RealTime
                                 var user = usersToNotify.FirstOrDefault(x => x.Id == userNotification.UserId);
                                 if (user == null)
                                 {
-                                    Logger.LogDebug($"Can not send sms to user: {userNotification.UserId}. User does not exists!");
+                                    Logger.LogDebug("Can not send sms to user: {UserId}. User does not exists!", userNotification.UserId);
                                     continue;
                                 }
 
                                 if (user.PhoneNumber.IsNullOrWhiteSpace())
                                 {
-                                    Logger.LogInformation($"Can not send sms to user: {user.Name}. User's phoneNumber is empty!");
+                                    Logger.LogInformation("Can not send sms to user: {Name}. User's phoneNumber is empty!", user.Name);
                                     continue;
                                 }
 
@@ -92,7 +92,7 @@ namespace X.Abp.Notification.Sms.RealTime
 
                                 foreach (var item in SmsRealTimeNotifierOptions.SmsPlatformConfigs)
                                 {
-                                    Logger.LogDebug($"SmsConfig => key: {item.Key},value: {item.Value}");
+                                    Logger.LogDebug("SmsConfig => key: {Key},value: {Value}", item.Key, item.Value);
                                     smsMessage.Properties.Add(item.Key, item.Value);
                                 }
 
@@ -106,7 +106,7 @@ namespace X.Abp.Notification.Sms.RealTime
                         }
                         catch (Exception ex)
                         {
-                            Logger.LogWarning($"Could not send notification to user: {userNotification.ToUserIdentifier()}");
+                            Logger.LogWarning("Could not send notification to user: {UserIdentifier}", userNotification.ToUserIdentifier());
                             Logger.LogWarning(ex.ToString(), ex);
                         }
                     }

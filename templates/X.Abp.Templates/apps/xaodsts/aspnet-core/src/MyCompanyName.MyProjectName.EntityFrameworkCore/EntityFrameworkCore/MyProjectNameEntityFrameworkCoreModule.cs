@@ -10,9 +10,9 @@ using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 #if MySQL
 using Volo.Abp.EntityFrameworkCore.MySQL;
-#elif SqlServer
+#elif SQLServer
 using Volo.Abp.EntityFrameworkCore.SqlServer;
-#elif Sqlite
+#elif SQLite
 using Volo.Abp.EntityFrameworkCore.Sqlite;
 #elif Oracle
 using Volo.Abp.EntityFrameworkCore.Oracle;
@@ -25,6 +25,7 @@ using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
+using Volo.Abp.Uow;
 
 using X.Abp.Gdpr;
 using X.Abp.Identity.EntityFrameworkCore;
@@ -43,9 +44,9 @@ namespace MyCompanyName.MyProjectName.EntityFrameworkCore;
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
 #if MySQL
     typeof(AbpEntityFrameworkCoreMySQLModule),
-#elif SqlServer
+#elif SQLServer
     typeof(AbpEntityFrameworkCoreSqlServerModule),
-#elif Sqlite
+#elif SQLite
     typeof(AbpEntityFrameworkCoreSqliteModule),
 #elif Oracle
     typeof(AbpEntityFrameworkCoreOracleModule),
@@ -67,6 +68,9 @@ public class MyProjectNameEntityFrameworkCoreModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
+#if PostgreSql
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+#endif
         MyProjectNameEfCoreEntityExtensionMappings.Configure();
     }
 
@@ -92,9 +96,9 @@ public class MyProjectNameEntityFrameworkCoreModule : AbpModule
              * See also MyProjectNameDbContextFactoryBase for EF Core tooling. */
 #if MySQL
             options.UseMySQL();
-#elif SqlServer
+#elif SQLServer
             options.UseSqlServer();
-#elif Sqlite
+#elif SQLite
             options.UseSqlite();
 #elif Oracle
             options.UseOracle();
@@ -104,5 +108,12 @@ public class MyProjectNameEntityFrameworkCoreModule : AbpModule
             options.UseNpgsql();
 #endif
         });
+
+#if SQLite
+        Configure<AbpUnitOfWorkDefaultOptions>(options =>
+        {
+            options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+        });
+#endif
     }
 }

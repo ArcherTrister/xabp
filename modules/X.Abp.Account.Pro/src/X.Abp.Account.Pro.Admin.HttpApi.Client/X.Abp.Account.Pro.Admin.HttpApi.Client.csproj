@@ -9,9 +9,10 @@
     <PackageId>X.Abp.Account.Pro.Admin.HttpApi.Client</PackageId>
     <RootNamespace />
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Http.Client" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Account.Pro.Admin.Application.Contracts\X.Abp.Account.Pro.Admin.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Account.Pro.Admin.Application.Contracts\X.Abp.Account.Pro.Admin.Application.Contracts.csproj" />
   </ItemGroup>
+
 </Project>

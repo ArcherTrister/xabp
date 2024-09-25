@@ -18,23 +18,23 @@ public class GatewayController :
 PaymentCommonController,
 IGatewayAppService
 {
-    protected IGatewayAppService GatewayAppService { get; }
+  protected IGatewayAppService GatewayAppService { get; }
 
-    public GatewayController(IGatewayAppService gatewayAppService)
-    {
-        GatewayAppService = gatewayAppService;
-    }
+  public GatewayController(IGatewayAppService gatewayAppService)
+  {
+    GatewayAppService = gatewayAppService;
+  }
 
-    [HttpGet]
-    public Task<List<GatewayDto>> GetGatewayConfigurationAsync()
-    {
-        return GatewayAppService.GetGatewayConfigurationAsync();
-    }
+  [HttpGet]
+  public virtual Task<List<GatewayDto>> GetGatewayConfigurationAsync()
+  {
+    return GatewayAppService.GetGatewayConfigurationAsync();
+  }
 
-    [Route("subscription-supported")]
-    [HttpGet]
-    public Task<List<GatewayDto>> GetSubscriptionSupportedGatewaysAsync()
-    {
-        return GatewayAppService.GetSubscriptionSupportedGatewaysAsync();
-    }
+  [Route("subscription-supported")]
+  [HttpGet]
+  public virtual Task<List<GatewayDto>> GetSubscriptionSupportedGatewaysAsync()
+  {
+    return GatewayAppService.GetSubscriptionSupportedGatewaysAsync();
+  }
 }

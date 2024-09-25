@@ -17,6 +17,7 @@ public class AbpAccountPublicWebSharedBundleContributor : BundleContributor
         if (context.ServiceProvider.GetRequiredService<IOptions<AbpAccountAuthorityDelegationOptions>>().Value.EnableDelegatedImpersonation)
         {
             context.Files.Add("/Pages/Account/AuthorityDelegation/account-authority-delegation-global.js");
+            context.Files.Add("/Pages/Account/LinkUsers/account-link-user-global.js");
         }
     }
 }

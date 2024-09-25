@@ -1,0 +1,54 @@
+{
+  "applications": {
+    "Docker-Dependencies": {
+      "type": "cli",
+      "workingDirectory": "../docker",
+      "startCommand": "./up.ps1",
+      "stopCommand": "./down.ps1"
+    },
+    "MyCompanyName.MyProjectName.AuthServer": {
+      "type": "dotnet-project",
+      "path": "../../apps/auth-server/src/MyCompanyName.MyProjectName.AuthServer/MyCompanyName.MyProjectName.AuthServer.csproj"
+    },
+    "MyCompanyName.MyProjectName.Blazor": {
+      "type": "dotnet-project",
+      "path": "../../apps/blazor/src/MyCompanyName.MyProjectName.Blazor/MyCompanyName.MyProjectName.Blazor.csproj"
+    },
+    "MyCompanyName.MyProjectName.Blazor.Server": {
+      "type": "dotnet-project",
+      "path": "../../apps/blazor/src/MyCompanyName.MyProjectName.Blazor.Server/MyCompanyName.MyProjectName.Blazor.Server.csproj"
+    },
+    "MyCompanyName.MyProjectName.PublicWeb": {
+      "type": "dotnet-project",
+      "path": "../../apps/public-web/src/MyCompanyName.MyProjectName.PublicWeb/MyCompanyName.MyProjectName.PublicWeb.csproj"
+    },
+    "MyCompanyName.MyProjectName.Web": {
+      "type": "dotnet-project",
+      "path": "../../apps/web/src/MyCompanyName.MyProjectName.Web/MyCompanyName.MyProjectName.Web.csproj"
+    },
+    "MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../services/administration/src/MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host/MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host.csproj"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../services/identity/src/MyCompanyName.MyProjectName.IdentityService.HttpApi.Host/MyCompanyName.MyProjectName.IdentityService.HttpApi.Host.csproj"
+    },
+    "MyCompanyName.MyProjectName.ProductService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../services/product/src/MyCompanyName.MyProjectName.ProductService.HttpApi.Host/MyCompanyName.MyProjectName.ProductService.HttpApi.Host.csproj"
+    },
+    "MyCompanyName.MyProjectName.SaasService.HttpApi.Host": {
+      "type": "dotnet-project",
+      "path": "../../services/saas/src/MyCompanyName.MyProjectName.SaasService.HttpApi.Host/MyCompanyName.MyProjectName.SaasService.HttpApi.Host.csproj"
+    },
+    "MyCompanyName.MyProjectName.WebGateway": {
+      "type": "dotnet-project",
+      "path": "../../gateways/web/src/MyCompanyName.MyProjectName.WebGateway/MyCompanyName.MyProjectName.WebGateway.csproj"
+    },
+    "MyCompanyName.MyProjectName.PublicWebGateway": {
+      "type": "dotnet-project",
+      "path": "../../gateways/web-public/src/MyCompanyName.MyProjectName.PublicWebGateway/MyCompanyName.MyProjectName.PublicWebGateway.csproj"
+    }
+  }
+}

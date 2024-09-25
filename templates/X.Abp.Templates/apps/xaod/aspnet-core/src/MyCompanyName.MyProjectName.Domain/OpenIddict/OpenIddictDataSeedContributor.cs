@@ -14,10 +14,9 @@ using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.OpenIddict.Applications;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
-
-using X.Abp.OpenIddict.Applications;
 
 namespace MyCompanyName.MyProjectName.OpenIddict;
 
@@ -93,7 +92,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
              * solution. Otherwise, you can delete this client. */
             await CreateApplicationAsync(
                 name: webClientId,
-                type: OpenIddictConstants.ClientTypes.Confidential,
+                clientType: OpenIddictConstants.ClientTypes.Confidential,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Web Application",
                 secret: configurationSection["MyProjectName_Web:ClientSecret"] ?? "1q2w3e*",
@@ -117,7 +116,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             var consoleAndAngularClientRootUrl = configurationSection["MyProjectName_App:RootUrl"]?.TrimEnd('/');
             await CreateApplicationAsync(
                 name: consoleAndAngularClientId,
-                type: OpenIddictConstants.ClientTypes.Public,
+                clientType: OpenIddictConstants.ClientTypes.Public,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Console Test / Angular Application",
                 secret: null,
@@ -149,7 +148,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             var mauiClientRootUrl = configurationSection["MyProjectName_Maui:RootUrl"].Replace("_", "-");
             await CreateApplicationAsync(
                 name: mauiClientId,
-                type: OpenIddictConstants.ClientTypes.Public,
+                clientType: OpenIddictConstants.ClientTypes.Public,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "MAUI Application",
                 secret: null,
@@ -174,7 +173,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
             await CreateApplicationAsync(
                 name: blazorClientId,
-                type: OpenIddictConstants.ClientTypes.Public,
+                clientType: OpenIddictConstants.ClientTypes.Public,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Blazor Application",
                 secret: null,
@@ -198,7 +197,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
             await CreateApplicationAsync(
                 name: blazorServerTieredClientId,
-                type: OpenIddictConstants.ClientTypes.Confidential,
+                clientType: OpenIddictConstants.ClientTypes.Confidential,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Blazor Server Application",
                 secret: configurationSection["MyProjectName_BlazorServerTiered:ClientSecret"] ?? "1q2w3e*",
@@ -223,7 +222,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
             await CreateApplicationAsync(
                 name: swaggerClientId,
-                type: OpenIddictConstants.ClientTypes.Public,
+                clientType: OpenIddictConstants.ClientTypes.Public,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Swagger Application",
                 secret: null,
@@ -246,7 +245,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
             await CreateApplicationAsync(
                 name: webPublicClientId,
-                type: OpenIddictConstants.ClientTypes.Confidential,
+                clientType: OpenIddictConstants.ClientTypes.Confidential,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Web Public Application",
                 secret: configurationSection["MyProjectName_Web_Public:ClientSecret"] ?? "1q2w3e*",
@@ -271,7 +270,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
             await CreateApplicationAsync(
                 name: webPublicTieredClientId,
-                type: OpenIddictConstants.ClientTypes.Confidential,
+                clientType: OpenIddictConstants.ClientTypes.Confidential,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Web Public Tiered Application",
                 secret: configurationSection["MyProjectName_Web_Public_Tiered:ClientSecret"] ?? "1q2w3e*",
@@ -291,7 +290,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
     private async Task CreateApplicationAsync(
         [NotNull] string name,
-        [NotNull] string type,
+        [NotNull] string clientType,
         [NotNull] string consentType,
         string displayName,
         string secret,
@@ -303,12 +302,12 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         string clientUri = null,
         string logoUri = null)
     {
-        if (!string.IsNullOrEmpty(secret) && string.Equals(type, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
+        if (!string.IsNullOrEmpty(secret) && string.Equals(clientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
         {
             throw new BusinessException(L["NoClientSecretCanBeSetForPublicApplications"]);
         }
 
-        if (string.IsNullOrEmpty(secret) && string.Equals(type, OpenIddictConstants.ClientTypes.Confidential, StringComparison.OrdinalIgnoreCase))
+        if (string.IsNullOrEmpty(secret) && string.Equals(clientType, OpenIddictConstants.ClientTypes.Confidential, StringComparison.OrdinalIgnoreCase))
         {
             throw new BusinessException(L["TheClientSecretIsRequiredForConfidentialApplications"]);
         }
@@ -325,7 +324,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             var application = new AbpApplicationDescriptor
             {
                 ClientId = name,
-                Type = type,
+                ClientType = clientType,
                 ClientSecret = secret,
                 ConsentType = consentType,
                 DisplayName = displayName,
@@ -336,11 +335,11 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             Check.NotNullOrEmpty(grantTypes, nameof(grantTypes));
             Check.NotNullOrEmpty(scopes, nameof(scopes));
 
-            if (new [] { OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit }.All(grantTypes.Contains))
+            if (new[] { OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit }.All(grantTypes.Contains))
             {
                 application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdToken);
 
-                if (string.Equals(type, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(clientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
                 {
                     application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdTokenToken);
                     application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeToken);
@@ -352,7 +351,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 application.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Logout);
             }
 
-            var buildInGrantTypes = new []
+            var buildInGrantTypes = new[]
             {
                 OpenIddictConstants.GrantTypes.Implicit,
                 OpenIddictConstants.GrantTypes.Password,
@@ -415,7 +414,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 if (grantType == OpenIddictConstants.GrantTypes.Implicit)
                 {
                     application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.IdToken);
-                    if (string.Equals(type, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(clientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
                     {
                         application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.IdTokenToken);
                         application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.Token);
@@ -428,7 +427,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 }
             }
 
-            var buildInScopes = new []
+            var buildInScopes = new[]
             {
                 OpenIddictConstants.Permissions.Scopes.Address,
                 OpenIddictConstants.Permissions.Scopes.Email,

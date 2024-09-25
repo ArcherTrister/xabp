@@ -27,192 +27,192 @@ namespace X.Abp.LanguageManagement;
 [Authorize(AbpLanguageManagementPermissions.Languages.Default)]
 public class LanguageAppService : LanguageAppServiceBase, ILanguageAppService
 {
-    protected ISettingManager SettingManager { get; }
+  protected ISettingManager SettingManager { get; }
 
-    protected ILanguageRepository LanguageRepository { get; }
+  protected ILanguageRepository LanguageRepository { get; }
 
-    protected AbpLocalizationOptions AbpLocalizationOptions { get; }
+  protected AbpLocalizationOptions AbpLocalizationOptions { get; }
 
-    public LanguageAppService(
-        ISettingManager settingManager,
-        IOptions<AbpLocalizationOptions> abpLocalizationOptions,
-        ILanguageRepository languageRepository)
+  public LanguageAppService(
+      ISettingManager settingManager,
+      IOptions<AbpLocalizationOptions> abpLocalizationOptions,
+      ILanguageRepository languageRepository)
+  {
+    SettingManager = settingManager;
+    LanguageRepository = languageRepository;
+    AbpLocalizationOptions = abpLocalizationOptions.Value;
+  }
+
+  public virtual async Task<ListResultDto<LanguageDto>> GetAllListAsync()
+  {
+    var languages = await LanguageRepository.GetListAsync();
+    var defaultLanguage = await FindDefaultLanguage(languages);
+
+    var languageDtos = ObjectMapper.Map<List<Language>, List<LanguageDto>>(languages);
+
+    if (defaultLanguage != null)
     {
-        SettingManager = settingManager;
-        LanguageRepository = languageRepository;
-        AbpLocalizationOptions = abpLocalizationOptions.Value;
+      var defaultLanguageDto = languageDtos.Find(
+          l => l.CultureName == defaultLanguage.CultureName &&
+               l.UiCultureName == defaultLanguage.CultureName);
+
+      if (defaultLanguageDto != null)
+      {
+        defaultLanguageDto.IsDefaultLanguage = true;
+      }
     }
 
-    public virtual async Task<ListResultDto<LanguageDto>> GetAllListAsync()
+    return new ListResultDto<LanguageDto>(languageDtos);
+  }
+
+  public virtual async Task<PagedResultDto<LanguageDto>> GetListAsync(GetLanguagesTextsInput input)
+  {
+    var languages = await LanguageRepository.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter);
+    var totalCount = await LanguageRepository.GetCountAsync(input.Filter);
+    var defaultLanguage = await FindDefaultLanguage(languages);
+
+    var languageDtos = ObjectMapper.Map<List<Language>, List<LanguageDto>>(languages);
+
+    if (defaultLanguage != null)
     {
-        var languages = await LanguageRepository.GetListAsync();
-        var defaultLanguage = await FindDefaultLanguage(languages);
+      var defaultLanguageDto = languageDtos.Find(
+          l => l.CultureName == defaultLanguage.CultureName &&
+               l.UiCultureName == defaultLanguage.CultureName);
 
-        var languageDtos = ObjectMapper.Map<List<Language>, List<LanguageDto>>(languages);
-
-        if (defaultLanguage != null)
-        {
-            var defaultLanguageDto = languageDtos.Find(
-                l => l.CultureName == defaultLanguage.CultureName &&
-                     l.UiCultureName == defaultLanguage.CultureName);
-
-            if (defaultLanguageDto != null)
-            {
-                defaultLanguageDto.IsDefaultLanguage = true;
-            }
-        }
-
-        return new ListResultDto<LanguageDto>(languageDtos);
+      if (defaultLanguageDto != null)
+      {
+        defaultLanguageDto.IsDefaultLanguage = true;
+      }
     }
 
-    public async Task<PagedResultDto<LanguageDto>> GetListAsync(GetLanguagesTextsInput input)
-    {
-        var languages = await LanguageRepository.GetListAsync(input.Sorting, input.MaxResultCount, input.SkipCount, input.Filter);
-        var totalCount = await LanguageRepository.GetCountAsync(input.Filter);
-        var defaultLanguage = await FindDefaultLanguage(languages);
+    return new PagedResultDto<LanguageDto>(totalCount, languageDtos);
+  }
 
-        var languageDtos = ObjectMapper.Map<List<Language>, List<LanguageDto>>(languages);
+  [Authorize(AbpLanguageManagementPermissions.Languages.Delete)]
+  public virtual async Task DeleteAsync(Guid id)
+  {
+    await LanguageRepository.DeleteAsync(id);
+  }
 
-        if (defaultLanguage != null)
-        {
-            var defaultLanguageDto = languageDtos.Find(
-                l => l.CultureName == defaultLanguage.CultureName &&
-                     l.UiCultureName == defaultLanguage.CultureName);
+  [Authorize(AbpLanguageManagementPermissions.Languages.ChangeDefault)]
+  public virtual async Task SetAsDefaultAsync(Guid id)
+  {
+    var language = await LanguageRepository.GetAsync(id);
+    await SettingManager.SetForCurrentTenantAsync(
+        LocalizationSettingNames.DefaultLanguage,
+        $"{language.CultureName};{language.UiCultureName}");
+  }
 
-            if (defaultLanguageDto != null)
-            {
-                defaultLanguageDto.IsDefaultLanguage = true;
-            }
-        }
+  [Authorize(AbpLanguageManagementPermissions.Languages.Create)]
+  public virtual async Task<LanguageDto> CreateAsync(CreateLanguageDto input)
+  {
+    var language = new Language(
+        GuidGenerator.Create(),
+        input.CultureName,
+        input.UiCultureName,
+        input.DisplayName,
+        input.FlagIcon,
+        input.IsEnabled);
 
-        return new PagedResultDto<LanguageDto>(totalCount, languageDtos);
-    }
+    input.MapExtraPropertiesTo(language);
 
-    [Authorize(AbpLanguageManagementPermissions.Languages.Delete)]
-    public virtual async Task DeleteAsync(Guid id)
-    {
-        await LanguageRepository.DeleteAsync(id);
-    }
+    language = await LanguageRepository.InsertAsync(language);
 
-    [Authorize(AbpLanguageManagementPermissions.Languages.ChangeDefault)]
-    public virtual async Task SetAsDefaultAsync(Guid id)
-    {
-        var language = await LanguageRepository.GetAsync(id);
-        await SettingManager.SetForCurrentTenantAsync(
-            LocalizationSettingNames.DefaultLanguage,
-            $"{language.CultureName};{language.UiCultureName}");
-    }
+    return ObjectMapper.Map<Language, LanguageDto>(language);
+  }
 
-    [Authorize(AbpLanguageManagementPermissions.Languages.Create)]
-    public virtual async Task<LanguageDto> CreateAsync(CreateLanguageDto input)
-    {
-        var language = new Language(
-            GuidGenerator.Create(),
-            input.CultureName,
-            input.UiCultureName,
-            input.DisplayName,
-            input.FlagIcon,
-            input.IsEnabled);
+  public virtual async Task<LanguageDto> GetAsync(Guid id)
+  {
+    var language = await LanguageRepository.GetAsync(id);
 
-        input.MapExtraPropertiesTo(language);
+    var languageDto = ObjectMapper.Map<Language, LanguageDto>(language);
 
-        language = await LanguageRepository.InsertAsync(language);
+    languageDto.IsDefaultLanguage = await IsDefaultLanguage(language);
 
-        return ObjectMapper.Map<Language, LanguageDto>(language);
-    }
+    return languageDto;
+  }
 
-    public virtual async Task<LanguageDto> GetAsync(Guid id)
-    {
-        var language = await LanguageRepository.GetAsync(id);
+  [Authorize(AbpLanguageManagementPermissions.Languages.Edit)]
+  public virtual async Task<LanguageDto> UpdateAsync(Guid id, UpdateLanguageDto input)
+  {
+    var language = await LanguageRepository.GetAsync(id);
 
-        var languageDto = ObjectMapper.Map<Language, LanguageDto>(language);
+    language.SetDisplayName(input.DisplayName);
+    language.FlagIcon = input.FlagIcon;
+    language.IsEnabled = input.IsEnabled;
+    language.SetConcurrencyStampIfNotNull(input.ConcurrencyStamp);
 
-        languageDto.IsDefaultLanguage = await IsDefaultLanguage(language);
+    input.MapExtraPropertiesTo(language);
 
-        return languageDto;
-    }
+    await LanguageRepository.UpdateAsync(language);
 
-    [Authorize(AbpLanguageManagementPermissions.Languages.Edit)]
-    public virtual async Task<LanguageDto> UpdateAsync(Guid id, UpdateLanguageDto input)
-    {
-        var language = await LanguageRepository.GetAsync(id);
+    return ObjectMapper.Map<Language, LanguageDto>(language);
+  }
 
-        language.SetDisplayName(input.DisplayName);
-        language.FlagIcon = input.FlagIcon;
-        language.IsEnabled = input.IsEnabled;
-        language.SetConcurrencyStampIfNotNull(input.ConcurrencyStamp);
-
-        input.MapExtraPropertiesTo(language);
-
-        await LanguageRepository.UpdateAsync(language);
-
-        return ObjectMapper.Map<Language, LanguageDto>(language);
-    }
-
-    public virtual Task<List<LanguageResourceDto>> GetResourcesAsync()
-    {
-        var list = AbpLocalizationOptions.Resources
-            .Values
-            .Select(r => new LanguageResourceDto { Name = r.ResourceName })
-            .ToList();
-
-        return Task.FromResult(list);
-    }
-
-    public virtual async Task<List<CultureInfoDto>> GetCulturelistAsync()
-    {
-        // return CultureInfo.GetCultures(CultureTypes.AllCultures).ToList(); // See https://github.com/dotnet/corefx/issues/38579
-        return await Task.FromResult(CultureInfo.GetCultures(CultureTypes.AllCultures).Select(c => new CultureInfoDto
-        {
-            DisplayName = c.EnglishName,
-            Name = c.Name
-        }).ToList());
-    }
-
-    public virtual Task<List<string>> GetFlagListAsync()
-    {
-        var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-        .Select(c => new RegionInfo(c.Name))
-        .GroupBy(r => r.TwoLetterISORegionName)
-        .Select(g => g.First())
+  public virtual Task<List<LanguageResourceDto>> GetResourcesAsync()
+  {
+    var list = AbpLocalizationOptions.Resources
+        .Values
+        .Select(r => new LanguageResourceDto { Name = r.ResourceName })
         .ToList();
 
-        var flags = new List<string>();
-        foreach (var flagCode in LanguageManagementFlagCodeConsts.FlagCodes)
-        {
-            var region = regions.FirstOrDefault(r => flagCode.Equals(r.TwoLetterISORegionName, StringComparison.OrdinalIgnoreCase));
+    return Task.FromResult(list);
+  }
 
-            if (region?.DisplayName != null)
-            {
-                flags.Add(flagCode);
-            }
-        }
-
-        return Task.FromResult(flags);
-    }
-
-    protected virtual async Task<Language> FindDefaultLanguage(IEnumerable<Language> languages)
+  public virtual async Task<List<CultureInfoDto>> GetCulturelistAsync()
+  {
+    // return CultureInfo.GetCultures(CultureTypes.AllCultures).ToList(); // See https://github.com/dotnet/corefx/issues/38579
+    return await Task.FromResult(CultureInfo.GetCultures(CultureTypes.AllCultures).Select(c => new CultureInfoDto
     {
-        var settingValue = await SettingManager.GetOrNullForCurrentTenantAsync(LocalizationSettingNames.DefaultLanguage);
-        if (settingValue.IsNullOrEmpty())
-        {
-            return null;
-        }
+      DisplayName = c.EnglishName,
+      Name = c.Name
+    }).ToList());
+  }
 
-        var (cultureName, uiCultureName) = LocalizationSettingHelper.ParseLanguageSetting(settingValue);
-        return languages.FindByCulture(cultureName, uiCultureName);
-    }
+  public virtual Task<List<string>> GetFlagListAsync()
+  {
+    var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
+    .Select(c => new RegionInfo(c.Name))
+    .GroupBy(r => r.TwoLetterISORegionName)
+    .Select(g => g.First())
+    .ToList();
 
-    protected virtual async Task<bool> IsDefaultLanguage(Language language)
+    var flags = new List<string>();
+    foreach (var flagCode in LanguageManagementFlagCodeConsts.FlagCodes)
     {
-        var settingValue = await SettingManager.GetOrNullForCurrentTenantAsync(LocalizationSettingNames.DefaultLanguage);
-        if (settingValue.IsNullOrEmpty())
-        {
-            return false;
-        }
+      var region = regions.FirstOrDefault(r => flagCode.Equals(r.TwoLetterISORegionName, StringComparison.OrdinalIgnoreCase));
 
-        var (cultureName, uiCultureName) = LocalizationSettingHelper.ParseLanguageSetting(settingValue);
-
-        return language.CultureName == cultureName && language.UiCultureName == uiCultureName;
+      if (region?.DisplayName != null)
+      {
+        flags.Add(flagCode);
+      }
     }
+
+    return Task.FromResult(flags);
+  }
+
+  protected virtual async Task<Language> FindDefaultLanguage(IEnumerable<Language> languages)
+  {
+    var settingValue = await SettingManager.GetOrNullForCurrentTenantAsync(LocalizationSettingNames.DefaultLanguage);
+    if (settingValue.IsNullOrEmpty())
+    {
+      return null;
+    }
+
+    var (cultureName, uiCultureName) = LocalizationSettingHelper.ParseLanguageSetting(settingValue);
+    return languages.FindByCulture(cultureName, uiCultureName);
+  }
+
+  protected virtual async Task<bool> IsDefaultLanguage(Language language)
+  {
+    var settingValue = await SettingManager.GetOrNullForCurrentTenantAsync(LocalizationSettingNames.DefaultLanguage);
+    if (settingValue.IsNullOrEmpty())
+    {
+      return false;
+    }
+
+    var (cultureName, uiCultureName) = LocalizationSettingHelper.ParseLanguageSetting(settingValue);
+
+    return language.CultureName == cultureName && language.UiCultureName == uiCultureName;
+  }
 }

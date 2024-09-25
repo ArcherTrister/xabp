@@ -13,12 +13,9 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
-      VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.LanguageManagement.Application.Contracts\X.Abp.LanguageManagement.Application.Contracts.csproj" />
-    <ProjectReference
-      Include="..\X.Abp.LanguageManagement.Domain\X.Abp.LanguageManagement.Domain.csproj" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.LanguageManagement.Application.Contracts\X.Abp.LanguageManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.LanguageManagement.Domain\X.Abp.LanguageManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>

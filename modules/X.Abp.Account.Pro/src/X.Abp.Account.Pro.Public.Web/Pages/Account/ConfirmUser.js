@@ -2,7 +2,7 @@
 
     $(function () {
         var l = abp.localization.getResource("AbpAccount");
-        var _accountService = x.abp.account.account;
+        var _accountService = volo.abp.account.account;
 
         $("#VerifyEmail").click(function (e) {
             _accountService
@@ -24,7 +24,7 @@
                     setInterval(function () {
                         _accountService.getConfirmationState($("#UserId").val())
                             .then(function (data) {
-                                if(data.emailConfirmed) {
+                                if (data.emailConfirmed) {
                                     location.reload();
                                 }
                             });

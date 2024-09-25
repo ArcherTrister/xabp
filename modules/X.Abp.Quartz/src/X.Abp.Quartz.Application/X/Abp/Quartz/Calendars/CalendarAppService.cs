@@ -17,33 +17,33 @@ namespace X.Abp.Quartz.Calendars;
 [Authorize(AbpQuartzPermissions.Calendars.Default)]
 public class CalendarAppService : QuartzAppServiceBase, ICalendarAppService
 {
-    public async Task<IReadOnlyCollection<string>> GetListAsync(string schedulerName)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        var calendarNames = await scheduler.GetCalendarNames();
+  public virtual async Task<IReadOnlyCollection<string>> GetListAsync(string schedulerName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    var calendarNames = await scheduler.GetCalendarNames();
 
-        return calendarNames;
-    }
+    return calendarNames;
+  }
 
-    public async Task<CalendarDetailDto> GetAsync(string schedulerName, string calendarName)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        var calendar = await scheduler.GetCalendar(calendarName);
-        return CalendarDetailDto.Create(calendar);
-    }
+  public virtual async Task<CalendarDetailDto> GetAsync(string schedulerName, string calendarName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    var calendar = await scheduler.GetCalendar(calendarName);
+    return CalendarDetailDto.Create(calendar);
+  }
 
-    [Authorize(AbpQuartzPermissions.Calendars.Create)]
-    public async Task CreateAsync(string schedulerName, string calendarName, bool replace, bool updateTriggers)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        ICalendar calendar = null;
-        await scheduler.AddCalendar(calendarName, calendar, replace, updateTriggers);
-    }
+  [Authorize(AbpQuartzPermissions.Calendars.Create)]
+  public virtual async Task CreateAsync(string schedulerName, string calendarName, bool replace, bool updateTriggers)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    ICalendar calendar = null;
+    await scheduler.AddCalendar(calendarName, calendar, replace, updateTriggers);
+  }
 
-    [Authorize(AbpQuartzPermissions.Calendars.Delete)]
-    public async Task DeleteAsync(string schedulerName, string calendarName)
-    {
-        var scheduler = await GetSchedulerAsync(schedulerName);
-        await scheduler.DeleteCalendar(calendarName);
-    }
+  [Authorize(AbpQuartzPermissions.Calendars.Delete)]
+  public virtual async Task DeleteAsync(string schedulerName, string calendarName)
+  {
+    var scheduler = await GetSchedulerAsync(schedulerName);
+    await scheduler.DeleteCalendar(calendarName);
+  }
 }

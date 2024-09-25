@@ -7,18 +7,14 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
 
 using X.Abp.Account.Public.Web.Pages.Account;
-
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
 namespace X.Abp.Account.Web.Pages.Account;
 
@@ -29,10 +25,8 @@ public class IdentityServerBackToImpersonatorModel : BackToImpersonatorModel
 
     public IdentityServerBackToImpersonatorModel(
         ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
         IOptions<AbpAccountIdentityServerOptions> options)
-        : base(currentPrincipalAccessor, signInManager, userManager)
+        : base(currentPrincipalAccessor)
     {
         Options = options.Value;
     }

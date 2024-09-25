@@ -16,8 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.Payment.Application.Contracts\X.Abp.Payment.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Payment.Application.Contracts\X.Abp.Payment.Application.Contracts.csproj" />
     <ProjectReference Include="..\X.Abp.Payment.Domain\X.Abp.Payment.Domain.csproj" />
   </ItemGroup>
 

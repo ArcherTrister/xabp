@@ -7,6 +7,6 @@ namespace X.Abp.OpenIddict.Pro.Web.Menus;
 public class AbpOpenIddictProMenus
 {
     public const string GroupName = "OpenIddict";
-    public const string Scopes = "OpenIddict.Scopes";
-    public const string Applications = "OpenIddict.Applications";
+    public const string Scopes = GroupName + ".Scopes";
+    public const string Applications = GroupName + ".Applications";
 }

@@ -10,7 +10,7 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.OpenIddict;
 using Volo.Abp.Security.Claims;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 public class OpenIddictImpersonateClaimsPrincipalHandler :
   IAbpOpenIddictClaimsPrincipalHandler,

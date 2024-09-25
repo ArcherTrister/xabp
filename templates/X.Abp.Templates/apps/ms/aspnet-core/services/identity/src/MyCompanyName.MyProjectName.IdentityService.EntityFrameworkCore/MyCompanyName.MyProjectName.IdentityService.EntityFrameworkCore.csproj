@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName.IdentityService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.Identity.Pro.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.IdentityServer.Pro.EntityFrameworkCore" Condition="'$(IdentityServer4)'=='True'" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.IdentityServer.Pro.EntityFrameworkCore" Condition="'$(IdentityServer4)'=='True'" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyCompanyName.MyProjectName.IdentityService.Domain\MyCompanyName.MyProjectName.IdentityService.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

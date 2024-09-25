@@ -27,107 +27,107 @@ namespace X.Abp.Forms.Forms;
 [Route("api/forms")]
 public class FormController : AbpControllerBase, IFormAppService
 {
-    protected IFormAppService FormAppService { get; }
+  protected IFormAppService FormAppService { get; }
 
-    public FormController(IFormAppService formAppService)
-    {
-        FormAppService = formAppService;
-        LocalizationResource = typeof(FormsResource);
-    }
+  public FormController(IFormAppService formAppService)
+  {
+    FormAppService = formAppService;
+    LocalizationResource = typeof(FormsResource);
+  }
 
-    [HttpGet]
-    public virtual Task<PagedResultDto<FormDto>> GetListAsync(GetFormListInputDto input)
-    {
-        return FormAppService.GetListAsync(input);
-    }
+  [HttpGet]
+  public virtual Task<PagedResultDto<FormDto>> GetListAsync(GetFormListInputDto input)
+  {
+    return FormAppService.GetListAsync(input);
+  }
 
-    [HttpGet]
-    [Route("{id}/responses")]
-    public Task<PagedResultDto<FormResponseDetailedDto>> GetResponsesAsync(Guid id, GetResponseListInputDto input)
-    {
-        return FormAppService.GetResponsesAsync(id, input);
-    }
+  [HttpGet]
+  [Route("{id}/responses")]
+  public virtual Task<PagedResultDto<FormResponseDetailedDto>> GetResponsesAsync(Guid id, GetResponseListInputDto input)
+  {
+    return FormAppService.GetResponsesAsync(id, input);
+  }
 
-    [HttpGet]
-    [Route("{id}/download-responses-csv")]
-    public Task<IRemoteStreamContent> GetCsvResponsesAsync(Guid id, GetResponseListInputDto input)
-    {
-        return FormAppService.GetCsvResponsesAsync(id, input);
-    }
+  [HttpGet]
+  [Route("{id}/download-responses-csv")]
+  public virtual Task<IRemoteStreamContent> GetCsvResponsesAsync(Guid id, GetResponseListInputDto input)
+  {
+    return FormAppService.GetCsvResponsesAsync(id, input);
+  }
 
-    [HttpGet]
-    [Route("{id}/responses-count")]
-    public Task<long> GetResponsesCountAsync(Guid id)
-    {
-        return FormAppService.GetResponsesCountAsync(id);
-    }
+  [HttpGet]
+  [Route("{id}/responses-count")]
+  public virtual Task<long> GetResponsesCountAsync(Guid id)
+  {
+    return FormAppService.GetResponsesCountAsync(id);
+  }
 
-    [HttpDelete]
-    [Route("{id}/responses")]
-    public Task DeleteAllResponsesOfFormAsync(Guid id)
-    {
-        return FormAppService.DeleteAllResponsesOfFormAsync(id);
-    }
+  [HttpDelete]
+  [Route("{id}/responses")]
+  public virtual Task DeleteAllResponsesOfFormAsync(Guid id)
+  {
+    return FormAppService.DeleteAllResponsesOfFormAsync(id);
+  }
 
-    [HttpPost]
-    [Route("/invite")]
-    public Task SendInviteEmailAsync(FormInviteEmailInputDto input)
-    {
-        return FormAppService.SendInviteEmailAsync(input);
-    }
+  [HttpPost]
+  [Route("/invite")]
+  public virtual Task SendInviteEmailAsync(FormInviteEmailInputDto input)
+  {
+    return FormAppService.SendInviteEmailAsync(input);
+  }
 
-    [HttpPost]
-    public virtual Task<FormDto> CreateAsync(CreateFormDto input)
-    {
-        return FormAppService.CreateAsync(input);
-    }
+  [HttpPost]
+  public virtual Task<FormDto> CreateAsync(CreateFormDto input)
+  {
+    return FormAppService.CreateAsync(input);
+  }
 
-    [HttpGet]
-    [Route("{id}")]
-    public virtual Task<FormWithDetailsDto> GetAsync(Guid id)
-    {
-        return FormAppService.GetAsync(id);
-    }
+  [HttpGet]
+  [Route("{id}")]
+  public virtual Task<FormWithDetailsDto> GetAsync(Guid id)
+  {
+    return FormAppService.GetAsync(id);
+  }
 
-    [HttpPut]
-    [Route("{id}")]
-    public virtual Task<FormDto> UpdateAsync(Guid id, UpdateFormDto input)
-    {
-        return FormAppService.UpdateAsync(id, input);
-    }
+  [HttpPut]
+  [Route("{id}")]
+  public virtual Task<FormDto> UpdateAsync(Guid id, UpdateFormDto input)
+  {
+    return FormAppService.UpdateAsync(id, input);
+  }
 
-    [HttpPut]
-    [Route("{id}/settings")]
-    public virtual Task SetSettingsAsync(Guid id, UpdateFormSettingInputDto input)
-    {
-        return FormAppService.SetSettingsAsync(id, input);
-    }
+  [HttpPut]
+  [Route("{id}/settings")]
+  public virtual Task SetSettingsAsync(Guid id, UpdateFormSettingInputDto input)
+  {
+    return FormAppService.SetSettingsAsync(id, input);
+  }
 
-    [HttpGet]
-    [Route("{formId}/settings")]
-    public virtual Task<FormSettingsDto> GetSettingsAsync(Guid formId)
-    {
-        return FormAppService.GetSettingsAsync(formId);
-    }
+  [HttpGet]
+  [Route("{formId}/settings")]
+  public virtual Task<FormSettingsDto> GetSettingsAsync(Guid formId)
+  {
+    return FormAppService.GetSettingsAsync(formId);
+  }
 
-    [HttpGet]
-    [Route("{id}/questions")]
-    public virtual Task<List<QuestionDto>> GetQuestionsAsync(Guid id, GetQuestionListDto input)
-    {
-        return FormAppService.GetQuestionsAsync(id, input);
-    }
+  [HttpGet]
+  [Route("{id}/questions")]
+  public virtual Task<List<QuestionDto>> GetQuestionsAsync(Guid id, GetQuestionListDto input)
+  {
+    return FormAppService.GetQuestionsAsync(id, input);
+  }
 
-    [HttpPost]
-    [Route("{id}/questions")]
-    public virtual Task<QuestionDto> CreateQuestionAsync(Guid id, CreateQuestionDto input)
-    {
-        return FormAppService.CreateQuestionAsync(id, input);
-    }
+  [HttpPost]
+  [Route("{id}/questions")]
+  public virtual Task<QuestionDto> CreateQuestionAsync(Guid id, CreateQuestionDto input)
+  {
+    return FormAppService.CreateQuestionAsync(id, input);
+  }
 
-    [HttpDelete]
-    [Route("{id}")]
-    public virtual Task DeleteAsync(Guid id)
-    {
-        return FormAppService.DeleteAsync(id);
-    }
+  [HttpDelete]
+  [Route("{id}")]
+  public virtual Task DeleteAsync(Guid id)
+  {
+    return FormAppService.DeleteAsync(id);
+  }
 }

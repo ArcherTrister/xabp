@@ -14,28 +14,28 @@ namespace X.Abp.OpenIddict.Pro.Web.Menus;
 
 public class AbpOpenIddictProMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        var localizer = context.GetLocalizer<AbpOpenIddictResource>();
+  private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    var localizer = context.GetLocalizer<AbpOpenIddictResource>();
 
-        var openIddictMenuItem = new ApplicationMenuItem(AbpOpenIddictProMenus.GroupName, localizer["Menu:OpenIddict"], null, "fa fa-id-badge");
+    var openIddictMenuItem = new ApplicationMenuItem(AbpOpenIddictProMenus.GroupName, localizer["Menu:OpenIddict"], null, "fa fa-id-badge");
 
-        openIddictMenuItem.AddItem(new ApplicationMenuItem(AbpOpenIddictProMenus.Applications, localizer["Applications"], "~/openIddict/Applications")
-            .RequirePermissions(AbpOpenIddictProPermissions.Application.Default));
+    openIddictMenuItem.AddItem(new ApplicationMenuItem(AbpOpenIddictProMenus.Applications, localizer["Applications"], "~/openIddict/Applications")
+        .RequirePermissions(AbpOpenIddictProPermissions.Application.Default));
 
-        openIddictMenuItem.AddItem(new ApplicationMenuItem(AbpOpenIddictProMenus.Scopes, localizer["Scopes"], "~/openIddict/Scopes", null)
-            .RequirePermissions(AbpOpenIddictProPermissions.Scope.Default));
+    openIddictMenuItem.AddItem(new ApplicationMenuItem(AbpOpenIddictProMenus.Scopes, localizer["Scopes"], "~/openIddict/Scopes", null)
+        .RequirePermissions(AbpOpenIddictProPermissions.Scope.Default));
 
-        context.Menu.GetAdministration().AddItem(openIddictMenuItem);
+    context.Menu.GetAdministration().AddItem(openIddictMenuItem);
 
-        return Task.CompletedTask;
-    }
+    return Task.CompletedTask;
+  }
 }

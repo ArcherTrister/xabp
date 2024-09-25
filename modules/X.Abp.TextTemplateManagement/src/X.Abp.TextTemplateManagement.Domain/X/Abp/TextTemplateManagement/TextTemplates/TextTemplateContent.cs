@@ -50,6 +50,6 @@ public class TextTemplateContent : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public virtual void SetContent(string content)
     {
-        Content = Check.NotNullOrWhiteSpace(content, nameof(content), TextTemplateConsts.MaxContentLength, 0);
+        Content = Check.NotNullOrWhiteSpace(content, nameof(content), TextTemplateConsts.MaxContentLength);
     }
 }

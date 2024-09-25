@@ -25,6 +25,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" VersionOverride="$(MicrosoftAspNetCorePackageVersion)" />
+    <PackageReference Include="X.Swashbuckle" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,18 +37,13 @@
     <!--<PackageReference
     Include="Volo.Abp.DistributedLocking" VersionOverride="$(AbpPackageVersion)" />-->
     <PackageReference Include="Volo.Abp.Swashbuckle" VersionOverride="$(AbpPackageVersion)" />
-    <!--<PackageReference
-    Include="Volo.Abp.Account.Pro.Public.Web.OpenIddict" VersionOverride="$(AbpPackageVersion)"
-    />-->
-    <!--<PackageReference
-    Include="Volo.Abp.Account.Pro.Public.Web.Impersonation" VersionOverride="$(AbpPackageVersion)"
-    />-->
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Public.Web.IdentityServer\X.Abp.Account.Pro.Public.Web.IdentityServer.csproj" />
     <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Public.Web.Impersonation\X.Abp.Account.Pro.Public.Web.Impersonation.csproj" />
+    <ProjectReference Include="..\..\..\..\modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Public.Web.OpenIddict\X.Abp.Account.Pro.Public.Web.OpenIddict.csproj" />
     <ProjectReference Include="..\AbpVnext.Pro.Application\AbpVnext.Pro.Application.csproj" />
     <ProjectReference Include="..\AbpVnext.Pro.EntityFrameworkCore\AbpVnext.Pro.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\AbpVnext.Pro.HttpApi\AbpVnext.Pro.HttpApi.csproj" />
@@ -65,7 +61,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\_ViewImports.cshtml" />
+    <None Remove="openiddict.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="openiddict.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

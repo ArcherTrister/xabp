@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName.ProductService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyCompanyName.MyProjectName.ProductService.Application.Contracts\MyCompanyName.MyProjectName.ProductService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\MyCompanyName.MyProjectName.ProductService.Domain\MyCompanyName.MyProjectName.ProductService.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

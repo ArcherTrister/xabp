@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName.Shared.Hosting.AspNetCore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Sinks.Async" />
+    <PackageReference Include="Serilog.Sinks.ElasticSearch" />
+    <PackageReference Include="prometheus-net.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Swashbuckle" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyCompanyName.MyProjectName.Shared.Hosting\MyCompanyName.MyProjectName.Shared.Hosting.csproj" />
+  </ItemGroup>
+
+</Project>

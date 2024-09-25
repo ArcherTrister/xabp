@@ -4,41 +4,19 @@
 
 using Volo.Abp.Application;
 using Volo.Abp.Authorization;
-using Volo.Abp.Localization;
-using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
-using Volo.Abp.Quartz;
 using Volo.Abp.Validation;
-using Volo.Abp.VirtualFileSystem;
-
-using X.Abp.Quartz.Localization;
 
 namespace X.Abp.Quartz;
 
 [DependsOn(
-    typeof(AbpQuartzModule),
     typeof(AbpDddApplicationContractsModule),
     typeof(AbpAuthorizationModule),
-    typeof(AbpValidationModule))]
+    typeof(AbpValidationModule),
+    typeof(AbpQuartzDomainSharedModule))]
 public class AbpQuartzApplicationContractsModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<AbpQuartzApplicationContractsModule>();
-        });
-
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Add<QuartzResource>("en")
-                .AddVirtualJson("/X/Abp/Quartz/Localization/Resources");
-        });
-
-        Configure<AbpExceptionLocalizationOptions>(options =>
-        {
-            options.MapCodeNamespace("X.Abp.Quartz", typeof(QuartzResource));
-        });
     }
 }

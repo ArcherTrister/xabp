@@ -5,28 +5,6 @@
 
 (function(){
 
-  // controller x.abp.payment.admin.requests.paymentRequestAdmin
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'x.abp.payment.admin.requests.paymentRequestAdmin');
-
-    x.abp.payment.admin.requests.paymentRequestAdmin.getList = function(input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment-admin/payment-requests' + abp.utils.buildQueryString([{ name: 'filter', value: input.filter }, { name: 'creationDateMax', value: input.creationDateMax }, { name: 'creationDateMin', value: input.creationDateMin }, { name: 'paymentType', value: input.paymentType }, { name: 'status', value: input.status }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.payment.admin.requests.paymentRequestAdmin.get = function(id, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment-admin/payment-requests/' + id + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-  })();
-
   // controller x.abp.payment.admin.plans.planAdmin
 
   (function(){
@@ -52,7 +30,7 @@
 
     x.abp.payment.admin.plans.planAdmin['delete'] = function(id, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/payment-admin/plans' + abp.utils.buildQueryString([{ name: 'id', value: id }]) + '',
+        url: abp.appPath + 'api/payment-admin/plans/' + id + '',
         type: 'DELETE',
         dataType: null
       }, ajaxParams));
@@ -100,6 +78,28 @@
     x.abp.payment.admin.plans.planAdmin.getGatewayPlans = function(planId, input, ajaxParams) {
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/payment-admin/plans/' + planId + '/external-plans' + abp.utils.buildQueryString([{ name: 'filter', value: input.filter }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
+  // controller x.abp.payment.admin.requests.paymentRequestAdmin
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.payment.admin.requests.paymentRequestAdmin');
+
+    x.abp.payment.admin.requests.paymentRequestAdmin.getList = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/payment-admin/payment-requests' + abp.utils.buildQueryString([{ name: 'filter', value: input.filter }, { name: 'creationDateMax', value: input.creationDateMax }, { name: 'creationDateMin', value: input.creationDateMin }, { name: 'paymentType', value: input.paymentType }, { name: 'status', value: input.status }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.payment.admin.requests.paymentRequestAdmin.get = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/payment-admin/payment-requests/' + id + '',
         type: 'GET'
       }, ajaxParams));
     };

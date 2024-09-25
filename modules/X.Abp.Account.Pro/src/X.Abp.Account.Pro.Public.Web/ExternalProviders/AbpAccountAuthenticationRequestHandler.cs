@@ -2,6 +2,8 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authentication;
@@ -38,8 +40,7 @@ public class AbpAccountAuthenticationRequestHandler<TOptions, THandler> : IAuthe
 
     public virtual async Task ChallengeAsync(AuthenticationProperties properties)
     {
-        await OptionsManager.SetAsync(InnerHandler.Scheme.Name);
-        ObjectHelper.TrySetProperty(InnerHandler, handler => handler.Options, () => OptionsManager.Value);
+        await SetOptionsAsync();
 
         await InnerHandler.ChallengeAsync(properties);
     }
@@ -49,12 +50,33 @@ public class AbpAccountAuthenticationRequestHandler<TOptions, THandler> : IAuthe
         await InnerHandler.ForbidAsync(properties);
     }
 
+    public async Task SignOutAsync(AuthenticationProperties properties)
+    {
+        if (!(InnerHandler is IAuthenticationSignOutHandler signOutHandler))
+        {
+            throw new InvalidOperationException($"The authentication handler registered for scheme '{InnerHandler.Scheme}' is '{InnerHandler.GetType().Name}' which cannot be used for SignOutAsync");
+        }
+
+        await SetOptionsAsync();
+        await signOutHandler.SignOutAsync(properties);
+    }
+
+    public async Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties properties)
+    {
+        if (!(InnerHandler is IAuthenticationSignInHandler signInHandler))
+        {
+            throw new InvalidOperationException($"The authentication handler registered for scheme '{InnerHandler.Scheme}' is '{InnerHandler.GetType().Name}' which cannot be used for SignInAsync");
+        }
+
+        await SetOptionsAsync();
+        await signInHandler.SignInAsync(user, properties);
+    }
+
     public virtual async Task<bool> HandleRequestAsync()
     {
         if (await InnerHandler.ShouldHandleRequestAsync())
         {
-            await OptionsManager.SetAsync(InnerHandler.Scheme.Name);
-            ObjectHelper.TrySetProperty(InnerHandler, handler => handler.Options, () => OptionsManager.Value);
+            await SetOptionsAsync();
         }
 
         return await InnerHandler.HandleRequestAsync();
@@ -63,5 +85,11 @@ public class AbpAccountAuthenticationRequestHandler<TOptions, THandler> : IAuthe
     public virtual THandler GetHandler()
     {
         return InnerHandler;
+    }
+
+    private async Task SetOptionsAsync()
+    {
+        await OptionsManager.SetAsync(InnerHandler.Scheme.Name);
+        ObjectHelper.TrySetProperty(InnerHandler, handler => handler.Options, () => OptionsManager.Value);
     }
 }

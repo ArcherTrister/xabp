@@ -5,19 +5,19 @@ namespace X.Abp.FileManagement.Blazor.Menus;
 
 public class FileManagementMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        //Add main menu items.
-        context.Menu.AddItem(new ApplicationMenuItem(FileManagementMenus.Prefix, displayName: "FileManagement", "/FileManagement", icon: "fa fa-globe"));
+  private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    //Add main menu items.
+    context.Menu.AddItem(new ApplicationMenuItem(FileManagementMenus.Prefix, displayName: "FileManagement", "/FileManagement", icon: "fa fa-globe"));
 
-        return Task.CompletedTask;
-    }
+    return Task.CompletedTask;
+  }
 }

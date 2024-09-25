@@ -37,14 +37,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Account.Pro.Public.Application.Contracts\X.Abp.Account.Pro.Public.Application.Contracts.csproj" />
-    <ProjectReference
-      Include="..\..\..\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.Domain\X.Abp.Identity.Pro.Domain.csproj" />
+    <None Remove="Pages\Account\LinkUsers\account-link-user-global.js" />
+    <None Remove="Pages\Account\LinkUsers\LinkUsersModal.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Account.Pro.Public.Application.Contracts\X.Abp.Account.Pro.Public.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.Domain\X.Abp.Identity.Pro.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

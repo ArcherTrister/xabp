@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
+using Volo.Abp.Uow;
+
 namespace AbpVnext.Pro.EntityFrameworkCore;
 
 /* This class is needed for EF Core console commands
@@ -46,7 +48,6 @@ public abstract class ProDbContextFactoryBase<TDbContext> : IDesignTimeDbContext
             }
         }
 
-        Console.WriteLine($"当前运行环境: {(environment.IsNullOrWhiteSpace() ? "未设置, 将使用默认配置" : environment)}, 如需更改运行环境请在运行命令中指定");
         var configuration = BuildConfiguration(environment);
 
         var builder = new DbContextOptionsBuilder<TDbContext>()
@@ -59,13 +60,15 @@ public abstract class ProDbContextFactoryBase<TDbContext> : IDesignTimeDbContext
 
     protected IConfigurationRoot BuildConfiguration(string environment)
     {
+        Console.WriteLine($"当前运行环境: {(environment.IsNullOrWhiteSpace() ? "未设置, 将使用默认配置" : environment)}, 如需更改运行环境请在运行命令中指定");
+
         var builder = new ConfigurationBuilder()
             .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../AbpVnext.Pro.DbMigrator/"))
             .AddJsonFile("appsettings.secrets.json", optional: false);
 
         if (environment.IsNullOrWhiteSpace())
         {
-            builder.AddJsonFile($"appsettings.json", optional: false);
+            builder.AddJsonFile("appsettings.json", optional: false);
         }
         else
         {

@@ -27,16 +27,16 @@ namespace X.Abp.Saas;
 [Controller]
 public class SubscriptionController : AbpControllerBase, ISubscriptionAppService
 {
-    protected ISubscriptionAppService SubscriptionAppService { get; }
+  protected ISubscriptionAppService SubscriptionAppService { get; }
 
-    public SubscriptionController(ISubscriptionAppService subscriptionAppService)
-    {
-        SubscriptionAppService = subscriptionAppService;
-    }
+  public SubscriptionController(ISubscriptionAppService subscriptionAppService)
+  {
+    SubscriptionAppService = subscriptionAppService;
+  }
 
-    [HttpPost]
-    public Task<PaymentRequestWithDetailsDto> CreateSubscriptionAsync(Guid editionId, Guid tenantId)
-    {
-        return SubscriptionAppService.CreateSubscriptionAsync(editionId, tenantId);
-    }
+  [HttpPost]
+  public virtual Task<PaymentRequestWithDetailsDto> CreateSubscriptionAsync(Guid editionId, Guid tenantId)
+  {
+    return SubscriptionAppService.CreateSubscriptionAsync(editionId, tenantId);
+  }
 }

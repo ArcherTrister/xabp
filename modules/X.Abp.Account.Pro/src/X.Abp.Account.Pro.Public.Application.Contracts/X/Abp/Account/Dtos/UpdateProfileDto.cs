@@ -29,5 +29,7 @@ public class UpdateProfileDto : ExtensibleObject, IHasConcurrencyStamp
     [DynamicStringLength(typeof(IdentityUserConsts), nameof(IdentityUserConsts.MaxPhoneNumberLength))]
     public string PhoneNumber { get; set; }
 
+    public string Timezone { get; set; }
+
     public string ConcurrencyStamp { get; set; }
 }

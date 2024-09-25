@@ -20,45 +20,45 @@ namespace X.Abp.Chat.EntityFrameworkCore.Conversations;
 
 public class EfCoreConversationRepository : EfCoreRepository<IChatDbContext, Conversation, Guid>, IConversationRepository
 {
-    public EfCoreConversationRepository(IDbContextProvider<IChatDbContext> dbContextProvider)
-        : base(dbContextProvider)
-    {
-    }
+  public EfCoreConversationRepository(IDbContextProvider<IChatDbContext> dbContextProvider)
+      : base(dbContextProvider)
+  {
+  }
 
-    public async Task<ConversationPair> FindPairAsync(Guid senderId, Guid targetId, CancellationToken cancellationToken = default)
-    {
-        var matchedConversations = await (await GetDbSetAsync())
-            .Where(x => (x.UserId == senderId && x.TargetUserId == targetId) ||
-                        (x.UserId == targetId && x.TargetUserId == senderId)).ToListAsync(GetCancellationToken(cancellationToken));
+  public virtual async Task<ConversationPair> FindPairAsync(Guid senderId, Guid targetId, CancellationToken cancellationToken = default)
+  {
+    var matchedConversations = await (await GetDbSetAsync())
+        .Where(x => (x.UserId == senderId && x.TargetUserId == targetId) ||
+                    (x.UserId == targetId && x.TargetUserId == senderId)).ToListAsync(GetCancellationToken(cancellationToken));
 
-        return !matchedConversations.Any()
-            ? null
-            : new ConversationPair
-            {
-                SenderConversation = matchedConversations.Single(x => x.UserId == senderId),
-                TargetConversation = matchedConversations.Single(x => x.UserId == targetId)
-            };
-    }
+    return !matchedConversations.Any()
+        ? null
+        : new ConversationPair
+        {
+          SenderConversation = matchedConversations.Single(x => x.UserId == senderId),
+          TargetConversation = matchedConversations.Single(x => x.UserId == targetId)
+        };
+  }
 
-    public async Task<List<ConversationWithTargetUser>> GetListByUserIdAsync(Guid userId, string filter, CancellationToken cancellationToken = default)
-    {
-        var query = from chatConversation in await GetDbSetAsync()
-                    join targetUser in (await GetDbContextAsync()).ChatUsers on chatConversation.TargetUserId equals targetUser.Id
-                    where userId == chatConversation.UserId && (targetUser.Name.Contains($"{filter}") || targetUser.Surname.Contains($"{filter}"))
-                    orderby chatConversation.LastMessageDate descending
-                    select new ConversationWithTargetUser
-                    {
-                        Conversation = chatConversation,
-                        TargetUser = targetUser
-                    };
+  public virtual async Task<List<ConversationWithTargetUser>> GetListByUserIdAsync(Guid userId, string filter, CancellationToken cancellationToken = default)
+  {
+    var query = from chatConversation in await GetDbSetAsync()
+                join targetUser in (await GetDbContextAsync()).ChatUsers on chatConversation.TargetUserId equals targetUser.Id
+                where userId == chatConversation.UserId && (targetUser.Name.Contains(filter) || targetUser.Surname.Contains(filter))
+                orderby chatConversation.LastMessageDate descending
+                select new ConversationWithTargetUser
+                {
+                  Conversation = chatConversation,
+                  TargetUser = targetUser
+                };
 
-        return await query.ToListAsync(GetCancellationToken(cancellationToken));
-    }
+    return await query.ToListAsync(GetCancellationToken(cancellationToken));
+  }
 
-    public async Task<int> GetTotalUnreadMessageCountAsync(Guid userId, CancellationToken cancellationToken = default)
-    {
-        return await (await GetQueryableAsync())
-            .Where(x => x.UserId == userId && x.LastMessageSide == ChatMessageSide.Receiver)
-            .SumAsync(x => x.UnreadMessageCount, cancellationToken: GetCancellationToken(cancellationToken));
-    }
+  public virtual async Task<int> GetTotalUnreadMessageCountAsync(Guid userId, CancellationToken cancellationToken = default)
+  {
+    return await (await GetQueryableAsync())
+        .Where(x => x.UserId == userId && x.LastMessageSide == ChatMessageSide.Receiver)
+        .SumAsync(x => x.UnreadMessageCount, cancellationToken: GetCancellationToken(cancellationToken));
+  }
 }

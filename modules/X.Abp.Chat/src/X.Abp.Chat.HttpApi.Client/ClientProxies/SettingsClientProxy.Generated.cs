@@ -24,4 +24,17 @@ public partial class SettingsClientProxy : ClientProxyBase<ISettingsAppService>,
             { typeof(SendOnEnterSettingDto), input }
         });
     }
+
+    public virtual async Task<ChatSettingsDto> GetAsync()
+    {
+        return await RequestAsync<ChatSettingsDto>(nameof(GetAsync));
+    }
+
+    public virtual async Task UpdateAsync(ChatSettingsDto input)
+    {
+        await RequestAsync(nameof(UpdateAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(ChatSettingsDto), input }
+        });
+    }
 }

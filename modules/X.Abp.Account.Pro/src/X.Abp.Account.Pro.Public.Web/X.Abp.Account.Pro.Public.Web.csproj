@@ -37,23 +37,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Sms" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="X.Captcha" />
-    <ProjectReference
-      Include="..\..\..\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.AspNetCore\X.Abp.Identity.Pro.AspNetCore.csproj" />
-    <ProjectReference
-      Include="..\X.Abp.Account.Pro.Public.Application.Contracts\X.Abp.Account.Pro.Public.Application.Contracts.csproj" />
-    <ProjectReference
-      Include="..\X.Abp.Account.Pro.Public.Web.Shared\X.Abp.Account.Pro.Public.Web.Shared.csproj" />
+    <ProjectReference Include="..\..\..\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.AspNetCore\X.Abp.Identity.Pro.AspNetCore.csproj" />
+    <ProjectReference Include="..\X.Abp.Account.Pro.Public.Application.Contracts\X.Abp.Account.Pro.Public.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Account.Pro.Public.Web.Shared\X.Abp.Account.Pro.Public.Web.Shared.csproj" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="X.Captcha" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
   </ItemGroup>
 

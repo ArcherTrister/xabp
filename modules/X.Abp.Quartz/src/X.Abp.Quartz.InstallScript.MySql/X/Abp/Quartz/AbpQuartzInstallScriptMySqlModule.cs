@@ -2,6 +2,7 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
+using System.Reflection;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -11,17 +12,30 @@ using Volo.Abp;
 using Volo.Abp.Modularity;
 using Volo.Abp.Quartz;
 
+using X.Abp.Quartz.MySql;
+
 namespace X.Abp.Quartz;
 
-[DependsOn(typeof(AbpQuartzModule))]
+[DependsOn(typeof(AbpQuartzDomainModule))]
 public class AbpQuartzInstallScriptMySqlModule : AbpModule
 {
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        Configure<AbpQuartzInstallScriptOptions>(options =>
+        {
+            options.ScriptAssembly = typeof(MySqlObjectsInstaller).GetTypeInfo().Assembly;
+            options.ScriptResourceName = "X.Abp.Quartz.MySql.Install.sql";
+        });
+    }
+
     public override async Task OnPreApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         var options = context.ServiceProvider.GetRequiredService<IOptions<AbpQuartzOptions>>().Value;
 
+        var installScriptOptions = context.ServiceProvider.GetRequiredService<IOptions<AbpQuartzInstallScriptOptions>>().Value;
+
         var objectsInstaller = context.ServiceProvider.GetRequiredService<IObjectsInstaller>();
 
-        await objectsInstaller.Initialize(options);
+        await objectsInstaller.Initialize(options, installScriptOptions);
     }
 }

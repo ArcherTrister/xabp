@@ -15,10 +15,8 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Http.Client" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client"
-      VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Saas.Application.Contracts\X.Abp.Saas.Application.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Saas.Application.Contracts\X.Abp.Saas.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

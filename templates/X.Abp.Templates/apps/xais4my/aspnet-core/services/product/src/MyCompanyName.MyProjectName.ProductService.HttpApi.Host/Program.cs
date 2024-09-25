@@ -19,7 +19,7 @@ public class Program
 
         try
         {
-            Log.Information($"Starting {assemblyName}.");
+            Log.Information("Starting {AssemblyName}.", assemblyName);
             var builder = WebApplication.CreateBuilder(args);
             builder.Host
                 .AddAppSettingsSecretsJson()

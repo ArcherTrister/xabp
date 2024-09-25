@@ -13,8 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Notification.Application.Contracts\X.Abp.Notification.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Notification.Application.Contracts\X.Abp.Notification.Application.Contracts.csproj" />
     <ProjectReference Include="..\X.Abp.Notification.Domain\X.Abp.Notification.Domain.csproj" />
   </ItemGroup>
 

@@ -19,67 +19,67 @@ using X.Abp.LanguageManagement.External;
 
 namespace X.Abp.LanguageManagement.EntityFrameworkCore
 {
-    public class EfCoreLocalizationTextRecordRepository
-        : EfCoreRepository<ILanguageManagementDbContext, LocalizationTextRecord, Guid>,
-            ILocalizationTextRecordRepository
+  public class EfCoreLocalizationTextRecordRepository
+      : EfCoreRepository<ILanguageManagementDbContext, LocalizationTextRecord, Guid>,
+          ILocalizationTextRecordRepository
+  {
+    public EfCoreLocalizationTextRecordRepository(
+        IDbContextProvider<ILanguageManagementDbContext> dbContextProvider)
+        : base(dbContextProvider)
     {
-        public EfCoreLocalizationTextRecordRepository(
-            IDbContextProvider<ILanguageManagementDbContext> dbContextProvider)
-            : base(dbContextProvider)
-        {
-        }
-
-        [Obsolete("Use GetListAsync() method.")]
-        public List<LocalizationTextRecord> GetList(string resourceName, string cultureName)
-        {
-            using (Volo.Abp.Uow.UnitOfWorkManager.DisableObsoleteDbContextCreationWarning.SetScoped(true))
-            {
-                return DbSet
-                .Where(localizationTextRecord =>
-                    localizationTextRecord.ResourceName == resourceName
-                    && localizationTextRecord.CultureName == cultureName)
-                .ToList();
-            }
-        }
-
-        public async Task<List<LocalizationTextRecord>> GetListAsync(
-            string resourceName,
-            string cultureName,
-            CancellationToken cancellationToken = default
-        )
-        {
-            return await (await GetDbSetAsync())
-                .Where(localizationTextRecord =>
-                    localizationTextRecord.ResourceName == resourceName
-                    && localizationTextRecord.CultureName == cultureName
-                )
-                .ToListAsync(GetCancellationToken(cancellationToken));
-        }
-
-        [Obsolete("Use FindAsync() method.")]
-        public LocalizationTextRecord Find(string resourceName, string cultureName)
-        {
-            using (Volo.Abp.Uow.UnitOfWorkManager.DisableObsoleteDbContextCreationWarning.SetScoped(true))
-            {
-                return DbSet.FirstOrDefault(
-                    localizationTextRecord =>
-                        localizationTextRecord.ResourceName == resourceName
-                        && localizationTextRecord.CultureName == cultureName);
-            }
-        }
-
-        public async Task<LocalizationTextRecord> FindAsync(
-            string resourceName,
-            string cultureName,
-            CancellationToken cancellationToken = default
-        )
-        {
-            return await (await GetDbSetAsync())
-                .Where(localizationTextRecord =>
-                    localizationTextRecord.ResourceName == resourceName
-                    && localizationTextRecord.CultureName == cultureName
-                )
-                .FirstOrDefaultAsync(GetCancellationToken(cancellationToken));
-        }
     }
+
+    [Obsolete("Use GetListAsync() method.")]
+    public List<LocalizationTextRecord> GetList(string resourceName, string cultureName)
+    {
+      using (Volo.Abp.Uow.UnitOfWorkManager.DisableObsoleteDbContextCreationWarning.SetScoped(true))
+      {
+        return DbSet
+        .Where(localizationTextRecord =>
+            localizationTextRecord.ResourceName == resourceName
+            && localizationTextRecord.CultureName == cultureName)
+        .ToList();
+      }
+    }
+
+    public virtual async Task<List<LocalizationTextRecord>> GetListAsync(
+        string resourceName,
+        string cultureName,
+        CancellationToken cancellationToken = default
+    )
+    {
+      return await (await GetDbSetAsync())
+          .Where(localizationTextRecord =>
+              localizationTextRecord.ResourceName == resourceName
+              && localizationTextRecord.CultureName == cultureName
+          )
+          .ToListAsync(GetCancellationToken(cancellationToken));
+    }
+
+    [Obsolete("Use FindAsync() method.")]
+    public LocalizationTextRecord Find(string resourceName, string cultureName)
+    {
+      using (Volo.Abp.Uow.UnitOfWorkManager.DisableObsoleteDbContextCreationWarning.SetScoped(true))
+      {
+        return DbSet.FirstOrDefault(
+            localizationTextRecord =>
+                localizationTextRecord.ResourceName == resourceName
+                && localizationTextRecord.CultureName == cultureName);
+      }
+    }
+
+    public virtual async Task<LocalizationTextRecord> FindAsync(
+        string resourceName,
+        string cultureName,
+        CancellationToken cancellationToken = default
+    )
+    {
+      return await (await GetDbSetAsync())
+          .Where(localizationTextRecord =>
+              localizationTextRecord.ResourceName == resourceName
+              && localizationTextRecord.CultureName == cultureName
+          )
+          .FirstOrDefaultAsync(GetCancellationToken(cancellationToken));
+    }
+  }
 }

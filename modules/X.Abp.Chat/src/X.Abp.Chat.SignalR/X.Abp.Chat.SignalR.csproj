@@ -20,8 +20,7 @@
     <PackageReference Include="Volo.Abp.AspNetCore.SignalR" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.EventBus" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Chat.Application.Contracts\X.Abp.Chat.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Chat.Application.Contracts\X.Abp.Chat.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -40,7 +40,15 @@ public class TenantAppService : SaasAppServiceBase, ITenantAppService
 
     protected AbpDbConnectionOptions DbConnectionOptions { get; }
 
-    public TenantAppService(ITenantRepository tenantRepository, IEditionRepository editionRepository, ITenantManager tenantManager, IDataSeeder dataSeeder, IDistributedEventBus distributedEventBus, IOptions<AbpDbConnectionOptions> dbConnectionOptions)
+    protected IConnectionStringChecker ConnectionStringChecker { get; }
+
+    public TenantAppService(ITenantRepository tenantRepository,
+        IEditionRepository editionRepository,
+        ITenantManager tenantManager,
+        IDataSeeder dataSeeder,
+        IDistributedEventBus distributedEventBus,
+        IOptions<AbpDbConnectionOptions> dbConnectionOptions,
+        IConnectionStringChecker connectionStringChecker)
     {
         EditionRepository = editionRepository;
         DataSeeder = dataSeeder;
@@ -48,6 +56,7 @@ public class TenantAppService : SaasAppServiceBase, ITenantAppService
         DbConnectionOptions = dbConnectionOptions.Value;
         TenantRepository = tenantRepository;
         TenantManager = tenantManager;
+        ConnectionStringChecker = connectionStringChecker;
     }
 
     public virtual async Task<SaasTenantDto> GetAsync(Guid id)
@@ -316,6 +325,11 @@ public class TenantAppService : SaasAppServiceBase, ITenantAppService
         var editions = await EditionRepository.GetListAsync();
 
         return ObjectMapper.Map<List<Edition>, List<EditionLookupDto>>(editions);
+    }
+
+    public virtual async Task<bool> CheckConnectionStringAsync(string connectionString)
+    {
+        return (await ConnectionStringChecker.CheckAsync(connectionString)).Connected;
     }
 
     [Authorize(AbpSaasPermissions.Tenants.SetPassword)]

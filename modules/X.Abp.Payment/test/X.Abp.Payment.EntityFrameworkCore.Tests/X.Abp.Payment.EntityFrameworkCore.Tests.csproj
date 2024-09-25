@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <RootNamespace>X.Abp.Payment</RootNamespace>
   </PropertyGroup>
@@ -13,7 +14,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0" />
     <ProjectReference Include="..\..\src\X.Abp.Payment.EntityFrameworkCore\X.Abp.Payment.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\X.Abp.Payment.TestBase\X.Abp.Payment.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="7.3.3" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
 </Project>

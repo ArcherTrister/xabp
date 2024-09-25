@@ -5,10 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+
+using IdentityModel;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -35,7 +36,8 @@ using X.Abp.Account.Public.Web.Security.Claims;
 using X.Abp.Account.Security.Captcha;
 using X.Abp.Account.Settings;
 using X.Abp.Identity;
-using X.Captcha;
+
+using static Volo.Abp.Identity.Settings.IdentitySettingNames;
 
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -81,11 +83,44 @@ public class LoginModel : AccountPageModel
     // TODO: Why there is an ExternalProviders if only the VisibleExternalProviders is used.
     public IEnumerable<ExternalProviderModel> ExternalProviders { get; set; }
 
-    public IEnumerable<ExternalProviderModel> VisibleExternalProviders => ExternalProviders.Where(x => !string.IsNullOrWhiteSpace(x.DisplayName));
+    public IEnumerable<ExternalProviderModel> VisibleExternalProviders
+    {
+        get
+        {
+            return ExternalProviders.Where(x => !string.IsNullOrWhiteSpace(x.DisplayName));
+        }
+    }
 
-    public bool IsExternalLoginOnly => EnableLocalLogin == false && ExternalProviders?.Count() == 1;
+    public bool IsExternalLoginOnly
+    {
+        get
+        {
+            if (EnableLocalLogin)
+            {
+                return false;
+            }
 
-    public string ExternalLoginScheme => IsExternalLoginOnly ? ExternalProviders?.SingleOrDefault()?.AuthenticationScheme : null;
+            return ExternalProviders != null && ExternalProviders.Count() == 1;
+        }
+    }
+
+    public string ExternalLoginScheme
+    {
+        get
+        {
+            if (!IsExternalLoginOnly)
+            {
+                return null;
+            }
+
+            if (ExternalProviders == null)
+            {
+                return null;
+            }
+
+            return ExternalProviders.SingleOrDefault()?.AuthenticationScheme;
+        }
+    }
 
     protected IAuthenticationSchemeProvider SchemeProvider { get; }
 
@@ -97,42 +132,18 @@ public class LoginModel : AccountPageModel
 
     protected IAccountExternalProviderAppService AccountExternalProviderAppService { get; }
 
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
-
-    protected IIdentityLinkUserAppService IdentityLinkUserAppService { get; }
-
-    protected IOptions<IdentityOptions> IdentityOptions { get; }
-
-    public IOptionsSnapshot<CaptchaOptions> CaptchaOptions { get; }
-
     public LoginModel(
         IAuthenticationSchemeProvider schemeProvider,
         IOptions<AbpAccountOptions> accountOptions,
         IAbpCaptchaValidatorFactory captchaValidatorFactory,
         IAccountExternalProviderAppService accountExternalProviderAppService,
-        ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
-        IIdentityLinkUserAppService identityLinkUserAppService,
-        IOptions<IdentityOptions> identityOptions,
-        IOptionsSnapshot<CaptchaOptions> captchaOptions)
+        ICurrentPrincipalAccessor currentPrincipalAccessor)
     {
         SchemeProvider = schemeProvider;
         AccountOptions = accountOptions.Value;
         CaptchaValidatorFactory = captchaValidatorFactory;
         AccountExternalProviderAppService = accountExternalProviderAppService;
         CurrentPrincipalAccessor = currentPrincipalAccessor;
-        SignInManager = signInManager;
-        UserManager = userManager;
-        IdentitySecurityLogManager = identitySecurityLogManager;
-        IdentityLinkUserAppService = identityLinkUserAppService;
-        IdentityOptions = identityOptions;
-        CaptchaOptions = captchaOptions;
     }
 
     public virtual async Task<IActionResult> OnGetAsync()
@@ -150,26 +161,22 @@ public class LoginModel : AccountPageModel
         UseCaptcha = await UseCaptchaOnLoginAsync();
 
         IsLinkLogin = await VerifyLinkTokenAsync();
-        if (IsLinkLogin)
+        if (IsLinkLogin && CurrentUser.IsAuthenticated)
         {
-            if (CurrentUser.IsAuthenticated)
+            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
             {
-                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
-                {
-                    Identity = IdentitySecurityLogIdentityConsts.Identity,
-                    Action = IdentitySecurityLogActionConsts.Logout
-                });
+                Identity = IdentitySecurityLogIdentityConsts.Identity,
+                Action = IdentitySecurityLogActionConsts.Logout
+            });
 
-                await SignInManager.SignOutAsync();
+            await SignInManager.SignOutAsync();
 
-                return Redirect(HttpContext.Request.GetDisplayUrl());
-            }
+            return Redirect(HttpContext.Request.GetDisplayUrl());
         }
 
         return Page();
     }
 
-    // TODO: Will be removed when we implement action filter
     [UnitOfWork]
     public virtual async Task<IActionResult> OnPostAsync(string action)
     {
@@ -177,29 +184,28 @@ public class LoginModel : AccountPageModel
         {
             await CaptchaVerificationAsync();
         }
-        catch (UserFriendlyException e)
+        catch (UserFriendlyException ex)
         {
-            if (e is ScoreBelowThresholdException)
+            if (ex is ScoreBelowThresholdException)
             {
-                var onScoreBelowThresholdResult = OnCaptchaScoreBelowThreshold();
+                var onScoreBelowThresholdResult = await OnCaptchaScoreBelowThresholdAsync();
                 if (onScoreBelowThresholdResult != null)
                 {
-                    return await onScoreBelowThresholdResult;
+                    return onScoreBelowThresholdResult;
                 }
             }
 
-            Alerts.Danger(GetLocalizeExceptionMessage(e));
+            Alerts.Danger(GetLocalizeExceptionMessage(ex));
             return Page();
         }
 
         ValidateModel();
-
         await IdentityOptions.SetAsync();
 
-        var localLoginResult = await CheckLocalLoginAsync();
-        if (localLoginResult != null)
+        IActionResult localLogin = await CheckLocalLoginAsync();
+        if (localLogin != null)
         {
-            return localLoginResult;
+            return localLogin;
         }
 
         IsSelfRegistrationEnabled = await SettingProvider.IsTrueAsync(AccountSettingNames.IsSelfRegistrationEnabled);
@@ -208,13 +214,9 @@ public class LoginModel : AccountPageModel
 
         IsLinkLogin = await VerifyLinkTokenAsync();
 
-        var result = await SignInManager.PasswordSignInAsync(
-            LoginInput.UserNameOrEmailAddress,
-            LoginInput.Password,
-            LoginInput.RememberMe,
-            true);
+        SignInResult result = await SignInManager.PasswordSignInAsync(LoginInput.UserNameOrEmailAddress, LoginInput.Password, LoginInput.RememberMe, true);
 
-        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
         {
             Identity = IdentitySecurityLogIdentityConsts.Identity,
             Action = result.ToIdentitySecurityLogAction(),
@@ -225,112 +227,151 @@ public class LoginModel : AccountPageModel
         {
             return RedirectToPage("./SendSecurityCode", new
             {
-                returnUrl = ReturnUrl,
-                returnUrlHash = ReturnUrlHash,
-                rememberMe = LoginInput.RememberMe,
-                linkUserId = LinkUserId,
-                linkTenantId = LinkTenantId,
-                linkToken = LinkToken
+                ReturnUrl,
+                ReturnUrlHash,
+                LoginInput.RememberMe,
+                LinkUserId,
+                LinkTenantId,
+                LinkToken
             });
         }
 
         if (result.IsLockedOut)
         {
+            IdentityUser user = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
+            await StoreLockedUserAsync(user);
             return RedirectToPage("./LockedOut", new
             {
-                returnUrl = ReturnUrl,
-                returnUrlHash = ReturnUrlHash
+                ReturnUrl,
+                ReturnUrlHash
             });
         }
 
-        if (result.IsNotAllowed)
+        IdentityUser notAllowedUser;
+        if (!result.IsNotAllowed)
         {
-            var notAllowedUser = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
-            if (notAllowedUser.IsActive && await UserManager.CheckPasswordAsync(notAllowedUser, LoginInput.Password))
+            if (!result.Succeeded)
             {
-                await StoreConfirmUserAsync(notAllowedUser);
-                return RedirectToPage("./ConfirmUser", new
-                {
-                    returnUrl = ReturnUrl,
-                    returnUrlHash = ReturnUrlHash
-                });
+                Alerts.Danger(L["InvalidUserNameOrPassword"]);
+                return Page();
             }
 
-            Alerts.Danger(L["LoginIsNotAllowed"]);
-            return Page();
-        }
+            IdentityUser user = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
 
-        if (!result.Succeeded)
-        {
-            Alerts.Danger(L["InvalidUserNameOrPassword"]);
-            return Page();
-        }
-
-        var user = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
-
-        if (IsLinkLogin)
-        {
-            using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(user)))
+            if (IsLinkLogin)
             {
-                await IdentityLinkUserAppService.LinkAsync(new LinkUserInput
+                using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(user)))
                 {
-                    UserId = LinkUserId.Value,
-                    TenantId = LinkTenantId,
-                    Token = LinkToken
-                });
-
-                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
-                {
-                    Identity = IdentitySecurityLogIdentityConsts.Identity,
-                    Action = IdentityProSecurityLogActionConsts.LinkUser,
-                    UserName = user.UserName,
-                    ExtraProperties =
+                    await IdentityLinkUserAppService.LinkAsync(new LinkUserInput
                     {
-                        { IdentityProSecurityLogActionConsts.LinkTargetTenantId, LinkTenantId },
-                        { IdentityProSecurityLogActionConsts.LinkTargetUserId, LinkUserId }
-                    }
-                });
+                        UserId = LinkUserId.Value,
+                        TenantId = LinkTenantId,
+                        Token = LinkToken
+                    });
 
-                using (CurrentTenant.Change(LinkTenantId))
-                {
-                    var targetUser = await UserManager.GetByIdAsync(LinkUserId.Value);
-                    using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(targetUser)))
+                    await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
                     {
-                        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+                        Identity = IdentitySecurityLogIdentityConsts.Identity,
+                        Action = IdentityProSecurityLogActionConsts.LinkUser,
+                        UserName = user.UserName,
+                        ExtraProperties =
                         {
-                            Identity = IdentitySecurityLogIdentityConsts.Identity,
-                            Action = IdentityProSecurityLogActionConsts.LinkUser,
-                            UserName = targetUser.UserName,
-                            ExtraProperties =
                             {
-                                { IdentityProSecurityLogActionConsts.LinkTargetTenantId, targetUser.TenantId },
-                                { IdentityProSecurityLogActionConsts.LinkTargetUserId, targetUser.Id }
+                                IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                                LinkTenantId
+                            },
+                            {
+                                IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                                LinkUserId
                             }
-                        });
-                    }
-                }
+                        }
+                    });
 
-                return RedirectToPage("./LinkLogged", new
-                {
-                    returnUrl = ReturnUrl,
-                    returnUrlHash = ReturnUrlHash,
-                    TargetLinkUserId = LinkUserId,
-                    TargetLinkTenantId = LinkTenantId
-                });
+                    using (CurrentTenant.Change(LinkTenantId))
+                    {
+                        notAllowedUser = await UserManager.GetByIdAsync(LinkUserId.Value);
+                        using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(notAllowedUser)))
+                        {
+                            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
+                            {
+                                Identity = IdentitySecurityLogIdentityConsts.Identity,
+                                Action = IdentityProSecurityLogActionConsts.LinkUser,
+                                UserName = notAllowedUser.UserName,
+                                ExtraProperties =
+                                {
+                                    {
+                                        IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                                        notAllowedUser.TenantId
+                                    },
+                                    {
+                                        IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                                        notAllowedUser.Id
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    return RedirectToPage("./LinkLogged", new
+                    {
+                        ReturnUrl,
+                        ReturnUrlHash,
+                        LinkUserId,
+                        LinkTenantId
+                    });
+                }
+            }
+            else
+            {
+                await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(user.Id, user.TenantId);
+                return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
             }
         }
+        else
+        {
+            notAllowedUser = await GetIdentityUserAsync(LoginInput.UserNameOrEmailAddress);
+            await StoreLockedUserAsync(notAllowedUser);
+            if (!await UserManager.CheckPasswordAsync(notAllowedUser, LoginInput.Password))
+            {
+                Alerts.Danger(L["LoginIsNotAllowed"]);
+                return Page();
+            }
 
-        return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
+            if (notAllowedUser.ShouldChangePasswordOnNextLogin || await UserManager.ShouldPeriodicallyChangePasswordAsync(notAllowedUser))
+            {
+                await StoreChangePasswordUserAsync(notAllowedUser);
+                return RedirectToPage("./ChangePassword", new
+                {
+                    ReturnUrl,
+                    ReturnUrlHash,
+                    LoginInput.RememberMe
+                });
+            }
+            else
+            {
+                if (notAllowedUser.IsActive || await UserManager.CheckPasswordAsync(notAllowedUser, LoginInput.Password))
+                {
+                    await StoreConfirmUserAsync(notAllowedUser);
+                    return RedirectToPage("./ConfirmUser", new
+                    {
+                        ReturnUrl,
+                        ReturnUrlHash
+                    });
+                }
+                else
+                {
+                    Alerts.Danger(L["LoginIsNotAllowed"]);
+                    return Page();
+                }
+            }
+        }
     }
 
     protected virtual async Task<IdentityUser> GetIdentityUserAsync(string userNameOrEmailAddress)
     {
         // TODO: Find a way of getting user's id from the logged in user and do not query it again like that!
-        var user = await UserManager.FindByNameAsync(LoginInput.UserNameOrEmailAddress) ??
+        return await UserManager.FindByNameAsync(LoginInput.UserNameOrEmailAddress) ??
             await UserManager.FindByEmailAsync(LoginInput.UserNameOrEmailAddress);
-        Debug.Assert(user != null, nameof(user) + " != null");
-
-        return user;
     }
 
     [UnitOfWork]
@@ -360,13 +401,17 @@ public class LoginModel : AccountPageModel
 
     protected virtual async Task<bool> VerifyLinkTokenAsync()
     {
-        return !LinkToken.IsNullOrWhiteSpace() && LinkUserId != null
-            && await IdentityLinkUserAppService.VerifyLinkTokenAsync(new VerifyLinkTokenInput
-            {
-                UserId = LinkUserId.Value,
-                TenantId = LinkTenantId,
-                Token = LinkToken
-            });
+        if (AbpStringExtensions.IsNullOrWhiteSpace(LinkToken) || !LinkUserId.HasValue)
+        {
+            return false;
+        }
+
+        return await IdentityLinkUserAppService.VerifyLinkTokenAsync(new VerifyLinkTokenInput()
+        {
+            UserId = LinkUserId.Value,
+            TenantId = LinkTenantId,
+            Token = LinkToken
+        });
     }
 
     protected virtual async Task<List<ExternalProviderModel>> GetExternalProvidersAsync()
@@ -427,7 +472,14 @@ public class LoginModel : AccountPageModel
     [UnitOfWork]
     public virtual async Task<IActionResult> OnPostExternalLoginAsync(string provider)
     {
-        var redirectUrl = Url.Page("./Login", pageHandler: "ExternalLoginCallback", values: new { ReturnUrl, ReturnUrlHash });
+        var redirectUrl = Url.Page("./Login", pageHandler: "ExternalLoginCallback", values: new
+        {
+            ReturnUrl,
+            ReturnUrlHash,
+            LinkTenantId,
+            LinkUserId,
+            LinkToken
+        });
         var properties = SignInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
         properties.Items["scheme"] = provider;
 
@@ -435,22 +487,16 @@ public class LoginModel : AccountPageModel
     }
 
     [UnitOfWork]
-    public virtual async Task<IActionResult> OnGetExternalLoginCallbackAsync(string returnUrl = "", string returnUrlHash = "", string remoteError = null)
+    public virtual async Task<IActionResult> OnGetExternalLoginCallbackAsync(string remoteError = null)
     {
-        // TODO: Did not implemented Identity Server 4 sample for this method (see ExternalLoginCallback in Quickstart of IDS4 sample)
-        /* Also did not implement these:
-         * - Logout(string logoutId)
-         */
-
         if (remoteError != null)
         {
-            Logger.LogWarning($"External login callback error: {remoteError}");
+            Logger.LogWarning("External login callback error: {RemoteError}", remoteError);
             return RedirectToPage("./Login");
         }
 
         await IdentityOptions.SetAsync();
-
-        var loginInfo = await SignInManager.GetExternalLoginInfoAsync();
+        ExternalLoginInfo loginInfo = await SignInManager.GetExternalLoginInfoAsync();
         if (loginInfo == null)
         {
             Logger.LogWarning("External login info is not available");
@@ -459,87 +505,223 @@ public class LoginModel : AccountPageModel
 
         IsLinkLogin = await VerifyLinkTokenAsync();
 
-        var user = await UserManager.FindByLoginAsync(loginInfo.LoginProvider, loginInfo.ProviderKey);
-
-        var result = await ExternalLoginSignInAsync(user, loginInfo.LoginProvider, loginInfo.ProviderKey, true, false);
-
+        SignInResult result = await SignInManager.ExternalLoginSignInAsync(loginInfo.LoginProvider, loginInfo.ProviderKey, true, true);
         if (!result.Succeeded)
         {
             await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
             {
                 Identity = IdentitySecurityLogIdentityConsts.IdentityExternal,
-                Action = "Login" + result
+                Action = "Login" + result.ToString()
             });
         }
 
-        if (result.IsLockedOut)
+        if (!result.IsLockedOut)
         {
-            Logger.LogWarning($"Cannot proceed because user is locked out!");
-            return RedirectToPage("./LockedOut", new
+            IdentityUser user;
+            if (result.IsNotAllowed)
             {
-                returnUrl = ReturnUrl,
-                returnUrlHash = ReturnUrlHash
-            });
-        }
+                Logger.LogWarning("External login callback error: User is Not Allowed!");
 
-        if (result.IsNotAllowed)
-        {
-            Logger.LogWarning($"External login callback error: User is Not Allowed!");
-
-            // var user = await UserManager.FindByLoginAsync(loginInfo.LoginProvider, loginInfo.ProviderKey);
-            if (user.IsActive)
-            {
-                await StoreConfirmUserAsync(user);
-                return RedirectToPage("./ConfirmUser", new
+                user = await UserManager.FindByLoginAsync(loginInfo.LoginProvider, loginInfo.ProviderKey);
+                if (user == null)
                 {
-                    returnUrl = ReturnUrl,
-                    returnUrlHash = ReturnUrlHash
-                });
+                    Logger.LogWarning($"External login callback error: User is Not Found!");
+                    return RedirectToPage("./Login");
+                }
+
+                if (user.ShouldChangePasswordOnNextLogin || await UserManager.ShouldPeriodicallyChangePasswordAsync(user))
+                {
+                    await StoreChangePasswordUserAsync(user);
+                    return RedirectToPage("./ChangePassword", new
+                    {
+                        ReturnUrl,
+                        ReturnUrlHash
+                    });
+                }
+                else
+                {
+                    if (user.IsActive)
+                    {
+                        await StoreConfirmUserAsync(user);
+                        return RedirectToPage("./ConfirmUser", new
+                        {
+                            ReturnUrl,
+                            ReturnUrlHash
+                        });
+                    }
+                    else
+                    {
+                        return RedirectToPage("./Login");
+                    }
+                }
             }
 
-            return RedirectToPage("./Login");
-        }
+            if (!result.Succeeded)
+            {
+                string email = loginInfo.Principal.FindFirstValue(AbpClaimTypes.Email) ?? loginInfo.Principal.FindFirstValue(JwtClaimTypes.Email);
+                if (email.IsNullOrWhiteSpace())
+                {
+                    return RedirectToPage("./Register", new
+                    {
+                        isExternalLogin = true,
+                        externalLoginAuthSchema = loginInfo.LoginProvider,
+                        returnUrl = ReturnUrl,
+                        returnUrlHash = ReturnUrlHash,
+                        linkTenantId = LinkTenantId,
+                        linkUserId = LinkUserId,
+                        linkToken = LinkToken
+                    });
+                }
 
-        if (result.Succeeded)
-        {
-            // var user = await UserManager.FindByLoginAsync(loginInfo.LoginProvider, loginInfo.ProviderKey);
+                IdentityUser externalUser = await UserManager.FindByEmailAsync(email);
+                if (externalUser == null)
+                {
+                    return RedirectToPage("./Login", new
+                    {
+                        isExternalLogin = true,
+                        externalLoginAuthSchema = loginInfo.LoginProvider,
+                        returnUrl = ReturnUrl,
+                        returnUrlHash = ReturnUrlHash,
+                        linkTenantId = LinkTenantId,
+                        linkUserId = LinkUserId,
+                        linkToken = LinkToken
+                    });
+                }
+
+                if (await UserManager.FindByLoginAsync(loginInfo.LoginProvider, loginInfo.ProviderKey) == null)
+                {
+                    IdentityResult identityResult = await UserManager.AddLoginAsync(externalUser, loginInfo);
+                    CheckIdentityErrors(identityResult);
+                }
+
+                if (await HasRequiredIdentitySettingsAsync())
+                {
+                    Logger.LogWarning("New external user is created but confirmation is required!");
+
+                    await StoreConfirmUserAsync(externalUser);
+                    return RedirectToPage("./ConfirmUser", new
+                    {
+                        ReturnUrl,
+                        ReturnUrlHash
+                    });
+                }
+
+                await SignInManager.SignInAsync(externalUser, false, loginInfo.LoginProvider);
+                await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(externalUser.Id, externalUser.TenantId);
+                if (IsLinkLogin)
+                {
+                    using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(externalUser)))
+                    {
+                        LinkUserInput input = new LinkUserInput
+                        {
+                            UserId = LinkUserId.Value,
+                            TenantId = LinkTenantId,
+                            Token = LinkToken
+                        };
+                        await IdentityLinkUserAppService.LinkAsync(input);
+                        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
+                        {
+                            Identity = IdentitySecurityLogIdentityConsts.Identity,
+                            Action = IdentityProSecurityLogActionConsts.LinkUser,
+                            UserName = externalUser.UserName,
+                            ExtraProperties =
+                            {
+                                {
+                                    IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                                    LinkTenantId
+                                },
+                                {
+                                    IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                                    LinkUserId
+                                }
+                            }
+                        });
+                        using (CurrentTenant.Change(LinkTenantId))
+                        {
+                            user = await UserManager.GetByIdAsync(LinkUserId.Value);
+                            using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(user)))
+                            {
+                                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
+                                {
+                                    Identity = IdentitySecurityLogIdentityConsts.Identity,
+                                    Action = IdentityProSecurityLogActionConsts.LinkUser,
+                                    UserName = user.UserName,
+                                    ExtraProperties =
+                                    {
+                                        {
+                                            IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                                            user.TenantId
+                                        },
+                                        {
+                                            IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                                            user.Id
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+
+                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
+                {
+                    Identity = IdentitySecurityLogIdentityConsts.IdentityExternal,
+                    Action = result.ToIdentitySecurityLogAction(),
+                    UserName = externalUser.Name
+                });
+                return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
+            }
+
+            user = await UserManager.FindByLoginAsync(loginInfo.LoginProvider, loginInfo.ProviderKey);
             if (IsLinkLogin)
             {
                 using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(user)))
                 {
-                    await IdentityLinkUserAppService.LinkAsync(new LinkUserInput
+                    LinkUserInput input = new LinkUserInput
                     {
                         UserId = LinkUserId.Value,
                         TenantId = LinkTenantId,
                         Token = LinkToken
-                    });
-
-                    await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+                    };
+                    await IdentityLinkUserAppService.LinkAsync(input);
+                    await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
                     {
                         Identity = IdentitySecurityLogIdentityConsts.Identity,
                         Action = IdentityProSecurityLogActionConsts.LinkUser,
                         UserName = user.UserName,
                         ExtraProperties =
                         {
-                            { IdentityProSecurityLogActionConsts.LinkTargetTenantId, LinkTenantId },
-                            { IdentityProSecurityLogActionConsts.LinkTargetUserId, LinkUserId }
+                            {
+                                IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                                LinkTenantId
+                            },
+                            {
+                                IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                                LinkUserId
+                            }
                         }
                     });
 
                     using (CurrentTenant.Change(LinkTenantId))
                     {
-                        var targetUser = await UserManager.GetByIdAsync(LinkUserId.Value);
+                        IdentityUser targetUser = await UserManager.GetByIdAsync(LinkUserId.Value);
                         using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(targetUser)))
                         {
-                            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+                            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
                             {
                                 Identity = IdentitySecurityLogIdentityConsts.Identity,
                                 Action = IdentityProSecurityLogActionConsts.LinkUser,
                                 UserName = targetUser.UserName,
                                 ExtraProperties =
                                 {
-                                    { IdentityProSecurityLogActionConsts.LinkTargetTenantId, targetUser.TenantId },
-                                    { IdentityProSecurityLogActionConsts.LinkTargetUserId, targetUser.Id }
+                                    {
+                                        IdentityProSecurityLogActionConsts.LinkTargetTenantId,
+                                        targetUser.TenantId
+                                    },
+                                    {
+                                        IdentityProSecurityLogActionConsts.LinkTargetUserId,
+                                        targetUser.Id
+                                    }
                                 }
                             });
                         }
@@ -547,107 +729,26 @@ public class LoginModel : AccountPageModel
                 }
             }
 
-            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
+            await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
             {
                 Identity = IdentitySecurityLogIdentityConsts.IdentityExternal,
                 Action = result.ToIdentitySecurityLogAction(),
                 UserName = user.UserName
             });
-
-            return await RedirectSafelyAsync(returnUrl, returnUrlHash);
-        }
-
-        // TODO: Handle other cases for result!
-        var email = loginInfo.Principal.FindFirstValue(ClaimTypes.Email);
-        if (email.IsNullOrWhiteSpace())
-        {
-            return RedirectToPage("./Register", new
-            {
-                IsExternalLogin = true,
-                ExternalLoginAuthSchema = loginInfo.LoginProvider,
-                ReturnUrl = returnUrl
-            });
-        }
-
-        var externalUser = await UserManager.FindByEmailAsync(email);
-        if (externalUser == null)
-        {
-            externalUser = await CreateExternalUserAsync(loginInfo);
+            await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(user.Id, user.TenantId);
+            return await RedirectSafelyAsync(ReturnUrl, ReturnUrlHash);
         }
         else
         {
-            if (await UserManager.FindByLoginAsync(loginInfo.LoginProvider, loginInfo.ProviderKey) == null)
+            IdentityUser user = await UserManager.FindByLoginAsync(loginInfo.LoginProvider, loginInfo.ProviderKey);
+            await StoreLockedUserAsync(user);
+            Logger.LogWarning("Cannot proceed because user is locked out!");
+            return RedirectToPage("./LockedOut", new
             {
-                (await UserManager.AddLoginAsync(externalUser, loginInfo)).CheckIdentityErrors();
-            }
-        }
-
-        if (await HasRequiredIdentitySettingsAsync())
-        {
-            Logger.LogWarning($"New external user is created but confirmation is required!");
-
-            await StoreConfirmUserAsync(externalUser);
-            return RedirectToPage("./ConfirmUser", new
-            {
-                returnUrl = ReturnUrl,
-                returnUrlHash = ReturnUrlHash
+                ReturnUrl,
+                ReturnUrlHash
             });
         }
-
-        await ExternalLoginSignInAsync(externalUser, loginInfo.LoginProvider, loginInfo.ProviderKey, false, true);
-
-        if (IsLinkLogin)
-        {
-            using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(externalUser)))
-            {
-                await IdentityLinkUserAppService.LinkAsync(new LinkUserInput
-                {
-                    UserId = LinkUserId.Value,
-                    TenantId = LinkTenantId,
-                    Token = LinkToken
-                });
-
-                await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
-                {
-                    Identity = IdentitySecurityLogIdentityConsts.Identity,
-                    Action = IdentityProSecurityLogActionConsts.LinkUser,
-                    UserName = externalUser.UserName,
-                    ExtraProperties =
-                    {
-                        { IdentityProSecurityLogActionConsts.LinkTargetTenantId, LinkTenantId },
-                        { IdentityProSecurityLogActionConsts.LinkTargetUserId, LinkUserId }
-                    }
-                });
-
-                using (CurrentTenant.Change(LinkTenantId))
-                {
-                    var targetUser = await UserManager.GetByIdAsync(LinkUserId.Value);
-                    using (CurrentPrincipalAccessor.Change(await SignInManager.CreateUserPrincipalAsync(targetUser)))
-                    {
-                        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
-                        {
-                            Identity = IdentitySecurityLogIdentityConsts.Identity,
-                            Action = IdentityProSecurityLogActionConsts.LinkUser,
-                            UserName = targetUser.UserName,
-                            ExtraProperties =
-                            {
-                                { IdentityProSecurityLogActionConsts.LinkTargetTenantId, targetUser.TenantId },
-                                { IdentityProSecurityLogActionConsts.LinkTargetUserId, targetUser.Id }
-                            }
-                        });
-                    }
-                }
-            }
-        }
-
-        await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
-        {
-            Identity = IdentitySecurityLogIdentityConsts.IdentityExternal,
-            Action = result.ToIdentitySecurityLogAction(),
-            UserName = externalUser.Name
-        });
-
-        return await RedirectSafelyAsync(returnUrl, returnUrlHash);
     }
 
     protected virtual async Task<SignInResult> ExternalLoginSignInAsync(IdentityUser user, string loginProvider, string providerKey, bool isPersistent, bool isSkipCheck)
@@ -677,7 +778,7 @@ public class LoginModel : AccountPageModel
         var additionalClaims = new List<Claim>
         {
             new Claim(ClaimTypes.AuthenticationMethod, loginProvider),
-            new Claim(CustomClaimTypes.ProviderKey, providerKey)
+            new Claim(ExtraClaimTypes.ProviderKey, providerKey)
         };
 
         await SignInManager.SignInWithClaimsAsync(user, new AuthenticationProperties { IsPersistent = isPersistent }, additionalClaims);
@@ -736,10 +837,10 @@ public class LoginModel : AccountPageModel
     {
         var requireConfirmedEmail = await SettingProvider.IsTrueAsync(IdentitySettingNames.SignIn.RequireConfirmedEmail);
         var requireConfirmedPhoneNumber = await SettingProvider.IsTrueAsync(IdentitySettingNames.SignIn.RequireConfirmedPhoneNumber);
-        return requireConfirmedEmail || requireConfirmedPhoneNumber;
+        return requireConfirmedEmail | requireConfirmedPhoneNumber;
     }
 
-    protected virtual Task<IActionResult> OnCaptchaScoreBelowThreshold()
+    protected virtual Task<IActionResult> OnCaptchaScoreBelowThresholdAsync()
     {
         return null;
     }
@@ -754,13 +855,13 @@ public class LoginModel : AccountPageModel
             return await OnPostExternalLoginAsync(ExternalLoginScheme);
         }
 
-        if (!EnableLocalLogin)
+        if (EnableLocalLogin)
         {
-            Alerts.Warning(L["LocalLoginIsNotEnabled"]);
-            return Page();
+            return null;
         }
 
-        return null;
+        Alerts.Warning(L["LocalLoginIsNotEnabled"]);
+        return Page();
     }
 
     public class LoginInputModel

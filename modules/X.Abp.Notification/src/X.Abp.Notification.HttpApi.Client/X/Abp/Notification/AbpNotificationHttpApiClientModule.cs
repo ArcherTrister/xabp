@@ -13,7 +13,7 @@ public class AbpNotificationHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddHttpClientProxies(
+        context.Services.AddStaticHttpClientProxies(
             typeof(AbpNotificationApplicationContractsModule).Assembly,
             AbpNotificationRemoteServiceConsts.RemoteServiceName
         );

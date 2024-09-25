@@ -253,9 +253,9 @@ public class LanguageTextAppService : LanguageAppServiceBase, ILanguageTextAppSe
 
     protected virtual async Task<LocalizationResourceBase> GetLocalizationResourceOrNullAsync(string resourceName)
     {
-        var resourceOrNullAsync = AbpLocalizationOptions.Resources.GetOrDefault(resourceName);
-        resourceOrNullAsync ??= await ExternalLocalizationStore.GetResourceOrNullAsync(resourceName);
+        var resource = AbpLocalizationOptions.Resources.GetOrDefault(resourceName);
+        resource ??= await ExternalLocalizationStore.GetResourceOrNullAsync(resourceName);
 
-        return resourceOrNullAsync;
+        return resource;
     }
 }

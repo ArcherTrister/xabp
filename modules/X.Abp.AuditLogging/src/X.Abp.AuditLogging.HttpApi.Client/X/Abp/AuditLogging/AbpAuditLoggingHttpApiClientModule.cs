@@ -17,7 +17,7 @@ public class AbpAuditLoggingHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddHttpClientProxies(
+        context.Services.AddStaticHttpClientProxies(
             typeof(AbpAuditLoggingApplicationContractsModule).Assembly,
             AbpAuditLoggingRemoteServiceConsts.RemoteServiceName);
 

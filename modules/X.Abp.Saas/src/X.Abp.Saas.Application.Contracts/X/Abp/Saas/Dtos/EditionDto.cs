@@ -18,4 +18,6 @@ public class EditionDto : ExtensibleEntityDto<Guid>, IHasConcurrencyStamp
     public string PlanName { get; set; }
 
     public string ConcurrencyStamp { get; set; }
+
+    public long TenantCount { get; set; }
 }

@@ -5,7 +5,7 @@ namespace X.Abp.VersionManagement.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(VersionManagementBlazorModule),
-    typeof(VersionManagementHttpApiClientModule),
+    typeof(AbpVersionManagementHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class VersionManagementBlazorWebAssemblyModule : AbpModule

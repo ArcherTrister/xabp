@@ -5,7 +5,7 @@ using Volo.Abp.MongoDB;
 namespace X.Abp.Chat.MongoDB;
 
 [DependsOn(
-    typeof(ChatDomainModule),
+    typeof(AbpChatDomainModule),
     typeof(AbpMongoDbModule)
     )]
 public class ChatMongoDbModule : AbpModule

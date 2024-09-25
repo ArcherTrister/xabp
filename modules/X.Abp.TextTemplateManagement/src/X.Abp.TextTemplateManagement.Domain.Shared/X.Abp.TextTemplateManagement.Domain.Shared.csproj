@@ -12,8 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource
-      Include="X\Abp\TextTemplateManagement\Localization\Resources\*.json" />
+    <EmbeddedResource Include="X\Abp\TextTemplateManagement\Localization\Resources\*.json" />
     <Content Remove="X\Abp\TextTemplateManagement\Localization\Resources\*.json" />
   </ItemGroup>
 

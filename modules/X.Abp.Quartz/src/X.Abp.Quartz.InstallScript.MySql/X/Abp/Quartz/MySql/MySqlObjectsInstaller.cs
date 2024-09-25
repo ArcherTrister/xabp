@@ -4,16 +4,12 @@
 
 using System;
 using System.Data;
-using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 using MySql.Data.MySqlClient;
-
-using Quartz.Impl.AdoJobStore;
 
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Quartz;
@@ -22,129 +18,95 @@ using static Quartz.SchedulerBuilder;
 
 namespace X.Abp.Quartz.MySql;
 
-public class MySqlObjectsInstaller : IObjectsInstaller, ISingletonDependency
+[Dependency(ReplaceServices = true)]
+public class MySqlObjectsInstaller : ObjectsInstallerBase
 {
-    protected ILogger<MySqlObjectsInstaller> Logger { get; set; }
+  protected ILogger<MySqlObjectsInstaller> Logger { get; set; }
 
-    public MySqlObjectsInstaller()
+  public MySqlObjectsInstaller()
+  {
+    Logger = NullLogger<MySqlObjectsInstaller>.Instance;
+  }
+
+  public override async Task Initialize(AbpQuartzOptions options, AbpQuartzInstallScriptOptions installScriptOptions)
+  {
+    // AdoProviderOptions
+    var connectionString = options.Properties[$"quartz.dataSource.{AdoProviderOptions.DefaultDataSourceName}.connectionString"];
+    var tablePrefix = options.Properties["quartz.jobStore.tablePrefix"];
+
+    if (connectionString.IsNullOrWhiteSpace())
     {
-        Logger = NullLogger<MySqlObjectsInstaller>.Instance;
+      throw new ArgumentNullException(nameof(connectionString));
     }
 
-    public async Task Initialize(AbpQuartzOptions options)
+    Logger.LogInformation("Start installing Quartz SQL objects...");
+
+    var builder = new MySqlConnectionStringBuilder(connectionString);
+    var dataBaseName = builder.Database;
+    builder.Remove("Database");
+
+    using (var connection = new MySqlConnection(builder.ConnectionString))
     {
-        // AdoProviderOptions
-        var connectionString = options.Properties[$"quartz.dataSource.{AdoProviderOptions.DefaultDataSourceName}.connectionString"];
-        var tablePrefix = options.Properties["quartz.jobStore.tablePrefix"];
+      if (connection.State == ConnectionState.Closed)
+      {
+        await connection.OpenAsync();
+      }
 
-        if (connectionString.IsNullOrWhiteSpace())
+      string checkDataBaseExists;
+
+      using (var cmd = new MySqlCommand("SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME=@dataBaseName;", connection))
+      {
+        cmd.Parameters.Add("@dataBaseName", MySqlDbType.String).Value = dataBaseName;
+        checkDataBaseExists = await cmd.ExecuteScalarAsync() as string;
+      }
+
+      if (checkDataBaseExists.IsNullOrWhiteSpace())
+      {
+        using (var cmd = new MySqlCommand($"CREATE DATABASE {dataBaseName} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;", connection))
         {
-            throw new ArgumentNullException(nameof(connectionString));
+          await cmd.ExecuteScalarAsync();
         }
 
-        Logger.LogInformation("Start installing Quartz SQL objects...");
+        var sql = GetInstallScript(installScriptOptions.ScriptAssembly, installScriptOptions.ScriptResourceName, dataBaseName, tablePrefix, installScriptOptions.EnableHeavyMigrations);
 
-        var builder = new MySqlConnectionStringBuilder(connectionString);
-        var dataBaseName = builder.Database;
-        builder.Remove("Database");
-
-        using (var connection = new MySqlConnection(builder.ConnectionString))
+        using (var cmd = new MySqlCommand(sql, connection))
         {
-            if (connection.State == ConnectionState.Closed)
-            {
-                await connection.OpenAsync();
-            }
+          await cmd.ExecuteScalarAsync();
+        }
+      }
+      else
+      {
+        long? checkTablesExists;
 
-            string checkDataBaseExists;
-
-            using (var cmd = new MySqlCommand("SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME=@dataBaseName;", connection))
-            {
-                cmd.Parameters.Add("@dataBaseName", MySqlDbType.String).Value = dataBaseName;
-                checkDataBaseExists = await cmd.ExecuteScalarAsync() as string;
-            }
-
-            if (checkDataBaseExists.IsNullOrWhiteSpace())
-            {
-                using (var cmd = new MySqlCommand($"CREATE DATABASE {dataBaseName} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;", connection))
-                {
-                    await cmd.ExecuteScalarAsync();
-                }
-
-                var sql = GetInstallScript(dataBaseName, tablePrefix, true);
-
-                using (var cmd = new MySqlCommand(sql, connection))
-                {
-                    await cmd.ExecuteScalarAsync();
-                }
-            }
-            else
-            {
-                long? checkTablesExists;
-
-                using (var cmd = new MySqlCommand("SELECT count(1) FROM information_schema.TABLES WHERE TABLE_SCHEMA = @dataBaseName;", connection))
-                {
-                    cmd.Parameters.Add("@dataBaseName", MySqlDbType.String).Value = dataBaseName;
-                    checkTablesExists = (long?)await cmd.ExecuteScalarAsync();
-                }
-
-                if (checkTablesExists is not null and > 0)
-                {
-                    if (checkTablesExists == 12)
-                    {
-                        Logger.LogInformation("DB tables already exist. Exit install.");
-                    }
-                    else
-                    {
-                        Logger.LogError($"DB tables already exist. Exit install.But the number of tables is not enough.");
-                    }
-                }
-                else
-                {
-                    var sql = GetInstallScript(dataBaseName, tablePrefix, true);
-
-                    using var cmd = new MySqlCommand(sql, connection);
-                    await cmd.ExecuteScalarAsync();
-                }
-            }
-
-            await connection.CloseAsync();
+        using (var cmd = new MySqlCommand("SELECT count(1) FROM information_schema.TABLES WHERE TABLE_SCHEMA = @dataBaseName;", connection))
+        {
+          cmd.Parameters.Add("@dataBaseName", MySqlDbType.String).Value = dataBaseName;
+          checkTablesExists = (long?)await cmd.ExecuteScalarAsync();
         }
 
-        Logger.LogInformation("Quartz SQL objects installed.");
+        if (checkTablesExists is not null and > 0)
+        {
+          if (checkTablesExists == 12)
+          {
+            Logger.LogInformation("DB tables already exist. Exit install.");
+          }
+          else
+          {
+            Logger.LogError("DB tables already exist. Exit install.But the number of tables is not enough.");
+          }
+        }
+        else
+        {
+          var sql = GetInstallScript(installScriptOptions.ScriptAssembly, installScriptOptions.ScriptResourceName, dataBaseName, tablePrefix, installScriptOptions.EnableHeavyMigrations);
+
+          using var cmd = new MySqlCommand(sql, connection);
+          await cmd.ExecuteScalarAsync();
+        }
+      }
+
+      await connection.CloseAsync();
     }
 
-    private string GetInstallScript(string dataBaseName, string tablePrefix, bool enableHeavyMigrations)
-    {
-        var script = GetStringResource(
-            typeof(MySqlObjectsInstaller).GetTypeInfo().Assembly,
-            "X.Abp.Quartz.MySql.Install.sql");
-
-        script = script.Replace("$(TablePrefix)", !string.IsNullOrWhiteSpace(tablePrefix) ? tablePrefix : AdoConstants.DefaultTablePrefix)
-            .ReplaceFirst("$(QuartzSchema)", dataBaseName);
-
-        if (!enableHeavyMigrations)
-        {
-            script = script.Replace("--SET @DISABLE_HEAVY_MIGRATIONS = 1;", "SET @DISABLE_HEAVY_MIGRATIONS = 1;");
-        }
-
-        return script;
-    }
-
-    /// <summary>
-    /// 嵌入式资源转字符串
-    /// </summary>
-    /// <param name="assembly">assembly</param>
-    /// <param name="resourceName">资源名称【全称】</param>
-    private string GetStringResource(Assembly assembly, string resourceName)
-    {
-        using var stream = assembly.GetManifestResourceStream(resourceName);
-        if (stream == null)
-        {
-            throw new InvalidOperationException(
-                $"Requested resource `{resourceName}` was not found in the assembly `{assembly}`.");
-        }
-
-        using var reader = new StreamReader(stream);
-        return reader.ReadToEnd();
-    }
+    Logger.LogInformation("Quartz SQL objects installed.");
+  }
 }

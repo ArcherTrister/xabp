@@ -20,8 +20,6 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Users;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
-
 namespace X.Abp.Account.Public.Web.Pages.Account;
 
 [Authorize]
@@ -32,26 +30,14 @@ public class DelegatedImpersonateModel : AccountPageModel
     [BindProperty(SupportsGet = true)]
     public Guid UserDelegationId { get; set; }
 
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    protected IdentitySecurityLogManager IdentitySecurityLogManager { get; }
-
     protected ICurrentPrincipalAccessor CurrentPrincipalAccessor { get; }
 
     protected IdentityUserDelegationManager IdentityUserDelegationManager { get; }
 
     public DelegatedImpersonateModel(
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
         IdentityUserDelegationManager identityUserDelegationManager)
     {
-        SignInManager = signInManager;
-        UserManager = userManager;
-        IdentitySecurityLogManager = identitySecurityLogManager;
         CurrentPrincipalAccessor = currentPrincipalAccessor;
         IdentityUserDelegationManager = identityUserDelegationManager;
     }
@@ -114,6 +100,8 @@ public class DelegatedImpersonateModel : AccountPageModel
                         Action = "DelegatedImpersonate"
                     });
                 }
+
+                await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(user.Id, user.TenantId);
 
                 return Redirect("~/");
             }

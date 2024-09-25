@@ -15,33 +15,33 @@ using X.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Themes.Lepton.Components.Toolbar.User
 
 namespace X.Abp.AspNetCore.Mvc.UI.Theme.Lepton.Toolbars
 {
-    public class LeptonThemeMainTopToolbarContributor : IToolbarContributor
+  public class LeptonThemeMainTopToolbarContributor : IToolbarContributor
+  {
+    public virtual async Task ConfigureToolbarAsync(IToolbarConfigurationContext context)
     {
-        public async Task ConfigureToolbarAsync(IToolbarConfigurationContext context)
-        {
-            if (context.Toolbar.Name != StandardToolbars.Main)
-            {
-                return;
-            }
+      if (context.Toolbar.Name != StandardToolbars.Main)
+      {
+        return;
+      }
 
-            if (!(context.Theme is LeptonTheme))
-            {
-                return;
-            }
+      if (!(context.Theme is LeptonTheme))
+      {
+        return;
+      }
 
-            var languageProvider = context.ServiceProvider.GetRequiredService<ILanguageProvider>();
+      var languageProvider = context.ServiceProvider.GetRequiredService<ILanguageProvider>();
 
-            // TODO: This duplicates GetLanguagesAsync() usage. Can we eleminate this?
-            var languages = await languageProvider.GetLanguagesAsync();
-            if (languages.Count > 1)
-            {
-                context.Toolbar.Items.Add(new ToolbarItem(typeof(LanguageSwitchViewComponent)));
-            }
+      // TODO: This duplicates GetLanguagesAsync() usage. Can we eleminate this?
+      var languages = await languageProvider.GetLanguagesAsync();
+      if (languages.Count > 1)
+      {
+        context.Toolbar.Items.Add(new ToolbarItem(typeof(LanguageSwitchViewComponent)));
+      }
 
-            if (context.ServiceProvider.GetRequiredService<ICurrentUser>().IsAuthenticated)
-            {
-                context.Toolbar.Items.Add(new ToolbarItem(typeof(UserMenuViewComponent)));
-            }
-        }
+      if (context.ServiceProvider.GetRequiredService<ICurrentUser>().IsAuthenticated)
+      {
+        context.Toolbar.Items.Add(new ToolbarItem(typeof(UserMenuViewComponent)));
+      }
     }
+  }
 }

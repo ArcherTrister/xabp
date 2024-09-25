@@ -172,7 +172,7 @@
               "uniqueName": "FindByWidgetAsyncByWidgetName",
               "name": "FindByWidgetAsync",
               "httpMethod": "GET",
-              "url": "api/cms-kit-public/poll/findbywidget",
+              "url": "api/cms-kit-public/poll/by-available-widget-name",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {

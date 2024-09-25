@@ -36,6 +36,14 @@ public partial class AccountClientProxy : ClientProxyBase<IAccountAppService>, I
         });
     }
 
+    public virtual async Task<bool> VerifyPasswordResetTokenAsync(VerifyPasswordResetTokenInput input)
+    {
+        return await RequestAsync<bool>(nameof(VerifyPasswordResetTokenAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(VerifyPasswordResetTokenInput), input }
+        });
+    }
+
     public virtual async Task ResetPasswordAsync(ResetPasswordDto input)
     {
         await RequestAsync(nameof(ResetPasswordAsync), new ClientProxyRequestTypeValue
@@ -65,6 +73,14 @@ public partial class AccountClientProxy : ClientProxyBase<IAccountAppService>, I
         await RequestAsync(nameof(SendEmailConfirmationTokenAsync), new ClientProxyRequestTypeValue
         {
             { typeof(SendEmailConfirmationTokenDto), input }
+        });
+    }
+
+    public virtual async Task<bool> VerifyEmailConfirmationTokenAsync(VerifyEmailConfirmationTokenInput input)
+    {
+        return await RequestAsync<bool>(nameof(VerifyEmailConfirmationTokenAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(VerifyEmailConfirmationTokenInput), input }
         });
     }
 
@@ -145,11 +161,11 @@ public partial class AccountClientProxy : ClientProxyBase<IAccountAppService>, I
         return await RequestAsync<ExternalLoginsDto>(nameof(GetExternalLoginsAsync));
     }
 
-    public virtual async Task RemoveLoginAsync(RemoveLoginInput input)
+    public virtual async Task RemoveExternalLoginAsync(RemoveExternalLoginInput input)
     {
-        await RequestAsync(nameof(RemoveLoginAsync), new ClientProxyRequestTypeValue
+        await RequestAsync(nameof(RemoveExternalLoginAsync), new ClientProxyRequestTypeValue
         {
-            { typeof(RemoveLoginInput), input }
+            { typeof(RemoveExternalLoginInput), input }
         });
     }
 
@@ -158,14 +174,19 @@ public partial class AccountClientProxy : ClientProxyBase<IAccountAppService>, I
         return await RequestAsync<TwoFactorAuthenticationDto>(nameof(GetTwoFactorAuthenticationAsync));
     }
 
+    public virtual async Task<bool> HasAuthenticatorAsync()
+    {
+        return await RequestAsync<bool>(nameof(HasAuthenticatorAsync));
+    }
+
     public virtual async Task<AuthenticatorInfoDto> GetAuthenticatorInfoAsync()
     {
         return await RequestAsync<AuthenticatorInfoDto>(nameof(GetAuthenticatorInfoAsync));
     }
 
-    public virtual async Task<ShowRecoveryCodesDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input)
+    public virtual async Task<VerifyAuthenticatorCodeDto> VerifyAuthenticatorCodeAsync(VerifyAuthenticatorCodeInput input)
     {
-        return await RequestAsync<ShowRecoveryCodesDto>(nameof(VerifyAuthenticatorCodeAsync), new ClientProxyRequestTypeValue
+        return await RequestAsync<VerifyAuthenticatorCodeDto>(nameof(VerifyAuthenticatorCodeAsync), new ClientProxyRequestTypeValue
         {
             { typeof(VerifyAuthenticatorCodeInput), input }
         });
@@ -176,8 +197,8 @@ public partial class AccountClientProxy : ClientProxyBase<IAccountAppService>, I
         await RequestAsync(nameof(ResetAuthenticatorAsync));
     }
 
-    public virtual async Task<ShowRecoveryCodesDto> GenerateRecoveryCodesAsync()
+    public virtual async Task<VerifyAuthenticatorCodeDto> GenerateRecoveryCodesAsync()
     {
-        return await RequestAsync<ShowRecoveryCodesDto>(nameof(GenerateRecoveryCodesAsync));
+        return await RequestAsync<VerifyAuthenticatorCodeDto>(nameof(GenerateRecoveryCodesAsync));
     }
 }

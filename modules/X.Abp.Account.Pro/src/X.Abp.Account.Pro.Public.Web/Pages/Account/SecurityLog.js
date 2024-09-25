@@ -2,7 +2,7 @@ var _dataTable = null;
 
 var l = abp.localization.getResource("AbpAccount");
 
-var _account = x.abp.account.account;
+var _account = volo.abp.account.account;
 
 abp.ui.extensions.tableColumns.get("account.mySecurityLogs").addContributor(
   function (columnList) {
@@ -17,7 +17,7 @@ abp.ui.extensions.tableColumns.get("account.mySecurityLogs").addContributor(
         data: "action",
         autoWidth: true,
         render: function (data) {
-          data = data || "";
+          data = $.fn.dataTable.render.text().display(data || "");
           return (
             '<span class="datatableCell" data-filter-field="Action">' +
             data +
@@ -37,7 +37,7 @@ abp.ui.extensions.tableColumns.get("account.mySecurityLogs").addContributor(
         autoWidth: true,
         orderable: false,
         render: function (data) {
-          data = data || "";
+          data = $.fn.dataTable.render.text().display(data || "");
 
           var maxChars = 20;
 
@@ -60,7 +60,7 @@ abp.ui.extensions.tableColumns.get("account.mySecurityLogs").addContributor(
         data: "applicationName",
         autoWidth: true,
         render: function (data) {
-          return data || "";
+          return $.fn.dataTable.render.text().display(data || "");
         },
       },
       {
@@ -68,7 +68,7 @@ abp.ui.extensions.tableColumns.get("account.mySecurityLogs").addContributor(
         data: "identity",
         autoWidth: true,
         render: function (data) {
-          return data || "";
+          return $.fn.dataTable.render.text().display(data || "");
         },
       },
       {
@@ -76,7 +76,7 @@ abp.ui.extensions.tableColumns.get("account.mySecurityLogs").addContributor(
         data: "clientId",
         autoWidth: true,
         render: function (data) {
-          return data || "";
+          return $.fn.dataTable.render.text().display(data || "");
         },
       },
     ]);
@@ -85,16 +85,6 @@ abp.ui.extensions.tableColumns.get("account.mySecurityLogs").addContributor(
 );
 
 $(function () {
-  $(".input-daterange")
-    .datepicker({
-      todayBtn: "linked",
-      autoclose: true,
-      language: abp.localization.currentCulture.cultureName,
-    })
-    .on("hide", function (e) {
-      e.stopPropagation();
-    });
-
   _dataTable = $("#MySecurityLogsTable").DataTable(
     abp.libs.datatables.normalizeConfiguration({
       processing: true,
@@ -108,27 +98,7 @@ $(function () {
       ajax: abp.libs.datatables.createAjax(
           _account.getSecurityLogList,
         function () {
-          var form = $("#FilterFormId").serializeFormToObject();
-
-          var startTime = luxon.DateTime.fromFormat(
-              form.startTime,
-              abp.localization.currentCulture.dateTimeFormat.shortDatePattern,
-              { locale: abp.localization.currentCulture.cultureName }
-          );
-          if (!startTime.invalid) {
-            form.startTime = startTime.toFormat("yyyy-MM-dd");
-          }
-
-          var endTime = luxon.DateTime.fromFormat(
-              form.endTime,
-              abp.localization.currentCulture.dateTimeFormat.shortDatePattern,
-              { locale: abp.localization.currentCulture.cultureName }
-          );
-          if (!endTime.invalid) {
-            form.endTime = endTime.toFormat("yyyy-MM-dd");
-          }
-
-          return form;
+          return $("#FilterFormId").serializeFormToObject();
         }
       ),
       columnDefs: abp.ui.extensions.tableColumns
@@ -144,6 +114,10 @@ $(function () {
 
   $("#FilterFormId").submit(function (e) {
     e.preventDefault();
-    _dataTable.ajax.reload(null, false);
+    _dataTable.ajax.reloadEx();
+  });
+  
+  $("abp-date-picker").on("change", function () {
+    _dataTable.ajax.reloadEx();
   });
 });

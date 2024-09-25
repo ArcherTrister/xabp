@@ -5,17 +5,17 @@
 using System.Security.Principal;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
+using OpenIddict.Abstractions;
+
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using X.Abp.Account.Public.Web.Pages.Account;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 [ExposeServices(typeof(BackToImpersonatorModel))]
 public class OpenIddictBackToImpersonatorModel : BackToImpersonatorModel
@@ -24,17 +24,15 @@ public class OpenIddictBackToImpersonatorModel : BackToImpersonatorModel
 
     public OpenIddictBackToImpersonatorModel(
         ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
         IOptions<AbpAccountOpenIddictOptions> options)
-        : base(currentPrincipalAccessor, signInManager, userManager)
+        : base(currentPrincipalAccessor)
     {
         Options = options.Value;
     }
 
     public override async Task<IActionResult> OnGetAsync()
     {
-        if (!Request.Query.TryGetValue("access_token", out var _))
+        if (!Request.Query.TryGetValue(OpenIddictConstants.Destinations.AccessToken, out var _))
         {
             return await base.OnGetAsync();
         }
@@ -44,13 +42,13 @@ public class OpenIddictBackToImpersonatorModel : BackToImpersonatorModel
         {
             using (CurrentPrincipalAccessor.Change(authenticateResult.Principal))
             {
-                var guid = CurrentPrincipalAccessor.Principal.FindImpersonatorTenantId();
-                var guid2 = CurrentPrincipalAccessor.Principal.FindImpersonatorUserId();
-                if ((guid.HasValue || guid2.HasValue) && guid2.HasValue)
+                var impersonatorTenantId = CurrentPrincipalAccessor.Principal.FindImpersonatorTenantId();
+                var impersonatorUserId = CurrentPrincipalAccessor.Principal.FindImpersonatorUserId();
+                if ((impersonatorTenantId.HasValue || impersonatorUserId.HasValue) && impersonatorUserId.HasValue)
                 {
-                    using (CurrentTenant.Change(guid, null))
+                    using (CurrentTenant.Change(impersonatorTenantId, null))
                     {
-                        var user = await UserManager.GetByIdAsync(guid2.Value);
+                        var user = await UserManager.GetByIdAsync(impersonatorUserId.Value);
                         try
                         {
                             return await OpenIddictAuthorizeResponse.GenerateAuthorizeResponseAsync(HttpContext, user);

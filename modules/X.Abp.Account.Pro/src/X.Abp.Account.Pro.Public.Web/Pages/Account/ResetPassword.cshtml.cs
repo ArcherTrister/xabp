@@ -55,13 +55,6 @@ public class ResetPasswordModel : AccountPageModel
 
     public bool LocalLoginDisabled { get; set; }
 
-    protected IAccountAppService AccountAppService { get; }
-
-    public ResetPasswordModel(IAccountAppService accountAppService)
-    {
-        AccountAppService = accountAppService;
-    }
-
     public virtual async Task<IActionResult> OnGetAsync()
     {
         var localLoginResult = await CheckLocalLoginAsync();

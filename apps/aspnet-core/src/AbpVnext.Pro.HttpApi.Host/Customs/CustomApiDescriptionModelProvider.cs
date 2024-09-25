@@ -77,7 +77,7 @@ public class CustomApiDescriptionModelProvider : IApiDescriptionModelProvider
                 var removedController = module.Controllers.RemoveAll(x => x.Value.IsRemoteService && controller.OrderBy(c => c.Value.ControllerGroupName).Skip(1).Contains(x));
                 foreach (var removed in removedController)
                 {
-                    Logger.LogInformation($"The controller named '{removed.Value.Type}' was removed from ApplicationApiDescriptionModel because it same with other controller.");
+                    Logger.LogInformation("The controller named '{Type}' was removed from ApplicationApiDescriptionModel because it same with other controller.", removed.Value.Type);
                 }
             }
         }
@@ -116,12 +116,12 @@ public class CustomApiDescriptionModelProvider : IApiDescriptionModelProvider
         if (controllerModel.Actions.ContainsKey(uniqueMethodName))
         {
             Logger.LogWarning(
-                $"Controller '{controllerModel.ControllerName}' contains more than one action with name '{uniqueMethodName}' for module '{moduleModel.RootPath}'. Ignored: " +
-                method);
+                "Controller '{ControllerName}' contains more than one action with name '{UniqueMethodName}' for module '{RootPath}'. Ignored: {Method}",
+                controllerModel.ControllerName, uniqueMethodName, moduleModel.RootPath, method);
             return;
         }
 
-        Logger.LogDebug($"ActionApiDescriptionModel.Create: {controllerModel.ControllerName}.{uniqueMethodName}");
+        Logger.LogDebug("ActionApiDescriptionModel.Create: {ControllerName}.{UniqueMethodName}", controllerModel.ControllerName, uniqueMethodName);
 
         bool? allowAnonymous = null;
         if (apiDescription.ActionDescriptor.EndpointMetadata.Any(x => x is IAllowAnonymous))

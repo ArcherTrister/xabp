@@ -23,30 +23,30 @@ namespace X.Abp.OpenIddict;
 
 public class OpenIddictClaimsPrincipalContributor : IAbpClaimsPrincipalContributor, ITransientDependency
 {
-    public Task ContributeAsync(AbpClaimsPrincipalContributorContext context)
+  public virtual Task ContributeAsync(AbpClaimsPrincipalContributorContext context)
+  {
+    var identity = context.ClaimsPrincipal.Identities.FirstOrDefault();
+    if (identity != null)
     {
-        var identity = context.ClaimsPrincipal.Identities.FirstOrDefault();
-        if (identity != null)
+      var options = context.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value;
+      var usernameClaim = identity.FindFirst(options.ClaimsIdentity.UserNameClaimType);
+      if (usernameClaim != null)
+      {
+        identity.AddIfNotContains(new Claim(OpenIddictConstants.Claims.PreferredUsername, usernameClaim.Value));
+        identity.AddIfNotContains(new Claim(JwtRegisteredClaimNames.UniqueName, usernameClaim.Value));
+      }
+
+      var httpContext = context.ServiceProvider.GetRequiredService<IHttpContextAccessor>().HttpContext;
+      if (httpContext != null)
+      {
+        var clientId = httpContext.GetOpenIddictServerRequest()?.ClientId;
+        if (clientId != null)
         {
-            var options = context.ServiceProvider.GetRequiredService<IOptions<IdentityOptions>>().Value;
-            var usernameClaim = identity.FindFirst(options.ClaimsIdentity.UserNameClaimType);
-            if (usernameClaim != null)
-            {
-                identity.AddIfNotContains(new Claim(OpenIddictConstants.Claims.PreferredUsername, usernameClaim.Value));
-                identity.AddIfNotContains(new Claim(JwtRegisteredClaimNames.UniqueName, usernameClaim.Value));
-            }
-
-            var httpContext = context.ServiceProvider.GetRequiredService<IHttpContextAccessor>().HttpContext;
-            if (httpContext != null)
-            {
-                var clientId = httpContext.GetOpenIddictServerRequest()?.ClientId;
-                if (clientId != null)
-                {
-                    identity.AddClaim(OpenIddictConstants.Claims.ClientId, clientId);
-                }
-            }
+          identity.AddClaim(OpenIddictConstants.Claims.ClientId, clientId);
         }
-
-        return Task.CompletedTask;
+      }
     }
+
+    return Task.CompletedTask;
+  }
 }

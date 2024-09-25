@@ -54,58 +54,68 @@ public class OAuthExternalLoginManager : ITransientDependency
 
     public virtual async Task<IEnumerable<Claim>> GetUserInfoAsync(string userName, string password)
     {
-        using var httpClient = HttpClientFactory.CreateClient(HttpClientName);
-        var token = await GetAccessTokenAsync(userName, password);
-        var discoveryResponse = await GetDiscoveryResponseAsync();
+        using (var httpClient = HttpClientFactory.CreateClient(HttpClientName))
+        {
+            var token = await GetAccessTokenAsync(userName, password);
+            var discoveryResponse = await GetDiscoveryResponseAsync();
 
-        var userinfoResponse = await httpClient.GetUserInfoAsync(
-            new UserInfoRequest
+            using (var request = new UserInfoRequest
             {
                 Token = token,
                 Address = discoveryResponse.UserInfoEndpoint
-            });
+            })
+            {
+                var userinfoResponse = await httpClient.GetUserInfoAsync(request);
 
-        return userinfoResponse.IsError
-            ? throw userinfoResponse.Exception ?? new AbpException("Get user info error: " + userinfoResponse.Raw)
-            : userinfoResponse.Claims;
+                return userinfoResponse.IsError
+                    ? throw userinfoResponse.Exception ?? new AbpException("Get user info error: " + userinfoResponse.Raw)
+                    : userinfoResponse.Claims;
+            }
+        }
     }
 
     protected virtual async Task<string> GetAccessTokenAsync(string userName, string password)
     {
-        using var httpClient = HttpClientFactory.CreateClient(HttpClientName);
-        var discoveryResponse = await GetDiscoveryResponseAsync();
-
-        var request = new PasswordTokenRequest
+        using (var httpClient = HttpClientFactory.CreateClient(HttpClientName))
         {
-            Address = discoveryResponse.TokenEndpoint,
-            ClientId = await OAuthSettingProvider.GetClientIdAsync(),
-            ClientSecret = await OAuthSettingProvider.GetClientSecretAsync(),
-            Scope = await OAuthSettingProvider.GetScopeAsync(),
-            UserName = userName,
-            Password = password
-        };
+            var discoveryResponse = await GetDiscoveryResponseAsync();
 
-        var tokenResponse = await httpClient.RequestPasswordTokenAsync(request);
-        return tokenResponse.IsError
-            ? throw tokenResponse.Exception ?? new AbpException("Get access token error: " + tokenResponse.Raw)
-            : tokenResponse.AccessToken;
+            using (var request = new PasswordTokenRequest
+            {
+                Address = discoveryResponse.TokenEndpoint,
+                ClientId = await OAuthSettingProvider.GetClientIdAsync(),
+                ClientSecret = await OAuthSettingProvider.GetClientSecretAsync(),
+                Scope = await OAuthSettingProvider.GetScopeAsync(),
+                UserName = userName,
+                Password = password
+            })
+            {
+                var tokenResponse = await httpClient.RequestPasswordTokenAsync(request);
+                return tokenResponse.IsError
+                    ? throw tokenResponse.Exception ?? new AbpException("Get access token error: " + tokenResponse.Raw)
+                    : tokenResponse.AccessToken;
+            }
+        }
     }
 
     protected virtual async Task<DiscoveryDocumentResponse> GetDiscoveryResponseAsync()
     {
-        using var httpClient = HttpClientFactory.CreateClient(HttpClientName);
-        var request = new DiscoveryDocumentRequest
+        using (var httpClient = HttpClientFactory.CreateClient(HttpClientName))
         {
-            Address = await OAuthSettingProvider.GetAuthorityAsync(),
-            Policy = new DiscoveryPolicy
+            using (var request = new DiscoveryDocumentRequest
             {
-                RequireHttps = await OAuthSettingProvider.GetRequireHttpsMetadataAsync()
+                Address = await OAuthSettingProvider.GetAuthorityAsync(),
+                Policy = new DiscoveryPolicy
+                {
+                    RequireHttps = await OAuthSettingProvider.GetRequireHttpsMetadataAsync()
+                }
+            })
+            {
+                var discoveryResponse = await httpClient.GetDiscoveryDocumentAsync(request);
+                return discoveryResponse.IsError
+                    ? throw discoveryResponse.Exception ?? new AbpException("Get discovery error: " + discoveryResponse.Raw)
+                    : discoveryResponse;
             }
-        };
-
-        var discoveryResponse = await httpClient.GetDiscoveryDocumentAsync(request);
-        return discoveryResponse.IsError
-            ? throw discoveryResponse.Exception ?? new AbpException("Get discovery error: " + discoveryResponse.Raw)
-            : discoveryResponse;
+        }
     }
 }

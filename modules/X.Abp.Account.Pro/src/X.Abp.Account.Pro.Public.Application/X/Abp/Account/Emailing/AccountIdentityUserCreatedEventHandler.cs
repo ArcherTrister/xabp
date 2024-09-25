@@ -3,7 +3,6 @@
 // for more information concerning the license and the contributors participating to this project.
 
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading.Tasks;
 
 using Volo.Abp.DependencyInjection;
@@ -20,33 +19,33 @@ public class AccountIdentityUserCreatedEventHandler :
     IDistributedEventHandler<IdentityUserCreatedEto>,
     ITransientDependency
 {
-    protected IdentityUserManager UserManager { get; }
+  protected IdentityUserManager UserManager { get; }
 
-    protected IAccountEmailer AccountEmailer { get; }
+  protected IAccountEmailer AccountEmailer { get; }
 
-    protected ISettingProvider SettingProvider { get; }
+  protected ISettingProvider SettingProvider { get; }
 
-    public AccountIdentityUserCreatedEventHandler(
-        IdentityUserManager userManager,
-        IAccountEmailer accountEmailer,
-        ISettingProvider settingProvider)
+  public AccountIdentityUserCreatedEventHandler(
+      IdentityUserManager userManager,
+      IAccountEmailer accountEmailer,
+      ISettingProvider settingProvider)
+  {
+    UserManager = userManager;
+    AccountEmailer = accountEmailer;
+    SettingProvider = settingProvider;
+  }
+
+  public virtual async Task HandleEventAsync(IdentityUserCreatedEto eventData)
+  {
+    if (eventData.Properties["SendConfirmationEmail"].Equals(true.ToString(), System.StringComparison.OrdinalIgnoreCase) &&
+        await SettingProvider.IsTrueAsync(IdentitySettingNames.SignIn.RequireConfirmedEmail))
     {
-        UserManager = userManager;
-        AccountEmailer = accountEmailer;
-        SettingProvider = settingProvider;
+      var user = await UserManager.GetByIdAsync(eventData.Id);
+      var confirmationToken = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+      await AccountEmailer.SendEmailConfirmationLinkAsync(
+          user,
+          confirmationToken,
+          eventData.Properties.GetOrDefault("AppName") ?? "MVC");
     }
-
-    public async Task HandleEventAsync(IdentityUserCreatedEto eventData)
-    {
-        if (eventData.Properties["SendConfirmationEmail"] == true.ToString().ToUpper(CultureInfo.CurrentCulture) &&
-            await SettingProvider.IsTrueAsync(IdentitySettingNames.SignIn.RequireConfirmedEmail))
-        {
-            var user = await UserManager.GetByIdAsync(eventData.Id);
-            var confirmationToken = await UserManager.GenerateEmailConfirmationTokenAsync(user);
-            await AccountEmailer.SendEmailConfirmationLinkAsync(
-                user,
-                confirmationToken,
-                eventData.Properties.GetOrDefault("AppName") ?? "MVC");
-        }
-    }
+  }
 }

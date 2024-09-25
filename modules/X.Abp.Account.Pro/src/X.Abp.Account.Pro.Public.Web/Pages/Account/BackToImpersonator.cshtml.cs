@@ -13,8 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
-
 namespace X.Abp.Account.Public.Web.Pages.Account;
 
 [Authorize]
@@ -23,18 +21,9 @@ public class BackToImpersonatorModel : AccountPageModel
 {
     protected ICurrentPrincipalAccessor CurrentPrincipalAccessor { get; }
 
-    protected SignInManager<IdentityUser> SignInManager { get; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    public BackToImpersonatorModel(
-        ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager)
+    public BackToImpersonatorModel(ICurrentPrincipalAccessor currentPrincipalAccessor)
     {
         CurrentPrincipalAccessor = currentPrincipalAccessor;
-        SignInManager = signInManager;
-        UserManager = userManager;
     }
 
     public virtual Task<IActionResult> OnGetAsync()
@@ -62,7 +51,7 @@ public class BackToImpersonatorModel : AccountPageModel
             {
                 IsPersistent = isPersistent
             });
-
+            await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(user.Id, user.TenantId);
             return Redirect("~/");
         }
     }

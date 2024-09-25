@@ -17,4 +17,8 @@ public interface IOAuthSettingProvider
     Task<string> GetScopeAsync();
 
     Task<bool> GetRequireHttpsMetadataAsync();
+
+    Task<bool> GetValidateEndpointsAsync();
+
+    Task<bool> GetValidateIssuerNameAsync();
 }

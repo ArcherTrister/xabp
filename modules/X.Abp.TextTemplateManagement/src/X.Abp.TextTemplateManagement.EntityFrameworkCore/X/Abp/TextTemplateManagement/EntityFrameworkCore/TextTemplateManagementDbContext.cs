@@ -18,6 +18,10 @@ ITextTemplateManagementDbContext
 {
     public DbSet<TextTemplateContent> TextTemplateContents { get; set; }
 
+    public DbSet<TextTemplateDefinitionRecord> TextTemplateDefinitionRecords { get; set; }
+
+    public DbSet<TextTemplateDefinitionContentRecord> TextTemplateDefinitionContentRecords { get; set; }
+
     public TextTemplateManagementDbContext(
       DbContextOptions<TextTemplateManagementDbContext> options)
       : base(options)

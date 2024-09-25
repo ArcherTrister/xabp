@@ -18,6 +18,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.IdentityServer;
+using Volo.Abp.PermissionManagement.OpenIddict;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Sms;
 
@@ -47,16 +48,13 @@ namespace AbpVnext.Pro;
     typeof(AbpIdentityProDomainModule),
     typeof(AbpPermissionManagementDomainIdentityModule),
     typeof(AbpOpenIddictProDomainModule),
-
-    // typeof(AbpPermissionManagementDomainOpenIddictModule),
+    typeof(AbpPermissionManagementDomainOpenIddictModule),
     typeof(AbpIdentityServerProDomainModule),
     typeof(AbpPermissionManagementDomainIdentityServerModule),
     typeof(AbpSettingManagementDomainModule),
     typeof(AbpSaasDomainModule),
     typeof(AbpTextTemplateManagementDomainModule),
     typeof(AbpLanguageManagementDomainModule),
-
-    // typeof(VoloAbpCommercialSuiteTemplatesModule),
     typeof(AbpEmailingModule),
     typeof(AbpSmsModule),
     typeof(AbpGdprDomainModule),

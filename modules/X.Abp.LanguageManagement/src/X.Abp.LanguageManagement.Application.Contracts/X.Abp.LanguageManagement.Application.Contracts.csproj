@@ -12,8 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.Features" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Authorization.Abstractions" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.LanguageManagement.Domain.Shared\X.Abp.LanguageManagement.Domain.Shared.csproj" />
   </ItemGroup>
 

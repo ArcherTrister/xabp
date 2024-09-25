@@ -22,55 +22,55 @@ public class UserPasswordChangeRequestedEventHandler :
     IDistributedEventHandler<UserPasswordChangeRequestedEto>,
     ITransientDependency
 {
-    public ILogger<UserPasswordChangeRequestedEventHandler> Logger { get; set; }
+  public ILogger<UserPasswordChangeRequestedEventHandler> Logger { get; set; }
 
-    protected IIdentityUserRepository UserRepository { get; }
+  protected IIdentityUserRepository UserRepository { get; }
 
-    protected IdentityUserManager IdentityUserManager { get; }
+  protected IdentityUserManager IdentityUserManager { get; }
 
-    public UserPasswordChangeRequestedEventHandler(
-      IIdentityUserRepository userRepository,
-      IdentityUserManager identityUserManager)
+  public UserPasswordChangeRequestedEventHandler(
+    IIdentityUserRepository userRepository,
+    IdentityUserManager identityUserManager)
+  {
+    Logger = NullLogger<UserPasswordChangeRequestedEventHandler>.Instance;
+    UserRepository = userRepository;
+    IdentityUserManager = identityUserManager;
+  }
+
+  public virtual async Task HandleEventAsync(UserPasswordChangeRequestedEto eventData)
+  {
+    if (!eventData.Password.IsNullOrEmpty())
     {
-        Logger = NullLogger<UserPasswordChangeRequestedEventHandler>.Instance;
-        UserRepository = userRepository;
-        IdentityUserManager = identityUserManager;
-    }
-
-    public async Task HandleEventAsync(UserPasswordChangeRequestedEto eventData)
-    {
-        if (!eventData.Password.IsNullOrEmpty())
+      var user = await UserRepository.FindByTenantIdAndUserNameAsync(eventData.UserName, eventData.TenantId);
+      if (user != null)
+      {
+        var source = await CheckUserPasswordAsync(user, eventData.Password);
+        if (source.Count != 0)
         {
-            var user = await UserRepository.FindByTenantIdAndUserNameAsync(eventData.UserName, eventData.TenantId);
-            if (user != null)
-            {
-                var source = await CheckUserPasswordAsync(user, eventData.Password);
-                if (source.Any())
-                {
-                    Logger.LogError("User password change failed: {userName}, reason: {reason}", eventData.UserName, string.Join(";", source.Select(e => e.Code)));
-                }
-                else
-                {
-                    (await IdentityUserManager.RemovePasswordAsync(user)).CheckIdentityErrors();
-                    (await IdentityUserManager.AddPasswordAsync(user, eventData.Password)).CheckIdentityErrors();
-                    Logger.LogInformation("User password changed: {userName}", eventData.UserName);
-                }
-            }
+          Logger.LogError("User password change failed: {userName}, reason: {reason}", eventData.UserName, string.Join(";", source.Select(e => e.Code)));
         }
-    }
-
-    private async Task<List<IdentityError>> CheckUserPasswordAsync(IdentityUser identityUser, string password)
-    {
-        var errors = new List<IdentityError>();
-        foreach (var passwordValidator in IdentityUserManager.PasswordValidators)
+        else
         {
-            var identityResult = await passwordValidator.ValidateAsync(IdentityUserManager, identityUser, password);
-            if (!identityResult.Succeeded && identityResult.Errors.Any())
-            {
-                errors.AddRange(identityResult.Errors);
-            }
+          (await IdentityUserManager.RemovePasswordAsync(user)).CheckIdentityErrors();
+          (await IdentityUserManager.AddPasswordAsync(user, eventData.Password)).CheckIdentityErrors();
+          Logger.LogInformation("User password changed: {userName}", eventData.UserName);
         }
-
-        return errors;
+      }
     }
+  }
+
+  private async Task<List<IdentityError>> CheckUserPasswordAsync(IdentityUser identityUser, string password)
+  {
+    var errors = new List<IdentityError>();
+    foreach (var passwordValidator in IdentityUserManager.PasswordValidators)
+    {
+      var identityResult = await passwordValidator.ValidateAsync(IdentityUserManager, identityUser, password);
+      if (!identityResult.Succeeded && identityResult.Errors.Any())
+      {
+        errors.AddRange(identityResult.Errors);
+      }
+    }
+
+    return errors;
+  }
 }

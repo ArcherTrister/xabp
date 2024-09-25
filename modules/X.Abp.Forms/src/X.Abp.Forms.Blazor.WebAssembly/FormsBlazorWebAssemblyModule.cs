@@ -5,7 +5,7 @@ namespace X.Abp.Forms.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(FormsBlazorModule),
-    typeof(FormsHttpApiClientModule),
+    typeof(AbpFormsHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class FormsBlazorWebAssemblyModule : AbpModule

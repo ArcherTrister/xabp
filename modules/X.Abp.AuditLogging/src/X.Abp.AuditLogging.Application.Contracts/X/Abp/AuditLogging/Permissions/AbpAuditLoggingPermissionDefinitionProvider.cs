@@ -18,7 +18,10 @@ public class AbpAuditLoggingPermissionDefinitionProvider : PermissionDefinitionP
         var permissionGroup = context.AddGroup(AbpAuditLoggingPermissions.GroupName, L("Permission:AuditLogging"));
 
         permissionGroup.AddPermission(AbpAuditLoggingPermissions.AuditLogs.Default, L("Permission:AuditLogs"))
-            .RequireFeatures(AbpAuditLoggingFeatures.Enable);
+            .RequireFeatures(AbpAuditLoggingFeatures.Enable)
+            .AddChild(AbpAuditLoggingPermissions.AuditLogs.SettingManagement,
+            L("Permission:SettingManagement"))
+                .RequireFeatures(AbpAuditLoggingFeatures.SettingManagement);
     }
 
     private static LocalizableString L(string name)

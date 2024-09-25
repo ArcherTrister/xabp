@@ -1,0 +1,8 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "ID0111": "未正确处理 OpenIDConnect 响应。这可能表明负责处理 OpenIDConnect 响应的事件处理程序没有注册，或者已经从处理程序列表中显式删除。",
+    "ID0112": "检索 OpenIddict 服务器上下文时发生错误。在 ASP.NET Core上, 这可能表明身份验证中间件在请求管道中注册得不够早。确保 'app.UseAuthentication()' 在 'app.UseAuthorization()' 和 'app.UseEndpoints()' (或 'app.UseMvc()')之前注册，然后再试一次。",
+    "ID0113": "验证当前请求时发生错误。"
+  }
+}

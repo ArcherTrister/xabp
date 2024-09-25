@@ -10,6 +10,7 @@ using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Features;
 using Volo.Abp.UI.Navigation;
 
+using X.Abp.TextTemplateManagement.Features;
 using X.Abp.TextTemplateManagement.Localization;
 using X.Abp.TextTemplateManagement.Permissions;
 
@@ -17,27 +18,27 @@ namespace X.Abp.TextTemplateManagement.Web.Menus;
 
 public class AbpTextTemplateManagementMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        IStringLocalizer localizer = context.GetLocalizer<TextTemplateManagementResource>();
+  private static Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    IStringLocalizer localizer = context.GetLocalizer<TextTemplateManagementResource>();
 
-        ApplicationMenuItem menuItem = new ApplicationMenuItem(
-            AbpTextTemplateManagementMenuNames.GroupName,
-            localizer["Menu:TextTemplates"],
-            "~/TextTemplateManagement",
-            "fa fa-text-width")
-            .RequireFeatures(TextTemplateManagementFeatures.Enable)
-            .RequirePermissions(AbpTextTemplateManagementPermissions.TextTemplates.Default);
-        context.Menu.GetAdministration().AddItem(menuItem);
+    ApplicationMenuItem menuItem = new ApplicationMenuItem(
+        AbpTextTemplateManagementMenuNames.GroupName,
+        localizer["Menu:TextTemplates"],
+        "~/TextTemplateManagement",
+        "fa fa-text-width")
+        .RequireFeatures(TextTemplateManagementFeatures.Enable)
+        .RequirePermissions(AbpTextTemplateManagementPermissions.TextTemplates.Default);
+    context.Menu.GetAdministration().AddItem(menuItem);
 
-        return Task.CompletedTask;
-    }
+    return Task.CompletedTask;
+  }
 }

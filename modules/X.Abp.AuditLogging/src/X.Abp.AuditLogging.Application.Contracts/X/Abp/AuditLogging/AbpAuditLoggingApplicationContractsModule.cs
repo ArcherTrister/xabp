@@ -4,13 +4,10 @@
 
 using Volo.Abp.Application;
 using Volo.Abp.AuditLogging;
-using Volo.Abp.AuditLogging.Localization;
 using Volo.Abp.Authorization;
 using Volo.Abp.Features;
-using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Validation;
-using Volo.Abp.VirtualFileSystem;
 
 namespace X.Abp.AuditLogging;
 
@@ -22,18 +19,4 @@ namespace X.Abp.AuditLogging;
     typeof(AbpFeaturesModule))]
 public class AbpAuditLoggingApplicationContractsModule : AbpModule
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<AbpAuditLoggingApplicationContractsModule>();
-        });
-
-        Configure<AbpLocalizationOptions>(options =>
-        {
-            options.Resources
-                .Get<AuditLoggingResource>()
-                .AddVirtualJson("/X/Abp/AuditLogging/Localization/Resources");
-        });
-    }
 }

@@ -5,20 +5,21 @@
 using System.Security.Claims;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+
+using OpenIddict.Abstractions;
 
 using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Security.Claims;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using X.Abp.Account.Public.Web;
+using X.Abp.Account.Public.Web.Pages.Account;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 [ExposeServices(typeof(ImpersonateUserModel))]
 public class OpenIddictImpersonateUserModel : ImpersonateUserModel
@@ -30,18 +31,15 @@ public class OpenIddictImpersonateUserModel : ImpersonateUserModel
         IPermissionChecker permissionChecker,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
         ITenantStore tenantStore,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
         IOptions<AbpAccountOpenIddictOptions> options)
-        : base(accountOptions, permissionChecker, currentPrincipalAccessor, tenantStore, signInManager, userManager, identitySecurityLogManager)
+        : base(accountOptions, permissionChecker, currentPrincipalAccessor, tenantStore)
     {
         Options = options.Value;
     }
 
     public override async Task<IActionResult> OnGetAsync()
     {
-        if (Request.Query.TryGetValue("access_token", out var _))
+        if (Request.Query.TryGetValue(OpenIddictConstants.Destinations.AccessToken, out var _))
         {
             var authenticateResult = await HttpContext.AuthenticateAsync(Options.ImpersonationAuthenticationScheme);
             if (authenticateResult.Succeeded)
@@ -53,8 +51,7 @@ public class OpenIddictImpersonateUserModel : ImpersonateUserModel
                         throw new BusinessException("Volo.Account:YouCanNotImpersonateYourself");
                     }
 
-                    if (AccountOptions.ImpersonationUserPermission.IsNullOrWhiteSpace() ||
-                    !await PermissionChecker.IsGrantedAsync(AccountOptions.ImpersonationUserPermission))
+                    if (!AccountOptions.ImpersonationUserPermission.IsNullOrWhiteSpace() && !await PermissionChecker.IsGrantedAsync(AccountOptions.ImpersonationUserPermission))
                     {
                         throw new BusinessException("Volo.Account:RequirePermissionToImpersonateUser").WithData("PermissionName", AccountOptions.ImpersonationUserPermission);
                     }
@@ -73,12 +70,18 @@ public class OpenIddictImpersonateUserModel : ImpersonateUserModel
                         if (CurrentTenant.IsAvailable)
                         {
                             additionalClaims.Add(new Claim(AbpClaimTypes.ImpersonatorTenantId, CurrentTenant.Id.ToString()!));
-                            var val = await HttpContext.RequestServices.GetRequiredService<ITenantStore>().FindAsync(CurrentTenant.Id!.Value);
-                            if (val != null && !val.Name.IsNullOrWhiteSpace())
+                            var tenantConfiguration = await HttpContext.RequestServices.GetRequiredService<ITenantStore>().FindAsync(CurrentTenant.Id!.Value);
+                            if (tenantConfiguration != null && !tenantConfiguration.Name.IsNullOrWhiteSpace())
                             {
-                                additionalClaims.Add(new Claim(AbpClaimTypes.ImpersonatorTenantName, val.Name));
+                                additionalClaims.Add(new Claim(AbpClaimTypes.ImpersonatorTenantName, tenantConfiguration.Name));
                             }
                         }
+                    }
+
+                    Claim claim = CurrentUser.FindClaim(AbpClaimTypes.RememberMe);
+                    if (claim != null)
+                    {
+                        additionalClaims.Add(claim);
                     }
 
                     try

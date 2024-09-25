@@ -17,63 +17,63 @@ namespace X.Abp.Account.Public.Web.ExternalProviders;
 /// </summary>
 public class DefaultScanCodeLoginProvider : IScanCodeLoginProvider, ITransientDependency
 {
-    protected IDistributedCache<LoginQrCodeCacheItem, string> DistributedCache { get; }
+  protected IDistributedCache<LoginQrCodeCacheItem, string> DistributedCache { get; }
 
-    public DefaultScanCodeLoginProvider(IDistributedCache<LoginQrCodeCacheItem, string> distributedCache)
+  public DefaultScanCodeLoginProvider(IDistributedCache<LoginQrCodeCacheItem, string> distributedCache)
+  {
+    DistributedCache = distributedCache;
+  }
+
+  public virtual async Task<string> GenerateQrCodeAsync()
+  {
+    var qrCodeKey = Guid.NewGuid().ToString("N");
+    await DistributedCache.SetAsync(qrCodeKey, new LoginQrCodeCacheItem(), new DistributedCacheEntryOptions { SlidingExpiration = TimeSpan.FromSeconds(300) });
+    return qrCodeKey;
+  }
+
+  public virtual async Task<LoginQrCode> CheckQrCodeAsync(string qrCodeKey)
+  {
+    var qrcode = await DistributedCache.GetAsync(qrCodeKey);
+    if (qrcode == null)
     {
-        DistributedCache = distributedCache;
+      return new LoginQrCode { QrCodeStatus = QrCodeStatus.Invalid };
     }
 
-    public async Task<string> GenerateQrCodeAsync()
+    return qrcode.ToLoginQrCode();
+  }
+
+  public virtual async Task<LoginQrCodeCacheItem> GetQrCodeAsync(string qrCodeKey)
+  {
+    return await DistributedCache.GetAsync(qrCodeKey);
+  }
+
+  public virtual async Task<LoginQrCode> ScanCodeAsync(string qrCodeKey, Guid userId, Guid? tenantId)
+  {
+    var qrcode = await DistributedCache.GetAsync(qrCodeKey);
+    if (qrcode == null)
     {
-        var qrCodeKey = Guid.NewGuid().ToString("N");
-        await DistributedCache.SetAsync(qrCodeKey, new LoginQrCodeCacheItem(), new DistributedCacheEntryOptions { SlidingExpiration = TimeSpan.FromSeconds(300) });
-        return qrCodeKey;
+      return new LoginQrCode { QrCodeStatus = QrCodeStatus.Invalid };
     }
 
-    public async Task<LoginQrCode> CheckQrCodeAsync(string qrCodeKey)
-    {
-        var qrcode = await DistributedCache.GetAsync(qrCodeKey);
-        if (qrcode == null)
-        {
-            return new LoginQrCode { QrCodeStatus = QrCodeStatus.Invalid };
-        }
+    LoginQrCodeCacheItem update = qrcode.ScanCode(userId, tenantId);
 
-        return qrcode.ToLoginQrCode();
+    await DistributedCache.SetAsync(qrCodeKey, update, new DistributedCacheEntryOptions { SlidingExpiration = TimeSpan.FromSeconds(180) });
+
+    return update.ToLoginQrCode();
+  }
+
+  public virtual async Task<LoginQrCode> ConfirmLoginAsync(string qrCodeKey, string scanCodeToken)
+  {
+    var qrcode = await DistributedCache.GetAsync(qrCodeKey);
+    if (qrcode == null)
+    {
+      return new LoginQrCode { QrCodeStatus = QrCodeStatus.Invalid };
     }
 
-    public async Task<LoginQrCodeCacheItem> GetQrCodeAsync(string qrCodeKey)
-    {
-        return await DistributedCache.GetAsync(qrCodeKey);
-    }
+    LoginQrCodeCacheItem update = qrcode.Confirm(scanCodeToken);
 
-    public async Task<LoginQrCode> ScanCodeAsync(string qrCodeKey, Guid userId, Guid? tenantId)
-    {
-        var qrcode = await DistributedCache.GetAsync(qrCodeKey);
-        if (qrcode == null)
-        {
-            return new LoginQrCode { QrCodeStatus = QrCodeStatus.Invalid };
-        }
+    await DistributedCache.SetAsync(qrCodeKey, update, new DistributedCacheEntryOptions { SlidingExpiration = TimeSpan.FromSeconds(180) });
 
-        LoginQrCodeCacheItem update = qrcode.ScanCode(userId, tenantId);
-
-        await DistributedCache.SetAsync(qrCodeKey, update, new DistributedCacheEntryOptions { SlidingExpiration = TimeSpan.FromSeconds(180) });
-
-        return update.ToLoginQrCode();
-    }
-
-    public async Task<LoginQrCode> ConfirmLoginAsync(string qrCodeKey, string scanCodeToken)
-    {
-        var qrcode = await DistributedCache.GetAsync(qrCodeKey);
-        if (qrcode == null)
-        {
-            return new LoginQrCode { QrCodeStatus = QrCodeStatus.Invalid };
-        }
-
-        LoginQrCodeCacheItem update = qrcode.Confirm(scanCodeToken);
-
-        await DistributedCache.SetAsync(qrCodeKey, update, new DistributedCacheEntryOptions { SlidingExpiration = TimeSpan.FromSeconds(180) });
-
-        return update.ToLoginQrCode();
-    }
+    return update.ToLoginQrCode();
+  }
 }

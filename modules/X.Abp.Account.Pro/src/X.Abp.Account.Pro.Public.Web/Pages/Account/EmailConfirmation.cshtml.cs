@@ -30,13 +30,6 @@ public class EmailConfirmationModel : AccountPageModel
 
     public bool EmailConfirmed { get; set; }
 
-    protected IAccountAppService AccountAppService { get; }
-
-    public EmailConfirmationModel(IAccountAppService accountAppService)
-    {
-        AccountAppService = accountAppService;
-    }
-
     public virtual async Task<IActionResult> OnGetAsync()
     {
         ReturnUrl = await GetRedirectUrlAsync(ReturnUrl, ReturnUrlHash);

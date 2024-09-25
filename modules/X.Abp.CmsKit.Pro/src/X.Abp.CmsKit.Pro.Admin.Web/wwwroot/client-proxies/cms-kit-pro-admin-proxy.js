@@ -5,47 +5,68 @@
 
 (function(){
 
-  // controller x.abp.cmsKit.admin.urlShorting.urlShortingAdmin
+  // controller x.abp.cmsKit.admin.contact.contactSetting
 
   (function(){
 
-    abp.utils.createNamespace(window, 'x.abp.cmsKit.admin.urlShorting.urlShortingAdmin');
+    abp.utils.createNamespace(window, 'x.abp.cmsKit.admin.contact.contactSetting');
 
-    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin.getList = function(input, ajaxParams) {
+    x.abp.cmsKit.admin.contact.contactSetting.get = function(ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/url-shorting' + abp.utils.buildQueryString([{ name: 'shortenedUrlFilter', value: input.shortenedUrlFilter }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        url: abp.appPath + 'api/cms-kit-admin/contact/settings',
         type: 'GET'
       }, ajaxParams));
     };
 
-    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin.get = function(id, ajaxParams) {
+    x.abp.cmsKit.admin.contact.contactSetting.update = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/url-shorting/' + id + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin.create = function(input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/url-shorting',
+        url: abp.appPath + 'api/cms-kit-admin/contact/settings',
         type: 'POST',
+        dataType: null,
         data: JSON.stringify(input)
       }, ajaxParams));
     };
 
-    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin.update = function(id, input, ajaxParams) {
+  })();
+
+  // controller x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin');
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getList = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/url-shorting/' + id + '',
-        type: 'PUT',
-        data: JSON.stringify(input)
+        url: abp.appPath + 'api/cms-kit-admin/newsletter' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        type: 'GET'
       }, ajaxParams));
     };
 
-    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin['delete'] = function(id, ajaxParams) {
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.get = function(id, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/url-shorting/' + id + '',
-        type: 'DELETE',
-        dataType: null
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/' + id + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getNewsletterRecordsCsvDetail = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/csv-detail' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getNewsletterPreferences = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/preferences',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getCsvResponses = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/export-csv' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }]) + '',
+        type: 'GET'
       }, ajaxParams));
     };
 
@@ -111,68 +132,47 @@
 
   })();
 
-  // controller x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin
+  // controller x.abp.cmsKit.admin.urlShorting.urlShortingAdmin
 
   (function(){
 
-    abp.utils.createNamespace(window, 'x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin');
+    abp.utils.createNamespace(window, 'x.abp.cmsKit.admin.urlShorting.urlShortingAdmin');
 
-    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getList = function(input, ajaxParams) {
+    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin.getList = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/newsletter' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        url: abp.appPath + 'api/cms-kit-admin/url-shorting' + abp.utils.buildQueryString([{ name: 'shortenedUrlFilter', value: input.shortenedUrlFilter }, { name: 'sorting', value: input.sorting }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
 
-    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.get = function(id, ajaxParams) {
+    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin.get = function(id, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/newsletter/' + id + '',
+        url: abp.appPath + 'api/cms-kit-admin/url-shorting/' + id + '',
         type: 'GET'
       }, ajaxParams));
     };
 
-    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getNewsletterRecordsCsvDetail = function(input, ajaxParams) {
+    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin.create = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/newsletter/csv-detail' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }]) + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getNewsletterPreferences = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/newsletter/preferences',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getCsvResponses = function(input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/newsletter/export-csv' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }]) + '',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-  })();
-
-  // controller x.abp.cmsKit.admin.contact.contactSetting
-
-  (function(){
-
-    abp.utils.createNamespace(window, 'x.abp.cmsKit.admin.contact.contactSetting');
-
-    x.abp.cmsKit.admin.contact.contactSetting.get = function(ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/contact/settings',
-        type: 'GET'
-      }, ajaxParams));
-    };
-
-    x.abp.cmsKit.admin.contact.contactSetting.update = function(input, ajaxParams) {
-      return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/contact/settings',
+        url: abp.appPath + 'api/cms-kit-admin/url-shorting',
         type: 'POST',
-        dataType: null,
         data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin.update = function(id, input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/url-shorting/' + id + '',
+        type: 'PUT',
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.urlShorting.urlShortingAdmin['delete'] = function(id, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/url-shorting/' + id + '',
+        type: 'DELETE',
+        dataType: null
       }, ajaxParams));
     };
 

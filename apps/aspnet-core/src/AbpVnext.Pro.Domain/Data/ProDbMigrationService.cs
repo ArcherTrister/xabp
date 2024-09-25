@@ -59,7 +59,7 @@ public class ProDbMigrationService : ITransientDependency
         await MigrateDatabaseSchemaAsync();
         await SeedDataAsync();
 
-        Logger.LogInformation($"Successfully completed host database migrations.");
+        Logger.LogInformation("Successfully completed host database migrations.");
 
         var tenants = await _tenantRepository.GetListAsync(true);
 
@@ -85,7 +85,7 @@ public class ProDbMigrationService : ITransientDependency
                 await SeedDataAsync(tenant);
             }
 
-            Logger.LogInformation($"Successfully completed {tenant.Name} tenant database migrations.");
+            Logger.LogInformation("Successfully completed {tenantName} tenant database migrations.", tenant.Name);
         }
 
         Logger.LogInformation("Successfully completed all database migrations.");
@@ -105,7 +105,7 @@ public class ProDbMigrationService : ITransientDependency
 
     private async Task SeedDataAsync(Tenant tenant = null)
     {
-        Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
+        Logger.LogInformation("Executing {hostOrTenant} database seed...", tenant == null ? "host" : tenant.Name + " tenant");
 
         await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
             .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName,

@@ -26,22 +26,36 @@ public class ConversationController : ChatController, IConversationAppService
 
     [HttpPost]
     [Route("send-message")]
-    public Task SendMessageAsync(SendMessageInput input)
+    public virtual Task<ChatMessageDto> SendMessageAsync(SendMessageInput input)
     {
         return ConversationAppService.SendMessageAsync(input);
     }
 
     [HttpGet]
     [Route("conversation")]
-    public Task<ChatConversationDto> GetConversationAsync(GetConversationInput input)
+    public virtual Task<ChatConversationDto> GetConversationAsync(GetConversationInput input)
     {
         return ConversationAppService.GetConversationAsync(input);
     }
 
     [HttpPost]
     [Route("mark-conversation-as-read")]
-    public Task MarkConversationAsReadAsync(MarkConversationAsReadInput input)
+    public virtual Task MarkConversationAsReadAsync(MarkConversationAsReadInput input)
     {
         return ConversationAppService.MarkConversationAsReadAsync(input);
+    }
+
+    [Route("delete-message")]
+    [HttpDelete]
+    public virtual Task DeleteMessageAsync(DeleteMessageInput input)
+    {
+        return ConversationAppService.DeleteMessageAsync(input);
+    }
+
+    [Route("delete-conversation")]
+    [HttpDelete]
+    public virtual Task DeleteConversationAsync(DeleteConversationInput input)
+    {
+        return ConversationAppService.DeleteConversationAsync(input);
     }
 }

@@ -5,19 +5,23 @@
 using System.Security.Claims;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+
+using OpenIddict.Abstractions;
 
 using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
 using Volo.Abp.Security.Claims;
+
+using X.Abp.Account.Public.Web;
+using X.Abp.Account.Public.Web.Pages.Account;
 
 using IdentityUser = Volo.Abp.Identity.IdentityUser;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 [ExposeServices(typeof(ImpersonateTenantModel))]
 public class OpenIddictImpersonateTenantModel : ImpersonateTenantModel
@@ -28,62 +32,69 @@ public class OpenIddictImpersonateTenantModel : ImpersonateTenantModel
         IOptions<AbpAccountOptions> accountOptions,
         IPermissionChecker permissionChecker,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
         IOptions<AbpAccountOpenIddictOptions> options)
-        : base(accountOptions, permissionChecker, currentPrincipalAccessor, signInManager, userManager, identitySecurityLogManager)
+        : base(accountOptions, permissionChecker, currentPrincipalAccessor)
     {
         Options = options.Value;
     }
 
     public override async Task<IActionResult> OnGetAsync()
     {
-        if (Request.Query.TryGetValue("access_token", out var _))
+        if (!Request.Query.ContainsKey(OpenIddictConstants.Destinations.AccessToken))
         {
-            var authenticateResult = await HttpContext.AuthenticateAsync(Options.ImpersonationAuthenticationScheme);
-            if (authenticateResult.Succeeded)
+            // ISSUE: reference to a compiler-generated method
+            return await base.OnGetAsync();
+        }
+
+        if (TenantUserName.IsNullOrWhiteSpace())
+        {
+            TenantUserName = AccountOptions.TenantAdminUserName;
+        }
+
+        if (ReturnUrl != null && !Url.IsLocalUrl(ReturnUrl) && !ReturnUrl.StartsWith(UriHelper.BuildAbsolute(Request.Scheme, Request.Host, Request.PathBase).RemovePostFix("/"), StringComparison.InvariantCultureIgnoreCase) && !await AppUrlProvider.IsRedirectAllowedUrlAsync(ReturnUrl))
+        {
+            ReturnUrl = null;
+        }
+
+        try
+        {
+            AuthenticateResult authenticateResult = await HttpContext.AuthenticateAsync(Options.ImpersonationAuthenticationScheme);
+            if (!authenticateResult.Succeeded)
             {
-                using (CurrentPrincipalAccessor.Change(authenticateResult.Principal))
+                throw new BusinessException("Volo.Account:RequirePermissionToImpersonateTenant").WithData("PermissionName", AccountOptions.ImpersonationTenantPermission);
+            }
+
+            using (CurrentPrincipalAccessor.Change(authenticateResult.Principal))
+            {
+                if (CurrentTenant.Id.HasValue)
                 {
-                    if (CurrentTenant.Id.HasValue)
+                    throw new BusinessException("Volo.Account:ImpersonateTenantOnlyAvailableForHost");
+                }
+
+                if (!AccountOptions.ImpersonationTenantPermission.IsNullOrWhiteSpace() && !await PermissionChecker.IsGrantedAsync(AccountOptions.ImpersonationTenantPermission))
+                {
+                    throw new BusinessException("Volo.Account:RequirePermissionToImpersonateTenant").WithData("PermissionName", AccountOptions.ImpersonationTenantPermission);
+                }
+
+                using (CurrentTenant.Change(TenantId))
+                {
+                    IdentityUser user = await UserManager.FindByNameAsync(TenantUserName) ?? throw new BusinessException("Volo.Account:ThereIsNoUserWithUserName").WithData("UserName", TenantUserName);
+                    try
                     {
-                        throw new BusinessException("Volo.Account:ImpersonateTenantOnlyAvailableForHost");
+                        return await OpenIddictAuthorizeResponse.GenerateAuthorizeResponseAsync(HttpContext, user, new Claim(AbpClaimTypes.ImpersonatorUserId, CurrentUser.Id.ToString()), new Claim(AbpClaimTypes.ImpersonatorUserName, CurrentUser.UserName));
                     }
-
-                    if (AccountOptions.ImpersonationTenantPermission.IsNullOrWhiteSpace() ||
-                    !await PermissionChecker.IsGrantedAsync(AccountOptions.ImpersonationTenantPermission))
+                    catch (Exception ex)
                     {
-                        throw new BusinessException("Volo.Account:RequirePermissionToImpersonateTenant")
-                            .WithData("PermissionName", AccountOptions.ImpersonationTenantPermission);
-                    }
-
-                    var currentUserId = CurrentUser.Id;
-                    var currentUserName = CurrentUser.UserName;
-                    using (CurrentTenant.Change(TenantId))
-                    {
-                        var adminUser = await UserManager.FindByNameAsync(AccountOptions.TenantAdminUserName);
-                        if (adminUser != null)
-                        {
-                            try
-                            {
-                                return await OpenIddictAuthorizeResponse.GenerateAuthorizeResponseAsync(HttpContext, adminUser, new Claim(AbpClaimTypes.ImpersonatorUserId, currentUserId.ToString()!), new Claim(AbpClaimTypes.ImpersonatorUserName, currentUserName));
-                            }
-                            catch (Exception ex)
-                            {
-                                Logger.LogException(ex);
-                                throw new BusinessException("Volo.Account:RequirePermissionToImpersonateTenant").WithData("PermissionName", AccountOptions.ImpersonationTenantPermission);
-                            }
-                        }
-
-                        throw new BusinessException("Volo.Account:ThereIsNoUserWithUserName").WithData("UserName", AccountOptions.TenantAdminUserName);
+                        Logger.LogException(ex);
+                        throw new BusinessException("Volo.Account:RequirePermissionToImpersonateTenant").WithData("PermissionName", AccountOptions.ImpersonationTenantPermission);
                     }
                 }
             }
-
-            throw new BusinessException("Volo.Account:RequirePermissionToImpersonateTenant").WithData("PermissionName", AccountOptions.ImpersonationTenantPermission);
         }
-
-        return await base.OnGetAsync();
+        catch (BusinessException ex)
+        {
+            Alerts.Danger(ExceptionToErrorInfoConverter.Convert(ex).Message);
+            return Page();
+        }
     }
 }

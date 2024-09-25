@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyCompanyName.MyProjectName.Domain\MyCompanyName.MyProjectName.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySql" Condition="'$(MySQL)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Condition="'$(SQLServer)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Condition="'$(SQLite)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Oracle" Condition="'$(Oracle)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Oracle.Devart" Condition="'$(OracleDevart)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Condition="'$(PostgreSQL)'=='True'" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.IdentityServer.Pro.EntityFrameworkCore" Condition="'$(IdentityServer4)'=='True'" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.OpenIddict.Pro.EntityFrameworkCore" Condition="'$(OpenIddict)'=='True'" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Identity.Pro.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.FileManagement.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Saas.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.Gdpr.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

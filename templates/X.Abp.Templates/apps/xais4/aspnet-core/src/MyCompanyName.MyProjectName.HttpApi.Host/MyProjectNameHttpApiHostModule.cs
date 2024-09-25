@@ -1,11 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
+Ôªø// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
 using MyCompanyName.MyProjectName.EntityFrameworkCore;
-#if EnableSwaggerEnumFilter
-using MyCompanyName.MyProjectName.Filters;
-#endif
 using MyCompanyName.MyProjectName.HealthChecks;
 using MyCompanyName.MyProjectName.MultiTenancy;
 
@@ -62,7 +59,6 @@ using X.Abp.Account.Public.Web;
 using X.Abp.Account.Public.Web.ExternalProviders;
 using X.Abp.Account.Public.Web.Impersonation;
 using X.Abp.Account.Web;
-using X.Abp.Account.Web.Extensions;
 using X.Abp.Identity.Permissions;
 using X.Abp.IdentityServer;
 using X.Abp.Saas.Permissions;
@@ -112,7 +108,7 @@ namespace MyCompanyName.MyProjectName
                     options.AddDeveloperSigningCredential = false;
                 });
 
-                // IIS ”¶”√≥Ã–Ú≥ÿ--->∏ﬂº∂…Ë÷√--->º”‘ÿ”√ªß≈‰÷√Œƒº˛…Ë÷√Œ™True
+                // IIS Â∫îÁî®Á®ãÂ∫èÊ±†--->È´òÁ∫ßËÆæÁΩÆ--->Âä†ËΩΩÁî®Êà∑ÈÖçÁΩÆÊñá‰ª∂ËÆæÁΩÆ‰∏∫True
                 string password = configuration["Certificates:Password"];
 
                 // Debug.Assert(!string.IsNullOrEmpty(password), "Certificates:Password is missing from appsettings");
@@ -139,11 +135,6 @@ namespace MyCompanyName.MyProjectName
 
             context.Services.AddSameSiteCookiePolicy();
 
-            // context.Services.Configure<CookiePolicyOptions>(options =>
-            // {
-            //     options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-            //     options.Secure = CookieSecurePolicy.SameAsRequest;
-            // });
             context.Services.Configure<IISServerOptions>(options =>
             {
                 options.MaxRequestBodySize = int.MaxValue;
@@ -173,7 +164,7 @@ namespace MyCompanyName.MyProjectName
             ConfigureVirtualFileSystem(context);
             ConfigureCors(context, configuration);
 
-            // ConfigureHealthChecks(context, configuration);
+            ConfigureHealthChecks(context, configuration);
 
             Configure<AbpAntiForgeryOptions>(options =>
             {
@@ -425,10 +416,7 @@ namespace MyCompanyName.MyProjectName
                         options.IncludeXmlComments(file, true);
                     });
 
-#if EnableSwaggerEnumFilter
-                    options.DocumentFilter<EnumDocumentFilter>();
-                    options.ParameterFilter<EnumParameterFilter>();
-#endif
+                    options.ShowEnumDescription();
                 });
         }
 

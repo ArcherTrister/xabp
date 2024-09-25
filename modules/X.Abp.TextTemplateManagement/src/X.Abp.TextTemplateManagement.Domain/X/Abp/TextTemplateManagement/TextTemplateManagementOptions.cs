@@ -9,4 +9,8 @@ namespace X.Abp.TextTemplateManagement;
 public class TextTemplateManagementOptions
 {
     public TimeSpan MinimumCacheDuration { get; set; } = TimeSpan.FromHours(1.0);
+
+    public bool SaveStaticTemplatesToDatabase { get; set; } = true;
+
+    public bool IsDynamicTemplateStoreEnabled { get; set; }
 }

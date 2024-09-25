@@ -33,14 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.LeptonTheme.Management.Application.Contracts\X.Abp.LeptonTheme.Management.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.LeptonTheme.Management.Application.Contracts\X.Abp.LeptonTheme.Management.Application.Contracts.csproj" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Authorization" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

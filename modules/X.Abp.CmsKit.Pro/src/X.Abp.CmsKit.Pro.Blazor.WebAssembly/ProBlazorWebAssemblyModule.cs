@@ -5,7 +5,7 @@ namespace X.Abp.CmsKit.Pro.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(ProBlazorModule),
-    typeof(ProHttpApiClientModule),
+    typeof(CmsKitProHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class ProBlazorWebAssemblyModule : AbpModule

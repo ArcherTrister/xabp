@@ -10,23 +10,23 @@ namespace X.Abp.Payment.Admin.Permissions
 
         public static class Plans
         {
-            public const string Default = "Payment.Plans";
-            public const string Create = "Payment.Plans.Create";
-            public const string Update = "Payment.Plans.Update";
-            public const string Delete = "Payment.Plans.Delete";
+            public const string Default = GroupName + ".Plans";
+            public const string Create = Default + ".Create";
+            public const string Update = Default + ".Update";
+            public const string Delete = Default + ".Delete";
 
             public static class GatewayPlans
             {
-                public const string Default = "Payment.Plans.GatewayPlans";
-                public const string Create = "Payment.Plans.GatewayPlans.Create";
-                public const string Update = "Payment.Plans.GatewayPlans.Update";
-                public const string Delete = "Payment.Plans.GatewayPlans.Delete";
+                public const string Default = GroupName + ".Plans.GatewayPlans";
+                public const string Create = Default + ".Create";
+                public const string Update = Default + ".Update";
+                public const string Delete = Default + ".Delete";
             }
         }
 
         public static class PaymentRequests
         {
-            public const string Default = "Payment.PaymentRequests";
+            public const string Default = GroupName + ".PaymentRequests";
         }
     }
 }

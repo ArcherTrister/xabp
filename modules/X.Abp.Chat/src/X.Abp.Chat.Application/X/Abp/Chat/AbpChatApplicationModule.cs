@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
 
 namespace X.Abp.Chat;
 
@@ -14,7 +15,8 @@ namespace X.Abp.Chat;
     typeof(AbpChatDomainModule),
     typeof(AbpChatApplicationContractsModule),
     typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule))]
+    typeof(AbpAutoMapperModule),
+    typeof(AbpPermissionManagementDomainSharedModule))]
 public class AbpChatApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

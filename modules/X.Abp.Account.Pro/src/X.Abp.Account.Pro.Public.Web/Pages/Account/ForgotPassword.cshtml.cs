@@ -33,13 +33,6 @@ public class ForgotPasswordModel : AccountPageModel
 
     public bool LocalLoginDisabled { get; set; }
 
-    protected IAccountAppService AccountAppService { get; }
-
-    public ForgotPasswordModel(IAccountAppService accountAppService)
-    {
-        AccountAppService = accountAppService;
-    }
-
     public virtual async Task<IActionResult> OnGetAsync()
     {
         var localLoginResult = await CheckLocalLoginAsync();

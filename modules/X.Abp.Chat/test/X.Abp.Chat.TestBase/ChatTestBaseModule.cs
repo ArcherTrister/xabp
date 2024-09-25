@@ -12,7 +12,7 @@ namespace X.Abp.Chat;
     typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(ChatDomainModule)
+    typeof(AbpChatDomainModule)
     )]
 public class ChatTestBaseModule : AbpModule
 {

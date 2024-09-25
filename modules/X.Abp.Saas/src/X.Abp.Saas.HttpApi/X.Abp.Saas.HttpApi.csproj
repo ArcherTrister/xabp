@@ -15,14 +15,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.Saas.Application.Contracts\X.Abp.Saas.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Saas.Application.Contracts\X.Abp.Saas.Application.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
 </Project>

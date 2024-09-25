@@ -94,7 +94,6 @@ $projects = (
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Admin.HttpApi",
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Admin.HttpApi.Client",
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Admin.Web",
-    # "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Installer",
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Public.Application",
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Public.Application.Contracts",
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Public.HttpApi",
@@ -106,8 +105,6 @@ $projects = (
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Public.Web.Shared",
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Shared.Application",
     "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Shared.Application.Contracts",
-    # "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Shared.IdentityServer",
-    # "modules/X.Abp.Account.Pro/src/X.Abp.Account.Pro.Shared.OpenIddict",
 
     ## modules/X.Abp.AuditLogging
     "modules/X.Abp.AuditLogging/src/X.Abp.AuditLogging.Application",
@@ -115,7 +112,6 @@ $projects = (
     "modules/X.Abp.AuditLogging/src/X.Abp.AuditLogging.HttpApi",
     "modules/X.Abp.AuditLogging/src/X.Abp.AuditLogging.HttpApi.Client",
     "modules/X.Abp.AuditLogging/src/X.Abp.AuditLogging.Web",
-    # "modules/X.Abp.AuditLogging/src/X.Abp.AuditLogging.Installer",
 
     ## modules/X.Abp.BasicData
     # "modules/X.Abp.BasicData/src/X.Abp.BasicData.Application",
@@ -126,7 +122,6 @@ $projects = (
     # "modules/X.Abp.BasicData/src/X.Abp.BasicData.HttpApi",
     # "modules/X.Abp.BasicData/src/X.Abp.BasicData.HttpApi.Client",
     # "modules/X.Abp.BasicData/src/X.Abp.BasicData.Web",
-    # "modules/X.Abp.BasicData/src/X.Abp.BasicData.Installer",
 
     ## modules/X.Abp.Chat
     "modules/X.Abp.Chat/src/X.Abp.Chat.Application",
@@ -138,7 +133,6 @@ $projects = (
     "modules/X.Abp.Chat/src/X.Abp.Chat.HttpApi.Client",
     "modules/X.Abp.Chat/src/X.Abp.Chat.SignalR",
     "modules/X.Abp.Chat/src/X.Abp.Chat.Web",
-    # "modules/X.Abp.Chat/src/X.Abp.Chat.Installer",
 
     ## modules/X.Abp.Cli
     "modules/X.Abp.Cli/src/X.Abp.Cli",
@@ -162,7 +156,6 @@ $projects = (
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Public.HttpApi.Client",
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Public.Web",
     # "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Web",
-    # "modules/X.CmsKit.Pro/src/X.CmsKit.Pro.Installer",
 
     ## modules/X.Abp.FileManagement
     "modules/X.Abp.FileManagement/src/X.Abp.FileManagement.Application",
@@ -173,7 +166,6 @@ $projects = (
     "modules/X.Abp.FileManagement/src/X.Abp.FileManagement.HttpApi",
     "modules/X.Abp.FileManagement/src/X.Abp.FileManagement.HttpApi.Client",
     "modules/X.Abp.FileManagement/src/X.Abp.FileManagement.Web",
-    # "modules/X.Abp.FileManagement/src/X.Abp.FileManagement.Installer"
 
     ## modules/X.Abp.Forms
     "modules/X.Abp.Forms/src/X.Abp.Forms.Application",
@@ -184,7 +176,6 @@ $projects = (
     "modules/X.Abp.Forms/src/X.Abp.Forms.HttpApi",
     "modules/X.Abp.Forms/src/X.Abp.Forms.HttpApi.Client",
     "modules/X.Abp.Forms/src/X.Abp.Forms.Web",
-    # "modules/X.Abp.Forms/src/X.Abp.Forms.Installer"
 
     ## "modules/X.Abp.Gdpr",
     "modules/X.Abp.Gdpr/src/X.Abp.Gdpr.Application",
@@ -195,7 +186,6 @@ $projects = (
     "modules/X.Abp.Gdpr/src/X.Abp.Gdpr.HttpApi",
     "modules/X.Abp.Gdpr/src/X.Abp.Gdpr.HttpApi.Client",
     "modules/X.Abp.Gdpr/src/X.Abp.Gdpr.Web",
-    # "modules/X.Abp.Gdpr/src/X.Abp.Gdpr.Installer",
 
     ## modules/X.Abp.Identity.Pro
     "modules/X.Abp.Identity.Pro/src/X.Abp.Identity.Pro.Application",
@@ -207,7 +197,6 @@ $projects = (
     "modules/X.Abp.Identity.Pro/src/X.Abp.Identity.Pro.HttpApi",
     "modules/X.Abp.Identity.Pro/src/X.Abp.Identity.Pro.HttpApi.Client",
     "modules/X.Abp.Identity.Pro/src/X.Abp.Identity.Pro.Web",
-    # "modules/X.Abp.Identity.Pro/src/X.Abp.Identity.Pro.Installer",
 
     ## modules/X.Abp.IdentityServer.Pro
     "modules/X.Abp.IdentityServer.Pro/src/X.Abp.IdentityServer.Pro.Application",
@@ -229,7 +218,6 @@ $projects = (
     # "modules/X.Abp.Iot/src/X.Abp.Iot.HttpApi",
     # "modules/X.Abp.Iot/src/X.Abp.Iot.HttpApi.Client",
     # "modules/X.Abp.Iot/src/X.Abp.Iot.Web",
-    # "modules/X.Abp.Iot/src/X.Abp.Iot.Installer"
 
     ## modules/X.Abp.LanguageManagement
     "modules/X.Abp.LanguageManagement/src/X.Abp.LanguageManagement.Application",
@@ -257,7 +245,7 @@ $projects = (
     "modules/X.Abp.Localization/src/X.Abp.Localization.CultureMap",
 
     ## modules/X.Abp.Notification
-    "modules/X.Abp.Notification/src/X.Abp.Notification",
+    "modules/X.Abp.Notification/src/X.Abp.Notification.Abstractions",
     "modules/X.Abp.Notification/src/X.Abp.Notification.Application",
     "modules/X.Abp.Notification/src/X.Abp.Notification.Application.Contracts",
     "modules/X.Abp.Notification/src/X.Abp.Notification.Domain",
@@ -269,7 +257,6 @@ $projects = (
     "modules/X.Abp.Notification/src/X.Abp.Notification.SignalR",
     "modules/X.Abp.Notification/src/X.Abp.Notification.Sms",
     "modules/X.Abp.Notification/src/X.Abp.Notification.Web",
-    # "modules/X.Abp.Notification/src/X.Abp.Notification.Installer"
 
     ## modules/X.Abp.OpenIddict.Pro
     "modules/X.Abp.OpenIddict.Pro/src/X.Abp.OpenIddict.Pro.Application",
@@ -281,7 +268,6 @@ $projects = (
     "modules/X.Abp.OpenIddict.Pro/src/X.Abp.OpenIddict.Pro.HttpApi",
     "modules/X.Abp.OpenIddict.Pro/src/X.Abp.OpenIddict.Pro.HttpApi.Client",
     "modules/X.Abp.OpenIddict.Pro/src/X.Abp.OpenIddict.Pro.Web",
-    # "modules/X.Abp.OpenIddict.Pro/src/X.Abp.OpenIddict.Pro.Installer"
 
     ## modules/X.Abp.Payment
     "modules/X.Abp.Payment/src/X.Abp.Payment.Admin.Application",
@@ -297,17 +283,17 @@ $projects = (
     "modules/X.Abp.Payment/src/X.Abp.Payment.HttpApi",
     "modules/X.Abp.Payment/src/X.Abp.Payment.HttpApi.Client",
     "modules/X.Abp.Payment/src/X.Abp.Payment.Web",
-    # "modules/X.Abp.Payment/src/X.Abp.Payment.Installer"
 
     ## modules/X.Abp.Quartz
     "modules/X.Abp.Quartz/src/X.Abp.Quartz.Application",
     "modules/X.Abp.Quartz/src/X.Abp.Quartz.Application.Contracts",
+    "modules/X.Abp.Quartz/src/X.Abp.Quartz.Domain",
+    "modules/X.Abp.Quartz/src/X.Abp.Quartz.Domain.Shared",
     "modules/X.Abp.Quartz/src/X.Abp.Quartz.HttpApi",
     "modules/X.Abp.Quartz/src/X.Abp.Quartz.HttpApi.Client",
     "modules/X.Abp.Quartz/src/X.Abp.Quartz.InstallScript.MySql",
     "modules/X.Abp.Quartz/src/X.Abp.Quartz.InstallScript.SqlServer",
     "modules/X.Abp.Quartz/src/X.Abp.Quartz.Web",
-    # "modules/X.Abp.Quartz/src/X.Abp.Quartz.Installer"
 
     ## modules/X.Abp.Saas
     "modules/X.Abp.Saas/src/X.Abp.Saas.Domain",
@@ -341,5 +327,4 @@ $projects = (
     "modules/X.Abp.VersionManagement/src/X.Abp.VersionManagement.HttpApi",
     "modules/X.Abp.VersionManagement/src/X.Abp.VersionManagement.HttpApi.Client",
     "modules/X.Abp.VersionManagement/src/X.Abp.VersionManagement.Web"
-    # "modules/X.Abp.VersionManagement/src/X.Abp.VersionManagement.Installer"
 )

@@ -3,7 +3,7 @@ using Volo.Abp.MongoDB;
 
 namespace X.Abp.Quartz.MongoDB;
 
-[ConnectionStringName(QuartzDbProperties.ConnectionStringName)]
+//[ConnectionStringName(QuartzDbProperties.ConnectionStringName)]
 public class QuartzMongoDbContext : AbpMongoDbContext, IQuartzMongoDbContext
 {
     /* Add mongo collections here. Example:

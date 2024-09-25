@@ -175,4 +175,20 @@ public class IdentitySettingsAppService : IdentityAppServiceBase, IIdentitySetti
             await SettingManager.SetForCurrentTenantAsync(IdentityProSettingNames.OAuthLogin.Authority, input.Authority);
         }
     }
+
+    public virtual async Task<IdentitySessionSettingsDto> GetSessionAsync()
+    {
+        return new IdentitySessionSettingsDto
+        {
+            PreventConcurrentLogin = await IdentityProPreventConcurrentLoginBehaviourSettingHelper.Get(SettingProvider)
+        };
+    }
+
+    public virtual async Task UpdateSessionAsync(IdentitySessionSettingsDto input)
+    {
+        if (input != null)
+        {
+            await SettingManager.SetForCurrentTenantAsync(IdentityProSettingNames.Session.PreventConcurrentLogin, input.PreventConcurrentLogin.ToString());
+        }
+    }
 }

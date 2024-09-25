@@ -17,17 +17,17 @@ namespace X.Abp.Quartz.Histories;
 [Authorize(AbpQuartzPermissions.ExecutionHistory.Default)]
 public class ExecutionHistoryAppService : QuartzAppServiceBase, IExecutionHistoryAppService
 {
-    public async Task<PagedResultDto<ExecutionHistoryDto>> GetListAsync(GetExecutionHistoryListInput input)
+  public virtual async Task<PagedResultDto<ExecutionHistoryDto>> GetListAsync(GetExecutionHistoryListInput input)
+  {
+    var store = ExecutionHistoryPlugin.Store;
+    if (store == null)
     {
-        var store = ExecutionHistoryPlugin.Store;
-        if (store == null)
-        {
-            // Logger.LogError("History plug-in is not enabled.");
-            throw new Volo.Abp.UserFriendlyException("History plug-in is not enabled.");
-        }
-        else
-        {
-            return await store.GetPageJobHistoryEntriesAsync(input.SchedulerName, input.SkipCount, input.MaxResultCount, input.Sorting);
-        }
+      // Logger.LogError("History plug-in is not enabled.");
+      throw new Volo.Abp.UserFriendlyException("History plug-in is not enabled.");
     }
+    else
+    {
+      return await store.GetPageJobHistoryEntriesAsync(input.SchedulerName, input.SkipCount, input.MaxResultCount, input.Sorting);
+    }
+  }
 }

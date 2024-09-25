@@ -46,7 +46,7 @@ public class PhoneNumberUserValidator : IUserValidator<IdentityUser>
             return;
         }
 
-        var owner = await UserRepository.FindByPhoneNumberAsync(phoneNumber);
+        var owner = await UserRepository.FindByPhoneNumberAsync(phoneNumber, false);
 
         if (owner != null &&
             !string.Equals(await userManager.GetUserIdAsync(owner), await userManager.GetUserIdAsync(user), StringComparison.Ordinal))

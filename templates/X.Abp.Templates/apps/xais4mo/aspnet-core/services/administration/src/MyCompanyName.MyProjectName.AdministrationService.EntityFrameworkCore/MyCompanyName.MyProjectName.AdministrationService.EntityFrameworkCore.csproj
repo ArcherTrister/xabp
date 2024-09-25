@@ -14,22 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="X.Abp.LanguageManagement.EntityFrameworkCore"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.TextTemplateManagement.EntityFrameworkCore"
-      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.LanguageManagement.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.EntityFrameworkCore" VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

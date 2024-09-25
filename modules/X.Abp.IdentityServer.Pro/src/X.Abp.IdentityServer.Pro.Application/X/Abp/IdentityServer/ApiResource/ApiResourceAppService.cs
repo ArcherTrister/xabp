@@ -124,7 +124,7 @@ public class ApiResourceAppService : IdentityServerAppServiceBase, IApiResourceA
         while (enumerator2.MoveNext())
         {
             var scope = enumerator2.Current;
-            if (!input.Scopes.Any((ApiResourceScopeDto c) => scope.Equals(apiResource.Id, c.Scope)))
+            if (!input.Scopes.Any((c) => scope.Equals(apiResource.Id, c.Scope)))
             {
                 apiResource.RemoveScope(scope.Scope);
             }
@@ -146,7 +146,7 @@ public class ApiResourceAppService : IdentityServerAppServiceBase, IApiResourceA
         while (enumerator2.MoveNext())
         {
             var clientSecret = enumerator2.Current;
-            if (input.Secrets.FirstOrDefault((ApiResourceSecretDto s) => clientSecret.Equals(apiResource.Id, s.Value, s.Type)) == null)
+            if (input.Secrets.FirstOrDefault((s) => clientSecret.Equals(apiResource.Id, s.Value, s.Type)) == null)
             {
                 apiResource.RemoveSecret(clientSecret.Value, clientSecret.Type);
             }
@@ -167,7 +167,7 @@ public class ApiResourceAppService : IdentityServerAppServiceBase, IApiResourceA
         while (enumerator2.MoveNext())
         {
             var claim = enumerator2.Current;
-            if (input.UserClaims.FirstOrDefault((ApiResourceClaimDto c) => claim.Equals(apiResource.Id, c.Type)) == null)
+            if (input.UserClaims.FirstOrDefault((c) => claim.Equals(apiResource.Id, c.Type)) == null)
             {
                 apiResource.RemoveClaim(claim.Type);
             }
@@ -188,7 +188,7 @@ public class ApiResourceAppService : IdentityServerAppServiceBase, IApiResourceA
         while (enumerator2.MoveNext())
         {
             var property = enumerator2.Current;
-            if (input.Properties.FirstOrDefault((ApiResourcePropertyDto c) => property.Equals(apiResource.Id, c.Key, c.Value)) == null)
+            if (input.Properties.FirstOrDefault((c) => property.Equals(apiResource.Id, c.Key, c.Value)) == null)
             {
                 apiResource.RemoveProperty(property.Key);
             }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Content;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.ClientProxying;
@@ -55,6 +56,22 @@ public partial class IdentityUserClientProxy : ClientProxyBase<IIdentityUserAppS
         await RequestAsync(nameof(DeleteAsync), new ClientProxyRequestTypeValue
         {
             { typeof(Guid), id }
+        });
+    }
+
+    public virtual async Task<IdentityUserDto> FindByIdAsync(Guid id)
+    {
+        return await RequestAsync<IdentityUserDto>(nameof(FindByIdAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(Guid), id }
+        });
+    }
+
+    public virtual async Task<IdentityUserDto> FindByPhoneNumberAsync(string phoneNumber)
+    {
+        return await RequestAsync<IdentityUserDto>(nameof(FindByPhoneNumberAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(string), phoneNumber }
         });
     }
 
@@ -197,11 +214,48 @@ public partial class IdentityUserClientProxy : ClientProxyBase<IIdentityUserAppS
         });
     }
 
-    public virtual async Task<IdentityUserDto> FindByPhoneNumberAsync(string phoneNumber)
+    public virtual async Task<IRemoteStreamContent> GetListAsExcelFileAsync(GetIdentityUserListAsFileInput input)
     {
-        return await RequestAsync<IdentityUserDto>(nameof(FindByPhoneNumberAsync), new ClientProxyRequestTypeValue
+        return await RequestAsync<IRemoteStreamContent>(nameof(GetListAsExcelFileAsync), new ClientProxyRequestTypeValue
         {
-            { typeof(string), phoneNumber }
+            { typeof(GetIdentityUserListAsFileInput), input }
+        });
+    }
+
+    public virtual async Task<IRemoteStreamContent> GetListAsCsvFileAsync(GetIdentityUserListAsFileInput input)
+    {
+        return await RequestAsync<IRemoteStreamContent>(nameof(GetListAsCsvFileAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(GetIdentityUserListAsFileInput), input }
+        });
+    }
+
+    public virtual async Task<DownloadTokenResultDto> GetDownloadTokenAsync()
+    {
+        return await RequestAsync<DownloadTokenResultDto>(nameof(GetDownloadTokenAsync));
+    }
+
+    public virtual async Task<IRemoteStreamContent> GetImportUsersSampleFileAsync(GetImportUsersSampleFileInput input)
+    {
+        return await RequestAsync<IRemoteStreamContent>(nameof(GetImportUsersSampleFileAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(GetImportUsersSampleFileInput), input }
+        });
+    }
+
+    public virtual async Task<ImportUsersFromFileOutput> ImportUsersFromFileAsync(ImportUsersFromFileInputWithStream input)
+    {
+        return await RequestAsync<ImportUsersFromFileOutput>(nameof(ImportUsersFromFileAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(ImportUsersFromFileInputWithStream), input }
+        });
+    }
+
+    public virtual async Task<IRemoteStreamContent> GetImportInvalidUsersFileAsync(GetImportInvalidUsersFileInput input)
+    {
+        return await RequestAsync<IRemoteStreamContent>(nameof(GetImportInvalidUsersFileAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(GetImportInvalidUsersFileInput), input }
         });
     }
 }

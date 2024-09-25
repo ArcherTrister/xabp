@@ -101,7 +101,14 @@ public class TenantController : AbpControllerBase, ITenantAppService
         return Service.GetEditionLookupAsync();
     }
 
-    [HttpPost]
+    [HttpGet]
+    [Route("check-connection-string")]
+    public virtual Task<bool> CheckConnectionStringAsync(string connectionString)
+    {
+        return Service.CheckConnectionStringAsync(connectionString);
+    }
+
+    [HttpPut]
     [Route("{id}/set-password")]
     public virtual Task SetPasswordAsync(Guid id, SaasTenantSetPasswordDto input)
     {

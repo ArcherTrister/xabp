@@ -19,37 +19,37 @@ namespace X.Abp.Quartz;
 [Route("api/quartz/{schedulerName}/calendars")]
 public class CalendarController : QuartzController, ICalendarAppService
 {
-    protected ICalendarAppService CalendarAppService { get; }
+  protected ICalendarAppService CalendarAppService { get; }
 
-    public CalendarController(ICalendarAppService calendarAppService)
-    {
-        CalendarAppService = calendarAppService;
-    }
+  public CalendarController(ICalendarAppService calendarAppService)
+  {
+    CalendarAppService = calendarAppService;
+  }
 
-    [HttpGet]
-    public async Task<IReadOnlyCollection<string>> GetListAsync(string schedulerName)
-    {
-        return await CalendarAppService.GetListAsync(schedulerName);
-    }
+  [HttpGet]
+  public virtual async Task<IReadOnlyCollection<string>> GetListAsync(string schedulerName)
+  {
+    return await CalendarAppService.GetListAsync(schedulerName);
+  }
 
-    [HttpGet]
-    [Route("{calendarName}")]
-    public async Task<CalendarDetailDto> GetAsync(string schedulerName, string calendarName)
-    {
-        return await CalendarAppService.GetAsync(schedulerName, calendarName);
-    }
+  [HttpGet]
+  [Route("{calendarName}")]
+  public virtual async Task<CalendarDetailDto> GetAsync(string schedulerName, string calendarName)
+  {
+    return await CalendarAppService.GetAsync(schedulerName, calendarName);
+  }
 
-    [HttpPut]
-    [Route("{calendarName}")]
-    public async Task CreateAsync(string schedulerName, string calendarName, bool replace, bool updateTriggers)
-    {
-        await CalendarAppService.CreateAsync(schedulerName, calendarName, replace, updateTriggers);
-    }
+  [HttpPut]
+  [Route("{calendarName}")]
+  public virtual async Task CreateAsync(string schedulerName, string calendarName, bool replace, bool updateTriggers)
+  {
+    await CalendarAppService.CreateAsync(schedulerName, calendarName, replace, updateTriggers);
+  }
 
-    [HttpDelete]
-    [Route("{calendarName}")]
-    public async Task DeleteAsync(string schedulerName, string calendarName)
-    {
-        await CalendarAppService.DeleteAsync(schedulerName, calendarName);
-    }
+  [HttpDelete]
+  [Route("{calendarName}")]
+  public virtual async Task DeleteAsync(string schedulerName, string calendarName)
+  {
+    await CalendarAppService.DeleteAsync(schedulerName, calendarName);
+  }
 }

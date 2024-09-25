@@ -14,50 +14,50 @@ namespace X.Abp.CmsKit.Pro.Public.Web.Pages.Public.Newsletters;
 
 public class SuccessModalModel : CmsKitProPublicPageModel
 {
-    public string NormalizedSource;
-    public List<string> AdditionalPreferences;
-    public List<string> DisplayAdditionalPreferences;
+  public string NormalizedSource;
+  public List<string> AdditionalPreferences;
+  public List<string> DisplayAdditionalPreferences;
 
-    [BindProperty(SupportsGet = true)]
-    [Required]
-    public string EmailAddress { get; set; }
+  [BindProperty(SupportsGet = true)]
+  [Required]
+  public string EmailAddress { get; set; }
 
-    [BindProperty(SupportsGet = true)]
-    [Required]
-    public string Preference { get; set; }
+  [BindProperty(SupportsGet = true)]
+  [Required]
+  public string Preference { get; set; }
 
-    [BindProperty(SupportsGet = true)]
-    [Required]
-    public string Source { get; set; }
+  [BindProperty(SupportsGet = true)]
+  [Required]
+  public string Source { get; set; }
 
-    [BindProperty(SupportsGet = true)]
-    [Required]
-    public string SourceUrl { get; set; }
+  [BindProperty(SupportsGet = true)]
+  [Required]
+  public string SourceUrl { get; set; }
 
-    [Required]
-    [BindProperty(SupportsGet = true)]
-    public bool RequestAdditionalPreferences { get; set; }
+  [Required]
+  [BindProperty(SupportsGet = true)]
+  public bool RequestAdditionalPreferences { get; set; }
 
-    protected INewsletterRecordPublicAppService NewsletterRecordPublicAppService { get; }
+  protected INewsletterRecordPublicAppService NewsletterRecordPublicAppService { get; }
 
-    public SuccessModalModel(INewsletterRecordPublicAppService newsletterRecordPublicAppService)
-    {
-        NewsletterRecordPublicAppService = newsletterRecordPublicAppService;
-    }
+  public SuccessModalModel(INewsletterRecordPublicAppService newsletterRecordPublicAppService)
+  {
+    NewsletterRecordPublicAppService = newsletterRecordPublicAppService;
+  }
 
-    public async Task OnGetAsync()
-    {
-        var newsletterEmailOptionsDto = await NewsletterRecordPublicAppService.GetOptionByPreferenceAsync(Preference);
-        AdditionalPreferences = newsletterEmailOptionsDto.AdditionalPreferences;
-        DisplayAdditionalPreferences = newsletterEmailOptionsDto.DisplayAdditionalPreferences;
-        NormalizedSource = Source.Replace('.', '_');
-    }
+  public virtual async Task OnGetAsync()
+  {
+    var newsletterEmailOptionsDto = await NewsletterRecordPublicAppService.GetOptionByPreferenceAsync(Preference);
+    AdditionalPreferences = newsletterEmailOptionsDto.AdditionalPreferences;
+    DisplayAdditionalPreferences = newsletterEmailOptionsDto.DisplayAdditionalPreferences;
+    NormalizedSource = Source.Replace('.', '_');
+  }
 
-    public async Task OnPostAsync()
-    {
-        var newsletterEmailOptionsDto = await NewsletterRecordPublicAppService.GetOptionByPreferenceAsync(Preference);
-        AdditionalPreferences = newsletterEmailOptionsDto.AdditionalPreferences;
-        DisplayAdditionalPreferences = newsletterEmailOptionsDto.DisplayAdditionalPreferences;
-        NormalizedSource = Source.Replace('.', '_');
-    }
+  public virtual async Task OnPostAsync()
+  {
+    var newsletterEmailOptionsDto = await NewsletterRecordPublicAppService.GetOptionByPreferenceAsync(Preference);
+    AdditionalPreferences = newsletterEmailOptionsDto.AdditionalPreferences;
+    DisplayAdditionalPreferences = newsletterEmailOptionsDto.DisplayAdditionalPreferences;
+    NormalizedSource = Source.Replace('.', '_');
+  }
 }

@@ -44,8 +44,6 @@ namespace X.Abp.Account.Public.Web.Areas.Account.Controllers;
 [Route("api/account")]
 public class AccountController : AccountControllerBase
 {
-    protected IConfiguration Configuration => LazyServiceProvider.LazyGetRequiredService<IConfiguration>();
-
     protected ITokenGeneratorProvider TokenGeneratorProvider => LazyServiceProvider.LazyGetRequiredService<ITokenGeneratorProvider>();
 
     protected IScanCodeLoginProvider ScanCodeLoginProvider => LazyServiceProvider.LazyGetRequiredService<IScanCodeLoginProvider>();
@@ -62,11 +60,8 @@ public class AccountController : AccountControllerBase
 
     protected IOptions<IdentityOptions> IdentityOptions => LazyServiceProvider.LazyGetRequiredService<IOptions<IdentityOptions>>();
 
-    /// <summary>
-    /// 登录【Cookies】
-    /// </summary>
-    /// <param name="login">登录信息</param>
-    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    protected IdentityDynamicClaimsPrincipalContributorCache IdentityDynamicClaimsPrincipalContributorCache => LazyServiceProvider.LazyGetRequiredService<IdentityDynamicClaimsPrincipalContributorCache>();
+
     [HttpPost]
     [Route("login")]
     public virtual async Task<AbpLoginResult> LoginAsync(UserLoginInfo login)
@@ -74,6 +69,8 @@ public class AccountController : AccountControllerBase
         ValidateLoginInfo(login);
 
         await ReplaceEmailToUsernameOfInputIfNeeds(login);
+
+        await IdentityOptions.SetAsync();
 
         var signInResult = await SignInManager.PasswordSignInAsync(
             login.UserNameOrEmailAddress,
@@ -87,6 +84,15 @@ public class AccountController : AccountControllerBase
             Action = signInResult.ToIdentitySecurityLogAction(),
             UserName = login.UserNameOrEmailAddress
         });
+
+        if (signInResult.Succeeded)
+        {
+            IdentityUser identityUser = await UserManager.FindByNameAsync(login.UserNameOrEmailAddress);
+            if (identityUser != null)
+            {
+                await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(identityUser.Id, identityUser.TenantId);
+            }
+        }
 
         return GetAbpLoginResult(signInResult);
     }
@@ -112,6 +118,7 @@ public class AccountController : AccountControllerBase
             {
                 var targetUser = await UserManager.GetByIdAsync(login.LinkUserId);
                 await SignInManager.SignInAsync(targetUser, isPersistent);
+                await IdentityDynamicClaimsPrincipalContributorCache.ClearAsync(targetUser.Id, targetUser.TenantId);
             }
 
             return new AbpLoginResult(LoginResultType.Success);
@@ -203,7 +210,7 @@ public class AccountController : AccountControllerBase
             }));
         }
 
-        Logger.LogInformation($"CurrentTenant:{scanCodeInfo.TenantId}");
+        Logger.LogInformation("CurrentTenant:{TenantId}", scanCodeInfo.TenantId);
 
         using (CurrentTenant.Change(scanCodeInfo.TenantId))
         {
@@ -264,7 +271,7 @@ public class AccountController : AccountControllerBase
         }
 
         var tenantId = CurrentTenant.Id;
-        Logger.LogInformation($"CurrentTenant:{tenantId}");
+        Logger.LogInformation("CurrentTenant:{TenantId}", tenantId);
 
         var redirectUrl = Url.Page("/Account/SpaExternalLogin", pageHandler: "Callback", values: new { returnUrl, tenantId, clientId, clientSecret, scope });
 
@@ -295,9 +302,9 @@ public class AccountController : AccountControllerBase
         }
 
         var tenantId = CurrentTenant.Id;
-        Logger.LogInformation($"CurrentTenant:{tenantId}");
+        Logger.LogInformation("CurrentTenant:{TenantId}", tenantId);
         var userId = CurrentUser.GetId();
-        Logger.LogInformation($"CurrentUser:{userId}");
+        Logger.LogInformation("CurrentUser:{UserId}", userId);
 
         var redirectUrl = Url.Page("/Account/SpaExternalLoginBind", pageHandler: "Callback", values: new { returnUrl, userId, tenantId });
 

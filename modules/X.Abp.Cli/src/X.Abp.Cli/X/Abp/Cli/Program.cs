@@ -57,7 +57,7 @@ public class Program
 
         var newArgs = new List<string>();
 #if DEBUG
-        if (args.Any() && args.Length > 0)
+        if (args.Length != 0 && args.Length > 0)
         {
             newArgs = args.ToList();
             newArgs.AddIfNotContains("--skip-cli-version-check");
@@ -78,7 +78,6 @@ public class Program
             ////newArgs.AddIfNotContains("-o");
             ////newArgs.AddIfNotContains("api/identity");
             // newArgs.AddIfNotContains("-url");
-            ////newArgs.AddIfNotContains("https://kf.4000871428.com/");
             // newArgs.AddIfNotContains("https://localhost:44302/");
 
             // newArgs.AddIfNotContains("generate-cert");
@@ -123,6 +122,6 @@ public class Program
 
         await application.ShutdownAsync();
 
-        Log.CloseAndFlush();
+        await Log.CloseAndFlushAsync();
     }
 }

@@ -19,7 +19,7 @@ namespace X.Abp.Notification.Sms
     [DependsOn(
         typeof(AbpIdentityProDomainModule),
         typeof(AbpSmsModule),
-        typeof(AbpNotificationModule))]
+        typeof(AbpNotificationAbstractionsModule))]
     public class AbpNotificationSmsModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

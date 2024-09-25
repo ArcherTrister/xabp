@@ -29,17 +29,19 @@ Update the XABP CLI:
 Create a new solution:
 
 ```bash
-> xabp create MyCompanyName.MyProjectName -o "D:\Project" -dbms sqlserver -cs "Server=127.0.0.1;Database=MyProjectName;User Id=sa;Password=123456"
+> xabp create MyCompanyName.MyProjectName -t xasl -tt IdentityServer4 -o "D:\Project" -dbms sqlserver -cs "Server=127.0.0.1;Database=MyProjectName;User Id=sa;Password=123456"
 ```
 
 -   MyCompanyName.MyProjectName
-    【Project Name】(company Name + roject Name)
+    (company Name + project Name)【Project Name】
 -   -t
-    Template name
+    Template name(Templates)【#Templates】
+-   -tt
+    Template type(IdentityServer4 OpenIddict)【default: IdentityServer4】
 -   -o
     Specified the output directory
 -   -dbms
-    Specified database driver
+    Specified database driver(MySQL SQLServer SQLite Oracle OracleDevart PostgreSQL)【default: MySQL】
 -   -cs
     Specifies the database connection string
 
@@ -86,6 +88,10 @@ Love XAbp? **Please give a star** to this repository :star:
 
 ### 💖💖 If you find this framework useful, maybe you can buy me a coffee. 💖💖
 
+<p align="center">
+  <img alt="pay" src="https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg">
+</p>
+
 Donate money by [PayPal](https://www.paypal.me/archertrister/) to my account [archertrister@outlook.com](https://www.paypal.me/archertrister/)
 
 ## Plan
@@ -130,14 +136,19 @@ Donate money by [PayPal](https://www.paypal.me/archertrister/) to my account [ar
 
 ### Templates
 
--   [x] X.Abp.IdentityServer4
--   [x] X.Abp.Openiddict
--   [x] X.Abp.IdentityServer4.SeparatedTenantSchema
--   [x] X.Abp.Openiddict.SeparatedTenantSchema
--   [ ] X.Abp.IdentityServer4.SeparatedAuthServer
--   [ ] X.Abp.Openiddict.SeparatedAuthServer
--   [ ] X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema
--   [ ] X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema
--   [x] X.Abp.IdentityServer4.Microservices
--   [x] X.Abp.Openiddict.Microservices
+-   ~~[x] X.Abp.IdentityServer4(xais4)~~
+-   ~~[x] X.Abp.Openiddict(xaod)~~
+-   [x] X.Abp.IdentityServer4.SeparatedTenantSchema(xais4sts)
+-   [x] X.Abp.Openiddict.SeparatedTenantSchema(xaodsts)
+-   ~~[ ] X.Abp.IdentityServer4.SeparatedAuthServer~~
+-   ~~[ ] X.Abp.Openiddict.SeparatedAuthServer~~
+-   ~~[ ] X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema~~
+-   ~~[ ] X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema~~
+-   [x] X.Abp.IdentityServer4.Microservices(xais4mo or xais4my)
+-   [x] X.Abp.Openiddict.Microservices(xaodmo or xaodmy)
 -   [ ] vue
+-   [ ] X.Abp.MicroService(xams)
+-   [x] X.Abp.MultiLayer(xaml)
+-   [x] X.Abp.MultiLayer.SeparateAuthServer(xamlsas)
+-   [ ] X.Abp.MultiLayer.SeparatedTenantSchema(xamlsts)
+-   [x] X.Abp.SingleLayer(xasl)

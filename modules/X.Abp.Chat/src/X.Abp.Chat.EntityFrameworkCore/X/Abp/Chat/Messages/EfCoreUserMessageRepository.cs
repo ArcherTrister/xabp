@@ -24,7 +24,7 @@ public class EfCoreUserMessageRepository : EfCoreRepository<IChatDbContext, User
     {
     }
 
-    public async Task<List<MessageWithDetails>> GetMessagesAsync(Guid userId, Guid targetUserId, int skipCount, int maxResultCount, CancellationToken cancellationToken = default)
+    public virtual async Task<List<MessageWithDetails>> GetMessagesAsync(Guid userId, Guid targetUserId, int skipCount, int maxResultCount, CancellationToken cancellationToken = default)
     {
         var query = from chatUserMessage in await GetDbSetAsync()
                     join message in (await GetDbContextAsync()).ChatMessages on chatUserMessage.ChatMessageId equals message.Id
@@ -36,5 +36,40 @@ public class EfCoreUserMessageRepository : EfCoreRepository<IChatDbContext, User
                     };
 
         return await query.OrderByDescending(x => x.Message.CreationTime).PageBy(skipCount, maxResultCount).ToListAsync(GetCancellationToken(cancellationToken));
+    }
+
+    public virtual async Task<bool> HasConversationAsync(Guid userId, Guid targetUserId, CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync()).AnyAsync(userMessage => userMessage.UserId == userId && userMessage.TargetUserId == targetUserId, GetCancellationToken(cancellationToken));
+    }
+
+    public virtual async Task<List<UserMessage>> GetListAsync(Guid messageId, CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync()).Where(userMessage => userMessage.ChatMessageId == messageId).ToListAsync(GetCancellationToken(cancellationToken));
+    }
+
+    public virtual async Task<List<Guid>> GetAllMessageIdsAsync(Guid userId, Guid targetUserId, CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync()).Where(userMessage => (userMessage.UserId == userId && userMessage.TargetUserId == targetUserId) || (userMessage.UserId == targetUserId && userMessage.TargetUserId == userId)).Select(userMessage => userMessage.ChatMessageId).ToListAsync(GetCancellationToken(cancellationToken));
+    }
+
+    public virtual async Task<MessageWithDetails> GetLastMessageAsync(Guid userId, Guid targetUserId, CancellationToken cancellationToken = default)
+    {
+        IQueryable<UserMessage> userMessageQueryable = await GetDbSetAsync();
+        IChatDbContext chatDbContext = await GetDbContextAsync();
+
+        IQueryable<MessageWithDetails> source = userMessageQueryable.Join(chatDbContext.ChatMessages, userMessage => userMessage.ChatMessageId, message => message.Id, (userMessage, message) => new
+        {
+            chatUserMessage = userMessage,
+            message = message
+        }).Where(data => userId == data.chatUserMessage.UserId && targetUserId == data.chatUserMessage.TargetUserId)
+        .Select(p => new MessageWithDetails { Message = p.message, UserMessage = p.chatUserMessage });
+
+        return await source.OrderByDescending(messageWithDetails => messageWithDetails.Message.CreationTime).FirstOrDefaultAsync(GetCancellationToken(cancellationToken));
+    }
+
+    public virtual async Task DeleteAllMessages(Guid userId, Guid targetUserId, CancellationToken cancellationToken = default)
+    {
+        await (await GetDbSetAsync()).Where(userMessage => (userMessage.UserId == userId && userMessage.TargetUserId == targetUserId) || (userMessage.UserId == targetUserId && userMessage.TargetUserId == userId)).ExecuteDeleteAsync(GetCancellationToken(cancellationToken));
     }
 }

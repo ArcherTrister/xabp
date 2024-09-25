@@ -3,9 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using MyCompanyName.MyProjectName.EntityFrameworkCore;
-#if EnableSwaggerEnumFilter
-using MyCompanyName.MyProjectName.Filters;
-#endif
 using MyCompanyName.MyProjectName.HealthChecks;
 using MyCompanyName.MyProjectName.MultiTenancy;
 
@@ -55,7 +52,6 @@ using X.Abp.Account.Public.Web;
 using X.Abp.Account.Public.Web.ExternalProviders;
 using X.Abp.Account.Public.Web.Impersonation;
 using X.Abp.Account.Web;
-using X.Abp.Account.Web.Extensions;
 using X.Abp.Identity.Permissions;
 using X.Abp.OpenIddict;
 using X.Abp.Saas.Permissions;
@@ -100,12 +96,7 @@ namespace MyCompanyName.MyProjectName
                 IdentityModelEventSource.ShowPII = true;
             }
 
-            // context.Services.AddSameSiteCookiePolicy();
-            // context.Services.Configure<CookiePolicyOptions>(options =>
-            // {
-            //     options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-            //     options.Secure = CookieSecurePolicy.SameAsRequest;
-            // });
+            context.Services.AddSameSiteCookiePolicy();
             context.Services.Configure<IISServerOptions>(options =>
             {
                 options.MaxRequestBodySize = int.MaxValue;
@@ -136,7 +127,7 @@ namespace MyCompanyName.MyProjectName
             ConfigureCors(context, configuration);
             ConfigureExternalProviders(context);
 
-            // ConfigureHealthChecks(context, configuration);
+            ConfigureHealthChecks(context, configuration);
 
             Configure<AbpAntiForgeryOptions>(options =>
             {

@@ -10,12 +10,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
-using Volo.Abp.Identity;
 using Volo.Abp.Identity.Settings;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Settings;
-
-using X.Abp.Identity;
 
 namespace X.Abp.Account.Public.Web.Pages.Account;
 
@@ -33,13 +30,6 @@ public class ConfirmUserModel : AccountPageModel
 
     [Required]
     public string PhoneConfirmationToken { get; set; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    public ConfirmUserModel(IdentityUserManager userManager)
-    {
-        UserManager = userManager;
-    }
 
     public virtual async Task<IActionResult> OnGetAsync()
     {

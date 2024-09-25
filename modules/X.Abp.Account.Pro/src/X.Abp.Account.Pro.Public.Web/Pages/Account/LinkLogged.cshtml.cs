@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 
 using X.Abp.Account.Dtos;
@@ -40,16 +39,6 @@ public class LinkLoggedModel : AccountPageModel
     public string TargetLinkTenantAndUserName { get; set; }
 
     public bool IsSpaReturnUrl { get; set; }
-
-    protected IdentityUserManager UserManager { get; }
-
-    protected IIdentityLinkUserAppService IdentityLinkUserAppService { get; }
-
-    public LinkLoggedModel(IdentityUserManager userManager, IIdentityLinkUserAppService identityLinkUserAppService)
-    {
-        UserManager = userManager;
-        IdentityLinkUserAppService = identityLinkUserAppService;
-    }
 
     public virtual async Task<IActionResult> OnGetAsync()
     {

@@ -15,9 +15,9 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json.Linq;
 
 using Volo.Abp;
+using Volo.Abp.Cli;
 using Volo.Abp.Cli.Commands.Services;
 using Volo.Abp.Cli.ProjectBuilding;
-using Volo.Abp.Cli.ProjectBuilding.Building;
 using Volo.Abp.Cli.ProjectBuilding.Templates.App;
 using Volo.Abp.Cli.Utils;
 using Volo.Abp.DependencyInjection;
@@ -31,7 +31,7 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
 {
     protected const string DefaultPassPhrase = "gsKnGZ041HLL4IM8";
 
-    protected const string DefaultVersion = "7.2.3";
+    protected const string DefaultVersion = "8.2.1";
 
     private static readonly string[] ExclusionFoldersOrFiles =
     {
@@ -57,16 +57,10 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
         public const string LongArgName = "install-template";
     }
 
-    private static class IncludeVue
+    private static class TemplateType
     {
-        public const string ShortArgName = "iv";
-        public const string LongArgName = "include-vue";
-    }
-
-    private static class EnableSwaggerEnumFilter
-    {
-        public const string ShortArgName = "esef";
-        public const string LongArgName = "enable-swagger-enum-filter";
+        public const string ShortArgName = "tt";
+        public const string LongArgName = "template-type";
     }
 
     protected InitialMigrationCreator InitialMigrationCreator { get; }
@@ -111,41 +105,12 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
             Logger.LogInformation("Template install success: " + installError);
         }
 
-        if (!createArgs.ExtraProperties.TryGetValue(IncludeVue.ShortArgName, out var includeVue))
-        {
-            if (!createArgs.ExtraProperties.TryGetValue(IncludeVue.LongArgName, out includeVue))
-            {
-                includeVue = "false";
-            }
-        }
-
-        if (!createArgs.ExtraProperties.TryGetValue(EnableSwaggerEnumFilter.ShortArgName, out var enableSwaggerEnumFilter))
-        {
-            if (!createArgs.ExtraProperties.TryGetValue(EnableSwaggerEnumFilter.LongArgName, out enableSwaggerEnumFilter))
-            {
-                enableSwaggerEnumFilter = "true";
-            }
-        }
-
-#pragma warning disable IDE0072 // 添加缺失的事例
-        var dbm = createArgs.DatabaseManagementSystem switch
-        {
-            DatabaseManagementSystem.MySQL => "MySQL",
-            DatabaseManagementSystem.Oracle => "Oracle",
-            DatabaseManagementSystem.OracleDevart => "OracleDevart",
-            DatabaseManagementSystem.PostgreSQL => "PostgreSql",
-            DatabaseManagementSystem.SQLite => "Sqlite",
-            _ => "SqlServer",
-        };
-#pragma warning restore IDE0072 // 添加缺失的事例
-
         var commandBuilder = new StringBuilder("dotnet new");
         commandBuilder.AppendFormat(" {0}", createArgs.TemplateName);
+        commandBuilder.AppendFormat(" -tt {0}", GetTemplateType(createArgs));
         commandBuilder.AppendFormat(" -n {0}", createArgs.SolutionName.FullName);
         commandBuilder.AppendFormat(" -o {0}", createArgs.OutputFolder);
-        commandBuilder.AppendFormat(" -iv {0}", includeVue);
-        commandBuilder.AppendFormat(" -esef {0}", enableSwaggerEnumFilter);
-        commandBuilder.AppendFormat(" -dbms {0}", dbm);
+        commandBuilder.AppendFormat(" -dbms {0}", createArgs.DatabaseManagementSystem.ToString());
 
         Logger.LogInformation("Execute command: " + commandBuilder.ToString());
 
@@ -162,8 +127,7 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
         var projectFiles = new List<ProjectFile>();
         SearchSolutionPath(projectFiles, createArgs.OutputFolder, 0);
 
-        await TryReplaceXAbpVersionAsync(projectFiles, createArgs.Version);
-
+        // await TryReplaceXAbpVersionAsync(projectFiles, createArgs.Version);
         await TryReplaceAppSettingsAsync(projectFiles, createArgs.ConnectionString);
 
         await TryReplaceFileWithProjectFileAsync(
@@ -177,7 +141,30 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
         // TryRunMigrator(projectFiles);
         await CreateInitialMigrationsAsync(createArgs);
 
-        Logger.LogInformation($"'{createArgs.SolutionName.ProjectName}' has been successfully created to '{createArgs.OutputFolder}'");
+        Logger.LogInformation("'{ProjectName}' has been successfully created to '{OutputFolder}'", createArgs.SolutionName.ProjectName, createArgs.OutputFolder);
+    }
+
+    protected virtual string GetTemplateType(ProjectBuildArgs createArgs)
+    {
+        if (!createArgs.ExtraProperties.TryGetValue(TemplateType.ShortArgName, out var templateType))
+        {
+            if (!createArgs.ExtraProperties.TryGetValue(TemplateType.LongArgName, out templateType))
+            {
+                templateType = "IdentityServer4";
+            }
+        }
+
+        if (templateType == null)
+        {
+            return "IdentityServer4";
+        }
+
+        return templateType.ToLowerInvariant() switch
+        {
+            "identityserver4" => "IdentityServer4",
+            "openiddict" => "OpenIddict",
+            _ => throw new CliUsageException(ExceptionMessageHelper.GetInvalidOptionExceptionMessage("Template Type")),
+        };
     }
 
     protected virtual void SearchSolutionPath(List<ProjectFile> projectFiles, string solutionPath, int depth)
@@ -226,7 +213,7 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
             f.Name.EndsWith("appsettings.json", StringComparison.Ordinal))
             .ToArray();
 
-        if (!appSettingsJsonFiles.Any())
+        if (appSettingsJsonFiles.Length == 0)
         {
             return;
         }
@@ -254,7 +241,7 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
                     continue;
                 }
 
-                if (!connectionStringContainer.Any())
+                if (connectionStringContainer.Count == 0)
                 {
                     continue;
                 }

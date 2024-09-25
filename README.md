@@ -32,17 +32,19 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 使用 cli 创建一个项目:
 
 ```bash
-> xabp create MyCompanyName.MyProjectName -t xaod -o "D:\Project" -dbms mysql -cs "Server=localhost;Port=3306;Database=QingBookStore;Uid=root;Pwd=123456;"
+> xabp create MyCompanyName.MyProjectName -t xasl -tt IdentityServer4 -o "D:\Project" -dbms mysql -cs "Server=localhost;Port=3306;Database=QingBookStore;Uid=root;Pwd=123456;"
 ```
 
 -   MyCompanyName.MyProjectName
-    【项目名称】(公司名称+项目名称)
+    (公司名称+项目名称)【项目名称】
 -   -t
-    模板名称
+    模板名称(模板列表)【#模板】
+-   -tt
+    模板类型(IdentityServer4 OpenIddict)【默认：IdentityServer4】
 -   -o
     指定输出目录
 -   -dbms
-    指定数据库驱动
+    指定数据库驱动(MySQL SQLServer SQLite Oracle OracleDevart PostgreSQL)【默认：MySQL】
 -   -cs
     指定数据库连接字符串
 
@@ -92,9 +94,7 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 ### 💖💖 If you find this framework useful, maybe you can buy me a coffee. 💖💖
 
 <p align="center">
-  <img alt="微信" src="https://cdn.jsdelivr.net/gh/ArcherTrister/ArcherTrister/assets/wechat.png" width="460" height="700">
-&nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="支付宝" src="https://cdn.jsdelivr.net/gh/ArcherTrister/ArcherTrister/assets/alipay.png" width="460" height="700">
+  <img alt="pay" src="https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg">
 </p>
 
 ## 计划
@@ -140,14 +140,19 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 
 ### 模板
 
--   [x] X.Abp.IdentityServer4
--   [x] X.Abp.Openiddict
--   [x] X.Abp.IdentityServer4.SeparatedTenantSchema
--   [x] X.Abp.Openiddict.SeparatedTenantSchema
--   [ ] X.Abp.IdentityServer4.SeparatedAuthServer
--   [ ] X.Abp.Openiddict.SeparatedAuthServer
--   [ ] X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema
--   [ ] X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema
--   [x] X.Abp.IdentityServer4.Microservices
--   [x] X.Abp.Openiddict.Microservices
+-   ~~[x] X.Abp.IdentityServer4(xais4)~~
+-   ~~[x] X.Abp.Openiddict(xaod)~~
+-   [x] X.Abp.IdentityServer4.SeparatedTenantSchema(xais4sts)
+-   [x] X.Abp.Openiddict.SeparatedTenantSchema(xaodsts)
+-   ~~[ ] X.Abp.IdentityServer4.SeparatedAuthServer~~
+-   ~~[ ] X.Abp.Openiddict.SeparatedAuthServer~~
+-   ~~[ ] X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema~~
+-   ~~[ ] X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema~~
+-   [x] X.Abp.IdentityServer4.Microservices(xais4mo or xais4my)
+-   [x] X.Abp.Openiddict.Microservices(xaodmo or xaodmy)
 -   [ ] vue
+-   [ ] X.Abp.MicroService(xams)
+-   [x] X.Abp.MultiLayer(xaml)
+-   [x] X.Abp.MultiLayer.SeparateAuthServer(xamlsas)
+-   [ ] X.Abp.MultiLayer.SeparatedTenantSchema(xamlsts)
+-   [x] X.Abp.SingleLayer(xasl)

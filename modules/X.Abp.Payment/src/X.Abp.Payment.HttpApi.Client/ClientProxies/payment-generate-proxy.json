@@ -4,439 +4,67 @@
       "rootPath": "payment",
       "remoteServiceName": "AbpPaymentCommon",
       "controllers": {
-        "X.Abp.Payment.Requests.PaymentRequestController": {
-          "controllerName": "PaymentRequest",
-          "controllerGroupName": "PaymentRequest",
+        "X.Abp.Payment.Gateways.GatewayController": {
+          "controllerName": "Gateway",
+          "controllerGroupName": "Gateway",
           "isRemoteService": true,
           "isIntegrationService": false,
           "apiVersion": null,
-          "type": "X.Abp.Payment.Requests.PaymentRequestController",
+          "type": "X.Abp.Payment.Gateways.GatewayController",
           "interfaces": [
             {
-              "type": "X.Abp.Payment.Requests.IPaymentRequestAppService",
-              "name": "IPaymentRequestAppService",
+              "type": "X.Abp.Payment.Gateways.IGatewayAppService",
+              "name": "IGatewayAppService",
               "methods": [
                 {
-                  "name": "CreateAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "input",
-                      "typeAsString": "X.Abp.Payment.Requests.PaymentRequestCreateDto, X.Abp.Payment.Application.Contracts",
-                      "type": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
-                      "typeSimple": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
+                  "name": "GetGatewayConfigurationAsync",
+                  "parametersOnMethod": [],
                   "returnValue": {
-                    "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
-                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+                    "type": "System.Collections.Generic.List<X.Abp.Payment.Gateways.GatewayDto>",
+                    "typeSimple": "[X.Abp.Payment.Gateways.GatewayDto]"
                   }
                 },
                 {
-                  "name": "GetAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "id",
-                      "typeAsString": "System.Guid, System.Private.CoreLib",
-                      "type": "System.Guid",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
+                  "name": "GetSubscriptionSupportedGatewaysAsync",
+                  "parametersOnMethod": [],
                   "returnValue": {
-                    "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
-                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
-                  }
-                },
-                {
-                  "name": "StartAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "paymentGateway",
-                      "typeAsString": "System.String, System.Private.CoreLib",
-                      "type": "System.String",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    },
-                    {
-                      "name": "input",
-                      "typeAsString": "X.Abp.Payment.Requests.PaymentRequestStartDto, X.Abp.Payment.Application.Contracts",
-                      "type": "X.Abp.Payment.Requests.PaymentRequestStartDto",
-                      "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartDto",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "X.Abp.Payment.Requests.PaymentRequestStartResultDto",
-                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartResultDto"
-                  }
-                },
-                {
-                  "name": "CompleteAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "paymentGateway",
-                      "typeAsString": "System.String, System.Private.CoreLib",
-                      "type": "System.String",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    },
-                    {
-                      "name": "parameters",
-                      "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
-                      "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
-                      "typeSimple": "{string:string}",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
-                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
-                  }
-                },
-                {
-                  "name": "HandleWebhookAsync",
-                  "parametersOnMethod": [
-                    {
-                      "name": "paymentGateway",
-                      "typeAsString": "System.String, System.Private.CoreLib",
-                      "type": "System.String",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    },
-                    {
-                      "name": "payload",
-                      "typeAsString": "System.String, System.Private.CoreLib",
-                      "type": "System.String",
-                      "typeSimple": "string",
-                      "isOptional": false,
-                      "defaultValue": null
-                    },
-                    {
-                      "name": "headers",
-                      "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
-                      "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
-                      "typeSimple": "{string:string}",
-                      "isOptional": false,
-                      "defaultValue": null
-                    }
-                  ],
-                  "returnValue": {
-                    "type": "System.Boolean",
-                    "typeSimple": "boolean"
+                    "type": "System.Collections.Generic.List<X.Abp.Payment.Gateways.GatewayDto>",
+                    "typeSimple": "[X.Abp.Payment.Gateways.GatewayDto]"
                   }
                 }
               ]
             }
           ],
           "actions": {
-            "CompleteAsyncByPaymentGatewayAndParameters": {
-              "uniqueName": "CompleteAsyncByPaymentGatewayAndParameters",
-              "name": "CompleteAsync",
-              "httpMethod": "POST",
-              "url": "api/payment/{paymentMethod}/complete",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "paymentGateway",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "parameters",
-                  "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
-                  "typeSimple": "{string:string}",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "paymentGateway",
-                  "name": "paymentGateway",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "parameters",
-                  "name": "parameters",
-                  "jsonName": null,
-                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
-                  "typeSimple": "{string:string}",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "paymentMethod",
-                  "name": "paymentMethod",
-                  "jsonName": null,
-                  "type": null,
-                  "typeSimple": null,
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
-                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
-            },
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/payment/requests",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "X.Abp.Payment.Requests.PaymentRequestCreateDto, X.Abp.Payment.Application.Contracts",
-                  "type": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
-                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
-                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
-                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
-            },
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
+            "GetGatewayConfigurationAsync": {
+              "uniqueName": "GetGatewayConfigurationAsync",
+              "name": "GetGatewayConfigurationAsync",
               "httpMethod": "GET",
-              "url": "api/payment/requests/{id}",
+              "url": "api/payment/gateways",
               "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
+              "parametersOnMethod": [],
+              "parameters": [],
               "returnValue": {
-                "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
-                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+                "type": "System.Collections.Generic.List<X.Abp.Payment.Gateways.GatewayDto>",
+                "typeSimple": "[X.Abp.Payment.Gateways.GatewayDto]"
               },
               "allowAnonymous": null,
-              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
+              "implementFrom": "X.Abp.Payment.Gateways.IGatewayAppService"
             },
-            "HandleWebhookAsyncByPaymentGatewayAndPayloadAndHeaders": {
-              "uniqueName": "HandleWebhookAsyncByPaymentGatewayAndPayloadAndHeaders",
-              "name": "HandleWebhookAsync",
-              "httpMethod": "POST",
-              "url": "api/payment/{paymentMethod}/webhook",
+            "GetSubscriptionSupportedGatewaysAsync": {
+              "uniqueName": "GetSubscriptionSupportedGatewaysAsync",
+              "name": "GetSubscriptionSupportedGatewaysAsync",
+              "httpMethod": "GET",
+              "url": "api/payment/gateways/subscription-supported",
               "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "paymentGateway",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "payload",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "headers",
-                  "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
-                  "typeSimple": "{string:string}",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "paymentGateway",
-                  "name": "paymentGateway",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "payload",
-                  "name": "payload",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "headers",
-                  "name": "headers",
-                  "jsonName": null,
-                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
-                  "typeSimple": "{string:string}",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Header",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "paymentMethod",
-                  "name": "paymentMethod",
-                  "jsonName": null,
-                  "type": null,
-                  "typeSimple": null,
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
+              "parametersOnMethod": [],
+              "parameters": [],
               "returnValue": {
-                "type": "System.Boolean",
-                "typeSimple": "boolean"
+                "type": "System.Collections.Generic.List<X.Abp.Payment.Gateways.GatewayDto>",
+                "typeSimple": "[X.Abp.Payment.Gateways.GatewayDto]"
               },
               "allowAnonymous": null,
-              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
-            },
-            "StartAsyncByPaymentGatewayAndInput": {
-              "uniqueName": "StartAsyncByPaymentGatewayAndInput",
-              "name": "StartAsync",
-              "httpMethod": "POST",
-              "url": "api/payment/{paymentMethod}/start",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "paymentGateway",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "X.Abp.Payment.Requests.PaymentRequestStartDto, X.Abp.Payment.Application.Contracts",
-                  "type": "X.Abp.Payment.Requests.PaymentRequestStartDto",
-                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "paymentGateway",
-                  "name": "paymentGateway",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "X.Abp.Payment.Requests.PaymentRequestStartDto",
-                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "paymentMethod",
-                  "name": "paymentMethod",
-                  "jsonName": null,
-                  "type": null,
-                  "typeSimple": null,
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "X.Abp.Payment.Requests.PaymentRequestStartResultDto",
-                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartResultDto"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
+              "implementFrom": "X.Abp.Payment.Gateways.IGatewayAppService"
             }
           }
         },
@@ -671,67 +299,439 @@
             }
           }
         },
-        "X.Abp.Payment.Gateways.GatewayController": {
-          "controllerName": "Gateway",
-          "controllerGroupName": "Gateway",
+        "X.Abp.Payment.Requests.PaymentRequestController": {
+          "controllerName": "PaymentRequest",
+          "controllerGroupName": "PaymentRequest",
           "isRemoteService": true,
           "isIntegrationService": false,
           "apiVersion": null,
-          "type": "X.Abp.Payment.Gateways.GatewayController",
+          "type": "X.Abp.Payment.Requests.PaymentRequestController",
           "interfaces": [
             {
-              "type": "X.Abp.Payment.Gateways.IGatewayAppService",
-              "name": "IGatewayAppService",
+              "type": "X.Abp.Payment.Requests.IPaymentRequestAppService",
+              "name": "IPaymentRequestAppService",
               "methods": [
                 {
-                  "name": "GetGatewayConfigurationAsync",
-                  "parametersOnMethod": [],
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Requests.PaymentRequestCreateDto, X.Abp.Payment.Application.Contracts",
+                      "type": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
+                      "typeSimple": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
                   "returnValue": {
-                    "type": "System.Collections.Generic.List<X.Abp.Payment.Gateways.GatewayDto>",
-                    "typeSimple": "[X.Abp.Payment.Gateways.GatewayDto]"
+                    "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
                   }
                 },
                 {
-                  "name": "GetSubscriptionSupportedGatewaysAsync",
-                  "parametersOnMethod": [],
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
                   "returnValue": {
-                    "type": "System.Collections.Generic.List<X.Abp.Payment.Gateways.GatewayDto>",
-                    "typeSimple": "[X.Abp.Payment.Gateways.GatewayDto]"
+                    "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "StartAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "paymentGateway",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.Payment.Requests.PaymentRequestStartDto, X.Abp.Payment.Application.Contracts",
+                      "type": "X.Abp.Payment.Requests.PaymentRequestStartDto",
+                      "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Payment.Requests.PaymentRequestStartResultDto",
+                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartResultDto"
+                  }
+                },
+                {
+                  "name": "CompleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "paymentGateway",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "parameters",
+                      "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                      "typeSimple": "{string:string}",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                    "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+                  }
+                },
+                {
+                  "name": "HandleWebhookAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "paymentGateway",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "payload",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "headers",
+                      "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                      "typeSimple": "{string:string}",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
                   }
                 }
               ]
             }
           ],
           "actions": {
-            "GetGatewayConfigurationAsync": {
-              "uniqueName": "GetGatewayConfigurationAsync",
-              "name": "GetGatewayConfigurationAsync",
-              "httpMethod": "GET",
-              "url": "api/payment/gateways",
+            "CompleteAsyncByPaymentGatewayAndParameters": {
+              "uniqueName": "CompleteAsyncByPaymentGatewayAndParameters",
+              "name": "CompleteAsync",
+              "httpMethod": "POST",
+              "url": "api/payment/{paymentMethod}/complete",
               "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
+              "parametersOnMethod": [
+                {
+                  "name": "paymentGateway",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "parameters",
+                  "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                  "typeSimple": "{string:string}",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "paymentGateway",
+                  "name": "paymentGateway",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "parameters",
+                  "name": "parameters",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                  "typeSimple": "{string:string}",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "paymentMethod",
+                  "name": "paymentMethod",
+                  "jsonName": null,
+                  "type": null,
+                  "typeSimple": null,
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
               "returnValue": {
-                "type": "System.Collections.Generic.List<X.Abp.Payment.Gateways.GatewayDto>",
-                "typeSimple": "[X.Abp.Payment.Gateways.GatewayDto]"
+                "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
               },
               "allowAnonymous": null,
-              "implementFrom": "X.Abp.Payment.Gateways.IGatewayAppService"
+              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
             },
-            "GetSubscriptionSupportedGatewaysAsync": {
-              "uniqueName": "GetSubscriptionSupportedGatewaysAsync",
-              "name": "GetSubscriptionSupportedGatewaysAsync",
-              "httpMethod": "GET",
-              "url": "api/payment/gateways/subscription-supported",
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/payment/requests",
               "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Requests.PaymentRequestCreateDto, X.Abp.Payment.Application.Contracts",
+                  "type": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
+                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
+                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestCreateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
               "returnValue": {
-                "type": "System.Collections.Generic.List<X.Abp.Payment.Gateways.GatewayDto>",
-                "typeSimple": "[X.Abp.Payment.Gateways.GatewayDto]"
+                "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
               },
               "allowAnonymous": null,
-              "implementFrom": "X.Abp.Payment.Gateways.IGatewayAppService"
+              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/payment/requests/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto",
+                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestWithDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
+            },
+            "HandleWebhookAsyncByPaymentGatewayAndPayloadAndHeaders": {
+              "uniqueName": "HandleWebhookAsyncByPaymentGatewayAndPayloadAndHeaders",
+              "name": "HandleWebhookAsync",
+              "httpMethod": "POST",
+              "url": "api/payment/{paymentMethod}/webhook",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "paymentGateway",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "payload",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "headers",
+                  "typeAsString": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                  "typeSimple": "{string:string}",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "paymentGateway",
+                  "name": "paymentGateway",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "payload",
+                  "name": "payload",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "headers",
+                  "name": "headers",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.Dictionary<System.String,System.String>",
+                  "typeSimple": "{string:string}",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Header",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "paymentMethod",
+                  "name": "paymentMethod",
+                  "jsonName": null,
+                  "type": null,
+                  "typeSimple": null,
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
+            },
+            "StartAsyncByPaymentGatewayAndInput": {
+              "uniqueName": "StartAsyncByPaymentGatewayAndInput",
+              "name": "StartAsync",
+              "httpMethod": "POST",
+              "url": "api/payment/{paymentMethod}/start",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "paymentGateway",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.Payment.Requests.PaymentRequestStartDto, X.Abp.Payment.Application.Contracts",
+                  "type": "X.Abp.Payment.Requests.PaymentRequestStartDto",
+                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "paymentGateway",
+                  "name": "paymentGateway",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.Payment.Requests.PaymentRequestStartDto",
+                  "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "paymentMethod",
+                  "name": "paymentMethod",
+                  "jsonName": null,
+                  "type": null,
+                  "typeSimple": null,
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.Payment.Requests.PaymentRequestStartResultDto",
+                "typeSimple": "X.Abp.Payment.Requests.PaymentRequestStartResultDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.Payment.Requests.IPaymentRequestAppService"
             }
           }
         }

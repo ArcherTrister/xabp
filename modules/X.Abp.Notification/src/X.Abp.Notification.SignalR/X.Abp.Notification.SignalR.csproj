@@ -21,7 +21,10 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.SignalR" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference Include="..\X.Abp.Notification\X.Abp.Notification.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Notification.Abstractions\X.Abp.Notification.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

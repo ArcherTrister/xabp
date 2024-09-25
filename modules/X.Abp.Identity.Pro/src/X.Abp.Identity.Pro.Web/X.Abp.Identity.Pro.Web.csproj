@@ -37,15 +37,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.Identity.Pro.Application.Contracts\X.Abp.Identity.Pro.Application.Contracts.csproj" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Web"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Web"
-      VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Identity.Pro.Application.Contracts\X.Abp.Identity.Pro.Application.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Web" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

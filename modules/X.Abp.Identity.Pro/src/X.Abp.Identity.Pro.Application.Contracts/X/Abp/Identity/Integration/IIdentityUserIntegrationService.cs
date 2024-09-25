@@ -5,11 +5,15 @@
 using System;
 using System.Threading.Tasks;
 
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
 using Volo.Abp.Users;
 
 namespace X.Abp.Identity.Integration;
-public interface IIdentityUserIntegrationService
+
+[IntegrationService]
+public interface IIdentityUserIntegrationService : IApplicationService
 {
     Task<UserData> FindByIdAsync(Guid id);
 

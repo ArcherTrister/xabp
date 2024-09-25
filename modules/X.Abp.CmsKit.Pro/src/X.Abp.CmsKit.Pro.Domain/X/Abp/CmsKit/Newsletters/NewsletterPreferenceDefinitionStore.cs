@@ -16,15 +16,15 @@ public class NewsletterPreferenceDefinitionStore :
 ITransientDependency,
 INewsletterPreferenceDefinitionStore
 {
-    protected NewsletterOptions NewsletterOptions { get; }
+  protected NewsletterOptions NewsletterOptions { get; }
 
-    public NewsletterPreferenceDefinitionStore(IOptions<NewsletterOptions> newsletterOptions)
-    {
-        NewsletterOptions = newsletterOptions.Value;
-    }
+  public NewsletterPreferenceDefinitionStore(IOptions<NewsletterOptions> newsletterOptions)
+  {
+    NewsletterOptions = newsletterOptions.Value;
+  }
 
-    public Task<List<NewsletterPreferenceDefinition>> GetNewslettersAsync()
-    {
-        return Task.FromResult(NewsletterOptions.Preferences.Values.ToList());
-    }
+  public virtual Task<List<NewsletterPreferenceDefinition>> GetNewslettersAsync()
+  {
+    return Task.FromResult(NewsletterOptions.Preferences.Values.ToList());
+  }
 }

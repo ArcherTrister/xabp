@@ -7,8 +7,10 @@ namespace X.Abp.Account.Public.Web.Menus;
 public class AbpAccountPublicMenus
 {
     public const string GroupName = "Account";
-    public const string LinkedAccounts = "Account.LinkedAccounts";
-    public const string Manage = "Account.Manage";
-    public const string SecurityLogs = "Account.SecurityLogs";
-    public const string Logout = "Account.Logout";
+    public const string LinkedAccounts = GroupName + ".LinkedAccounts";
+    public const string AuthorityDelegation = GroupName + ".AuthorityDelegation";
+    public const string Manage = GroupName + ".Manage";
+    public const string SecurityLogs = GroupName + ".SecurityLogs";
+    public const string Sessions = GroupName + ".Sessions";
+    public const string Logout = GroupName + ".Logout";
 }

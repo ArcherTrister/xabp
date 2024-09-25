@@ -1,0 +1,140 @@
+{
+  "folders": {
+    "items": {
+      "services": {
+        "items": {
+          "administration": {
+            "items": {
+              "src": {}
+            }
+          },
+          "identity": {
+            "items": {
+              "src": {}
+            }
+          },
+          "product": {
+            "items": {
+              "src": {}
+            }
+          },
+          "saas": {
+            "items": {
+              "src": {}
+            }
+          }
+        }
+      },
+      "gateways": {
+        "items": {
+          "internal": {
+            "items": {
+              "src": {}
+            }
+          },
+          "web": {
+            "items": {
+              "src": {}
+            }
+          },
+          "web-public": {
+            "items": {
+              "src": {}
+            }
+          }
+        }
+      },
+      "apps": {
+        "items": {
+          "auth-server": {
+            "items": {
+              "src": {}
+            }
+          },
+          "blazor": {
+            "items": {
+              "src": {}
+            }
+          },
+          "public-web": {
+            "items": {
+              "src": {}
+            }
+          },
+          "web": {
+            "items": {
+              "src": {}
+            }
+          }
+        }
+      },
+      "shared": {}
+    }
+  },
+  "packages": {
+    "MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host": {
+      "path": "services/administration/src/MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host/MyCompanyName.MyProjectName.AdministrationService.HttpApi.Host.abppkg.json",
+      "folder": "services/administration/src"
+    },
+    "MyCompanyName.MyProjectName.IdentityService.HttpApi.Host": {
+      "path": "services/identity/src/MyCompanyName.MyProjectName.IdentityService.HttpApi.Host/MyCompanyName.MyProjectName.IdentityService.HttpApi.Host.abppkg.json",
+      "folder": "services/identity/src"
+    },
+    "MyCompanyName.MyProjectName.ProductService.HttpApi.Host": {
+      "path": "services/product/src/MyCompanyName.MyProjectName.ProductService.HttpApi.Host/MyCompanyName.MyProjectName.ProductService.HttpApi.Host.abppkg.json",
+      "folder": "services/product/src"
+    },
+    "MyCompanyName.MyProjectName.SaasService.HttpApi.Host": {
+      "path": "services/saas/src/MyCompanyName.MyProjectName.SaasService.HttpApi.Host/MyCompanyName.MyProjectName.SaasService.HttpApi.Host.abppkg.json",
+      "folder": "services/saas/src"
+    },
+    "MyCompanyName.MyProjectName.InternalGateway": {
+      "path": "gateways/internal/src/MyCompanyName.MyProjectName.InternalGateway/MyCompanyName.MyProjectName.InternalGateway.abppkg.json",
+      "folder": "gateways/internal/src"
+    },
+    "MyCompanyName.MyProjectName.WebGateway": {
+      "path": "gateways/web/src/MyCompanyName.MyProjectName.WebGateway/MyCompanyName.MyProjectName.WebGateway.abppkg.json",
+      "folder": "gateways/web/src"
+    },
+    "MyCompanyName.MyProjectName.PublicWebGateway": {
+      "path": "gateways/web-public/src/MyCompanyName.MyProjectName.PublicWebGateway/MyCompanyName.MyProjectName.PublicWebGateway.abppkg.json",
+      "folder": "gateways/web-public/src"
+    },
+    "MyCompanyName.MyProjectName.AuthServer": {
+      "path": "apps/auth-server/src/MyCompanyName.MyProjectName.AuthServer/MyCompanyName.MyProjectName.AuthServer.abppkg.json",
+      "folder": "apps/auth-server/src"
+    },
+    "MyCompanyName.MyProjectName.PublicWeb": {
+      "path": "apps/public-web/src/MyCompanyName.MyProjectName.PublicWeb/MyCompanyName.MyProjectName.PublicWeb.abppkg.json",
+      "folder": "apps/public-web/src"
+    },
+    "MyCompanyName.MyProjectName.Web": {
+      "path": "apps/web/src/MyCompanyName.MyProjectName.Web/MyCompanyName.MyProjectName.Web.abppkg.json",
+      "folder": "apps/web/src"
+    },
+    "MyCompanyName.MyProjectName.DbMigrator": {
+      "path": "shared/MyCompanyName.MyProjectName.DbMigrator/MyCompanyName.MyProjectName.DbMigrator.abppkg.json",
+      "folder": "shared"
+    },
+    "MyCompanyName.MyProjectName.Shared.Hosting.AspNetCore": {
+      "path": "shared/MyCompanyName.MyProjectName.Shared.Hosting.AspNetCore/MyCompanyName.MyProjectName.Shared.Hosting.AspNetCore.abppkg.json",
+      "folder": "shared"
+    },
+    "MyCompanyName.MyProjectName.Shared.Hosting.Microservices": {
+      "path": "shared/MyCompanyName.MyProjectName.Shared.Hosting.Microservices/MyCompanyName.MyProjectName.Shared.Hosting.Microservices.abppkg.json",
+      "folder": "shared"
+    },
+    "MyCompanyName.MyProjectName.Shared.Localization": {
+      "path": "shared/MyCompanyName.MyProjectName.Shared.Localization/MyCompanyName.MyProjectName.Shared.Localization.abppkg.json",
+      "folder": "shared"
+    },
+    "MyCompanyName.MyProjectName.Shared.Hosting.Gateways": {
+      "path": "shared/MyCompanyName.MyProjectName.Shared.Hosting.Gateways/MyCompanyName.MyProjectName.Shared.Hosting.Gateways.abppkg.json",
+      "folder": "shared"
+    },
+    "MyCompanyName.MyProjectName.Shared.Hosting": {
+      "path": "shared/MyCompanyName.MyProjectName.Shared.Hosting/MyCompanyName.MyProjectName.Shared.Hosting.abppkg.json",
+      "folder": "shared"
+    }
+  }
+}

@@ -20,9 +20,11 @@ public interface IIdentityRoleAppService : ICrudAppService<
 {
     Task<ListResultDto<IdentityRoleDto>> GetAllListAsync();
 
-    Task UpdateClaimsAsync(Guid id, List<IdentityRoleClaimDto> input);
-
     Task<List<ClaimTypeDto>> GetAllClaimTypesAsync();
 
     Task<List<IdentityRoleClaimDto>> GetClaimsAsync(Guid id);
+
+    Task UpdateClaimsAsync(Guid id, List<IdentityRoleClaimUpdateDto> input);
+
+    Task MoveAllUsersAsync(Guid id, Guid? targetRoleId);
 }

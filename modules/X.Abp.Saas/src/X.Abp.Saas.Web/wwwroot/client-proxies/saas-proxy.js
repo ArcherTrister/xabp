@@ -63,6 +63,21 @@
       }, ajaxParams));
     };
 
+    x.abp.saas.edition.getAllList = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/saas/editions/all',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.saas.edition.moveAllTenants = function(id, targetEditionId, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/saas/editions/' + id + '/move-all-tenants' + abp.utils.buildQueryString([{ name: 'targetEditionId', value: targetEditionId }]) + '',
+        type: 'PUT',
+        dataType: null
+      }, ajaxParams));
+    };
+
   })();
 
   // controller x.abp.saas.subscription
@@ -162,10 +177,17 @@
       }, ajaxParams));
     };
 
+    x.abp.saas.tenant.checkConnectionString = function(connectionString, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/saas/tenants/check-connection-string' + abp.utils.buildQueryString([{ name: 'connectionString', value: connectionString }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
     x.abp.saas.tenant.setPassword = function(id, input, ajaxParams) {
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/saas/tenants/' + id + '/set-password',
-        type: 'POST',
+        type: 'PUT',
         dataType: null,
         data: JSON.stringify(input)
       }, ajaxParams));

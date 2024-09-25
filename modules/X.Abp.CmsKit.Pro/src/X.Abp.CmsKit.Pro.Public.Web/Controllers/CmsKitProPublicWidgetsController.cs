@@ -15,24 +15,24 @@ namespace X.Abp.CmsKit.Pro.Public.Web.Controllers;
 
 public class CmsKitProPublicWidgetsController : AbpController
 {
-    public IActionResult Contact()
-    {
-        return ViewComponent(typeof(ContactViewComponent));
-    }
+  public IActionResult Contact()
+  {
+    return ViewComponent(typeof(ContactViewComponent));
+  }
 
-    public async Task<IActionResult> Poll(string widgetName)
+  public virtual async Task<IActionResult> Poll(string widgetName)
+  {
+    return await Task.FromResult(ViewComponent(typeof(PollViewComponent), new
     {
-        return await Task.FromResult(ViewComponent(typeof(PollViewComponent), new
-        {
-            widgetName
-        }));
-    }
+      widgetName
+    }));
+  }
 
-    public async Task<IActionResult> PollByCode(string code)
+  public virtual async Task<IActionResult> PollByCode(string code)
+  {
+    return await Task.FromResult(ViewComponent(typeof(PollByCodeViewComponent), new
     {
-        return await Task.FromResult(ViewComponent(typeof(PollByCodeViewComponent), new
-        {
-            code
-        }));
-    }
+      code
+    }));
+  }
 }

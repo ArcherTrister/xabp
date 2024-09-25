@@ -5,7 +5,7 @@ namespace X.Abp.Payment.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(PaymentBlazorModule),
-    typeof(PaymentHttpApiClientModule),
+    typeof(AbpPaymentHttpApiClientModule),
     typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule)
     )]
 public class PaymentBlazorWebAssemblyModule : AbpModule

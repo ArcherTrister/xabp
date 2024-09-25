@@ -104,7 +104,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
 
             await CreateApplicationAsync(
                 name: swaggerClientId!,
-                type: OpenIddictConstants.ClientTypes.Public,
+                clientType: OpenIddictConstants.ClientTypes.Public,
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Swagger Client",
                 secret: null,
@@ -157,7 +157,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
         var webClientRootUrl = _configuration["OpenIddict:Applications:Web:RootUrl"].EnsureEndsWith('/');
         await CreateApplicationAsync(
             name: "Web",
-            type: OpenIddictConstants.ClientTypes.Confidential,
+            clientType: OpenIddictConstants.ClientTypes.Confidential,
             consentType: OpenIddictConstants.ConsentTypes.Implicit,
             displayName: "Web Client",
             secret: "1q2w3e*",
@@ -166,7 +166,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
                 OpenIddictConstants.GrantTypes.AuthorizationCode,
                 OpenIddictConstants.GrantTypes.Implicit
             },
-            scopes: commonScopes.Union(new[] {"AccountService", "IdentityService", "AdministrationService", "SaasService", "ProductService"}).ToList(),
+            scopes: commonScopes.Union(new[] { "AccountService", "IdentityService", "AdministrationService", "SaasService", "ProductService" }).ToList(),
             redirectUris: new List<string> { $"{webClientRootUrl}signin-oidc" },
             postLogoutRedirectUris: new List<string>() { $"{webClientRootUrl}signout-callback-oidc" });
 
@@ -174,7 +174,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
         var blazorClientRootUrl = _configuration["OpenIddict:Applications:Blazor:RootUrl"].EnsureEndsWith('/');
         await CreateApplicationAsync(
             name: "Blazor",
-            type: OpenIddictConstants.ClientTypes.Public,
+            clientType: OpenIddictConstants.ClientTypes.Public,
             consentType: OpenIddictConstants.ConsentTypes.Implicit,
             displayName: "Blazor Client",
             secret: null,
@@ -182,7 +182,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
             {
                 OpenIddictConstants.GrantTypes.AuthorizationCode
             },
-            scopes: commonScopes.Union(new[] {"AccountService", "IdentityService", "AdministrationService", "SaasService", "ProductService"}).ToList(),
+            scopes: commonScopes.Union(new[] { "AccountService", "IdentityService", "AdministrationService", "SaasService", "ProductService" }).ToList(),
             redirectUris: new List<string> { $"{blazorClientRootUrl}authentication/login-callback" },
             postLogoutRedirectUris: new List<string> { $"{blazorClientRootUrl}authentication/logout-callback" });
 
@@ -190,7 +190,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
         var blazorServerClientRootUrl = _configuration["OpenIddict:Applications:BlazorServer:RootUrl"].EnsureEndsWith('/');
         await CreateApplicationAsync(
             name: "BlazorServer",
-            type: OpenIddictConstants.ClientTypes.Confidential,
+            clientType: OpenIddictConstants.ClientTypes.Confidential,
             consentType: OpenIddictConstants.ConsentTypes.Implicit,
             displayName: "Blazor Server Client",
             secret: "1q2w3e*",
@@ -199,7 +199,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
                 OpenIddictConstants.GrantTypes.AuthorizationCode,
                 OpenIddictConstants.GrantTypes.Implicit
             },
-            scopes: commonScopes.Union(new[] {"AccountService", "IdentityService", "AdministrationService", "SaasService", "ProductService" }).ToList(),
+            scopes: commonScopes.Union(new[] { "AccountService", "IdentityService", "AdministrationService", "SaasService", "ProductService" }).ToList(),
             redirectUris: new List<string> { $"{blazorServerClientRootUrl}signin-oidc" },
             postLogoutRedirectUris: new List<string> { $"{blazorServerClientRootUrl}signout-callback-oidc" });
 
@@ -207,7 +207,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
         var publicWebClientRootUrl = _configuration["OpenIddict:Applications:PublicWeb:RootUrl"].EnsureEndsWith('/');
         await CreateApplicationAsync(
             name: "PublicWeb",
-            type: OpenIddictConstants.ClientTypes.Confidential,
+            clientType: OpenIddictConstants.ClientTypes.Confidential,
             consentType: OpenIddictConstants.ConsentTypes.Implicit,
             displayName: "Public Web Client",
             secret: "1q2w3e*",
@@ -224,7 +224,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
         var angularClientRootUrl = _configuration["OpenIddict:Applications:Angular:RootUrl"]?.TrimEnd('/');
         await CreateApplicationAsync(
             name: "Angular",
-            type: OpenIddictConstants.ClientTypes.Public,
+            clientType: OpenIddictConstants.ClientTypes.Public,
             consentType: OpenIddictConstants.ConsentTypes.Implicit,
             displayName: "Angular Client",
             secret: null,
@@ -236,14 +236,14 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
                 "LinkLogin",
                 "Impersonation"
             },
-            scopes: commonScopes.Union(new[] {"AccountService", "IdentityService", "AdministrationService", "SaasService", "ProductService" }).ToList(),
+            scopes: commonScopes.Union(new[] { "AccountService", "IdentityService", "AdministrationService", "SaasService", "ProductService" }).ToList(),
             redirectUris: new List<string> { $"{angularClientRootUrl}" },
             postLogoutRedirectUris: new List<string> { $"{angularClientRootUrl}" });
 
         //Administration Service Client
         await CreateApplicationAsync(
             name: "AdministrationService",
-            type: OpenIddictConstants.ClientTypes.Confidential,
+            clientType: OpenIddictConstants.ClientTypes.Confidential,
             consentType: OpenIddictConstants.ConsentTypes.Implicit,
             displayName: "Administration Service Client",
             secret: "1q2w3e*",
@@ -257,7 +257,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
 
     private async Task CreateApplicationAsync(
         [NotNull] string name,
-        [NotNull] string type,
+        [NotNull] string clientType,
         [NotNull] string consentType,
         string displayName,
         string? secret,
@@ -267,12 +267,12 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
         List<string>? postLogoutRedirectUris = null,
         List<string>? permissions = null)
     {
-        if (!string.IsNullOrEmpty(secret) && string.Equals(type, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
+        if (!string.IsNullOrEmpty(secret) && string.Equals(clientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
         {
             throw new BusinessException(L["NoClientSecretCanBeSetForPublicApplications"]);
         }
 
-        if (string.IsNullOrEmpty(secret) && string.Equals(type, OpenIddictConstants.ClientTypes.Confidential, StringComparison.OrdinalIgnoreCase))
+        if (string.IsNullOrEmpty(secret) && string.Equals(clientType, OpenIddictConstants.ClientTypes.Confidential, StringComparison.OrdinalIgnoreCase))
         {
             throw new BusinessException(L["TheClientSecretIsRequiredForConfidentialApplications"]);
         }
@@ -289,7 +289,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
             var application = new OpenIddictApplicationDescriptor
             {
                 ClientId = name,
-                Type = type,
+                ClientType = clientType,
                 ClientSecret = secret,
                 ConsentType = consentType,
                 DisplayName = displayName
@@ -298,11 +298,11 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
             Check.NotNullOrEmpty(grantTypes, nameof(grantTypes));
             Check.NotNullOrEmpty(scopes, nameof(scopes));
 
-            if (new [] { OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit }.All(grantTypes.Contains))
+            if (new[] { OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit }.All(grantTypes.Contains))
             {
                 application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdToken);
 
-                if (string.Equals(type, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(clientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
                 {
                     application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdTokenToken);
                     application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeToken);
@@ -377,7 +377,7 @@ public class OpenIddictDataSeeder : IDataSeedContributor, ITransientDependency
                 if (grantType == OpenIddictConstants.GrantTypes.Implicit)
                 {
                     application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.IdToken);
-                    if (string.Equals(type, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(clientType, OpenIddictConstants.ClientTypes.Public, StringComparison.OrdinalIgnoreCase))
                     {
                         application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.IdTokenToken);
                         application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.Token);

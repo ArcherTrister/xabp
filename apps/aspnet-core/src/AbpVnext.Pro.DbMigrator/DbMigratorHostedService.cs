@@ -28,7 +28,7 @@ public class DbMigratorHostedService : IHostedService
         _hostApplicationLifetime = hostApplicationLifetime;
     }
 
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public virtual async Task StartAsync(CancellationToken cancellationToken)
     {
         using var application = await AbpApplicationFactory.CreateAsync<ProDbMigratorModule>(options =>
         {
@@ -49,7 +49,7 @@ public class DbMigratorHostedService : IHostedService
         _hostApplicationLifetime.StopApplication();
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public virtual Task StopAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
     }
@@ -71,7 +71,7 @@ public class DbMigratorHostedService : IHostedService
 
         if (environment.IsNullOrWhiteSpace())
         {
-            builder.AddJsonFile($"appsettings.json", optional: false);
+            builder.AddJsonFile("appsettings.json", optional: false);
         }
         else
         {

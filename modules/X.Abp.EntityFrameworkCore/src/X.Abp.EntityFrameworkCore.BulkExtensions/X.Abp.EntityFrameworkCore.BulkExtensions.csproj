@@ -12,8 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Z.EntityFramework.Extensions.EFCore"
-      Version="$(ZEntityFrameworkPackageVersion)" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" />
   </ItemGroup>
 
 </Project>

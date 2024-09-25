@@ -22,5 +22,5 @@ public class AbpOAuthExternalLoginProviderOptions
 
     public string ProviderKeyClaimType { get; set; } = AbpClaimTypes.UserId;
 
-    public bool CanObtainUserInfoWithoutPassword { get; set; } = false;
+    public bool CanObtainUserInfoWithoutPassword { get; set; }
 }

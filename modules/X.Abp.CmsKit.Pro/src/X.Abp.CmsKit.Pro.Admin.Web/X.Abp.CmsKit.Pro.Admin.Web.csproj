@@ -15,14 +15,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.SettingManagement.Web"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.CmsKit.Admin.Web" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Admin.Application.Contracts\X.Abp.CmsKit.Pro.Admin.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Admin.Application.Contracts\X.Abp.CmsKit.Pro.Admin.Application.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

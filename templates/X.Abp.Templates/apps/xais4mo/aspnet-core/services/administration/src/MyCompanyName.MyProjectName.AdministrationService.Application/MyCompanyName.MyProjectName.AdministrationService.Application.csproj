@@ -8,20 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Application"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="X.Abp.AuditLogging.Application"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.LeptonTheme.Management.Application"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.LanguageManagement.Application"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.TextTemplateManagement.Application"
-      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.AuditLogging.Application" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LeptonTheme.Management.Application" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.Application" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.Application" VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

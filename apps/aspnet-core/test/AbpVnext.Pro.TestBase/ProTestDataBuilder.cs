@@ -19,7 +19,7 @@ public class ProTestDataSeedContributor : IDataSeedContributor, ITransientDepend
         _currentTenant = currentTenant;
     }
 
-    public Task SeedAsync(DataSeedContext context)
+    public virtual Task SeedAsync(DataSeedContext context)
     {
         /* Seed additional test data... */
 

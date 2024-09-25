@@ -16,13 +16,11 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.Quartz.Application.Contracts\X.Abp.Quartz.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Quartz.Application.Contracts\X.Abp.Quartz.Application.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -84,6 +84,11 @@ public class AbpLanguageManagementDomainModule : AbpModule
         }
     }
 
+    public override void OnApplicationInitialization(ApplicationInitializationContext context)
+    {
+        AsyncHelper.RunSync(() => OnApplicationInitializationAsync(context));
+    }
+
     public override async Task OnApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         await SaveLocalizationAsync(context);

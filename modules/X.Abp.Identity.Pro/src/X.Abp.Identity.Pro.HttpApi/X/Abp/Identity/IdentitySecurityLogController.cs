@@ -21,37 +21,37 @@ namespace X.Abp.Identity;
 [Route("api/identity/security-logs")]
 public class IdentitySecurityLogController : AbpControllerBase, IIdentitySecurityLogAppService
 {
-    protected IIdentitySecurityLogAppService IdentitySecurityLogAppService { get; }
+  protected IIdentitySecurityLogAppService IdentitySecurityLogAppService { get; }
 
-    public IdentitySecurityLogController(IIdentitySecurityLogAppService identitySecurityLogAppService)
-    {
-        IdentitySecurityLogAppService = identitySecurityLogAppService;
-    }
+  public IdentitySecurityLogController(IIdentitySecurityLogAppService identitySecurityLogAppService)
+  {
+    IdentitySecurityLogAppService = identitySecurityLogAppService;
+  }
 
-    [HttpGet]
-    public Task<PagedResultDto<IdentitySecurityLogDto>> GetListAsync([FromQuery] GetIdentitySecurityLogListInput input)
-    {
-        return IdentitySecurityLogAppService.GetListAsync(input);
-    }
+  [HttpGet]
+  public virtual Task<PagedResultDto<IdentitySecurityLogDto>> GetListAsync([FromQuery] GetIdentitySecurityLogListInput input)
+  {
+    return IdentitySecurityLogAppService.GetListAsync(input);
+  }
 
-    [HttpGet]
-    [Route("{id}")]
-    public Task<IdentitySecurityLogDto> GetAsync(Guid id)
-    {
-        return IdentitySecurityLogAppService.GetAsync(id);
-    }
+  [HttpGet]
+  [Route("{id}")]
+  public virtual Task<IdentitySecurityLogDto> GetAsync(Guid id)
+  {
+    return IdentitySecurityLogAppService.GetAsync(id);
+  }
 
-    [HttpGet]
-    [Route("my")]
-    public Task<PagedResultDto<IdentitySecurityLogDto>> GetMyListAsync([FromQuery] GetIdentitySecurityLogListInput input)
-    {
-        return IdentitySecurityLogAppService.GetMyListAsync(input);
-    }
+  [HttpGet]
+  [Route("my")]
+  public virtual Task<PagedResultDto<IdentitySecurityLogDto>> GetMyListAsync([FromQuery] GetIdentitySecurityLogListInput input)
+  {
+    return IdentitySecurityLogAppService.GetMyListAsync(input);
+  }
 
-    [HttpGet]
-    [Route("my/{id}")]
-    public Task<IdentitySecurityLogDto> GetMyAsync(Guid id)
-    {
-        return IdentitySecurityLogAppService.GetMyAsync(id);
-    }
+  [HttpGet]
+  [Route("my/{id}")]
+  public virtual Task<IdentitySecurityLogDto> GetMyAsync(Guid id)
+  {
+    return IdentitySecurityLogAppService.GetMyAsync(id);
+  }
 }

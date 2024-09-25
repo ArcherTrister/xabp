@@ -13,8 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.OpenIddict.Pro.Application.Contracts\X.Abp.OpenIddict.Pro.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.OpenIddict.Pro.Application.Contracts\X.Abp.OpenIddict.Pro.Application.Contracts.csproj" />
     <ProjectReference Include="..\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj" />
   </ItemGroup>
 

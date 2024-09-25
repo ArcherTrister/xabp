@@ -82,7 +82,7 @@ public abstract class DatabaseMigrationEventHandlerBase<TDbContext> : ITransient
                 if (tenantId == null)
                 {
                     //Migrating the host database
-                    Logger.LogInformation($"Migrating database of host. Database Name = {DatabaseName}");
+                    Logger.LogInformation("Migrating database of host. Database Name = {DatabaseName}", DatabaseName);
                     result = await MigrateDatabaseSchemaWithDbContextAsync();
                 }
                 else
@@ -92,7 +92,7 @@ public abstract class DatabaseMigrationEventHandlerBase<TDbContext> : ITransient
                         !tenantConfiguration.ConnectionStrings.GetOrDefault(DatabaseName).IsNullOrWhiteSpace())
                     {
                         //Migrating the tenant database (only if tenant has a separate database)
-                        Logger.LogInformation($"Migrating separate database of tenant. Database Name = {DatabaseName}, TenantId = {tenantId}");
+                        Logger.LogInformation("Migrating separate database of tenant. Database Name = {DatabaseName}, TenantId = {TenantId}", DatabaseName, tenantId);
                         result = await MigrateDatabaseSchemaWithDbContextAsync();
                     }
                 }
@@ -111,7 +111,7 @@ public abstract class DatabaseMigrationEventHandlerBase<TDbContext> : ITransient
         var tryCount = IncrementEventTryCount(eventData);
         if (tryCount <= MaxEventTryCount)
         {
-            Logger.LogWarning($"Could not apply database migrations. Re-queueing the operation. TenantId = {eventData.TenantId}, Database Name = {eventData.DatabaseName}.");
+            Logger.LogWarning("Could not apply database migrations. Re-queueing the operation. TenantId = {TenantId}, Database Name = {DatabaseName}.", eventData.TenantId, eventData.DatabaseName);
             Logger.LogException(exception, LogLevel.Warning);
 
             await Task.Delay(RandomHelper.GetRandom(5000, 15000));
@@ -119,7 +119,7 @@ public abstract class DatabaseMigrationEventHandlerBase<TDbContext> : ITransient
         }
         else
         {
-            Logger.LogError($"Could not apply database migrations. Canceling the operation. TenantId = {eventData.TenantId}, DatabaseName = {eventData.DatabaseName}.");
+            Logger.LogError("Could not apply database migrations. Canceling the operation. TenantId = {TenantId}, DatabaseName = {DatabaseName}.", eventData.TenantId, eventData.DatabaseName);
             Logger.LogException(exception);
         }
     }
@@ -131,7 +131,7 @@ public abstract class DatabaseMigrationEventHandlerBase<TDbContext> : ITransient
         var tryCount = IncrementEventTryCount(eventData);
         if (tryCount <= MaxEventTryCount)
         {
-            Logger.LogWarning($"Could not perform tenant created event. Re-queueing the operation. TenantId = {eventData.Id}, TenantName = {eventData.Name}.");
+            Logger.LogWarning("Could not perform tenant created event. Re-queueing the operation. TenantId = {Id}, TenantName = {Name}.", eventData.Id, eventData.Name);
             Logger.LogException(exception, LogLevel.Warning);
 
             await Task.Delay(RandomHelper.GetRandom(5000, 15000));
@@ -139,7 +139,7 @@ public abstract class DatabaseMigrationEventHandlerBase<TDbContext> : ITransient
         }
         else
         {
-            Logger.LogError($"Could not perform tenant created event. Canceling the operation. TenantId = {eventData.Id}, TenantName = {eventData.Name}.");
+            Logger.LogError("Could not perform tenant created event. Canceling the operation. TenantId = {Id}, TenantName = {Name}.", eventData.Id, eventData.Name);
             Logger.LogException(exception);
         }
     }
@@ -151,7 +151,7 @@ public abstract class DatabaseMigrationEventHandlerBase<TDbContext> : ITransient
         var tryCount = IncrementEventTryCount(eventData);
         if (tryCount <= MaxEventTryCount)
         {
-            Logger.LogWarning($"Could not perform tenant connection string updated event. Re-queueing the operation. TenantId = {eventData.Id}, TenantName = {eventData.Name}.");
+            Logger.LogWarning("Could not perform tenant connection string updated event. Re-queueing the operation. TenantId = {Id}, TenantName = {Name}.", eventData.Id, eventData.Name);
             Logger.LogException(exception, LogLevel.Warning);
 
             await Task.Delay(RandomHelper.GetRandom(5000, 15000));
@@ -159,7 +159,7 @@ public abstract class DatabaseMigrationEventHandlerBase<TDbContext> : ITransient
         }
         else
         {
-            Logger.LogError($"Could not perform tenant connection string updated event. Canceling the operation. TenantId = {eventData.Id}, TenantName = {eventData.Name}.");
+            Logger.LogError("Could not perform tenant connection string updated event. Canceling the operation. TenantId = {Id}, TenantName = {Name}.", eventData.Id, eventData.Name);
             Logger.LogException(exception);
         }
     }

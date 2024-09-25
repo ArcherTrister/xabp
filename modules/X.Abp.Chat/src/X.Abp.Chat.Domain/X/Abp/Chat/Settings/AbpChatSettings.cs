@@ -13,5 +13,9 @@ public static class AbpChatSettings
         private const string MessagingPrefix = Prefix + ".Messaging";
 
         public const string SendMessageOnEnter = MessagingPrefix + ".SendMessageOnEnter";
+
+        public const string DeletingMessages = MessagingPrefix + ".DeletingMessages";
+        public const string DeletingConversations = MessagingPrefix + ".DeletingConversations";
+        public const string MessageDeletionPeriod = MessagingPrefix + ".MessageDeletionPeriod";
     }
 }

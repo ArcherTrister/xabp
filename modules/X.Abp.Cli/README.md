@@ -512,6 +512,7 @@ xabp generate-cert -t <cert-type> [options]
 ```bash
 xabp generate-cert
 xabp generate-cert -o MyCerts/InnerFolder
+xabp generate-cert -o MyCerts/InnerFolder -n identityserver
 xabp generate-cert -o MyCerts/InnerFolder -p 123456
 xabp generate-cert -t rsa -o MyCerts/InnerFolder -p 123456
 xabp generate-cert -t ecd -o MyCerts/InnerFolder -p 123456
@@ -521,14 +522,16 @@ xabp generate-cert -t ecd -o MyCerts/InnerFolder -p 123456 -d www.domain.com -y 
 
 #### Options
 
--   `--type` 或 `-t`: 证书类型. 可用的证书类型有:
+-   `--type` 或 `-t`: 证书类型.默认值: `rsa`. 可用的证书类型有:
     -   `rsa`: RSA. 此证书有一些可选选项:
-        -   `--output` 或 `-o`: Folder name to place generated Cert File in. 默认值: ``.
+        -   `--output` 或 `-o`: Folder name to place generated Cert file in. 默认值: ``.
+        -   `--name` 或 `-n`: Generated Cert File name. 默认值: `idsrv4`.
         -   `--password` 或 `-p`: The cert file password. 默认值: `123456`
         -   `--dns-name` 或 `-d`: The cert file domain name. 默认值: `localhost`.
         -   `--years` 或 `-y`: The cert file valid duration. 默认值: `1`.
     -   `ecd`: ECD. 此证书有一些可选选项:
-        -   `--output` 或 `-o`: Folder name to place generated Cert File in. 默认值: ``.
+        -   `--output` 或 `-o`: Folder name to place generated Cert file in. 默认值: ``.
+        -   `--name` 或 `-n`: Generated Cert File name. 默认值: `idsrv4`.
         -   `--password` 或 `-p`: The cert file password. 默认值: `123456`
         -   `--dns-name` 或 `-d`: The cert file domain name. 默认值: `localhost`.
         -   `--years` 或 `-y`: The cert file valid duration. 默认值: `1`.
@@ -549,7 +552,7 @@ xabp install-module <模块名称> [options]
 示例:
 
 ```bash
-xabp install-module X.Chat
+xabp install-module X.Abp.Chat
 ```
 
 -   示例中将 X.Chat 模块添加到解决方案中.

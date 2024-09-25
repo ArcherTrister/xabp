@@ -13,6 +13,7 @@ public class AbpAuditLoggingPermissions
     public class AuditLogs
     {
         public const string Default = GroupName + ".AuditLogs";
+        public const string SettingManagement = Default + ".SettingManagement";
     }
 
     public static string[] GetAll()

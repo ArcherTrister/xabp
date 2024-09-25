@@ -5,7 +5,7 @@ using Volo.Abp.MongoDB;
 namespace X.Abp.Payment.MongoDB;
 
 [DependsOn(
-    typeof(PaymentDomainModule),
+    typeof(AbpPaymentDomainModule),
     typeof(AbpMongoDbModule)
     )]
 public class PaymentMongoDbModule : AbpModule

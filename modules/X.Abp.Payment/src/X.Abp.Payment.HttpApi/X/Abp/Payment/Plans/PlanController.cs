@@ -17,37 +17,37 @@ namespace X.Abp.Payment.Plans;
 [RemoteService(true, Name = AbpPaymentCommonRemoteServiceConsts.RemoteServiceName)]
 public class PlanController : PaymentCommonController, IPlanAppService
 {
-    protected IPlanAppService PlanAppService { get; }
+  protected IPlanAppService PlanAppService { get; }
 
-    public PlanController(IPlanAppService planAppService)
-    {
-        PlanAppService = planAppService;
-    }
+  public PlanController(IPlanAppService planAppService)
+  {
+    PlanAppService = planAppService;
+  }
 
-    [HttpGet]
-    [Route("{planId}/{gateway}")]
-    public Task<GatewayPlanDto> GetGatewayPlanAsync(Guid planId, string gateway)
-    {
-        return PlanAppService.GetGatewayPlanAsync(planId, gateway);
-    }
+  [HttpGet]
+  [Route("{planId}/{gateway}")]
+  public virtual Task<GatewayPlanDto> GetGatewayPlanAsync(Guid planId, string gateway)
+  {
+    return PlanAppService.GetGatewayPlanAsync(planId, gateway);
+  }
 
-    [HttpGet]
-    public Task<List<PlanDto>> GetPlanListAsync()
-    {
-        return PlanAppService.GetPlanListAsync();
-    }
+  [HttpGet]
+  public virtual Task<List<PlanDto>> GetPlanListAsync()
+  {
+    return PlanAppService.GetPlanListAsync();
+  }
 
-    [HttpGet]
-    [Route("{planId}")]
-    public Task<PlanDto> GetAsync(Guid planId)
-    {
-        return PlanAppService.GetAsync(planId);
-    }
+  [HttpGet]
+  [Route("{planId}")]
+  public virtual Task<PlanDto> GetAsync(Guid planId)
+  {
+    return PlanAppService.GetAsync(planId);
+  }
 
-    [HttpGet]
-    [Route("many")]
-    public Task<List<PlanDto>> GetManyAsync(Guid[] planIds)
-    {
-        return PlanAppService.GetManyAsync(planIds);
-    }
+  [HttpGet]
+  [Route("many")]
+  public virtual Task<List<PlanDto>> GetManyAsync(Guid[] planIds)
+  {
+    return PlanAppService.GetManyAsync(planIds);
+  }
 }

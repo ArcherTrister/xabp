@@ -16,19 +16,19 @@ namespace X.Abp.Forms.Responses;
 
 public interface IResponseAppService : IApplicationService
 {
-    public Task<FormResponseDto> GetAsync(Guid id);
+  Task<FormResponseDto> GetAsync(Guid id);
 
-    public Task<List<QuestionWithAnswersDto>> GetQuestionsWithAnswersAsync(Guid id);
+  Task<List<QuestionWithAnswersDto>> GetQuestionsWithAnswersAsync(Guid id);
 
-    public Task<PagedResultDto<FormResponseDto>> GetListAsync(GetUserFormListInputDto input);
+  Task<PagedResultDto<FormResponseDto>> GetListAsync(GetUserFormListInputDto input);
 
-    public Task<FormDto> GetFormDetailsAsync(Guid formId);
+  Task<FormDto> GetFormDetailsAsync(Guid formId);
 
-    public Task<PagedResultDto<FormWithResponseDto>> GetUserFormsByUserIdAsync(Guid userId);
+  Task<PagedResultDto<FormWithResponseDto>> GetUserFormsByUserIdAsync(Guid userId);
 
-    public Task<FormResponseDto> SaveAnswersAsync(Guid formId, CreateResponseDto input);
+  Task<FormResponseDto> SaveAnswersAsync(Guid formId, CreateResponseDto input);
 
-    public Task<FormResponseDto> UpdateAnswersAsync(Guid id, UpdateResponseDto input);
+  Task<FormResponseDto> UpdateAnswersAsync(Guid id, UpdateResponseDto input);
 
-    public Task DeleteAsync(Guid id);
+  Task DeleteAsync(Guid id);
 }

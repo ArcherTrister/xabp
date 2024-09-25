@@ -21,4 +21,8 @@ public interface IIdentitySettingsAppService : IApplicationService
     Task<IdentityOAuthSettingsDto> GetOAuthAsync();
 
     Task UpdateOAuthAsync(IdentityOAuthSettingsDto input);
+
+    Task<IdentitySessionSettingsDto> GetSessionAsync();
+
+    Task UpdateSessionAsync(IdentitySessionSettingsDto input);
 }

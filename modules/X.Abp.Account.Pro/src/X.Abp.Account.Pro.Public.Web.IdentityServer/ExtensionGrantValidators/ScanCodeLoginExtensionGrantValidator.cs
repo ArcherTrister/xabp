@@ -90,7 +90,7 @@ public class ScanCodeLoginExtensionGrantValidator : IExtensionGrantValidator
                 return;
             }
 
-            Logger.LogInformation($"SpaExternalTenantId:{parsedGuid}");
+            Logger.LogInformation("SpaExternalTenantId:{SpaExternalTenantId}", parsedGuid);
             scanCodeLoginTenantId = parsedGuid;
         }
 

@@ -11,10 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.CmsKit.Admin.Application.Contracts"
-      VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.CmsKit.Pro.Domain.Shared\X.Abp.CmsKit.Pro.Domain.Shared.csproj" />
+    <PackageReference Include="Volo.CmsKit.Admin.Application.Contracts" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain.Shared\X.Abp.CmsKit.Pro.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

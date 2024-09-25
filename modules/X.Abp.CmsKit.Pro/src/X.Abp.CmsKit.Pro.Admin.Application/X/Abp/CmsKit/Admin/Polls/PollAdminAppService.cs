@@ -22,137 +22,137 @@ namespace X.Abp.CmsKit.Admin.Polls;
 [RequiresGlobalFeature("CmsKitPro.Polls")]
 public class PollAdminAppService : CmsKitProAdminAppServiceBase, IPollAdminAppService
 {
-    protected CmsKitPollingOptions CmsKitPollingOptions { get; }
+  protected CmsKitPollingOptions CmsKitPollingOptions { get; }
 
-    protected IPollRepository PollRepository { get; }
+  protected IPollRepository PollRepository { get; }
 
-    protected PollManager PollManager { get; }
+  protected PollManager PollManager { get; }
 
-    public PollAdminAppService(
-      IPollRepository pollRepository,
-      IOptions<CmsKitPollingOptions> pollingOptions,
-      PollManager pollManager)
+  public PollAdminAppService(
+    IPollRepository pollRepository,
+    IOptions<CmsKitPollingOptions> pollingOptions,
+    PollManager pollManager)
+  {
+    CmsKitPollingOptions = pollingOptions.Value;
+    PollRepository = pollRepository;
+    PollManager = pollManager;
+  }
+
+  public virtual async Task<PollWithDetailsDto> GetAsync(Guid id)
+  {
+    var poll = await PollRepository.GetAsync(id, true);
+    poll.OrderPollOptions();
+    return ObjectMapper.Map<Poll, PollWithDetailsDto>(poll);
+  }
+
+  public virtual async Task<PagedResultDto<PollDto>> GetListAsync(GetPollListInput input)
+  {
+    var pollList = await PollRepository.GetListAsync(input.Filter, input.Sorting, input.SkipCount, input.MaxResultCount);
+    return new PagedResultDto<PollDto>(await PollRepository.GetCountAsync(input.Filter), ObjectMapper.Map<List<Poll>, List<PollDto>>(pollList));
+  }
+
+  [Authorize(AbpCmsKitProAdminPermissions.Polls.Create)]
+  public virtual async Task<PollWithDetailsDto> CreateAsync(CreatePollDto input)
+  {
+    if (!input.Widget.IsNullOrWhiteSpace())
     {
-        CmsKitPollingOptions = pollingOptions.Value;
-        PollRepository = pollRepository;
-        PollManager = pollManager;
+      await SetWidgetToNullAsync(input.Widget);
     }
 
-    public async Task<PollWithDetailsDto> GetAsync(Guid id)
+    await PollManager.EnsureExistAsync(input.Code);
+    var poll1 = new Poll(GuidGenerator.Create(), input.Question, input.Code, input.Widget, input.Name, input.StartDate, input.AllowMultipleVote, input.ShowVoteCount, input.ShowResultWithoutGivingVote, input.ShowHoursLeft, input.EndDate, input.ResultShowingEndDate, CurrentTenant?.Id);
+    foreach (var pollOption in input.PollOptions)
     {
-        var poll = await PollRepository.GetAsync(id, true);
-        poll.OrderPollOptions();
-        return ObjectMapper.Map<Poll, PollWithDetailsDto>(poll);
+      poll1.AddPollOption(GuidGenerator.Create(), pollOption.Text, pollOption.Order, CurrentTenant?.Id);
     }
 
-    public async Task<PagedResultDto<PollDto>> GetListAsync(GetPollListInput input)
+    var poll2 = await PollRepository.InsertAsync(poll1, false);
+    return ObjectMapper.Map<Poll, PollWithDetailsDto>(poll2);
+  }
+
+  [Authorize(AbpCmsKitProAdminPermissions.Polls.Update)]
+  public virtual async Task<PollWithDetailsDto> UpdateAsync(Guid id, UpdatePollDto input)
+  {
+    var poll = await PollRepository.GetAsync(id, true);
+
+    if (poll.Code != input.Code)
     {
-        var pollList = await PollRepository.GetListAsync(input.Filter, input.Sorting, input.SkipCount, input.MaxResultCount);
-        return new PagedResultDto<PollDto>(await PollRepository.GetCountAsync(input.Filter), ObjectMapper.Map<List<Poll>, List<PollDto>>(pollList));
+      await PollManager.EnsureExistAsync(input.Code);
     }
 
-    [Authorize(AbpCmsKitProAdminPermissions.Polls.Create)]
-    public async Task<PollWithDetailsDto> CreateAsync(CreatePollDto input)
+    if (!input.Widget.IsNullOrWhiteSpace() && poll.Widget != input.Widget)
     {
-        if (!input.Widget.IsNullOrWhiteSpace())
-        {
-            await SetWidgetToNullAsync(input.Widget);
-        }
-
-        await PollManager.EnsureExistAsync(input.Code);
-        var poll1 = new Poll(GuidGenerator.Create(), input.Question, input.Code, input.Widget, input.Name, input.StartDate, input.AllowMultipleVote, input.ShowVoteCount, input.ShowResultWithoutGivingVote, input.ShowHoursLeft, input.EndDate, input.ResultShowingEndDate, CurrentTenant?.Id);
-        foreach (var pollOption in input.PollOptions)
-        {
-            poll1.AddPollOption(GuidGenerator.Create(), pollOption.Text, pollOption.Order, CurrentTenant?.Id);
-        }
-
-        var poll2 = await PollRepository.InsertAsync(poll1, false);
-        return ObjectMapper.Map<Poll, PollWithDetailsDto>(poll2);
+      await SetWidgetToNullAsync(input.Widget);
     }
 
-    [Authorize(AbpCmsKitProAdminPermissions.Polls.Update)]
-    public async Task<PollWithDetailsDto> UpdateAsync(Guid id, UpdatePollDto input)
+    poll.SetQuestion(input.Question);
+    poll.SetCode(input.Code);
+    poll.ShowVoteCount = input.ShowVoteCount;
+    poll.ShowResultWithoutGivingVote = input.ShowResultWithoutGivingVote;
+    poll.ShowHoursLeft = input.ShowHoursLeft;
+    poll.Widget = input.Widget;
+    poll.Name = input.Name;
+    poll.SetDates(input.StartDate, input.EndDate, input.ResultShowingEndDate);
+    foreach (var optionId in poll.PollOptions.Select(p => p.Id).Except(input.PollOptions.Select(p => p.Id)).ToList())
     {
-        var poll = await PollRepository.GetAsync(id, true);
-
-        if (poll.Code != input.Code)
-        {
-            await PollManager.EnsureExistAsync(input.Code);
-        }
-
-        if (!input.Widget.IsNullOrWhiteSpace() && poll.Widget != input.Widget)
-        {
-            await SetWidgetToNullAsync(input.Widget);
-        }
-
-        poll.SetQuestion(input.Question);
-        poll.SetCode(input.Code);
-        poll.ShowVoteCount = input.ShowVoteCount;
-        poll.ShowResultWithoutGivingVote = input.ShowResultWithoutGivingVote;
-        poll.ShowHoursLeft = input.ShowHoursLeft;
-        poll.Widget = input.Widget;
-        poll.Name = input.Name;
-        poll.SetDates(input.StartDate, input.EndDate, input.ResultShowingEndDate);
-        foreach (var optionId in poll.PollOptions.Select(p => p.Id).Except(input.PollOptions.Select(p => p.Id)).ToList())
-        {
-            poll.RemovePollOption(optionId);
-        }
-
-        foreach (var pollOption in input.PollOptions)
-        {
-            poll.UpdatePollOption(pollOption.Id, pollOption.Text, pollOption.Order, poll.TenantId);
-        }
-
-        await PollRepository.UpdateAsync(poll, false);
-        return ObjectMapper.Map<Poll, PollWithDetailsDto>(poll);
+      poll.RemovePollOption(optionId);
     }
 
-    [Authorize(AbpCmsKitProAdminPermissions.Polls.Delete)]
-    public Task DeleteAsync(Guid id)
+    foreach (var pollOption in input.PollOptions)
     {
-        return PollRepository.DeleteAsync(id, false);
+      poll.UpdatePollOption(pollOption.Id, pollOption.Text, pollOption.Order, poll.TenantId);
     }
 
-    public Task<ListResultDto<PollWidgetDto>> GetWidgetsAsync()
+    await PollRepository.UpdateAsync(poll, false);
+    return ObjectMapper.Map<Poll, PollWithDetailsDto>(poll);
+  }
+
+  [Authorize(AbpCmsKitProAdminPermissions.Polls.Delete)]
+  public virtual Task DeleteAsync(Guid id)
+  {
+    return PollRepository.DeleteAsync(id, false);
+  }
+
+  public virtual Task<ListResultDto<PollWidgetDto>> GetWidgetsAsync()
+  {
+    return Task.FromResult(new ListResultDto<PollWidgetDto>()
     {
-        return Task.FromResult(new ListResultDto<PollWidgetDto>()
-        {
-            Items = CmsKitPollingOptions.WidgetNames.Select(n => new PollWidgetDto()
-            {
-                Name = n
-            }).ToList()
-        });
+      Items = CmsKitPollingOptions.WidgetNames.Select(n => new PollWidgetDto()
+      {
+        Name = n
+      }).ToList()
+    });
+  }
+
+  public virtual async Task<GetResultDto> GetResultAsync(Guid id)
+  {
+    var poll = await PollRepository.GetAsync(id, true);
+    poll.OrderPollOptions();
+    var pollResultDtoList = new List<PollResultDto>();
+    foreach (var pollOption1 in poll.PollOptions)
+    {
+      var pollOption = pollOption1;
+      pollResultDtoList.Add(new PollResultDto()
+      {
+        Text = pollOption.Text,
+        VoteCount = poll.PollOptions.First(p => p.Id == pollOption.Id).VoteCount
+      });
     }
 
-    public async Task<GetResultDto> GetResultAsync(Guid id)
+    return new GetResultDto()
     {
-        var poll = await PollRepository.GetAsync(id, true);
-        poll.OrderPollOptions();
-        var pollResultDtoList = new List<PollResultDto>();
-        foreach (var pollOption1 in poll.PollOptions)
-        {
-            var pollOption = pollOption1;
-            pollResultDtoList.Add(new PollResultDto()
-            {
-                Text = pollOption.Text,
-                VoteCount = poll.PollOptions.First(p => p.Id == pollOption.Id).VoteCount
-            });
-        }
+      PollVoteCount = poll.VoteCount,
+      Question = poll.Question,
+      PollResultDetails = pollResultDtoList
+    };
+  }
 
-        return new GetResultDto()
-        {
-            PollVoteCount = poll.VoteCount,
-            Question = poll.Question,
-            PollResultDetails = pollResultDtoList
-        };
-    }
-
-    private async Task SetWidgetToNullAsync(string widget)
+  private async Task SetWidgetToNullAsync(string widget)
+  {
+    foreach (var item in await PollRepository.GetListByWidgetAsync(widget))
     {
-        foreach (var item in await PollRepository.GetListByWidgetAsync(widget))
-        {
-            item.Widget = null;
-            await PollRepository.UpdateAsync(item, false);
-        }
+      item.Widget = null;
+      await PollRepository.UpdateAsync(item, false);
     }
+  }
 }

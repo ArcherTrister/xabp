@@ -17,7 +17,7 @@ public class AbpLanguageManagementHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddHttpClientProxies(typeof(AbpLanguageManagementApplicationContractsModule).Assembly, AbpLanguageManagementRemoteServiceConsts.RemoteServiceName);
+        context.Services.AddStaticHttpClientProxies(typeof(AbpLanguageManagementApplicationContractsModule).Assembly, AbpLanguageManagementRemoteServiceConsts.RemoteServiceName);
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {

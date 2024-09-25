@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Abstractions" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Gdpr.Abstractions" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ldap" VersionOverride="$(AbpPackageVersion)" />

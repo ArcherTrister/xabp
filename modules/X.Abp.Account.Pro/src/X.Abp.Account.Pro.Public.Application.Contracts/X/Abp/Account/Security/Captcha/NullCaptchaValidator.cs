@@ -8,10 +8,10 @@ namespace X.Abp.Account.Security.Captcha;
 
 public class NullCaptchaValidator : ICaptchaValidator
 {
-    public static NullCaptchaValidator Instance { get; } = new NullCaptchaValidator();
+  public static NullCaptchaValidator Instance { get; } = new NullCaptchaValidator();
 
-    public Task ValidateAsync(string captchaResponse)
-    {
-        return Task.CompletedTask;
-    }
+  public virtual Task ValidateAsync(string captchaResponse)
+  {
+    return Task.CompletedTask;
+  }
 }

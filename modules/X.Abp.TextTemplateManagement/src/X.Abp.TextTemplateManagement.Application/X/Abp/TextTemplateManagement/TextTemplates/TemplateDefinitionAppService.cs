@@ -15,6 +15,7 @@ using Volo.Abp.Features;
 using Volo.Abp.Localization;
 using Volo.Abp.TextTemplating;
 
+using X.Abp.TextTemplateManagement.Features;
 using X.Abp.TextTemplateManagement.Permissions;
 
 namespace X.Abp.TextTemplateManagement.TextTemplates;

@@ -15,8 +15,7 @@
     <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ddd.Domain" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.LanguageManagement.Domain.Shared\X.Abp.LanguageManagement.Domain.Shared.csproj" />
+    <ProjectReference Include="..\X.Abp.LanguageManagement.Domain.Shared\X.Abp.LanguageManagement.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,8 @@ using System.Text.Json;
 
 using AutoMapper;
 
+using OpenIddict.Abstractions;
+
 using Volo.Abp.OpenIddict.Applications;
 using Volo.Abp.OpenIddict.Scopes;
 
@@ -25,21 +27,21 @@ public class AbpOpenIddictProApplicationAutoMapperProfile : Profile
         CreateMap<OpenIddictApplicationModel, ApplicationDto>(MemberList.Destination)
                   .MapExtraProperties()
                   .ForMember(applicationDto => applicationDto.ClientSecret, x => x.Ignore())
-                  .ForMember(applicationDto => applicationDto.AllowAuthorizationCodeFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains("gt:authorization_code")))
-                  .ForMember(applicationDto => applicationDto.AllowClientCredentialsFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains("gt:client_credentials")))
-                  .ForMember(applicationDto => applicationDto.AllowImplicitFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains("gt:implicit")))
-                  .ForMember(applicationDto => applicationDto.AllowHybridFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains("gt:authorization_code") && applicationModel.Permissions.Contains("gt:implicit")))
-                  .ForMember(applicationDto => applicationDto.AllowPasswordFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains("gt:password")))
-                  .ForMember(applicationDto => applicationDto.AllowRefreshTokenFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains("gt:refresh_token")))
-                  .ForMember(applicationDto => applicationDto.AllowLogoutEndpoint, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains("ept:logout")))
-                  .ForMember(applicationDto => applicationDto.AllowDeviceEndpoint, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains("ept:device")))
+                  .ForMember(applicationDto => applicationDto.AllowAuthorizationCodeFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode)))
+                  .ForMember(applicationDto => applicationDto.AllowClientCredentialsFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.GrantTypes.ClientCredentials)))
+                  .ForMember(applicationDto => applicationDto.AllowImplicitFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.GrantTypes.Implicit)))
+                  .ForMember(applicationDto => applicationDto.AllowHybridFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode) && applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.GrantTypes.Implicit)))
+                  .ForMember(applicationDto => applicationDto.AllowPasswordFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.GrantTypes.Password)))
+                  .ForMember(applicationDto => applicationDto.AllowRefreshTokenFlow, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.GrantTypes.RefreshToken)))
+                  .ForMember(applicationDto => applicationDto.AllowLogoutEndpoint, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.Endpoints.Logout)))
+                  .ForMember(applicationDto => applicationDto.AllowDeviceEndpoint, x => x.MapFrom(applicationModel => applicationModel.Permissions.Contains(OpenIddictConstants.Permissions.Endpoints.Device)))
                   .ForMember(applicationDto => applicationDto.RedirectUris, x => x.MapFrom(applicationModel => HashSet(applicationModel.RedirectUris)))
                   .ForMember(applicationDto => applicationDto.PostLogoutRedirectUris, x => x.MapFrom(applicationModel => HashSet(applicationModel.PostLogoutRedirectUris)))
                   .ForMember(applicationDto => applicationDto.ExtensionGrantTypes, x => x.MapFrom(applicationModel => HashSet(applicationModel.Permissions)
-                        .Where(str => str != "gt:refresh_token" && str != "gt:authorization_code" && str != "gt:implicit" && str != "gt:password" && str != "gt:client_credentials" && str != "gt:urn:ietf:params:oauth:grant-type:device_code")
-                        .Where(str => str.StartsWith("gt:", StringComparison.OrdinalIgnoreCase))
-                        .Select(str => str.Substring("gt:".Length))))
-                  .ForMember(applicationDto => applicationDto.Scopes, x => x.MapFrom(applicationModel => HashSet(applicationModel.Permissions).Where(str => str.StartsWith("scp:", StringComparison.InvariantCultureIgnoreCase)).Select(str => str.Substring("scp:".Length))));
+                        .Where(str => str != OpenIddictConstants.Permissions.GrantTypes.RefreshToken && str != OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode && str != OpenIddictConstants.Permissions.GrantTypes.Implicit && str != OpenIddictConstants.Permissions.GrantTypes.Password && str != OpenIddictConstants.Permissions.GrantTypes.ClientCredentials && str != OpenIddictConstants.Permissions.GrantTypes.DeviceCode)
+                        .Where(str => str.StartsWith(OpenIddictConstants.Permissions.Prefixes.GrantType, StringComparison.OrdinalIgnoreCase))
+                        .Select(str => str.Substring(OpenIddictConstants.Permissions.Prefixes.GrantType.Length))))
+                  .ForMember(applicationDto => applicationDto.Scopes, x => x.MapFrom(applicationModel => HashSet(applicationModel.Permissions).Where(str => str.StartsWith(OpenIddictConstants.Permissions.Prefixes.Scope, StringComparison.InvariantCultureIgnoreCase)).Select(str => str.Substring(OpenIddictConstants.Permissions.Prefixes.Scope.Length))));
 
         CreateMap<OpenIddictScopeModel, ScopeDto>(MemberList.Destination)
                   .MapExtraProperties()

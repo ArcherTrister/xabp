@@ -21,75 +21,75 @@ namespace X.Abp.Cli.Commands;
 
 public class ListModulesCommand : IConsoleCommand, ITransientDependency
 {
-    public const string Name = "list-modules";
+  public const string Name = "list-modules";
 
-    protected ModuleInfoProvider ModuleInfoProvider { get; }
+  protected ModuleInfoProvider ModuleInfoProvider { get; }
 
-    protected ILogger<ListModulesCommand> Logger { get; set; }
+  protected ILogger<ListModulesCommand> Logger { get; set; }
 
-    public ListModulesCommand(ModuleInfoProvider moduleInfoProvider, ILogger<ListModulesCommand> logger)
+  public ListModulesCommand(ModuleInfoProvider moduleInfoProvider, ILogger<ListModulesCommand> logger)
+  {
+    ModuleInfoProvider = moduleInfoProvider;
+    Logger = logger ?? NullLogger<ListModulesCommand>.Instance;
+  }
+
+  public virtual async Task ExecuteAsync(CommandLineArgs commandLineArgs)
+  {
+    var modules = await ModuleInfoProvider.GetModuleListAsync();
+    var freeModules = modules.Where(m => !m.IsPro).ToList();
+
+    var proModules = modules.Where(m => m.IsPro).ToList();
+    var xModules = InstallModules.Init.Select(p => new Volo.Abp.Cli.ProjectBuilding.Building.ModuleInfo
     {
-        ModuleInfoProvider = moduleInfoProvider;
-        Logger = logger ?? NullLogger<ListModulesCommand>.Instance;
+      Name = p.Name,
+      DisplayName = p.DisplayName,
+    }).ToList();
+    proModules = proModules.Union(xModules).ToList();
+
+    var output = new StringBuilder(Environment.NewLine);
+    output.AppendLine("Open Source Application Modules");
+    output.AppendLine();
+
+    foreach (var module in freeModules)
+    {
+      output.AppendLine($"> {module.DisplayName.PadRight(50)} ({module.Name})");
     }
 
-    public async Task ExecuteAsync(CommandLineArgs commandLineArgs)
+    if (commandLineArgs.Options.TryGetValue("include-pro-modules", out var _))
     {
-        var modules = await ModuleInfoProvider.GetModuleListAsync();
-        var freeModules = modules.Where(m => !m.IsPro).ToList();
-
-        var proModules = modules.Where(m => m.IsPro).ToList();
-        var xModules = InstallModules.Init.Select(p => new Volo.Abp.Cli.ProjectBuilding.Building.ModuleInfo
-        {
-            Name = p.Name,
-            DisplayName = p.DisplayName,
-        }).ToList();
-        proModules = proModules.Union(xModules).ToList();
-
-        var output = new StringBuilder(Environment.NewLine);
-        output.AppendLine("Open Source Application Modules");
-        output.AppendLine();
-
-        foreach (var module in freeModules)
-        {
-            output.AppendLine($"> {module.DisplayName.PadRight(50)} ({module.Name})");
-        }
-
-        if (commandLineArgs.Options.TryGetValue("include-pro-modules", out var _))
-        {
-            output.AppendLine();
-            output.AppendLine("Commercial (Pro) Application Modules");
-            output.AppendLine();
-            foreach (var module in proModules)
-            {
-                output.AppendLine($"> {module.DisplayName.PadRight(50)} ({module.Name})");
-            }
-        }
-
-        Logger.LogInformation(output.ToString());
+      output.AppendLine();
+      output.AppendLine("Commercial (Pro) Application Modules");
+      output.AppendLine();
+      foreach (var module in proModules)
+      {
+        output.AppendLine($"> {module.DisplayName.PadRight(50)} ({module.Name})");
+      }
     }
 
-    public string GetUsageInfo()
-    {
-        var sb = new StringBuilder();
+    Logger.LogInformation(output.ToString());
+  }
 
-        sb.AppendLine(string.Empty);
-        sb.AppendLine("'list-modules' command is used for listing open source application modules.");
-        sb.AppendLine(string.Empty);
-        sb.AppendLine("Usage:");
-        sb.AppendLine("  xabp list-modules");
-        sb.AppendLine("  xabp list-modules --include-pro-modules");
-        sb.AppendLine(string.Empty);
-        sb.AppendLine("Options:");
-        sb.AppendLine("  --include-pro-modules                                           Includes commercial (pro) modules in the output.");
-        sb.AppendLine(string.Empty);
-        sb.AppendLine("See the documentation for more info: https://docs.abp.io/en/abp/latest/CLI");
+  public string GetUsageInfo()
+  {
+    var sb = new StringBuilder();
 
-        return sb.ToString();
-    }
+    sb.AppendLine(string.Empty);
+    sb.AppendLine("'list-modules' command is used for listing open source application modules.");
+    sb.AppendLine(string.Empty);
+    sb.AppendLine("Usage:");
+    sb.AppendLine("  xabp list-modules");
+    sb.AppendLine("  xabp list-modules --include-pro-modules");
+    sb.AppendLine(string.Empty);
+    sb.AppendLine("Options:");
+    sb.AppendLine("  --include-pro-modules                                           Includes commercial (pro) modules in the output.");
+    sb.AppendLine(string.Empty);
+    sb.AppendLine("See the documentation for more info: https://docs.abp.io/en/abp/latest/CLI");
 
-    public string GetShortDescription()
-    {
-        return "List application modules";
-    }
+    return sb.ToString();
+  }
+
+  public string GetShortDescription()
+  {
+    return "List application modules";
+  }
 }

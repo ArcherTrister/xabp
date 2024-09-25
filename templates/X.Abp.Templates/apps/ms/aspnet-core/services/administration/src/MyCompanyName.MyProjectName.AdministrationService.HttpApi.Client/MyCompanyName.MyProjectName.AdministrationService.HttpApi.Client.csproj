@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName.AdministrationService</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.AuditLogging.HttpApi.Client" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LeptonTheme.Management.HttpApi.Client" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.HttpApi.Client" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.HttpApi.Client" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\MyCompanyName.MyProjectName.AdministrationService.Application.Contracts\MyCompanyName.MyProjectName.AdministrationService.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

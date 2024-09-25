@@ -7,6 +7,7 @@ using Volo.Abp.Modularity;
 namespace X.Abp.Account;
 
 [DependsOn(
+    typeof(AbpAccountAdminApplicationContractsModule),
     typeof(AbpAccountSharedApplicationModule))]
 public class AbpAccountAdminApplicationModule : AbpModule
 {

@@ -73,11 +73,11 @@
 //         {
 //             using (var uow = UnitOfWorkManager.Begin(requiresNew: true, isTransactional: false))
 //             {
-//                 Log.Information($"Lock is acquired for db migration and seeding on database named: {DatabaseName}...");
+//                 Log.Information("Lock is acquired for db migration and seeding on database named: {DatabaseName}...", DatabaseName);
 //
 //                 if (handle is null)
 //                 {
-//                     Log.Information($"Handle is null because of the locking for : {DatabaseName}");
+//                     Log.Information("Handle is null because of the locking for : {DatabaseName}", DatabaseName);
 //                     return false;
 //                 }
 //

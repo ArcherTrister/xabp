@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 
 using MyCompanyName.MyProjectName.AdministrationService;
@@ -163,6 +163,12 @@ public class MyProjectNameWebModule : AbpModule
                 options.Scope.Add("ProductService");
             });
 
+        Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+        {
+            options.IsDynamicClaimsEnabled = true;
+            options.RemoteRefreshUrl = configuration["AuthServer:Authority"] + options.RemoteRefreshUrl;
+        });
+
         if (Convert.ToBoolean(configuration["AuthServer:IsOnK8s"]))
         {
             context.Services.Configure<OpenIdConnectOptions>("oidc", options =>
@@ -264,6 +270,7 @@ public class MyProjectNameWebModule : AbpModule
         app.UseAuthentication();
         app.UseMultiTenancy();
         app.UseAbpSerilogEnrichers();
+        app.UseDynamicClaims();
         app.UseAuthorization();
         app.UseConfiguredEndpoints(endpoints =>
         {

@@ -27,46 +27,46 @@ public class UrlShortingAdminController :
   CmsKitProAdminController,
   IUrlShortingAdminAppService
 {
-    protected IUrlShortingAdminAppService UrlShortingAdminAppService { get; }
+  protected IUrlShortingAdminAppService UrlShortingAdminAppService { get; }
 
-    public UrlShortingAdminController(IUrlShortingAdminAppService urlShortingAdminAppService)
-    {
-        UrlShortingAdminAppService = urlShortingAdminAppService;
-    }
+  public UrlShortingAdminController(IUrlShortingAdminAppService urlShortingAdminAppService)
+  {
+    UrlShortingAdminAppService = urlShortingAdminAppService;
+  }
 
-    [HttpGet]
-    public Task<PagedResultDto<ShortenedUrlDto>> GetListAsync(GetShortenedUrlListInput input)
-    {
-        return UrlShortingAdminAppService.GetListAsync(input);
-    }
+  [HttpGet]
+  public virtual Task<PagedResultDto<ShortenedUrlDto>> GetListAsync(GetShortenedUrlListInput input)
+  {
+    return UrlShortingAdminAppService.GetListAsync(input);
+  }
 
-    [Route("{id}")]
-    [HttpGet]
-    public Task<ShortenedUrlDto> GetAsync(Guid id)
-    {
-        return UrlShortingAdminAppService.GetAsync(id);
-    }
+  [Route("{id}")]
+  [HttpGet]
+  public virtual Task<ShortenedUrlDto> GetAsync(Guid id)
+  {
+    return UrlShortingAdminAppService.GetAsync(id);
+  }
 
-    [Authorize(AbpCmsKitProAdminPermissions.UrlShorting.Create)]
-    [HttpPost]
-    public Task<ShortenedUrlDto> CreateAsync(CreateShortenedUrlDto input)
-    {
-        return UrlShortingAdminAppService.CreateAsync(input);
-    }
+  [Authorize(AbpCmsKitProAdminPermissions.UrlShorting.Create)]
+  [HttpPost]
+  public virtual Task<ShortenedUrlDto> CreateAsync(CreateShortenedUrlDto input)
+  {
+    return UrlShortingAdminAppService.CreateAsync(input);
+  }
 
-    [Route("{id}")]
-    [HttpPut]
-    [Authorize(AbpCmsKitProAdminPermissions.UrlShorting.Update)]
-    public Task<ShortenedUrlDto> UpdateAsync(Guid id, UpdateShortenedUrlDto input)
-    {
-        return UrlShortingAdminAppService.UpdateAsync(id, input);
-    }
+  [Route("{id}")]
+  [HttpPut]
+  [Authorize(AbpCmsKitProAdminPermissions.UrlShorting.Update)]
+  public virtual Task<ShortenedUrlDto> UpdateAsync(Guid id, UpdateShortenedUrlDto input)
+  {
+    return UrlShortingAdminAppService.UpdateAsync(id, input);
+  }
 
-    [Authorize(AbpCmsKitProAdminPermissions.UrlShorting.Delete)]
-    [Route("{id}")]
-    [HttpDelete]
-    public Task DeleteAsync(Guid id)
-    {
-        return UrlShortingAdminAppService.DeleteAsync(id);
-    }
+  [Authorize(AbpCmsKitProAdminPermissions.UrlShorting.Delete)]
+  [Route("{id}")]
+  [HttpDelete]
+  public virtual Task DeleteAsync(Guid id)
+  {
+    return UrlShortingAdminAppService.DeleteAsync(id);
+  }
 }

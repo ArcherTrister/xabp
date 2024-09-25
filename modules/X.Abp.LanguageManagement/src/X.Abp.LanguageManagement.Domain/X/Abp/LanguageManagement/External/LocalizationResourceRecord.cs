@@ -29,12 +29,11 @@ namespace X.Abp.LanguageManagement.External
 
         public DateTime? LastModificationTime { get; set; }
 
-        protected LocalizationResourceRecord() { }
+        protected LocalizationResourceRecord()
+        {
+        }
 
-        public LocalizationResourceRecord(
-            LocalizationResourceBase resource,
-            IEnumerable<string> supportedCultures
-        )
+        public LocalizationResourceRecord(LocalizationResourceBase resource, IEnumerable<string> supportedCultures)
         {
             Name = Check.NotNullOrWhiteSpace(resource.ResourceName, nameof(resource.ResourceName));
 
@@ -59,15 +58,12 @@ namespace X.Abp.LanguageManagement.External
             return this;
         }
 
-        public bool TryUpdate(
-            LocalizationResourceBase resource,
-            IEnumerable<string> supportedCultures
-        )
+        public bool TryUpdate(LocalizationResourceBase resource, IEnumerable<string> supportedCultures)
         {
-            return method_5(resource) | method_6(resource) | method_7(supportedCultures);
+            return IsUpdateDefaultCulture(resource) | IsUpdateBaseResources(resource) | IsUpdateSupportedCultures(supportedCultures);
         }
 
-        private bool method_5(LocalizationResourceBase localizationResource)
+        private bool IsUpdateDefaultCulture(LocalizationResourceBase localizationResource)
         {
             if (DefaultCulture == localizationResource.DefaultCultureName)
             {
@@ -78,7 +74,7 @@ namespace X.Abp.LanguageManagement.External
             return true;
         }
 
-        private bool method_6(LocalizationResourceBase localizationResource)
+        private bool IsUpdateBaseResources(LocalizationResourceBase localizationResource)
         {
             string str = Transform(localizationResource.BaseResourceNames);
             if (BaseResources == str)
@@ -90,9 +86,9 @@ namespace X.Abp.LanguageManagement.External
             return true;
         }
 
-        private bool method_7(IEnumerable<string> ienumerable_0)
+        private bool IsUpdateSupportedCultures(IEnumerable<string> supportedCultures)
         {
-            string str = Transform(ienumerable_0);
+            string str = Transform(supportedCultures);
             if (SupportedCultures == str)
             {
                 return false;
@@ -102,13 +98,13 @@ namespace X.Abp.LanguageManagement.External
             return true;
         }
 
-        private static string Transform(IEnumerable<string> ienumerable_0)
+        private static string Transform(IEnumerable<string> supportedCultures)
         {
-            string str = string.Join(",", ienumerable_0);
+            string str = string.Join(",", supportedCultures);
             return str.IsNullOrWhiteSpace() ? null : str;
         }
 
-        private string[] Transform(string str)
+        private static string[] Transform(string str)
         {
             string[] strArray;
             if (str == null)
@@ -117,15 +113,13 @@ namespace X.Abp.LanguageManagement.External
             }
             else
             {
-                strArray = str.Split(
-                    ",",
-                    StringSplitOptions.RemoveEmptyEntries
-                );
+                strArray = str.Split(",", StringSplitOptions.RemoveEmptyEntries);
                 if (strArray != null)
                 {
                     return strArray;
                 }
             }
+
             return Array.Empty<string>();
         }
     }

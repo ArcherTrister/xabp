@@ -35,7 +35,6 @@ public class ApiResourcesController : AbpControllerBase, IApiResourceAppService
         ApiResourceAppService = apiResourceAppService;
     }
 
-    [Route("")]
     [HttpGet]
     public virtual async Task<PagedResultDto<ApiResourceWithDetailsDto>> GetListAsync(GetApiResourceListInput input)
     {

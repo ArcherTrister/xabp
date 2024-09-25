@@ -28,58 +28,57 @@ namespace X.Abp.IdentityServer;
 [Controller]
 public class IdentityResourcesController : AbpControllerBase, IIdentityResourceAppService
 {
-    protected IIdentityResourceAppService IdentityResourceAppService { get; }
+  protected IIdentityResourceAppService IdentityResourceAppService { get; }
 
-    public IdentityResourcesController(IIdentityResourceAppService identityResourceAppService)
-    {
-        IdentityResourceAppService = identityResourceAppService;
-    }
+  public IdentityResourcesController(IIdentityResourceAppService identityResourceAppService)
+  {
+    IdentityResourceAppService = identityResourceAppService;
+  }
 
-    [HttpGet]
-    [Route("")]
-    public async Task<PagedResultDto<IdentityResourceWithDetailsDto>> GetListAsync(GetIdentityResourceListInput input)
-    {
-        return await IdentityResourceAppService.GetListAsync(input);
-    }
+  [HttpGet]
+  public virtual async Task<PagedResultDto<IdentityResourceWithDetailsDto>> GetListAsync(GetIdentityResourceListInput input)
+  {
+    return await IdentityResourceAppService.GetListAsync(input);
+  }
 
-    [Route("all")]
-    [HttpGet]
-    public virtual async Task<List<IdentityResourceWithDetailsDto>> GetAllListAsync()
-    {
-        return await IdentityResourceAppService.GetAllListAsync();
-    }
+  [Route("all")]
+  [HttpGet]
+  public virtual async Task<List<IdentityResourceWithDetailsDto>> GetAllListAsync()
+  {
+    return await IdentityResourceAppService.GetAllListAsync();
+  }
 
-    [HttpGet]
-    [Route("{id}")]
-    public virtual async Task<IdentityResourceWithDetailsDto> GetAsync(Guid id)
-    {
-        return await IdentityResourceAppService.GetAsync(id);
-    }
+  [HttpGet]
+  [Route("{id}")]
+  public virtual async Task<IdentityResourceWithDetailsDto> GetAsync(Guid id)
+  {
+    return await IdentityResourceAppService.GetAsync(id);
+  }
 
-    [HttpPost]
-    public virtual async Task<IdentityResourceWithDetailsDto> CreateAsync(CreateIdentityResourceDto input)
-    {
-        return await IdentityResourceAppService.CreateAsync(input);
-    }
+  [HttpPost]
+  public virtual async Task<IdentityResourceWithDetailsDto> CreateAsync(CreateIdentityResourceDto input)
+  {
+    return await IdentityResourceAppService.CreateAsync(input);
+  }
 
-    [Route("{id}")]
-    [HttpPut]
-    public virtual async Task<IdentityResourceWithDetailsDto> UpdateAsync(Guid id, UpdateIdentityResourceDto input)
-    {
-        return await IdentityResourceAppService.UpdateAsync(id, input);
-    }
+  [Route("{id}")]
+  [HttpPut]
+  public virtual async Task<IdentityResourceWithDetailsDto> UpdateAsync(Guid id, UpdateIdentityResourceDto input)
+  {
+    return await IdentityResourceAppService.UpdateAsync(id, input);
+  }
 
-    [HttpDelete]
-    [Route("{id}")]
-    public virtual async Task DeleteAsync(Guid id)
-    {
-        await IdentityResourceAppService.DeleteAsync(id);
-    }
+  [HttpDelete]
+  [Route("{id}")]
+  public virtual async Task DeleteAsync(Guid id)
+  {
+    await IdentityResourceAppService.DeleteAsync(id);
+  }
 
-    [HttpPost]
-    [Route("create-standard-resources")]
-    public virtual async Task CreateStandardResourcesAsync()
-    {
-        await IdentityResourceAppService.CreateStandardResourcesAsync();
-    }
+  [HttpPost]
+  [Route("create-standard-resources")]
+  public virtual async Task CreateStandardResourcesAsync()
+  {
+    await IdentityResourceAppService.CreateStandardResourcesAsync();
+  }
 }

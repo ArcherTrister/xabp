@@ -13,8 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Domain" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Users.Domain" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.Chat.Domain.Shared\X.Abp.Chat.Domain.Shared.csproj" />
   </ItemGroup>
 

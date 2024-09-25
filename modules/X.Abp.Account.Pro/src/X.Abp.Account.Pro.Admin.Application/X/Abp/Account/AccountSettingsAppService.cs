@@ -41,7 +41,8 @@ public class AccountSettingsAppService : ApplicationService, IAccountSettingsApp
         return new AccountSettingsDto
         {
             IsSelfRegistrationEnabled = await SettingProvider.GetAsync<bool>(AccountSettingNames.IsSelfRegistrationEnabled),
-            EnableLocalLogin = await SettingProvider.GetAsync<bool>(AccountSettingNames.EnableLocalLogin)
+            EnableLocalLogin = await SettingProvider.GetAsync<bool>(AccountSettingNames.EnableLocalLogin),
+            PreventEmailEnumeration = await SettingProvider.GetAsync<bool>(AccountSettingNames.PreventEmailEnumeration)
         };
     }
 
@@ -51,6 +52,7 @@ public class AccountSettingsAppService : ApplicationService, IAccountSettingsApp
         {
             await SettingManager.SetForCurrentTenantAsync(AccountSettingNames.IsSelfRegistrationEnabled, input.IsSelfRegistrationEnabled.ToString());
             await SettingManager.SetForCurrentTenantAsync(AccountSettingNames.EnableLocalLogin, input.EnableLocalLogin.ToString());
+            await SettingManager.SetForCurrentTenantAsync(AccountSettingNames.PreventEmailEnumeration, input.PreventEmailEnumeration.ToString());
         }
     }
 

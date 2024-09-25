@@ -1,0 +1,41 @@
+config:
+    selfUrl: # https://myprojectname-st-identity
+    corsOrigins: # https://myprojectname-st-gateway-web,https://myprojectname-st-gateway-public-web
+    connectionStrings:
+        identityService: #
+        administrationService: #
+        saasService: #
+    authServer:
+        authority: # http://myprojectname-st-authserver
+        requireHttpsMetadata: # "false"
+    dotnetEnv: Staging
+    redisHost: #
+    rabbitmqHost: #
+    elasticsearchUrl: #
+    stringEncryptionDefaultPassPhrase: gsKnGZ041HLL4IM8
+
+# Seeded clients
+identityServerClients:
+    authServerRootUrl: #
+    angularRootUrl: #
+    webRootUrl: #
+    blazorRootUrl: #
+    blazorServerRootUrl: #
+    publicWebRootUrl: #
+    webGatewayRootUrl: #
+    publicWebGatewayRootUrl: #
+    administrationServiceRootUrl: #
+    identityServiceRootUrl: #
+    saasServiceRootUrl: #
+    productServiceRootUrl: #
+
+ingress:
+    host: myprojectname-st-identity
+    tlsSecret: myprojectname-tls
+
+image:
+    repository: abpvnext/myprojectname-service-identity
+    tag: latest
+    pullPolicy: IfNotPresent
+
+env: {}

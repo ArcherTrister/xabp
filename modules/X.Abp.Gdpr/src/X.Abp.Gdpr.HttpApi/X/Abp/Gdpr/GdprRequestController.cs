@@ -46,11 +46,11 @@ IGdprRequestAppService
     [HttpGet("data/{requestId}")]
     public virtual async Task<IRemoteStreamContent> GetUserDataAsync(Guid requestId, string token)
     {
-        var userDataAsync = await GdprRequestAppService.GetUserDataAsync(requestId, token);
-        Response.Headers.Add("Content-Disposition", "attachment;filename=\"" + userDataAsync.FileName + "\"");
+        var userData = await GdprRequestAppService.GetUserDataAsync(requestId, token);
+        Response.Headers.Add("Content-Disposition", "attachment;filename=\"" + userData.FileName + "\"");
         Response.Headers.Add("Accept-Ranges", "bytes");
-        Response.ContentType = userDataAsync.ContentType;
-        return userDataAsync;
+        Response.ContentType = userData.ContentType;
+        return userData;
     }
 
     [HttpGet("is-request-allowed")]

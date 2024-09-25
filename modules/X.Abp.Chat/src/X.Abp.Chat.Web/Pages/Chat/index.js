@@ -1,12 +1,27 @@
 (function ($) {
 
     var l = abp.localization.getResource('Chat');
-    var _conversationService = x.chat.conversations.conversation;
-    var _contactService = x.chat.users.contact;
-    var _settingService = x.chat.settings.settings;
+    var _conversationService = volo.chat.conversations.conversation;
+    var _contactService = volo.chat.users.contact;
+    var _settingService = volo.chat.settings.settings;
     var _wrapper = $('#chat_wrapper');
 
+    var searchingPermission = abp.auth.isGranted("Chat.Searching");
+    if (searchingPermission) {
+        $("#SearchBox").show();
+    }
     var pageSize = 50;
+
+    const ChatDeletingMessages = {
+        enabled: "Enabled",
+        disabled: "Disabled",
+        enabledWithDeletionPeriod: "EnabledWithDeletionPeriod"
+    }
+
+    const ChatDeletingConversations = {
+        enabled: "Enabled",
+        disabled: "Disabled"
+    }
 
     var queryStringParser = {
         keyValueArray: [],
@@ -27,7 +42,7 @@
 
                 for (var i = 0; i < parametersAndValues.length; i++) {
                     var parameterAndValue = parametersAndValues[i].split('=');
-                    this.keyValueArray.push({key: parameterAndValue[0], value: parameterAndValue[1]});
+                    this.keyValueArray.push({ key: parameterAndValue[0], value: parameterAndValue[1] });
                 }
             }
 
@@ -89,16 +104,16 @@
 
     var colorGenerator = {
         colors: [
-            {text: '#ffffff', background: '#3cb160'},
-            {text: '#ffffff', background: '#c373cc'},
-            {text: '#ffffff', background: '#2b78b3'},
-            {text: '#ffffff', background: '#6ac79a'},
-            {text: '#ffffff', background: '#aeb140'},
-            {text: '#ffffff', background: '#b773c0'},
-            {text: '#ffffff', background: '#e16d7a'},
-            {text: '#ffffff', background: '#ffac2a'},
-            {text: '#ffffff', background: '#21bbc7'},
-            {text: '#ffffff', background: '#59ab95'}
+            { text: '#ffffff', background: '#3cb160' },
+            { text: '#ffffff', background: '#c373cc' },
+            { text: '#ffffff', background: '#2b78b3' },
+            { text: '#ffffff', background: '#6ac79a' },
+            { text: '#ffffff', background: '#aeb140' },
+            { text: '#ffffff', background: '#b773c0' },
+            { text: '#ffffff', background: '#e16d7a' },
+            { text: '#ffffff', background: '#ffac2a' },
+            { text: '#ffffff', background: '#21bbc7' },
+            { text: '#ffffff', background: '#59ab95' }
         ],
         generateFromString: function (str) {
             var hash = 0;
@@ -160,6 +175,7 @@
                 var username = $(this).data('username');
                 var conversationTitle = $(this).data('conversation-title');
                 var isNewContact = $(this).data('is-new-contact');
+                var hasChatPermission = $(this).data('has-chat-permission');
 
                 _wrapper.find('#Send_Message_Form #userId').val(userId);
                 _wrapper.find('#Conversation_Title').html(conversationTitle);
@@ -173,6 +189,22 @@
                 }
 
                 contacts.setActiveContact(this);
+
+                var chatBox = $("#chatBox");
+                if (!hasChatPermission) {
+                    chatBox.css("pointer-events", "none");
+                    chatBox.css("opacity", "0.4");
+                    var chatBoxTitle = $("#Conversation_Title");
+                    chatBoxTitle.text(chatBoxTitle.text() + " ¡ª " + l('Volo.Chat:010004'));
+                } else {
+                    chatBox.css("pointer-events", "inherit");
+                    chatBox.css("opacity", "inherit");
+                }
+
+                _wrapper.find('#AvatarId').show();
+                $('#EmptyTemplate').hide();
+                $('#chat_conversation_wrapper').show();
+                $('#Send_Message_Form').show();
                 _wrapper.find('#Chat_Message_Box').val('');
                 _wrapper.find('#Chat_Message_Box').focus();
                 _wrapper.find('#Send_Message_Form #Send_Message_Button').prop('disabled', true);
@@ -189,15 +221,9 @@
         setActiveContact: function (activeContact) {
             var oldActiveContact = _wrapper.find('.chat-contact, .active');
             if (oldActiveContact.length > 1) {
-                $(oldActiveContact).addClass('border-right-0');
-                $(oldActiveContact).addClass('list-group-item-light');
                 $(oldActiveContact).removeClass('active');
-                $(oldActiveContact).removeClass('text-white');
             }
-            $(activeContact).removeClass('border-right-0');
-            $(activeContact).removeClass('list-group-item-light');
             $(activeContact).addClass('active');
-            $(activeContact).addClass('text-white');
         },
         addCanvasToContacts: function () {
             var contacts = _wrapper.find('.chat-contact');
@@ -210,15 +236,18 @@
             }
         },
         refresh: function (callback) {
-            var filter = _wrapper.find('#Contacts_Filter').val();
-            var includeOtherContacts = filter !== null && filter !== '';
+            let filter = _wrapper.find('#Contacts_Filter').val();
+            if (filter.length > 1 && filter[0] === ' ' && filter[1] !== ' ') {
+                filter = filter.trim();
+                _wrapper.find('#Contacts_Filter').val(filter);
+            }
+            let includeOtherContacts = filter !== null && filter !== '';
             _contactService.getContacts({
                 filter: _wrapper.find('#Contacts_Filter').val(),
                 includeOtherContacts: includeOtherContacts
             }).then(function (result) {
-
-                var contactsAsHtml = '';
-                var otherContact = false;
+                let contactsAsHtml = '';
+                let otherContact = false;
                 for (var i = 0; i < result.length; i++) {
                     if (otherContact === false &&
                         (result[i].lastMessage === null || result[i].lastMessage === '')) {
@@ -228,11 +257,25 @@
                     contactsAsHtml += contacts.getContactTemplate(result[i], otherContact);
                 }
 
+                if (includeOtherContacts === true || result.length > 0) {
+                    $('#EmptyTemplate').hide();
+                    $('#chat_conversation_wrapper').show();
+                    $('#Send_Message_Form').show();
+                    _wrapper.find('#AvatarId').show();
+                }
+                else {
+                    $('#EmptyTemplate').show();
+                    $('#chat_conversation_wrapper').hide();
+                    $('#Send_Message_Form').hide();
+                    _wrapper.find('#Conversation_Title').html('');
+                    _wrapper.find('#AvatarId').hide();
+                }
+
                 _wrapper.find('#contact_list').empty();
                 _wrapper.find('#contact_list').html(contactsAsHtml);
 
                 contacts.addCanvasToContacts();
-
+                conversation.bindDeleteConversationEvent();
                 if (callback) {
                     callback();
                 }
@@ -257,19 +300,32 @@
                 unreadBadge = '<small class="badge bg-success me-1" style="display:none">0</small>';
             }
 
-            var template = "\<a class=\"chat-contact list-group-item list-group-item-action px-4 list-group-item-light rounded-0 border-left-0 border-right-0\" data-conversation-title=\"" + contacts.getName(contact) + "\" data-userid=\"" + contact.userId + "\" data-username=\"" + contact.username + "\" data-is-new-contact=" + isNewContact + ">" +
-                "<div class=\"media\">" +
-                //"<img src=\"https://avatars.dicebear.com/v2/human/voloqq.svg\" alt=\"user\" width=\"44\" class=\"rounded-circle mx-auto\">" +
-                "<canvas class=\"canvas-avatar mx-auto rounded-circle\" width=\"40\" height=\"40\"> .</canvas >" +
-                "<div class=\"media-body ms-2 d-none d-md-block\">" +
-                "<div class=\"d-flex align-items-center justify-content-between mb-1\">" +
-                "<h6 class=\"mb-0\">" +
-                unreadBadge + contacts.getName(contact) + "</h6> <small class=\"small font-weight-bold last-message-date\">" + lastMessageDate + "</small>" +
+            var deletingTemplate = "";
+            if (conversation.isDeletingConversationEnabled()) {
+                deletingTemplate = "<div class=\"dropdown position-absolute bottom-0 end-0\">" +
+                    "<button class=\"btn p-1\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
+                    "<i class=\"lpx-caret bi-chevron-down\" aria-hidden=\"true\"></i>" +
+                    "</button>" +
+                    "<ul class=\"dropdown-menu\">" +
+                    "<li><a class=\"dropdown-item delete-conversation-btn\" data-id=" + contact.userId + " href=\"#\">" + l("Delete") + "</a></li>" +
+                    "</ul>" +
+                    "</div>";
+            }
+
+            var template = "\<div class=\"active border-2 chat-contact cursor-pointer list-group-item list-group-item-action mb-1 mt-0 px-2 rounded-2\" data-conversation-title=\"" + contacts.getName(contact) + "\" data-userid=\"" + contact.userId + "\" data-username=\"" + contact.username + "\" data-is-new-contact=" + isNewContact + " data-has-chat-permission=\"" + contact.hasChatPermission + "\"" + ">" +
+                "<div class=\"media \">" +
+                //"<img src=\"https://avatars.dicebear.com/v2/human/voloqq.svg\" alt=\"user\" width=\"44\" class=\"rounded-circle mx-auto me-md-2 float-start \">" +
+                "<canvas class=\"canvas-avatar me-2 float-start rounded-circle\" width=\"48\" height=\"48\"> .</canvas >" +
+                "<div class=\"media-body ms-2\">" +
+                "<div class=\"d-flex align-items-center justify-content-between mb-0\">" +
+                "<h5 class=\"mb-0 mt-1\">" +
+                unreadBadge + contacts.getName(contact) + "</h5> <small class=\"last-message-date\">" + lastMessageDate + "</small>" +
                 "</div > " +
-                "<p class=\"mb-0 text-small last-message\">" + contacts.shortenMessage(contact.lastMessage) + "</p>" +
+                "<p class=\"mb-0 small last-message\">" + contacts.shortenMessage(contact.lastMessage) + "</p>" +
                 "</div > " +
                 "</div > " +
-                "</a>";
+                deletingTemplate +
+                "</div>";
 
             return template;
         },
@@ -290,15 +346,16 @@
             return name;
         },
         getSeparatorTemplate: function () {
-            var template = "<div class=\"list-group-item px-2 py-1 bg-light text-muted text-center font-size-sm text-uppercase border-left-0 border-right-0\">" +
+            var template = "<div class=\" px-2 py-1 bg-light text-muted text-center font-size-sm small text-uppercase my-1 rounded-2  \">" +
                 "<small>" + l('OtherContacts') + "</small>" +
                 "</div>";
 
             return template;
         },
-        addMessage: function (userId, username, name, surname, message, isSent) {
+        addMessage: function (userId, username, name, surname, message, isSent, id) {
 
             var messageObj = {
+                id: id,
                 message: message,
                 side: isSent ? 1 : 2,
                 messageDate: new Date()
@@ -312,7 +369,9 @@
 
             if (contactInHtmlList.length > 0) {
                 $(contactInHtmlList[0]).find('.last-message').html(contacts.shortenMessage(messageObj.message));
+                $(contactInHtmlList[0]).find('.last-message').html(contacts.shortenMessage(messageObj.message));
                 $(contactInHtmlList[0]).find('.last-message-date').html(dateManager.formatMessageDate(new Date()));
+                $(contactInHtmlList[0]).data('is-new-contact', false);
 
                 if (userId !== _wrapper.find('#userId').val()) {
                     var unreadBadge = $(contactInHtmlList[0]).find('.bg-success');
@@ -344,6 +403,7 @@
 
             var currentContactHtml = _wrapper.find('#contact_list').html();
             _wrapper.find('#contact_list').html(newContactHtml + currentContactHtml);
+            conversation.bindDeleteConversationEvent();
         },
         moveToTop: function (userId) {
 
@@ -362,12 +422,12 @@
 
                 contactAsHtmlElement.css('position', 'relative');
                 previousAll.css('position', 'relative');
-                contactAsHtmlElement.animate({'top': -moveUp});
-                previousAll.animate({'top': moveDown}, {
+                contactAsHtmlElement.animate({ 'top': -moveUp });
+                previousAll.animate({ 'top': moveDown }, {
                     complete: function () {
                         contactAsHtmlElement.parent().prepend(contactAsHtmlElement);
-                        contactAsHtmlElement.css({'position': 'static', 'top': 0});
-                        previousAll.css({'position': 'static', 'top': 0});
+                        contactAsHtmlElement.css({ 'position': 'static', 'top': 0 });
+                        previousAll.css({ 'position': 'static', 'top': 0 });
                     }
                 });
             }
@@ -388,7 +448,6 @@
                     contacts.refresh();
                 }
             });
-
         }
     };
 
@@ -442,13 +501,13 @@
 
         },
         getReceivedMessageTemplate: function (message) {
-            var template = "<div class=\"media w-75 mw-65 w-lp-auto mb-2\">" +
+            var template = "<div message-id=" + message.id + " class=\"media w-75 mw-65 w-lp-auto mb-2\">" +
                 //"<img src=\"https://avatars.dicebear.com/v2/human/volorewe.svg\" alt=\"user\" width=\"32\" class=\"rounded-circle d-none d-md-block\">"+
-                " <div class=\"media-body position-relative ms-3\">" +
-                "<div class=\"bg-light shadow rounded py-3 px-4 mb-1\">" +
-                "<p class=\"text-small mb-0 text-muted\">" + message.message + "</p>" +
+                " <div class=\"media-body position-relative \">" +
+                "<div class=\"card bg-light shadow-sm rounded py-1 px-2 py-lg-2 px-lg-3 mb-1\">" +
+                "<p class=\"text-small mb-0 \">" + message.message + "</p>" +
                 "</div>" +
-                "<p class=\"small text-muted position-absolute m-0\" style=\"opacity: 0.35; width: 100px; right: -110px; top: 1px;\">" + dateManager.formatMessageDate(message.messageDate) + "</p>" +
+                "<p class=\"small text-muted position-absolute m-0\" style=\"opacity: 0.5; width: 50px; right: -60px; top: 4px;\">" + dateManager.formatMessageDate(message.messageDate) + "</p>" +
                 "</div>" +
                 " </div>";
 
@@ -460,13 +519,26 @@
                 message.message = '';
             }
 
-            var template = "<div class=\"media w-75 mw-65 w-lp-auto ms-auto mb-2\">" +
-                "<div class=\"media-body position-relative \">" +
-                " <div class=\"bg-primary shadow rounded py-3 px-4 mb-1\">" +
-                " <p class=\"text-small mb-0 text-white\">" + (message.message) + "</p>" +
+            var deletingTemplate = "";
+            if (conversation.isDeletingMessageEnabled(message.messageDate)) {
+                deletingTemplate = "<div class=\"dropdown position-absolute top-0 end-0\">" +
+                    " <button class=\"btn p-1\" type=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">" +
+                    "<i class=\"bi bi-chevron-down text-light\" aria-hidden=\"true\"></i>" +
+                    "</button>" +
+                    "<ul class=\"dropdown-menu\" style=\"\">" +
+                    "<li><a class=\"dropdown-item delete-message-btn\" data-id=" + message.id + " href=\"#\">" + l("Delete") + "</a></li>" +
+                    "</ul>" +
+                    "</div>";
+            }
+
+            var template = "<div message-id=" + message.id + " class=\"media w-75 mw-65 w-lp-auto mb-2 ms-auto position-relative\">" +
+                "<div class=\"media-body position-relative\">" +
+                " <div class=\"bg-primary card mb-1 px-2 px-lg-3 py-1 py-lg-2 rounded shadow-sm\">" +
+                " <p class=\"mb-0 message-text text-small text-white\">" + (message.message) + "</p>" +
                 " </div>" +
-                "<p class=\"small text-muted position-absolute text-right m-0\" style=\"opacity: 0.35; width: 100px; left: -110px; top: 1px; \">" + dateManager.formatMessageDate(message.messageDate) + "</p>" +
+                "<p class=\"left m-0 message-date small text-muted\" style=\"opacity: 0.5; width: 50px; left: -60px; top: 4px;\">" + dateManager.formatMessageDate(message.messageDate) + "</p>" +
                 " </div>" +
+                deletingTemplate +
                 "</div>";
 
             return template;
@@ -476,20 +548,11 @@
                 ? l('YouHave{0}UnreadMessages', unreadMessageCount)
                 : l('YouHaveAnUnreadMessage');
 
-            var template =
-                "<div class=\"row justify-content-center unread-message-count-badge-wrapper\">" +
-                "<h3>" +
-                "<span class=\"badge bg-info\">" +
-                unreadMessageCountText +
-                "</span>" +
-                "</h3>" +
-                "</div>";
+            return `<p class=\"text-info small text-center my-2 p-2 border border-info rounded\"> ${unreadMessageCountText} </p>`;
 
-            return template;
         },
         display: function (data, isExtraData = false, unreadMessageCount = 0) {
             var messagesAsHtml = '';
-
             for (var i = data.messages.length - 1; i >= 0; i--) {
                 if (data.messages[i].side === 1) {
                     messagesAsHtml += conversation.getSentMessageTemplate(data.messages[i]);
@@ -523,7 +586,7 @@
             } else {
                 $(_wrapper.find('#chat_conversation')[0]).html(messagesAsHtml);
             }
-
+            conversation.bindDeleteMessageEvent();
             if (!isExtraData) {
                 conversation.scrollToBottom();
             }
@@ -572,12 +635,13 @@
                     }
                 });
         },
-        addMessage: function (message) {
+        addMessage: function (message, id) {
 
             var isScrollAtBottomBeforeMessageAdded = conversation.isScrollAtBottom;
 
             _wrapper.find('#chat_conversation')
                 .append(conversation.getReceivedMessageTemplate({
+                    id: id,
                     message: message,
                     messageDate: new Date()
                 }));
@@ -598,13 +662,13 @@
 
             _conversationService.sendMessage({
                 targetUserId: data.userId, message: data.message
-            }).then(function () {
+            }).then(function (res) {
                 _wrapper.find('#chat_conversation').append(
-                    conversation.getSentMessageTemplate({message: data.message, messageDate: new Date()}));
+                    conversation.getSentMessageTemplate({ message: data.message, messageDate: new Date(), id: res.id }));
                 _wrapper.find('#Chat_Message_Box').val('');
 
                 if (_wrapper.find('#chat_conversation').html() !== '') {
-                    contacts.addMessage(data.userId, null, null, null, data.message, true);
+                    contacts.addMessage(data.userId, null, null, null, data.message, true, res.id);
                 } else {
                     var activeContact = _wrapper.find('.chat-contact, .active')[0];
 
@@ -619,11 +683,58 @@
                         lastMessageSide: 1
                     });
                 }
-
+                conversation.bindDeleteMessageEvent();
                 conversation.scrollToBottom();
                 _wrapper.find('#Chat_Message_Box').focus();
                 _wrapper.find('#Send_Message_Form #Send_Message_Button').prop('disabled', true);
             });
+        },
+        deleteConversation: function () {
+            var userId = $(this).data('id');
+            _conversationService.deleteConversation({
+                targetUserId: userId
+            }).then((res) => {
+                $("div [data-userid=" + userId + "]").remove();
+                if (contacts.conversations[userId]) {
+                    contacts.conversations[userId] = null;
+                }
+                if (_wrapper.find('#Send_Message_Form #userId').val() == userId) {
+                    $('#EmptyTemplate').show();
+                    $('#chat_conversation_wrapper').hide();
+                    $('#Send_Message_Form').hide();
+                    _wrapper.find('#Conversation_Title').html('');
+                    _wrapper.find('#AvatarId').hide();
+                    conversation.clear();
+                }
+            });
+        },
+        bindDeleteConversationEvent: function () {
+            document.querySelectorAll('.delete-conversation-btn').forEach(btn => {
+                btn.onclick = conversation.deleteConversation;
+            });
+        },
+        bindDeleteMessageEvent: function () {
+            document.querySelectorAll('.delete-message-btn').forEach(btn => {
+                btn.onclick = conversation.deleteMessage;
+            });
+        },
+        deleteMessage: function () {
+            var messageId = $(this).data('id');
+            var userId = _wrapper.find('#Send_Message_Form #userId').val();
+            _conversationService.deleteMessage({
+                targetUserId: userId,
+                messageId: messageId
+            }).then((res) => {
+                $("div [message-id=" + messageId + "]").remove();
+                contacts.refresh(() => conversation.reActiveCurrentContact(userId));
+                if (contacts.conversations[userId]) {
+                    contacts.conversations[userId].messages = contacts.conversations[userId].messages.filter(m => m.id != messageId);
+                }
+            });
+        },
+        reActiveCurrentContact: function (userId) {
+            contacts.setActiveContact(document.querySelector(".chat-contact[data-userid='" + userId + "']"));
+            contacts.moveToTop(userId);
         },
         getSendOnEnterSetting: function () {
             var checkbox = _wrapper.find("#Send_Message_Form #Send_On_Enter");
@@ -636,9 +747,9 @@
         setSendOnEnterSettingListener: function () {
             _wrapper.find('#Send_Message_Form #Send_On_Enter').change(function () {
                 if (this.checked) {
-                    _settingService.setSendOnEnterSetting({sendOnEnter: true});
+                    _settingService.setSendOnEnterSetting({ sendOnEnter: true });
                 } else {
-                    _settingService.setSendOnEnterSetting({sendOnEnter: false});
+                    _settingService.setSendOnEnterSetting({ sendOnEnter: false });
                 }
             });
         },
@@ -646,11 +757,59 @@
             $(_wrapper.find('#chat_conversation_wrapper')[0]).mCustomScrollbar('scrollTo', 'bottom', {
                 scrollInertia: 0
             });
+        },
+        isDeletingMessageEnabled: function (messageDate) {
+            var deletingMessages = abp.setting.get('Volo.Chat.Messaging.DeletingMessages');
+            if (deletingMessages === ChatDeletingMessages.enabled) {
+                return true;
+            }
+            if (deletingMessages === ChatDeletingMessages.enabledWithDeletionPeriod) {
+                var messageDeletionPeriod = abp.setting.get('Volo.Chat.Messaging.MessageDeletionPeriod');
+                return Math.abs((new Date() - new Date(messageDate)) / 1000) < messageDeletionPeriod;
+            }
+
+            return false;
+        },
+        isDeletingConversationEnabled: function () {
+            var deletingMessages = abp.setting.get('Volo.Chat.Messaging.DeletingMessages');
+            if (deletingMessages !== ChatDeletingMessages.enabled) {
+                return false;
+            }
+
+            var deletingConversations = abp.setting.get('Volo.Chat.Messaging.DeletingConversations');
+            return deletingConversations === ChatDeletingConversations.enabled;
+        },
+        onDeleteMessage: function (messageId) {
+            $("div [message-id=" + messageId + "]").remove();
+            var userId = $(".active.chat-contact").data("userid");
+            contacts.refresh(() => conversation.reActiveCurrentContact(userId));
+            if (contacts.conversations[userId]) {
+                contacts.conversations[userId].messages = contacts.conversations[userId].messages.filter(m => m.id != messageId);
+            }
+        },
+        onDeleteConversation: function (userId) {
+            $("div [data-userid=" + userId + "]").remove();
+            if (_wrapper.find('#Send_Message_Form #userId').val() == userId) {
+                $('#EmptyTemplate').show();
+                $('#chat_conversation_wrapper').hide();
+                $('#Send_Message_Form').hide();
+                _wrapper.find('#Conversation_Title').html('');
+                _wrapper.find('#AvatarId').hide();
+                conversation.clear();
+            }
+            if (contacts.conversations[userId]) {
+                contacts.conversations[userId] = null;
+            }
         }
     };
 
     contacts.init();
     conversation.init();
+
+    $("#StartConversation").click(function () {
+        _wrapper.find('#Contacts_Filter').val(' ');
+        contacts.refresh();
+    });
 
     $(document).on("ChatMessageReceived", function (event, message) {
 
@@ -660,12 +819,21 @@
             message.senderName,
             message.senderSurname,
             message.text,
-            false
+            false,
+            message.id
         );
 
         if (message.senderUserId === _wrapper.find('#userId').val()) {
-            conversation.addMessage(message.text);
+            conversation.addMessage(message.text, message.id);
         }
+    });
+
+    $(document).on("ChatDeleteMessage", function (event, messageId) {
+        conversation.onDeleteMessage(messageId)
+    });
+
+    $(document).on("ChatDeleteConversation", function (event, userId) {
+        conversation.onDeleteConversation(userId)
     });
 
 }(jQuery));

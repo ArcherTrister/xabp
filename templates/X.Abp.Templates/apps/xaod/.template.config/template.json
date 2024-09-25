@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "ArcherTrister",
-  "classifications": ["Abp Vnext Pro/Openiddict/Web/WebAPI"],
+  "classifications": [ "Abp Vnext Pro/Openiddict/Web/WebAPI" ],
   "name": "Abp Vnext Pro Openiddict Template",
   "identity": "X.Abp.Openiddict",
   "shortName": "xaod",
@@ -43,46 +43,46 @@
       "type": "parameter",
       "description": "Database Management System",
       "dataType": "choice",
-      "defaultValue": "SqlServer",
+      "defaultValue": "MySQL",
       "isRequired": false,
       "choices": [
         {
-          "choice": "SqlServer",
-          "description": "Sql Server"
-        },
-        {
           "choice": "MySQL",
-          "description": "My SQL"
+          "description": "MySQL Database"
         },
         {
-          "choice": "Sqlite",
-          "description": "Sqlite"
+          "choice": "SQLServer",
+          "description": "SQLServer Database"
+        },
+        {
+          "choice": "SQLite",
+          "description": "SQLite Database"
         },
         {
           "choice": "Oracle",
-          "description": "Oracle"
+          "description": "Oracle Database"
         },
         {
           "choice": "OracleDevart",
-          "description": "Oracle Devart Driver"
+          "description": "Oracle Devart Database"
         },
         {
-          "choice": "PostgreSql",
-          "description": "Postgre Sql"
+          "choice": "PostgreSQL",
+          "description": "PostgreSQL Database"
         }
       ]
     },
-    "SqlServer": {
+    "SQLServer": {
       "type": "computed",
-      "value": "(DatabaseManagementSystem == \"SqlServer\")"
+      "value": "(DatabaseManagementSystem == \"SQLServer\")"
     },
     "MySQL": {
       "type": "computed",
       "value": "(DatabaseManagementSystem == \"MySQL\")"
     },
-    "Sqlite": {
+    "SQLite": {
       "type": "computed",
-      "value": "(DatabaseManagementSystem == \"Sqlite\")"
+      "value": "(DatabaseManagementSystem == \"SQLite\")"
     },
     "Oracle": {
       "type": "computed",
@@ -90,11 +90,11 @@
     },
     "OracleDevart": {
       "type": "computed",
-      "value": "(DatabaseManagementSystem == \"Oracle.Devart\")"
+      "value": "(DatabaseManagementSystem == \"OracleDevart\")"
     },
-    "PostgreSql": {
+    "PostgreSQL": {
       "type": "computed",
-      "value": "(DatabaseManagementSystem == \"PostgreSql\")"
+      "value": "(DatabaseManagementSystem == \"PostgreSQL\")"
     }
   },
   "SpecialCustomOperations": {
@@ -103,10 +103,10 @@
         {
           "type": "conditional",
           "configuration": {
-            "if": ["---#if"],
-            "else": ["---#else"],
-            "elseif": ["---#elseif", "---#elif"],
-            "endif": ["---#endif"],
+            "if": [ "---#if" ],
+            "else": [ "---#else" ],
+            "elseif": [ "---#elseif", "---#elif" ],
+            "endif": [ "---#endif" ],
             "trim": "true",
             "wholeLine": "true"
           }
@@ -119,7 +119,7 @@
       "modifiers": [
         {
           "condition": "(!IncludeVue)",
-          "exclude": ["vue/**/*"]
+          "exclude": [ "vue/**/*" ]
         },
         {
           "condition": "(!EnableSwaggerEnumFilter)",

@@ -62,7 +62,7 @@ namespace X.Abp.Account.Public.Web.Pages.Account
             }
 
             var tenantId = CurrentTenant.Id;
-            Logger.LogInformation($"CurrentTenant:{tenantId}");
+            Logger.LogInformation("CurrentTenant:{TenantId}", tenantId);
 
             var redirectUrl = Url.Page("SpaExternalLogin", pageHandler: "Callback", values: new { returnUrl, tenantId, clientId, clientSecret, scope });
 
@@ -102,7 +102,7 @@ namespace X.Abp.Account.Public.Web.Pages.Account
                 }));
             }
 
-            Logger.LogInformation($"CurrentTenant:{tenantId}");
+            Logger.LogInformation("CurrentTenant:{TenantId}", tenantId);
 
             await IdentityOptions.SetAsync();
 

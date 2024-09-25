@@ -8,7 +8,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -20,8 +19,6 @@ using Volo.Abp.Security.Claims;
 
 using X.Abp.Account.Public.Web.Pages.Account;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
-
 namespace X.Abp.Account.Web.Pages.Account;
 
 [ExposeServices(typeof(DelegatedImpersonateModel))]
@@ -30,13 +27,10 @@ public class IdentityServerDelegatedImpersonateModel : DelegatedImpersonateModel
     protected AbpAccountIdentityServerOptions Options { get; }
 
     public IdentityServerDelegatedImpersonateModel(
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
         IdentityUserDelegationManager identityUserDelegationManager,
         IOptions<AbpAccountIdentityServerOptions> options)
-      : base(signInManager, userManager, identitySecurityLogManager, currentPrincipalAccessor, identityUserDelegationManager)
+      : base(currentPrincipalAccessor, identityUserDelegationManager)
     {
         Options = options.Value;
     }

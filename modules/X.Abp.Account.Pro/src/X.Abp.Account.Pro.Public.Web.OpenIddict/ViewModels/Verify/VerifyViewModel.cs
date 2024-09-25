@@ -5,7 +5,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace X.Abp.Account.Public.Web.ViewModels.Verify;
+namespace X.Abp.Account.Web.ViewModels.Verify;
 
 public class VerifyViewModel
 {

@@ -11,20 +11,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Http.Client.Web" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="X.Abp.Account.Pro.Public.HttpApi.Client"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.AspNetCore.Mvc.UI.Theme.Lepton"
-      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.Account.Pro.Public.HttpApi.Client" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.AspNetCore.Mvc.UI.Theme.Lepton" VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

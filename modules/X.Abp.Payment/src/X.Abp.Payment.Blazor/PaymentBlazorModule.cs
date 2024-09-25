@@ -9,7 +9,7 @@ using Volo.Abp.UI.Navigation;
 namespace X.Abp.Payment.Blazor;
 
 [DependsOn(
-    typeof(PaymentApplicationContractsModule),
+    typeof(AbpPaymentApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
     typeof(AbpAutoMapperModule)
     )]

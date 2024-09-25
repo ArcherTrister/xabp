@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\modules.props" />
+    <Import Project="..\..\..\..\modules.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>X.Abp.OpenIddict.Pro</RootNamespace>
   </PropertyGroup>
 
@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.5" />
     <ProjectReference Include="..\X.Abp.OpenIddict.Pro.TestBase\X.Abp.OpenIddict.Pro.TestBase.csproj" />
-    <PackageReference Include="X.Abp.EntityFrameworkCore.Sqlite" Version="6.0.2" />
+    <PackageReference Include="X.Abp.EntityFrameworkCore.Sqlite" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
 </Project>

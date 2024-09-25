@@ -159,7 +159,7 @@ public class IdentityResourceAppService : IdentityServerAppServiceBase, IIdentit
         while (enumerator.MoveNext())
         {
             var property = enumerator.Current;
-            if (!input.Properties.Any((IdentityResourcePropertyDto c) => property.Equals(identityResource.Id, c.Key, c.Value)))
+            if (!input.Properties.Any((c) => property.Equals(identityResource.Id, c.Key, c.Value)))
             {
                 identityResource.RemoveProperty(property.Key);
             }

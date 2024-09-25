@@ -28,12 +28,12 @@ public class CustomAlwaysAllowAuthorizationService : IAbpAuthorizationService
         _currentPrincipalAccessor = currentPrincipalAccessor;
     }
 
-    public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)
+    public virtual Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)
     {
         return Task.FromResult(AuthorizationResult.Success());
     }
 
-    public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, string policyName)
+    public virtual Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, string policyName)
     {
         return Task.FromResult(AuthorizationResult.Success());
     }

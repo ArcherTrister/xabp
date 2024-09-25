@@ -3,8 +3,8 @@
     $(function () {
         var l = abp.localization.getResource("AbpAccount");
 
-        var _profileService = x.abp.account.profile;
-        var _accountService = x.abp.account.account;
+        var _profileService = volo.abp.account.profile;
+        var _accountService = volo.abp.account.account;
 
         var _confirmPhoneNumberModal = new abp.ModalManager(
             abp.appPath + "Account/Components/ProfileManagementGroup/PersonalInfo/ConfirmPhoneNumberModal"
@@ -63,7 +63,7 @@
             var returnUrl = "/";
             var returnUrlLink = $("#returnUrlLink");
 
-            if(returnUrlLink.length === 1){
+            if (returnUrlLink.length === 1) {
                 returnUrl = returnUrlLink.attr("href");
             }
 
@@ -71,7 +71,7 @@
                 .sendEmailConfirmationToken({
                     userId: $('#CurrentUserId').val(),
                     appName: "MVC",
-                    returnUrl:returnUrl,
+                    returnUrl: returnUrl,
                     returnUrlHash: "",
                 })
                 .then(function () {
@@ -108,12 +108,12 @@
                 return false;
             }
 
-            var input = $("#PersonalSettingsForm").serializeFormToObject();
+            var input = $("#PersonalSettingsForm").serializeFormToObject(false);
 
             _profileService.update(input).then(function (result) {
                 abp.notify.success(l("PersonalSettingsSaved"));
 
-                if (input.email !== $email.attr("data-saved-email")) {
+                if (input.Email !== $email.attr("data-saved-email")) {
                     $verifyEmail.show();
                     $emailVerified.hide();
                     $email.attr("data-email-verified", "False");
@@ -122,16 +122,16 @@
                 $email.attr("data-saved-email", $email.val());
                 $emailNotVerified.hide();
 
-                if (!input.phoneNumber || input.phoneNumber === "") {
+                if (!input.PhoneNumber || input.PhoneNumber === "") {
                     $verifyPhone.hide();
                     $phoneVerified.hide();
                     $phoneNotVerified.hide();
-                    $phone.attr("data-saved-phone", input.phoneNumber);
+                    $phone.attr("data-saved-phone", input.PhoneNumber);
                     return;
                 }
 
                 if (
-                    $phone.attr("data-saved-phone") === input.phoneNumber ||
+                    $phone.attr("data-saved-phone") === input.PhoneNumber ||
                     $verifyPhone.length < 1
                 ) {
                     return;
@@ -140,7 +140,7 @@
                 $verifyPhone.show();
                 $phoneVerified.hide();
                 $phoneNotVerified.hide();
-                $phone.attr("data-saved-phone", input.phoneNumber);
+                $phone.attr("data-saved-phone", input.PhoneNumber);
                 $phone.attr("data-phone-verified", "False");
 
                 askForVerify();

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: administration
+appVersion: "1.0"
+description: MyProjectName Administration MyProjectName
+version: 1.0.0
+type: application

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+  
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>X.Abp.Payment.WeChat.Domain.Shared</AssemblyName>
+    <PackageId>X.Abp.Payment.WeChat.Domain.Shared</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X.Abp.Payment.Domain.Shared\X.Abp.Payment.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

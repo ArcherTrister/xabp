@@ -13,22 +13,22 @@ namespace X.Abp.Forms.Web.Menus;
 
 public class AbpFormsMenuContributor : IMenuContributor
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
+  {
+    if (context.Menu.Name == StandardMenus.Main)
     {
-        if (context.Menu.Name == StandardMenus.Main)
-        {
-            await ConfigureMainMenuAsync(context);
-        }
+      await ConfigureMainMenuAsync(context);
     }
+  }
 
-    private static async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  private static async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+  {
+    if (await context.IsGrantedAsync(AbpFormsPermissions.Forms.Default))
     {
-        if (await context.IsGrantedAsync(AbpFormsPermissions.Forms.Default))
-        {
-            var localizer = context.GetLocalizer<FormsResource>();
+      var localizer = context.GetLocalizer<FormsResource>();
 
-            var formMenuItem = new ApplicationMenuItem(AbpFormsMenus.GroupName, localizer["Menu:Forms"], icon: "fa fa-list", url: "/Forms");
-            context.Menu.AddItem(formMenuItem);
-        }
+      var formMenuItem = new ApplicationMenuItem(AbpFormsMenus.GroupName, localizer["Menu:Forms"], icon: "fa fa-list", url: "/Forms");
+      context.Menu.AddItem(formMenuItem);
     }
+  }
 }

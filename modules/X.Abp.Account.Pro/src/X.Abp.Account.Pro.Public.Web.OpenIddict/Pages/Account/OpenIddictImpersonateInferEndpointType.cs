@@ -9,7 +9,7 @@ using OpenIddict.Server.AspNetCore;
 
 using Volo.Abp;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 public class OpenIddictImpersonateInferEndpointType : IOpenIddictServerHandler<OpenIddictServerEvents.ProcessRequestContext>
 {

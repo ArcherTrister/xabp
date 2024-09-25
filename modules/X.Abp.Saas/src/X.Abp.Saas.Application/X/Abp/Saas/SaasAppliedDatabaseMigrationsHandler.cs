@@ -36,7 +36,7 @@ public class SaasAppliedDatabaseMigrationsHandler :
 
     public virtual async Task HandleEventAsync(AppliedDatabaseMigrationsEto eventData)
     {
-        Logger.LogDebug($"Handling AppliedDatabaseMigrationsEto event. DatabaseName: {eventData.DatabaseName}");
+        Logger.LogDebug("Handling AppliedDatabaseMigrationsEto event. DatabaseName: {DatabaseName}", eventData.DatabaseName);
 
         if (eventData.TenantId.HasValue)
         {
@@ -46,7 +46,7 @@ public class SaasAppliedDatabaseMigrationsHandler :
         {
             foreach (Tenant tenant in await TenantRepository.GetListWithSeparateConnectionStringAsync(eventData.DatabaseName))
             {
-                Logger.LogDebug($"Publishing ApplyDatabaseMigrationsEto event for tenant: {tenant.Id} {tenant.Name}.");
+                Logger.LogDebug("Publishing ApplyDatabaseMigrationsEto event for tenant: {Id} {Name}.", tenant.Id, tenant.Name);
 
                 await DistributedEventBus.PublishAsync(new ApplyDatabaseMigrationsEto()
                 {

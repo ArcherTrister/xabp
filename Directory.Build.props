@@ -1,16 +1,20 @@
 <Project>
   <PropertyGroup>
     <!-- All XAbp packages -->
-    <XAbpPackageVersion>8.2.0-beta</XAbpPackageVersion>
+    <XAbpPackageVersion>8.3.0-beta</XAbpPackageVersion>
 
     <!-- All Abp packages -->
-    <AbpPackageVersion>8.2.0</AbpPackageVersion>
+    <AbpPackageVersion>8.3.0</AbpPackageVersion>
 
     <!-- All Microsoft AspNetCore packages -->
     <MicrosoftAspNetCorePackageVersion>8.0.4</MicrosoftAspNetCorePackageVersion>
-    
-    <AspNetSecurityOAuthPackageVersion>8.0.4</AspNetSecurityOAuthPackageVersion>
+
+    <AspNetSecurityOAuthPackageVersion>8.1.0</AspNetSecurityOAuthPackageVersion>
     <AspNetCoreHealthChecksPackageVersion>8.0.0</AspNetCoreHealthChecksPackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -19,8 +23,8 @@
 
   <ItemGroup>
     <PackageReference Condition="'$(IsTestProject)' == 'true'" Include="coverlet.collector">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 

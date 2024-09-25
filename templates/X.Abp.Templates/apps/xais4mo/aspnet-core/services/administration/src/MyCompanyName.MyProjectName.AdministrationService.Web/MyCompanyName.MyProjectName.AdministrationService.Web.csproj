@@ -10,12 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="X.Abp.LeptonTheme.Management.Web"
-      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LeptonTheme.Management.Web" VersionOverride="$(XAbpPackageVersion)" />
     <PackageReference Include="X.Abp.AuditLogging.Web" VersionOverride="$(XAbpPackageVersion)" />
     <PackageReference Include="X.Abp.LanguageManagement.Web" VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.TextTemplateManagement.Web"
-      VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.Web" VersionOverride="$(XAbpPackageVersion)" />
     <PackageReference Include="X.Abp.Account.Pro.Admin.Web" VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>
 

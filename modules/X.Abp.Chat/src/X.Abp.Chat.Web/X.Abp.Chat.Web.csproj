@@ -16,13 +16,11 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.Chat.Application.Contracts\X.Abp.Chat.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Chat.Application.Contracts\X.Abp.Chat.Application.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +40,10 @@
     <Content Remove="Components\**\*.css" />
     <Content Remove="wwwroot\**\*.js" />
     <Content Remove="wwwroot\**\*.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\Chat\Components\ChatSettingGroup\Default.js" />
   </ItemGroup>
 
   <ItemGroup>

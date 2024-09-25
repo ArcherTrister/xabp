@@ -8,20 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi"
-      VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AuditLogging.HttpApi" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="X.Abp.LeptonTheme.Management.HttpApi"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.LanguageManagement.HttpApi"
-      VersionOverride="$(XAbpPackageVersion)" />
-    <PackageReference Include="X.Abp.TextTemplateManagement.HttpApi"
-      VersionOverride="$(XAbpPackageVersion)" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="X.Abp.LeptonTheme.Management.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.LanguageManagement.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+    <PackageReference Include="X.Abp.TextTemplateManagement.HttpApi" VersionOverride="$(XAbpPackageVersion)" />
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference
       Include="..\MyCompanyName.MyProjectName.AdministrationService.Application.Contracts\MyCompanyName.MyProjectName.AdministrationService.Application.Contracts.csproj" />

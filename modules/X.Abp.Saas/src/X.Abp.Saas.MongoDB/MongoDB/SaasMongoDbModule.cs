@@ -5,7 +5,7 @@ using Volo.Abp.MongoDB;
 namespace X.Abp.Saas.MongoDB;
 
 [DependsOn(
-    typeof(SaasDomainModule),
+    typeof(AbpSaasDomainModule),
     typeof(AbpMongoDbModule)
     )]
 public class SaasMongoDbModule : AbpModule

@@ -5,9 +5,10 @@
 using System.Security.Claims;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+
+using OpenIddict.Abstractions;
 
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
@@ -15,9 +16,9 @@ using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Security.Claims;
 
-using IdentityUser = Volo.Abp.Identity.IdentityUser;
+using X.Abp.Account.Public.Web.Pages.Account;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 [ExposeServices(typeof(DelegatedImpersonateModel))]
 public class OpenIddictDelegatedImpersonateModel : DelegatedImpersonateModel
@@ -25,20 +26,17 @@ public class OpenIddictDelegatedImpersonateModel : DelegatedImpersonateModel
     protected AbpAccountOpenIddictOptions Options { get; }
 
     public OpenIddictDelegatedImpersonateModel(
-        SignInManager<IdentityUser> signInManager,
-        IdentityUserManager userManager,
-        IdentitySecurityLogManager identitySecurityLogManager,
         ICurrentPrincipalAccessor currentPrincipalAccessor,
         IdentityUserDelegationManager identityUserDelegationManager,
         IOptions<AbpAccountOpenIddictOptions> options)
-      : base(signInManager, userManager, identitySecurityLogManager, currentPrincipalAccessor, identityUserDelegationManager)
+      : base(currentPrincipalAccessor, identityUserDelegationManager)
     {
         Options = options.Value;
     }
 
     public override async Task<IActionResult> OnGetAsync()
     {
-        if (Request.Query.TryGetValue("access_token", out var _))
+        if (Request.Query.TryGetValue(OpenIddictConstants.Destinations.AccessToken, out var _))
         {
             var authenticateResult = await HttpContext.AuthenticateAsync(Options.ImpersonationAuthenticationScheme);
             if (!authenticateResult.Succeeded)
@@ -53,49 +51,56 @@ public class OpenIddictDelegatedImpersonateModel : DelegatedImpersonateModel
 
             using (CurrentPrincipalAccessor.Change(authenticateResult.Principal))
             {
-                var userDelegation = await IdentityUserDelegationManager.FindActiveDelegationByIdAsync(UserDelegationId);
-                if (userDelegation != null)
+                IdentityUserDelegation userDelegation = await IdentityUserDelegationManager.FindActiveDelegationByIdAsync(UserDelegationId);
+
+                if (userDelegation == null)
                 {
-                    var targetUserId = userDelegation.TargetUserId;
-                    var id = CurrentUser.Id;
-                    if (!(targetUserId != id))
-                    {
-                        targetUserId = userDelegation.SourceUserId;
-                        if (targetUserId == id)
-                        {
-                            throw new BusinessException("Volo.Account:YouCanNotImpersonateYourself");
-                        }
-
-                        var user = await UserManager.FindByIdAsync(userDelegation.SourceUserId.ToString());
-                        if (user == null)
-                        {
-                            throw new BusinessException("Volo.Account:Volo.Account:ThereIsNoUserWithId").WithData("UserId", userDelegation.SourceUserId);
-                        }
-
-                        var additionalClaims = new List<Claim>();
-                        if (CurrentUser.Id?.ToString() != CurrentUser.FindClaim(AbpClaimTypes.ImpersonatorUserId)?.Value)
-                        {
-                            additionalClaims.Add(new Claim(AbpClaimTypes.ImpersonatorUserId, CurrentUser.Id.ToString()));
-                            additionalClaims.Add(new Claim(AbpClaimTypes.ImpersonatorUserName, CurrentUser.UserName));
-                            if (CurrentTenant.IsAvailable)
-                            {
-                                additionalClaims.Add(new Claim(AbpClaimTypes.ImpersonatorTenantId, CurrentTenant.GetId().ToString()));
-                            }
-                        }
-
-                        try
-                        {
-                            return await OpenIddictAuthorizeResponse.GenerateAuthorizeResponseAsync(HttpContext, user, additionalClaims.ToArray());
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.LogException(ex);
-                            throw new BusinessException("Volo.Account:ImpersonateError");
-                        }
-                    }
+                    throw new BusinessException("Volo.Account:InvalidUserDelegationId");
                 }
 
-                throw new BusinessException("Volo.Account:InvalidUserDelegationId");
+                if (CurrentUser.Id.HasValue && userDelegation.TargetUserId == CurrentUser.Id.GetValueOrDefault())
+                {
+                    Guid sourceUserId = userDelegation.SourceUserId;
+
+                    if (CurrentUser.Id.HasValue && (sourceUserId == CurrentUser.Id.GetValueOrDefault()))
+                    {
+                        throw new BusinessException("Volo.Account:YouCanNotImpersonateYourself");
+                    }
+
+                    IdentityUser user = await UserManager.FindByIdAsync(userDelegation.SourceUserId.ToString());
+                    if (user == null)
+                    {
+                        throw new BusinessException("Volo.Account:Volo.Account:ThereIsNoUserWithId").WithData("UserId", userDelegation.SourceUserId);
+                    }
+
+                    List<Claim> claimList = new List<Claim>();
+
+                    if (CurrentUser.Id?.ToString() != CurrentUser.FindClaim(AbpClaimTypes.ImpersonatorUserId)?.Value)
+                    {
+                        claimList.Add(new Claim(AbpClaimTypes.ImpersonatorUserId, CurrentUser.Id.ToString()));
+                        claimList.Add(new Claim(AbpClaimTypes.ImpersonatorUserName, CurrentUser.UserName));
+                        if (CurrentTenant.IsAvailable)
+                        {
+                            claimList.Add(new Claim(AbpClaimTypes.ImpersonatorTenantId, CurrentTenant.GetId().ToString()));
+                        }
+                    }
+
+                    Claim claim = CurrentUser.FindClaim(AbpClaimTypes.RememberMe);
+                    if (claim != null)
+                    {
+                        claimList.Add(claim);
+                    }
+
+                    try
+                    {
+                        return await OpenIddictAuthorizeResponse.GenerateAuthorizeResponseAsync(HttpContext, user, claimList.ToArray());
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogException(ex);
+                        throw new BusinessException("Volo.Account:ImpersonateError");
+                    }
+                }
             }
         }
 

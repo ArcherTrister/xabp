@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Localization;
 
 using Volo.Abp.OpenIddict;
 
-namespace X.Abp.Account.Public.Web.Pages.Account;
+namespace X.Abp.Account.Web.Pages.Account;
 
 public class OpenIddictReturnUrlRequestCultureProvider : RequestCultureProvider
 {
-    private const string ReturnUrl = "ReturnUrl";
+    private const string ReturnUrl = nameof(ReturnUrl);
 
     private const string QueryStringKey = "culture";
 
@@ -18,7 +18,7 @@ public class OpenIddictReturnUrlRequestCultureProvider : RequestCultureProvider
 
     public override async Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
     {
-        ArgumentNullException.ThrowIfNull(httpContext);
+        ArgumentNullException.ThrowIfNull(httpContext, nameof(httpContext));
 
         var request = httpContext.Request;
         if (request.QueryString.HasValue)

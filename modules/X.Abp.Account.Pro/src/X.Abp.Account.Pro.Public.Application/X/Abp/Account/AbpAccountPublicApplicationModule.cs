@@ -6,19 +6,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Volo.Abp.AutoMapper;
 using Volo.Abp.BlobStoring;
+using Volo.Abp.Imaging;
 using Volo.Abp.Modularity;
 using Volo.Abp.Sms;
+using Volo.Abp.Timing;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 
 namespace X.Abp.Account;
 
 [DependsOn(
-    typeof(AbpAccountSharedApplicationModule),
-    typeof(AbpSmsModule),
     typeof(AbpAutoMapperModule),
     typeof(AbpBlobStoringModule),
-    typeof(AbpAccountPublicApplicationContractsModule))]
+    typeof(AbpImagingImageSharpModule),
+    typeof(AbpSmsModule),
+    typeof(AbpTimingModule),
+    typeof(AbpAccountPublicApplicationContractsModule),
+    typeof(AbpAccountSharedApplicationModule))]
 public class AbpAccountPublicApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Uow;
 
@@ -51,8 +52,8 @@ public class MyProjectNameTenantDatabaseMigrationHandler :
     {
         await MigrateAndSeedForTenantAsync(
             eventData.Id,
-            eventData.Properties.GetOrDefault("AdminEmail") ?? MyProjectNameConsts.AdminEmailDefaultValue,
-            eventData.Properties.GetOrDefault("AdminPassword") ?? MyProjectNameConsts.AdminPasswordDefaultValue
+            eventData.Properties.GetOrDefault(IdentityDataSeedContributor.AdminEmailPropertyName) ?? IdentityDataSeedContributor.AdminEmailDefaultValue,
+            eventData.Properties.GetOrDefault(IdentityDataSeedContributor.AdminPasswordPropertyName) ?? IdentityDataSeedContributor.AdminPasswordDefaultValue
         );
     }
 
@@ -66,8 +67,8 @@ public class MyProjectNameTenantDatabaseMigrationHandler :
 
         await MigrateAndSeedForTenantAsync(
             eventData.Id,
-            MyProjectNameConsts.AdminEmailDefaultValue,
-            MyProjectNameConsts.AdminPasswordDefaultValue
+            IdentityDataSeedContributor.AdminEmailDefaultValue,
+            IdentityDataSeedContributor.AdminPasswordDefaultValue
         );
 
         /* You may want to move your data from the old database to the new database!
@@ -85,8 +86,8 @@ public class MyProjectNameTenantDatabaseMigrationHandler :
 
         await MigrateAndSeedForTenantAsync(
             eventData.TenantId.Value,
-            MyProjectNameConsts.AdminEmailDefaultValue,
-            MyProjectNameConsts.AdminPasswordDefaultValue
+            IdentityDataSeedContributor.AdminEmailDefaultValue,
+            IdentityDataSeedContributor.AdminPasswordDefaultValue
         );
     }
 

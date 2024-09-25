@@ -14,8 +14,7 @@
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ddd.Application" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Ddd.Domain" VersionOverride="$(AbpPackageVersion)" />
-    <ProjectReference
-      Include="..\X.Abp.Quartz.Application.Contracts\X.Abp.Quartz.Application.Contracts.csproj" />
+    <ProjectReference Include="..\X.Abp.Quartz.Application.Contracts\X.Abp.Quartz.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

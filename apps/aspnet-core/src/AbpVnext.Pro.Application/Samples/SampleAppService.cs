@@ -6,12 +6,18 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+using DeviceDetectorNET;
+using DeviceDetectorNET.Results;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+using Polly;
+
+using Volo.Abp.AspNetCore.WebClientInfo;
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 
@@ -44,7 +50,7 @@ public class SampleAppService : ProAppService
         AbpOptions = options.Value;
     }
 
-    public Task<TenantConfiguration> GetTenantConfigurationAsync(string name)
+    public virtual Task<TenantConfiguration> GetTenantConfigurationAsync(string name)
     {
         return TenantStore.FindAsync(name);
     }
@@ -111,5 +117,68 @@ public class SampleAppService : ProAppService
         var userId = await UserManager.GetUserIdAsync(user);
         var result = await HttpContextAccessor.HttpContext.AuthenticateAsync(IdentityConstants.TwoFactorRememberMeScheme);
         return result?.Principal != null && result.Principal.FindFirstValue(ClaimTypes.Name) == userId;
+    }
+
+    public async Task<ParseResult<DeviceDetectorResult>> GetDeviceInfoAsync()
+    {
+        //string userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
+        //var userAgent = HttpContext..Request.Headers["User-agent"];
+        //IWebClientInfoProvider webClientInfoProvider = context.RequestServices.GetRequiredService<IWebClientInfoProvider>();
+        //IHttpContextAccessor httpContextAccessor = LazyServiceProvider.GetRequiredService<IHttpContextAccessor>();
+
+        var userAgent = HttpContextAccessor.HttpContext?.Request?.Headers?["User-Agent"];
+
+        return await Task.FromResult(DeviceDetector.GetInfoFromUserAgent(userAgent));
+
+        /*
+        // 创建DeviceDetector实例
+        var deviceDetector = new DeviceDetector(userAgent);
+
+        // 获取设备信息
+        deviceDetector.Parse();
+
+        // 输出设备类型
+        Console.WriteLine("Device Type: " + deviceDetector.);
+
+        // 输出操作系统信息
+        Console.WriteLine("OS: " + deviceDetector.Os);
+
+        // 输出浏览器信息
+        Console.WriteLine("Browser: " + deviceDetector.Browser);
+        */
+
+        // 输出更多信息...
+        /*
+                     if (deviceDetector.IsParsed())
+            {
+                var osInfo = deviceDetector.GetOs();
+                if (deviceDetector.IsMobile())
+                {
+                    // IdentitySessionDevices.Mobile
+                    device = osInfo.Success ? osInfo.Match.Name : "Mobile";
+                }
+                else if (deviceDetector.IsBrowser())
+                {
+                    // IdentitySessionDevices.Web
+                    device = "Web";
+                }
+                else if (deviceDetector.IsDesktop())
+                {
+                    // TODO: PC
+                    device = "Desktop";
+                }
+
+                if (osInfo.Success)
+                {
+                    deviceInfo = osInfo.Match.Name + " " + osInfo.Match.Version;
+                }
+
+                var clientInfo = deviceDetector.GetClient();
+                if (clientInfo.Success)
+                {
+                    deviceInfo = deviceInfo.IsNullOrWhiteSpace() ? clientInfo.Match.Name : deviceInfo + " " + clientInfo.Match.Name;
+                }
+            }
+         */
     }
 }

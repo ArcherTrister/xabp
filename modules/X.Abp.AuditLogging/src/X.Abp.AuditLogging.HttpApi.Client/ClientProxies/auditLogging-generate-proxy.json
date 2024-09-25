@@ -211,6 +211,18 @@
                 },
                 {
                   "nameOnMethod": "input",
+                  "name": "ClientId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
                   "name": "UserId",
                   "jsonName": null,
                   "type": "System.Guid?",
@@ -285,8 +297,8 @@
                   "nameOnMethod": "input",
                   "name": "HttpStatusCode",
                   "jsonName": null,
-                  "type": "System.Net.HttpStatusCode?",
-                  "typeSimple": "System.Net.HttpStatusCode?",
+                  "type": "System.String",
+                  "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -541,8 +553,8 @@
                   "nameOnMethod": "input",
                   "name": "EntityChangeType",
                   "jsonName": null,
-                  "type": "Volo.Abp.Auditing.EntityChangeType?",
-                  "typeSimple": "Volo.Abp.Auditing.EntityChangeType?",
+                  "type": "System.String",
+                  "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -763,6 +775,178 @@
               },
               "allowAnonymous": null,
               "implementFrom": "X.Abp.AuditLogging.IAuditLogsAppService"
+            }
+          }
+        },
+        "X.Abp.AuditLogging.AuditLogSettingsController": {
+          "controllerName": "AuditLogSettings",
+          "controllerGroupName": "AuditLogSettings",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.AuditLogging.AuditLogSettingsController",
+          "interfaces": [
+            {
+              "type": "X.Abp.AuditLogging.IAuditLogSettingsAppService",
+              "name": "IAuditLogSettingsAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.AuditLogging.AuditLogSettingsDto",
+                    "typeSimple": "X.Abp.AuditLogging.AuditLogSettingsDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.AuditLogging.AuditLogSettingsDto, X.Abp.AuditLogging.Application.Contracts",
+                      "type": "X.Abp.AuditLogging.AuditLogSettingsDto",
+                      "typeSimple": "X.Abp.AuditLogging.AuditLogSettingsDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetGlobalAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto",
+                    "typeSimple": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto"
+                  }
+                },
+                {
+                  "name": "UpdateGlobalAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto, X.Abp.AuditLogging.Application.Contracts",
+                      "type": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto",
+                      "typeSimple": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/audit-logging/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.AuditLogging.AuditLogSettingsDto",
+                "typeSimple": "X.Abp.AuditLogging.AuditLogSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.AuditLogging.IAuditLogSettingsAppService"
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/audit-logging/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.AuditLogging.AuditLogSettingsDto, X.Abp.AuditLogging.Application.Contracts",
+                  "type": "X.Abp.AuditLogging.AuditLogSettingsDto",
+                  "typeSimple": "X.Abp.AuditLogging.AuditLogSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.AuditLogging.AuditLogSettingsDto",
+                  "typeSimple": "X.Abp.AuditLogging.AuditLogSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.AuditLogging.IAuditLogSettingsAppService"
+            },
+            "GetGlobalAsync": {
+              "uniqueName": "GetGlobalAsync",
+              "name": "GetGlobalAsync",
+              "httpMethod": "GET",
+              "url": "api/audit-logging/settings/global",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto",
+                "typeSimple": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.AuditLogging.IAuditLogSettingsAppService"
+            },
+            "UpdateGlobalAsyncByInput": {
+              "uniqueName": "UpdateGlobalAsyncByInput",
+              "name": "UpdateGlobalAsync",
+              "httpMethod": "PUT",
+              "url": "api/audit-logging/settings/global",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto, X.Abp.AuditLogging.Application.Contracts",
+                  "type": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto",
+                  "typeSimple": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto",
+                  "typeSimple": "X.Abp.AuditLogging.AuditLogGlobalSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.AuditLogging.IAuditLogSettingsAppService"
             }
           }
         }

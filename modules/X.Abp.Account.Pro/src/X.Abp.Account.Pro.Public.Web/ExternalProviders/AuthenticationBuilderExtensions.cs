@@ -5,11 +5,12 @@
 using System.Linq;
 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-namespace X.Abp.Account.Public.Web.ExternalProviders;
+using X.Abp.Account.Public.Web.ExternalProviders;
+
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class AuthenticationBuilderExtensions
 {

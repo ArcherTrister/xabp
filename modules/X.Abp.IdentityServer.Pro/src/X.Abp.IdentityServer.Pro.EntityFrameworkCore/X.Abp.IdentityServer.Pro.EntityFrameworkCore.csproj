@@ -16,7 +16,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\X.Abp.IdentityServer.Pro.Domain\X.Abp.IdentityServer.Pro.Domain.csproj" />
-    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+  </ItemGroup>
 </Project>

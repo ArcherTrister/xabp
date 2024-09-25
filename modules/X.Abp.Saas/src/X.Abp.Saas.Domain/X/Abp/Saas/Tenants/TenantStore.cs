@@ -74,10 +74,10 @@ public class TenantStore : ITenantStore, ITransientDependency
       string normalizedName)
     {
         string cacheKey = CalculateCacheKey(id, normalizedName);
-        TenantConfigurationCacheItem cacheItemAsync = await Cache.GetAsync(cacheKey, null, true);
-        if (cacheItemAsync?.Value != null)
+        TenantConfigurationCacheItem cacheItem = await Cache.GetAsync(cacheKey, null, true);
+        if (cacheItem?.Value != null)
         {
-            return cacheItemAsync;
+            return cacheItem;
         }
 
         if (id.HasValue)

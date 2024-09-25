@@ -43,7 +43,7 @@
 
     x.abp.openIddict.application['delete'] = function(id, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/openiddict/applications' + abp.utils.buildQueryString([{ name: 'id', value: id }]) + '',
+        url: abp.appPath + 'api/openiddict/applications/' + id + '',
         type: 'DELETE',
         dataType: null
       }, ajaxParams));
@@ -89,7 +89,7 @@
 
     x.abp.openIddict.scope['delete'] = function(id, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/openiddict/scopes' + abp.utils.buildQueryString([{ name: 'id', value: id }]) + '',
+        url: abp.appPath + 'api/openiddict/scopes/' + id + '',
         type: 'DELETE',
         dataType: null
       }, ajaxParams));

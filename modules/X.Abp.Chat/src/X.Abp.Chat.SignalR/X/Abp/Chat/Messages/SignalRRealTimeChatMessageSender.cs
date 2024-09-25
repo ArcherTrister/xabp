@@ -21,11 +21,21 @@ public class SignalRRealTimeChatMessageSender : IRealTimeChatMessageSender, ITra
         ChatHubContext = chatHubContext;
     }
 
-    public async Task SendAsync(Guid targetUserId, ChatMessageRdto message)
+    public virtual async Task SendAsync(Guid targetUserId, ChatMessageRdto message)
     {
         await ChatHubContext
             .Clients
             .User(targetUserId.ToString())
             .SendAsync("ReceiveMessage", message);
+    }
+
+    public virtual async Task DeleteMessageAsync(Guid targetUserId, Guid messageId)
+    {
+        await ChatHubContext.Clients.User(targetUserId.ToString()).SendAsync("DeleteMessage", messageId);
+    }
+
+    public virtual async Task DeleteConversationAsync(Guid targetUserId, Guid userId)
+    {
+        await ChatHubContext.Clients.User(targetUserId.ToString()).SendAsync("DeleteConversation", userId);
     }
 }

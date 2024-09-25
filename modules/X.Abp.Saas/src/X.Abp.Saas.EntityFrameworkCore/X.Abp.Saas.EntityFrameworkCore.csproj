@@ -15,8 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore"
-      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.Saas.Domain\X.Abp.Saas.Domain.csproj" />
   </ItemGroup>
 

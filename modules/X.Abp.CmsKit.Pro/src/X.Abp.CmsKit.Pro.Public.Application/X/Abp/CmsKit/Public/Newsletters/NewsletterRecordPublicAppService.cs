@@ -73,20 +73,20 @@ public class NewsletterRecordPublicAppService : PublicAppService, INewsletterRec
             return new List<NewsletterPreferenceDetailsDto>();
         }
 
-        var preferenceDefinitionList = await NewsletterRecordsManager.GetNewsletterPreferencesAsync();
-        var preferencesAsync = new List<NewsletterPreferenceDetailsDto>();
-        foreach (var preferenceDefinition in preferenceDefinitionList)
+        var preferences = await NewsletterRecordsManager.GetNewsletterPreferencesAsync();
+        var preferenceDefinitionList = new List<NewsletterPreferenceDetailsDto>();
+        foreach (var preference in preferences)
         {
-            preferencesAsync.Add(new NewsletterPreferenceDetailsDto()
+            preferenceDefinitionList.Add(new NewsletterPreferenceDetailsDto()
             {
-                Preference = preferenceDefinition.Preference,
-                DisplayPreference = preferenceDefinition.DisplayPreference.Localize(StringLocalizerFactory),
-                IsSelectedByEmailAddress = newsletterRecord.Preferences.Any(x => x.Preference == preferenceDefinition.Preference),
-                Definition = preferenceDefinition.Definition.Localize(StringLocalizerFactory)
+                Preference = preference.Preference,
+                DisplayPreference = preference.DisplayPreference.Localize(StringLocalizerFactory),
+                IsSelectedByEmailAddress = newsletterRecord.Preferences.Any(x => x.Preference == preference.Preference),
+                Definition = preference.Definition.Localize(StringLocalizerFactory)
             });
         }
 
-        return preferencesAsync;
+        return preferenceDefinitionList;
     }
 
     public virtual async Task UpdatePreferencesAsync(UpdatePreferenceRequestInput input)
@@ -140,10 +140,10 @@ public class NewsletterRecordPublicAppService : PublicAppService, INewsletterRec
     {
         var source = await NewsletterRecordsManager.GetNewsletterPreferencesAsync();
         var preferenceDefinition = source.FirstOrDefault(x => x.Preference == preference);
-        var byPreferenceAsync = ObjectMapper.Map<NewsletterPreferenceDefinition, NewsletterEmailOptionsDto>(preferenceDefinition!);
+        var newsletterEmailOption = ObjectMapper.Map<NewsletterPreferenceDefinition, NewsletterEmailOptionsDto>(preferenceDefinition!);
         if (preferenceDefinition?.AdditionalPreferences == null || preferenceDefinition.AdditionalPreferences.Count == 0)
         {
-            return byPreferenceAsync;
+            return newsletterEmailOption;
         }
 
         for (var index = 0; index < source.Count; ++index)
@@ -152,20 +152,20 @@ public class NewsletterRecordPublicAppService : PublicAppService, INewsletterRec
             {
                 foreach (var additionalPreference in source[index].AdditionalPreferences)
                 {
-                    var preferenceDefinition2 = source.FirstOrDefault(x => x.Preference == additionalPreference);
-                    if (preferenceDefinition2 != null && additionalPreference != preference)
+                    var additionalPreferenceDefinition = source.FirstOrDefault(x => x.Preference == additionalPreference);
+                    if (additionalPreferenceDefinition != null && additionalPreference != preference)
                     {
-                        byPreferenceAsync.AdditionalPreferences.Add(preferenceDefinition2.Preference);
-                        byPreferenceAsync.DisplayAdditionalPreferences.Add((string)preferenceDefinition2.DisplayPreference.Localize(StringLocalizerFactory));
+                        newsletterEmailOption.AdditionalPreferences.Add(additionalPreferenceDefinition.Preference);
+                        newsletterEmailOption.DisplayAdditionalPreferences.Add(additionalPreferenceDefinition.DisplayPreference.Localize(StringLocalizerFactory));
                     }
                 }
             }
         }
 
-        byPreferenceAsync.PrivacyPolicyConfirmation = preferenceDefinition.PrivacyPolicyConfirmation.Localize(StringLocalizerFactory);
-        byPreferenceAsync.AdditionalPreferences = byPreferenceAsync.AdditionalPreferences.Distinct().ToList();
-        byPreferenceAsync.DisplayAdditionalPreferences = byPreferenceAsync.DisplayAdditionalPreferences.Distinct().ToList();
-        return byPreferenceAsync;
+        newsletterEmailOption.PrivacyPolicyConfirmation = preferenceDefinition.PrivacyPolicyConfirmation.Localize(StringLocalizerFactory);
+        newsletterEmailOption.AdditionalPreferences = newsletterEmailOption.AdditionalPreferences.Distinct().ToList();
+        newsletterEmailOption.DisplayAdditionalPreferences = newsletterEmailOption.DisplayAdditionalPreferences.Distinct().ToList();
+        return newsletterEmailOption;
     }
 
     private async Task SendEmailAsync(string emailAddress, NewsletterEmailStatus newsletterEmailStatus)
