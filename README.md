@@ -38,7 +38,7 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 -   MyCompanyName.MyProjectName
     (公司名称+项目名称)【项目名称】
 -   -t
-    模板名称(#模板)【模板列表】
+    模板名称 【[模板列表](#模板)】
 -   -tt
     模板类型(IdentityServer4 OpenIddict)【默认：IdentityServer4】
 -   -o

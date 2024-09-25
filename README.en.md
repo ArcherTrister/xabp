@@ -35,7 +35,7 @@ Create a new solution:
 -   MyCompanyName.MyProjectName
     (company Name + project Name)【Project Name】
 -   -t
-    Template name(#Templates)【Templates】
+    Template name【[Templates](#Templates)】
 -   -tt
     Template type(IdentityServer4 OpenIddict)【default: IdentityServer4】
 -   -o
