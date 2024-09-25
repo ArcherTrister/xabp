@@ -274,3 +274,10 @@ deploy/nuget-api-key.txt
 
 # X Abp
 # AbpVnext.Pro.*
+_site/*
+api/*
+docs/*
+modules/toc.yml
+docfx.json
+index.md
+toc.yml
