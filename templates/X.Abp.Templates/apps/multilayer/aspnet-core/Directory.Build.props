@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <!-- All XAbp packages -->
-    <XAbpPackageVersion>8.3.1-beta</XAbpPackageVersion>
+    <XAbpPackageVersion>8.3.1-alpha</XAbpPackageVersion>
 
     <!-- All Abp packages -->
     <AbpPackageVersion>8.3.1</AbpPackageVersion>

@@ -5,7 +5,7 @@
     <NoWarn>$(NoWarn);CS1591;CS0436;CA1305</NoWarn>
     <Authors>ArcherTrister</Authors>
     <!--<PackageVersion>8.3.1-alpha-beta-rc-preview</PackageVersion>-->
-    <PackageReleaseNotes>8.3.1-beta</PackageReleaseNotes>
+    <PackageReleaseNotes>8.3.1-alpha</PackageReleaseNotes>
     <NeutralLanguage>zh-Hans</NeutralLanguage>
     <Copyright>Copyright © 2016-2024 LX Incorporated. All rights reserved.</Copyright>
     <PackageProjectUrl>https://freeabp.github.io/</PackageProjectUrl>
