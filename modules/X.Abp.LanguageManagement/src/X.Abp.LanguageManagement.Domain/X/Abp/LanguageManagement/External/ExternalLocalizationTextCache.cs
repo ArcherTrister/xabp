@@ -20,6 +20,8 @@ using Volo.Abp.MultiTenancy;
 
 namespace X.Abp.LanguageManagement.External
 {
+#pragma warning disable CA2227 // 集合属性应为只读
+#pragma warning disable CA1001 // 具有可释放字段的类型应该是可释放的
     public class ExternalLocalizationTextCache : ISingletonDependency, IExternalLocalizationTextCache
     {
         private readonly AsyncKeyedLocker<string> asyncKeyedLocker = new AsyncKeyedLocker<string>(o =>

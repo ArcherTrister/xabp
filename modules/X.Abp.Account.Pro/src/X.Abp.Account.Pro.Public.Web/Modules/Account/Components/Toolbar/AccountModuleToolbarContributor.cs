@@ -19,10 +19,10 @@ public class AccountModuleToolbarContributor : IToolbarContributor
     {
         if (context.Toolbar.Name == StandardToolbars.Main)
         {
-            //if (!context.ServiceProvider.GetRequiredService<ICurrentUser>().IsAuthenticated)
-            //{
-            //    context.Toolbar.Items.Add(new ToolbarItem(typeof(UserLoginLinkViewComponent), order: 1000000));
-            //}
+/*            if (!context.ServiceProvider.GetRequiredService<ICurrentUser>().IsAuthenticated)
+            {
+                context.Toolbar.Items.Add(new ToolbarItem(typeof(UserLoginLinkViewComponent), order: 1000000));
+            }*/
 
             if (context.ServiceProvider.GetRequiredService<ICurrentUser>().FindImpersonatorUserId() != null)
             {

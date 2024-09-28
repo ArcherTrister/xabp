@@ -33,6 +33,7 @@ namespace AbpVnext.Pro.IdentityServer;
 
 public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransientDependency
 {
+#pragma warning disable CA1861 // 不要将常量数组作为参数
     protected IApiResourceRepository ApiResourceRepository { get; }
 
     protected IApiScopeRepository ApiScopeRepository { get; }
@@ -117,14 +118,7 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
         var apiResource = await ApiResourceRepository.FindByNameAsync(name);
         if (apiResource == null)
         {
-            apiResource = await ApiResourceRepository.InsertAsync(
-                new ApiResource(
-                    GuidGenerator.Create(),
-                    name,
-                    name + " API"
-                ),
-                autoSave: true
-            );
+            apiResource = await ApiResourceRepository.InsertAsync(new ApiResource(GuidGenerator.Create(), name, name + " API"), true);
         }
 
         foreach (var claim in claims)

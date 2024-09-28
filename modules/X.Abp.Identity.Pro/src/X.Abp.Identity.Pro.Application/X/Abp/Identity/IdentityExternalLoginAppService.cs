@@ -55,29 +55,29 @@ namespace X.Abp.Identity
 
         protected virtual async Task UpdateCurrentUserAsync(IdentityUser user)
         {
-            if (!CurrentUser.UserName.IsNullOrWhiteSpace() && !string.Equals(user.UserName, CurrentUser.UserName, StringComparison.InvariantCultureIgnoreCase))
+            if (!CurrentUser.UserName.IsNullOrWhiteSpace() && !string.Equals(user.UserName, CurrentUser.UserName, StringComparison.OrdinalIgnoreCase))
             {
-                IdentityResult identityResult = await UserManager.SetUserNameAsync(user, CurrentUser.UserName);
+                (await UserManager.SetUserNameAsync(user, CurrentUser.UserName)).CheckIdentityErrors();
             }
 
-            if (!CurrentUser.Email.IsNullOrWhiteSpace() && !string.Equals(user.Email, CurrentUser.Email, StringComparison.InvariantCultureIgnoreCase))
+            if (!CurrentUser.Email.IsNullOrWhiteSpace() && !string.Equals(user.Email, CurrentUser.Email, StringComparison.OrdinalIgnoreCase))
             {
                 (await UserManager.SetEmailAsync(user, CurrentUser.Email)).CheckIdentityErrors();
                 user.SetEmailConfirmed(CurrentUser.EmailVerified);
             }
 
-            if (!CurrentUser.PhoneNumber.IsNullOrWhiteSpace() && !string.Equals(user.PhoneNumber, CurrentUser.PhoneNumber, StringComparison.InvariantCultureIgnoreCase))
+            if (!CurrentUser.PhoneNumber.IsNullOrWhiteSpace() && !string.Equals(user.PhoneNumber, CurrentUser.PhoneNumber, StringComparison.OrdinalIgnoreCase))
             {
                 (await UserManager.SetPhoneNumberAsync(user, CurrentUser.PhoneNumber)).CheckIdentityErrors();
                 user.SetPhoneNumberConfirmed(CurrentUser.PhoneNumberVerified);
             }
 
-            if (!CurrentUser.Name.IsNullOrWhiteSpace() && !string.Equals(user.Name, CurrentUser.Name, StringComparison.InvariantCultureIgnoreCase))
+            if (!CurrentUser.Name.IsNullOrWhiteSpace() && !string.Equals(user.Name, CurrentUser.Name, StringComparison.OrdinalIgnoreCase))
             {
                 user.Name = CurrentUser.Name;
             }
 
-            if (!CurrentUser.SurName.IsNullOrWhiteSpace() && !string.Equals(user.Surname, CurrentUser.SurName, StringComparison.InvariantCultureIgnoreCase))
+            if (!CurrentUser.SurName.IsNullOrWhiteSpace() && !string.Equals(user.Surname, CurrentUser.SurName, StringComparison.OrdinalIgnoreCase))
             {
                 user.Surname = CurrentUser.SurName;
             }

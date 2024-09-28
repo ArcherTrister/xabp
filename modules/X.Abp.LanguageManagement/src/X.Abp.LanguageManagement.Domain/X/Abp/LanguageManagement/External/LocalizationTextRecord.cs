@@ -25,34 +25,16 @@ namespace X.Abp.LanguageManagement.External
 
         public DateTime? LastModificationTime { get; set; }
 
-        protected LocalizationTextRecord() { }
+        protected LocalizationTextRecord()
+        {
+        }
 
-        public LocalizationTextRecord(
-            Guid id,
-            string resourceName,
-            string cultureName,
-            string value
-        )
+        public LocalizationTextRecord(Guid id, string resourceName, string cultureName, string value)
             : base(id)
         {
-            ResourceName = Check.NotNullOrWhiteSpace(
-                resourceName,
-                nameof(resourceName),
-                LocalizationTextRecordConsts.MaxResourceNameLength,
-                0
-            );
-            CultureName = Check.NotNullOrWhiteSpace(
-                cultureName,
-                nameof(cultureName),
-                LocalizationTextRecordConsts.MaxCultureNameLength,
-                0
-            );
-            Value = Check.Length(
-                value,
-                nameof(value),
-                LocalizationTextRecordConsts.MaxValueLength,
-                0
-            );
+            ResourceName = Check.NotNullOrWhiteSpace(resourceName, nameof(resourceName), LocalizationTextRecordConsts.MaxResourceNameLength);
+            CultureName = Check.NotNullOrWhiteSpace(cultureName, nameof(cultureName), LocalizationTextRecordConsts.MaxCultureNameLength);
+            Value = Check.Length(value, nameof(value), LocalizationTextRecordConsts.MaxValueLength);
         }
     }
 }

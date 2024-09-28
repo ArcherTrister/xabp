@@ -31,7 +31,7 @@ public class EfCoreConversationRepository : EfCoreRepository<IChatDbContext, Con
         .Where(x => (x.UserId == senderId && x.TargetUserId == targetId) ||
                     (x.UserId == targetId && x.TargetUserId == senderId)).ToListAsync(GetCancellationToken(cancellationToken));
 
-    return !matchedConversations.Any()
+    return matchedConversations.Count == 0
         ? null
         : new ConversationPair
         {

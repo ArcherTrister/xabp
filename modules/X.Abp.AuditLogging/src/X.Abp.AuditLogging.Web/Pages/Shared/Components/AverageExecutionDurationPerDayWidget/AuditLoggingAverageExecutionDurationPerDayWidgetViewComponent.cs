@@ -12,7 +12,7 @@ using X.Abp.AuditLogging.Permissions;
 
 namespace X.Abp.AuditLogging.Web.Pages.Shared.Components.AverageExecutionDurationPerDayWidget
 {
-    [Widget(RequiredPolicies = [AbpAuditLoggingPermissions.AuditLogs.Default], ScriptTypes = [typeof(AuditLoggingAverageExecutionDurationPerDayWidgetScriptContributor)])]
+    [Widget(RequiredPolicies = new string[] { AbpAuditLoggingPermissions.AuditLogs.Default }, ScriptTypes = new Type[] { typeof(AuditLoggingAverageExecutionDurationPerDayWidgetScriptContributor) })]
     public class AuditLoggingAverageExecutionDurationPerDayWidgetViewComponent : AuditLogsComponentBase
     {
         public virtual IViewComponentResult Invoke()

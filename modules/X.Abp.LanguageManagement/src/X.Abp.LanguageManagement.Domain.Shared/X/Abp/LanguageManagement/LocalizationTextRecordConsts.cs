@@ -8,7 +8,7 @@ public static class LocalizationTextRecordConsts
     /// <summary>
     /// Default value: 10
     /// </summary>
-    public static int MaxCultureNameLength = LanguageConsts.MaxCultureNameLength;
+    public static int MaxCultureNameLength { get; set; } = LanguageConsts.MaxCultureNameLength;
 
     /// <summary>
     /// Default value: 128

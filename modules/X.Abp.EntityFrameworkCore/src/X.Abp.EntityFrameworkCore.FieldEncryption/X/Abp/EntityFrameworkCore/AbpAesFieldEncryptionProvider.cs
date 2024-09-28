@@ -18,6 +18,9 @@ namespace X.Abp.EntityFrameworkCore;
 
 public class AbpAesFieldEncryptionProvider : IFieldEncryptionProvider, ITransientDependency
 {
+#pragma warning disable SYSLIB0041 // 类型或成员已过时
+#pragma warning disable CA5379 // 确保密钥派生功能算法足够强大
+#pragma warning disable CA5401 // 不要将 CreateEncryptor 与非默认 IV 结合使用
     protected AbpStringEncryptionOptions Options { get; }
 
     public AbpAesFieldEncryptionProvider(IOptions<AbpStringEncryptionOptions> options)
@@ -157,6 +160,7 @@ public class AbpAesFieldEncryptionProvider : IFieldEncryptionProvider, ITransien
             using (var symmetricKey = Aes.Create())
             {
                 symmetricKey.Mode = CipherMode.CBC;
+
                 using (var encryptor = symmetricKey.CreateEncryptor(keyBytes, Options.InitVectorBytes))
                 {
                     using (var memoryStream = new MemoryStream())

@@ -121,11 +121,11 @@ public class SampleAppService : ProAppService
 
     public async Task<ParseResult<DeviceDetectorResult>> GetDeviceInfoAsync()
     {
-        //string userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
+/*        //string userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
         //var userAgent = HttpContext..Request.Headers["User-agent"];
         //IWebClientInfoProvider webClientInfoProvider = context.RequestServices.GetRequiredService<IWebClientInfoProvider>();
         //IHttpContextAccessor httpContextAccessor = LazyServiceProvider.GetRequiredService<IHttpContextAccessor>();
-
+*/
         var userAgent = HttpContextAccessor.HttpContext?.Request?.Headers?["User-Agent"];
 
         return await Task.FromResult(DeviceDetector.GetInfoFromUserAgent(userAgent));

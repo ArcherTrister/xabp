@@ -21,7 +21,7 @@ namespace X.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayo
 
         public MenuStatus NavBarStatus { get; set; }
 
-        public EventHandler StateChanged;
+        public EventHandler StateChanged { get; set; }
 
         public void SetParents()
         {

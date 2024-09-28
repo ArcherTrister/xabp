@@ -35,7 +35,7 @@ Create a new solution:
 -   MyCompanyName.MyProjectName
     (company Name + project Name)【Project Name】
 -   -t
-    Template name【[Templates](#Templates)】
+    Template name【[Template List](#Templates)】
 -   -tt
     Template type(IdentityServer4 OpenIddict)【default: IdentityServer4】
 -   -o
@@ -48,7 +48,7 @@ Create a new solution:
 > See the [CLI documentation](https://github.com/ArcherTrister/xabp/blob/main/modules/X.Abp.Cli/README.md) for all available options.
 
 ::: tip
-Specify the database driver requires the database connection string, if not specified, you need to manually change, the microservice template uses the SqlServer driver by default, currently not supported to specify the database driver, please manually change.
+<font style="background:#FF6600">Specify the database driver requires the database connection string, if not specified, you need to manually change, the microservice template uses the SqlServer driver by default, currently not supported to specify the database driver, please manually change.</font>
 :::
 
 ### Application Modules
@@ -89,7 +89,7 @@ Love XAbp? **Please give a star** to this repository :star:
 ### 💖💖 If you find this framework useful, maybe you can buy me a coffee. 💖💖
 
 <p align="center">
-  <img alt="pay" src="https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg">
+  <img alt="pay" src="https://cdn.jsdelivr.net/gh/ArcherTrister/ArcherTrister@master/assets/pay.jpg" onerror="this.src='https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg'" />
 </p>
 
 Donate money by [PayPal](https://www.paypal.me/archertrister/) to my account [archertrister@outlook.com](https://www.paypal.me/archertrister/)
@@ -136,17 +136,20 @@ Donate money by [PayPal](https://www.paypal.me/archertrister/) to my account [ar
 
 ### Templates
 
--   ~~[x] X.Abp.IdentityServer4(xais4)~~
--   ~~[x] X.Abp.Openiddict(xaod)~~
+-   [x] ~~X.Abp.IdentityServer4(xais4)~~
+-   [x] ~~X.Abp.Openiddict(xaod)~~
 -   [x] X.Abp.IdentityServer4.SeparatedTenantSchema(xais4sts)
 -   [x] X.Abp.Openiddict.SeparatedTenantSchema(xaodsts)
--   ~~[ ] X.Abp.IdentityServer4.SeparatedAuthServer~~
--   ~~[ ] X.Abp.Openiddict.SeparatedAuthServer~~
--   ~~[ ] X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema~~
--   ~~[ ] X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema~~
+-   [ ] ~~X.Abp.IdentityServer4.SeparatedAuthServer~~
+-   [ ] ~~X.Abp.Openiddict.SeparatedAuthServer~~
+-   [ ] ~~X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema~~
+-   [ ] ~~X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema~~
 -   [x] X.Abp.IdentityServer4.Microservices(xais4mo or xais4my)
 -   [x] X.Abp.Openiddict.Microservices(xaodmo or xaodmy)
 -   [ ] vue
+
+---
+
 -   [ ] X.Abp.MicroService(xams)
 -   [x] X.Abp.MultiLayer(xaml)
 -   [x] X.Abp.MultiLayer.SeparateAuthServer(xamlsas)

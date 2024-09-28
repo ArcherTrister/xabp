@@ -15,8 +15,7 @@ namespace X.Abp.LanguageManagement.External
         Task<Dictionary<string, string>> GetTextsAsync(
             string resourceName,
             string cultureName,
-            Func<Task<Dictionary<string, string>>> factory
-        );
+            Func<Task<Dictionary<string, string>>> factory);
 
         Task InvalidateAsync(string resourceName, string cultureName);
     }

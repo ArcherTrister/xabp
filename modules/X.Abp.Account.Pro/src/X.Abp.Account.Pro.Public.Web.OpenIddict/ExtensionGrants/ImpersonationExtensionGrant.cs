@@ -220,7 +220,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
                     IdentityUser user = await UserManager.FindByNameAsync(tenantUserName);
                     if (user == null)
                     {
-                        Logger.LogError(Localizer["Volo.Account:ThereIsNoUserWithUserName"].ToString().Replace("{UserName}", tenantUserName));
+                        Logger.LogError(Localizer["Volo.Account:ThereIsNoUserWithUserName"].ToString().Replace("{UserName}", tenantUserName, StringComparison.Ordinal));
                         return new ForbidResult(new string[1]
                         {
                             OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
@@ -228,7 +228,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
                         new AuthenticationProperties(new Dictionary<string, string>()
                         {
                             [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidRequest,
-                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:ThereIsNoUserWithUserName"].ToString().Replace("{UserName}", tenantUserName)
+                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:ThereIsNoUserWithUserName"].ToString().Replace("{UserName}", tenantUserName, StringComparison.Ordinal)
                         },
                         new Dictionary<string, object>()
                         {
@@ -268,7 +268,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
             }
             else
             {
-                Logger.LogError(Localizer["Volo.Account:RequirePermissionToImpersonateTenant"].ToString().Replace("{PermissionName}", AbpAccountOptions.ImpersonationTenantPermission));
+                Logger.LogError(Localizer["Volo.Account:RequirePermissionToImpersonateTenant"].ToString().Replace("{PermissionName}", AbpAccountOptions.ImpersonationTenantPermission, StringComparison.Ordinal));
                 return new ForbidResult(new string[1]
                 {
                     OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
@@ -276,7 +276,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
                 new AuthenticationProperties(new Dictionary<string, string>()
                 {
                     [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidRequest,
-                    [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:RequirePermissionToImpersonateTenant"].ToString().Replace("{PermissionName}", AbpAccountOptions.ImpersonationTenantPermission)
+                    [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:RequirePermissionToImpersonateTenant"].ToString().Replace("{PermissionName}", AbpAccountOptions.ImpersonationTenantPermission, StringComparison.Ordinal)
                 },
                 new Dictionary<string, object>()
                 {
@@ -322,7 +322,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
                     IdentityUser user = await UserManager.FindByIdAsync(userId.ToString());
                     if (user == null)
                     {
-                        Logger.LogError(Localizer["Volo.Account:ThereIsNoUserWithId"].ToString().Replace("{UserId}", userId.ToString()));
+                        Logger.LogError(Localizer["Volo.Account:ThereIsNoUserWithId"].ToString().Replace("{UserId}", userId.ToString(), StringComparison.Ordinal));
                         return new ForbidResult(new string[1]
                         {
                             OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
@@ -330,7 +330,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
                         new AuthenticationProperties(new Dictionary<string, string>()
                         {
                             [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidRequest,
-                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:ThereIsNoUserWithId"].ToString().Replace("{UserId}", userId.ToString())
+                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:ThereIsNoUserWithId"].ToString().Replace("{UserId}", userId.ToString(), StringComparison.Ordinal)
                         },
                         new Dictionary<string, object>()
                         {
@@ -383,7 +383,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
             }
             else
             {
-                Logger.LogError(Localizer["Volo.Account:RequirePermissionToImpersonateUser"].ToString().Replace("{PermissionName}", AbpAccountOptions.ImpersonationUserPermission));
+                Logger.LogError(Localizer["Volo.Account:RequirePermissionToImpersonateUser"].ToString().Replace("{PermissionName}", AbpAccountOptions.ImpersonationUserPermission, StringComparison.Ordinal));
                 return new ForbidResult(new string[1]
                 {
                     OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
@@ -391,7 +391,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
                 new AuthenticationProperties(new Dictionary<string, string>()
                 {
                     [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidRequest,
-                    [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:RequirePermissionToImpersonateUser"].ToString().Replace("{PermissionName}", AbpAccountOptions.ImpersonationUserPermission)
+                    [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:RequirePermissionToImpersonateUser"].ToString().Replace("{PermissionName}", AbpAccountOptions.ImpersonationUserPermission, StringComparison.Ordinal)
                 },
                 new Dictionary<string, object>()
                 {
@@ -431,7 +431,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
                     IdentityUser user = await UserManager.FindByIdAsync(userDelegation.SourceUserId.ToString());
                     if (user == null)
                     {
-                        Logger.LogError(Localizer["Volo.Account:ThereIsNoUserWithId"].ToString().Replace("{UserId}", userDelegation.SourceUserId.ToString()));
+                        Logger.LogError(Localizer["Volo.Account:ThereIsNoUserWithId"].ToString().Replace("{UserId}", userDelegation.SourceUserId.ToString(), StringComparison.Ordinal));
                         return new ForbidResult(new string[1]
                         {
                             OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
@@ -439,7 +439,7 @@ namespace X.Abp.Account.Web.ExtensionGrants
                         new AuthenticationProperties(new Dictionary<string, string>()
                         {
                             [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidRequest,
-                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:ThereIsNoUserWithId"].ToString().Replace("{UserId}", userDelegation.SourceUserId.ToString())
+                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = Localizer["Volo.Account:ThereIsNoUserWithId"].ToString().Replace("{UserId}", userDelegation.SourceUserId.ToString(), StringComparison.Ordinal)
                         },
                         new Dictionary<string, object>()
                         {

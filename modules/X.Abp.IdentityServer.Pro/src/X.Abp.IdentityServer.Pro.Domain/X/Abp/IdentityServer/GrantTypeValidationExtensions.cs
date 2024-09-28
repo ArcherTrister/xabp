@@ -12,12 +12,12 @@ namespace X.Abp.IdentityServer;
 
 public static class GrantTypeValidationExtensions
 {
+#pragma warning disable CA1851 // “IEnumerable”集合可能的多个枚举
     public static void Validate(this IEnumerable<string> grantTypes)
     {
         ArgumentNullException.ThrowIfNull(grantTypes);
 
         // spaces are not allowed in grant types
-#pragma warning disable CA1851 // “IEnumerable”集合可能的多个枚举
         foreach (var type in grantTypes)
         {
             if (type.IsNullOrWhiteSpace())
@@ -37,7 +37,6 @@ public static class GrantTypeValidationExtensions
         {
             throw new InvalidOperationException("Grant types list contains duplicate values");
         }
-#pragma warning restore CA1851 // “IEnumerable”集合可能的多个枚举
 
         // would allow response_type downgrade attack from code to token
         DisallowGrantTypeCombination(GrantType.Implicit, GrantType.AuthorizationCode, grantTypes);
@@ -51,7 +50,6 @@ public static class GrantTypeValidationExtensions
         ArgumentNullException.ThrowIfNull(grantTypes);
 
         // spaces are not allowed in grant types
-#pragma warning disable CA1851 // “IEnumerable”集合可能的多个枚举
         foreach (var type in grantTypes)
         {
             if (type.IsNullOrWhiteSpace())
@@ -71,7 +69,6 @@ public static class GrantTypeValidationExtensions
         {
             throw new InvalidOperationException("Grant types list contains duplicate values");
         }
-#pragma warning restore CA1851 // “IEnumerable”集合可能的多个枚举
 
         // would allow response_type downgrade attack from code to token
         DisallowGrantTypeCombination(GrantType.Implicit, GrantType.AuthorizationCode, grantTypes);
@@ -82,12 +79,10 @@ public static class GrantTypeValidationExtensions
 
     private static void DisallowGrantTypeCombination(string value1, string value2, IEnumerable<string> grantTypes)
     {
-#pragma warning disable CA1851 // “IEnumerable”集合可能的多个枚举
         if (grantTypes.Contains(value1, StringComparer.Ordinal) &&
             grantTypes.Contains(value2, StringComparer.Ordinal))
         {
             throw new InvalidOperationException($"Grant types list cannot contain both {value1} and {value2}");
         }
-#pragma warning restore CA1851 // “IEnumerable”集合可能的多个枚举
     }
 }

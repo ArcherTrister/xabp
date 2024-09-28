@@ -1,5 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using System;
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
@@ -42,10 +46,10 @@ namespace X.Abp.AspNetCore.Components.Web.LeptonTheme.Components.ApplicationLayo
                 return;
             }
 
-            var menuItemPath = MenuItem.MenuItem.Url.Replace("~/", string.Empty).Trim('/');
+            var menuItemPath = MenuItem.MenuItem.Url.Replace("~/", string.Empty, StringComparison.OrdinalIgnoreCase).Trim('/');
             var currentPagePath = new Uri(NavigationManager.Uri.TrimEnd('/')).AbsolutePath.Trim('/');
 
-            if (menuItemPath.TrimEnd('/').Equals(currentPagePath, StringComparison.InvariantCultureIgnoreCase))
+            if (menuItemPath.TrimEnd('/').Equals(currentPagePath, StringComparison.OrdinalIgnoreCase))
             {
                 Menu.Activate(MenuItem);
             }

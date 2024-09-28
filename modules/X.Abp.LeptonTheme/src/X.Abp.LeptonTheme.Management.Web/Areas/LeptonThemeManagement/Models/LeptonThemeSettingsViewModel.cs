@@ -6,6 +6,5 @@ namespace X.Abp.LeptonTheme.Management.Web.Areas.LeptonThemeManagement.Models
 {
     public class LeptonThemeSettingsViewModel : LeptonThemeSettingsDto
     {
-
     }
 }

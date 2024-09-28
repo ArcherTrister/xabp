@@ -36,13 +36,13 @@ public class FileIconOption
             return DefaultIconInfo;
         }
 
-        var extension = fileNameParts.Last().ToLower();
+        var extension = fileNameParts.Last().ToLower(System.Globalization.CultureInfo.InvariantCulture);
         return FileIconInfos.TryGetValue(extension, out var _) ? FileIconInfos[extension] : DefaultIconInfo;
     }
 
     public virtual FileIconOption SetFileIcon(string extension, FileIconInfo iconInfo)
     {
-        extension = extension.ToLower();
+        extension = extension.ToLower(System.Globalization.CultureInfo.InvariantCulture);
         if (FileIconInfos.TryGetValue(extension, out var _))
         {
             FileIconInfos[extension] = iconInfo;

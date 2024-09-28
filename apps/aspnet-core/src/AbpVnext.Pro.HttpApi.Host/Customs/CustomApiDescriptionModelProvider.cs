@@ -117,7 +117,10 @@ public class CustomApiDescriptionModelProvider : IApiDescriptionModelProvider
         {
             Logger.LogWarning(
                 "Controller '{ControllerName}' contains more than one action with name '{UniqueMethodName}' for module '{RootPath}'. Ignored: {Method}",
-                controllerModel.ControllerName, uniqueMethodName, moduleModel.RootPath, method);
+                controllerModel.ControllerName,
+                uniqueMethodName,
+                moduleModel.RootPath,
+                method);
             return;
         }
 

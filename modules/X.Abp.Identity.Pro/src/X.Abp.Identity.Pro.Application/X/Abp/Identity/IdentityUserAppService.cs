@@ -441,12 +441,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
                         providerWithPassword.CanObtainUserInfoWithoutPassword;
                 }
 
-                providers.Add(
-                    new ExternalLoginProviderDto(
-                        externalLoginProvider.Value.Name,
-                        canObtainUserInfoWithoutPassword
-                    )
-                );
+                providers.Add(new ExternalLoginProviderDto(externalLoginProvider.Value.Name, canObtainUserInfoWithoutPassword));
             }
         }
 
@@ -454,16 +449,9 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
     }
 
     [Authorize(AbpIdentityProPermissions.Users.Import)]
-    public virtual async Task<IdentityUserDto> ImportExternalUserAsync(
-        ImportExternalUserInput input
-    )
+    public virtual async Task<IdentityUserDto> ImportExternalUserAsync(ImportExternalUserInput input)
     {
-        if (
-            !AbpIdentityOptions.Value.ExternalLoginProviders.TryGetValue(
-                input.Provider,
-                out var providerInfo
-            )
-        )
+        if (!AbpIdentityOptions.Value.ExternalLoginProviders.TryGetValue(input.Provider, out var providerInfo))
         {
             throw new BusinessException(IdentityProErrorCodes.InvalidExternalLoginProvider);
         }
@@ -477,17 +465,12 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
 
         if (provider is IExternalLoginProviderWithPassword)
         {
-            if (
-                !provider.As<IExternalLoginProviderWithPassword>().CanObtainUserInfoWithoutPassword
+            if (!provider.As<IExternalLoginProviderWithPassword>().CanObtainUserInfoWithoutPassword
                 && !await provider.TryAuthenticateAsync(
                     input.UserNameOrEmailAddress,
-                    input.Password
-                )
-            )
+                    input.Password))
             {
-                throw new BusinessException(
-                    IdentityProErrorCodes.ExternalLoginProviderAuthenticateFailed
-                );
+                throw new BusinessException(IdentityProErrorCodes.ExternalLoginProviderAuthenticateFailed);
             }
         }
 
@@ -497,8 +480,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
                 ? await providerWithPassword.CreateUserAsync(
                     input.UserNameOrEmailAddress,
                     input.Provider,
-                    input.Password
-                )
+                    input.Password)
                 : await provider.CreateUserAsync(input.UserNameOrEmailAddress, input.Provider);
         }
         else
@@ -527,9 +509,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
     }
 
     [AllowAnonymous]
-    public virtual async Task<IRemoteStreamContent> GetListAsExcelFileAsync(
-        GetIdentityUserListAsFileInput input
-    )
+    public virtual async Task<IRemoteStreamContent> GetListAsExcelFileAsync(GetIdentityUserListAsFileInput input)
     {
         List<IdentityUserExportDto> identityUserExportDtoList = await GetExportUsersAsync(input);
         using MemoryStream memoryStream = new MemoryStream();
@@ -539,20 +519,14 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
             true,
             "Sheet1",
             ExcelType.XLSX,
-            GetExcelConfiguration(ExcelType.XLSX)
-        );
+            GetExcelConfiguration(ExcelType.XLSX));
+
         memoryStream.Seek(0L, SeekOrigin.Begin);
-        return new RemoteStreamContent(
-            memoryStream,
-            "UserList.xlsx",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        );
+        return new RemoteStreamContent(memoryStream, "UserList.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     }
 
     [AllowAnonymous]
-    public virtual async Task<IRemoteStreamContent> GetListAsCsvFileAsync(
-        GetIdentityUserListAsFileInput input
-    )
+    public virtual async Task<IRemoteStreamContent> GetListAsCsvFileAsync(GetIdentityUserListAsFileInput input)
     {
         List<IdentityUserExportDto> identityUserExportDtoList = await GetExportUsersAsync(input);
         using MemoryStream memoryStream = new MemoryStream();
@@ -562,8 +536,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
             true,
             "Sheet1",
             ExcelType.CSV,
-            GetExcelConfiguration(ExcelType.CSV)
-        );
+            GetExcelConfiguration(ExcelType.CSV));
         memoryStream.Seek(0L, SeekOrigin.Begin);
         return new RemoteStreamContent(memoryStream, "UserList.csv", "text/csv");
     }
@@ -582,9 +555,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
     }
 
     [AllowAnonymous]
-    public virtual async Task<IRemoteStreamContent> GetImportUsersSampleFileAsync(
-        GetImportUsersSampleFileInput input
-    )
+    public virtual async Task<IRemoteStreamContent> GetImportUsersSampleFileAsync(GetImportUsersSampleFileInput input)
     {
         await CheckDownloadTokenAsync(input.Token);
         return await GetImportUsersFileAsync(
@@ -612,14 +583,11 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
                 }
             },
             "ImportUsersSampleFile",
-            input.FileType
-        );
+            input.FileType);
     }
 
     [Authorize(AbpIdentityProPermissions.Users.Import)]
-    public virtual async Task<ImportUsersFromFileOutput> ImportUsersFromFileAsync(
-        ImportUsersFromFileInputWithStream input
-    )
+    public virtual async Task<ImportUsersFromFileOutput> ImportUsersFromFileAsync(ImportUsersFromFileInputWithStream input)
     {
         await IdentityOptions.SetAsync();
         MemoryStream stream = new MemoryStream();
@@ -635,17 +603,12 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
                 configuration = new CsvConfiguration() { Seperator = ';' };
             }
 
-            list = (
-                await MiniExcel.QueryAsync<InvalidImportUsersFromFileDto>(
+            list = (await MiniExcel.QueryAsync<InvalidImportUsersFromFileDto>(
                     stream,
                     null,
-                    input.FileType == ImportUsersFromFileType.Excel
-                        ? ExcelType.XLSX
-                        : ExcelType.CSV,
+                    input.FileType == ImportUsersFromFileType.Excel ? ExcelType.XLSX : ExcelType.CSV,
                     "A2",
-                    configuration
-                )
-            ).ToList();
+                    configuration)).ToList();
         }
         catch (Exception)
         {
@@ -667,8 +630,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
                         GuidGenerator.Create(),
                         waitingImportUser.UserName,
                         waitingImportUser.EmailAddress,
-                        CurrentTenant.Id
-                    )
+                        CurrentTenant.Id)
                     {
                         Surname = waitingImportUser.Surname,
                         Name = waitingImportUser.Name
@@ -680,9 +642,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
 
                     if (!waitingImportUser.Password.IsNullOrWhiteSpace())
                     {
-                        (
-                            await UserManager.CreateAsync(user, waitingImportUser.Password)
-                        ).CheckIdentityErrors();
+                        (await UserManager.CreateAsync(user, waitingImportUser.Password)).CheckIdentityErrors();
                     }
                     else
                     {
@@ -691,15 +651,9 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
 
                     if (!waitingImportUser.AssignedRoleNames.IsNullOrWhiteSpace())
                     {
-                        (
-                            await UserManager.SetRolesAsync(
-                                user,
-                                waitingImportUser
-                                    .AssignedRoleNames.Split(";")
-                                    .Select(role => role.Trim())
-                                    .Where(role => !role.IsNullOrWhiteSpace())
-                            )
-                        ).CheckIdentityErrors();
+                        (await UserManager.SetRolesAsync(user,
+                            waitingImportUser.AssignedRoleNames.Split(";").Select(role => role.Trim()).Where(role => !role.IsNullOrWhiteSpace())))
+                            .CheckIdentityErrors();
                     }
 
                     await uow.CompleteAsync();
@@ -739,19 +693,15 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
     }
 
     [AllowAnonymous]
-    public virtual async Task<IRemoteStreamContent> GetImportInvalidUsersFileAsync(
-        GetImportInvalidUsersFileInput input
-    )
+    public virtual async Task<IRemoteStreamContent> GetImportInvalidUsersFileAsync(GetImportInvalidUsersFileInput input)
     {
         IDownloadCacheItem downloadCacheItem = await CheckDownloadTokenAsync(input.Token, true);
-        ImportInvalidUsersCacheItem invalidUsersCacheItem = await ImportInvalidUsersCache.GetAsync(
-            input.Token
-        );
+        ImportInvalidUsersCacheItem invalidUsersCacheItem = await ImportInvalidUsersCache.GetAsync(input.Token);
+
         return await GetImportUsersFileAsync(
             invalidUsersCacheItem.InvalidUsers,
             "InvalidUsers",
-            invalidUsersCacheItem.FileType
-        );
+            invalidUsersCacheItem.FileType);
     }
 
     /*
@@ -801,10 +751,9 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
 
     protected virtual async Task UpdateUserByInput(
         IdentityUser user,
-        IdentityUserCreateOrUpdateDtoBase input
-    )
+        IdentityUserCreateOrUpdateDtoBase input)
     {
-        if (!string.Equals(user.Email, input.Email, StringComparison.InvariantCultureIgnoreCase))
+        if (!string.Equals(user.Email, input.Email, StringComparison.OrdinalIgnoreCase))
         {
             (await UserManager.SetEmailAsync(user, input.Email)).CheckIdentityErrors();
         }
@@ -813,26 +762,20 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
             !string.Equals(
                 user.PhoneNumber,
                 input.PhoneNumber,
-                StringComparison.InvariantCultureIgnoreCase
-            )
-        )
+                StringComparison.OrdinalIgnoreCase))
         {
             (await UserManager.SetPhoneNumberAsync(user, input.PhoneNumber)).CheckIdentityErrors();
         }
 
-        (
-            await UserManager.SetLockoutEnabledAsync(user, input.LockoutEnabled)
-        ).CheckIdentityErrors();
+        (await UserManager.SetLockoutEnabledAsync(user, input.LockoutEnabled)).CheckIdentityErrors();
         user.Name = input.Name;
         user.Surname = input.Surname;
         (await UserManager.UpdateAsync(user)).CheckIdentityErrors();
         user.SetIsActive(input.IsActive);
         user.SetShouldChangePasswordOnNextLogin(input.ShouldChangePasswordOnNextLogin);
 
-        if (
-            await PermissionChecker.IsGrantedAsync(AbpIdentityProPermissions.Users.ManageRoles)
-            && input.RoleNames != null
-        )
+        if (await PermissionChecker.IsGrantedAsync(AbpIdentityProPermissions.Users.ManageRoles)
+            && input.RoleNames != null)
         {
             await UpdateUserRolesBasedOnOrganizationUnits(user, input);
 
@@ -841,8 +784,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
 
         if (
             await PermissionChecker.IsGrantedAsync(AbpIdentityProPermissions.Users.ManageOU)
-            && input.OrganizationUnitIds != null
-        )
+            && input.OrganizationUnitIds != null)
         {
             await UserManager.SetOrganizationUnitsAsync(user, input.OrganizationUnitIds);
         }
@@ -850,8 +792,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
 
     protected virtual async Task UpdateUserRolesBasedOnOrganizationUnits(
         IdentityUser user,
-        IdentityUserCreateOrUpdateDtoBase input
-    )
+        IdentityUserCreateOrUpdateDtoBase input)
     {
         if (input.OrganizationUnitIds == null)
         {
@@ -871,8 +812,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
                 null,
                 int.MaxValue,
                 0,
-                true
-            );
+                true);
             if (source.Count != 0)
             {
                 IdentityRole[] array2 = source
@@ -908,8 +848,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
     protected virtual async Task<IRemoteStreamContent> GetImportUsersFileAsync<T>(
         List<T> users,
         string fileName,
-        ImportUsersFromFileType fileType
-    )
+        ImportUsersFromFileType fileType)
         where T : ImportUsersFromFileDto
     {
         IConfiguration iconfiguration = null;
@@ -936,9 +875,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
         return new RemoteStreamContent(memoryStream, fileName, contentType);
     }
 
-    protected virtual async Task<List<IdentityUserExportDto>> GetExportUsersAsync(
-        GetIdentityUserListAsFileInput input
-    )
+    protected virtual async Task<List<IdentityUserExportDto>> GetExportUsersAsync(GetIdentityUserListAsFileInput input)
     {
         IDownloadCacheItem downloadCacheItem = await CheckDownloadTokenAsync(input.Token);
 
@@ -961,27 +898,20 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
                 maxCreationTime: input.MaxCreationTime,
                 minCreationTime: input.MinCreationTime,
                 maxModifitionTime: input.MaxModifitionTime,
-                minModifitionTime: input.MinModifitionTime
-            );
+                minModifitionTime: input.MinModifitionTime);
             IEnumerable<Guid> userIds = users.Select(x => x.Id);
 
-            List<IdentityUserIdWithRoleNames> source = await UserRepository.GetRoleNamesAsync(
-                userIds
-            );
+            List<IdentityUserIdWithRoleNames> source = await UserRepository.GetRoleNamesAsync(userIds);
             List<IdentityUserExportDto> identityUserExportDtoList = ObjectMapper.Map<
                 List<IdentityUser>,
                 List<IdentityUserExportDto>
             >(users);
             for (int i = 0; i < users.Count; ++i)
             {
-                IdentityUserIdWithRoleNames userIdWithRoleNames = source.FirstOrDefault(x =>
-                    x.Id == users[i].Id
-                );
+                IdentityUserIdWithRoleNames userIdWithRoleNames = source.FirstOrDefault(x => x.Id == users[i].Id);
                 if (userIdWithRoleNames != null)
                 {
-                    identityUserExportDtoList[i].Roles = userIdWithRoleNames.RoleNames.JoinAsString(
-                        ";"
-                    );
+                    identityUserExportDtoList[i].Roles = userIdWithRoleNames.RoleNames.JoinAsString(";");
                 }
             }
 
@@ -991,8 +921,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
 
     protected virtual async Task<IDownloadCacheItem> CheckDownloadTokenAsync(
         string token,
-        bool isInvalidUsersToken = false
-    )
+        bool isInvalidUsersToken = false)
     {
         IDownloadCacheItem downloadCacheItem;
         if (!isInvalidUsersToken)
@@ -1014,12 +943,9 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
 
     private async Task<OrganizationUnitWithDetailsDto> ConvertToOrganizationUnitWithDetailsDtoAsync(
         OrganizationUnit organizationUnit,
-        Dictionary<Guid, IdentityRole> roleLookup
-    )
+        Dictionary<Guid, IdentityRole> roleLookup)
     {
-        var dto = ObjectMapper.Map<OrganizationUnit, OrganizationUnitWithDetailsDto>(
-            organizationUnit
-        );
+        var dto = ObjectMapper.Map<OrganizationUnit, OrganizationUnitWithDetailsDto>(organizationUnit);
         dto.Roles = new List<IdentityRoleDto>();
         foreach (var ouRole in organizationUnit.Roles)
         {
@@ -1033,9 +959,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
         return await Task.FromResult(dto);
     }
 
-    private async Task<Dictionary<Guid, IdentityRole>> GetRoleLookup(
-        IEnumerable<OrganizationUnit> organizationUnits
-    )
+    private async Task<Dictionary<Guid, IdentityRole>> GetRoleLookup(IEnumerable<OrganizationUnit> organizationUnits)
     {
         var roleIds = organizationUnits
             .SelectMany(q => q.Roles)
@@ -1046,7 +970,7 @@ public class IdentityUserAppService : IdentityAppServiceBase, IIdentityUserAppSe
         return (await RoleRepository.GetListAsync(roleIds)).ToDictionary(u => u.Id, u => u);
     }
 
-    private IConfiguration GetExcelConfiguration(ExcelType excelType)
+    private static IConfiguration GetExcelConfiguration(ExcelType excelType)
     {
         DynamicExcelColumn[] dynamicExcelColumnArray = new DynamicExcelColumn[13]
         {

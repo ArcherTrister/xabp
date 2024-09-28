@@ -29,17 +29,17 @@ public class CustomTokenResponseGenerator : ITokenResponseGenerator
     /// <summary>
     /// The logger
     /// </summary>
-    protected readonly ILogger Logger;
+    protected ILogger Logger { get; }
 
     /// <summary>
     /// The token service
     /// </summary>
-    protected readonly ITokenService TokenService;
+    protected ITokenService TokenService { get; }
 
     /// <summary>
     /// The refresh token service
     /// </summary>
-    protected readonly IRefreshTokenService RefreshTokenService;
+    protected IRefreshTokenService RefreshTokenService { get; }
 
     /// <summary>
     /// The scope parser
@@ -49,17 +49,17 @@ public class CustomTokenResponseGenerator : ITokenResponseGenerator
     /// <summary>
     /// The resource store
     /// </summary>
-    protected readonly IResourceStore Resources;
+    protected IResourceStore Resources { get; }
 
     /// <summary>
     /// The clients store
     /// </summary>
-    protected readonly IClientStore Clients;
+    protected IClientStore Clients { get; }
 
     /// <summary>
     ///  The clock
     /// </summary>
-    protected readonly ISystemClock Clock;
+    protected ISystemClock Clock { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CustomTokenResponseGenerator" /> class.
@@ -352,7 +352,7 @@ public class CustomTokenResponseGenerator : ITokenResponseGenerator
     /// <param name="request">The request.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     /// <exception cref="InvalidOperationException">Client does not exist anymore.</exception>
-    protected virtual async Task<(string accessToken, string refreshToken)> CreateAccessTokenAsync(ValidatedTokenRequest request)
+    protected virtual async Task<(string AccessToken, string RefreshToken)> CreateAccessTokenAsync(ValidatedTokenRequest request)
     {
         TokenCreationRequest tokenRequest;
         bool createRefreshToken;

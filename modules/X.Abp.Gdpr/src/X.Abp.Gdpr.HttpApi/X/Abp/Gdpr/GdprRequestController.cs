@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Asp.Versioning;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Volo.Abp;
@@ -47,8 +48,8 @@ IGdprRequestAppService
     public virtual async Task<IRemoteStreamContent> GetUserDataAsync(Guid requestId, string token)
     {
         var userData = await GdprRequestAppService.GetUserDataAsync(requestId, token);
-        Response.Headers.Add("Content-Disposition", "attachment;filename=\"" + userData.FileName + "\"");
-        Response.Headers.Add("Accept-Ranges", "bytes");
+        Response.Headers.Append("Content-Disposition", "attachment;filename=\"" + userData.FileName + "\"");
+        Response.Headers.Append("Accept-Ranges", "bytes");
         Response.ContentType = userData.ContentType;
         return userData;
     }

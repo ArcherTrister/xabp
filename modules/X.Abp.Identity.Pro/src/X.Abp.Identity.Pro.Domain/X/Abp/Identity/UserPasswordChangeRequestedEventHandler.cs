@@ -47,13 +47,13 @@ public class UserPasswordChangeRequestedEventHandler :
         var source = await CheckUserPasswordAsync(user, eventData.Password);
         if (source.Count != 0)
         {
-          Logger.LogError("User password change failed: {userName}, reason: {reason}", eventData.UserName, string.Join(";", source.Select(e => e.Code)));
+          Logger.LogError("User password change failed: {UserName}, reason: {Reason}", eventData.UserName, string.Join(";", source.Select(e => e.Code)));
         }
         else
         {
           (await IdentityUserManager.RemovePasswordAsync(user)).CheckIdentityErrors();
           (await IdentityUserManager.AddPasswordAsync(user, eventData.Password)).CheckIdentityErrors();
-          Logger.LogInformation("User password changed: {userName}", eventData.UserName);
+          Logger.LogInformation("User password changed: {UserName}", eventData.UserName);
         }
       }
     }

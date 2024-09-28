@@ -23,10 +23,7 @@ public class IdentityServerReturnUrlRequestCultureProvider : RequestCultureProvi
 
     public override async Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
     {
-        if (httpContext == null)
-        {
-            throw new ArgumentNullException(nameof(httpContext));
-        }
+        ArgumentNullException.ThrowIfNull(httpContext);
 
         var request = httpContext.Request;
         if (!request.QueryString.HasValue)

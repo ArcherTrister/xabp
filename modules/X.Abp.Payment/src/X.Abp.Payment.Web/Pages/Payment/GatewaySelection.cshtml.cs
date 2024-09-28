@@ -52,7 +52,7 @@ public class GatewaySelectionModel : PaymentPageModel
             ? await GatewayAppService.GetSubscriptionSupportedGatewaysAsync()
             : await GatewayAppService.GetGatewayConfigurationAsync();
         Gateways = PaymentWebOptions.Value.Gateways.Where(x => gatewaysDtos.Any(a => a.Name == x.Key)).Select(x => x.Value).ToList();
-        if (!Gateways.Any())
+        if (Gateways.Count == 0)
         {
             throw new ApplicationException("No payment gateway configured!");
         }

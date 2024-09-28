@@ -31,7 +31,7 @@ dotnet tool update -g X.Abp.Cli --add-source ./
 -   **`help`**: 展示 XABP CLI 的用法帮助信息.
 -   ~~**`cli`**: 更新或删除 XABP CLI.~~
 -   **`prompt`**: tarts with prompt mode.
--   **`new`**：生成基于 XABP 的[启动模板](Startup-Templates/Index.md).
+-   **`new`**：生成基于 XABP 的[启动模板](https://abp.io/docs/zh-Hans/abp/latest/Startup-Templates/Index).
 -   **`update`**：自动更新的 XABP 解决方案 XABP 相关的 NuGet 和 NPM 包.
 -   **`clean`**: 删除当前目录下所有的 `BIN` 和 `OBJ` 子目录.
 -   ~~**`add-package`**: 添加 XABP 包到项目.~~
@@ -39,16 +39,16 @@ dotnet tool update -g X.Abp.Cli --add-source ./
 -   **`generate-proxy`**: 生成客户端代理以使用 HTTP API 端点.
 -   **`remove-proxy`**: 移除以前生成的客户端代理.
 -   ~~**`switch-to-preview`**: 切换到 XABP 框架的最新预览版本。~~
--   ~~**`switch-to-nightly`**: 切换解决方案所有 XABP 相关包为[夜间构建](Nightly-Builds.md)版本.~~
+-   ~~**`switch-to-nightly`**: 切换解决方案所有 XABP 相关包为[夜间构建](https://abp.io/docs/en/abp/latest/Nightly-Builds)版本.~~
 -   ~~**`switch-to-stable`**: 切换解决方案所有 XABP 相关包为最新的稳定版本.~~
--   **`translate`**: 当源代码控制存储库中有多个 JSON[本地化]（Localization.md 文件时,可简化翻译本地化文件的过程.
+-   **`translate`**: 当源代码控制存储库中有多个 JSON[本地化](https://abp.io/docs/lastest/Localization)文件时,可简化翻译本地化文件的过程.
 -   **`create-migration-and-run-migrator`**: 创建并运行迁移.
 -   ~~**`login`**: 使用你在[abp.io](https://abp.io/)的用户名和密码在你的计算机上认证.~~
 -   ~~**`login-info`**: 展示当前登录用户信息.~~
 -   ~~**`logout`**: 在你的计算机注销认证.~~
 -   ~~**`bundle`**: 为 XABP Blazor 和 MAUI Blazor 项目生成引用的脚本和样式.~~
 -   **`install-libs`**: 为 MVC / Razor Pages 和 Blazor Server UI 类型安装 NPM 包.
--   **`create`**: 基于 ABPVnext Pro 启动模板生成新的解决方案.
+-   **`create`**: 基于 **xabp** 启动模板生成新的解决方案.
 -   **`generate-cert`**: 生成证书文件.
 -   **`install-module`**: 添加[应用模块](https://github.com/ArcherTrister/xabp#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%A8%A1%E5%9D%97)到解决方案.
 
@@ -107,12 +107,12 @@ xabp new Acme.BookStore
 -   Acme.BookStore 是解决方案的名称.
 -   常见的命名方式类似于 _YourCompany.YourProject_. 不过你可以使用自己喜欢的方式,如 _YourProject_ (单级命名空间) 或 _YourCompany.YourProduct.YourModule_ (三级命名空间).
 
-参阅[XABP CLI 创建新解决方案示例](CLI-New-Command-Samples.md)查看更多示例.
+参阅[XABP CLI 创建新解决方案示例](https://abp.io/docs/latest/cli/new-command-samples)查看更多示例.
 
 #### Options
 
 -   `--template` 或者 `-t`: 指定模板. 默认的模板是 `app`,会生成 web 项目.可用的模板有:
-    -   `app` (default): [应用程序模板](Startup-Templates/Application.md). 其他选项:
+    -   `app` (**default**): [应用程序模板](https://abp.io/docs/zh-Hans/abp/latest/Startup-Templates/Application). 其他选项:
         -   `--ui` 或者 `-u`: 指定 ui 框架.默认`mvc`框架.其他选项:
             -   `mvc`: ASP.NET Core MVC.此模板的其他选项:
                 -   `--tiered`: 创建分层解决方案,Web 和 Http Api 层在物理上是分开的.如果未指定会创建一个分层的解决方案,此解决方案没有那么复杂,适合大多数场景.
@@ -128,10 +128,10 @@ xabp new Acme.BookStore
         -   `--database-provider` 或者 `-d`: 指定数据库提供程序.默认是 `ef`.其他选项:
             -   `ef`: Entity Framework Core.
             -   `mongodb`: MongoDB.
-    -   `module`: [Module template](Startup-Templates/Module.md). 其他选项:
+    -   `module`: [Module template](https://abp.io/docs/zh-Hans/abp/latest/Startup-Templates/Module). 其他选项:
         -   `--no-ui`: 不包含 UI.仅创建服务模块(也称为微服务 - 没有 UI).
-    -   **`console`**: [Console template](Startup-Templates/Console.md).
-    -   **`maui`**: [Maui template](Startup-Templates/MAUI.md).
+    -   **`console`**: [Console template](https://abp.io/docs/zh-Hans/abp/latest/Startup-Templates/Console).
+    -   **`maui`**: [Maui template](https://abp.io/docs/zh-Hans/abp/latest/Startup-Templates/MAUI).
     -   **`app-nolayers`**: 应用程序单层模板
     -   `--ui` 或者 `-u`: 指定 ui 框架.默认`mvc`框架.其他选项:
         -   `mvc`: ASP.NET Core MVC.
@@ -147,7 +147,7 @@ xabp new Acme.BookStore
 -   `--preview`: 使用最新的预览版本.
 -   `--template-source` 或者 `-ts`: 指定自定义模板源用于生成项目,可以使用本地源和网络源(例如 `D:\local-templat` 或 `https://.../my-template-file.zip`).
 -   `--create-solution-folder` 或者 `-csf`: 指定项目是在输出文件夹中的新文件夹中还是直接在输出文件夹中.
--   `--connection-string` 或者 `-cs`: 重写所有 `appsettings.json` 文件的默认连接字符串. 默认连接字符串是 `Server=localhost;Database=MyProjectName;Trusted_Connection=True`. 默认的数据库提供程序是 `SQL Server`. 如果你使用 EF Core 但需要更改 DBMS,可以按[这里所述](Entity-Framework-Core-Other-DBMS.md)进行更改(创建解决方案之后).
+-   `--connection-string` 或者 `-cs`: 重写所有 `appsettings.json` 文件的默认连接字符串. 默认连接字符串是 `Server=localhost;Database=MyProjectName;Trusted_Connection=True`. 默认的数据库提供程序是 `SQL Server`. 如果你使用 EF Core 但需要更改 DBMS,可以按[这里所述](https://abp.io/docs/zh-Hans/abp/latest/Entity-Framework-Core-Other-DBMS)进行更改(创建解决方案之后).
 -   `--local-framework-ref --abp-path`: 使用对项目的本地引用,而不是替换为 NuGet 包引用.
 
 ### update
@@ -187,7 +187,7 @@ xabp clean
 通过以下方式将 XABP 包添加到项目中
 
 -   添加 nuget 包做为项目的依赖项目.
--   添加 `[DependsOn(...)]` attribute 到项目的模块类 (请参阅 [模块开发文档](Module-Development-Basics.md)).
+-   添加 `[DependsOn(...)]` attribute 到项目的模块类 (请参阅 [模块开发文档](https://abp.io/docs/zh-Hans/abp/latest/Module-Development-Basics)).
 
 > 需要注意的是添加的模块可能需要额外的配置,通常会在包的文档中指出.
 
@@ -281,7 +281,7 @@ xabp generate-proxy -t csharp -url https://localhost:44302/
 -   `--working-directory` or `-wd`: 执行目录. 用于 `csharp` 和 `js` 客户端类型.
 -   `--url` or `-u`: API 定义的 URL. 用于 `csharp` 和 `js` 客户端类型.
 
-> 参阅 [Angular 服务代理文档](UI/Angular/Service-Proxies.md) 了解更多.
+> 参阅 [Angular 服务代理文档](https://abp.io/docs/zh-Hans/abp/latest/UI/Angular/Service-Proxies) 了解更多.
 
 ### remove-proxy
 
@@ -319,7 +319,7 @@ xabp remove-proxy -t csharp --folder MyProxies/InnerFolder
 -   `--working-directory` or `-wd`: 执行目录. 用于 `csharp` 和 `js` 客户端类型.
 -   `--url` or `-u`: API 定义的 URL. 用于 `csharp` 和 `js` 客户端类型.
 
-> 参阅 [Angular 服务代理文档](UI/Angular/Service-Proxies.md) 了解更多.
+> 参阅 [Angular 服务代理文档](https://abp.io/docs/en/abp/latest/UI/Angular/Service-Proxies) 了解更多.
 
 ### switch-to-preview
 
@@ -337,7 +337,7 @@ xabp switch-to-preview [options]
 
 ### switch-to-nightly
 
-想要切换到 XABP 框架的最新[每晚构建](Nightly-Builds.md)预览版可以使用此命令.
+想要切换到 XABP 框架的最新[每晚构建](https://abp.io/docs/en/abp/latest/Nightly-Builds)预览版可以使用此命令.
 
 用法:
 
@@ -365,7 +365,7 @@ xabp switch-to-stable [options]
 
 ### translate
 
-源代码控制存储库中有多个 JSON[本地化](Localization.md)文件时,用于简化翻译[本地化](Localization.md)文件的过程.
+源代码控制存储库中有多个 JSON[本地化](https://abp.io/docs/lastest/Localization)文件时,用于简化翻译[本地化](https://abp.io/docs/lastest/Localization)文件的过程.
 
 -   该命令将基于参考文化创建一个统一的 json 文件
 -   它搜索当前目录和所有子目录中的所有本地化"JSON"文件(递归). 然后创建一个包含所有需要翻译的条目的文件(默认情况下名为 "abp-translation.json").
@@ -428,13 +428,13 @@ xabp bundle [options]
     -   `webassembly`
     -   `maui-blazor`
 
-`bundle` command reads the `appsettings.json` file inside the Blazor and MAUI Blazor project for bundling options. For more details about managing style and script references in Blazor or MAUI Blazor apps, see [Managing Global Scripts & Styles](UI/Blazor/Global-Scripts-Styles.md)
+`bundle` command reads the `appsettings.json` file inside the Blazor and MAUI Blazor project for bundling options. For more details about managing style and script references in Blazor or MAUI Blazor apps, see [Managing Global Scripts & Styles](https://abp.io/docs/en/abp/latest/UI/Blazor/Global-Scripts-Styles)
 
 ### install-libs
 
 为 MVC / Razor Pages 和 Blazor Server UI 类型安装 NPM 包, 它的 **执行目录** 或者传递的 `--working-directory` 目录必须包含一个项目文件(\*.csproj).
 
-`install-libs` 命令读取 `abp.resourcemapping.js` 来管理包. 参阅[客户端包管理](UI/AspNetCore/Client-Side-Package-Management.md)了解更多细节.
+`install-libs` 命令读取 `abp.resourcemapping.js` 来管理包. 参阅[客户端包管理](https://abp.io/docs/zh-Hans/abp/latest/UI/AspNetCore/Client-Side-Package-Management)了解更多细节.
 
 用法:
 
@@ -448,7 +448,7 @@ xabp install-libs [options]
 
 ### create
 
-生成基于 XABP[启动模板](Startup-Templates/Index.md)的新解决方案.
+生成基于 XABP[启动模板](https://abp.io/startup-templates?culture=zh-Hans)的新解决方案.
 
 用法:
 
@@ -465,25 +465,38 @@ xabp create Acme.BookStore
 -   Acme.BookStore 是解决方案的名称.
 -   常见的命名方式类似于 _YourCompany.YourProject_. 不过你可以使用自己喜欢的方式,如 _YourProject_ (单级命名空间) 或 _YourCompany.YourProduct.YourModule_ (三级命名空间).
 
-参阅[XABP CLI 创建新解决方案示例](CLI-New-Command-Samples.md)查看更多示例.
+参阅[XABP CLI 创建新解决方案示例](https://abp.io/docs/latest/cli/new-command-samples)查看更多示例.
 
 #### Options
 
--   `--template` 或者 `-t`: 指定模板. 默认的模板是 `xais4`,会生成 web 项目.可用的模板有:
-    -   [x] `xais4` (default): [应用程序模板](Startup-Templates/Application.md).
-    -   [x] `xaod` : [应用程序模板](Startup-Templates/Application.md).
-    -   [x] `xais4sts` : [SeparatedTenantSchema 应用程序模板](Startup-Templates/Application.md).
-    -   [x] `xaodsts` : [SeparatedTenantSchema 应用程序模板](Startup-Templates/Application.md).
-    -   [ ] `xais4sas` : [SeparatedAuthServer 应用程序模板](Startup-Templates/Application.md).
-    -   [ ] `xaodsas` : [SeparatedAuthServer 应用程序模板](Startup-Templates/Application.md).
-    -   [ ] `xais4sassts` : [SeparatedAuthServer and SeparatedTenantSchema 应用程序模板](Startup-Templates/Application.md).
-    -   [ ] `xaodsassts` : [SeparatedAuthServer and SeparatedTenantSchema 应用程序模板](Startup-Templates/Application.md).
-    -   [x] `xais4m` : [微服务应用程序模板](Startup-Templates/Application.md).
-    -   [x] `xaodm` : [微服务应用程序模板](Startup-Templates/Application.md).
+-   `--template` 或者 `-t`: 指定模板. 默认的模板是 `xaml`,会生成 web 项目.可用的模板有:
+
+    -   [x] ~~`xais4` : IdentityServer4 多层普通应用程序模板.~~
+    -   [x] ~~`xaod` : OpenIddict 多层普通应用程序模板~~
+    -   [x] `xais4sts` : IdentityServer4 租户架构分离应用程序模板.
+    -   [x] `xaodsts` : OpenIddict 租户架构分离应用程序模板.
+    -   [ ] `xais4sas` : IdentityServer4 授权服务分离应用程序模板.
+    -   [ ] `xaodsas` : OpenIddict 授权服务分离应用程序模板.
+    -   [ ] `xais4sassts` : IdentityServer4 SeparatedAuthServer and SeparatedTenantSchema 应用程序模板.
+    -   [ ] `xaodsassts` : OpenIddict SeparatedAuthServer and SeparatedTenantSchema 应用程序模板.
+    -   [x] `xais4mo` : IdentityServer4 Ocelot 微服务应用程序模板.
+    -   [x] `xais4my` : IdentityServer4 Yarp 微服务应用程序模板.
+    -   [x] `xaodmo` : OpenIddict Ocelot 微服务应用程序模板.
+    -   [x] `xaodmy` : OpenIddict Yarp 微服务应用程序模板.
+
+    ***
+
+    -   [ ] `xams` : 微服务应用程序模板,需搭配 `-tt` 参数使用.
+    -   [x] `xaml` (**default**): 多层普通应用程序模板,需搭配 `-tt` 参数使用.
+    -   [x] `xamlsas` : 多层授权服务分离应用程序模板,需搭配 `-tt` 参数使用.
+    -   [ ] `xamlsts` : 多层租户架构分离应用程序模板,需搭配 `-tt` 参数使用.
+    -   [x] `xasl` : 单层应用程序模板,需搭配 `-tt` 参数使用.
+
+-   `--template-type` 或者 `-tt`: 指定模板类型,默认是 IdentityServer4.
 -   `--output-folder` 或者 `-o`: 指定输出文件夹,默认是当前目录.
 -   `--version` 或者 `-v`: 指定 XABP 和模板的版本.它可以是 [release tag](https://github.com/ArcherTrister/xabp/releases) 或者 [branch name](https://github.com/ArcherTrister/xabp/branches). 如果没有指定,则使用最新版本.大多数情况下,你会希望使用最新的版本.
 -   `--create-solution-folder` 或者 `-csf`: 指定项目是在输出文件夹中的新文件夹中还是直接在输出文件夹中.
--   `--connection-string` 或者 `-cs`: 重写所有 `appsettings.json` 文件的默认连接字符串. 默认连接字符串是 `Server=localhost;Database=MyProjectName;Trusted_Connection=True`. 默认的数据库提供程序是 `SQL Server`. 如果你使用 EF Core 但需要更改 DBMS,可以按[这里所述](Entity-Framework-Core-Other-DBMS.md)进行更改(创建解决方案之后).
+-   `--connection-string` 或者 `-cs`: 重写所有 `appsettings.json` 文件的默认连接字符串. 默认连接字符串是 `Server=localhost;Database=MyProjectName;Trusted_Connection=True`. 默认的数据库提供程序是 `SQL Server`. 如果你使用 EF Core 但需要更改 DBMS,可以按[这里所述](https://abp.io/docs/zh-Hans/abp/latest/Entity-Framework-Core-Other-DBMS)进行更改(创建解决方案之后).
 -   `--database-management-system` or `-dbms`: Sets the database management system. Default is **SQL Server**. Supported DBMS's:
     -   `SqlServer`
     -   `MySQL`
@@ -493,6 +506,7 @@ xabp create Acme.BookStore
     -   `PostgreSQL`
         ::tip
         使用 mysql 需要先创建一个空的数据库再创建项目，否则会报错 `Unknown database`.
+-   `--install-template` 或者 `-it`: 是否安装项目模板,默认 false.
 -   `--include-vue` 或者 `-iv`: 是否包含 Vue 项目,默认 false.
 -   `--enable-swagger-enum-filter` 或者 `-esef`: 是否启用 Swagger 枚举过滤器,默认 true.
 -   `--install-template` 或者 `-it`: 是否安装项目模板,默认 false.

@@ -14,9 +14,11 @@ namespace X.Abp.CmsKit.Pro.Public.Web.Pages.Public.Newsletters;
 
 public class SuccessModalModel : CmsKitProPublicPageModel
 {
-  public string NormalizedSource;
-  public List<string> AdditionalPreferences;
-  public List<string> DisplayAdditionalPreferences;
+  public string NormalizedSource { get; set; }
+
+  public List<string> AdditionalPreferences { get; set; }
+
+  public List<string> DisplayAdditionalPreferences { get; set; }
 
   [BindProperty(SupportsGet = true)]
   [Required]

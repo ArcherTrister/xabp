@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -31,15 +35,14 @@ namespace X.Abp.Account.Web.Services;
 
 public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordValidator
 {
-    public CustomResourceOwnerPasswordValidator(IdentityUserManager userManager, SignInManager<IdentityUser> signInManager, IdentitySecurityLogManager identitySecurityLogManager, ILogger<ResourceOwnerPasswordValidator<IdentityUser>> logger, IStringLocalizer<AbpIdentityServerResource> localizer, IOptions<AbpIdentityOptions> abpIdentityOptions, IServiceScopeFactory serviceScopeFactory, IOptions<IdentityOptions> identityOptions, ISettingProvider settingProvider) : base(userManager, signInManager, identitySecurityLogManager, logger, localizer, abpIdentityOptions, serviceScopeFactory, identityOptions, settingProvider)
+    public CustomResourceOwnerPasswordValidator(IdentityUserManager userManager, SignInManager<IdentityUser> signInManager, IdentitySecurityLogManager identitySecurityLogManager, ILogger<ResourceOwnerPasswordValidator<IdentityUser>> logger, IStringLocalizer<AbpIdentityServerResource> localizer, IOptions<AbpIdentityOptions> abpIdentityOptions, IServiceScopeFactory serviceScopeFactory, IOptions<IdentityOptions> identityOptions, ISettingProvider settingProvider)
+        : base(userManager, signInManager, identitySecurityLogManager, logger, localizer, abpIdentityOptions, serviceScopeFactory, identityOptions, settingProvider)
     {
     }
 
     /// <summary>
     /// https://github.com/IdentityServer/IdentityServer4/blob/master/src/AspNetIdentity/src/ResourceOwnerPasswordValidator.cs#L53
     /// </summary>
-    /// <param name="context"></param>
-    /// <returns></returns>
     [UnitOfWork]
     public override async Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
     {
@@ -90,17 +93,18 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
                     {
                         await SetSuccessResultAsync(context, user);
                     }
+
                     return;
                 }
 
                 if (result.IsLockedOut)
                 {
-                    Logger.LogInformation("Authentication failed for username: {username}, reason: locked out", context.UserName);
+                    Logger.LogInformation("Authentication failed for username: {UserName}, reason: locked out", context.UserName);
                     errorDescription = Localizer["UserLockedOut"];
                 }
                 else if (result.IsNotAllowed)
                 {
-                    Logger.LogInformation("Authentication failed for username: {username}, reason: not allowed", context.UserName);
+                    Logger.LogInformation("Authentication failed for username: {UserName}, reason: not allowed", context.UserName);
 
                     if (user.ShouldChangePasswordOnNextLogin)
                     {
@@ -118,7 +122,7 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
                 }
                 else
                 {
-                    Logger.LogInformation("Authentication failed for username: {username}, reason: invalid credentials", context.UserName);
+                    Logger.LogInformation("Authentication failed for username: {UserName}, reason: invalid credentials", context.UserName);
                     errorDescription = Localizer["InvalidUserNameOrPassword"];
                 }
 
@@ -132,7 +136,7 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
             }
             else
             {
-                Logger.LogInformation("No user found matching username: {username}", context.UserName);
+                Logger.LogInformation("No user found matching username: {UserName}", context.UserName);
                 errorDescription = Localizer["InvalidUsername"];
 
                 await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext()
@@ -160,7 +164,7 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
                 return;
             }
 
-            Logger.LogInformation("Authentication failed for username: {username}, reason: InvalidRecoveryCode", context.UserName);
+            Logger.LogInformation("Authentication failed for username: {UserName}, reason: InvalidRecoveryCode", context.UserName);
             context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, Localizer["InvalidRecoveryCode"]);
         }
 
@@ -177,18 +181,19 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
 
             await UserManager.AccessFailedAsync(user);
 
-            Logger.LogInformation("Authentication failed for username: {username}, reason: InvalidAuthenticatorCode", context.UserName);
+            Logger.LogInformation("Authentication failed for username: {UserName}, reason: InvalidAuthenticatorCode", context.UserName);
             context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, Localizer["InvalidAuthenticatorCode"]);
         }
         else
         {
-            Logger.LogInformation("Authentication failed for username: {username}, reason: RequiresTwoFactor", context.UserName);
+            Logger.LogInformation("Authentication failed for username: {UserName}, reason: RequiresTwoFactor", context.UserName);
             var twoFactorToken = await UserManager.GenerateUserTokenAsync(user, TokenOptions.DefaultProvider, nameof(SignInResult.RequiresTwoFactor));
-            context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, nameof(SignInResult.RequiresTwoFactor),
+            context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant,
+                nameof(SignInResult.RequiresTwoFactor),
                 new Dictionary<string, object>()
                 {
-                        {"userId", user.Id},
-                        {"twoFactorToken", twoFactorToken}
+                    { "userId", user.Id },
+                    { "twoFactorToken", twoFactorToken }
                 });
 
             await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
@@ -240,24 +245,26 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
                 }
                 else
                 {
-                    Logger.LogInformation("ChangePassword failed for username: {username}, reason: {changePasswordResult}", context.UserName, changePasswordResult);
+                    Logger.LogInformation("ChangePassword failed for username: {UserName}, reason: {ChangePasswordResult}", context.UserName, changePasswordResult);
                     context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, changePasswordResult.Errors.Select(x => x.Description).JoinAsString(", "));
                 }
             }
             else
             {
-                Logger.LogInformation("Authentication failed for username: {username}, reason: InvalidAuthenticatorCode", context.UserName);
+                Logger.LogInformation("Authentication failed for username: {UserName}, reason: InvalidAuthenticatorCode", context.UserName);
                 context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, Localizer["InvalidAuthenticatorCode"]);
             }
         }
         else
         {
             Logger.LogInformation("Authentication failed for username: {{{UserName}}}, reason: {{{ChangePasswordType}}}", context.UserName, changePasswordType.ToString());
-            context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant, nameof(user.ShouldChangePasswordOnNextLogin),
+            context.Result = new GrantValidationResult(
+                TokenRequestErrors.InvalidGrant,
+                nameof(user.ShouldChangePasswordOnNextLogin),
                 new Dictionary<string, object>()
                 {
-                        {"userId", user.Id},
-                        {"changePasswordToken", await UserManager.GenerateUserTokenAsync(user, TokenOptions.DefaultProvider, changePasswordType.ToString())}
+                    { "userId", user.Id },
+                    { "changePasswordToken", await UserManager.GenerateUserTokenAsync(user, TokenOptions.DefaultProvider, changePasswordType.ToString()) }
                 });
 
             await IdentitySecurityLogManager.SaveAsync(new IdentitySecurityLogContext
@@ -274,7 +281,7 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
     {
         var sub = await UserManager.GetUserIdAsync(user);
 
-        Logger.LogInformation("Credentials validated for username: {username}", context.UserName);
+        Logger.LogInformation("Credentials validated for username: {UserName}", context.UserName);
 
         var additionalClaims = new List<Claim>();
 
@@ -283,8 +290,7 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
         context.Result = new GrantValidationResult(
             sub,
             OidcConstants.AuthenticationMethods.Password,
-            additionalClaims.ToArray()
-        );
+            additionalClaims.ToArray());
 
         await IdentitySecurityLogManager.SaveAsync(
             new IdentitySecurityLogContext
@@ -293,8 +299,7 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
                 Action = IdentityServerSecurityLogActionConsts.LoginSucceeded,
                 UserName = context.UserName,
                 ClientId = await FindClientIdAsync(context)
-            }
-        );
+            });
     }
 
     protected override async Task ReplaceEmailToUsernameOfInputIfNeeds(ResourceOwnerPasswordValidationContext context)
@@ -336,9 +341,7 @@ public class CustomResourceOwnerPasswordValidator : AbpResourceOwnerPasswordVali
             customClaims.Add(
                 new Claim(
                     AbpClaimTypes.TenantId,
-                    user.TenantId?.ToString()
-                )
-            );
+                    user.TenantId?.ToString()));
         }
 
         return Task.CompletedTask;

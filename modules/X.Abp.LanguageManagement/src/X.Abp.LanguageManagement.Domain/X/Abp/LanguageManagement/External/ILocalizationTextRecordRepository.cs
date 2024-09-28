@@ -23,15 +23,13 @@ namespace X.Abp.LanguageManagement.External
         Task<List<LocalizationTextRecord>> GetListAsync(
             string resourceName,
             string cultureName,
-            CancellationToken cancellationToken = default
-        );
+            CancellationToken cancellationToken = default);
 
         LocalizationTextRecord Find(string resourceName, string cultureName);
 
         Task<LocalizationTextRecord> FindAsync(
             string resourceName,
             string cultureName,
-            CancellationToken cancellationToken = default
-        );
+            CancellationToken cancellationToken = default);
     }
 }

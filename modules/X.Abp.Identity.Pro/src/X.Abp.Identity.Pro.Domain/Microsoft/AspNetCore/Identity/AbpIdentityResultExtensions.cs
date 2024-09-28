@@ -27,7 +27,9 @@ public static class AbpIdentityResultExtensions
         var resourceSet = identityResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, false);
         if (resourceSet == null)
         {
+#pragma warning disable CA1065 // 不要在意外的位置引发异常
             throw new AbpException("Can't get the ResourceSet of Identity.");
+#pragma warning restore CA1065 // 不要在意外的位置引发异常
         }
 
         var iterator = resourceSet.GetEnumerator();
@@ -48,7 +50,9 @@ public static class AbpIdentityResultExtensions
 
         if (IdentityStrings.Count == 0)
         {
+#pragma warning disable CA1065 // 不要在意外的位置引发异常
             throw new AbpException("ResourceSet values of Identity is empty.");
+#pragma warning restore CA1065 // 不要在意外的位置引发异常
         }
     }
 

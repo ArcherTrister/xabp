@@ -135,7 +135,7 @@ public class GenerateCertCommand : IConsoleCommand, ITransientDependency
     return sb.ToString();
   }
 
-  public string GetShortDescription()
+  public static string GetShortDescription()
   {
     return "Generates cert file.";
   }

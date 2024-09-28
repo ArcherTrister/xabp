@@ -88,7 +88,7 @@ public class ListModulesCommand : IConsoleCommand, ITransientDependency
     return sb.ToString();
   }
 
-  public string GetShortDescription()
+  public static string GetShortDescription()
   {
     return "List application modules";
   }

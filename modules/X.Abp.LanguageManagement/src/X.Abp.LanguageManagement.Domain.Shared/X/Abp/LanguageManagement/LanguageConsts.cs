@@ -14,7 +14,7 @@ public static class LanguageConsts
     /// <summary>
     /// Default value: 10
     /// </summary>
-    public static int MaxUiCultureNameLength = MaxCultureNameLength;
+    public static int MaxUiCultureNameLength { get; set; } = MaxCultureNameLength;
 
     /// <summary>
     /// Default value: 32

@@ -100,7 +100,7 @@ public class MessagingManager : DomainService
         }
 
         List<Guid> messageIds = await _userMessageRepository.GetAllMessageIdsAsync(senderId, targetId);
-        if (messageIds.Any())
+        if (messageIds.Count != 0)
         {
             await _messageRepository.DeleteALlMessagesAsync(messageIds);
         }
@@ -151,7 +151,7 @@ public class MessagingManager : DomainService
                 await uow.CompleteAsync();
             }
         }
-        catch (AbpDbConcurrencyException ex)
+        catch (AbpDbConcurrencyException)
         {
         }
 

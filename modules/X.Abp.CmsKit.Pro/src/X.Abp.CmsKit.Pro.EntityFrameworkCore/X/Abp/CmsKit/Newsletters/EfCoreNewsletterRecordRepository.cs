@@ -23,58 +23,56 @@ public class EfCoreNewsletterRecordRepository :
 EfCoreRepository<CmsKitProDbContext, NewsletterRecord, Guid>,
 INewsletterRecordRepository
 {
-  public EfCoreNewsletterRecordRepository(
+#pragma warning disable CA1307 // 为了清晰起见，请指定 StringComparison
+
+    public EfCoreNewsletterRecordRepository(
     IDbContextProvider<CmsKitProDbContext> dbContextProvider)
     : base(dbContextProvider)
-  {
-  }
+    {
+    }
 
-  public virtual async Task<List<NewsletterSummaryQueryResultItem>> GetListAsync(
-    string preference = null,
-    string source = null,
-    int skipCount = 0,
-    int maxResultCount = int.MaxValue,
-    CancellationToken cancellationToken = default)
-  {
-#pragma warning disable CA1307 // 为了清晰起见，请指定 StringComparison
-    return await (await GetDbSetAsync())
-        .WhereIf(!string.IsNullOrWhiteSpace(preference), x => x.Preferences.Any(p => p.Preference == preference))
-        .WhereIf(!string.IsNullOrWhiteSpace(source), x => x.Preferences.Any(p => p.Source.Contains(source)))
-        .Select(x => new NewsletterSummaryQueryResultItem
-        {
-          CreationTime = x.CreationTime,
-          EmailAddress = x.EmailAddress,
-          Id = x.Id,
-        })
-        .OrderByDescending(x => x.CreationTime)
-        .PageBy(skipCount, maxResultCount)
-        .ToListAsync(GetCancellationToken(cancellationToken));
-#pragma warning restore CA1307 // 为了清晰起见，请指定 StringComparison
-  }
+    public virtual async Task<List<NewsletterSummaryQueryResultItem>> GetListAsync(
+      string preference = null,
+      string source = null,
+      int skipCount = 0,
+      int maxResultCount = int.MaxValue,
+      CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync())
+            .WhereIf(!string.IsNullOrWhiteSpace(preference), x => x.Preferences.Any(p => p.Preference == preference))
+            .WhereIf(!string.IsNullOrWhiteSpace(source), x => x.Preferences.Any(p => p.Source.Contains(source)))
+            .Select(x => new NewsletterSummaryQueryResultItem
+            {
+                CreationTime = x.CreationTime,
+                EmailAddress = x.EmailAddress,
+                Id = x.Id,
+            })
+            .OrderByDescending(x => x.CreationTime)
+            .PageBy(skipCount, maxResultCount)
+            .ToListAsync(GetCancellationToken(cancellationToken));
+    }
 
-  public virtual async Task<NewsletterRecord> FindByEmailAddressAsync(
-    string emailAddress,
-    bool includeDetails = true,
-    CancellationToken cancellationToken = default)
-  {
-    Check.NotNullOrWhiteSpace(emailAddress, nameof(emailAddress));
-    return await (await GetDbSetAsync()).IncludeDetails(includeDetails).Where(newsletterRecord => newsletterRecord.EmailAddress == emailAddress).FirstOrDefaultAsync(GetCancellationToken(cancellationToken));
-  }
+    public virtual async Task<NewsletterRecord> FindByEmailAddressAsync(
+      string emailAddress,
+      bool includeDetails = true,
+      CancellationToken cancellationToken = default)
+    {
+        Check.NotNullOrWhiteSpace(emailAddress, nameof(emailAddress));
+        return await (await GetDbSetAsync()).IncludeDetails(includeDetails).Where(newsletterRecord => newsletterRecord.EmailAddress == emailAddress).FirstOrDefaultAsync(GetCancellationToken(cancellationToken));
+    }
 
-  public virtual async Task<int> GetCountByFilterAsync(
-    string preference = null,
-    string source = null,
-    CancellationToken cancellationToken = default)
-  {
-#pragma warning disable CA1307 // 为了清晰起见，请指定 StringComparison
-    return await (await GetDbSetAsync()).WhereIf(!preference.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.Preferences.Any(newsletterPreference => newsletterPreference.Preference == preference))
-        .WhereIf(!source.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.Preferences.Any(newsletterPreference => newsletterPreference.Source.Contains(source)))
-        .CountAsync(GetCancellationToken(cancellationToken));
-#pragma warning restore CA1307 // 为了清晰起见，请指定 StringComparison
-  }
+    public virtual async Task<int> GetCountByFilterAsync(
+      string preference = null,
+      string source = null,
+      CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync()).WhereIf(!preference.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.Preferences.Any(newsletterPreference => newsletterPreference.Preference == preference))
+            .WhereIf(!source.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.Preferences.Any(newsletterPreference => newsletterPreference.Source.Contains(source)))
+            .CountAsync(GetCancellationToken(cancellationToken));
+    }
 
-  public override async Task<IQueryable<NewsletterRecord>> WithDetailsAsync()
-  {
-    return (await GetQueryableAsync()).IncludeDetails();
-  }
+    public override async Task<IQueryable<NewsletterRecord>> WithDetailsAsync()
+    {
+        return (await GetQueryableAsync()).IncludeDetails();
+    }
 }

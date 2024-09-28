@@ -140,7 +140,7 @@ public class CreateCommand : IConsoleCommand, ITransientDependency
     await CreateProjectService.CreateAsync(projectArgs);
   }
 
-  public string GetShortDescription()
+  public static string GetShortDescription()
   {
     return "Generate a new solution based on the ABPVnext Pro startup templates.";
   }
@@ -157,6 +157,7 @@ public class CreateCommand : IConsoleCommand, ITransientDependency
     sb.AppendLine("Options:");
     sb.AppendLine(string.Empty);
     sb.AppendLine("-t|--template <template-name>               (default: xais4)");
+    sb.AppendLine("-tt|--template-type <template-type>               (default: IdentityServer4)");
     sb.AppendLine("-o|--output-folder <output-folder>          (default: current folder)");
     sb.AppendLine("-v|--version <version>                      (default: latest version)");
     sb.AppendLine("-cs|--connection-string <connection-string> (your database connection string)");

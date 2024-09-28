@@ -15,6 +15,7 @@ namespace X.Abp.Identity.Web.Pages.Identity.Users;
 
 public class IndexModel : IdentityPageModel
 {
+#pragma warning disable SA1122 // Use string.Empty for empty strings
     public Guid? RoleId { get; set; }
 
     public Guid? OrganizationUnitId { get; set; }
@@ -31,16 +32,12 @@ public class IndexModel : IdentityPageModel
 
     public List<SelectListItem> RolesComboboxItems { get; set; } = new List<SelectListItem>
         {
-#pragma warning disable SA1122 // Use string.Empty for empty strings
             new SelectListItem("", "", true)
-#pragma warning restore SA1122 // Use string.Empty for empty strings
         };
 
     public List<SelectListItem> OrganizationUnitsComboboxItems { get; set; } = new List<SelectListItem>
         {
-#pragma warning disable SA1122 // Use string.Empty for empty strings
             new SelectListItem("", "", true)
-#pragma warning restore SA1122 // Use string.Empty for empty strings
         };
 
     protected IIdentityUserAppService IdentityUserAppService { get; }

@@ -16,8 +16,7 @@ namespace X.Abp.AspNetCore.Components.Web.LeptonTheme
     [DependsOn(
         typeof(AbpAutoMapperModule),
         typeof(AbpLeptonThemeManagementDomainSharedModule),
-        typeof(AbpAspNetCoreComponentsWebThemingModule)
-        )]
+        typeof(AbpAspNetCoreComponentsWebThemingModule))]
     public class AbpAspNetCoreComponentsWebLeptonThemeModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

@@ -8,7 +8,7 @@ public static class FileDescriptorConsts
 {
     public const string DefaultSorting = "Name asc";
 
-    public static int MaxSizeLength = int.MaxValue;
+    public static int MaxSizeLength { get; set; } = int.MaxValue;
 
     public static int MaxNameLength { get; set; } = byte.MaxValue;
 

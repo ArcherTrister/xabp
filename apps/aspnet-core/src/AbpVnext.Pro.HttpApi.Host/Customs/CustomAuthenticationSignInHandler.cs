@@ -1,8 +1,9 @@
-﻿//using System.Security.Claims;
-//using System.Text.Encodings.Web;
-//using System.Threading.Tasks;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
 
 //using Microsoft.AspNetCore.Authentication;
+
 //using Microsoft.AspNetCore.Http;
 //using Microsoft.Extensions.Logging;
 //using Microsoft.Extensions.Options;

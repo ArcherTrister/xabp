@@ -10,23 +10,17 @@ namespace X.Abp.LanguageManagement.External
 {
     public interface IExternalLocalizationStoreCache
     {
-        Task<ExternalLocalizationStoreCache.AllLocalizationResourcesCacheItem> GetAllResourcesCacheItemAsync(
-            Func<Task<ExternalLocalizationStoreCache.AllLocalizationResourcesCacheItem>> factory
-        );
+        Task<ExternalLocalizationStoreCache.AllLocalizationResourcesCacheItem> GetAllResourcesCacheItemAsync(Func<Task<ExternalLocalizationStoreCache.AllLocalizationResourcesCacheItem>> factory);
 
         ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem GetResourceCacheItem(
             string resourceName,
-            Func<ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem> factory
-        );
+            Func<ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem> factory);
 
         Task<ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem> GetResourceCacheItemAsync(
             string resourceName,
-            Func<Task<ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem>> factory
-        );
+            Func<Task<ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem>> factory);
 
-        ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem CreateResourceCacheItem(
-            LocalizationResourceRecord resourceRecord
-        );
+        ExternalLocalizationStoreCache.LocalizationResourceRecordCacheItem CreateResourceCacheItem(LocalizationResourceRecord resourceRecord);
 
         Task InvalidateAsync(IEnumerable<string> changedResourceNames);
     }

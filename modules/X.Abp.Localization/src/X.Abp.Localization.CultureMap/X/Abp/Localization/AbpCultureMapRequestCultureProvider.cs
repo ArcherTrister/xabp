@@ -19,10 +19,7 @@ public class AbpCultureMapRequestCultureProvider : RequestCultureProvider
 {
     public override async Task<ProviderCultureResult> DetermineProviderCultureResult(HttpContext httpContext)
     {
-        if (httpContext == null)
-        {
-            throw new ArgumentNullException(nameof(httpContext));
-        }
+        ArgumentNullException.ThrowIfNull(httpContext);
 
         var option = httpContext.RequestServices.GetRequiredService<IOptions<AbpLocalizationCultureMapOptions>>().Value;
 

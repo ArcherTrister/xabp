@@ -127,7 +127,7 @@ public class EfCoreIdentityRoleRepository : EfCoreRepository<IIdentityProDbConte
     {
         var dbContext = await GetDbContextAsync();
         var roleClaims = await dbContext.Set<IdentityRoleClaim>().Where(uc => uc.ClaimType == claimType).ToListAsync(cancellationToken: cancellationToken);
-        if (roleClaims.Any())
+        if (roleClaims.Count != 0)
         {
             (await GetDbContextAsync()).Set<IdentityRoleClaim>().RemoveRange(roleClaims);
             if (autoSave)

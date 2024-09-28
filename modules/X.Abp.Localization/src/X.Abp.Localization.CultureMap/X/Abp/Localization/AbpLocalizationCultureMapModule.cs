@@ -17,11 +17,13 @@ namespace X.Abp.Localization
         {
             Configure<AbpLocalizationCultureMapOptions>(options =>
             {
+#pragma warning disable CA1861 // 不要将常量数组作为参数
                 var zhHansCultureMapInfo = new CultureMapInfo
                 {
                     TargetCulture = "zh-Hans",
                     SourceCultures = new string[] { "zh", "zh_CN", "zh_cn", "zh-CN", "zh-CN" }
                 };
+#pragma warning restore CA1861 // 不要将常量数组作为参数
 
                 options.CulturesMaps.Add(zhHansCultureMapInfo);
                 options.UiCulturesMaps.Add(zhHansCultureMapInfo);

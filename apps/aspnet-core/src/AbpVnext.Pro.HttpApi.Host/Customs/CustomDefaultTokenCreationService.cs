@@ -30,22 +30,22 @@ public class CustomDefaultTokenCreationService : ITokenCreationService
     /// <summary>
     /// The key service
     /// </summary>
-    protected readonly IKeyMaterialService Keys;
+    protected IKeyMaterialService Keys { get; }
 
     /// <summary>
     /// The logger
     /// </summary>
-    protected readonly ILogger Logger;
+    protected ILogger Logger { get; }
 
     /// <summary>
     ///  The clock
     /// </summary>
-    protected readonly ISystemClock Clock;
+    protected ISystemClock Clock { get; }
 
     /// <summary>
     /// The options
     /// </summary>
-    protected readonly IdentityServerOptions Options;
+    protected IdentityServerOptions Options { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DefaultTokenCreationService"/> class.
@@ -103,7 +103,7 @@ public class CustomDefaultTokenCreationService : ITokenCreationService
             var cert = x509Key.Certificate;
             if (Clock.UtcNow.UtcDateTime > cert.NotAfter)
             {
-                Logger.LogWarning("Certificate {subjectName} has expired on {expiration}", cert.Subject, cert.NotAfter.ToString(CultureInfo.InvariantCulture));
+                Logger.LogWarning("Certificate {SubjectName} has expired on {Expiration}", cert.Subject, cert.NotAfter.ToString(CultureInfo.InvariantCulture));
             }
 
             header["x5t"] = Base64Url.Encode(cert.GetCertHash());

@@ -33,7 +33,7 @@ public static class ResponseContentTypeHelper
     public static void ResolveContentTypeAndEncoding(
         string actionResultContentType,
         string httpResponseContentType,
-        (string defaultContentType, Encoding defaultEncoding) @default,
+        (string DefaultContentType, Encoding DefaultEncoding) @default,
         Func<string, Encoding> getEncoding,
         out string resolvedContentType,
         out Encoding resolvedContentTypeEncoding)

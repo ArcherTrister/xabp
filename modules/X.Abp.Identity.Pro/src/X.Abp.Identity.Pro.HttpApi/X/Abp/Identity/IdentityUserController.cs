@@ -220,18 +220,14 @@ public class IdentityUserController : AbpControllerBase, IIdentityUserAppService
 
     [HttpGet]
     [Route("export-as-excel")]
-    public virtual Task<IRemoteStreamContent> GetListAsExcelFileAsync(
-        GetIdentityUserListAsFileInput input
-    )
+    public virtual Task<IRemoteStreamContent> GetListAsExcelFileAsync(GetIdentityUserListAsFileInput input)
     {
         return UserAppService.GetListAsExcelFileAsync(input);
     }
 
     [HttpGet]
     [Route("export-as-csv")]
-    public virtual Task<IRemoteStreamContent> GetListAsCsvFileAsync(
-        GetIdentityUserListAsFileInput input
-    )
+    public virtual Task<IRemoteStreamContent> GetListAsCsvFileAsync(GetIdentityUserListAsFileInput input)
     {
         return UserAppService.GetListAsCsvFileAsync(input);
     }
@@ -245,27 +241,21 @@ public class IdentityUserController : AbpControllerBase, IIdentityUserAppService
 
     [HttpGet]
     [Route("import-users-sample-file")]
-    public virtual Task<IRemoteStreamContent> GetImportUsersSampleFileAsync(
-        GetImportUsersSampleFileInput input
-    )
+    public virtual Task<IRemoteStreamContent> GetImportUsersSampleFileAsync(GetImportUsersSampleFileInput input)
     {
         return UserAppService.GetImportUsersSampleFileAsync(input);
     }
 
     [HttpPost]
     [Route("import-users-from-file")]
-    public virtual Task<ImportUsersFromFileOutput> ImportUsersFromFileAsync(
-        ImportUsersFromFileInputWithStream input
-    )
+    public virtual Task<ImportUsersFromFileOutput> ImportUsersFromFileAsync(ImportUsersFromFileInputWithStream input)
     {
         return UserAppService.ImportUsersFromFileAsync(input);
     }
 
     [HttpGet]
     [Route("download-import-invalid-users-file")]
-    public virtual Task<IRemoteStreamContent> GetImportInvalidUsersFileAsync(
-        GetImportInvalidUsersFileInput input
-    )
+    public virtual Task<IRemoteStreamContent> GetImportInvalidUsersFileAsync(GetImportInvalidUsersFileInput input)
     {
         return UserAppService.GetImportInvalidUsersFileAsync(input);
     }

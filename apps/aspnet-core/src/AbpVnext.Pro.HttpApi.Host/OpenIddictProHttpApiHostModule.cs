@@ -84,11 +84,11 @@ public class OpenIddictProHttpApiHostModule : AbpModule
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
 
-        //PreConfigure<IdentityBuilder>(identityBuilder =>
-        //{
-        //    // identityBuilder.AddSignInManager<CustomSignInManager>();
-        //    identityBuilder.AddClaimsPrincipalFactory<CustomUserClaimsPrincipalFactory>();
-        //});
+/*        PreConfigure<IdentityBuilder>(identityBuilder =>
+        {
+            // identityBuilder.AddSignInManager<CustomSignInManager>();
+            identityBuilder.AddClaimsPrincipalFactory<CustomUserClaimsPrincipalFactory>();
+        });*/
 
         PreConfigure<AuthorizationOptions>(options =>
         {
@@ -183,17 +183,17 @@ public class OpenIddictProHttpApiHostModule : AbpModule
         var configuration = context.Services.GetConfiguration();
         var hostingEnvironment = context.Services.GetHostingEnvironment();
 
-        //context.Services.Configure<AuthenticationOptions>(options =>
-        //{
-        //    var schemes = options.Schemes.ToList();
-        //    foreach (var scheme in schemes)
-        //    {
-        //        if (scheme.Name == "SchemeToRemove")
-        //        {
-        //            //options.Schemes.Remove(scheme);
-        //        }
-        //    }
-        //});
+/*        context.Services.Configure<AuthenticationOptions>(options =>
+        {
+            var schemes = options.Schemes.ToList();
+            foreach (var scheme in schemes)
+            {
+                if (scheme.Name == "SchemeToRemove")
+                {
+                    //options.Schemes.Remove(scheme);
+                }
+            }
+        });*/
 
         if (hostingEnvironment.IsDevelopment())
         {
@@ -238,8 +238,8 @@ public class OpenIddictProHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureExternalProviders(context);
-        // ConfigureHealthChecks(context, configuration);
 
+        // ConfigureHealthChecks(context, configuration);
         Configure<AbpAntiForgeryOptions>(options =>
         {
             // options.TokenCookie.Expiration = TimeSpan.FromDays(365);
@@ -274,14 +274,15 @@ public class OpenIddictProHttpApiHostModule : AbpModule
         //    options.KeyPrefix = "KeyPrefix";
         // });
 
-        //context.Services.AddSingleton<IDistributedLockProvider>(sp =>
-        //{
-        //    var connection = ConnectionMultiplexer
-        //        .Connect(configuration["Redis:Configuration"]);
-        //    return new
-        //        RedisDistributedSynchronizationProvider(connection.GetDatabase());
-        //});
-        //LocalAbpDistributedLock
+/*        context.Services.AddSingleton<IDistributedLockProvider>(sp =>
+        {
+            var connection = ConnectionMultiplexer
+                .Connect(configuration["Redis:Configuration"]);
+            return new
+                RedisDistributedSynchronizationProvider(connection.GetDatabase());
+        });*/
+
+        // LocalAbpDistributedLock
 
         // Configure<AbpDbContextOptions>(options =>
         // {
@@ -438,15 +439,15 @@ public class OpenIddictProHttpApiHostModule : AbpModule
         // );
         // context.Services.Replace(ServiceDescriptor.Transient<ITokenService, CustomDefaultTokenService>());
         //        context.Services.Replace(
-        //ServiceDescriptor.Transient<IUserInfoResponseGenerator, CustomUserInfoResponseGenerator>());
+        // ServiceDescriptor.Transient<IUserInfoResponseGenerator, CustomUserInfoResponseGenerator>());
 
-        //        context.Services.Replace(
-        //ServiceDescriptor.Transient<IClaimsService, CustomDefaultClaimsService>());
+        // context.Services.Replace(
+        // ServiceDescriptor.Transient<IClaimsService, CustomDefaultClaimsService>());
 
-        //CustomTokenResponseGenerator : ITokenResponseGenerator
-        //context.Services.Replace(ServiceDescriptor.Transient<ITokenResponseGenerator, CustomTokenResponseGenerator>());
+        // CustomTokenResponseGenerator : ITokenResponseGenerator
+        // context.Services.Replace(ServiceDescriptor.Transient<ITokenResponseGenerator, CustomTokenResponseGenerator>());
 
-        //            // CustomTokenEndpoint : IEndpointHandler
+        // CustomTokenEndpoint : IEndpointHandler
         //            // CustomDefaultUserSession : IUserSession
         //            context.Services.Replace(
         // ServiceDescriptor.Transient<IUserSession, CustomDefaultUserSession>()
@@ -454,11 +455,11 @@ public class OpenIddictProHttpApiHostModule : AbpModule
 
         // context.Services.Replace(ServiceDescriptor.Transient<IApiDescriptionModelProvider, CustomApiDescriptionModelProvider>());
 
-        //context.Services.Replace(ServiceDescriptor.Scoped<IApiDescriptionModelProvider, CustomOpenIddictServerAspNetCoreHandler>());
-        //context.Services.AddScoped(typeof(CustomOpenIddictServerAspNetCoreHandler));
+        // context.Services.Replace(ServiceDescriptor.Scoped<IApiDescriptionModelProvider, CustomOpenIddictServerAspNetCoreHandler>());
+        // context.Services.AddScoped(typeof(CustomOpenIddictServerAspNetCoreHandler));
     }
 
-    private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
+    private static void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
     {
         context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
         context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
@@ -833,7 +834,7 @@ Configure<AuthenticationSchemeOptions>(options =>
             });
     }
 
-    private void ConfigureLocalization()
+    private static void ConfigureLocalization()
     {
         /*
         //Configure<AbpLocalizationCultureMapOptions>(options =>
@@ -878,6 +879,7 @@ Configure<AuthenticationSchemeOptions>(options =>
             {
                 // options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                 options.Scope.Add("user:email");
+
                 // options.ClaimActions.MapJsonKey(ClaimTypes.Name, "nickname");
             })
             .WithDynamicOptions<GitHubAuthenticationOptions, GitHubAuthenticationHandler>(

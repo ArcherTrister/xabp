@@ -28,20 +28,17 @@ namespace X.Abp.Payment.WeChatPay
         protected WeChatPayOptions WeChatPayOptions { get; }
 
         // protected IPurchaseParameterListGenerator PurchaseParameterListGenerator { get; }
-
         protected IPaymentRequestRepository PaymentRequestRepository { get; }
 
         public WeChatPayPaymentGateway(
             IWeChatPayClient weChatPayClient,
             IOptions<WeChatPayOptions> weChatPayOptions,
-
-            //IPurchaseParameterListGenerator parameters,
             IPaymentRequestRepository repository)
         {
             WeChatPayClient = weChatPayClient;
             WeChatPayOptions = weChatPayOptions.Value;
 
-            //PurchaseParameterListGenerator = parameters;
+            // PurchaseParameterListGenerator = parameters;
             PaymentRequestRepository = repository;
         }
 

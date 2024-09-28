@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Asp.Versioning;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Volo.Abp;
@@ -108,8 +109,8 @@ public class FileDescriptorController : AbpControllerBase, IFileDescriptorAppSer
   {
     var fileDescriptor = await FileDescriptorAppService.GetAsync(id);
 
-    Response.Headers.Add("Content-Disposition", $"attachment;filename=\"{fileDescriptor.Name}\"");
-    Response.Headers.Add("Accept-Ranges", "bytes");
+    Response.Headers.Append("Content-Disposition", $"attachment;filename=\"{fileDescriptor.Name}\"");
+    Response.Headers.Append("Accept-Ranges", "bytes");
     Response.ContentType = fileDescriptor.MimeType;
 
     return await FileDescriptorAppService.DownloadAsync(id, token);

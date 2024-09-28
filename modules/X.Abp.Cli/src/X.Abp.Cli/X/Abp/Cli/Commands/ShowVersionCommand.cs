@@ -44,7 +44,7 @@ public class ShowVersionCommand : IConsoleCommand, ITransientDependency
     return sb.ToString();
   }
 
-  public string GetShortDescription()
+  public static string GetShortDescription()
   {
     return "Show xabp version";
   }

@@ -38,7 +38,7 @@ namespace X.Abp.LanguageManagement.Web.Pages.LanguageManagement
             foreach (string flagCode1 in LanguageManagementFlagCodeConsts.FlagCodes)
             {
                 string flagCode = flagCode1;
-                RegionInfo regionInfo = list.FirstOrDefault(r => flagCode.Equals(r.TwoLetterISORegionName, StringComparison.InvariantCultureIgnoreCase));
+                RegionInfo regionInfo = list.FirstOrDefault(r => flagCode.Equals(r.TwoLetterISORegionName, StringComparison.OrdinalIgnoreCase));
                 if (regionInfo != null && regionInfo.EnglishName != null)
                 {
                     FlagSelectList.Add(new SelectListItem(regionInfo.EnglishName, flagCode));

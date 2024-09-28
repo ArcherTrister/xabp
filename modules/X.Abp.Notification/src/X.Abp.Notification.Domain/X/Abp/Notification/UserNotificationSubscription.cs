@@ -65,7 +65,6 @@ namespace X.Abp.Notification
             Guid? tenantId,
             Guid userId,
             string notificationName,
-            // EntityIdentifier entityIdentifier = null,
             string entityId = null,
             string entityTypeName = null,
             string entityTypeAssemblyQualifiedName = null,
@@ -75,9 +74,6 @@ namespace X.Abp.Notification
             TenantId = tenantId;
             NotificationName = notificationName;
             UserId = userId;
-            //EntityId = entityIdentifier == null ? null : entityIdentifier.Id.ToJsonString();
-            //EntityTypeName = entityIdentifier == null ? null : entityIdentifier.Type.FullName;
-            //EntityTypeAssemblyQualifiedName = entityIdentifier == null ? null : entityIdentifier.Type.AssemblyQualifiedName;
             EntityId = entityId;
             EntityTypeName = entityTypeName;
             EntityTypeAssemblyQualifiedName = entityTypeAssemblyQualifiedName;

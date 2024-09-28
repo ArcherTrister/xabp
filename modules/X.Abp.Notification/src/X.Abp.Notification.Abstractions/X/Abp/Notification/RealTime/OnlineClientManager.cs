@@ -13,14 +13,6 @@ using Volo.Abp.DependencyInjection;
 
 namespace X.Abp.Notification.RealTime
 {
-  public class OnlineClientManager<T> : OnlineClientManager, IOnlineClientManager<T>
-  {
-    public OnlineClientManager(IOnlineClientStore<T> store)
-        : base(store)
-    {
-    }
-  }
-
   /// <summary>
   /// Implements <see cref="IOnlineClientManager"/>.
   /// </summary>

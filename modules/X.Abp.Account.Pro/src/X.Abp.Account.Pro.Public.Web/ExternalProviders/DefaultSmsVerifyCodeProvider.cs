@@ -34,7 +34,7 @@ public class DefaultSmsVerifyCodeProvider : ISmsVerifyCodeProvider, ITransientDe
 
     public virtual async Task<bool> CheckAsync(string phoneNumber, string smsVerifyCode, string verifyParameter)
     {
-        var parameters = JsonSerializer.Deserialize<Dictionary<string, string>>(verifyParameter!, new JsonSerializerOptions { WriteIndented = true, PropertyNameCaseInsensitive = true });
+        var parameters = JsonSerializer.Deserialize<Dictionary<string, string>>(verifyParameter!, WriteOptions);
 
         var verifyCodeId = parameters?.GetValueOrDefault("VerifyCodeId");
         var code = await DistributedCache.GetAsync($"{phoneNumber}:{verifyCodeId}");
@@ -49,9 +49,15 @@ public class DefaultSmsVerifyCodeProvider : ISmsVerifyCodeProvider, ITransientDe
 
     public virtual async Task SaveAsync(string phoneNumber, string smsVerifyCode, string verifyParameter)
     {
-        var parameters = JsonSerializer.Deserialize<Dictionary<string, string>>(verifyParameter!, new JsonSerializerOptions { WriteIndented = true, PropertyNameCaseInsensitive = true });
+        var parameters = JsonSerializer.Deserialize<Dictionary<string, string>>(verifyParameter!, WriteOptions);
 
         var verifyCodeId = parameters?.GetValueOrDefault("VerifyCodeId");
         await DistributedCache.SetAsync($"{phoneNumber}:{verifyCodeId}", smsVerifyCode, options: new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5) });
     }
+
+    private static readonly JsonSerializerOptions WriteOptions = new()
+    {
+        WriteIndented = true,
+        PropertyNameCaseInsensitive = true
+    };
 }

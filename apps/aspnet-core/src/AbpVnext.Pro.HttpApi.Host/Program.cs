@@ -27,6 +27,7 @@ public class Program
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
             .Enrich.FromLogContext()
+
             // .WriteTo.Async(c => c.File("Logs/logs_.txt", shared: true, rollingInterval: RollingInterval.Day))
             .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Verbose).WriteTo.Async(q => q.File("Logs/verboses_.txt", rollingInterval: RollingInterval.Day)))
             .WriteTo.Logger(c => c.Filter.ByIncludingOnly(p => p.Level == LogEventLevel.Debug).WriteTo.Async(q => q.File("Logs/debugs_.txt", rollingInterval: RollingInterval.Day)))
@@ -61,10 +62,10 @@ await builder.AddApplicationAsync<OrderingServiceHttpApiHostModule>(options =>
 ````
              */
 
-            //await builder.AddApplicationAsync<IdentityServerProHttpApiHostModule>(options =>
-            //{
-            //    options.ApplicationName = "Pro";
-            //});
+/*            await builder.AddApplicationAsync<IdentityServerProHttpApiHostModule>(options =>
+            {
+                options.ApplicationName = "Pro";
+            });*/
 
             await builder.AddApplicationAsync<OpenIddictProHttpApiHostModule>(options =>
             {

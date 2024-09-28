@@ -69,7 +69,7 @@ public abstract class ProDbContextBase<TDbContext> : AbpDbContext<TDbContext>
 
         modelBuilder.ConfigureVersionManagement();
 
-        //modelBuilder.ConfigureBasicData();
+        // modelBuilder.ConfigureBasicData();
 
         /* Configure your own tables/entities inside here */
 

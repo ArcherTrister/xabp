@@ -1,4 +1,8 @@
-﻿using System.Collections.Immutable;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using System.Collections.Immutable;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,12 +19,13 @@ using Volo.Abp.OpenIddict.Authorizations;
 
 namespace AbpVnext.Pro.Customs;
 
-//ReplaceAuthorizationManager
+// ReplaceAuthorizationManager
 [Dependency(ReplaceServices = true)]
 [ExposeServices(typeof(AbpAuthorizationManager))]
 public class CustomAbpAuthorizationManager : AbpAuthorizationManager
 {
-    public CustomAbpAuthorizationManager(IOpenIddictAuthorizationCache<OpenIddictAuthorizationModel> cache, ILogger<OpenIddictAuthorizationManager<OpenIddictAuthorizationModel>> logger, IOptionsMonitor<OpenIddictCoreOptions> options, IOpenIddictAuthorizationStoreResolver resolver, AbpOpenIddictIdentifierConverter identifierConverter) : base(cache, logger, options, resolver, identifierConverter)
+    public CustomAbpAuthorizationManager(IOpenIddictAuthorizationCache<OpenIddictAuthorizationModel> cache, ILogger<OpenIddictAuthorizationManager<OpenIddictAuthorizationModel>> logger, IOptionsMonitor<OpenIddictCoreOptions> options, IOpenIddictAuthorizationStoreResolver resolver, AbpOpenIddictIdentifierConverter identifierConverter)
+        : base(cache, logger, options, resolver, identifierConverter)
     {
     }
 

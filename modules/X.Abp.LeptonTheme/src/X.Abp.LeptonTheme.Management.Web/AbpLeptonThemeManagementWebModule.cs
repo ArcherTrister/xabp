@@ -75,7 +75,7 @@ namespace X.Abp.LeptonTheme.Management.Web
 
             Configure<RazorPagesOptions>(options =>
             {
-                //Configure authorization.
+                // Configure authorization.
             });
 
             Configure<DynamicJavaScriptProxyOptions>(options =>

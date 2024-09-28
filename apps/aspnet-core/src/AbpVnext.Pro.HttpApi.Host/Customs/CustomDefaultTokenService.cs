@@ -31,42 +31,42 @@ public class CustomDefaultTokenService : ITokenService
     /// <summary>
     /// The logger
     /// </summary>
-    protected readonly ILogger Logger;
+    protected ILogger Logger { get; }
 
     /// <summary>
     /// The HTTP context accessor
     /// </summary>
-    protected readonly IHttpContextAccessor ContextAccessor;
+    protected IHttpContextAccessor ContextAccessor { get; }
 
     /// <summary>
     /// The claims provider
     /// </summary>
-    protected readonly IClaimsService ClaimsProvider;
+    protected IClaimsService ClaimsProvider { get; }
 
     /// <summary>
     /// The reference token store
     /// </summary>
-    protected readonly IReferenceTokenStore ReferenceTokenStore;
+    protected IReferenceTokenStore ReferenceTokenStore { get; }
 
     /// <summary>
     /// The signing service
     /// </summary>
-    protected readonly ITokenCreationService CreationService;
+    protected ITokenCreationService CreationService { get; }
 
     /// <summary>
     /// The clock
     /// </summary>
-    protected readonly ISystemClock Clock;
+    protected ISystemClock Clock { get; }
 
     /// <summary>
     /// The key material service
     /// </summary>
-    protected readonly IKeyMaterialService KeyMaterialService;
+    protected IKeyMaterialService KeyMaterialService { get; }
 
     /// <summary>
     /// The IdentityServer options
     /// </summary>
-    protected readonly IdentityServerOptions Options;
+    protected IdentityServerOptions Options { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DefaultTokenService" /> class.
@@ -76,7 +76,7 @@ public class CustomDefaultTokenService : ITokenService
     /// <param name="creationService">The signing service.</param>
     /// <param name="contextAccessor">The HTTP context accessor.</param>
     /// <param name="clock">The clock.</param>
-    /// <param name="keyMaterialService"></param>
+    /// <param name="keyMaterialService">keyMaterialService</param>
     /// <param name="options">The IdentityServer options</param>
     /// <param name="logger">The logger.</param>
     public CustomDefaultTokenService(

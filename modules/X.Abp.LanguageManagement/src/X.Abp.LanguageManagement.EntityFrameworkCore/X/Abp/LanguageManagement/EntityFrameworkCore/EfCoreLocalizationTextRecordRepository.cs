@@ -45,14 +45,12 @@ namespace X.Abp.LanguageManagement.EntityFrameworkCore
     public virtual async Task<List<LocalizationTextRecord>> GetListAsync(
         string resourceName,
         string cultureName,
-        CancellationToken cancellationToken = default
-    )
+        CancellationToken cancellationToken = default)
     {
       return await (await GetDbSetAsync())
           .Where(localizationTextRecord =>
               localizationTextRecord.ResourceName == resourceName
-              && localizationTextRecord.CultureName == cultureName
-          )
+              && localizationTextRecord.CultureName == cultureName)
           .ToListAsync(GetCancellationToken(cancellationToken));
     }
 
@@ -71,14 +69,12 @@ namespace X.Abp.LanguageManagement.EntityFrameworkCore
     public virtual async Task<LocalizationTextRecord> FindAsync(
         string resourceName,
         string cultureName,
-        CancellationToken cancellationToken = default
-    )
+        CancellationToken cancellationToken = default)
     {
       return await (await GetDbSetAsync())
           .Where(localizationTextRecord =>
               localizationTextRecord.ResourceName == resourceName
-              && localizationTextRecord.CultureName == cultureName
-          )
+              && localizationTextRecord.CultureName == cultureName)
           .FirstOrDefaultAsync(GetCancellationToken(cancellationToken));
     }
   }

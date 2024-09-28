@@ -5,6 +5,17 @@
 namespace X.Abp.Cli.ProjectBuilding.Templates;
 public class AbpTemplateConsts
 {
+    public const string MicroService = "xams";
+    public const string MultiLayer = "xaml";
+    public const string MultiLayerSeparateAuthServer = "xamlsas";
+    public const string MultiLayerSeparatedTenantSchema = "xamlsts";
+    public const string SingleLayer = "xasl";
+
+    public static string[] NewTemplates =
+    [
+        MicroService, MultiLayer, MultiLayerSeparateAuthServer, MultiLayerSeparatedTenantSchema, SingleLayer
+    ];
+
     public class IdentityServer
     {
         public const string Default = "xais4";

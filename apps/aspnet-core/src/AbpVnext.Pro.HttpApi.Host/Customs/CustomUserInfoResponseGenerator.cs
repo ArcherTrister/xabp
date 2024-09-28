@@ -31,17 +31,17 @@ public class CustomUserInfoResponseGenerator : IUserInfoResponseGenerator
     /// <summary>
     /// The logger
     /// </summary>
-    protected readonly ILogger Logger;
+    protected ILogger Logger { get; }
 
     /// <summary>
     /// The profile service
     /// </summary>
-    protected readonly IProfileService Profile;
+    protected IProfileService Profile { get; }
 
     /// <summary>
     /// The resource store
     /// </summary>
-    protected readonly IResourceStore Resources;
+    protected IResourceStore Resources { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CustomUserInfoResponseGenerator"/> class.
@@ -72,7 +72,7 @@ public class CustomUserInfoResponseGenerator : IUserInfoResponseGenerator
         var validatedResources = await GetRequestedResourcesAsync(scopes);
         var requestedClaimTypes = await GetRequestedClaimTypesAsync(validatedResources);
 
-        Logger.LogDebug("Requested claim types: {claimTypes}", requestedClaimTypes.ToSpaceSeparatedString());
+        Logger.LogDebug("Requested claim types: {ClaimTypes}", requestedClaimTypes.ToSpaceSeparatedString());
 
         // call profile service
         var context = new ProfileDataRequestContext(
@@ -97,7 +97,7 @@ public class CustomUserInfoResponseGenerator : IUserInfoResponseGenerator
         else
         {
             outgoingClaims.AddRange(profileClaims);
-            Logger.LogInformation("Profile service returned the following claim types: {types}", profileClaims.Select(c => c.Type).ToSpaceSeparatedString());
+            Logger.LogInformation("Profile service returned the following claim types: {Types}", profileClaims.Select(c => c.Type).ToSpaceSeparatedString());
         }
 
         var subClaim = outgoingClaims.SingleOrDefault(x => x.Type == JwtClaimTypes.Subject);
@@ -107,7 +107,7 @@ public class CustomUserInfoResponseGenerator : IUserInfoResponseGenerator
         }
         else if (subClaim.Value != validationResult.Subject.GetSubjectId())
         {
-            Logger.LogError("Profile service returned incorrect subject value: {sub}", subClaim);
+            Logger.LogError("Profile service returned incorrect subject value: {Sub}", subClaim);
             throw new InvalidOperationException("Profile service returned incorrect subject value");
         }
 
@@ -117,7 +117,7 @@ public class CustomUserInfoResponseGenerator : IUserInfoResponseGenerator
     /// <summary>
     ///  Gets the identity resources from the scopes.
     /// </summary>
-    /// <param name="scopes"></param>
+    /// <param name="scopes">范围</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     protected internal virtual async Task<ResourceValidationResult> GetRequestedResourcesAsync(IEnumerable<string> scopes)
     {
@@ -127,7 +127,7 @@ public class CustomUserInfoResponseGenerator : IUserInfoResponseGenerator
         }
 
         var scopeString = string.Join(" ", scopes);
-        Logger.LogDebug("Scopes in access token: {scopes}", scopeString);
+        Logger.LogDebug("Scopes in access token: {Scopes}", scopeString);
 
         // if we ever parameterize identity scopes, then we would need to invoke the resource validator's parse API here
         var identityResources = await Resources.FindEnabledIdentityResourcesByScopeAsync(scopes);
@@ -141,7 +141,7 @@ public class CustomUserInfoResponseGenerator : IUserInfoResponseGenerator
     /// <summary>
     /// Gets the requested claim types.
     /// </summary>
-    /// <param name="resourceValidationResult"></param>
+    /// <param name="resourceValidationResult">验证结果</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     protected internal virtual Task<IEnumerable<string>> GetRequestedClaimTypesAsync(ResourceValidationResult resourceValidationResult)
     {

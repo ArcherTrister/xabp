@@ -23,8 +23,6 @@ public class IdentitySessionDynamicClaimsPrincipalContributor : AbpDynamicClaims
     /// IAbpClaimsPrincipalFactory
     /// https://github.com/abpframework/abp/blob/905d4b5d26c9f84797ae166ef01aeb1c016d3dcf/framework/src/Volo.Abp.Security/Volo/Abp/Security/Claims/AbpClaimsPrincipalFactory.cs#L56
     /// </summary>
-    /// <param name="context"></param>
-    /// <returns></returns>
     public override async Task ContributeAsync(AbpClaimsPrincipalContributorContext context)
     {
         ClaimsIdentity identity = context.ClaimsPrincipal.Identities.FirstOrDefault();

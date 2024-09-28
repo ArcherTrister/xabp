@@ -27,12 +27,12 @@ public class CustomDefaultClaimsService : IClaimsService
     /// <summary>
     /// The logger
     /// </summary>
-    protected readonly ILogger Logger;
+    protected ILogger Logger { get; }
 
     /// <summary>
     /// The user service
     /// </summary>
-    protected readonly IProfileService Profile;
+    protected IProfileService Profile { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CustomDefaultClaimsService"/> class.
@@ -57,7 +57,7 @@ public class CustomDefaultClaimsService : IClaimsService
     /// </returns>
     public virtual async Task<IEnumerable<Claim>> GetIdentityTokenClaimsAsync(ClaimsPrincipal subject, ResourceValidationResult resources, bool includeAllIdentityClaims, ValidatedRequest request)
     {
-        Logger.LogDebug("Getting claims for identity token for subject: {subject} and client: {clientId}",
+        Logger.LogDebug("Getting claims for identity token for subject: {Subject} and client: {ClientId}",
             subject.GetSubjectId(),
             request.Client.ClientId);
 
@@ -117,7 +117,7 @@ public class CustomDefaultClaimsService : IClaimsService
     /// </returns>
     public virtual async Task<IEnumerable<Claim>> GetAccessTokenClaimsAsync(ClaimsPrincipal subject, ResourceValidationResult resources, ValidatedRequest request)
     {
-        Logger.LogDebug("Getting claims for access token for client: {clientId}", request.Client.ClientId);
+        Logger.LogDebug("Getting claims for access token for client: {ClientId}", request.Client.ClientId);
 
         var outputClaims = new List<Claim>
         {
@@ -127,11 +127,11 @@ public class CustomDefaultClaimsService : IClaimsService
         // log if client ID is overwritten
         if (!string.Equals(request.ClientId, request.Client.ClientId, System.StringComparison.Ordinal))
         {
-            Logger.LogDebug("Client {clientId} is impersonating {impersonatedClientId}", request.Client.ClientId, request.ClientId);
+            Logger.LogDebug("Client {ClientId} is impersonating {ImpersonatedClientId}", request.Client.ClientId, request.ClientId);
         }
 
         // check for client claims
-        if (request.ClientClaims != null && request.ClientClaims.Any())
+        if (request.ClientClaims != null && request.ClientClaims.Count != 0)
         {
             if (subject == null || request.Client.AlwaysSendClientClaims)
             {
@@ -165,7 +165,7 @@ public class CustomDefaultClaimsService : IClaimsService
                 outputClaims.Add(new Claim(JwtClaimTypes.Scope, IdentityServerConstants.StandardScopes.OfflineAccess));
             }
 
-            Logger.LogDebug("Getting claims for access token for subject: {subject}", subject.GetSubjectId());
+            Logger.LogDebug("Getting claims for access token for subject: {Subject}", subject.GetSubjectId());
 
             outputClaims.AddRange(GetStandardSubjectClaims(subject));
             outputClaims.AddRange(GetOptionalClaims(subject));
@@ -262,7 +262,6 @@ public class CustomDefaultClaimsService : IClaimsService
     /// Filters out protocol claims like amr, nonce etc..
     /// </summary>
     /// <param name="claims">The claims.</param>
-    /// <returns></returns>
     protected virtual IEnumerable<Claim> FilterProtocolClaims(IEnumerable<Claim> claims)
     {
         var claimsToFilter = claims.Where(x => Constants.Filters.ClaimsServiceFilterClaimTypes.Contains(x.Type));

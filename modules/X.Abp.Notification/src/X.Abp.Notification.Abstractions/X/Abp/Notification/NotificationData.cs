@@ -67,9 +67,9 @@ namespace X.Abp.Notification
             _properties = new Dictionary<string, object>();
         }
 
-        //public override string ToString()
-        //{
-        //    return this.ToJsonString();
-        //}
+/*        public override string ToString()
+        {
+            return this.ToJsonString();
+        }*/
     }
 }

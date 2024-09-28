@@ -54,7 +54,7 @@ public class NotificationAppService : NotificationAppServiceBase, INotificationA
 
             SetNotificationDepth(groupDto.Notifications);
 
-            if (groupDto.Notifications.Any())
+            if (groupDto.Notifications.Count != 0)
             {
                 result.Groups.Add(groupDto);
             }

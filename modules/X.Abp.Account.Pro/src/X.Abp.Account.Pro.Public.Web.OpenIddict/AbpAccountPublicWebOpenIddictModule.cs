@@ -48,6 +48,7 @@ public class AbpAccountPublicWebOpenIddictModule : AbpModule
         {
             builder.AddEventHandler(OpenIddictImpersonateInferEndpointType.Descriptor);
             builder.AddEventHandler(LinkLoginExtensionGrantProcessJsonResponse.Descriptor);
+
             // builder.AddEventHandler(OpenIddictCreateIdentitySession.Descriptor);
             builder.AddEventHandler(OpenIddictValidateIdentitySessionServerHandler.Descriptor);
             builder.AddEventHandler(OpenIddictRevokeIdentitySessionOnRevocation.Descriptor);

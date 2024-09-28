@@ -47,7 +47,7 @@ public class ClaimTypeEditModalModel : IdentityPageModel
         {
             var ownedClaimsFiltered = ownedClaims.Where(c => c.ClaimType == claim.Name).ToList();
 
-            if (!ownedClaimsFiltered.Any())
+            if (ownedClaimsFiltered.Count == 0)
             {
 #pragma warning disable SA1122 // Use string.Empty for empty strings
                 claim.Value.Add("");

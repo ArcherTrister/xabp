@@ -63,7 +63,8 @@ namespace AbpVnext.Pro;
 // [DependsOn(typeof(AbpAccountSharedIdentityServerModule))]
 // [DependsOn(typeof(AbpBasicDataDomainModule))]
 [DependsOn(typeof(AbpNotificationDomainModule))]
-//[DependsOn(typeof(AbpIotDomainModule))]
+
+// [DependsOn(typeof(AbpIotDomainModule))]
 [DependsOn(typeof(AbpChatDomainModule))]
 [DependsOn(typeof(AbpFileManagementDomainModule))]
 [DependsOn(typeof(AbpFormsDomainModule))]

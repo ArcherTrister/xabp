@@ -156,7 +156,7 @@ public class ConversationAppService : ChatAppServiceBase, IConversationAppServic
                 await uow.CompleteAsync();
             }
         }
-        catch (AbpDbConcurrencyException ex)
+        catch (AbpDbConcurrencyException)
         {
         }
     }

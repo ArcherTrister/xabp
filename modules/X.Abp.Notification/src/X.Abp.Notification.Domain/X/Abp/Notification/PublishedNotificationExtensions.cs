@@ -28,10 +28,8 @@ namespace X.Abp.Notification
                 Id = publishedNotification.Id,
                 TenantId = publishedNotification.TenantId,
                 NotificationName = publishedNotification.NotificationName,
-                // Data = publishedNotification.Data.IsNullOrEmpty() ? null : JsonConvert.DeserializeObject(publishedNotification.Data, Type.GetType(publishedNotification.DataTypeName)) as NotificationData,
                 Data = publishedNotification.Data.IsNullOrEmpty() ? null : jsonSerializer.Deserialize(Type.GetType(publishedNotification.DataTypeName), publishedNotification.Data) as NotificationData,
                 EntityTypeName = publishedNotification.EntityTypeName,
-                // EntityId = publishedNotification.EntityId.IsNullOrEmpty() ? null : JsonConvert.DeserializeObject(publishedNotification.EntityId, EntityHelper.FindPrimaryKeyType(entityType)),
                 EntityId = publishedNotification.EntityId.IsNullOrEmpty() ? null : jsonSerializer.Deserialize(EntityHelper.FindPrimaryKeyType(entityType), publishedNotification.EntityId),
                 Severity = publishedNotification.Severity,
                 CreationTime = publishedNotification.CreationTime

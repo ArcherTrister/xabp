@@ -6,7 +6,7 @@ using Volo.Abp.AutoMapper;
 using Volo.Abp.Emailing;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement;
-using Volo.Abp.TextTemplating;
+using Volo.Abp.TextTemplating.Scriban;
 using Volo.Abp.VirtualFileSystem;
 using Volo.CmsKit;
 
@@ -16,7 +16,7 @@ namespace X.Abp.CmsKit;
     typeof(CmsKitProDomainSharedModule),
     typeof(CmsKitDomainModule),
     typeof(AbpEmailingModule),
-    typeof(AbpTextTemplatingModule),
+    typeof(AbpTextTemplatingScribanModule),
     typeof(AbpAutoMapperModule),
     typeof(AbpSettingManagementDomainModule))]
 public class CmsKitProDomainModule : AbpModule

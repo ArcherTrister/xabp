@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using System;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
@@ -45,30 +49,30 @@ public class CustomAbpDynamicClaimsMiddleware : AbpDynamicClaimsMiddleware
     }
 }
 
-//public class CustomAbpDynamicClaimsMiddleware : AbpMiddlewareBase, ITransientDependency
-//{
-//    public override async Task InvokeAsync(HttpContext context, RequestDelegate next)
-//    {
-//        if ((context.User.Identity?.IsAuthenticated ?? false) && context.RequestServices.GetRequiredService<IOptions<AbpClaimsPrincipalFactoryOptions>>().Value.IsDynamicClaimsEnabled)
-//        {
-//            string authenticationType = context.User.Identity.AuthenticationType;
-//            IAbpClaimsPrincipalFactory requiredService = context.RequestServices.GetRequiredService<IAbpClaimsPrincipalFactory>();
-//            context.User = await requiredService.CreateDynamicAsync(context.User);
-//            IIdentity? identity = context.User.Identity;
-//            if (identity != null && !identity.IsAuthenticated)
-//            {
-//                IAuthenticationSchemeProvider requiredService2 = context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
-//                if (!authenticationType.IsNullOrWhiteSpace())
-//                {
-//                    AuthenticationScheme authenticationScheme = await requiredService2.GetSchemeAsync(authenticationType);
-//                    if (authenticationScheme != null && typeof(IAuthenticationSignOutHandler).IsAssignableFrom(authenticationScheme.HandlerType))
-//                    {
-//                        await context.SignOutAsync(authenticationScheme.Name);
-//                    }
-//                }
-//            }
-//        }
+/*public class CustomAbpDynamicClaimsMiddleware : AbpMiddlewareBase, ITransientDependency
+{
+    public override async Task InvokeAsync(HttpContext context, RequestDelegate next)
+    {
+        if ((context.User.Identity?.IsAuthenticated ?? false) && context.RequestServices.GetRequiredService<IOptions<AbpClaimsPrincipalFactoryOptions>>().Value.IsDynamicClaimsEnabled)
+        {
+            string authenticationType = context.User.Identity.AuthenticationType;
+            IAbpClaimsPrincipalFactory requiredService = context.RequestServices.GetRequiredService<IAbpClaimsPrincipalFactory>();
+            context.User = await requiredService.CreateDynamicAsync(context.User);
+            IIdentity? identity = context.User.Identity;
+            if (identity != null && !identity.IsAuthenticated)
+            {
+                IAuthenticationSchemeProvider requiredService2 = context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                if (!authenticationType.IsNullOrWhiteSpace())
+                {
+                    AuthenticationScheme authenticationScheme = await requiredService2.GetSchemeAsync(authenticationType);
+                    if (authenticationScheme != null && typeof(IAuthenticationSignOutHandler).IsAssignableFrom(authenticationScheme.HandlerType))
+                    {
+                        await context.SignOutAsync(authenticationScheme.Name);
+                    }
+                }
+            }
+        }
 
-//        await next(context);
-//    }
-//}
+        await next(context);
+    }
+}*/

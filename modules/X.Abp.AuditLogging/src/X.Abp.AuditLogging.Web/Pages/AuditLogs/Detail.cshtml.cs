@@ -39,10 +39,12 @@ namespace X.Abp.AuditLogging.Web.Pages.AuditLogging
 
         public virtual string SerializeDictionary(Dictionary<string, object> dictionary)
         {
-            return JsonSerializer.Serialize(dictionary, new JsonSerializerOptions()
-            {
-                WriteIndented = true
-            });
+            return JsonSerializer.Serialize(dictionary, WriteOptions);
         }
+
+        private static readonly JsonSerializerOptions WriteOptions = new()
+        {
+            WriteIndented = true
+        };
     }
 }

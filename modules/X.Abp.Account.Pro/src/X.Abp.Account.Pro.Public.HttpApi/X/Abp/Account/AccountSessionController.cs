@@ -32,9 +32,7 @@ public class AccountSessionController : AbpControllerBase, IAccountSessionAppSer
     }
 
     [HttpGet]
-    public virtual Task<PagedResultDto<IdentitySessionDto>> GetListAsync(
-        GetAccountIdentitySessionListInput input
-    )
+    public virtual Task<PagedResultDto<IdentitySessionDto>> GetListAsync(GetAccountIdentitySessionListInput input)
     {
         return AccountSessionAppService.GetListAsync(input);
     }

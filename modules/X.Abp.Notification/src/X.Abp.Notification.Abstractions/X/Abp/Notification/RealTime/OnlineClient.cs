@@ -98,9 +98,9 @@ namespace X.Abp.Notification.RealTime
             Properties = new Dictionary<string, object>();
         }
 
-        //public override string ToString()
-        //{
-        //    return this.ToJsonString();
-        //}
+/*        public override string ToString()
+        {
+            return this.ToJsonString();
+        }*/
     }
 }

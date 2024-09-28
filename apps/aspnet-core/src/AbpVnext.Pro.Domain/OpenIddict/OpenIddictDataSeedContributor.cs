@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +29,8 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
     private readonly IAbpApplicationManager _applicationManager;
     private readonly IOpenIddictScopeManager _scopeManager;
     private readonly IPermissionDataSeeder _permissionDataSeeder;
-    private readonly IStringLocalizer<OpenIddictResponse> L;
+
+    protected IStringLocalizer<OpenIddictResponse> L { get; }
 
     public OpenIddictDataSeedContributor(
         IConfiguration configuration,
@@ -78,7 +83,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
         var configurationSection = _configuration.GetSection("OpenIddict:Applications");
 
-        //Web Client
+        // Web Client
         var webClientId = configurationSection["Pro_Web:ClientId"];
         if (!webClientId.IsNullOrWhiteSpace())
         {
@@ -92,7 +97,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Web Application",
                 secret: configurationSection["Pro_Web:ClientSecret"] ?? "1q2w3e*",
-                grantTypes: new List<string> //Hybrid flow
+                grantTypes: new List<string> // Hybrid flow
                 {
                     OpenIddictConstants.GrantTypes.AuthorizationCode,
                     OpenIddictConstants.GrantTypes.Implicit
@@ -101,11 +106,10 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 redirectUri: $"{webClientRootUrl}signin-oidc",
                 postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc",
                 clientUri: webClientRootUrl,
-                logoUri: "/images/clients/aspnetcore.svg"
-            );
+                logoUri: "/images/clients/aspnetcore.svg");
         }
 
-        //Console Test / Angular Client
+        // Console Test / Angular Client
         var consoleAndAngularClientId = configurationSection["Pro_App:ClientId"];
         if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
         {
@@ -133,15 +137,14 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 redirectUri: consoleAndAngularClientRootUrl,
                 postLogoutRedirectUri: consoleAndAngularClientRootUrl,
                 clientUri: consoleAndAngularClientRootUrl,
-                logoUri: "/images/clients/angular.svg"
-            );
+                logoUri: "/images/clients/angular.svg");
         }
 
-        //MAUI Client
+        // MAUI Client
         var mauiClientId = configurationSection["Pro_Maui:ClientId"];
         if (!mauiClientId.IsNullOrWhiteSpace())
         {
-            var mauiClientRootUrl = configurationSection["Pro_Maui:RootUrl"].Replace("_", "-");
+            var mauiClientRootUrl = configurationSection["Pro_Maui:RootUrl"].Replace("_", "-", StringComparison.CurrentCulture);
             await CreateApplicationAsync(
                 name: mauiClientId,
                 clientType: OpenIddictConstants.ClientTypes.Public,
@@ -157,8 +160,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 },
                 scopes: commonScopes,
                 redirectUri: mauiClientRootUrl,
-                postLogoutRedirectUri: mauiClientRootUrl
-            );
+                postLogoutRedirectUri: mauiClientRootUrl);
         }
 
         // Blazor Client
@@ -181,8 +183,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 redirectUri: $"{blazorRootUrl}/authentication/login-callback",
                 postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback",
                 clientUri: blazorRootUrl,
-                logoUri: "/images/clients/blazor.svg"
-            );
+                logoUri: "/images/clients/blazor.svg");
         }
 
         // Blazor Server Tiered Client
@@ -197,7 +198,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Blazor Server Application",
                 secret: configurationSection["Pro_BlazorServerTiered:ClientSecret"] ?? "1q2w3e*",
-                grantTypes: new List<string> //Hybrid flow
+                grantTypes: new List<string> // Hybrid flow
                 {
                     OpenIddictConstants.GrantTypes.AuthorizationCode,
                     OpenIddictConstants.GrantTypes.Implicit
@@ -206,8 +207,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 redirectUri: $"{blazorServerTieredRootUrl}signin-oidc",
                 postLogoutRedirectUri: $"{blazorServerTieredRootUrl}signout-callback-oidc",
                 clientUri: blazorServerTieredRootUrl,
-                logoUri: "/images/clients/blazor.svg"
-            );
+                logoUri: "/images/clients/blazor.svg");
         }
 
         // Swagger Client
@@ -229,8 +229,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 scopes: commonScopes,
                 redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                 clientUri: swaggerRootUrl,
-                logoUri: "/images/clients/swagger.svg"
-            );
+                logoUri: "/images/clients/swagger.svg");
         }
 
         // Web Public Client
@@ -245,7 +244,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Web Public Application",
                 secret: configurationSection["Pro_Web_Public:ClientSecret"] ?? "1q2w3e*",
-                grantTypes: new List<string> //Hybrid flow
+                grantTypes: new List<string> // Hybrid flow
                 {
                     OpenIddictConstants.GrantTypes.AuthorizationCode,
                     OpenIddictConstants.GrantTypes.Implicit
@@ -254,8 +253,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 redirectUri: $"{webPublicRootUrl}signin-oidc",
                 postLogoutRedirectUri: $"{webPublicRootUrl}signout-callback-oidc",
                 clientUri: webPublicRootUrl,
-                logoUri: "/images/clients/aspnetcore.svg"
-            );
+                logoUri: "/images/clients/aspnetcore.svg");
         }
 
         // Web Public Tiered Client
@@ -270,7 +268,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Web Public Tiered Application",
                 secret: configurationSection["Pro_Web_Public_Tiered:ClientSecret"] ?? "1q2w3e*",
-                grantTypes: new List<string> //Hybrid flow
+                grantTypes: new List<string> // Hybrid flow
                 {
                     OpenIddictConstants.GrantTypes.AuthorizationCode,
                     OpenIddictConstants.GrantTypes.Implicit
@@ -279,8 +277,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 redirectUri: $"{webPublicTieredRootUrl}signin-oidc",
                 postLogoutRedirectUri: $"{webPublicTieredRootUrl}signout-callback-oidc",
                 clientUri: webPublicTieredRootUrl,
-                logoUri: "/images/clients/aspnetcore.svg"
-            );
+                logoUri: "/images/clients/aspnetcore.svg");
         }
     }
 
@@ -310,8 +307,8 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
         if (!string.IsNullOrEmpty(name) && await _applicationManager.FindByClientIdAsync(name) != null)
         {
+            // throw new BusinessException(L["TheClientIdentifierIsAlreadyTakenByAnotherApplication"]);
             return;
-            //throw new BusinessException(L["TheClientIdentifierIsAlreadyTakenByAnotherApplication"]);
         }
 
         var client = await _applicationManager.FindByClientIdAsync(name);
@@ -331,7 +328,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             Check.NotNullOrEmpty(grantTypes, nameof(grantTypes));
             Check.NotNullOrEmpty(scopes, nameof(scopes));
 
-            if (new [] { OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit }.All(grantTypes.Contains))
+            if (new[] { OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit }.All(grantTypes.Contains))
             {
                 application.Permissions.Add(OpenIddictConstants.Permissions.ResponseTypes.CodeIdToken);
 
@@ -347,7 +344,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 application.Permissions.Add(OpenIddictConstants.Permissions.Endpoints.Logout);
             }
 
-            var buildInGrantTypes = new []
+            var buildInGrantTypes = new[]
             {
                 OpenIddictConstants.GrantTypes.Implicit,
                 OpenIddictConstants.GrantTypes.Password,
@@ -423,7 +420,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 }
             }
 
-            var buildInScopes = new []
+            var buildInScopes = new[]
             {
                 OpenIddictConstants.Permissions.Scopes.Address,
                 OpenIddictConstants.Permissions.Scopes.Email,
@@ -482,8 +479,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     ClientPermissionValueProvider.ProviderName,
                     name,
                     permissions,
-                    null
-                );
+                    null);
             }
 
             await _applicationManager.CreateAsync(application);

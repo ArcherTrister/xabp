@@ -31,7 +31,7 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
 {
     protected const string DefaultPassPhrase = "gsKnGZ041HLL4IM8";
 
-    protected const string DefaultVersion = "8.2.1";
+    protected const string DefaultVersion = "8.3.1-beta";
 
     private static readonly string[] ExclusionFoldersOrFiles =
     {
@@ -107,7 +107,11 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
 
         var commandBuilder = new StringBuilder("dotnet new");
         commandBuilder.AppendFormat(" {0}", createArgs.TemplateName);
-        commandBuilder.AppendFormat(" -tt {0}", GetTemplateType(createArgs));
+        if (AbpTemplateConsts.NewTemplates.Any(p => p == createArgs.TemplateName))
+        {
+            commandBuilder.AppendFormat(" -tt {0}", GetTemplateType(createArgs));
+        }
+
         commandBuilder.AppendFormat(" -n {0}", createArgs.SolutionName.FullName);
         commandBuilder.AppendFormat(" -o {0}", createArgs.OutputFolder);
         commandBuilder.AppendFormat(" -dbms {0}", createArgs.DatabaseManagementSystem.ToString());
@@ -342,6 +346,10 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
         string efCoreProjectPath;
         switch (projectArgs.TemplateName)
         {
+            // case AbpTemplateConsts.MicroService:
+            case AbpTemplateConsts.MultiLayer:
+            case AbpTemplateConsts.MultiLayerSeparateAuthServer:
+            case AbpTemplateConsts.MultiLayerSeparatedTenantSchema:
             case AbpTemplateConsts.IdentityServer.Default:
             case AbpTemplateConsts.IdentityServer.SeparatedAuthServer:
             case AbpTemplateConsts.IdentityServer.SeparatedTenantSchema:
@@ -353,6 +361,7 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
                 efCoreProjectPath = Directory.GetFiles(projectArgs.OutputFolder, "*EntityFrameworkCore.csproj", SearchOption.AllDirectories).FirstOrDefault();
                 isLayeredTemplate = true;
                 break;
+            case AbpTemplateConsts.SingleLayer:
             case AppNoLayersTemplate.TemplateName:
             case AppNoLayersProTemplate.TemplateName:
                 efCoreProjectPath = Directory.GetFiles(projectArgs.OutputFolder, "*.Host.csproj", SearchOption.AllDirectories).FirstOrDefault()

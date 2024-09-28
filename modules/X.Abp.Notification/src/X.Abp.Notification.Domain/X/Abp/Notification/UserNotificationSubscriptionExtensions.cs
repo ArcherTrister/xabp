@@ -31,7 +31,6 @@ namespace X.Abp.Notification
                 NotificationName = userNotificationSubscription.NotificationName,
                 EntityType = entityType,
                 EntityTypeName = userNotificationSubscription.EntityTypeName,
-                // EntityId = userNotificationSubscription.EntityId.IsNullOrEmpty() ? null : JsonConvert.DeserializeObject(userNotificationSubscription.EntityId, EntityHelper.FindPrimaryKeyType(entityType)),
                 EntityId = userNotificationSubscription.EntityId.IsNullOrEmpty() ? null : jsonSerializer.Deserialize(EntityHelper.FindPrimaryKeyType(entityType), userNotificationSubscription.EntityId),
                 EntityTypeAssemblyQualifiedName = userNotificationSubscription.EntityTypeAssemblyQualifiedName,
                 TargetNotifiers = userNotificationSubscription.TargetNotifiers,

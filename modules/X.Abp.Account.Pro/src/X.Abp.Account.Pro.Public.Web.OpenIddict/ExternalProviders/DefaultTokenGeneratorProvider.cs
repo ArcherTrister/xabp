@@ -46,12 +46,12 @@ public class DefaultTokenGeneratorProvider : ITokenGeneratorProvider, ITransient
     */
 
     public virtual Task<TokenGeneratorResult> CreateSpaExternalLoginAccessTokenAsync(string loginProvider, string providerKey, Guid? tenantId, string clientId, string clientSecret, string scope)
-  {
-    throw new NotImplementedException();
-  }
+    {
+        throw new NotImplementedException();
+    }
 
-  public virtual Task<TokenGeneratorResult> CreateScanCodeLoginAccessTokenAsync(Guid userId, Guid? tenantId, string clientId, string clientSecret, string scope)
-  {
-    throw new NotImplementedException();
-  }
+    public virtual Task<TokenGeneratorResult> CreateScanCodeLoginAccessTokenAsync(Guid userId, Guid? tenantId, string clientId, string clientSecret, string scope)
+    {
+        throw new NotImplementedException();
+    }
 }

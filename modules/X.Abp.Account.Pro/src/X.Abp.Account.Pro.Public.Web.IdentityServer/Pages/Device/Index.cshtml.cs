@@ -76,7 +76,7 @@ public class IndexModel : AccountPageModel
         }
 
         var resources = await ResourceStore.FindEnabledResourcesByScopeAsync(request.ValidatedResources.RawScopeValues);
-        if (resources == null || (!resources.IdentityResources.Any() && !resources.ApiResources.Any()))
+        if (resources == null || (resources.IdentityResources.Count == 0 && resources.ApiResources.Count == 0))
         {
             throw new UserFriendlyException($"No scopes matching: {request.ValidatedResources.RawScopeValues.Aggregate((x, y) => x + ", " + y)}");
         }

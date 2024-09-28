@@ -19,9 +19,6 @@ namespace X.Abp.LanguageManagement.External
     {
         LocalizationResourceRecord Find(string name);
 
-        Task<LocalizationResourceRecord> FindAsync(
-            string name,
-            CancellationToken cancellationToken = default
-        );
+        Task<LocalizationResourceRecord> FindAsync(string name, CancellationToken cancellationToken = default);
     }
 }

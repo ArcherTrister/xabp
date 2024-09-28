@@ -35,8 +35,8 @@ namespace AbpVnext.Pro.Customs;
 /// <summary>
 /// Provides the logic necessary to extract, validate and handle OpenID Connect requests.
 /// </summary>
-//[Dependency(ReplaceServices = true)]
-//[ExposeServices(typeof(IIdentityUserAppService), typeof(OpenIddictServerAspNetCoreHandler), typeof(CustomOpenIddictServerAspNetCoreHandler))]
+// [Dependency(ReplaceServices = true)]
+// [ExposeServices(typeof(IIdentityUserAppService), typeof(OpenIddictServerAspNetCoreHandler), typeof(CustomOpenIddictServerAspNetCoreHandler))]
 [EditorBrowsable(EditorBrowsableState.Advanced)]
 public sealed class CustomOpenIddictServerAspNetCoreHandler : AuthenticationHandler<OpenIddictServerAspNetCoreOptions>,
     IAuthenticationRequestHandler,

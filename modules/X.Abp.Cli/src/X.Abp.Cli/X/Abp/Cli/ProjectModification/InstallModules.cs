@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Volo.Abp.Cli.ProjectModification;
 
 namespace X.Abp.Cli.ProjectModification;
-internal class InstallModules
+internal sealed class InstallModules
 {
     // TODO: 静态模块信息
     public static List<ModuleWithMastersInfo> Init => new()

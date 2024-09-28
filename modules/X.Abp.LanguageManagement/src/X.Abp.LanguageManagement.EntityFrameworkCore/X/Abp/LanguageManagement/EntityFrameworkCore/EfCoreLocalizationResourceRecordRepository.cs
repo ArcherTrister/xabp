@@ -19,10 +19,10 @@ namespace X.Abp.LanguageManagement.EntityFrameworkCore
       : EfCoreRepository<ILanguageManagementDbContext, LocalizationResourceRecord, Guid>,
           ILocalizationResourceRecordRepository
   {
-    public EfCoreLocalizationResourceRecordRepository(
-        IDbContextProvider<ILanguageManagementDbContext> dbContextProvider
-    )
-        : base(dbContextProvider) { }
+    public EfCoreLocalizationResourceRecordRepository(IDbContextProvider<ILanguageManagementDbContext> dbContextProvider)
+            : base(dbContextProvider)
+    {
+    }
 
     [Obsolete("Use FindAsync() method.")]
     public LocalizationResourceRecord Find(string name)
@@ -33,16 +33,9 @@ namespace X.Abp.LanguageManagement.EntityFrameworkCore
       }
     }
 
-    public virtual async Task<LocalizationResourceRecord> FindAsync(
-        string name,
-        CancellationToken cancellationToken = default
-    )
+    public virtual async Task<LocalizationResourceRecord> FindAsync(string name, CancellationToken cancellationToken = default)
     {
-      return await FindAsync(
-          localizationResourceRecord => localizationResourceRecord.Name == name,
-          true,
-          cancellationToken
-      );
+      return await FindAsync(localizationResourceRecord => localizationResourceRecord.Name == name, true, cancellationToken);
     }
   }
 }

@@ -51,9 +51,7 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 > See the [CLI documentation](https://github.com/ArcherTrister/xabp/blob/main/modules/X.Abp.Cli/README.md) for all available options.
 
 ::: tip
-
-指定数据库驱动需指定数据库连接字符串，如不指定则需手动更改，微服务模板默认使用 SqlServer 驱动，暂不支持指定数据库驱动，请手动更换。
-
+<font style="background:#FF6600">指定数据库驱动需指定数据库连接字符串，如不指定则需手动更改，微服务模板默认使用 SqlServer 驱动，暂不支持指定数据库驱动，请手动更换。</font>
 :::
 
 ### 应用程序模块
@@ -94,7 +92,7 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 ### 💖💖 If you find this framework useful, maybe you can buy me a coffee. 💖💖
 
 <p align="center">
-  <img alt="pay" src="https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg">
+  <img alt="pay" src="https://cdn.jsdelivr.net/gh/ArcherTrister/ArcherTrister@master/assets/pay.jpg" onerror="this.src='https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg'" />
 </p>
 
 ## 计划
@@ -140,17 +138,20 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 
 ### 模板
 
--   ~~[x] X.Abp.IdentityServer4(xais4)~~
--   ~~[x] X.Abp.Openiddict(xaod)~~
+-   [x] ~~X.Abp.IdentityServer4(xais4)~~
+-   [x] ~~X.Abp.Openiddict(xaod)~~
 -   [x] X.Abp.IdentityServer4.SeparatedTenantSchema(xais4sts)
 -   [x] X.Abp.Openiddict.SeparatedTenantSchema(xaodsts)
--   ~~[ ] X.Abp.IdentityServer4.SeparatedAuthServer~~
--   ~~[ ] X.Abp.Openiddict.SeparatedAuthServer~~
--   ~~[ ] X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema~~
--   ~~[ ] X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema~~
+-   [ ] ~~X.Abp.IdentityServer4.SeparatedAuthServer~~
+-   [ ] ~~X.Abp.Openiddict.SeparatedAuthServer~~
+-   [ ] ~~X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema~~
+-   [ ] ~~X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema~~
 -   [x] X.Abp.IdentityServer4.Microservices(xais4mo or xais4my)
 -   [x] X.Abp.Openiddict.Microservices(xaodmo or xaodmy)
 -   [ ] vue
+
+---
+
 -   [ ] X.Abp.MicroService(xams)
 -   [x] X.Abp.MultiLayer(xaml)
 -   [x] X.Abp.MultiLayer.SeparateAuthServer(xamlsas)

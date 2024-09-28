@@ -84,11 +84,11 @@ public class IdentityServerProHttpApiHostModule : AbpModule
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
 
-        //PreConfigure<IdentityBuilder>(identityBuilder =>
-        //{
-        //    // identityBuilder.AddSignInManager<CustomSignInManager>();
-        //    identityBuilder.AddClaimsPrincipalFactory<CustomUserClaimsPrincipalFactory>();
-        //});
+/*        PreConfigure<IdentityBuilder>(identityBuilder =>
+        {
+            // identityBuilder.AddSignInManager<CustomSignInManager>();
+            identityBuilder.AddClaimsPrincipalFactory<CustomUserClaimsPrincipalFactory>();
+        });*/
 
         PreConfigure<AuthorizationOptions>(options =>
         {
@@ -106,7 +106,8 @@ public class IdentityServerProHttpApiHostModule : AbpModule
             PreConfigure<AbpIdentityServerBuilderOptions>(options =>
             {
                 options.AddDeveloperSigningCredential = true;
-                //options.UpdateAbpClaimTypes = false;
+
+                // options.UpdateAbpClaimTypes = false;
             });
 
             // PreConfigure<IdentityServerOptions>(options =>
@@ -115,25 +116,26 @@ public class IdentityServerProHttpApiHostModule : AbpModule
             //    // options.Endpoints = new EndpointsOptions { EnableTokenEndpoint = false };
             // });
 
-            //PreConfigure<IIdentityServerBuilder>(identityServerBuilder =>
-            //{
-            //    //identityServerBuilder.AddProfileService<CustomProfileService>();
-            //    // builder.AddExtensionGrantValidator<WeChatMiniProgramGrantValidator>();
-            //    // builder.AddExtensionGrantValidator<PhoneVerifyCodeGrantValidator>();
-            //    // builder.AddExtensionGrantValidator<ThirdPartyProviderGrantValidator>();
-            //    // builder.AddExtensionGrantValidator<BindThirdPartyProviderGrantValidator>();
-            //    // //builder.AddPersistedGrantStore<CustomPersistedGrantStore>();
-            //    // //builder.AddResponseGenerators
-            //    // //CustomTokenValidator
-            //    // identityServerBuilder.AddEndpoint<CustomTokenEndpoint>(EndpointNames.Token, ProtocolRoutePaths.Token.EnsureLeadingSlash());
-            //});
+/*            PreConfigure<IIdentityServerBuilder>(identityServerBuilder =>
+            {
+                //identityServerBuilder.AddProfileService<CustomProfileService>();
+                // builder.AddExtensionGrantValidator<WeChatMiniProgramGrantValidator>();
+                // builder.AddExtensionGrantValidator<PhoneVerifyCodeGrantValidator>();
+                // builder.AddExtensionGrantValidator<ThirdPartyProviderGrantValidator>();
+                // builder.AddExtensionGrantValidator<BindThirdPartyProviderGrantValidator>();
+                // //builder.AddPersistedGrantStore<CustomPersistedGrantStore>();
+                // //builder.AddResponseGenerators
+                // //CustomTokenValidator
+                // identityServerBuilder.AddEndpoint<CustomTokenEndpoint>(EndpointNames.Token, ProtocolRoutePaths.Token.EnsureLeadingSlash());
+            });*/
         }
         else
         {
             PreConfigure<AbpIdentityServerBuilderOptions>(options =>
             {
                 options.AddDeveloperSigningCredential = false;
-                //options.UpdateAbpClaimTypes = false;
+
+                // options.UpdateAbpClaimTypes = false;
             });
 
             // IIS 应用程序池--->高级设置--->加载用户配置文件设置为True
@@ -291,8 +293,8 @@ public class IdentityServerProHttpApiHostModule : AbpModule
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
         ConfigureExternalProviders(context);
-        // ConfigureHealthChecks(context, configuration);
 
+        // ConfigureHealthChecks(context, configuration);
         Configure<AbpAntiForgeryOptions>(options =>
         {
             // options.TokenCookie.Expiration = TimeSpan.FromDays(365);
@@ -327,14 +329,15 @@ public class IdentityServerProHttpApiHostModule : AbpModule
         //    options.KeyPrefix = "KeyPrefix";
         // });
 
-        //context.Services.AddSingleton<IDistributedLockProvider>(sp =>
-        //{
-        //    var connection = ConnectionMultiplexer
-        //        .Connect(configuration["Redis:Configuration"]);
-        //    return new
-        //        RedisDistributedSynchronizationProvider(connection.GetDatabase());
-        //});
-        //LocalAbpDistributedLock
+/*        context.Services.AddSingleton<IDistributedLockProvider>(sp =>
+        {
+            var connection = ConnectionMultiplexer
+                .Connect(configuration["Redis:Configuration"]);
+            return new
+                RedisDistributedSynchronizationProvider(connection.GetDatabase());
+        });*/
+
+        // LocalAbpDistributedLock
 
         // Configure<AbpDbContextOptions>(options =>
         // {
@@ -491,15 +494,15 @@ public class IdentityServerProHttpApiHostModule : AbpModule
         // );
         // context.Services.Replace(ServiceDescriptor.Transient<ITokenService, CustomDefaultTokenService>());
         //        context.Services.Replace(
-        //ServiceDescriptor.Transient<IUserInfoResponseGenerator, CustomUserInfoResponseGenerator>());
+        // ServiceDescriptor.Transient<IUserInfoResponseGenerator, CustomUserInfoResponseGenerator>());
 
-        //        context.Services.Replace(
-        //ServiceDescriptor.Transient<IClaimsService, CustomDefaultClaimsService>());
+        // context.Services.Replace(
+        // ServiceDescriptor.Transient<IClaimsService, CustomDefaultClaimsService>());
 
-        //CustomTokenResponseGenerator : ITokenResponseGenerator
-        //context.Services.Replace(ServiceDescriptor.Transient<ITokenResponseGenerator, CustomTokenResponseGenerator>());
+        // CustomTokenResponseGenerator : ITokenResponseGenerator
+        // context.Services.Replace(ServiceDescriptor.Transient<ITokenResponseGenerator, CustomTokenResponseGenerator>());
 
-        //            // CustomTokenEndpoint : IEndpointHandler
+        // CustomTokenEndpoint : IEndpointHandler
         //            // CustomDefaultUserSession : IUserSession
         //            context.Services.Replace(
         // ServiceDescriptor.Transient<IUserSession, CustomDefaultUserSession>()
@@ -710,7 +713,6 @@ public class IdentityServerProHttpApiHostModule : AbpModule
         //        .AddAuthenticationSchemes("Bearer_OR_Cookies")
         //        .Build();
         // });
-
         context.Services.ForwardIdentityAuthenticationForBearer();
 
         /*
@@ -966,7 +968,7 @@ public class IdentityServerProHttpApiHostModule : AbpModule
             });
     }
 
-    private void ConfigureLocalization()
+    private static void ConfigureLocalization()
     {
         /*
         //Configure<AbpLocalizationCultureMapOptions>(options =>

@@ -4,7 +4,7 @@
 
 namespace X.Abp.Saas;
 
-public enum TenantActivationState : byte
+public enum TenantActivationState
 {
     Active,
     ActiveWithLimitedTime,

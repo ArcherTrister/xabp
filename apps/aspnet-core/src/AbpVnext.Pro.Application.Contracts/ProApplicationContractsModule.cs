@@ -43,9 +43,11 @@ namespace AbpVnext.Pro;
     typeof(AbpLanguageManagementApplicationContractsModule),
     typeof(AbpGdprApplicationContractsModule),
     typeof(AbpTextTemplateManagementApplicationContractsModule))]
+
 // [DependsOn(typeof(AbpBasicDataApplicationContractsModule))]
 [DependsOn(typeof(AbpNotificationApplicationContractsModule))]
-//[DependsOn(typeof(AbpIotApplicationContractsModule))]
+
+// [DependsOn(typeof(AbpIotApplicationContractsModule))]
 [DependsOn(typeof(AbpOpenIddictProApplicationContractsModule))]
 [DependsOn(typeof(AbpQuartzApplicationContractsModule))]
 [DependsOn(typeof(AbpChatApplicationContractsModule))]

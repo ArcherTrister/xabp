@@ -120,8 +120,8 @@ public static class ExecutionHistoryPluginConfigurationExtensions
             var exp = Expression.Lambda(prop, param);
 
             var method = i == 0
-                ? direction.ToLower(CultureInfo.CurrentCulture) == "asc" ? "OrderBy" : "OrderByDescending"
-                : direction.ToLower(CultureInfo.CurrentCulture) == "asc" ? "ThenBy" : "ThenByDescending";
+                ? direction.Equals("asc", StringComparison.OrdinalIgnoreCase) ? "OrderBy" : "OrderByDescending"
+                : direction.Equals("asc", StringComparison.OrdinalIgnoreCase) ? "ThenBy" : "ThenByDescending";
             Type[] types = { query.ElementType, exp.Body.Type };
             var mce = i == 0 ? Expression.Call(typeof(Queryable), method, types, query.Expression, exp) : Expression.Call(typeof(Queryable), method, types, res.Expression, exp);
 

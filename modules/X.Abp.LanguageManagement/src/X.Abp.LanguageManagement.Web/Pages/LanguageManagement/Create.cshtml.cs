@@ -21,6 +21,8 @@ namespace X.Abp.LanguageManagement.Web.Pages.LanguageManagement
 {
     public class CreateModel : LanguageManagementPageModel
     {
+#pragma warning disable SA1122 // Use string.Empty for empty strings
+#pragma warning disable CA2227 // 集合属性应为只读
         public List<SelectListItem> CultureSelectList { get; set; } = new List<SelectListItem>();
 
         public List<SelectListItem> UiCultureSelectList { get; set; } = new List<SelectListItem>();
@@ -41,21 +43,22 @@ namespace X.Abp.LanguageManagement.Web.Pages.LanguageManagement
             List<RegionInfo> list = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
                 .Select(c => new RegionInfo(c.Name))
                 .GroupBy(r => r.TwoLetterISORegionName).Select(g => g.First()).ToList();
-            foreach (string flagCode1 in LanguageManagementFlagCodeConsts.FlagCodes)
+            foreach (string flagCode in LanguageManagementFlagCodeConsts.FlagCodes)
             {
-                string flagCode = flagCode1;
-                RegionInfo regionInfo = list.FirstOrDefault(r => flagCode.Equals(r.TwoLetterISORegionName, StringComparison.InvariantCultureIgnoreCase));
+                RegionInfo regionInfo = list.FirstOrDefault(r => flagCode.Equals(r.TwoLetterISORegionName, StringComparison.OrdinalIgnoreCase));
                 if (regionInfo != null && regionInfo.EnglishName != null)
                 {
                     FlagSelectList.Add(new SelectListItem(regionInfo.EnglishName, flagCode));
                 }
             }
+
             CultureSelectList = cultures.Select(c => new SelectListItem(c.EnglishName, c.Name)).ToList();
-            if (CultureSelectList.Any())
+            if (CultureSelectList.Count != 0)
             {
                 CultureSelectList.FirstOrDefault().Text = "";
                 CultureSelectList.FirstOrDefault().Value = "";
             }
+
             UiCultureSelectList = CultureSelectList;
             return Task.CompletedTask;
         }

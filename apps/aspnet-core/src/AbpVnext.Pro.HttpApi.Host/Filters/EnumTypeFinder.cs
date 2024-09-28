@@ -23,7 +23,7 @@ public class EnumTypeFinder : IEnumTypeFinder
             .Where(type => type.IsEnum &&
             (type.Name.Equals("DayOfWeek", StringComparison.OrdinalIgnoreCase) ||
             type.FullName.StartsWith("Volo", StringComparison.InvariantCultureIgnoreCase) ||
-            type.FullName.StartsWith("X", StringComparison.InvariantCultureIgnoreCase) ||
+            type.FullName.StartsWith('X') ||
             type.FullName.StartsWith("AbpVnext.Pro", StringComparison.InvariantCultureIgnoreCase)))
             .Distinct().ToDictionary(p => p.FullName, p => p);
     }

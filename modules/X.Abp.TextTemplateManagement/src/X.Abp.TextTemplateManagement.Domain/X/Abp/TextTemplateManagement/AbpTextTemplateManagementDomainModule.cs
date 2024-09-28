@@ -28,7 +28,9 @@ using X.Abp.TextTemplateManagement.TextTemplates;
 namespace X.Abp.TextTemplateManagement;
 
 [DependsOn(typeof(AbpTextTemplateManagementDomainSharedModule), typeof(AbpTextTemplatingCoreModule), typeof(AbpDddDomainModule), typeof(AbpCachingModule))]
+#pragma warning disable CA1001 // 具有可释放字段的类型应该是可释放的
 public class AbpTextTemplateManagementDomainModule : AbpModule
+#pragma warning restore CA1001 // 具有可释放字段的类型应该是可释放的
 {
     private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
@@ -55,6 +57,11 @@ public class AbpTextTemplateManagementDomainModule : AbpModule
     {
         InitializeTextDynamicTemplates(context);
         return Task.CompletedTask;
+    }
+
+    public override void OnApplicationShutdown(ApplicationShutdownContext context)
+    {
+        _cancellationTokenSource.Cancel();
     }
 
     public override async Task OnApplicationShutdownAsync(ApplicationShutdownContext context)

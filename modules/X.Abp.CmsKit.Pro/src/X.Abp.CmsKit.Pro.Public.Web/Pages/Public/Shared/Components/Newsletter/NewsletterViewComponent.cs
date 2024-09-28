@@ -49,7 +49,7 @@ public class NewsletterViewComponent : AbpViewComponent
             Preference = preference,
             Source = source,
             NormalizedSource = source.Replace('.', '_'),
-            PrivacyPolicyConfirmation = privacyPolicyConfirmation == null ? newsletterEmailOptions.PrivacyPolicyConfirmation : privacyPolicyConfirmation.Localize(StringLocalizerFactory).Value,
+            PrivacyPolicyConfirmation = privacyPolicyConfirmation == null ? newsletterEmailOptions.PrivacyPolicyConfirmation : (await privacyPolicyConfirmation.LocalizeAsync(StringLocalizerFactory)).Value,
             RequestAdditionalPreferencesLater = requestAdditionalPreferencesLater,
             AdditionalPreferences = newsletterEmailOptions.AdditionalPreferences,
             DisplayAdditionalPreferences = newsletterEmailOptions.DisplayAdditionalPreferences

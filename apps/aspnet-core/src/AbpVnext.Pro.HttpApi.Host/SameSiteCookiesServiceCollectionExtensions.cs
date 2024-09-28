@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // - WkWebview on iOS 12 for iPhone, iPod Touch, iPad
             // - Chrome on iOS 12 for iPhone, iPod Touch, iPad
             // All of which are broken by SameSite=None, because they use the iOS networking stack
-            if (userAgent.Contains("CPU iPhone OS 12") || userAgent.Contains("iPad; CPU OS 12"))
+            if (userAgent.Contains("CPU iPhone OS 12", System.StringComparison.OrdinalIgnoreCase) || userAgent.Contains("iPad; CPU OS 12", System.StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
@@ -49,8 +49,8 @@ namespace Microsoft.Extensions.DependencyInjection
             // This does not include:
             // - Chrome on Mac OS X
             // Because they do not use the Mac OS networking stack.
-            if (userAgent.Contains("Macintosh; Intel Mac OS X 10_14") &&
-                userAgent.Contains("Version/") && userAgent.Contains("Safari"))
+            if (userAgent.Contains("Macintosh; Intel Mac OS X 10_14", System.StringComparison.OrdinalIgnoreCase) &&
+                userAgent.Contains("Version/", System.StringComparison.OrdinalIgnoreCase) && userAgent.Contains("Safari", System.StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
@@ -59,7 +59,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // and none in this range require it.
             // Note: this covers some pre-Chromium Edge versions,
             // but pre-Chromium Edge does not require SameSite=None.
-            if (userAgent.Contains("Chrome/5") || userAgent.Contains("Chrome/6"))
+            if (userAgent.Contains("Chrome/5", System.StringComparison.OrdinalIgnoreCase) || userAgent.Contains("Chrome/6", System.StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }

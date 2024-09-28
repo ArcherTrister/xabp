@@ -37,7 +37,9 @@ namespace X.Abp.LanguageManagement;
     typeof(AbpAutoMapperModule),
     typeof(AbpDddDomainModule),
     typeof(AbpCachingModule))]
+#pragma warning disable CA1001 // 具有可释放字段的类型应该是可释放的
 public class AbpLanguageManagementDomainModule : AbpModule
+#pragma warning restore CA1001 // 具有可释放字段的类型应该是可释放的
 {
     private static readonly OneTimeRunner OneTimeRunner = new();
     private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();

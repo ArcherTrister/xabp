@@ -21,6 +21,7 @@ namespace X.Abp.AuditLogging.Web.Pages.AuditLogging
 {
     public class IndexModel : AuditLoggingPageModel
     {
+#pragma warning disable SA1122 // Use string.Empty for empty strings
         public string StartTime { get; set; }
 
         public string EndTime { get; set; }

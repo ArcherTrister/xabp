@@ -48,9 +48,11 @@ namespace AbpVnext.Pro;
     typeof(AbpGdprDomainSharedModule),
     typeof(AbpGlobalFeaturesModule),
     typeof(BlobStoringDatabaseDomainSharedModule))]
-//[DependsOn(typeof(AbpBasicDataDomainSharedModule))]
+
+// [DependsOn(typeof(AbpBasicDataDomainSharedModule))]
 [DependsOn(typeof(AbpNotificationDomainSharedModule))]
-//[DependsOn(typeof(AbpIotDomainSharedModule))]
+
+// [DependsOn(typeof(AbpIotDomainSharedModule))]
 [DependsOn(typeof(AbpChatDomainSharedModule))]
 [DependsOn(typeof(AbpFileManagementDomainSharedModule))]
 [DependsOn(typeof(AbpFormsDomainSharedModule))]

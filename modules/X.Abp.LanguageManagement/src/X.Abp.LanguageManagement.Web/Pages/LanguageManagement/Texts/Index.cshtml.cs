@@ -2,6 +2,7 @@
 // See https://github.com/ArcherTrister/xabp
 // for more information concerning the license and the contributors participating to this project.
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -56,7 +57,9 @@ namespace X.Abp.LanguageManagement.Web.Pages.LanguageManagement.Texts
             TargetCultureNameSelectItems = languages.Items.Select(p => new SelectListItem(p.DisplayName, p.CultureName, p.CultureName == TargetCultureName)).ToList();
             ResourceNameSelectItems = source.Select(l => new SelectListItem(l.Name, l.Name)).ToList();
 
+#pragma warning disable SA1122 // Use string.Empty for empty strings
             ResourceNameSelectItems.AddFirst(new SelectListItem("", ""));
+#pragma warning restore SA1122 // Use string.Empty for empty strings
             GetOnlyEmptyValuesSelectItems = new List<SelectListItem>()
               {
                 new SelectListItem(L["All"].Value, "false"),
@@ -77,9 +80,9 @@ namespace X.Abp.LanguageManagement.Web.Pages.LanguageManagement.Texts
                 return language.UiCultureName;
             }
 
-            if (currentUiCulture.Contains("-"))
+            if (currentUiCulture.Contains('-', System.StringComparison.Ordinal))
             {
-                currentUiCulture = currentUiCulture[..currentUiCulture.IndexOf('-')];
+                currentUiCulture = currentUiCulture[..currentUiCulture.IndexOf('-', StringComparison.Ordinal)];
             }
 
             language = languages.FirstOrDefault(l => l.UiCultureName == currentUiCulture);

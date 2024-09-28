@@ -18,28 +18,28 @@ namespace AbpVnext.Pro.Customs;
 [ExposeServices(typeof(AbpClaimsPrincipalFactory))]
 public class CustomAbpClaimsPrincipalFactory : AbpClaimsPrincipalFactory
 {
-    public CustomAbpClaimsPrincipalFactory(IServiceScopeFactory serviceScopeFactory, IOptions<AbpClaimsPrincipalFactoryOptions> abpClaimOptions)
-        : base(serviceScopeFactory, abpClaimOptions)
+    public CustomAbpClaimsPrincipalFactory(IServiceProvider serviceProvider, IOptions<AbpClaimsPrincipalFactoryOptions> abpClaimOptions)
+        : base(serviceProvider, abpClaimOptions)
     {
     }
 
     public override async Task<ClaimsPrincipal> InternalCreateAsync(AbpClaimsPrincipalFactoryOptions options, ClaimsPrincipal existsClaimsPrincipal = null, bool isDynamic = false)
     {
-        using IServiceScope scope = ServiceScopeFactory.CreateScope();
+        // using IServiceScope scope = ServiceScopeFactory.CreateScope();
         ClaimsPrincipal claimsIdentity = existsClaimsPrincipal ?? new ClaimsPrincipal(new ClaimsIdentity(AuthenticationType, AbpClaimTypes.UserName, AbpClaimTypes.Role));
-        AbpClaimsPrincipalContributorContext context = new AbpClaimsPrincipalContributorContext(claimsIdentity, scope.ServiceProvider);
+        AbpClaimsPrincipalContributorContext context = new AbpClaimsPrincipalContributorContext(claimsIdentity, ServiceProvider);
         if (!isDynamic)
         {
             foreach (Type contributor in options.Contributors)
             {
-                await ((IAbpClaimsPrincipalContributor)scope.ServiceProvider.GetRequiredService(contributor)).ContributeAsync(context);
+                await ((IAbpClaimsPrincipalContributor)ServiceProvider.GetRequiredService(contributor)).ContributeAsync(context);
             }
         }
         else
         {
             foreach (Type dynamicContributor in options.DynamicContributors)
             {
-                await ((IAbpDynamicClaimsPrincipalContributor)scope.ServiceProvider.GetRequiredService(dynamicContributor)).ContributeAsync(context);
+                await ((IAbpDynamicClaimsPrincipalContributor)ServiceProvider.GetRequiredService(dynamicContributor)).ContributeAsync(context);
             }
         }
 

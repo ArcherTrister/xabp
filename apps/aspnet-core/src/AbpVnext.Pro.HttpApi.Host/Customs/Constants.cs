@@ -124,14 +124,6 @@ internal static class Constants
         public static readonly string[] All = { HomeRealm, Tenant };
     }
 
-    public static Dictionary<string, int> ProtectedResourceErrorStatusCodes = new()
-    {
-            { OidcConstants.ProtectedResourceErrors.InvalidToken,      401 },
-            { OidcConstants.ProtectedResourceErrors.ExpiredToken,      401 },
-            { OidcConstants.ProtectedResourceErrors.InvalidRequest,    400 },
-            { OidcConstants.ProtectedResourceErrors.InsufficientScope, 403 }
-    };
-
     public static readonly Dictionary<string, IEnumerable<string>> ScopeToClaimsMapping = new()
     {
             {
@@ -179,6 +171,14 @@ internal static class Constants
                     JwtClaimTypes.Subject
                 }
             }
+    };
+
+    public static Dictionary<string, int> ProtectedResourceErrorStatusCodes = new()
+    {
+            { OidcConstants.ProtectedResourceErrors.InvalidToken,      401 },
+            { OidcConstants.ProtectedResourceErrors.ExpiredToken,      401 },
+            { OidcConstants.ProtectedResourceErrors.InvalidRequest,    400 },
+            { OidcConstants.ProtectedResourceErrors.InsufficientScope, 403 }
     };
 
     public static class UIConstants

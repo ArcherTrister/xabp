@@ -16,7 +16,7 @@ public class HashSetStringConverter : IValueConverter<HashSet<string>, string>, 
 
     public string Convert(HashSet<string> sourceMember, ResolutionContext context)
     {
-        return sourceMember != null && sourceMember.Any() ? sourceMember.Aggregate((x, y) => x + Environment.NewLine + y) : null;
+        return sourceMember != null && sourceMember.Count != 0 ? sourceMember.Aggregate((x, y) => x + Environment.NewLine + y) : null;
     }
 
     public HashSet<string> Convert(string sourceMember, ResolutionContext context)

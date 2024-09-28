@@ -13,10 +13,6 @@ using Volo.Abp.DependencyInjection;
 
 namespace X.Abp.Notification.RealTime
 {
-  public class InMemoryOnlineClientStore<T> : InMemoryOnlineClientStore, IOnlineClientStore<T>
-  {
-  }
-
   public class InMemoryOnlineClientStore : IOnlineClientStore, ISingletonDependency
   {
     /// <summary>

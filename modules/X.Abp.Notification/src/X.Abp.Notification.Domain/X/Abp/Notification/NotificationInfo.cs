@@ -103,9 +103,7 @@ namespace X.Abp.Notification
 
         public NotificationInfo(Guid id,
             string notificationName,
-            //NotificationData data = null,
             string data = null,
-            //EntityIdentifier entityIdentifier = null,
             string entityId = null,
             string entityTypeName = null,
             string entityTypeAssemblyQualifiedName = null,
@@ -117,13 +115,10 @@ namespace X.Abp.Notification
             : base(id)
         {
             NotificationName = notificationName;
-            // Data = data?.ToJsonString();
+
             Data = data;
             DataTypeName = data?.GetType().AssemblyQualifiedName;
 
-            //EntityId = entityIdentifier?.Id.ToJsonString();
-            //EntityTypeName = entityIdentifier?.Type.FullName;
-            //EntityTypeAssemblyQualifiedName = entityIdentifier?.Type.AssemblyQualifiedName;
             EntityId = entityId;
             EntityTypeName = entityTypeName;
             EntityTypeAssemblyQualifiedName = entityTypeAssemblyQualifiedName;

@@ -37,7 +37,8 @@ namespace AbpVnext.Pro;
 [DependsOn(typeof(AbpAccountPublicHttpApiModule))]
 [DependsOn(typeof(AbpAccountAdminHttpApiModule))]
 [DependsOn(typeof(AbpAuditLoggingHttpApiModule))]
-//[DependsOn(typeof(AbpBasicDataHttpApiModule))]
+
+// [DependsOn(typeof(AbpBasicDataHttpApiModule))]
 [DependsOn(typeof(AbpChatHttpApiModule))]
 [DependsOn(typeof(CmsKitProHttpApiModule))]
 [DependsOn(typeof(AbpFileManagementHttpApiModule))]
@@ -45,8 +46,10 @@ namespace AbpVnext.Pro;
 [DependsOn(typeof(AbpGdprHttpApiModule))]
 [DependsOn(typeof(AbpIdentityProHttpApiModule))]
 [DependsOn(typeof(AbpIdentityServerProHttpApiModule))]
-//[DependsOn(typeof(AbpIotHttpApiModule))]
+
+// [DependsOn(typeof(AbpIotHttpApiModule))]
 [DependsOn(typeof(AbpLanguageManagementHttpApiModule))]
+
 // LeptonTheme
 [DependsOn(typeof(AbpNotificationHttpApiModule))]
 [DependsOn(typeof(AbpOpenIddictProHttpApiModule))]

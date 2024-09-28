@@ -104,7 +104,7 @@ public class EditModalModel : IdentityUserModalPageModel
 
     private void HttpDecodeRoleNames()
     {
-        if (Roles != null && Roles.Any())
+        if (Roles != null && Roles.Length != 0)
         {
             foreach (var role in Roles)
             {

@@ -26,7 +26,7 @@ public interface IFileManager : IDomainService
 
     Task DeleteAllAsync(Guid? directoryId);
 
-    Task DeleteAsync(FileDescriptor id);
+    Task DeleteAsync(FileDescriptor file);
 
     Task MoveAsync(FileDescriptor file, Guid? newDirectoryId);
 }
