@@ -47,9 +47,8 @@ Create a new solution:
 
 > See the [CLI documentation](https://github.com/ArcherTrister/xabp/blob/main/modules/X.Abp.Cli/README.md) for all available options.
 
-::: tip
-<font style="background:#FF6600">Specify the database driver requires the database connection string, if not specified, you need to manually change, the microservice template uses the SqlServer driver by default, currently not supported to specify the database driver, please manually change.</font>
-:::
+> [!TIP]
+> Specify the database driver requires the database connection string, if not specified, you need to manually change, the microservice template uses the SqlServer driver by default, currently not supported to specify the database driver, please manually change.
 
 ### Application Modules
 

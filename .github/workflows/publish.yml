@@ -1,0 +1,32 @@
+name: "Publish"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  publish:
+    name: "Publish"
+    runs-on: "windows-latest"
+    steps:
+    - uses: actions/checkout@v3
+  
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.200
+
+    - name: Install NuGet
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: '5.x'
+
+    - name: Pack All Packages
+      run: .\nuget-pack.ps1 -f
+      working-directory: .\deploy
+      shell: powershell
+
+    - name: Publish All Packages
+      run: .\nuget-push.ps1 -url "https://api.nuget.org/v3/index.json" -key ${{ secrets.NUGETKEY }} -f
+      working-directory: .\deploy
+      shell: powershell

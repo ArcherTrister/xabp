@@ -1,0 +1,17 @@
+name: "Tagged Release"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+    steps:
+    - name: "Auto release"
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUBTOKEN }}"
+        prerelease: false
+        automatic_release_tag: "8.3.1-alpha"
