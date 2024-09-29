@@ -45,10 +45,10 @@ Create a new solution:
 -   -cs
     Specifies the database connection string
 
-> See the [CLI documentation](https://github.com/ArcherTrister/xabp/blob/main/modules/X.Abp.Cli/README.md) for all available options.
-
 > [!TIP]
 > Specify the database driver requires the database connection string, if not specified, you need to manually change, the microservice template uses the SqlServer driver by default, currently not supported to specify the database driver, please manually change.
+
+> See the [CLI documentation](https://github.com/ArcherTrister/xabp/blob/main/modules/X.Abp.Cli/README.md) for all available options.
 
 ### Application Modules
 
