@@ -50,7 +50,7 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 
 > [!TIP]
 > 指定数据库驱动需指定数据库连接字符串，如不指定则需手动更改，微服务模板默认使用 SqlServer 驱动，暂不支持指定数据库驱动，请手动更换。
-
+>
 > 有关所有可用选项，请参阅[CLI 文档](https://github.com/ArcherTrister/xabp/blob/main/modules/X.Abp.Cli/README.md)。
 
 ### 应用程序模块
