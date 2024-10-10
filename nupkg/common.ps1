@@ -283,6 +283,9 @@ $projects = (
     "modules/X.Abp.Payment/src/X.Abp.Payment.HttpApi",
     "modules/X.Abp.Payment/src/X.Abp.Payment.HttpApi.Client",
     "modules/X.Abp.Payment/src/X.Abp.Payment.Web",
+    "modules/X.Abp.Payment/src/X.Abp.Payment.WeChatPay.Domain",
+    "modules/X.Abp.Payment/src/X.Abp.Payment.WeChatPay.Domain.Shared",
+    "modules/X.Abp.Payment/src/X.Abp.Payment.WeChatPay.Web",
 
     ## modules/X.Abp.Quartz
     "modules/X.Abp.Quartz/src/X.Abp.Quartz.Application",

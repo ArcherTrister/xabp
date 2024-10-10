@@ -45,6 +45,7 @@ using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.IdentityServer;
+using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
@@ -56,6 +57,8 @@ using X.Abp.Account.Public.Web;
 using X.Abp.Account.Public.Web.Impersonation;
 using X.Abp.Account.Web;
 using X.Abp.Identity.Permissions;
+using X.Abp.Payment.Gateways;
+using X.Abp.Payment;
 using X.Abp.Saas.Permissions;
 
 namespace AbpVnext.Pro;
@@ -324,18 +327,23 @@ public class IdentityServerProHttpApiHostModule : AbpModule
             // });
         });
 
+        Configure<AbpAccountIdentityServerOptions>(options =>
+        {
+            options.ClientIdToDeviceMap.Add("clientId", "device");
+        });
+
         // Configure<AbpDistributedCacheOptions>(options =>
         // {
         //    options.KeyPrefix = "KeyPrefix";
         // });
 
-/*        context.Services.AddSingleton<IDistributedLockProvider>(sp =>
-        {
-            var connection = ConnectionMultiplexer
-                .Connect(configuration["Redis:Configuration"]);
-            return new
-                RedisDistributedSynchronizationProvider(connection.GetDatabase());
-        });*/
+        /*        context.Services.AddSingleton<IDistributedLockProvider>(sp =>
+                {
+                    var connection = ConnectionMultiplexer
+                        .Connect(configuration["Redis:Configuration"]);
+                    return new
+                        RedisDistributedSynchronizationProvider(connection.GetDatabase());
+                });*/
 
         // LocalAbpDistributedLock
 

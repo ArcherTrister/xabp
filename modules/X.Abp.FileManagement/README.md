@@ -2,4 +2,4 @@
 
 FileManagement module for ABP framework.
 
-see https://docs.abp.io/en/commercial/latest/modules/file-management
+[File Management Module (Pro)](https://abp.io/docs/latest/modules/file-management)

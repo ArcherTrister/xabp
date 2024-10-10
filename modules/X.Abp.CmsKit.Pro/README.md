@@ -2,6 +2,8 @@
 
 CmsKit Pro module for ABP framework.
 
+[CMS Kit Module (Pro)](https://abp.io/docs/latest/modules/cms-kit-pro)
+
 Domain.Shared
 
 XXXGlobalFeatureConfigurator
