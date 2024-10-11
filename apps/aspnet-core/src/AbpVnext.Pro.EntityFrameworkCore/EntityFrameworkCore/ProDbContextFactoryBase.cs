@@ -10,8 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-using Volo.Abp.Uow;
-
 namespace AbpVnext.Pro.EntityFrameworkCore;
 
 /* This class is needed for EF Core console commands
@@ -25,12 +23,13 @@ public abstract class ProDbContextFactoryBase<TDbContext> : IDesignTimeDbContext
 
         Console.WriteLine("添加环境变量参数格式: -e RuntimeEnvironment 或 --environment RuntimeEnvironment");
         Console.WriteLine("** RuntimeEnvironment ** 可选参数: [Development | Production | Staging]");
+        Console.WriteLine("** Add-Migration/dotnet ef migrations add ** 不受环境变量影响");
         Console.WriteLine("① Nuget包管理器控制台");
-        Console.WriteLine("Add-Migration MigrationName -Args '--environment Development'");
+        Console.WriteLine("Add-Migration MigrationName");
         Console.WriteLine("Update-Database -Args '--environment Development'");
         Console.WriteLine("Remove-Migration -Args '--environment Development'");
         Console.WriteLine("② 命令提示符");
-        Console.WriteLine("dotnet ef migrations add MigrationName -- --environment Development");
+        Console.WriteLine("dotnet ef migrations add MigrationName");
         Console.WriteLine("dotnet ef database update -- --environment Development");
         Console.WriteLine("dotnet ef migrations remove -- --environment Development");
 

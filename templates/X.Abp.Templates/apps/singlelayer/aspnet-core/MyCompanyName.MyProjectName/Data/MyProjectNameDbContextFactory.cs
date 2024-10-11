@@ -21,12 +21,13 @@ public class MyProjectNameDbContextFactory : IDesignTimeDbContextFactory<MyProje
 
         System.Console.WriteLine("添加环境变量参数格式: -e RuntimeEnvironment 或 --environment RuntimeEnvironment");
         System.Console.WriteLine("** RuntimeEnvironment ** 可选参数: [Development | Production | Staging]");
+        System.Console.WriteLine("** Add-Migration/dotnet ef migrations add ** 不受环境变量影响");
         System.Console.WriteLine("① Nuget包管理器控制台");
-        System.Console.WriteLine("Add-Migration MigrationName -Args '--environment Development'");
+        System.Console.WriteLine("Add-Migration MigrationName");
         System.Console.WriteLine("Update-Database -Args '--environment Development'");
         System.Console.WriteLine("Remove-Migration -Args '--environment Development'");
         System.Console.WriteLine("② 命令提示符");
-        System.Console.WriteLine("dotnet ef migrations add MigrationName -- --environment Development");
+        System.Console.WriteLine("dotnet ef migrations add MigrationName");
         System.Console.WriteLine("dotnet ef database update -- --environment Development");
         System.Console.WriteLine("dotnet ef migrations remove -- --environment Development");
 
