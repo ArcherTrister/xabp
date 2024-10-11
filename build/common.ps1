@@ -25,15 +25,14 @@ $solutionPaths = @(
     "../modules/X.Abp.Quartz",
     "../modules/X.Abp.Saas",
     "../modules/X.Abp.TextTemplateManagement",
-    "../modules/X.Abp.VersionManagement",
-    "../templates/X.Abp.Templates",
-	)
+    "../modules/X.Abp.VersionManagement"
+)
 
 if ($full -eq "-f")
 {
 	# List of additional solutions required for full build
 	$solutionPaths += (
-
+        "../templates/X.Abp.Templates"
 	) 
 }else{ 
 	Write-host ""
