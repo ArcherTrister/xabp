@@ -2,15 +2,16 @@
 using Volo.Abp;
 using Volo.Abp.Authorization;
 using Volo.Abp.Autofac;
+using Volo.Abp.Guids;
 using Volo.Abp.Modularity;
 
 namespace X.Abp.LeptonTheme.Management
 {
     [DependsOn(
-        typeof(AbpAutofacModule),
-        typeof(AbpTestBaseModule),
-        typeof(AbpAuthorizationModule),
-        typeof(LeptonThemeManagementDomainModule)
+    typeof(AbpAutofacModule),
+    typeof(AbpTestBaseModule),
+    typeof(AbpAuthorizationModule),
+    typeof(AbpGuidsModule)
         )]
     public class LeptonThemeManagementTestBaseModule : AbpModule
     {

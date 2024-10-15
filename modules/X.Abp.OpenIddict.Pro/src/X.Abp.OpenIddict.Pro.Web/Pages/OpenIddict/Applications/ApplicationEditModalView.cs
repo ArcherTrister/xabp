@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using Volo.Abp.ObjectExtending;
 
-namespace X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Applications;
+namespace X.Abp.OpenIddict.Web.Pages.OpenIddict.Applications;
 
 public class ApplicationEditModalView : ExtensibleObject
 {

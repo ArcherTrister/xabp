@@ -13,4 +13,6 @@ namespace X.Abp.Gdpr;
 public interface IGdprDbContext : IEfCoreDbContext
 {
     DbSet<GdprRequest> Requests { get; }
+
+    DbSet<GdprInfo> GdprInfos { get; }
 }

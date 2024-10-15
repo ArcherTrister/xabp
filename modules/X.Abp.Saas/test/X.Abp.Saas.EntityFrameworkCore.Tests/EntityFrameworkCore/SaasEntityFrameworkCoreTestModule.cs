@@ -10,8 +10,8 @@ using Volo.Abp.Uow;
 namespace X.Abp.Saas.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(SaasTestBaseModule),
-    typeof(SaasEntityFrameworkCoreModule),
+    typeof(SaasApplicationTestModule),
+    typeof(AbpSaasEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class SaasEntityFrameworkCoreTestModule : AbpModule

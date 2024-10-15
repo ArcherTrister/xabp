@@ -6,7 +6,7 @@ using Volo.Abp.GlobalFeatures;
 
 namespace X.Abp.CmsKit.GlobalFeatures;
 
-[GlobalFeatureName("CmsKitPro.UrlShorting")]
+[GlobalFeatureName(Name)]
 public class UrlShortingFeature : GlobalFeature
 {
     public const string Name = "CmsKitPro.UrlShorting";

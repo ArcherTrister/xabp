@@ -1,10 +1,10 @@
-﻿using Volo.Abp.Identity.Pro.Samples;
+﻿using X.Abp.Identity.Samples;
 using Xunit;
 
-namespace X.Abp.Identity.Pro.MongoDB.Samples;
+namespace X.Abp.Identity.MongoDB.Samples;
 
 [Collection(MongoTestCollection.Name)]
-public class SampleRepository_Tests : SampleRepository_Tests<ProMongoDbTestModule>
+public class SampleRepository_Tests : SampleRepository_Tests<AbpIdentityProMongoDbTestModule>
 {
     /* Don't write custom repository tests here, instead write to
      * the base class.

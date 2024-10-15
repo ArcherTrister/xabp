@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.MongoDB" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.CmsKit.MongoDB" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />
   </ItemGroup>
 

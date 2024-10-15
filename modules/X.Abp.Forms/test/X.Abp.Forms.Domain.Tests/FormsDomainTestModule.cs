@@ -1,5 +1,4 @@
-﻿using X.Abp.Forms.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.Forms;
 
@@ -8,7 +7,8 @@ namespace X.Abp.Forms;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(FormsEntityFrameworkCoreTestModule)
+    typeof(AbpFormsDomainModule),
+    typeof(FormsTestBaseModule)
     )]
 public class FormsDomainTestModule : AbpModule
 {

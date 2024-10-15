@@ -1,12 +1,10 @@
-﻿using System;
-using Volo.Abp.Data;
+﻿using Volo.Abp.Data;
 using Volo.Abp.Modularity;
-using Volo.Abp.Uow;
 
 namespace X.Abp.FileManagement.MongoDB;
 
 [DependsOn(
-    typeof(FileManagementTestBaseModule),
+    typeof(FileManagementApplicationTestModule),
     typeof(FileManagementMongoDbModule)
     )]
 public class FileManagementMongoDbTestModule : AbpModule

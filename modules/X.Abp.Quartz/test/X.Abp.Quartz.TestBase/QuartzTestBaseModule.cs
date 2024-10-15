@@ -3,6 +3,7 @@ using Volo.Abp;
 using Volo.Abp.Authorization;
 using Volo.Abp.Autofac;
 using Volo.Abp.Data;
+using Volo.Abp.Guids;
 using Volo.Abp.Modularity;
 using Volo.Abp.Threading;
 
@@ -12,7 +13,7 @@ namespace X.Abp.Quartz;
     typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(QuartzDomainModule)
+    typeof(AbpGuidsModule)
     )]
 public class QuartzTestBaseModule : AbpModule
 {

@@ -1,4 +1,4 @@
-﻿using Volo.Abp.LanguageManagement.Samples;
+﻿using X.Abp.LanguageManagement.Samples;
 
 namespace X.Abp.LanguageManagement.EntityFrameworkCore.Samples;
 

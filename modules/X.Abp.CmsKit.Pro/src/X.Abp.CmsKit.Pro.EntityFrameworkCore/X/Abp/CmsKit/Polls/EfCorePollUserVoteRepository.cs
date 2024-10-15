@@ -11,12 +11,10 @@ using X.Abp.CmsKit.EntityFrameworkCore;
 
 namespace X.Abp.CmsKit.Polls;
 
-public class EfCorePollUserVoteRepository :
-EfCoreRepository<CmsKitProDbContext, PollUserVote, Guid>,
-IPollUserVoteRepository
+public class EfCorePollUserVoteRepository : EfCoreRepository<ICmsKitProDbContext, PollUserVote, Guid>, IPollUserVoteRepository
 {
     public EfCorePollUserVoteRepository(
-      IDbContextProvider<CmsKitProDbContext> dbContextProvider)
+      IDbContextProvider<ICmsKitProDbContext> dbContextProvider)
       : base(dbContextProvider)
     {
     }

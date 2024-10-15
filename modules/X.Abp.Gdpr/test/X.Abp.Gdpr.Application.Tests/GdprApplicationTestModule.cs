@@ -3,7 +3,7 @@
 namespace X.Abp.Gdpr;
 
 [DependsOn(
-    typeof(GdprApplicationModule),
+    typeof(AbpGdprApplicationModule),
     typeof(GdprDomainTestModule)
     )]
 public class GdprApplicationTestModule : AbpModule

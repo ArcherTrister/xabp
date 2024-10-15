@@ -46,7 +46,7 @@ public class NewsletterRecordAdminAppService : CmsKitProAdminAppServiceBase, INe
   public virtual async Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(GetNewsletterRecordsRequestInput input)
   {
     var count = await NewsletterRecordsRepository.GetCountByFilterAsync(input.Preference, input.Source);
-    var summaryQueryResultItemList = await NewsletterRecordsRepository.GetListAsync(input.Preference, input.Source, input.SkipCount, input.MaxResultCount);
+    var summaryQueryResultItemList = await NewsletterRecordsRepository.GetListAsync(input.Preference, input.Source, input.EmailAddress, input.SkipCount, input.MaxResultCount);
     return new PagedResultDto<NewsletterRecordDto>(count, ObjectMapper.Map<List<NewsletterSummaryQueryResultItem>, List<NewsletterRecordDto>>(summaryQueryResultItemList));
   }
 

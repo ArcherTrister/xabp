@@ -3,7 +3,7 @@
 namespace X.Abp.Saas;
 
 [DependsOn(
-    typeof(SaasApplicationModule),
+    typeof(AbpSaasApplicationModule),
     typeof(SaasDomainTestModule)
     )]
 public class SaasApplicationTestModule : AbpModule

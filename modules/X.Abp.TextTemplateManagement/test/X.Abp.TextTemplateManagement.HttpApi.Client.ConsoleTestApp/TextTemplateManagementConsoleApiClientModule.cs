@@ -6,7 +6,7 @@ namespace X.Abp.TextTemplateManagement;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(TextTemplateManagementHttpApiClientModule),
+    typeof(AbpTextTemplateManagementHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class TextTemplateManagementConsoleApiClientModule : AbpModule

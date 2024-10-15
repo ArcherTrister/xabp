@@ -3,7 +3,7 @@
 namespace X.Abp.Forms;
 
 [DependsOn(
-    typeof(FormsApplicationModule),
+    typeof(AbpFormsApplicationModule),
     typeof(FormsDomainTestModule)
     )]
 public class FormsApplicationTestModule : AbpModule

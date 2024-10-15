@@ -17,9 +17,17 @@ namespace X.Abp.CmsKit.Public.Polls;
 [ExposeServices(typeof(IPollPublicAppService), typeof(PollPublicClientProxy))]
 public partial class PollPublicClientProxy : ClientProxyBase<IPollPublicAppService>, IPollPublicAppService
 {
-    public virtual async Task<PollWithDetailsDto> FindByWidgetAsync(string widgetName)
+    public virtual async Task<bool> IsWidgetNameAvailableAsync(string widgetName)
     {
-        return await RequestAsync<PollWithDetailsDto>(nameof(FindByWidgetAsync), new ClientProxyRequestTypeValue
+        return await RequestAsync<bool>(nameof(IsWidgetNameAvailableAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(string), widgetName }
+        });
+    }
+
+    public virtual async Task<PollWithDetailsDto> FindByAvailableWidgetAsync(string widgetName)
+    {
+        return await RequestAsync<PollWithDetailsDto>(nameof(FindByAvailableWidgetAsync), new ClientProxyRequestTypeValue
         {
             { typeof(string), widgetName }
         });

@@ -6,7 +6,7 @@ namespace X.Abp.Forms;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(FormsHttpApiClientModule),
+    typeof(AbpFormsHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class FormsConsoleApiClientModule : AbpModule

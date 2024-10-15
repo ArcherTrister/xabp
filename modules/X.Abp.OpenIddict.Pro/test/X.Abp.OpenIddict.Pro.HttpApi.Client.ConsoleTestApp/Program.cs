@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace X.Abp.OpenIddict.Pro.HttpApi.Client.ConsoleTestApp;
+namespace X.Abp.OpenIddict.HttpApi.Client.ConsoleTestApp;
 
 class Program
 {

@@ -14,7 +14,7 @@ using X.Abp.OpenIddict.Applications.Dtos;
 using X.Abp.OpenIddict.Scopes;
 using X.Abp.OpenIddict.Scopes.Dtos;
 
-namespace X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Applications;
+namespace X.Abp.OpenIddict.Web.Pages.OpenIddict.Applications;
 
 public class EditModalModel : OpenIddictProPageModel
 {

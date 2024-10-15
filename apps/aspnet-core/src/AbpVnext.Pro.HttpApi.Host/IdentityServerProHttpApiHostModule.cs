@@ -60,6 +60,7 @@ using X.Abp.Identity.Permissions;
 using X.Abp.Payment.Gateways;
 using X.Abp.Payment;
 using X.Abp.Saas.Permissions;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AbpVnext.Pro;
 

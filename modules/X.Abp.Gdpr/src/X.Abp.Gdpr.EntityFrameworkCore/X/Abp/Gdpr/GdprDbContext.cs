@@ -14,6 +14,8 @@ public class GdprDbContext : AbpDbContext<GdprDbContext>, IGdprDbContext
 {
     public DbSet<GdprRequest> Requests { get; set; }
 
+    public DbSet<GdprInfo> GdprInfos { get; set; }
+
     public GdprDbContext(DbContextOptions<GdprDbContext> options)
       : base(options)
     {

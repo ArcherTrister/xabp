@@ -3,7 +3,7 @@
 namespace X.Abp.VersionManagement;
 
 [DependsOn(
-    typeof(VersionManagementApplicationModule),
+    typeof(AbpVersionManagementApplicationModule),
     typeof(VersionManagementDomainTestModule)
     )]
 public class VersionManagementApplicationTestModule : AbpModule

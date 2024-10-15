@@ -18,9 +18,9 @@ using X.Abp.VersionManagement.EntityFrameworkCore;
 
 namespace X.Abp.VersionManagement.AppEditions;
 
-public class EfCoreAppEditionRepository : EfCoreRepository<VersionManagementDbContext, AppEdition, Guid>, IAppEditionRepository
+public class EfCoreAppEditionRepository : EfCoreRepository<IVersionManagementDbContext, AppEdition, Guid>, IAppEditionRepository
 {
-    public EfCoreAppEditionRepository(IDbContextProvider<VersionManagementDbContext> dbContextProvider)
+    public EfCoreAppEditionRepository(IDbContextProvider<IVersionManagementDbContext> dbContextProvider)
         : base(dbContextProvider)
     {
     }

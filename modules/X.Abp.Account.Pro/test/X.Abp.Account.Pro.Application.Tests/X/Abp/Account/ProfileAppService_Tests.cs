@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.DependencyInjection;
+
 using NSubstitute;
+
 using Shouldly;
-using Volo.Abp.Account.Pro.Application.Tests.Volo.Abp.Account;
+
+using Volo.Abp;
 using Volo.Abp.Identity.Settings;
 using Volo.Abp.Settings;
 using Volo.Abp.Users;
+
+using X.Abp.Account.Dtos;
+using X.Abp.Account.Pro.Application.Tests.Volo.Abp.Account;
+
 using Xunit;
 
 namespace X.Abp.Account;
@@ -49,7 +57,6 @@ public class ProfileAppService_Tests : AbpAccountApplicationTestBase
     result.Email.ShouldBe(johnNash.Email);
     result.PhoneNumber.ShouldBe(johnNash.PhoneNumber);
   }
-
 
   [Fact]
   public virtual async Task UpdateAsync()

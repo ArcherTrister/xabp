@@ -8,6 +8,7 @@ using Volo.Abp.Modularity;
 using Volo.CmsKit.EntityFrameworkCore;
 
 using X.Abp.CmsKit.Newsletters;
+using X.Abp.CmsKit.PageFeedbacks;
 using X.Abp.CmsKit.Polls;
 using X.Abp.CmsKit.UrlShorting;
 
@@ -27,6 +28,9 @@ public class CmsKitProEntityFrameworkCoreModule : AbpModule
             options.AddRepository<NewsletterRecord, EfCoreNewsletterRecordRepository>();
             options.AddRepository<ShortenedUrl, EfCoreShortenedUrlRepository>();
             options.AddRepository<Poll, EfCorePollRepository>();
+            options.AddRepository<PollUserVote, EfCorePollUserVoteRepository>();
+            options.AddRepository<PageFeedback, EfCorePageFeedbackRepository>();
+            options.AddRepository<PageFeedbackSetting, EfCorePageFeedbackSettingRepository>();
         });
     }
 }

@@ -1,4 +1,4 @@
-﻿using Volo.Abp.TextTemplateManagement.Samples;
+﻿using X.Abp.TextTemplateManagement.Samples;
 using Xunit;
 
 namespace X.Abp.TextTemplateManagement.MongoDB.Samples;

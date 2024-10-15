@@ -20,8 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.IdentityServer.Domain.Shared" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.Identity.Domain" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AutoMapper" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Security" VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Caching" VersionOverride="$(AbpPackageVersion)" />

@@ -1,12 +1,10 @@
-﻿using System;
-using Volo.Abp.Data;
+﻿using Volo.Abp.Data;
 using Volo.Abp.Modularity;
-using Volo.Abp.Uow;
 
 namespace X.Abp.Quartz.MongoDB;
 
 [DependsOn(
-    typeof(QuartzTestBaseModule),
+    typeof(QuartzApplicationTestModule),
     typeof(QuartzMongoDbModule)
     )]
 public class QuartzMongoDbTestModule : AbpModule

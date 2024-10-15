@@ -11,7 +11,10 @@ namespace X.Abp.CmsKit.Public.Polls;
 
 public interface IPollPublicAppService : IApplicationService
 {
-    Task<PollWithDetailsDto> FindByWidgetAsync(string widgetName);
+    Task<bool> IsWidgetNameAvailableAsync(string widgetName);
+
+    // Task<PollWithDetailsDto> FindByWidgetAsync(string widgetName);
+    Task<PollWithDetailsDto> FindByAvailableWidgetAsync(string widgetName);
 
     Task<PollWithDetailsDto> FindByCodeAsync(string code);
 

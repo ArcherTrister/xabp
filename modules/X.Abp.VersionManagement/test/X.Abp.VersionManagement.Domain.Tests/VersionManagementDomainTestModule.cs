@@ -1,5 +1,4 @@
-﻿using X.Abp.VersionManagement.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.VersionManagement;
 
@@ -8,7 +7,8 @@ namespace X.Abp.VersionManagement;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(VersionManagementEntityFrameworkCoreTestModule)
+    typeof(AbpVersionManagementDomainModule),
+    typeof(VersionManagementTestBaseModule)
     )]
 public class VersionManagementDomainTestModule : AbpModule
 {

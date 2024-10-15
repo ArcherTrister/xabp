@@ -10,5 +10,9 @@ public class CmsKitProSettingDefinitionProvider : SettingDefinitionProvider
 {
     public override void Define(ISettingDefinitionContext context)
     {
+        context.Add(new SettingDefinition[]
+        {
+                new SettingDefinition(CmsKitProSettingNames.Contact.ReceiverEmailAddress, "info@mycompanyname.com", null, null, true, true, false)
+        });
     }
 }

@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace X.Abp.OpenIddict.Pro.MongoDB;
+namespace X.Abp.OpenIddict.MongoDB;
 
 [CollectionDefinition(Name)]
 public class MongoTestCollection : ICollectionFixture<MongoDbFixture>

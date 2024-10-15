@@ -18,7 +18,7 @@ public class ConsoleTestAppHostedService : IHostedService
 
   public virtual async Task StartAsync(CancellationToken cancellationToken)
   {
-    using (var application = await AbpApplicationFactory.CreateAsync<ProConsoleApiClientModule>(options =>
+    using (var application = await AbpApplicationFactory.CreateAsync<CmsKitProConsoleApiClientModule>(options =>
     {
       options.Services.ReplaceConfiguration(_configuration);
       options.UseAutofac();

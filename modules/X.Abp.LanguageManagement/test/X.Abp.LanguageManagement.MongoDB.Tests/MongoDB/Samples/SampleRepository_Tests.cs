@@ -1,4 +1,4 @@
-﻿using Volo.Abp.LanguageManagement.Samples;
+﻿using X.Abp.LanguageManagement.Samples;
 using Xunit;
 
 namespace X.Abp.LanguageManagement.MongoDB.Samples;

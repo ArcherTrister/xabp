@@ -37,7 +37,7 @@
 
     x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getList = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/newsletter' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
+        url: abp.appPath + 'api/cms-kit-admin/newsletter' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }, { name: 'emailAddress', value: input.emailAddress }, { name: 'skipCount', value: input.skipCount }, { name: 'maxResultCount', value: input.maxResultCount }]) + '',
         type: 'GET'
       }, ajaxParams));
     };

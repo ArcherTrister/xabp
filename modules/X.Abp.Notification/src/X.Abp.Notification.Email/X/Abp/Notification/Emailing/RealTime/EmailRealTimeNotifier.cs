@@ -12,8 +12,9 @@ using Volo.Abp.Emailing;
 using Volo.Abp.Localization;
 using Volo.Abp.MultiTenancy;
 
-using X.Abp.Identity;
 using X.Abp.Notification.RealTime;
+
+using IIdentityUserRepository = X.Abp.Identity.IIdentityUserRepository;
 
 namespace X.Abp.Notification.Email.RealTime
 {

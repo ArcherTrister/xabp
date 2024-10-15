@@ -10,8 +10,8 @@ using Volo.Abp.Uow;
 namespace X.Abp.VersionManagement.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(VersionManagementTestBaseModule),
-    typeof(VersionManagementEntityFrameworkCoreModule),
+    typeof(VersionManagementApplicationTestModule),
+    typeof(AbpVersionManagementEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class VersionManagementEntityFrameworkCoreTestModule : AbpModule

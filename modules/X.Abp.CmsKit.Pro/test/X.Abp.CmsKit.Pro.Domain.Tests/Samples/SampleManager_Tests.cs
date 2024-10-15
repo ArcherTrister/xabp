@@ -3,7 +3,7 @@ using Xunit;
 
 namespace X.Abp.CmsKit.Pro.Samples;
 
-public class SampleManager_Tests : ProDomainTestBase
+public class SampleManager_Tests : CmsKitProDomainTestBase
 {
   //private readonly SampleManager _sampleManager;
 

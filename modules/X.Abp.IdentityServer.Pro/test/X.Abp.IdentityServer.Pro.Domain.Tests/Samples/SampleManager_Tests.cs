@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
 
-namespace X.Abp.IdentityServer.Pro.Samples;
+namespace X.Abp.IdentityServer.Samples;
 
-public class SampleManager_Tests : ProDomainTestBase
+public class SampleManager_Tests : AbpIdentityServerProDomainTestBase
 {
   //private readonly SampleManager _sampleManager;
 

@@ -1,20 +1,23 @@
 ﻿using System.Threading.Tasks;
+using Volo.Abp.Modularity;
+
 using Xunit;
 
 namespace X.Abp.Chat.Samples;
 
-public class SampleManager_Tests : ChatDomainTestBase
+public abstract class SampleManager_Tests<TStartupModule> : ChatDomainTestBase<TStartupModule>
+    where TStartupModule : IAbpModule
 {
-  //private readonly SampleManager _sampleManager;
+    //private readonly SampleManager _sampleManager;
 
-  public SampleManager_Tests()
-  {
-    //_sampleManager = GetRequiredService<SampleManager>();
-  }
+    public SampleManager_Tests()
+    {
+        //_sampleManager = GetRequiredService<SampleManager>();
+    }
 
-  [Fact]
-  public virtual Task Method1Async()
-  {
-    return Task.CompletedTask;
-  }
+    [Fact]
+    public Task Method1Async()
+    {
+        return Task.CompletedTask;
+    }
 }

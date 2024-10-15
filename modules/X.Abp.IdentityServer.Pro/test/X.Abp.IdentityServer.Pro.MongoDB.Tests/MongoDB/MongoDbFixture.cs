@@ -1,7 +1,7 @@
 using System;
 using EphemeralMongo;
 
-namespace X.Abp.IdentityServer.Pro.MongoDB;
+namespace X.Abp.IdentityServer.MongoDB;
 
 public class MongoDbFixture : IDisposable
 {

@@ -3,7 +3,7 @@
 namespace X.Abp.LeptonTheme.Management
 {
     [DependsOn(
-        typeof(LeptonThemeManagementApplicationModule),
+        typeof(AbpLeptonThemeManagementApplicationModule),
         typeof(LeptonThemeManagementDomainTestModule)
         )]
     public class LeptonThemeManagementApplicationTestModule : AbpModule

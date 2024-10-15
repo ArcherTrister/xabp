@@ -9,8 +9,8 @@ using Volo.Abp.Modularity;
 namespace X.Abp.LanguageManagement.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(LanguageManagementTestBaseModule),
-    typeof(LanguageManagementEntityFrameworkCoreModule),
+    typeof(LanguageManagementApplicationTestModule),
+    typeof(AbpLanguageManagementEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class LanguageManagementEntityFrameworkCoreTestModule : AbpModule

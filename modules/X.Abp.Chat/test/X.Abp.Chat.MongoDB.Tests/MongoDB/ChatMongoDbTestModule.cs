@@ -1,12 +1,10 @@
-﻿using System;
-using Volo.Abp.Data;
+﻿using Volo.Abp.Data;
 using Volo.Abp.Modularity;
-using Volo.Abp.Uow;
 
 namespace X.Abp.Chat.MongoDB;
 
 [DependsOn(
-    typeof(ChatTestBaseModule),
+    typeof(ChatApplicationTestModule),
     typeof(ChatMongoDbModule)
     )]
 public class ChatMongoDbTestModule : AbpModule

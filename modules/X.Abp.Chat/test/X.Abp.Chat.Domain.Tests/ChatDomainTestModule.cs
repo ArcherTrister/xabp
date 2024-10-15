@@ -1,5 +1,4 @@
-﻿using X.Abp.Chat.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.Chat;
 
@@ -8,7 +7,8 @@ namespace X.Abp.Chat;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(ChatEntityFrameworkCoreTestModule)
+    typeof(AbpChatDomainModule),
+    typeof(ChatTestBaseModule)
     )]
 public class ChatDomainTestModule : AbpModule
 {

@@ -6,7 +6,7 @@ namespace X.Abp.Payment;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(PaymentHttpApiClientModule),
+    typeof(AbpPaymentHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class PaymentConsoleApiClientModule : AbpModule

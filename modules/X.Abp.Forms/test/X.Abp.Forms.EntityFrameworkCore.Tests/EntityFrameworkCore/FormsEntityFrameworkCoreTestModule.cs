@@ -10,8 +10,8 @@ using Volo.Abp.Uow;
 namespace X.Abp.Forms.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(FormsTestBaseModule),
-    typeof(FormsEntityFrameworkCoreModule),
+    typeof(FormsApplicationTestModule),
+    typeof(AbpFormsEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class FormsEntityFrameworkCoreTestModule : AbpModule

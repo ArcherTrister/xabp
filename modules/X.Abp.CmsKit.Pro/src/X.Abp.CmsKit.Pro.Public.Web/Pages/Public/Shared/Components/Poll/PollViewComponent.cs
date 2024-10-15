@@ -33,7 +33,7 @@ public class PollViewComponent : AbpViewComponent
 
     public virtual async Task<IViewComponentResult> InvokeAsync(string widgetName)
     {
-        var pollWithDetails = await PollPublicAppService.FindByWidgetAsync(widgetName);
+        var pollWithDetails = await PollPublicAppService.FindByAvailableWidgetAsync(widgetName);
         return pollWithDetails == null
             ? View("~/Pages/Public/Shared/Components/Poll/Empty.cshtml", new PollViewModel()
             {

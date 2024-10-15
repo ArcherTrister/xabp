@@ -22,11 +22,11 @@ public static class GlobalModuleFeaturesDictionaryCmsKitExtensions
     }
 
     public static GlobalModuleFeaturesDictionary CmsKitPro(
-        this GlobalModuleFeaturesDictionary dic,
+        this GlobalModuleFeaturesDictionary modules,
         Action<GlobalCmsKitProFeatures> configureAction)
     {
         Check.NotNull(configureAction, nameof(configureAction));
-        configureAction(dic.CmsKitPro());
-        return dic;
+        configureAction(modules.CmsKitPro());
+        return modules;
     }
 }

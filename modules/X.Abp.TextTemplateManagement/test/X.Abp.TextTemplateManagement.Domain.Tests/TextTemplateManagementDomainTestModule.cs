@@ -1,5 +1,4 @@
-﻿using Volo.Abp.TextTemplateManagement.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.TextTemplateManagement;
 
@@ -8,7 +7,8 @@ namespace X.Abp.TextTemplateManagement;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(TextTemplateManagementEntityFrameworkCoreTestModule)
+    typeof(AbpTextTemplateManagementDomainModule),
+    typeof(TextTemplateManagementTestBaseModule)
     )]
 public class TextTemplateManagementDomainTestModule : AbpModule
 {

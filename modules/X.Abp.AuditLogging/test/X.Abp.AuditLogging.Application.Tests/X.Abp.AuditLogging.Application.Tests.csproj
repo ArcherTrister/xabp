@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\..\..\configureawait.props" />
   <Import Project="..\..\..\..\modules.props" />
 
   <PropertyGroup>
@@ -9,11 +10,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\X.Abp.AuditLogging.Application\X.Abp.AuditLogging.Application.csproj" />
-    <ProjectReference Include="..\X.Abp.AuditLogging.Domain.Tests\X.Abp.AuditLogging.Domain.Tests.csproj" />
+    <ProjectReference Include="..\X.Abp.AuditLogging.TestBase\X.Abp.AuditLogging.TestBase.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
   </ItemGroup>
 
 </Project>

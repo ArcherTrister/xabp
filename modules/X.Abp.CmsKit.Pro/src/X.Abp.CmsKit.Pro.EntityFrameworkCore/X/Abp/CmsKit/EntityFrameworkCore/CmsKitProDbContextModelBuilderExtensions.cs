@@ -12,6 +12,7 @@ using Volo.CmsKit.EntityFrameworkCore;
 
 using X.Abp.CmsKit.GlobalFeatures;
 using X.Abp.CmsKit.Newsletters;
+using X.Abp.CmsKit.PageFeedbacks;
 using X.Abp.CmsKit.Polls;
 using X.Abp.CmsKit.UrlShorting;
 
@@ -96,6 +97,36 @@ public static class CmsKitProDbContextModelBuilderExtensions
             {
                 b.ToTable(AbpCmsKitDbProperties.DbTablePrefix + "PollOptions", AbpCmsKitDbProperties.DbSchema);
                 b.Property(pollOption => pollOption.Text).HasMaxLength(PollConst.MaxTextLength).IsRequired(true).HasColumnName(nameof(PollOption.Text));
+                b.ConfigureByConvention();
+                b.ApplyObjectExtensionMappings();
+            });
+        }
+
+        if (GlobalFeatureManager.Instance.IsEnabled<PageFeedbackFeature>())
+        {
+            builder.Entity<PageFeedback>(b =>
+            {
+                b.ToTable(AbpCmsKitDbProperties.DbTablePrefix + "PageFeedbacks", AbpCmsKitDbProperties.DbSchema);
+                b.Property(pageFeedback => pageFeedback.Url).HasMaxLength(PageFeedbackConst.MaxUrlLength).HasColumnName(nameof(PageFeedback.Url));
+                b.Property(pageFeedback => pageFeedback.EntityType).HasMaxLength(PageFeedbackConst.MaxEntityTypeLength).IsRequired(true).HasColumnName(nameof(PageFeedback.EntityType));
+                b.Property(pageFeedback => pageFeedback.EntityId).HasMaxLength(PageFeedbackConst.MaxEntityIdLength).HasColumnName(nameof(PageFeedback.EntityId));
+                b.Property(pageFeedback => pageFeedback.UserNote).HasMaxLength(PageFeedbackConst.MaxUserNoteLength).HasColumnName(nameof(PageFeedback.UserNote));
+                b.Property(pageFeedback => pageFeedback.AdminNote).HasMaxLength(PageFeedbackConst.MaxUrlLength).HasColumnName(nameof(PageFeedback.AdminNote));
+                b.Property(pageFeedback => pageFeedback.IsUseful).HasColumnName(nameof(PageFeedback.IsUseful));
+                b.Property(pageFeedback => pageFeedback.IsHandled).HasColumnName(nameof(PageFeedback.IsHandled));
+                b.ConfigureByConvention();
+                b.ApplyObjectExtensionMappings();
+            });
+            builder.Entity<PageFeedbackSetting>(b =>
+            {
+                b.ToTable(AbpCmsKitDbProperties.DbTablePrefix + "PageFeedbackSettings", AbpCmsKitDbProperties.DbSchema);
+                b.Property(pageFeedbackSetting => pageFeedbackSetting.EntityType).HasMaxLength(PageFeedbackConst.MaxEntityTypeLength).HasColumnName(nameof(PageFeedbackSetting.EntityType));
+                b.Property(pageFeedbackSetting => pageFeedbackSetting.EmailAddresses).HasMaxLength(PageFeedbackConst.MaxEmailAddressesLength).HasColumnName(nameof(PageFeedbackSetting.EmailAddresses));
+                b.HasIndex(pageFeedbackSetting => new
+                {
+                    pageFeedbackSetting.TenantId,
+                    pageFeedbackSetting.EntityType
+                }).IsUnique(true);
                 b.ConfigureByConvention();
                 b.ApplyObjectExtensionMappings();
             });

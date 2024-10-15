@@ -1,7 +1,7 @@
 ﻿using Volo.Abp.AspNetCore.Components.WebAssembly.Theming;
 using Volo.Abp.Modularity;
 
-namespace X.Abp.IdentityServer.Pro.Blazor.WebAssembly;
+namespace X.Abp.IdentityServer.Blazor.WebAssembly;
 
 [DependsOn(
     typeof(ProBlazorModule),

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace X.Abp.IdentityServer.Pro.Blazor;
+namespace X.Abp.IdentityServer.Blazor;
 
 public class ProBlazorAutoMapperProfile : Profile
 {

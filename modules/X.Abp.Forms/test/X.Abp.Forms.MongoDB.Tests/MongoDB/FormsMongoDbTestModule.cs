@@ -1,12 +1,10 @@
-﻿using System;
-using Volo.Abp.Data;
+﻿using Volo.Abp.Data;
 using Volo.Abp.Modularity;
-using Volo.Abp.Uow;
 
 namespace X.Abp.Forms.MongoDB;
 
 [DependsOn(
-    typeof(FormsTestBaseModule),
+    typeof(FormsApplicationTestModule),
     typeof(FormsMongoDbModule)
     )]
 public class FormsMongoDbTestModule : AbpModule

@@ -1,5 +1,4 @@
-﻿using X.Abp.FileManagement.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.FileManagement;
 
@@ -8,7 +7,8 @@ namespace X.Abp.FileManagement;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(FileManagementEntityFrameworkCoreTestModule)
+    typeof(AbpFileManagementDomainModule),
+    typeof(FileManagementTestBaseModule)
     )]
 public class FileManagementDomainTestModule : AbpModule
 {

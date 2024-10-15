@@ -310,6 +310,78 @@
             }
           }
         },
+        "X.Abp.CmsKit.Public.PageFeedbacks.PageFeedbackPublicController": {
+          "controllerName": "PageFeedbackPublic",
+          "controllerGroupName": "PageFeedbackPublic",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Public.PageFeedbacks.PageFeedbackPublicController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Public.PageFeedbacks.IPageFeedbackPublicAppService",
+              "name": "IPageFeedbackPublicAppService",
+              "methods": [
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Public.PageFeedbacks.CreatePageFeedbackInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Public.PageFeedbacks.CreatePageFeedbackInput",
+                      "typeSimple": "X.Abp.CmsKit.Public.PageFeedbacks.CreatePageFeedbackInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Public.PageFeedbacks.PageFeedbackDto",
+                    "typeSimple": "X.Abp.CmsKit.Public.PageFeedbacks.PageFeedbackDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/cms-kit-public/page-feedback",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Public.PageFeedbacks.CreatePageFeedbackInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Public.PageFeedbacks.CreatePageFeedbackInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.PageFeedbacks.CreatePageFeedbackInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Public.PageFeedbacks.CreatePageFeedbackInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.PageFeedbacks.CreatePageFeedbackInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Public.PageFeedbacks.PageFeedbackDto",
+                "typeSimple": "X.Abp.CmsKit.Public.PageFeedbacks.PageFeedbackDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.PageFeedbacks.IPageFeedbackPublicAppService"
+            }
+          }
+        },
         "X.Abp.CmsKit.Public.Polls.PollPublicController": {
           "controllerName": "PollPublic",
           "controllerGroupName": "PollPublic",
@@ -323,7 +395,24 @@
               "name": "IPollPublicAppService",
               "methods": [
                 {
-                  "name": "FindByWidgetAsync",
+                  "name": "IsWidgetNameAvailableAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "widgetName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                },
+                {
+                  "name": "FindByAvailableWidgetAsync",
                   "parametersOnMethod": [
                     {
                       "name": "widgetName",
@@ -402,9 +491,46 @@
             }
           ],
           "actions": {
-            "FindByWidgetAsyncByWidgetName": {
-              "uniqueName": "FindByWidgetAsyncByWidgetName",
-              "name": "FindByWidgetAsync",
+            "IsWidgetNameAvailableAsyncByWidgetName": {
+              "uniqueName": "IsWidgetNameAvailableAsyncByWidgetName",
+              "name": "IsWidgetNameAvailableAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/poll/widget-name-available",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "widgetName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "widgetName",
+                  "name": "widgetName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Polls.IPollPublicAppService"
+            },
+            "FindByAvailableWidgetAsyncByWidgetName": {
+              "uniqueName": "FindByAvailableWidgetAsyncByWidgetName",
+              "name": "FindByAvailableWidgetAsync",
               "httpMethod": "GET",
               "url": "api/cms-kit-public/poll/by-available-widget-name",
               "supportedVersions": [],

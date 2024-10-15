@@ -1,4 +1,4 @@
-﻿namespace X.Abp.IdentityServer.Pro.Blazor.Menus;
+﻿namespace X.Abp.IdentityServer.Blazor.Menus;
 
 public class ProMenus
 {

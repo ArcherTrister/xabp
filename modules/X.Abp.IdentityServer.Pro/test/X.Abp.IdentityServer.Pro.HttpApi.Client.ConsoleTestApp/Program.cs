@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace X.Abp.IdentityServer.Pro.HttpApi.Client.ConsoleTestApp;
+namespace X.Abp.IdentityServer.HttpApi.Client.ConsoleTestApp;
 
 class Program
 {

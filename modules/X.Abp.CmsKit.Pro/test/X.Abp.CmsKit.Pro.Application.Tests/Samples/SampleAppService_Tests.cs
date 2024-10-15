@@ -1,29 +1,11 @@
-﻿using System.Threading.Tasks;
-using Shouldly;
-using Xunit;
+﻿namespace X.Abp.CmsKit.Pro.Samples;
 
-namespace X.Abp.CmsKit.Pro.Samples;
-
-public class SampleAppService_Tests : ProApplicationTestBase
+public class SampleAppService_Tests : CmsKitProApplicationTestBase
 {
-  private readonly ISampleAppService _sampleAppService;
+  //private readonly ISampleAppService _sampleAppService;
 
   public SampleAppService_Tests()
   {
-    _sampleAppService = GetRequiredService<ISampleAppService>();
-  }
-
-  [Fact]
-  public virtual async Task GetAsync()
-  {
-    var result = await _sampleAppService.GetAsync();
-    result.Value.ShouldBe(42);
-  }
-
-  [Fact]
-  public virtual async Task GetAuthorizedAsync()
-  {
-    var result = await _sampleAppService.GetAuthorizedAsync();
-    result.Value.ShouldBe(42);
+    //_sampleAppService = GetRequiredService<ISampleAppService>();
   }
 }

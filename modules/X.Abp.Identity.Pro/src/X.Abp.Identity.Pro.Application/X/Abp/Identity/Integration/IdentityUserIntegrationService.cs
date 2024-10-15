@@ -12,42 +12,42 @@ using Volo.Abp.Users;
 
 namespace X.Abp.Identity.Integration
 {
-  public class IdentityUserIntegrationService : IdentityAppServiceBase, IIdentityUserIntegrationService
-  {
-    protected IIdentityUserRepository UserRepository { get; }
-
-    protected IdentityUserRepositoryExternalUserLookupServiceProvider UserLookupServiceProvider { get; }
-
-    public IdentityUserIntegrationService(
-      IIdentityUserRepository userRepository,
-      IdentityUserRepositoryExternalUserLookupServiceProvider userLookupServiceProvider)
+    public class IdentityUserIntegrationService : IdentityAppServiceBase, IIdentityUserIntegrationService
     {
-      UserRepository = userRepository;
-      UserLookupServiceProvider = userLookupServiceProvider;
-    }
+        protected IIdentityUserRepository UserRepository { get; }
 
-    public virtual async Task<string[]> GetRoleNamesAsync(Guid id) => (await UserRepository.GetRoleNamesAsync(id)).ToArray();
+        protected IdentityUserRepositoryExternalUserLookupServiceProvider UserLookupServiceProvider { get; }
 
-    public virtual async Task<UserData> FindByIdAsync(Guid id)
-    {
-      IUserData userData = await UserLookupServiceProvider.FindByIdAsync(id);
-      return userData != null ? new UserData(userData) : null;
-    }
+        public IdentityUserIntegrationService(
+          IIdentityUserRepository userRepository,
+          IdentityUserRepositoryExternalUserLookupServiceProvider userLookupServiceProvider)
+        {
+            UserRepository = userRepository;
+            UserLookupServiceProvider = userLookupServiceProvider;
+        }
 
-    public virtual async Task<UserData> FindByUserNameAsync(string userName)
-    {
-      IUserData userData = await UserLookupServiceProvider.FindByUserNameAsync(userName);
-      return userData != null ? new UserData(userData) : null;
-    }
+        public virtual async Task<string[]> GetRoleNamesAsync(Guid id) => (await UserRepository.GetRoleNamesAsync(id)).ToArray();
 
-    public virtual async Task<ListResultDto<UserData>> SearchAsync(UserLookupSearchInputDto input)
-    {
-      return new ListResultDto<UserData>((await UserLookupServiceProvider.SearchAsync(input.Sorting, input.Filter, input.MaxResultCount, input.SkipCount)).Select(u => new UserData(u)).ToList());
-    }
+        public virtual async Task<UserData> FindByIdAsync(Guid id)
+        {
+            IUserData userData = await UserLookupServiceProvider.FindByIdAsync(id);
+            return userData != null ? new UserData(userData) : null;
+        }
 
-    public virtual async Task<long> GetCountAsync(UserLookupCountInputDto input)
-    {
-      return await UserLookupServiceProvider.GetCountAsync(input.Filter);
+        public virtual async Task<UserData> FindByUserNameAsync(string userName)
+        {
+            IUserData userData = await UserLookupServiceProvider.FindByUserNameAsync(userName);
+            return userData != null ? new UserData(userData) : null;
+        }
+
+        public virtual async Task<ListResultDto<UserData>> SearchAsync(UserLookupSearchInputDto input)
+        {
+            return new ListResultDto<UserData>((await UserLookupServiceProvider.SearchAsync(input.Sorting, input.Filter, input.MaxResultCount, input.SkipCount)).Select(u => new UserData(u)).ToList());
+        }
+
+        public virtual async Task<long> GetCountAsync(UserLookupCountInputDto input)
+        {
+            return await UserLookupServiceProvider.GetCountAsync(input.Filter);
+        }
     }
-  }
 }

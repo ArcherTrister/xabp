@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 
-namespace X.Abp.Identity.Pro.HttpApi.Client.ConsoleTestApp;
+namespace X.Abp.Identity.HttpApi.Client.ConsoleTestApp;
 
 public class ConsoleTestAppHostedService : IHostedService
 {
@@ -18,7 +18,7 @@ public class ConsoleTestAppHostedService : IHostedService
 
   public virtual async Task StartAsync(CancellationToken cancellationToken)
   {
-    using (var application = await AbpApplicationFactory.CreateAsync<ProConsoleApiClientModule>(options =>
+    using (var application = await AbpApplicationFactory.CreateAsync<AbpIdentityProConsoleApiClientModule>(options =>
     {
       options.Services.ReplaceConfiguration(_configuration);
       options.UseAutofac();

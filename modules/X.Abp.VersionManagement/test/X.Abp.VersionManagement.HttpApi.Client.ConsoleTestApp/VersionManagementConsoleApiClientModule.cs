@@ -6,7 +6,7 @@ namespace X.Abp.VersionManagement;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(VersionManagementHttpApiClientModule),
+    typeof(AbpVersionManagementHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class VersionManagementConsoleApiClientModule : AbpModule

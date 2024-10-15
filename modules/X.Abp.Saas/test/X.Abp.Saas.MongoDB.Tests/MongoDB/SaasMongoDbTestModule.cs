@@ -1,12 +1,10 @@
-﻿using System;
-using Volo.Abp.Data;
+﻿using Volo.Abp.Data;
 using Volo.Abp.Modularity;
-using Volo.Abp.Uow;
 
 namespace X.Abp.Saas.MongoDB;
 
 [DependsOn(
-    typeof(SaasTestBaseModule),
+    typeof(SaasApplicationTestModule),
     typeof(SaasMongoDbModule)
     )]
 public class SaasMongoDbTestModule : AbpModule

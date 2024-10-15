@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel"
+      VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Autofac" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\..\src\X.Abp.Saas.HttpApi.Client\X.Abp.Saas.HttpApi.Client.csproj" />
   </ItemGroup>
@@ -27,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
   </ItemGroup>
 
 </Project>

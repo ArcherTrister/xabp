@@ -10,8 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\X.Abp.Notification.EntityFrameworkCore.Tests\X.Abp.Notification.EntityFrameworkCore.Tests.csproj" />
+    <ProjectReference Include="..\X.Abp.Notification.TestBase\X.Abp.Notification.TestBase.csproj" />
   </ItemGroup>
 
 </Project>

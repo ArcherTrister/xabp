@@ -3,7 +3,7 @@
 namespace X.Abp.FileManagement;
 
 [DependsOn(
-    typeof(FileManagementApplicationModule),
+    typeof(AbpFileManagementApplicationModule),
     typeof(FileManagementDomainTestModule)
     )]
 public class FileManagementApplicationTestModule : AbpModule

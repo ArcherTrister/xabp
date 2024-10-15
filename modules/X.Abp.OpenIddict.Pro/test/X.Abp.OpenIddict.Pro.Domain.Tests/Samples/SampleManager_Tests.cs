@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
 
-namespace X.Abp.OpenIddict.Pro.Samples;
+namespace X.Abp.OpenIddict.Samples;
 
-public class SampleManager_Tests : ProDomainTestBase
+public class SampleManager_Tests : AbpOpenIddictProDomainTestBase
 {
   //private readonly SampleManager _sampleManager;
 

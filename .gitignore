@@ -252,16 +252,19 @@ paket-files/
 *.sln.iml
 
 # Pro
+
+apps/aspnet-core/src/AbpVnext.Pro.AuthServer/Logs/*
+apps/aspnet-core/src/AbpVnext.Pro.Blazor.Server/Logs/*
+apps/aspnet-core/src/AbpVnext.Pro.Blazor.Server.Tiered/Logs/*
+apps/aspnet-core/src/AbpVnext.Pro.DbMigrator/Logs/*
+apps/aspnet-core/src/AbpVnext.Pro.EntityFrameworkCore/Migrations/*
+apps/aspnet-core/src/AbpVnext.Pro.EntityFrameworkCore/TenantMigrations/*
+apps/aspnet-core/src/AbpVnext.Pro.HttpApi.Host/Logs/*
+apps/aspnet-core/src/AbpVnext.Pro.HttpApi.Host/Logs/*
 apps/aspnet-core/src/AbpVnext.Pro.Web/Logs/*
 apps/aspnet-core/src/AbpVnext.Pro.Web.Host/Logs/*
 apps/aspnet-core/src/AbpVnext.Pro.Web.Public/Logs/*
 apps/aspnet-core/src/AbpVnext.Pro.Web.Public.Host/Logs/*
-apps/aspnet-core/src/AbpVnext.Pro.AuthServer/Logs/*
-apps/aspnet-core/src/AbpVnext.Pro.HttpApi.Host/Logs/*
-apps/aspnet-core/src/AbpVnext.Pro.HttpApi.Host/Logs/*
-apps/aspnet-core/src/AbpVnext.Pro.DbMigrator/Logs/*
-apps/aspnet-core/src/AbpVnext.Pro.Blazor.Server/Logs/*
-apps/aspnet-core/src/AbpVnext.Pro.Blazor.Server.Tiered/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*

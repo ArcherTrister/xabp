@@ -2,7 +2,7 @@
 
 namespace X.Abp.CmsKit.Pro.EntityFrameworkCore.Samples;
 
-public class SampleRepository_Tests : SampleRepository_Tests<ProEntityFrameworkCoreTestModule>
+public class SampleRepository_Tests : SampleRepository_Tests<CmsKitProEntityFrameworkCoreTestModule>
 {
     /* Don't write custom repository tests here, instead write to
      * the base class.

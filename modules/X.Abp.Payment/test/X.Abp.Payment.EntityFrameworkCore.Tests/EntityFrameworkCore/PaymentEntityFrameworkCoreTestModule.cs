@@ -10,8 +10,8 @@ using Volo.Abp.Uow;
 namespace X.Abp.Payment.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(PaymentTestBaseModule),
-    typeof(PaymentEntityFrameworkCoreModule),
+    typeof(PaymentApplicationTestModule),
+    typeof(AbpPaymentEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class PaymentEntityFrameworkCoreTestModule : AbpModule

@@ -19,14 +19,13 @@ using X.Abp.CmsKit.EntityFrameworkCore;
 
 namespace X.Abp.CmsKit.Newsletters;
 
-public class EfCoreNewsletterRecordRepository :
-EfCoreRepository<CmsKitProDbContext, NewsletterRecord, Guid>,
-INewsletterRecordRepository
+public class EfCoreNewsletterRecordRepository : EfCoreRepository<ICmsKitProDbContext, NewsletterRecord, Guid>, INewsletterRecordRepository
 {
 #pragma warning disable CA1307 // 为了清晰起见，请指定 StringComparison
+#pragma warning disable CA1309 // 使用序数字符串比较
 
     public EfCoreNewsletterRecordRepository(
-    IDbContextProvider<CmsKitProDbContext> dbContextProvider)
+    IDbContextProvider<ICmsKitProDbContext> dbContextProvider)
     : base(dbContextProvider)
     {
     }
@@ -34,6 +33,7 @@ INewsletterRecordRepository
     public virtual async Task<List<NewsletterSummaryQueryResultItem>> GetListAsync(
       string preference = null,
       string source = null,
+      string emailAddress = null,
       int skipCount = 0,
       int maxResultCount = int.MaxValue,
       CancellationToken cancellationToken = default)
@@ -41,6 +41,7 @@ INewsletterRecordRepository
         return await (await GetDbSetAsync())
             .WhereIf(!string.IsNullOrWhiteSpace(preference), x => x.Preferences.Any(p => p.Preference == preference))
             .WhereIf(!string.IsNullOrWhiteSpace(source), x => x.Preferences.Any(p => p.Source.Contains(source)))
+            .WhereIf(!emailAddress.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.EmailAddress.Equals(emailAddress))
             .Select(x => new NewsletterSummaryQueryResultItem
             {
                 CreationTime = x.CreationTime,
@@ -64,10 +65,13 @@ INewsletterRecordRepository
     public virtual async Task<int> GetCountByFilterAsync(
       string preference = null,
       string source = null,
+      string emailAddress = null,
       CancellationToken cancellationToken = default)
     {
-        return await (await GetDbSetAsync()).WhereIf(!preference.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.Preferences.Any(newsletterPreference => newsletterPreference.Preference == preference))
+        return await (await GetDbSetAsync())
+            .WhereIf(!preference.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.Preferences.Any(newsletterPreference => newsletterPreference.Preference == preference))
             .WhereIf(!source.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.Preferences.Any(newsletterPreference => newsletterPreference.Source.Contains(source)))
+            .WhereIf(!emailAddress.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.EmailAddress.Equals(emailAddress))
             .CountAsync(GetCancellationToken(cancellationToken));
     }
 

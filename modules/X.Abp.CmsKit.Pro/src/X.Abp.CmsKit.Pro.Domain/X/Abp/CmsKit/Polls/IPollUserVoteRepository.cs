@@ -8,7 +8,6 @@ using Volo.Abp.Domain.Repositories;
 
 namespace X.Abp.CmsKit.Polls;
 
-public interface IPollUserVoteRepository :
-IBasicRepository<PollUserVote, Guid>
+public interface IPollUserVoteRepository : IBasicRepository<PollUserVote, Guid>
 {
 }

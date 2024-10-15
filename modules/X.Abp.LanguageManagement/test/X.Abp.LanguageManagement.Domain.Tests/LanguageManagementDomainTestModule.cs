@@ -1,5 +1,4 @@
-﻿using Volo.Abp.LanguageManagement.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.LanguageManagement;
 
@@ -8,7 +7,8 @@ namespace X.Abp.LanguageManagement;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(LanguageManagementEntityFrameworkCoreTestModule)
+    typeof(AbpLanguageManagementDomainModule),
+    typeof(LanguageManagementTestBaseModule)
     )]
 public class LanguageManagementDomainTestModule : AbpModule
 {

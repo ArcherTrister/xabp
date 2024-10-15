@@ -4,16 +4,19 @@
 
 using System.Threading.Tasks;
 
-using Volo.Abp.Application.Services;
 using Volo.Abp.Caching;
+using Volo.Abp.Features;
+using Volo.Abp.GlobalFeatures;
 
+using X.Abp.CmsKit.Features;
+using X.Abp.CmsKit.GlobalFeatures;
 using X.Abp.CmsKit.UrlShorting;
 
 namespace X.Abp.CmsKit.Public.UrlShorting;
 
-public class UrlShortingPublicAppService :
-ApplicationService,
-IUrlShortingPublicAppService
+[RequiresFeature(CmsKitProFeatures.UrlShortingEnable)]
+[RequiresGlobalFeature(typeof(UrlShortingFeature))]
+public class UrlShortingPublicAppService : PublicAppService, IUrlShortingPublicAppService
 {
   protected IShortenedUrlRepository ShortenedUrlRepository { get; }
 

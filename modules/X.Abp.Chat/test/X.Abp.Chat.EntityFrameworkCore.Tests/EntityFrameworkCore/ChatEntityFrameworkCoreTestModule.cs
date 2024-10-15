@@ -10,8 +10,8 @@ using Volo.Abp.Uow;
 namespace X.Abp.Chat.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(ChatTestBaseModule),
-    typeof(ChatEntityFrameworkCoreModule),
+    typeof(ChatApplicationTestModule),
+    typeof(AbpChatEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class ChatEntityFrameworkCoreTestModule : AbpModule

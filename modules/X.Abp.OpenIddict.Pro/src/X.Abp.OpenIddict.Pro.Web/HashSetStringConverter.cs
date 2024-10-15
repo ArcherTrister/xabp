@@ -8,7 +8,7 @@ using System.Linq;
 
 using AutoMapper;
 
-namespace X.Abp.OpenIddict.Pro.Web;
+namespace X.Abp.OpenIddict.Web;
 
 public class HashSetStringConverter : IValueConverter<HashSet<string>, string>, IValueConverter<string, HashSet<string>>
 {

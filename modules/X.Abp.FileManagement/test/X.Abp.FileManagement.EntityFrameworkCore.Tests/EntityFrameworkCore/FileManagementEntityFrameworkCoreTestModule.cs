@@ -10,8 +10,8 @@ using Volo.Abp.Uow;
 namespace X.Abp.FileManagement.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(FileManagementTestBaseModule),
-    typeof(FileManagementEntityFrameworkCoreModule),
+    typeof(FileManagementApplicationTestModule),
+    typeof(AbpFileManagementEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class FileManagementEntityFrameworkCoreTestModule : AbpModule

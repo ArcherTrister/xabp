@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
 using Volo.Abp;
@@ -57,6 +58,8 @@ public class AbpIdentityProDomainModule : AbpModule
 
         context.Services.AddHttpClient(OAuthExternalLoginManager.HttpClientName);
         Configure<AbpLocalizationOptions>(options => options.Resources.Get<IdentityResource>().AddBaseTypes(typeof(LdapResource)));
+
+        context.Services.Replace(ServiceDescriptor.Transient<IIdentityDataSeeder, X.Abp.Identity.IdentityDataSeeder>());
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

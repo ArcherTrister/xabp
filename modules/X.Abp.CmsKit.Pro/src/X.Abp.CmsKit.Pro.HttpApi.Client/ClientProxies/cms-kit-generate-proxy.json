@@ -908,6 +908,188 @@
             }
           }
         },
+        "Volo.CmsKit.Public.MarkedItems.MarkedItemPublicController": {
+          "controllerName": "MarkedItemPublic",
+          "controllerGroupName": "MarkedItemPublic",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "Volo.CmsKit.Public.MarkedItems.MarkedItemPublicController",
+          "interfaces": [
+            {
+              "type": "Volo.CmsKit.Public.MarkedItems.IMarkedItemPublicAppService",
+              "name": "IMarkedItemPublicAppService",
+              "methods": [
+                {
+                  "name": "GetForUserAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "entityType",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "entityId",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.CmsKit.Public.MarkedItems.MarkedItemWithToggleDto",
+                    "typeSimple": "Volo.CmsKit.Public.MarkedItems.MarkedItemWithToggleDto"
+                  }
+                },
+                {
+                  "name": "ToggleAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "entityType",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "entityId",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetForUserAsyncByEntityTypeAndEntityId": {
+              "uniqueName": "GetForUserAsyncByEntityTypeAndEntityId",
+              "name": "GetForUserAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/marked-items/{entityType}/{entityId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "entityType",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "entityId",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "entityType",
+                  "name": "entityType",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "entityId",
+                  "name": "entityId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.CmsKit.Public.MarkedItems.MarkedItemWithToggleDto",
+                "typeSimple": "Volo.CmsKit.Public.MarkedItems.MarkedItemWithToggleDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.CmsKit.Public.MarkedItems.IMarkedItemPublicAppService"
+            },
+            "ToggleAsyncByEntityTypeAndEntityId": {
+              "uniqueName": "ToggleAsyncByEntityTypeAndEntityId",
+              "name": "ToggleAsync",
+              "httpMethod": "PUT",
+              "url": "api/cms-kit-public/marked-items/{entityType}/{entityId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "entityType",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "entityId",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "entityType",
+                  "name": "entityType",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "entityId",
+                  "name": "entityId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.CmsKit.Public.MarkedItems.IMarkedItemPublicAppService"
+            }
+          }
+        },
         "Volo.CmsKit.Public.Menus.MenuItemPublicController": {
           "controllerName": "MenuItemPublic",
           "controllerGroupName": "MenuItemPublic",

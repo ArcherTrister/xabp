@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using X.Abp.IdentityServer.Pro.Blazor.Menus;
+using X.Abp.IdentityServer.Blazor.Menus;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 
-namespace X.Abp.IdentityServer.Pro.Blazor;
+namespace X.Abp.IdentityServer.Blazor;
 
 [DependsOn(
     typeof(AbpIdentityServerProApplicationContractsModule),

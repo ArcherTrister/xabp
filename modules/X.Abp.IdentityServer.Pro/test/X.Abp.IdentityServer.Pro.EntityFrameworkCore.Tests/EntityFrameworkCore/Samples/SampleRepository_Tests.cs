@@ -1,8 +1,8 @@
-﻿using X.Abp.IdentityServer.Pro.Samples;
+﻿using X.Abp.IdentityServer.Samples;
 
-namespace X.Abp.IdentityServer.Pro.EntityFrameworkCore.Samples;
+namespace X.Abp.IdentityServer.EntityFrameworkCore.Samples;
 
-public class SampleRepository_Tests : SampleRepository_Tests<AbpIdentityServerEntityFrameworkCoreTestModule>
+public class SampleRepository_Tests : SampleRepository_Tests<AbpIdentityServerProEntityFrameworkCoreTestModule>
 {
     /* Don't write custom repository tests here, instead write to
      * the base class.

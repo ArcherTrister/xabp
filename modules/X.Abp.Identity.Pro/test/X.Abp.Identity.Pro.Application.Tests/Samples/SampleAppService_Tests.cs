@@ -1,29 +1,26 @@
 ﻿using System.Threading.Tasks;
+
 using Shouldly;
+
 using Xunit;
 
-namespace X.Abp.Identity.Pro.Samples;
+namespace X.Abp.Identity.Samples;
 
-public class SampleAppService_Tests : ProApplicationTestBase
+public class SampleAppService_Tests : AbpIdentityProApplicationTestBase
 {
-  private readonly ISampleAppService _sampleAppService;
+    // private readonly ISampleAppService _sampleAppService;
+    private readonly IIdentityUserRepository _identityUserRepository;
 
-  public SampleAppService_Tests()
-  {
-    _sampleAppService = GetRequiredService<ISampleAppService>();
-  }
+    public SampleAppService_Tests()
+    {
+        // _sampleAppService = GetRequiredService<ISampleAppService>();
+        _identityUserRepository = GetRequiredService<IIdentityUserRepository>();
+    }
 
-  [Fact]
-  public virtual async Task GetAsync()
-  {
-    var result = await _sampleAppService.GetAsync();
-    result.Value.ShouldBe(42);
-  }
-
-  [Fact]
-  public virtual async Task GetAuthorizedAsync()
-  {
-    var result = await _sampleAppService.GetAuthorizedAsync();
-    result.Value.ShouldBe(42);
-  }
+    [Fact]
+    public async Task FindUserByPhoneNumber_Test()
+    {
+        var user = await _identityUserRepository.FindByPhoneNumberAsync("13888888888");
+        user.ShouldNotBeNull();
+    }
 }

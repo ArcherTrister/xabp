@@ -12,8 +12,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace X.Abp.CmsKit.Polls;
 
-public interface IPollRepository :
-  IBasicRepository<Poll, Guid>
+public interface IPollRepository : IBasicRepository<Poll, Guid>
 {
     Task<List<Poll>> GetListAsync(
       string filter = null,
@@ -26,7 +25,8 @@ public interface IPollRepository :
       string widget,
       CancellationToken cancellationToken = default);
 
-    Task<Poll> FindByWidgetAsync(string widget, CancellationToken cancellationToken = default);
+    // Task<Poll> FindByWidgetAsync(string widget, CancellationToken cancellationToken = default);
+    Task<Poll> FindByAvailableWidgetAsync(string widget, DateTime now, CancellationToken cancellationToken = default);
 
     Task<Poll> FindByCodeAsync(string code, CancellationToken cancellationToken = default);
 
@@ -34,6 +34,14 @@ public interface IPollRepository :
 
     Task<IQueryable<Poll>> WithDetailsAsync();
 
-    Task<Dictionary<Poll, List<PollUserVote>>> GetPollWithPollUserVotesAsync(
-      Guid id);
+    Task<Dictionary<Poll, List<PollUserVote>>> GetPollWithPollUserVotesAsync(Guid id);
+
+    Task<PollWithUserVotes> GetPollWithPollUserVotesAsync(Guid id, Guid userId);
+
+    Task<Poll> FindByDateRangeAndWidgetAsync(
+      DateTime startDate,
+      DateTime? endDate = null,
+      DateTime? resultShowingEndDate = null,
+      string widget = null,
+      CancellationToken cancellationToken = default);
 }

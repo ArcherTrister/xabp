@@ -6,7 +6,7 @@ namespace X.Abp.LanguageManagement;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(LanguageManagementHttpApiClientModule),
+    typeof(AbpLanguageManagementHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class LanguageManagementConsoleApiClientModule : AbpModule

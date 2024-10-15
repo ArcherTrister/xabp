@@ -19,12 +19,10 @@ using X.Abp.CmsKit.EntityFrameworkCore;
 
 namespace X.Abp.CmsKit.UrlShorting;
 
-public class EfCoreShortenedUrlRepository :
-EfCoreRepository<CmsKitProDbContext, ShortenedUrl, Guid>,
-IShortenedUrlRepository
+public class EfCoreShortenedUrlRepository : EfCoreRepository<ICmsKitProDbContext, ShortenedUrl, Guid>, IShortenedUrlRepository
 {
   public EfCoreShortenedUrlRepository(
-    IDbContextProvider<CmsKitProDbContext> dbContextProvider)
+    IDbContextProvider<ICmsKitProDbContext> dbContextProvider)
     : base(dbContextProvider)
   {
   }

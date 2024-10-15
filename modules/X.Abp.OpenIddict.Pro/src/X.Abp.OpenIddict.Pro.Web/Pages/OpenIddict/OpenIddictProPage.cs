@@ -5,7 +5,7 @@
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 using Volo.Abp.OpenIddict.Localization;
 
-namespace X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict;
+namespace X.Abp.OpenIddict.Web.Pages.OpenIddict;
 
 public abstract class OpenIddictProPageModel : AbpPageModel
 {

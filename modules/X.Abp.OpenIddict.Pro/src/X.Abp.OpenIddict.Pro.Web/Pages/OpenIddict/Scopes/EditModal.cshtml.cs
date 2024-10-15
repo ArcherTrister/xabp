@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using X.Abp.OpenIddict.Scopes;
 using X.Abp.OpenIddict.Scopes.Dtos;
 
-namespace X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Scopes;
+namespace X.Abp.OpenIddict.Web.Pages.OpenIddict.Scopes;
 
 public class EditModalModel : OpenIddictProPageModel
 {

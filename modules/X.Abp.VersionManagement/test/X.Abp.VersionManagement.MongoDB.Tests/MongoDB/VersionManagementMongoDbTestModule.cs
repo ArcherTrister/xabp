@@ -1,12 +1,10 @@
-﻿using System;
-using Volo.Abp.Data;
+﻿using Volo.Abp.Data;
 using Volo.Abp.Modularity;
-using Volo.Abp.Uow;
 
 namespace X.Abp.VersionManagement.MongoDB;
 
 [DependsOn(
-    typeof(VersionManagementTestBaseModule),
+    typeof(VersionManagementApplicationTestModule),
     typeof(VersionManagementMongoDbModule)
     )]
 public class VersionManagementMongoDbTestModule : AbpModule

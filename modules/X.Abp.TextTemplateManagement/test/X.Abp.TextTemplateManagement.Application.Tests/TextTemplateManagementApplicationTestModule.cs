@@ -3,7 +3,7 @@
 namespace X.Abp.TextTemplateManagement;
 
 [DependsOn(
-    typeof(TextTemplateManagementApplicationModule),
+    typeof(AbpTextTemplateManagementApplicationModule),
     typeof(TextTemplateManagementDomainTestModule)
     )]
 public class TextTemplateManagementApplicationTestModule : AbpModule

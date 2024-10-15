@@ -1,6 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\..\..\modules.props" />
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,8 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <ProjectReference Include="..\X.Abp.Gdpr.EntityFrameworkCore.Tests\X.Abp.Gdpr.EntityFrameworkCore.Tests.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\X.Abp.Gdpr.Domain\X.Abp.Gdpr.Domain.csproj" />
+    <ProjectReference Include="..\X.Abp.Gdpr.TestBase\X.Abp.Gdpr.TestBase.csproj" />
   </ItemGroup>
 
 </Project>

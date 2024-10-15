@@ -3,7 +3,7 @@
 namespace X.Abp.LanguageManagement;
 
 [DependsOn(
-    typeof(LanguageManagementApplicationModule),
+    typeof(AbpLanguageManagementApplicationModule),
     typeof(LanguageManagementDomainTestModule)
     )]
 public class LanguageManagementApplicationTestModule : AbpModule

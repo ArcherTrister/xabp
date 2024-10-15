@@ -10,8 +10,8 @@ using Volo.Abp.Uow;
 namespace X.Abp.Quartz.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(QuartzTestBaseModule),
-    typeof(QuartzEntityFrameworkCoreModule),
+    typeof(QuartzApplicationTestModule),
+    typeof(AbpQuartzEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class QuartzEntityFrameworkCoreTestModule : AbpModule

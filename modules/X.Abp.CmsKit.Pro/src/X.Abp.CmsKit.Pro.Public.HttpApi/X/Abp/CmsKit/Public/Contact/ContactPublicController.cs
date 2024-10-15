@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using Volo.Abp;
+using Volo.Abp.Features;
 using Volo.Abp.GlobalFeatures;
 
+using X.Abp.CmsKit.Features;
 using X.Abp.CmsKit.GlobalFeatures;
 
 namespace X.Abp.CmsKit.Public.Contact;
@@ -17,6 +19,7 @@ namespace X.Abp.CmsKit.Public.Contact;
 [RequiresGlobalFeature(typeof(ContactFeature))]
 [Area(AbpCmsKitProPublicRemoteServiceConsts.ModuleName)]
 [RemoteService(true, Name = AbpCmsKitProPublicRemoteServiceConsts.RemoteServiceName)]
+[RequiresFeature(CmsKitProFeatures.ContactEnable)]
 public class ContactPublicController : CmsKitProPublicController, IContactPublicAppService
 {
     protected IContactPublicAppService ContactPublicAppService { get; }

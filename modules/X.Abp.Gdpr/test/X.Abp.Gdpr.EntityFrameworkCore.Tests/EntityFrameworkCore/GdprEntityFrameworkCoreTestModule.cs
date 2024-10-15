@@ -9,8 +9,8 @@ using Volo.Abp.Modularity;
 namespace X.Abp.Gdpr.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(GdprTestBaseModule),
-    typeof(GdprEntityFrameworkCoreModule),
+    typeof(GdprApplicationTestModule),
+    typeof(AbpGdprEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class GdprEntityFrameworkCoreTestModule : AbpModule

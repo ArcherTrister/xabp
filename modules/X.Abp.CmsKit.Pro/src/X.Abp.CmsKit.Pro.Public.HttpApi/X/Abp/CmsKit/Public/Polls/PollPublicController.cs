@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using Volo.Abp;
+using Volo.Abp.Features;
 using Volo.Abp.GlobalFeatures;
 
+using X.Abp.CmsKit.Features;
 using X.Abp.CmsKit.GlobalFeatures;
 
 namespace X.Abp.CmsKit.Public.Polls;
@@ -18,40 +20,48 @@ namespace X.Abp.CmsKit.Public.Polls;
 [Area(AbpCmsKitProPublicRemoteServiceConsts.ModuleName)]
 [Route("api/cms-kit-public/poll")]
 [RequiresGlobalFeature(typeof(PollsFeature))]
+[RequiresFeature(CmsKitProFeatures.PollEnable)]
 public class PollPublicController : CmsKitProPublicController, IPollPublicAppService
 {
-  protected IPollPublicAppService PollPublicAppService { get; }
+    protected IPollPublicAppService PollPublicAppService { get; }
 
-  public PollPublicController(IPollPublicAppService pollPublicAppService)
-  {
-    PollPublicAppService = pollPublicAppService;
-  }
+    public PollPublicController(IPollPublicAppService pollPublicAppService)
+    {
+        PollPublicAppService = pollPublicAppService;
+    }
 
-  [Route("by-available-widget-name")]
-  [HttpGet]
-  public virtual async Task<PollWithDetailsDto> FindByWidgetAsync(string widgetName)
-  {
-    return await PollPublicAppService.FindByWidgetAsync(widgetName);
-  }
+    [Route("widget-name-available")]
+    [HttpGet]
+    public virtual async Task<bool> IsWidgetNameAvailableAsync(string widgetName)
+    {
+        return await PollPublicAppService.IsWidgetNameAvailableAsync(widgetName);
+    }
 
-  [Route("by-code")]
-  [HttpGet]
-  public virtual async Task<PollWithDetailsDto> FindByCodeAsync(string code)
-  {
-    return await PollPublicAppService.FindByCodeAsync(code);
-  }
+    [Route("by-available-widget-name")]
+    [HttpGet]
+    public virtual async Task<PollWithDetailsDto> FindByAvailableWidgetAsync(string widgetName)
+    {
+        return await PollPublicAppService.FindByAvailableWidgetAsync(widgetName);
+    }
 
-  [HttpGet]
-  [Route("result/{id}")]
-  public virtual async Task<GetResultDto> GetResultAsync(Guid id)
-  {
-    return await PollPublicAppService.GetResultAsync(id);
-  }
+    [Route("by-code")]
+    [HttpGet]
+    public virtual async Task<PollWithDetailsDto> FindByCodeAsync(string code)
+    {
+        return await PollPublicAppService.FindByCodeAsync(code);
+    }
 
-  [Route("{id}")]
-  [HttpPost]
-  public virtual async Task SubmitVoteAsync(Guid id, SubmitPollInput input)
-  {
-    await PollPublicAppService.SubmitVoteAsync(id, input);
-  }
+    [HttpGet]
+    [Route("result/{id}")]
+    public virtual async Task<GetResultDto> GetResultAsync(Guid id)
+    {
+        return await PollPublicAppService.GetResultAsync(id);
+    }
+
+    [Route("{id}")]
+    [HttpPost]
+    public virtual async Task SubmitVoteAsync(Guid id, SubmitPollInput input)
+    {
+        await PollPublicAppService.SubmitVoteAsync(id, input);
+    }
 }

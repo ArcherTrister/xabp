@@ -401,7 +401,7 @@ public class LoginModel : AccountPageModel
 
     protected virtual async Task<bool> VerifyLinkTokenAsync()
     {
-        if (AbpStringExtensions.IsNullOrWhiteSpace(LinkToken) || !LinkUserId.HasValue)
+        if (LinkToken.IsNullOrWhiteSpace() || !LinkUserId.HasValue)
         {
             return false;
         }

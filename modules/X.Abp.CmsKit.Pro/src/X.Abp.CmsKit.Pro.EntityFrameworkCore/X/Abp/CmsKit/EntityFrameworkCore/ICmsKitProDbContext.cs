@@ -9,6 +9,7 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.CmsKit;
 
 using X.Abp.CmsKit.Newsletters;
+using X.Abp.CmsKit.PageFeedbacks;
 using X.Abp.CmsKit.Polls;
 using X.Abp.CmsKit.UrlShorting;
 
@@ -28,4 +29,8 @@ public interface ICmsKitProDbContext : IEfCoreDbContext
     DbSet<PollUserVote> PollUserVotes { get; }
 
     DbSet<PollOption> PollOptions { get; }
+
+    DbSet<PageFeedback> PageFeedbacks { get; }
+
+    DbSet<PageFeedbackSetting> PageFeedbackSettings { get; }
 }

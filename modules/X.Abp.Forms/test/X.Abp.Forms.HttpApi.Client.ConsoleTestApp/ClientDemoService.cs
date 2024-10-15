@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using IdentityModel.Client;
+
 using Microsoft.Extensions.Configuration;
-using X.Abp.Forms.Samples;
+
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.IdentityModel;
 
@@ -11,41 +13,25 @@ namespace X.Abp.Forms;
 
 public class ClientDemoService : ITransientDependency
 {
-  private readonly ISampleAppService _sampleAppService;
+  //private readonly ISampleAppService _sampleAppService;
   private readonly IIdentityModelAuthenticationService _authenticationService;
   private readonly IConfiguration _configuration;
 
   public ClientDemoService(
-      ISampleAppService sampleAppService,
+      //ISampleAppService sampleAppService,
       IIdentityModelAuthenticationService authenticationService,
       IConfiguration configuration)
   {
-    _sampleAppService = sampleAppService;
+    //_sampleAppService = sampleAppService;
     _authenticationService = authenticationService;
     _configuration = configuration;
   }
 
   public virtual async Task RunAsync()
   {
-    await TestWithDynamicProxiesAsync();
+    //await TestWithDynamicProxiesAsync();
     await TestWithHttpClientAndIdentityModelAuthenticationServiceAsync();
     await TestAllManuallyAsync();
-  }
-
-  /* Shows how to perform an HTTP request to the API using ABP's dynamic c# proxy
-   * feature. It is just simple as calling a local service method.
-   * Authorization and HTTP request details are handled by the ABP framework.
-   */
-  private async Task TestWithDynamicProxiesAsync()
-  {
-    Console.WriteLine();
-    Console.WriteLine($"***** {nameof(TestWithDynamicProxiesAsync)} *****");
-
-    var result = await _sampleAppService.GetAsync();
-    Console.WriteLine("Result: " + result.Value);
-
-    result = await _sampleAppService.GetAuthorizedAsync();
-    Console.WriteLine("Result (authorized): " + result.Value);
   }
 
   /* Shows how to use HttpClient to perform a request to the HTTP API.

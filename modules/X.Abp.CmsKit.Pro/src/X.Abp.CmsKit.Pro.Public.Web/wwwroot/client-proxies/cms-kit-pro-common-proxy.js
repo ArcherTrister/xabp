@@ -62,13 +62,36 @@
 
   })();
 
+  // controller x.abp.cmsKit.public.pageFeedbacks.pageFeedbackPublic
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.cmsKit.public.pageFeedbacks.pageFeedbackPublic');
+
+    x.abp.cmsKit.public.pageFeedbacks.pageFeedbackPublic.create = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-public/page-feedback',
+        type: 'POST',
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+  })();
+
   // controller x.abp.cmsKit.public.polls.pollPublic
 
   (function(){
 
     abp.utils.createNamespace(window, 'x.abp.cmsKit.public.polls.pollPublic');
 
-    x.abp.cmsKit.public.polls.pollPublic.findByWidget = function(widgetName, ajaxParams) {
+    x.abp.cmsKit.public.polls.pollPublic.isWidgetNameAvailable = function(widgetName, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-public/poll/widget-name-available' + abp.utils.buildQueryString([{ name: 'widgetName', value: widgetName }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.public.polls.pollPublic.findByAvailableWidget = function(widgetName, ajaxParams) {
       return abp.ajax($.extend(true, {
         url: abp.appPath + 'api/cms-kit-public/poll/by-available-widget-name' + abp.utils.buildQueryString([{ name: 'widgetName', value: widgetName }]) + '',
         type: 'GET'

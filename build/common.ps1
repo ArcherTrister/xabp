@@ -1,6 +1,6 @@
 $full = $args[0]
 
-# COMMON PATHS 
+# COMMON PATHS
 
 $rootFolder = (Get-Item -Path "./" -Verbose).FullName
 
@@ -28,14 +28,14 @@ $solutionPaths = @(
     "../modules/X.Abp.VersionManagement"
 )
 
-if ($full -eq "-f")
-{
-	# List of additional solutions required for full build
-	$solutionPaths += (
+if ($full -eq "-f") {
+    # List of additional solutions required for full build
+    $solutionPaths += (
         "../templates/X.Abp.Templates"
-	) 
-}else{ 
-	Write-host ""
-	Write-host ":::::::::::::: !!! You are in development mode !!! ::::::::::::::" -ForegroundColor red -BackgroundColor  yellow
-	Write-host "" 
-} 
+    )
+}
+else {
+    Write-host ""
+    Write-host ":::::::::::::: !!! You are in development mode !!! ::::::::::::::" -ForegroundColor red -BackgroundColor  yellow
+    Write-host ""
+}

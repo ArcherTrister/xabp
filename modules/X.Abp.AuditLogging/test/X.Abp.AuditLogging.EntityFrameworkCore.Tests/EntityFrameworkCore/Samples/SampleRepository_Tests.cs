@@ -1,4 +1,4 @@
-﻿using Volo.Abp.AuditLogging.Samples;
+﻿using X.Abp.AuditLogging.Samples;
 
 namespace X.Abp.AuditLogging.EntityFrameworkCore.Samples;
 

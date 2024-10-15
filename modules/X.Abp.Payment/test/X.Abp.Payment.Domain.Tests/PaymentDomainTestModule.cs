@@ -1,5 +1,4 @@
-﻿using X.Abp.Payment.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.Payment;
 
@@ -8,7 +7,8 @@ namespace X.Abp.Payment;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(PaymentEntityFrameworkCoreTestModule)
+    typeof(AbpPaymentDomainModule),
+    typeof(PaymentTestBaseModule)
     )]
 public class PaymentDomainTestModule : AbpModule
 {

@@ -61,9 +61,8 @@ namespace X.Abp.LanguageManagement.External
 
         public virtual async Task<LocalizationResourceBase[]> GetResourcesAsync()
         {
-            ExternalLocalizationStore localizationStore = this;
-            return (await localizationStore.GetAllResourcesCacheItemAsync())
-                .Resources.Select(localizationStore.CreateNonTypedLocalizationResource)
+            return (await GetAllResourcesCacheItemAsync())
+                .Resources.Select(CreateNonTypedLocalizationResource)
                 .Cast<LocalizationResourceBase>()
                 .ToArray();
         }

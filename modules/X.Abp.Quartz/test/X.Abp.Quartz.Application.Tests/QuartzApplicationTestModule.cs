@@ -3,7 +3,7 @@
 namespace X.Abp.Quartz;
 
 [DependsOn(
-    typeof(QuartzApplicationModule),
+    typeof(AbpQuartzApplicationModule),
     typeof(QuartzDomainTestModule)
     )]
 public class QuartzApplicationTestModule : AbpModule

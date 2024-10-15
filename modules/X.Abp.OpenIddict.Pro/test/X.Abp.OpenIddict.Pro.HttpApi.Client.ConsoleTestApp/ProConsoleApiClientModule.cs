@@ -2,11 +2,11 @@
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Modularity;
 
-namespace X.Abp.OpenIddict.Pro;
+namespace X.Abp.OpenIddict;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(ProHttpApiClientModule),
+    typeof(AbpOpenIddictProHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class ProConsoleApiClientModule : AbpModule

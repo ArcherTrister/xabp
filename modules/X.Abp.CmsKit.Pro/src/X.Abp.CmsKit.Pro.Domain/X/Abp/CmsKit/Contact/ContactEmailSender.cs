@@ -51,7 +51,7 @@ public class ContactEmailSender : ITransientDependency
             throw new ArgumentNullException(Localizer["EmailToException"]);
         }
 
-        var str = await TemplateRenderer.RenderAsync(CmsKitEmailTemplates.ContactEmailTemplate,
+        var body = await TemplateRenderer.RenderAsync(CmsKitEmailTemplates.ContactEmailTemplate,
             new
             {
                 Title = Localizer["Contact"],
@@ -60,6 +60,6 @@ public class ContactEmailSender : ITransientDependency
                 Message = string.Format("{0} : {1}", Localizer["Message"], message)
             });
 
-        await EmailSender.SendAsync(receiverEmail, subject, str, true);
+        await EmailSender.SendAsync(receiverEmail, subject, body, true);
     }
 }

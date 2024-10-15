@@ -10,7 +10,7 @@ using Volo.Abp.UI.Navigation;
 
 using X.Abp.OpenIddict.Permissions;
 
-namespace X.Abp.OpenIddict.Pro.Web.Menus;
+namespace X.Abp.OpenIddict.Web.Menus;
 
 public class AbpOpenIddictProMenuContributor : IMenuContributor
 {

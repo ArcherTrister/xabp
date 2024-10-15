@@ -55,28 +55,28 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 
 ### 应用程序模块
 
--   [**Account Pro**](https://commercial.abp.io/modules/Volo.Account.Pro): 登录，注册，忘记密码，电子邮件激活，社交登录和其他帐户相关功能.
--   [**AuditLogging Ui**](https://commercial.abp.io/modules/Volo.AuditLogging.Ui): 详细报告用户审核日志和实体历史记录.
--   [**Chat**](https://commercial.abp.io/modules/Volo.Chat): 用户之间的实时消息传递.
--   [**CmsKit Pro**](https://commercial.abp.io/modules/Volo.CmsKit.Pro): 用于创建自己的内容管理系统的构建块.
--   [**File Management**](https://commercial.abp.io/modules/Volo.FileManagement): 以分层文件夹结构上传、下载和组织文件.
--   [**Forms**](https://commercial.abp.io/modules/Volo.Forms): 创建表单和调查.
--   [**Gdpr**](https://commercial.abp.io/modules/Volo.Gdpr): 此模块允许用户下载和删除应用程序收集的个人数据.
--   [**Identity Pro**](https://commercial.abp.io/modules/Volo.Identity.Pro): 用户、角色、声明和权限管理.
--   [**Identityserver Pro**](https://commercial.abp.io/modules/Volo.Identityserver.Ui): 管理身份服务器对象，如客户端、API 资源、身份资源、机密、应用程序 URL、声明等.
--   ~~[**Iot**](https://github.com/ArcherTrister/xabp/blob/main/modules/X.Abp.Iot/README.md): 物联网服务.~~
--   [**Language Management**](https://commercial.abp.io/modules/Volo.LanguageManagement): 添加或删除语言并动态本地化应用程序 UI.
--   ~~[**LeptonTheme**](https://commercial.abp.io/modules/Volo.LeptonTheme): v6.0 之前专业模板的官方默认主题.~~
+-   [**Account Pro**](https://commercial.abp.io/modules/Volo.Account.Pro): 登录，注册，忘记密码，电子邮件激活，社交登录和其他帐户相关功能。
+-   [**AuditLogging Ui**](https://commercial.abp.io/modules/Volo.AuditLogging.Ui): 详细报告用户审核日志和实体历史记录。
+-   [**Chat**](https://commercial.abp.io/modules/Volo.Chat): 用户之间的实时消息传递。
+-   [**CmsKit Pro**](https://commercial.abp.io/modules/Volo.CmsKit.Pro): 用于创建自己的内容管理系统的构建块。
+-   [**File Management**](https://commercial.abp.io/modules/Volo.FileManagement): 以分层文件夹结构上传、下载和组织文件。
+-   [**Forms**](https://commercial.abp.io/modules/Volo.Forms): 创建表单和调查。
+-   [**Gdpr**](https://commercial.abp.io/modules/Volo.Gdpr): 此模块允许用户下载和删除应用程序收集的个人数据。
+-   [**Identity Pro**](https://commercial.abp.io/modules/Volo.Identity.Pro): 用户、角色、声明和权限管理。
+-   [**Identityserver Pro**](https://commercial.abp.io/modules/Volo.Identityserver.Ui): 管理身份服务器对象，如客户端、API 资源、身份资源、机密、应用程序 URL、声明等。
+-   ~~[**Iot**](https://github.com/ArcherTrister/xabp/blob/main/modules/X.Abp.Iot/README.md): 物联网服务。~~
+-   [**Language Management**](https://commercial.abp.io/modules/Volo.LanguageManagement): 添加或删除语言并动态本地化应用程序 UI。
+-   ~~[**LeptonTheme**](https://commercial.abp.io/modules/Volo.LeptonTheme): v6.0 之前专业模板的官方默认主题。~~
 -   ~~[**LeptonXTheme Pro**](https://commercial.abp.io/modules/Volo.Abp.LeptonTheme.Pro): 下一代轻子主题。ABP 商业的官方主题.~~
--   [**Localization**](https://github.com/ArcherTrister/xabp/tree/main/modules/X.Abp.Localization/README.md): ABP 多种格式的区域性本地化.
--   [**Notification**](https://github.com/ArcherTrister/xabp/tree/main/modules/X.Abp.Notification/README.md): ABP 通知模块.
--   [**OpenIddict Pro**](https://commercial.abp.io/modules/Volo.OpenIddict.Pro): 管理身份服务器对象，如客户端、API 资源、身份资源、机密、应用程序 URL、声明等.
--   [**Payment**](https://commercial.abp.io/modules/Volo.Payment): 为不同的支付网关提供集成.
--   [**Quartz**](https://github.com/ArcherTrister/xabp/tree/main/modules/X.Abp.Quartz/README.md): Quartz 仪表板.
--   [**Saas**](https://commercial.abp.io/modules/Volo.Saas): 管理租户、版本和功能以创建 多租户/SaaS 应用程序.
--   [**TextTemplate Management**](https://commercial.abp.io/modules/Volo.TextTemplateManagement): 在用户界面上编辑文本/电子邮件模板.
--   ~~[**Twilio SMS**](https://commercial.abp.io/modules/Volo.Abp.Sms.Twilio): 通过 Twilio 云服务发送短信.~~
--   [**Version Management**](https://github.com/ArcherTrister/xabp/tree/main/modules/X.Abp.VersionManagement/README.md): 应用程序版本管理.
+-   [**Localization**](https://github.com/ArcherTrister/xabp/tree/main/modules/X.Abp.Localization/README.md): ABP 多种格式的区域性本地化。
+-   [**Notification**](https://github.com/ArcherTrister/xabp/tree/main/modules/X.Abp.Notification/README.md): ABP 通知模块。
+-   [**OpenIddict Pro**](https://commercial.abp.io/modules/Volo.OpenIddict.Pro): 管理身份服务器对象，如客户端、API 资源、身份资源、机密、应用程序 URL、声明等。
+-   [**Payment**](https://commercial.abp.io/modules/Volo.Payment): 为不同的支付网关提供集成。
+-   [**Quartz**](https://github.com/ArcherTrister/xabp/tree/main/modules/X.Abp.Quartz/README.md): Quartz 仪表板。
+-   [**Saas**](https://commercial.abp.io/modules/Volo.Saas): 管理租户、版本和功能以创建 多租户/SaaS 应用程序。
+-   [**TextTemplate Management**](https://commercial.abp.io/modules/Volo.TextTemplateManagement): 在用户界面上编辑文本/电子邮件模板。
+-   ~~[**Twilio SMS**](https://commercial.abp.io/modules/Volo.Abp.Sms.Twilio): 通过 Twilio 云服务发送短信。~~
+-   [**Version Management**](https://github.com/ArcherTrister/xabp/tree/main/modules/X.Abp.VersionManagement/README.md): 应用程序版本管理。
 
 ### 启动模板
 

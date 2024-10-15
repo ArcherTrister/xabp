@@ -23,11 +23,11 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 
 using X.Abp.OpenIddict.Permissions;
-using X.Abp.OpenIddict.Pro.Web.Menus;
-using X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Applications;
-using X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Scopes;
+using X.Abp.OpenIddict.Web.Menus;
+using X.Abp.OpenIddict.Web.Pages.OpenIddict.Applications;
+using X.Abp.OpenIddict.Web.Pages.OpenIddict.Scopes;
 
-namespace X.Abp.OpenIddict.Pro.Web;
+namespace X.Abp.OpenIddict.Web;
 
 [DependsOn(
     typeof(AbpOpenIddictProApplicationContractsModule),

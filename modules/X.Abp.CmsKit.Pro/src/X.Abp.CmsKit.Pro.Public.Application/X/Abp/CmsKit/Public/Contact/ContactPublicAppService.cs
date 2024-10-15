@@ -8,12 +8,18 @@ using Microsoft.Extensions.Options;
 
 using Volo.Abp;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Features;
+using Volo.Abp.GlobalFeatures;
 
 using X.Abp.CmsKit.Contact;
+using X.Abp.CmsKit.Features;
+using X.Abp.CmsKit.GlobalFeatures;
 using X.Captcha.Re;
 
 namespace X.Abp.CmsKit.Public.Contact;
 
+[RequiresFeature(CmsKitProFeatures.ContactEnable)]
+[RequiresGlobalFeature(typeof(ContactFeature))]
 public class ContactPublicAppService : ApplicationService, IContactPublicAppService
 {
     // public IAbpCaptchaValidatorFactory CaptchaValidatorFactory { get; set; }

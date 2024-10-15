@@ -1,5 +1,4 @@
-﻿using X.Abp.Gdpr.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.Gdpr;
 
@@ -8,7 +7,8 @@ namespace X.Abp.Gdpr;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(GdprEntityFrameworkCoreTestModule)
+    typeof(AbpGdprDomainModule),
+    typeof(GdprTestBaseModule)
     )]
 public class GdprDomainTestModule : AbpModule
 {

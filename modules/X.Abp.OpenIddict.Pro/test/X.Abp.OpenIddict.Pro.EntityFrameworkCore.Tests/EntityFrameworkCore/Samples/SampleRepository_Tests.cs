@@ -1,8 +1,8 @@
-﻿using Volo.Abp.OpenIddict.Pro.Samples;
+﻿using X.Abp.OpenIddict.Samples;
 
-namespace X.Abp.OpenIddict.Pro.EntityFrameworkCore.Samples;
+namespace X.Abp.OpenIddict.EntityFrameworkCore.Samples;
 
-public class SampleRepository_Tests : SampleRepository_Tests<ProEntityFrameworkCoreTestModule>
+public class SampleRepository_Tests : SampleRepository_Tests<AbpOpenIddictProEntityFrameworkCoreTestModule>
 {
     /* Don't write custom repository tests here, instead write to
      * the base class.

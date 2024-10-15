@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>X.Abp.Identity.Pro.MongoDB</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Identity.MongoDB" VersionOverride="$(AbpPackageVersion)" />
+    <ProjectReference Include="..\X.Abp.Identity.Pro.Domain\X.Abp.Identity.Pro.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

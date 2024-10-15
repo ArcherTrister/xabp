@@ -1,5 +1,4 @@
-﻿using X.Abp.Saas.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.Saas;
 
@@ -8,7 +7,8 @@ namespace X.Abp.Saas;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(SaasEntityFrameworkCoreTestModule)
+    typeof(AbpSaasDomainModule),
+    typeof(SaasTestBaseModule)
     )]
 public class SaasDomainTestModule : AbpModule
 {

@@ -9,7 +9,8 @@ namespace X.Abp.Notification;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(NotificationEntityFrameworkCoreTestModule)
+    typeof(NotificationEntityFrameworkCoreTestModule),
+    typeof(NotificationTestBaseModule)
     )]
 public class NotificationDomainTestModule : AbpModule
 {

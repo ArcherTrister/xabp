@@ -18,6 +18,8 @@ public class GlobalCmsKitProFeatures : GlobalModuleFeatures
 
     public PollsFeature PollsFeature => GetFeature<PollsFeature>();
 
+    public PageFeedbackFeature PageFeedbackFeature => GetFeature<PageFeedbackFeature>();
+
     public GlobalCmsKitProFeatures(GlobalFeatureManager cmsKitPro)
       : base(cmsKitPro)
     {
@@ -25,5 +27,6 @@ public class GlobalCmsKitProFeatures : GlobalModuleFeatures
         AddFeature(new ContactFeature(this));
         AddFeature(new UrlShortingFeature(this));
         AddFeature(new PollsFeature(this));
+        AddFeature(new PageFeedbackFeature(this));
     }
 }

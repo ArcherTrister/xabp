@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
+using Volo.Abp.AuditLogging;
 using Volo.Abp.Authorization;
 using Volo.Abp.Autofac;
 using Volo.Abp.Data;
@@ -12,7 +13,7 @@ namespace X.Abp.AuditLogging;
     typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(AuditLoggingDomainModule)
+    typeof(AbpAuditLoggingDomainModule)
     )]
 public class AuditLoggingTestBaseModule : AbpModule
 {

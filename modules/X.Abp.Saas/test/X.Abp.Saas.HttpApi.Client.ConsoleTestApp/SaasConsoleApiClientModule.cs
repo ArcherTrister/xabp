@@ -6,7 +6,7 @@ namespace X.Abp.Saas;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(SaasHttpApiClientModule),
+    typeof(AbpSaasHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class SaasConsoleApiClientModule : AbpModule

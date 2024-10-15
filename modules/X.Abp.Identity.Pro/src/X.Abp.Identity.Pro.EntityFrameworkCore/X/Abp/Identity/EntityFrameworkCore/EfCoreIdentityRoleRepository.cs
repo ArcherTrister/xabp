@@ -25,17 +25,6 @@ public class EfCoreIdentityRoleRepository : EfCoreRepository<IIdentityProDbConte
     {
     }
 
-    public virtual async Task<IdentityRole> FindByNormalizedNameAsync(
-        string normalizedRoleName,
-        bool includeDetails = true,
-        CancellationToken cancellationToken = default)
-    {
-        return await (await GetDbSetAsync())
-            .IncludeDetails(includeDetails)
-            .OrderBy(x => x.Id)
-            .FirstOrDefaultAsync(r => r.NormalizedName == normalizedRoleName, GetCancellationToken(cancellationToken));
-    }
-
     public virtual async Task<List<IdentityRoleWithUserCount>> GetListWithUserCountAsync(string filter, bool includeDetails, CancellationToken cancellationToken = default)
     {
         var roles = await (await GetDbSetAsync())
@@ -57,6 +46,17 @@ public class EfCoreIdentityRoleRepository : EfCoreRepository<IIdentityProDbConte
             .ToListAsync(GetCancellationToken(cancellationToken));
 
         return roles.Select(role => new IdentityRoleWithUserCount(role, userCount.FirstOrDefault(x => x.RoleId == role.Id)?.Count ?? 0)).ToList();
+    }
+
+    public virtual async Task<IdentityRole> FindByNormalizedNameAsync(
+        string normalizedRoleName,
+        bool includeDetails = true,
+        CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync())
+            .IncludeDetails(includeDetails)
+            .OrderBy(x => x.Id)
+            .FirstOrDefaultAsync(r => r.NormalizedName == normalizedRoleName, GetCancellationToken(cancellationToken));
     }
 
     public virtual async Task<List<IdentityRoleWithUserCount>> GetListWithUserCountAsync(

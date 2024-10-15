@@ -68,7 +68,7 @@ $solutions = (
     "modules/X.Abp.AuditLogging",
     "modules/X.Abp.Chat",
     "modules/X.Abp.Cli",
-    "modules/X.Abp.CmsKit.Pro",
+    # "modules/X.Abp.CmsKit.Pro",
     "modules/X.Abp.FileManagement",
     "modules/X.Abp.Forms",
     "modules/X.Abp.Gdpr",
@@ -142,7 +142,7 @@ $projects = (
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Admin.Application.Contracts",
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Admin.HttpApi",
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Admin.HttpApi.Client",
-    # "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Admin.Web",
+    "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Admin.Web",
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Application",
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Application.Contracts",
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Domain",
@@ -155,7 +155,7 @@ $projects = (
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Public.HttpApi",
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Public.HttpApi.Client",
     "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Public.Web",
-    # "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Web",
+    "modules/X.Abp.CmsKit.Pro/src/X.Abp.CmsKit.Pro.Web",
 
     ## modules/X.Abp.FileManagement
     "modules/X.Abp.FileManagement/src/X.Abp.FileManagement.Application",

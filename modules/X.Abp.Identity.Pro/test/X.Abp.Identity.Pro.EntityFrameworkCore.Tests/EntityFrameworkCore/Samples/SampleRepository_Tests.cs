@@ -1,8 +1,8 @@
-﻿using Volo.Abp.Identity.Pro.Samples;
+﻿using X.Abp.Identity.Samples;
 
-namespace X.Abp.Identity.Pro.EntityFrameworkCore.Samples;
+namespace X.Abp.Identity.EntityFrameworkCore.Samples;
 
-public class SampleRepository_Tests : SampleRepository_Tests<ProEntityFrameworkCoreTestModule>
+public class SampleRepository_Tests : SampleRepository_Tests<AbpIdentityProEntityFrameworkCoreTestModule>
 {
     /* Don't write custom repository tests here, instead write to
      * the base class.

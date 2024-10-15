@@ -3,6 +3,7 @@ using Volo.Abp;
 using Volo.Abp.Authorization;
 using Volo.Abp.Autofac;
 using Volo.Abp.Data;
+using Volo.Abp.Guids;
 using Volo.Abp.Modularity;
 using Volo.Abp.Threading;
 
@@ -12,7 +13,7 @@ namespace X.Abp.LanguageManagement;
     typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(LanguageManagementDomainModule)
+    typeof(AbpGuidsModule)
     )]
 public class LanguageManagementTestBaseModule : AbpModule
 {

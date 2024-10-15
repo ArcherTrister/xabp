@@ -19,5 +19,11 @@ public static class CmsKitProErrorCodes
         public const string PollUserVoteVotedBySameUser = "CmsKitPro:Poll:0004";
         public const string PollOptionWidgetNameCannotBeSame = "CmsKitPro:Poll:0005";
         public const string PollHasAlreadySameCodeException = "CmsKitPro:Poll:0006";
+        public const string PollSubmitVoteConcurrencyException = "CmsKitPro:Poll:0007";
+    }
+
+    public static class PageFeedbacks
+    {
+        public const string EntityCantHavePageFeedback = "CmsKitPro:PageFeedback:0001";
     }
 }

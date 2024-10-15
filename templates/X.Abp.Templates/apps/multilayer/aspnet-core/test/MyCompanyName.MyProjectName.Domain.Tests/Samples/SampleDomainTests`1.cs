@@ -7,6 +7,8 @@ using Volo.Abp.Modularity;
 
 using Xunit;
 
+using IIdentityUserRepository = X.Abp.Identity.IIdentityUserRepository;
+
 namespace MyCompanyName.MyProjectName.Samples;
 
 /* This is just an example test class.

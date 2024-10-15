@@ -5,11 +5,11 @@
 using AutoMapper;
 
 using X.Abp.OpenIddict.Applications.Dtos;
-using X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Applications;
-using X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Scopes;
 using X.Abp.OpenIddict.Scopes.Dtos;
+using X.Abp.OpenIddict.Web.Pages.OpenIddict.Applications;
+using X.Abp.OpenIddict.Web.Pages.OpenIddict.Scopes;
 
-namespace X.Abp.OpenIddict.Pro.Web;
+namespace X.Abp.OpenIddict.Web;
 
 public class AbpOpenIddictProWebAutoMapperProfile : Profile
 {

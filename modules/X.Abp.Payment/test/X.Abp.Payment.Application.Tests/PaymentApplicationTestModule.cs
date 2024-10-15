@@ -3,7 +3,7 @@
 namespace X.Abp.Payment;
 
 [DependsOn(
-    typeof(PaymentApplicationModule),
+    typeof(AbpPaymentApplicationModule),
     typeof(PaymentDomainTestModule)
     )]
 public class PaymentApplicationTestModule : AbpModule

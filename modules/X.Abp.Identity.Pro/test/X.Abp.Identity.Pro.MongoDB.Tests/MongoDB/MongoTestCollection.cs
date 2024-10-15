@@ -1,6 +1,6 @@
-using Xunit;
+﻿using Xunit;
 
-namespace X.Abp.Identity.Pro.MongoDB;
+namespace X.Abp.Identity.MongoDB;
 
 [CollectionDefinition(Name)]
 public class MongoTestCollection : ICollectionFixture<MongoDbFixture>

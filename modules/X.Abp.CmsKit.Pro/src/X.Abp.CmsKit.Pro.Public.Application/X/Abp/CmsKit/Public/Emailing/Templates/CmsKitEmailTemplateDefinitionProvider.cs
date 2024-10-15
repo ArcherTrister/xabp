@@ -14,7 +14,7 @@ public class CmsKitEmailTemplateDefinitionProvider : TemplateDefinitionProvider
         context.Add(new TemplateDefinition[]
         {
             new TemplateDefinition(CmsKitEmailTemplates.NewsletterEmailTemplate, typeof(CmsKitResource), null, false, "Abp.StandardEmailTemplates.Layout")
-            .WithVirtualFilePath("/X/CmsKit/Public/Emailing/Templates/NewsletterEmailLayout.tpl", true)
+            .WithVirtualFilePath("/X/Abp/CmsKit/Public/Emailing/Templates/NewsletterEmailLayout.tpl", true)
         });
     }
 }

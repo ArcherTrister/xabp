@@ -1,5 +1,4 @@
-﻿using X.Abp.Quartz.EntityFrameworkCore;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 
 namespace X.Abp.Quartz;
 
@@ -8,7 +7,8 @@ namespace X.Abp.Quartz;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(QuartzEntityFrameworkCoreTestModule)
+    typeof(AbpQuartzDomainModule),
+    typeof(QuartzTestBaseModule)
     )]
 public class QuartzDomainTestModule : AbpModule
 {

@@ -6,7 +6,7 @@ namespace X.Abp.Gdpr;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(GdprHttpApiClientModule),
+    typeof(AbpGdprHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class GdprConsoleApiClientModule : AbpModule

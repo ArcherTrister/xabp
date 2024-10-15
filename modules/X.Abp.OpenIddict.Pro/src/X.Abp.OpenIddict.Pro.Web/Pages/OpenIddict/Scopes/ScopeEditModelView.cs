@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using Volo.Abp.ObjectExtending;
 
-namespace X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Scopes;
+namespace X.Abp.OpenIddict.Web.Pages.OpenIddict.Scopes;
 
 public class ScopeEditModelView : ExtensibleObject
 {

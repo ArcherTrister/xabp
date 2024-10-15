@@ -11,12 +11,12 @@ using Volo.Abp.Domain.Repositories;
 
 namespace X.Abp.CmsKit.Newsletters;
 
-public interface INewsletterRecordRepository :
-  IBasicRepository<NewsletterRecord, Guid>
+public interface INewsletterRecordRepository : IBasicRepository<NewsletterRecord, Guid>
 {
     Task<List<NewsletterSummaryQueryResultItem>> GetListAsync(
       string preference = null,
       string source = null,
+      string emailAddress = null,
       int skipCount = 0,
       int maxResultCount = int.MaxValue,
       CancellationToken cancellationToken = default);
@@ -29,5 +29,6 @@ public interface INewsletterRecordRepository :
     Task<int> GetCountByFilterAsync(
       string preference = null,
       string source = null,
+      string emailAddress = null,
       CancellationToken cancellationToken = default);
 }

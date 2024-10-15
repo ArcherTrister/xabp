@@ -1,4 +1,4 @@
-﻿using Volo.Abp.TextTemplateManagement.Samples;
+﻿using X.Abp.TextTemplateManagement.Samples;
 
 namespace X.Abp.TextTemplateManagement.EntityFrameworkCore.Samples;
 

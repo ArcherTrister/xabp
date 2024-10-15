@@ -2920,6 +2920,9 @@ namespace AbpVnext.Pro.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("varchar(32)");
 
+                    b.Property<bool?>("IsApproved")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<Guid?>("RepliedCommentId")
                         .HasColumnType("char(36)");
 
@@ -2996,6 +2999,41 @@ namespace AbpVnext.Pro.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CmsGlobalResources", (string)null);
+                });
+
+            modelBuilder.Entity("Volo.CmsKit.MarkedItems.UserMarkedItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid>("CreatorId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("EntityId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "EntityType", "EntityId");
+
+                    b.HasIndex("TenantId", "CreatorId", "EntityType", "EntityId");
+
+                    b.ToTable("CmsUserMarkedItems", (string)null);
                 });
 
             modelBuilder.Entity("Volo.CmsKit.MediaDescriptors.MediaDescriptor", b =>
@@ -3772,6 +3810,99 @@ namespace AbpVnext.Pro.Migrations
                     b.HasIndex("TenantId", "EmailAddress");
 
                     b.ToTable("CmsNewsletterRecords", (string)null);
+                });
+
+            modelBuilder.Entity("X.Abp.CmsKit.PageFeedbacks.PageFeedback", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("AdminNote")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)")
+                        .HasColumnName("AdminNote");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<string>("EntityId")
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("EntityId");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("EntityType");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsHandled")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("IsHandled");
+
+                    b.Property<bool>("IsUseful")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("IsUseful");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("TenantId");
+
+                    b.Property<string>("Url")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)")
+                        .HasColumnName("Url");
+
+                    b.Property<string>("UserNote")
+                        .HasMaxLength(1024)
+                        .HasColumnType("varchar(1024)")
+                        .HasColumnName("UserNote");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CmsPageFeedbacks", (string)null);
+                });
+
+            modelBuilder.Entity("X.Abp.CmsKit.PageFeedbacks.PageFeedbackSetting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("EmailAddresses")
+                        .HasMaxLength(1024)
+                        .HasColumnType("varchar(1024)")
+                        .HasColumnName("EmailAddresses");
+
+                    b.Property<string>("EntityType")
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("EntityType");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId", "EntityType")
+                        .IsUnique();
+
+                    b.ToTable("CmsPageFeedbackSettings", (string)null);
                 });
 
             modelBuilder.Entity("X.Abp.CmsKit.Polls.Poll", b =>
@@ -5251,8 +5382,8 @@ namespace AbpVnext.Pro.Migrations
                     b.Property<DateTime?>("ActivationEndDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<byte>("ActivationState")
-                        .HasColumnType("tinyint unsigned");
+                    b.Property<int>("ActivationState")
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -5411,6 +5542,79 @@ namespace AbpVnext.Pro.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AbpTextTemplateContents", (string)null);
+                });
+
+            modelBuilder.Entity("X.Abp.TextTemplateManagement.TextTemplates.TextTemplateDefinitionContentRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("DefinitionId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("FileContent")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DefinitionId");
+
+                    b.ToTable("AbpTextTemplateDefinitionContentRecords", (string)null);
+                });
+
+            modelBuilder.Entity("X.Abp.TextTemplateManagement.TextTemplates.TextTemplateDefinitionRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("DefaultCultureName")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("DisplayName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("longtext")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsInlineLocalized")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsLayout")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Layout")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("LocalizationResourceName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("RenderEngine")
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("AbpTextTemplateDefinitionRecords", (string)null);
                 });
 
             modelBuilder.Entity("X.Abp.VersionManagement.AppEditions.AppEdition", b =>
@@ -5996,6 +6200,15 @@ namespace AbpVnext.Pro.Migrations
                     b.HasOne("X.Abp.Saas.Tenants.Tenant", null)
                         .WithMany("ConnectionStrings")
                         .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("X.Abp.TextTemplateManagement.TextTemplates.TextTemplateDefinitionContentRecord", b =>
+                {
+                    b.HasOne("X.Abp.TextTemplateManagement.TextTemplates.TextTemplateDefinitionRecord", null)
+                        .WithMany()
+                        .HasForeignKey("DefinitionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

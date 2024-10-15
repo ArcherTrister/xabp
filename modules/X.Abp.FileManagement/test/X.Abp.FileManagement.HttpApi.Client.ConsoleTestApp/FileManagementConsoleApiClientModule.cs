@@ -6,7 +6,7 @@ namespace X.Abp.FileManagement;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(FileManagementHttpApiClientModule),
+    typeof(AbpFileManagementHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class FileManagementConsoleApiClientModule : AbpModule

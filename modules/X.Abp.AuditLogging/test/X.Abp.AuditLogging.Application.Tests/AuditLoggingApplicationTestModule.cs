@@ -3,8 +3,8 @@
 namespace X.Abp.AuditLogging;
 
 [DependsOn(
-    typeof(AuditLoggingApplicationModule),
-    typeof(AuditLoggingDomainTestModule)
+    typeof(AbpAuditLoggingApplicationModule),
+    typeof(AuditLoggingTestBaseModule)
     )]
 public class AuditLoggingApplicationTestModule : AbpModule
 {

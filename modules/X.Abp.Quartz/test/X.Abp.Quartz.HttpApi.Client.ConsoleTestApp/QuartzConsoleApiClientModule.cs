@@ -6,7 +6,7 @@ namespace X.Abp.Quartz;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(QuartzHttpApiClientModule),
+    typeof(AbpQuartzHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
     )]
 public class QuartzConsoleApiClientModule : AbpModule

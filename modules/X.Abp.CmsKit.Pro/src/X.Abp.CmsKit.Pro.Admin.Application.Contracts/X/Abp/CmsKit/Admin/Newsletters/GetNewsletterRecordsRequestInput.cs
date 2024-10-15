@@ -11,4 +11,6 @@ public class GetNewsletterRecordsRequestInput : PagedResultRequestDto
     public string Preference { get; set; }
 
     public string Source { get; set; }
+
+    public string EmailAddress { get; set; }
 }

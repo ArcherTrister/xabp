@@ -9,8 +9,8 @@ using Volo.Abp.Modularity;
 namespace X.Abp.TextTemplateManagement.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(TextTemplateManagementTestBaseModule),
-    typeof(TextTemplateManagementEntityFrameworkCoreModule),
+    typeof(TextTemplateManagementApplicationTestModule),
+    typeof(AbpTextTemplateManagementEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreSqliteModule)
     )]
 public class TextTemplateManagementEntityFrameworkCoreTestModule : AbpModule

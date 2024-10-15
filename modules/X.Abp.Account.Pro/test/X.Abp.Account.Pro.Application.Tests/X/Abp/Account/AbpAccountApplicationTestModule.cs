@@ -4,30 +4,34 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using NSubstitute;
-using Volo.Abp.Account.Pro.Application.Tests.Volo.Abp.Account;
+
+using Volo.Abp;
 using Volo.Abp.Authorization;
 using Volo.Abp.Autofac;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Data;
-using Volo.Abp.Uow;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.AspNetCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.Threading;
+using Volo.Abp.Uow;
+
+using X.Abp.Account.Pro.Application.Tests.Volo.Abp.Account;
+using X.Abp.Identity.AspNetCore;
+using X.Abp.Identity.EntityFrameworkCore;
 
 namespace X.Abp.Account;
 
 [DependsOn(typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(AbpIdentityEntityFrameworkCoreModule),
-    typeof(AbpIdentityAspNetCoreModule),
+    typeof(AbpIdentityProEntityFrameworkCoreModule),
+    typeof(AbpIdentityProAspNetCoreModule),
     typeof(AbpAccountAdminApplicationModule),
     typeof(AbpAccountPublicApplicationModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
@@ -81,7 +85,6 @@ public class AbpAccountApplicationTestModule : AbpModule
             new DbContextOptionsBuilder<SettingManagementDbContext>().UseSqlite(connection).Options
         ).GetService<IRelationalDatabaseCreator>().CreateTables();
 
-
         new IdentityDbContext(
             new DbContextOptionsBuilder<IdentityDbContext>().UseSqlite(connection).Options
         ).GetService<IRelationalDatabaseCreator>().CreateTables();
@@ -89,7 +92,6 @@ public class AbpAccountApplicationTestModule : AbpModule
         new PermissionManagementDbContext(
             new DbContextOptionsBuilder<PermissionManagementDbContext>().UseSqlite(connection).Options
         ).GetService<IRelationalDatabaseCreator>().CreateTables();
-
 
         return connection;
     }

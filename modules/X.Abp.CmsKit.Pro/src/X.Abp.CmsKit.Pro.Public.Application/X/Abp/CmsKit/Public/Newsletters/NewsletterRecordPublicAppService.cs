@@ -8,15 +8,21 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Volo.Abp.Emailing;
+using Volo.Abp.Features;
+using Volo.Abp.GlobalFeatures;
 using Volo.Abp.TextTemplating;
 using Volo.Abp.UI.Navigation.Urls;
 
+using X.Abp.CmsKit.Features;
+using X.Abp.CmsKit.GlobalFeatures;
 using X.Abp.CmsKit.Newsletters;
 using X.Abp.CmsKit.Newsletters.Helpers;
 using X.Abp.CmsKit.Public.Emailing.Templates;
 
 namespace X.Abp.CmsKit.Public.Newsletters;
 
+[RequiresFeature(CmsKitProFeatures.NewsletterEnable)]
+[RequiresGlobalFeature(typeof(NewslettersFeature))]
 public class NewsletterRecordPublicAppService : PublicAppService, INewsletterRecordPublicAppService
 {
     protected INewsletterPreferenceDefinitionStore NewsletterPreferenceDefinitionStore { get; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace X.Abp.OpenIddict.Pro.Web.Pages.OpenIddict.Scopes;
+namespace X.Abp.OpenIddict.Web.Pages.OpenIddict.Scopes;
 
 public class IndexModel : OpenIddictProPageModel
 {

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 
-namespace X.Abp.OpenIddict.Pro.HttpApi.Client.ConsoleTestApp;
+namespace X.Abp.OpenIddict.HttpApi.Client.ConsoleTestApp;
 
 public class ConsoleTestAppHostedService : IHostedService
 {
