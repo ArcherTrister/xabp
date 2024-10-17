@@ -1,18 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using X.Abp.CmsKit.Pro.Blazor.Menus;
+
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 
+using X.Abp.CmsKit.Pro.Blazor.Menus;
+
 namespace X.Abp.CmsKit.Pro.Blazor;
 
 [DependsOn(
-    typeof(CmsKitProApplicationContractsModule),
+    typeof(AbpCmsKitProApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
-    typeof(AbpAutoMapperModule)
-    )]
+    typeof(AbpAutoMapperModule))]
 public class ProBlazorModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

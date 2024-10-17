@@ -14,7 +14,7 @@ using Volo.CmsKit.Public;
 namespace X.Abp.CmsKit.Public;
 
 [DependsOn(
-    typeof(CmsKitProDomainModule),
+    typeof(AbpCmsKitProDomainModule),
     typeof(AbpCmsKitProPublicApplicationContractsModule),
     typeof(CmsKitPublicApplicationModule),
     typeof(AbpEmailingModule),

@@ -8,6 +8,7 @@ using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.CmsKit;
 
+using X.Abp.CmsKit.Faqs;
 using X.Abp.CmsKit.Newsletters;
 using X.Abp.CmsKit.PageFeedbacks;
 using X.Abp.CmsKit.Polls;
@@ -33,4 +34,8 @@ public interface ICmsKitProDbContext : IEfCoreDbContext
     DbSet<PageFeedback> PageFeedbacks { get; }
 
     DbSet<PageFeedbackSetting> PageFeedbackSettings { get; }
+
+    DbSet<FaqQuestion> FaqQuestions { get; set; }
+
+    DbSet<FaqSection> FaqSections { get; set; }
 }

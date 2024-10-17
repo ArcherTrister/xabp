@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="CsvHelper" />
+    <PackageReference Include="System.Linq.Async" />
     <PackageReference Include="Volo.CmsKit.Admin.Application" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.CmsKit.Pro.Admin.Application.Contracts\X.Abp.CmsKit.Pro.Admin.Application.Contracts.csproj" />
     <ProjectReference Include="..\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />

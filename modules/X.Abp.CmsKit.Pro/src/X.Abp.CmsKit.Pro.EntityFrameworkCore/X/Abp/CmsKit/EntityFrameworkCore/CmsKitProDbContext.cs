@@ -8,6 +8,7 @@ using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.CmsKit;
 
+using X.Abp.CmsKit.Faqs;
 using X.Abp.CmsKit.Newsletters;
 using X.Abp.CmsKit.PageFeedbacks;
 using X.Abp.CmsKit.Polls;
@@ -33,6 +34,10 @@ public class CmsKitProDbContext : AbpDbContext<CmsKitProDbContext>, ICmsKitProDb
     public DbSet<PageFeedback> PageFeedbacks { get; set; }
 
     public DbSet<PageFeedbackSetting> PageFeedbackSettings { get; set; }
+
+    public DbSet<FaqQuestion> FaqQuestions { get; set; }
+
+    public DbSet<FaqSection> FaqSections { get; set; }
 
     public CmsKitProDbContext(DbContextOptions<CmsKitProDbContext> options)
       : base(options)

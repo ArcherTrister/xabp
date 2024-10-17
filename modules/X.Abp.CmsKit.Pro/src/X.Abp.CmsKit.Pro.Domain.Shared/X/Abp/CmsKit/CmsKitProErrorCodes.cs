@@ -26,4 +26,16 @@ public static class CmsKitProErrorCodes
     {
         public const string EntityCantHavePageFeedback = "CmsKitPro:PageFeedback:0001";
     }
+
+    public static class FaqSection
+    {
+        public const string FaqSectionHasAlreadyException = "CmsKitPro:FaqSection:0001";
+        public const string FaqSectionInvalidGroupName = "CmsKitPro:FaqSection:0002";
+    }
+
+    public static class FaqQuestion
+    {
+        public const string FaqQuestionHasAlreadyException = "CmsKitPro:FaqQuestion:0001";
+        public const string FaqQuestionSectionNotFound = "CmsKitPro:FaqQuestion:0002";
+    }
 }

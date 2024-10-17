@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using Volo.Abp.AspNetCore.Authentication;
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Security.Claims;
@@ -32,12 +33,12 @@ public class IdentitySessionDynamicClaimsPrincipalContributor : AbpDynamicClaims
             if (userId.HasValue)
             {
                 var logger = context.ServiceProvider.GetRequiredService<ILogger<IdentitySessionDynamicClaimsPrincipalContributor>>();
+                bool logout = false;
                 string sessionId = identity.FindSessionId();
                 if (sessionId.IsNullOrWhiteSpace())
                 {
-                    logger.LogWarning(message: $"sessionId claim not found for user: {userId}, log out.");
-                    await context.ServiceProvider.GetRequiredService<IdentityDynamicClaimsPrincipalContributorCache>().ClearAsync(userId.Value);
-                    context.ClaimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity());
+                    logger.LogWarning(message: "SessionId claim not found for user: {UserId}, log out.", userId);
+                    logout = true;
                 }
                 else
                 {
@@ -48,11 +49,20 @@ public class IdentitySessionDynamicClaimsPrincipalContributor : AbpDynamicClaims
                     {
                         if (!await identitySessionChecker.IsValidateAsync(sessionId))
                         {
-                            logger.LogWarning(message: $"SessionId({sessionId}) not found for user: {userId}, log out.");
-                            await context.ServiceProvider.GetRequiredService<IdentityDynamicClaimsPrincipalContributorCache>().ClearAsync(userId.Value);
-                            context.ClaimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity());
+                            logger.LogWarning(message: "SessionId({SessionId}) not found for user: {UserId}, log out.", sessionId, userId);
+                            logout = true;
                         }
                     }
+                }
+
+                if (logout)
+                {
+                    await context.ServiceProvider.GetRequiredService<IdentityDynamicClaimsPrincipalContributorCache>().ClearAsync(userId.Value);
+                    context.ClaimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity());
+                    logger.LogWarning("The token is no longer valid because the user's session expired.");
+                    var tokenUnauthorizedErrorInfo = context.ServiceProvider.GetRequiredService<AbpAspNetCoreTokenUnauthorizedErrorInfo>();
+                    tokenUnauthorizedErrorInfo.Error = "invalid_token";
+                    tokenUnauthorizedErrorInfo.ErrorDescription = "SessionExpired";
                 }
             }
         }

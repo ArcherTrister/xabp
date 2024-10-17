@@ -44,6 +44,9 @@ namespace X.Abp.CmsKit.PageFeedbacks
             return new PageFeedbackSetting(GuidGenerator.Create(), entityType, emailAddresses, CurrentTenant.Id);
         }
 
-        public virtual PageFeedbackSetting CreateDefaultSetting(string emailAddresses) => new PageFeedbackSetting(GuidGenerator.Create(), null, emailAddresses, CurrentTenant.Id);
+        public virtual PageFeedbackSetting CreateDefaultSetting(string emailAddresses)
+        {
+            return new PageFeedbackSetting(GuidGenerator.Create(), null, emailAddresses, CurrentTenant.Id);
+        }
     }
 }

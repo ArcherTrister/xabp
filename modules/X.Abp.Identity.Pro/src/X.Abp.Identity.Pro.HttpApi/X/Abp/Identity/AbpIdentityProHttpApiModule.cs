@@ -19,4 +19,12 @@ public class AbpIdentityProHttpApiModule : AbpModule
             mvcBuilder.AddApplicationPartIfNotExists(typeof(AbpIdentityProHttpApiModule).Assembly);
         });
     }
+
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.FormBodyBindingIgnoredTypes.Add(typeof(ImportUsersFromFileInputWithStream));
+        });
+    }
 }

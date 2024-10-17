@@ -98,7 +98,7 @@ public class EfCorePollRepository : EfCoreRepository<ICmsKitProDbContext, Poll, 
             return null;
         }
 
-        return await (await GetDbSetAsync()).FirstOrDefaultAsync(poll => poll.Widget == widget && ((poll.StartDate <= now && (poll.EndDate.HasValue == false || poll.EndDate >= (DateTime?)now)) || (poll.ResultShowingEndDate.HasValue && poll.ResultShowingEndDate >= (DateTime?)now)), GetCancellationToken(cancellationToken));
+        return await (await GetDbSetAsync()).FirstOrDefaultAsync(poll => poll.Widget == widget && ((poll.StartDate <= now && (poll.EndDate.HasValue == false || poll.EndDate >= now)) || (poll.ResultShowingEndDate.HasValue && poll.ResultShowingEndDate >= now)), GetCancellationToken(cancellationToken));
     }
 
     public virtual async Task<Poll> FindByCodeAsync(string code, CancellationToken cancellationToken = default)

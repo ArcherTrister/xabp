@@ -3,6 +3,7 @@
 // for more information concerning the license and the contributors participating to this project.
 
 using System;
+using System.Collections.Generic;
 
 using Volo.Abp.Auditing;
 
@@ -15,4 +16,6 @@ public class NewsletterSummaryQueryResultItem : IHasCreationTime
     public string EmailAddress { get; set; }
 
     public DateTime CreationTime { get; set; }
+
+    public List<string> Preferences { get; set; }
 }

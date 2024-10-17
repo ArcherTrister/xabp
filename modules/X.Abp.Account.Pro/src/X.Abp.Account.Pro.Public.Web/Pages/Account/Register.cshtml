@@ -50,7 +50,7 @@
     }
 
     <div class="account-module-form">
-        <form method="post">
+        <form method="post" id="registerForm">
 
             @if (Model.UseCaptcha)
             {
@@ -86,10 +86,38 @@
                 <re-captcha-v2-div callback="(function(){$('#@CaptchaValidatorBase.CaptchaResponseKey').val(token)})" />
             }
 
-            <div class="gap-2 d-grid">
-                <abp-button button-type="Primary" type="submit" class="mt-2 mb-3">@L["Register"]</abp-button>
-            </div>
-            @L["AlreadyRegistered"] <a href="@Url.Page("./Login", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})">@L["Login"]</a>
+            @if (Model.EnableLocalRegister || Model.IsExternalLoginOnly)
+            {
+                <div class="gap-2 d-grid">
+                    <abp-button button-type="Primary" type="submit" class="mt-2 mb-3">@L["Register"]</abp-button>
+                </div>
+            }
         </form>
+
+        @L["AlreadyRegistered"] <a href="@Url.Page("./Login", new {returnUrl = Model.ReturnUrl, returnUrlHash = Model.ReturnUrlHash})">@L["Login"]</a>
+
+        @if(!Model.IsExternalLogin && Model.VisibleExternalProviders.Any())
+        {
+            <hr />
+            @L["OrRegisterWith"]
+
+            <br />
+            <form asp-page="./Login" asp-page-handler="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-returnUrlHash="@Model.ReturnUrlHash" method="post">
+                @foreach (var provider in Model.VisibleExternalProviders)
+                {
+                    <button type="submit"
+                            class="mt-2 me-2 btn btn-outline-primary btn-sm"
+                            name="provider"
+                            value="@provider.AuthenticationScheme"
+                            data-busy-text="@L["ProcessingWithThreeDot"]">
+                        @if (provider.Icon != null)
+                        {
+                            <i class="@provider.Icon"></i>
+                        }
+                        <span>@provider.DisplayName</span>
+                    </button>
+                }
+            </form>
+        }
     </div>
 }

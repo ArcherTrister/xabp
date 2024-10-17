@@ -35,7 +35,7 @@ namespace X.Abp.CmsKit.PageFeedbacks
           bool? isHandled = null,
           string sorting = null,
           int skipCount = 0,
-          int maxResultCount = 2147483647,
+          int maxResultCount = int.MaxValue,
           CancellationToken cancellationToken = default)
         {
             return await (await GetFilteredQueryableAsync(entityType, entityId, isUseful, url, isHandled))

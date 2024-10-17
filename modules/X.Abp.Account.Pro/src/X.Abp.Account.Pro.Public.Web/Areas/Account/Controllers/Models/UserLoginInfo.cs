@@ -25,5 +25,5 @@ public class UserLoginInfo
 
     public bool RememberMe { get; set; }
 
-    public Guid? TenanId { get; set; }
+    public Guid? TenantId { get; set; }
 }

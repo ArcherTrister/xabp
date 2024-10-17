@@ -20,29 +20,37 @@ public class CmsKitProFeatureDefinitionProvider : CmsKitFeatureDefinitionProvide
         FeatureGroupDefinition featureGroupDefinition = context.AddGroup(CmsKitProFeatures.GroupName, L("Feature:CmsKitProGroup"));
         if (GlobalFeatureManager.Instance.IsEnabled<ContactFeature>())
         {
-            featureGroupDefinition.AddFeature("CmsKitPro.ContactEnable", "true", L("Feature:ContactEnable"), L("Feature:ContactEnableDescription"), new ToggleStringValueType());
+            featureGroupDefinition.AddFeature(CmsKitProFeatures.ContactEnable, "true", L("Feature:ContactEnable"), L("Feature:ContactEnableDescription"), new ToggleStringValueType());
         }
 
         if (GlobalFeatureManager.Instance.IsEnabled<NewslettersFeature>())
         {
-            featureGroupDefinition.AddFeature("CmsKitPro.NewsletterEnable", "true", L("Feature:NewsletterEnable"), L("Feature:NewsletterEnableDescription"), new ToggleStringValueType());
+            featureGroupDefinition.AddFeature(CmsKitProFeatures.NewsletterEnable, "true", L("Feature:NewsletterEnable"), L("Feature:NewsletterEnableDescription"), new ToggleStringValueType());
         }
 
         if (GlobalFeatureManager.Instance.IsEnabled<PollsFeature>())
         {
-            featureGroupDefinition.AddFeature("CmsKitPro.PollEnable", "true", L("Feature:PollEnable"), L("Feature:PollEnableDescription"), new ToggleStringValueType());
+            featureGroupDefinition.AddFeature(CmsKitProFeatures.PollEnable, "true", L("Feature:PollEnable"), L("Feature:PollEnableDescription"), new ToggleStringValueType());
         }
 
         if (GlobalFeatureManager.Instance.IsEnabled<UrlShortingFeature>())
         {
-            featureGroupDefinition.AddFeature("CmsKitPro.UrlShortingEnable", "true", L("Feature:UrlShortingEnable"), L("Feature:UrlShortingEnableDescription"), new ToggleStringValueType());
+            featureGroupDefinition.AddFeature(CmsKitProFeatures.UrlShortingEnable, "true", L("Feature:UrlShortingEnable"), L("Feature:UrlShortingEnableDescription"), new ToggleStringValueType());
         }
 
         if (GlobalFeatureManager.Instance.IsEnabled<PageFeedbackFeature>())
         {
-            featureGroupDefinition.AddFeature("CmsKitPro.PageFeedbackEnable", "true", L("Feature:PageFeedbackEnable"), L("Feature:PageFeedbackEnableDescription"), new ToggleStringValueType());
+            featureGroupDefinition.AddFeature(CmsKitProFeatures.PageFeedbackEnable, "true", L("Feature:PageFeedbackEnable"), L("Feature:PageFeedbackEnableDescription"), new ToggleStringValueType());
+        }
+
+        if (GlobalFeatureManager.Instance.IsEnabled<FaqFeature>())
+        {
+            featureGroupDefinition.AddFeature(CmsKitProFeatures.FaqEnable, "true", L("Feature:FaqEnable"), L("Feature:FaqEnableDescription"), new ToggleStringValueType());
         }
     }
 
-    private static LocalizableString L(string name) => LocalizableString.Create<CmsKitResource>(name);
+    private static LocalizableString L(string name)
+    {
+        return LocalizableString.Create<CmsKitResource>(name);
+    }
 }

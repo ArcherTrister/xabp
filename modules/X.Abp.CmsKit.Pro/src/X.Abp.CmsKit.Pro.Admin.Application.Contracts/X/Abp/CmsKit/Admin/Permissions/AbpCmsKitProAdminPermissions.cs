@@ -10,34 +10,53 @@ public static class AbpCmsKitProAdminPermissions
 {
     public const string GroupName = "CmsKit";
 
-    public static string[] GetAll()
-    {
-        return ReflectionHelper.GetPublicConstantsRecursively(typeof(AbpCmsKitProAdminPermissions));
-    }
-
     public static class Newsletters
     {
-        public const string Default = "CmsKit.Newsletter";
+        public const string Default = GroupName + ".Newsletter";
+        public const string EditPreferences = Default + ".EditPreferences";
+        public const string Import = Default + ".Import";
     }
 
     public static class Contact
     {
+        private const string Default = "CmsKit.Contact";
         public const string SettingManagement = "CmsKit.SettingManagement";
     }
 
     public static class UrlShorting
     {
-        public const string Default = "CmsKit.UrlShorting";
-        public const string Create = "CmsKit.UrlShorting.Create";
-        public const string Update = "CmsKit.UrlShorting.Update";
-        public const string Delete = "CmsKit.UrlShorting.Delete";
+        public const string Default = GroupName + ".UrlShorting";
+        public const string Create = Default + ".Create";
+        public const string Update = Default + ".Update";
+        public const string Delete = Default + ".Delete";
     }
 
     public static class Polls
     {
-        public const string Default = "CmsKit.Poll";
-        public const string Create = "CmsKit.Poll.Create";
-        public const string Update = "CmsKit.Poll.Update";
-        public const string Delete = "CmsKit.Poll.Delete";
+        public const string Default = GroupName + ".Poll";
+        public const string Create = Default + ".Create";
+        public const string Update = Default + ".Update";
+        public const string Delete = Default + ".Delete";
+    }
+
+    public static class PageFeedbacks
+    {
+        public const string Default = GroupName + ".PageFeedback";
+        public const string Update = Default + ".Update";
+        public const string Delete = Default + ".Delete";
+        public const string Settings = Default + ".Settings";
+    }
+
+    public static class Faqs
+    {
+        public const string Default = GroupName + ".Faq";
+        public const string Create = Default + ".Create";
+        public const string Update = Default + ".Update";
+        public const string Delete = Default + ".Delete";
+    }
+
+    public static string[] GetAll()
+    {
+        return ReflectionHelper.GetPublicConstantsRecursively(typeof(AbpCmsKitProAdminPermissions));
     }
 }

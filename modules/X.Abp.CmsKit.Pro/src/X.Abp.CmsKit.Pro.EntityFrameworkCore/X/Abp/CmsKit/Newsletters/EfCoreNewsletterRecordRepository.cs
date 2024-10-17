@@ -44,6 +44,7 @@ public class EfCoreNewsletterRecordRepository : EfCoreRepository<ICmsKitProDbCon
             .WhereIf(!emailAddress.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.EmailAddress.Equals(emailAddress))
             .Select(x => new NewsletterSummaryQueryResultItem
             {
+                Preferences = x.Preferences.Select(p => p.Preference).ToList(),
                 CreationTime = x.CreationTime,
                 EmailAddress = x.EmailAddress,
                 Id = x.Id,

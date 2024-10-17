@@ -14,16 +14,25 @@ namespace X.Abp.CmsKit.Admin.Newsletters;
 
 public interface INewsletterRecordAdminAppService : IApplicationService
 {
-    Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(
-      GetNewsletterRecordsRequestInput input);
+    Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(GetNewsletterRecordsRequestInput input);
 
     Task<NewsletterRecordWithDetailsDto> GetAsync(Guid id);
 
-    Task<List<NewsletterRecordCsvDto>> GetNewsletterRecordsCsvDetailAsync(
-      GetNewsletterRecordsCsvRequestInput input);
+    Task<List<NewsletterRecordCsvDto>> GetNewsletterRecordsCsvDetailAsync(GetNewsletterRecordsCsvRequestInput input);
 
     Task<List<string>> GetNewsletterPreferencesAsync();
 
-    Task<IRemoteStreamContent> GetCsvResponsesAsync(
-      GetNewsletterRecordsCsvRequestInput input);
+    Task<IRemoteStreamContent> GetCsvResponsesAsync(GetNewsletterRecordsCsvRequestInput input);
+
+    Task<List<NewsletterPreferenceDetailsDto>> GetNewsletterPreferencesAsync(string emailAddress);
+
+    Task UpdatePreferencesAsync(UpdatePreferenceInput input);
+
+    Task<DownloadTokenResultDto> GetDownloadTokenAsync();
+
+    Task<IRemoteStreamContent> GetImportNewslettersSampleFileAsync(GetImportNewslettersSampleFileInput input);
+
+    Task<ImportNewslettersFromFileOutput> ImportNewslettersFromFileAsync(ImportNewslettersFromFileInputWithStream input);
+
+    Task<IRemoteStreamContent> GetImportInvalidNewslettersFileAsync(GetImportInvalidNewslettersFileInput input);
 }

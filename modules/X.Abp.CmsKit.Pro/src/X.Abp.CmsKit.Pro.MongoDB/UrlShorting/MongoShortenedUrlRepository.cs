@@ -31,7 +31,7 @@ namespace X.Abp.CmsKit.UrlShorting
           string filter = null,
           string sorting = null,
           int skipCount = 0,
-          int maxResultCount = 2147483647,
+          int maxResultCount = int.MaxValue,
           CancellationToken cancellationToken = default)
         {
             CancellationToken token = GetCancellationToken(cancellationToken);

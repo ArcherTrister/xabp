@@ -8,21 +8,12 @@ namespace X.Abp.CmsKit.PageFeedbacks
 {
     public class EntityCantHavePageFeedbackException : BusinessException
     {
-        public string EntityType
-        {
-            get
-            {
-                return Data["EntityType"] as string;
-            }
-        }
-
         public EntityCantHavePageFeedbackException(string entityType)
             : base(CmsKitProErrorCodes.PageFeedbacks.EntityCantHavePageFeedback)
         {
             Check.NotNullOrEmpty(entityType, nameof(entityType), PageFeedbackConst.MaxEntityTypeLength);
 
-            // TODO: WithData
-            WithData("EntityType", EntityType);
+            WithData("EntityType", entityType);
         }
     }
 }

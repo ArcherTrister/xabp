@@ -3,6 +3,8 @@
 using Volo.Abp.Data;
 using Volo.Abp.MongoDB;
 using Volo.CmsKit;
+
+using X.Abp.CmsKit.Faqs;
 using X.Abp.CmsKit.Newsletters;
 using X.Abp.CmsKit.PageFeedbacks;
 using X.Abp.CmsKit.Polls;
@@ -28,6 +30,10 @@ public class CmsKitProMongoDbContext : AbpMongoDbContext, ICmsKitProMongoDbConte
     public IMongoCollection<PageFeedback> PageFeedbacks => Collection<PageFeedback>();
 
     public IMongoCollection<PageFeedbackSetting> PageFeedbackSettings => Collection<PageFeedbackSetting>();
+
+    public IMongoCollection<FaqSection> FaqSections => Collection<FaqSection>();
+
+    public IMongoCollection<FaqQuestion> FaqQuestions => Collection<FaqQuestion>();
 
     protected override void CreateModel(IMongoModelBuilder modelBuilder)
     {

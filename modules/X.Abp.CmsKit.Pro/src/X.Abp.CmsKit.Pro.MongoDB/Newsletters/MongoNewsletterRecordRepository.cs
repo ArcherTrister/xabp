@@ -33,7 +33,7 @@ namespace X.Abp.CmsKit.Newsletters
           string source = null,
           string emailAddress = null,
           int skipCount = 0,
-          int maxResultCount = 2147483647,
+          int maxResultCount = int.MaxValue,
           CancellationToken cancellationToken = default)
         {
             CancellationToken token = GetCancellationToken(cancellationToken);
@@ -42,9 +42,10 @@ namespace X.Abp.CmsKit.Newsletters
                 .WhereIf(!source.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.Preferences.Any(newsletterPreference => newsletterPreference.Source.Contains(source)))
                 .WhereIf(!emailAddress.IsNullOrWhiteSpace(), newsletterRecord => newsletterRecord.EmailAddress.Equals(emailAddress))
                 .PageBy(skipCount, maxResultCount)
-                .As<IMongoQueryable<NewsletterSummaryQueryResultItem>>()
+                .As<IMongoQueryable<NewsletterRecord>>()
                 .Select(x => new NewsletterSummaryQueryResultItem
                 {
+                    Preferences = x.Preferences.Select(p => p.Preference).ToList(),
                     CreationTime = x.CreationTime,
                     EmailAddress = x.EmailAddress,
                     Id = x.Id,

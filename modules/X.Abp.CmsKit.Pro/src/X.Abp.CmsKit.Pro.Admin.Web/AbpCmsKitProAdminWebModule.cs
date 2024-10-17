@@ -5,6 +5,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AutoMapper;
@@ -14,6 +15,7 @@ using Volo.Abp.VirtualFileSystem;
 using Volo.CmsKit.Localization;
 
 using X.Abp.CmsKit.Admin;
+using X.Abp.CmsKit.Admin.Newsletters;
 using X.Abp.CmsKit.Pro.Admin.Web.Menus;
 
 namespace X.Abp.CmsKit.Pro.Admin.Web;
@@ -39,6 +41,11 @@ public class AbpCmsKitProAdminWebModule : AbpModule
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.FormBodyBindingIgnoredTypes.Add(typeof(ImportNewslettersFromFileInputWithStream));
+        });
+
         Configure<AbpNavigationOptions>(options =>
         {
             options.MenuContributors.Add(new AbpCmsKitProAdminMenuContributor());

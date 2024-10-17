@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using Microsoft.Extensions.DependencyInjection;
+
 using Volo.Abp;
 using Volo.Abp.Authorization;
 using Volo.Abp.Autofac;
@@ -10,12 +15,11 @@ using Volo.Abp.Threading;
 namespace X.Abp.CmsKit.Pro;
 
 [DependsOn(
-    typeof(CmsKitProDomainModule),
+    typeof(AbpCmsKitProDomainModule),
     typeof(AbpAutofacModule),
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
-    typeof(AbpGuidsModule)
-    )]
+    typeof(AbpGuidsModule))]
 public class CmsKitProTestBaseModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

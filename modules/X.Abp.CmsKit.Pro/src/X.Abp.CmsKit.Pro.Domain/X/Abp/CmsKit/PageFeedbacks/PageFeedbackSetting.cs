@@ -55,9 +55,7 @@ namespace X.Abp.CmsKit.PageFeedbacks
             {
                 if (!ValidationHelper.IsValidEmailAddress(emailAddress.Trim()))
                 {
-                    // TODO: ArgumentException
-                    // throw new ArgumentException(Class12.smethod_19() + emailAddress + Class12.smethod_19());
-                    throw new ArgumentException();
+                    throw new ArgumentException("Email address is not valid");
                 }
             }
 

@@ -410,13 +410,13 @@ public static class IdentityServerDbContextModelCreatingExtensions
             if (IsDatabaseProvider(builder, EfCoreDatabaseProvider.MySql))
             {
                 PersistedGrantConsts.DataMaxLengthValue = 10000; //TODO: MySQL accepts 20.000. We can consider to change in v3.0.
-                }
+            }
 
             b.Property(x => x.Data).HasMaxLength(PersistedGrantConsts.DataMaxLengthValue).IsRequired();
 
             b.HasKey(x => x.Key); //TODO: What about Id!!!
 
-                b.HasIndex(x => new { x.SubjectId, x.ClientId, x.Type });
+            b.HasIndex(x => new { x.SubjectId, x.ClientId, x.Type });
             b.HasIndex(x => new { x.SubjectId, x.SessionId, x.Type });
             b.HasIndex(x => x.Expiration);
 
@@ -445,7 +445,7 @@ public static class IdentityServerDbContextModelCreatingExtensions
             if (IsDatabaseProvider(builder, EfCoreDatabaseProvider.MySql))
             {
                 DeviceFlowCodesConsts.DataMaxLength = 10000; //TODO: MySQL accepts 20.000. We can consider to change in v3.0.
-                }
+            }
             b.Property(x => x.Data).HasMaxLength(DeviceFlowCodesConsts.DataMaxLength).IsRequired();
 
             b.HasIndex(x => new { x.UserCode });

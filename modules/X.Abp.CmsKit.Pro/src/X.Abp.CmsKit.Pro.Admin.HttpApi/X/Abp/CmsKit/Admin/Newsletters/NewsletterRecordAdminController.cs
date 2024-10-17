@@ -69,4 +69,34 @@ public class NewsletterRecordAdminController : CmsKitProAdminController, INewsle
   {
     return await NewsletterRecordAdminAppService.GetCsvResponsesAsync(input);
   }
+
+    public Task<List<NewsletterPreferenceDetailsDto>> GetNewsletterPreferencesAsync(string emailAddress)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdatePreferencesAsync(UpdatePreferenceInput input)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<DownloadTokenResultDto> GetDownloadTokenAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IRemoteStreamContent> GetImportNewslettersSampleFileAsync(GetImportNewslettersSampleFileInput input)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ImportNewslettersFromFileOutput> ImportNewslettersFromFileAsync(ImportNewslettersFromFileInputWithStream input)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IRemoteStreamContent> GetImportInvalidNewslettersFileAsync(GetImportInvalidNewslettersFileInput input)
+    {
+        throw new NotImplementedException();
+    }
 }

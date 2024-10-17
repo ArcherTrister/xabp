@@ -30,12 +30,15 @@ public class IdentitySessionChecker : ITransientDependency
 
     protected IWebClientInfoProvider WebClientInfoProvider { get; }
 
+    protected IOptions<IdentitySessionCheckerOptions> Options { get; }
+
     public IdentitySessionChecker(
       IOptions<Volo.Abp.Security.Claims.AbpClaimsPrincipalFactoryOptions> abpClaimsPrincipalFactoryOption,
       IdentitySessionManager identitySessionManager,
       IDistributedCache<IdentitySessionCacheItem> cache,
       IClock clock,
-      IWebClientInfoProvider webClientInfoProvider)
+      IWebClientInfoProvider webClientInfoProvider,
+      IOptions<IdentitySessionCheckerOptions> options)
     {
         Logger = NullLogger<IdentitySessionChecker>.Instance;
         AbpClaimsPrincipalFactoryOptions = abpClaimsPrincipalFactoryOption;
@@ -43,13 +46,14 @@ public class IdentitySessionChecker : ITransientDependency
         Cache = cache;
         Clock = clock;
         WebClientInfoProvider = webClientInfoProvider;
+        Options = options;
     }
 
     public virtual async Task<bool> IsValidateAsync(string sessionId)
     {
         if (!AbpClaimsPrincipalFactoryOptions.Value.IsDynamicClaimsEnabled)
         {
-            Logger.LogInformation("Dynamic claims is disabled, The session will not be checked.");
+            Logger.LogInformation("Dynamic claims is disabled, The SessionId({SessionId}) will not be checked.", sessionId);
             return true;
         }
 
@@ -76,14 +80,33 @@ public class IdentitySessionChecker : ITransientDependency
                 SessionId = identitySession.SessionId
             };
         });
-        if (sessionCacheItem == null)
+
+        if (sessionCacheItem != null)
         {
-            return false;
+            Logger.LogDebug("SessionId({SessionId}) found in cache, Updating hit count({HitCount}), last access time({CacheLastAccessed}) and IP address({IpAddress}).", sessionCacheItem.SessionId, sessionCacheItem.HitCount, sessionCacheItem.CacheLastAccessed, sessionCacheItem.IpAddress);
+
+            sessionCacheItem.CacheLastAccessed = Clock.Now;
+            sessionCacheItem.IpAddress = WebClientInfoProvider.ClientIpAddress;
+            ++sessionCacheItem.HitCount;
+
+            await Cache.SetAsync(sessionId, sessionCacheItem);
+            if (sessionCacheItem.HitCount == 1)
+            {
+                Logger.LogDebug("Updating the session from cache on the first check.");
+                await IdentitySessionManager.UpdateSessionFromCacheAsync(sessionId);
+            }
+            else if (sessionCacheItem.HitCount > Options.Value.UpdateSessionAfterCacheHit)
+            {
+                Logger.LogDebug("Update the session from cache because reached the maximum cache hit count({HitCount}).", Options.Value.UpdateSessionAfterCacheHit);
+                sessionCacheItem.HitCount = 0;
+                await Cache.SetAsync(sessionId, sessionCacheItem);
+                await IdentitySessionManager.UpdateSessionFromCacheAsync(sessionId);
+            }
+
+            return true;
         }
 
-        sessionCacheItem.CacheLastAccessed = Clock.Now;
-        sessionCacheItem.IpAddress = WebClientInfoProvider.ClientIpAddress;
-        await Cache.SetAsync(sessionId, sessionCacheItem);
-        return true;
+        await Cache.RemoveAsync(sessionId);
+        return false;
     }
 }

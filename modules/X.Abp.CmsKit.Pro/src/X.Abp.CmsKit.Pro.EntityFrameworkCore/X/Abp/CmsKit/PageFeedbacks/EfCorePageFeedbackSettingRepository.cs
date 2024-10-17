@@ -47,7 +47,7 @@ namespace X.Abp.CmsKit.PageFeedbacks
           List<string> existingEntityTypes,
           CancellationToken cancellationToken = default)
         {
-            int num = await (await GetQueryableAsync())
+            await (await GetQueryableAsync())
                 .Where(pageFeedbackSetting => !existingEntityTypes.Contains(pageFeedbackSetting.EntityType))
                 .ExecuteDeleteAsync(GetCancellationToken(cancellationToken));
         }

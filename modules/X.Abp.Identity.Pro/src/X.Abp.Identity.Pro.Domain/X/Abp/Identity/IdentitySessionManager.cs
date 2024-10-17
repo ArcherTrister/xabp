@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
@@ -160,8 +161,13 @@ public class IdentitySessionManager : DomainService
         return await IdentitySessionRepository.ExistAsync(sessionId);
     }
 
-    protected virtual async Task<IdentitySession> UpdateSessionFromCacheAsync(
-      IdentitySession session)
+    public virtual async Task<IdentitySession> UpdateSessionFromCacheAsync(string sessionId)
+    {
+        var identitySession = await IdentitySessionRepository.FindAsync(sessionId);
+        return await UpdateSessionFromCacheAsync(identitySession);
+    }
+
+    protected virtual async Task<IdentitySession> UpdateSessionFromCacheAsync(IdentitySession session)
     {
         if (session == null)
         {
@@ -177,9 +183,7 @@ public class IdentitySessionManager : DomainService
         return session;
     }
 
-    protected virtual Task<bool> UpdateSessionFromCacheAsync(
-      IdentitySession session,
-      IdentitySessionCacheItem sessionCacheItem)
+    protected virtual Task<bool> UpdateSessionFromCacheAsync(IdentitySession session, IdentitySessionCacheItem sessionCacheItem)
     {
         if (session == null)
         {
@@ -203,7 +207,7 @@ public class IdentitySessionManager : DomainService
 
                 if (!(cacheLastAccessed.HasValue & lastAccessed.HasValue && cacheLastAccessed.GetValueOrDefault() > lastAccessed.GetValueOrDefault()))
                 {
-                    goto label_8;
+                    goto SetIpAddress;
                 }
             }
 
@@ -211,7 +215,7 @@ public class IdentitySessionManager : DomainService
             result = true;
         }
 
-label_8:
+SetIpAddress:
         if (!sessionCacheItem.IpAddress.IsNullOrWhiteSpace())
         {
             List<string> list = session.GetIpAddresses().ToList();

@@ -121,7 +121,9 @@
     @if (Model.VisibleExternalProviders.Any())
     {
         <hr/>
-        @L["OrSignInWith"]<br/>
+        @L["OrSignInWith"]
+
+        <br/>
         <form asp-page="./Login" asp-page-handler="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" asp-route-returnUrlHash="@Model.ReturnUrlHash" method="post">
             @foreach (var provider in Model.VisibleExternalProviders)
             {

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\..\..\modules.props" />
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -14,7 +15,7 @@
     <PackageReference Include="EphemeralMongo6.runtime.osx-x64" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
     <PackageReference Include="EphemeralMongo6.runtime.win-x64" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
     <ProjectReference Include="..\..\src\X.Abp.LanguageManagement.MongoDB\X.Abp.LanguageManagement.MongoDB.csproj" />
-    <ProjectReference Include="..\X.Abp.LanguageManagement.Application.Tests\X.Abp.LanguageManagement.Application.Tests.csproj" />
+    <ProjectReference Include="..\X.Abp.LanguageManagement.TestBase\X.Abp.LanguageManagement.TestBase.csproj" />
   </ItemGroup>
 
 </Project>

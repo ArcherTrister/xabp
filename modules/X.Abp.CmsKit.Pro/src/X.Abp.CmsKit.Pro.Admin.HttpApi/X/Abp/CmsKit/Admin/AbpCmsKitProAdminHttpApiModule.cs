@@ -4,8 +4,11 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Modularity;
 using Volo.CmsKit.Admin;
+
+using X.Abp.CmsKit.Admin.Newsletters;
 
 namespace X.Abp.CmsKit.Admin;
 
@@ -17,5 +20,13 @@ public class AbpCmsKitProAdminHttpApiModule : AbpModule
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         PreConfigure<IMvcBuilder>(builder => builder.AddApplicationPartIfNotExists(typeof(AbpCmsKitProAdminHttpApiModule).Assembly));
+    }
+
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.FormBodyBindingIgnoredTypes.Add(typeof(ImportNewslettersFromFileInputWithStream));
+        });
     }
 }

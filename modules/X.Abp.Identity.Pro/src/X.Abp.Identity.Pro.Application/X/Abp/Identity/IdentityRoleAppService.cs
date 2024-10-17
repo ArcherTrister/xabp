@@ -182,7 +182,10 @@ public class IdentityRoleAppService : IdentityAppServiceBase, IIdentityRoleAppSe
         var role = await RoleManager.GetByIdAsync(id);
         role.SetConcurrencyStampIfNotNull(input.ConcurrencyStamp);
 
-        (await RoleManager.SetRoleNameAsync(role, input.Name)).CheckIdentityErrors();
+        if (role.Name != input.Name)
+        {
+            (await RoleManager.SetRoleNameAsync(role, input.Name)).CheckIdentityErrors();
+        }
 
         role.IsDefault = input.IsDefault;
         role.IsPublic = input.IsPublic;

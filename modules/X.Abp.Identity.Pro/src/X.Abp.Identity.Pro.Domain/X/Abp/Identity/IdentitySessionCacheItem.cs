@@ -16,4 +16,6 @@ public class IdentitySessionCacheItem
     public virtual string IpAddress { get; set; }
 
     public virtual DateTime? CacheLastAccessed { get; set; }
+
+    public virtual int HitCount { get; set; }
 }

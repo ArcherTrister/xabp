@@ -11,7 +11,7 @@ using Volo.CmsKit.Admin;
 namespace X.Abp.CmsKit.Admin;
 
 [DependsOn(
-    typeof(CmsKitProDomainModule),
+    typeof(AbpCmsKitProDomainModule),
     typeof(AbpCmsKitProAdminApplicationContractsModule),
     typeof(CmsKitAdminApplicationModule))]
 public class AbpCmsKitProAdminApplicationModule : AbpModule

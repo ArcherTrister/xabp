@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authorization;
 
+using Volo.Abp.Features;
 using Volo.Abp.GlobalFeatures;
 using Volo.Abp.SettingManagement;
 
 using X.Abp.CmsKit.Admin.Permissions;
+using X.Abp.CmsKit.Features;
 using X.Abp.CmsKit.GlobalFeatures;
 
 namespace X.Abp.CmsKit.Admin.Contact;
 
+[RequiresFeature(CmsKitProFeatures.NewsletterEnable)]
 [RequiresGlobalFeature(ContactFeature.Name)]
 [Authorize(AbpCmsKitProAdminPermissions.Contact.SettingManagement)]
 public class ContactSettingsAppService : CmsKitProAdminAppServiceBase, IContactSettingsAppService

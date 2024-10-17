@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <!--<PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />-->
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 

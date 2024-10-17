@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\..\..\modules.props" />
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\modules.props" />
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -15,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\X.Abp.LanguageManagement.EntityFrameworkCore\X.Abp.LanguageManagement.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\X.Abp.LanguageManagement.Application.Tests\X.Abp.LanguageManagement.Application.Tests.csproj" />
+    <ProjectReference Include="..\X.Abp.LanguageManagement.TestBase\X.Abp.LanguageManagement.TestBase.csproj" />
   </ItemGroup>
 
 </Project>

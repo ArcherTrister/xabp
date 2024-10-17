@@ -9,7 +9,7 @@ using Volo.CmsKit.Public;
 namespace X.Abp.CmsKit.Public;
 
 [DependsOn(
-    typeof(CmsKitProDomainSharedModule),
+    typeof(AbpCmsKitProDomainSharedModule),
     typeof(AbpCachingModule),
     typeof(CmsKitPublicApplicationContractsModule))]
 public class AbpCmsKitProPublicApplicationContractsModule : AbpModule

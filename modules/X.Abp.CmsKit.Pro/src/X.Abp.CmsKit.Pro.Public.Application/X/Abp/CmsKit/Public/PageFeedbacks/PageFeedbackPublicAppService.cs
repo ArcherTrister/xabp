@@ -48,7 +48,7 @@ namespace X.Abp.CmsKit.Public.PageFeedbacks
         protected virtual async Task SendEmailsAsync(PageFeedback pageFeedback)
         {
             PageFeedbackSetting pageFeedbackSetting = await PageFeedbackSettingRepository.FindByEntityTypeAsync(pageFeedback.EntityType);
-            if (pageFeedbackSetting == null || AbpStringExtensions.IsNullOrWhiteSpace(pageFeedbackSetting.EmailAddresses))
+            if (pageFeedbackSetting == null || pageFeedbackSetting.EmailAddresses.IsNullOrWhiteSpace())
             {
                 pageFeedbackSetting = await PageFeedbackSettingRepository.FindByEntityTypeAsync(null);
             }

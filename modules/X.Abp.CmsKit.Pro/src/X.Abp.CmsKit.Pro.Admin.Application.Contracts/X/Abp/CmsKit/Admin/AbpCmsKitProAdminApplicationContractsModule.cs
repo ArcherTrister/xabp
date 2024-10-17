@@ -8,7 +8,7 @@ using Volo.CmsKit.Admin;
 namespace X.Abp.CmsKit.Admin;
 
 [DependsOn(
-    typeof(CmsKitProDomainSharedModule),
+    typeof(AbpCmsKitProDomainSharedModule),
     typeof(CmsKitAdminApplicationContractsModule))]
 public class AbpCmsKitProAdminApplicationContractsModule : AbpModule
 {

@@ -1,4 +1,10 @@
-﻿using Volo.Abp.Modularity;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using Volo.Abp.Modularity;
+
+using X.Abp.LanguageManagement.EntityFrameworkCore;
 
 namespace X.Abp.LanguageManagement;
 
@@ -7,10 +13,8 @@ namespace X.Abp.LanguageManagement;
  * database independent anyway.
  */
 [DependsOn(
-    typeof(AbpLanguageManagementDomainModule),
-    typeof(LanguageManagementTestBaseModule)
-    )]
+    typeof(LanguageManagementEntityFrameworkCoreTestModule),
+    typeof(LanguageManagementTestBaseModule))]
 public class LanguageManagementDomainTestModule : AbpModule
 {
-
 }
