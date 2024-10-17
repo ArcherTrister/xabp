@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\..\..\configureawait.props" />
   <Import Project="..\..\..\..\modules.props" />
@@ -6,11 +6,14 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>X.Abp.Chat</RootNamespace>
+    <AssemblyName>X.Abp.Chat.MongoDB</AssemblyName>
+    <PackageId>X.Abp.Chat.MongoDB</PackageId>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.MongoDB" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Users.MongoDB" VersionOverride="$(AbpPackageVersion)" />
     <ProjectReference Include="..\X.Abp.Chat.Domain\X.Abp.Chat.Domain.csproj" />
   </ItemGroup>
 

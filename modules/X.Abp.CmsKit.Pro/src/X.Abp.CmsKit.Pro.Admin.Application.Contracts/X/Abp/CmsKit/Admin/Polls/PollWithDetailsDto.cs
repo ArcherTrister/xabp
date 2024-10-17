@@ -12,7 +12,7 @@ using Volo.Abp.MultiTenancy;
 namespace X.Abp.CmsKit.Admin.Polls;
 
 [Serializable]
-public class PollWithDetailsDto : EntityDto<Guid>, IHasCreationTime, IMultiTenant
+public class PollWithDetailsDto : ExtensibleEntityDto<Guid>, IHasCreationTime, IMultiTenant
 {
     public string Question { get; set; }
 

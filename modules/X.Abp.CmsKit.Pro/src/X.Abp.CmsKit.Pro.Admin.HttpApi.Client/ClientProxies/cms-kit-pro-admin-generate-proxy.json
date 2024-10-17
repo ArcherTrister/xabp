@@ -186,6 +186,99 @@
                     "type": "Volo.Abp.Content.IRemoteStreamContent",
                     "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
                   }
+                },
+                {
+                  "name": "GetNewsletterPreferencesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "emailAddress",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.CmsKit.Admin.Newsletters.NewsletterPreferenceDetailsDto>",
+                    "typeSimple": "[X.Abp.CmsKit.Admin.Newsletters.NewsletterPreferenceDetailsDto]"
+                  }
+                },
+                {
+                  "name": "UpdatePreferencesAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.UpdatePreferenceInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Newsletters.UpdatePreferenceInput",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.UpdatePreferenceInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                },
+                {
+                  "name": "GetDownloadTokenAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.Newsletters.DownloadTokenResultDto",
+                    "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.DownloadTokenResultDto"
+                  }
+                },
+                {
+                  "name": "GetImportNewslettersSampleFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetImportNewslettersSampleFileInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Newsletters.GetImportNewslettersSampleFileInput",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetImportNewslettersSampleFileInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
+                },
+                {
+                  "name": "ImportNewslettersFromFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileInputWithStream, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileInputWithStream",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileInputWithStream",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileOutput",
+                    "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileOutput"
+                  }
+                },
+                {
+                  "name": "GetImportInvalidNewslettersFileAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetImportInvalidNewslettersFileInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Admin.Newsletters.GetImportInvalidNewslettersFileInput",
+                      "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetImportInvalidNewslettersFileInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Content.IRemoteStreamContent",
+                    "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+                  }
                 }
               ]
             }
@@ -353,6 +446,30 @@
                   "constraintTypes": null,
                   "bindingSourceId": "ModelBinding",
                   "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EmailAddress",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Token",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
                 }
               ],
               "returnValue": {
@@ -417,11 +534,235 @@
                   "constraintTypes": null,
                   "bindingSourceId": "ModelBinding",
                   "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EmailAddress",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Token",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
                 }
               ],
               "returnValue": {
                 "type": "Volo.Abp.Content.IRemoteStreamContent",
                 "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "UpdatePreferencesAsyncByInput": {
+              "uniqueName": "UpdatePreferencesAsyncByInput",
+              "name": "UpdatePreferencesAsync",
+              "httpMethod": "PUT",
+              "url": "api/cms-kit-admin/newsletter/preferences",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.UpdatePreferenceInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Newsletters.UpdatePreferenceInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.UpdatePreferenceInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "X.Abp.CmsKit.Admin.Newsletters.UpdatePreferenceInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.UpdatePreferenceInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "GetDownloadTokenAsync": {
+              "uniqueName": "GetDownloadTokenAsync",
+              "name": "GetDownloadTokenAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter/download-token",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.Newsletters.DownloadTokenResultDto",
+                "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.DownloadTokenResultDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "GetImportNewslettersSampleFileAsyncByInput": {
+              "uniqueName": "GetImportNewslettersSampleFileAsyncByInput",
+              "name": "GetImportNewslettersSampleFileAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter/import-newsletters-sample-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetImportNewslettersSampleFileInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Newsletters.GetImportNewslettersSampleFileInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetImportNewslettersSampleFileInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Token",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "ImportNewslettersFromFileAsyncByInput": {
+              "uniqueName": "ImportNewslettersFromFileAsyncByInput",
+              "name": "ImportNewslettersFromFileAsync",
+              "httpMethod": "POST",
+              "url": "api/cms-kit-admin/newsletter/import-newsletters-from-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileInputWithStream, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileInputWithStream",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileInputWithStream",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "File",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Content.IRemoteStreamContent",
+                  "typeSimple": "Volo.Abp.Content.IRemoteStreamContent",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "FormFile",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileOutput",
+                "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.ImportNewslettersFromFileOutput"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "GetImportInvalidNewslettersFileAsyncByInput": {
+              "uniqueName": "GetImportInvalidNewslettersFileAsyncByInput",
+              "name": "GetImportInvalidNewslettersFileAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter/download-import-invalid-newsletters-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Admin.Newsletters.GetImportInvalidNewslettersFileInput, X.Abp.CmsKit.Pro.Admin.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Admin.Newsletters.GetImportInvalidNewslettersFileInput",
+                  "typeSimple": "X.Abp.CmsKit.Admin.Newsletters.GetImportInvalidNewslettersFileInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Token",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"
+            },
+            "GetNewsletterPreferencesAsyncByEmailAddress": {
+              "uniqueName": "GetNewsletterPreferencesAsyncByEmailAddress",
+              "name": "GetNewsletterPreferencesAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-admin/newsletter/preferences/{emailAddress}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "emailAddress",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "emailAddress",
+                  "name": "emailAddress",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.CmsKit.Admin.Newsletters.NewsletterPreferenceDetailsDto>",
+                "typeSimple": "[X.Abp.CmsKit.Admin.Newsletters.NewsletterPreferenceDetailsDto]"
               },
               "allowAnonymous": false,
               "implementFrom": "X.Abp.CmsKit.Admin.Newsletters.INewsletterRecordAdminAppService"

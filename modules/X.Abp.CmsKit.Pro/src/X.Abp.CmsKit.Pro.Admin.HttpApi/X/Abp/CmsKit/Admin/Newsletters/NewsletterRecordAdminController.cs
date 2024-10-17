@@ -27,76 +27,93 @@ namespace X.Abp.CmsKit.Admin.Newsletters;
 [RemoteService(true, Name = CmsKitAdminRemoteServiceConsts.RemoteServiceName)]
 public class NewsletterRecordAdminController : CmsKitProAdminController, INewsletterRecordAdminAppService
 {
-  protected INewsletterRecordAdminAppService NewsletterRecordAdminAppService { get; }
+    protected INewsletterRecordAdminAppService NewsletterRecordAdminAppService { get; }
 
-  public NewsletterRecordAdminController(INewsletterRecordAdminAppService input)
-  {
-    NewsletterRecordAdminAppService = input;
-  }
-
-  [HttpGet]
-  public virtual Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(GetNewsletterRecordsRequestInput input)
-  {
-    return NewsletterRecordAdminAppService.GetListAsync(input);
-  }
-
-  [Route("{id}")]
-  [HttpGet]
-  public virtual Task<NewsletterRecordWithDetailsDto> GetAsync(Guid id)
-  {
-    return NewsletterRecordAdminAppService.GetAsync(id);
-  }
-
-  [Route("csv-detail")]
-  [HttpGet]
-  public virtual Task<List<NewsletterRecordCsvDto>> GetNewsletterRecordsCsvDetailAsync(
-    GetNewsletterRecordsCsvRequestInput input)
-  {
-    return NewsletterRecordAdminAppService.GetNewsletterRecordsCsvDetailAsync(input);
-  }
-
-  [Route("preferences")]
-  [HttpGet]
-  public virtual Task<List<string>> GetNewsletterPreferencesAsync()
-  {
-    return NewsletterRecordAdminAppService.GetNewsletterPreferencesAsync();
-  }
-
-  [Route("export-csv")]
-  [HttpGet]
-  public virtual async Task<IRemoteStreamContent> GetCsvResponsesAsync(
-    GetNewsletterRecordsCsvRequestInput input)
-  {
-    return await NewsletterRecordAdminAppService.GetCsvResponsesAsync(input);
-  }
-
-    public Task<List<NewsletterPreferenceDetailsDto>> GetNewsletterPreferencesAsync(string emailAddress)
+    public NewsletterRecordAdminController(INewsletterRecordAdminAppService newsletterRecordAdminAppService)
     {
-        throw new NotImplementedException();
+        NewsletterRecordAdminAppService = newsletterRecordAdminAppService;
     }
 
+    [HttpGet]
+    public virtual Task<PagedResultDto<NewsletterRecordDto>> GetListAsync(GetNewsletterRecordsRequestInput input)
+    {
+        return NewsletterRecordAdminAppService.GetListAsync(input);
+    }
+
+    [Route("{id}")]
+    [HttpGet]
+    public virtual Task<NewsletterRecordWithDetailsDto> GetAsync(Guid id)
+    {
+        return NewsletterRecordAdminAppService.GetAsync(id);
+    }
+
+    [Route("csv-detail")]
+    [HttpGet]
+    public virtual Task<List<NewsletterRecordCsvDto>> GetNewsletterRecordsCsvDetailAsync(
+      GetNewsletterRecordsCsvRequestInput input)
+    {
+        return NewsletterRecordAdminAppService.GetNewsletterRecordsCsvDetailAsync(input);
+    }
+
+    [Route("preferences")]
+    [HttpGet]
+    public virtual Task<List<string>> GetNewsletterPreferencesAsync()
+    {
+        return NewsletterRecordAdminAppService.GetNewsletterPreferencesAsync();
+    }
+
+    [Route("export-csv")]
+    [HttpGet]
+    public virtual async Task<IRemoteStreamContent> GetCsvResponsesAsync(
+      GetNewsletterRecordsCsvRequestInput input)
+    {
+        return await NewsletterRecordAdminAppService.GetCsvResponsesAsync(input);
+    }
+
+    [HttpPut]
+    [Route("preferences")]
     public Task UpdatePreferencesAsync(UpdatePreferenceInput input)
     {
-        throw new NotImplementedException();
+        return NewsletterRecordAdminAppService.UpdatePreferencesAsync(input);
     }
 
+    [HttpGet]
+    [Route("download-token")]
     public Task<DownloadTokenResultDto> GetDownloadTokenAsync()
     {
-        throw new NotImplementedException();
+        return NewsletterRecordAdminAppService.GetDownloadTokenAsync();
     }
 
-    public Task<IRemoteStreamContent> GetImportNewslettersSampleFileAsync(GetImportNewslettersSampleFileInput input)
+    [AllowAnonymous]
+    [Route("import-newsletters-sample-file")]
+    [HttpGet]
+    public Task<IRemoteStreamContent> GetImportNewslettersSampleFileAsync(
+      GetImportNewslettersSampleFileInput input)
     {
-        throw new NotImplementedException();
+        return NewsletterRecordAdminAppService.GetImportNewslettersSampleFileAsync(input);
     }
 
-    public Task<ImportNewslettersFromFileOutput> ImportNewslettersFromFileAsync(ImportNewslettersFromFileInputWithStream input)
+    [Route("import-newsletters-from-file")]
+    [HttpPost]
+    public Task<ImportNewslettersFromFileOutput> ImportNewslettersFromFileAsync(
+      [FromForm] ImportNewslettersFromFileInputWithStream input)
     {
-        throw new NotImplementedException();
+        return NewsletterRecordAdminAppService.ImportNewslettersFromFileAsync(input);
     }
 
-    public Task<IRemoteStreamContent> GetImportInvalidNewslettersFileAsync(GetImportInvalidNewslettersFileInput input)
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("download-import-invalid-newsletters-file")]
+    public Task<IRemoteStreamContent> GetImportInvalidNewslettersFileAsync(
+      GetImportInvalidNewslettersFileInput input)
     {
-        throw new NotImplementedException();
+        return NewsletterRecordAdminAppService.GetImportInvalidNewslettersFileAsync(input);
+    }
+
+    [Route("preferences/{emailAddress}")]
+    [HttpGet]
+    public Task<List<NewsletterPreferenceDetailsDto>> GetNewsletterPreferencesAsync(string emailAddress)
+    {
+        return NewsletterRecordAdminAppService.GetNewsletterPreferencesAsync(emailAddress);
     }
 }

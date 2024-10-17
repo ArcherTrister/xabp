@@ -8,10 +8,14 @@ using Volo.Abp.AutoMapper;
 using Volo.CmsKit.Admin.Tags;
 using Volo.CmsKit.Tags;
 
+using X.Abp.CmsKit.Admin.Faqs;
 using X.Abp.CmsKit.Admin.Newsletters;
+using X.Abp.CmsKit.Admin.PageFeedbacks;
 using X.Abp.CmsKit.Admin.Polls;
 using X.Abp.CmsKit.Admin.UrlShorting;
+using X.Abp.CmsKit.Faqs;
 using X.Abp.CmsKit.Newsletters;
+using X.Abp.CmsKit.PageFeedbacks;
 using X.Abp.CmsKit.Polls;
 using X.Abp.CmsKit.UrlShorting;
 
@@ -21,17 +25,26 @@ public class AbpCmsKitProAdminApplicationAutoMapperProfile : Profile
 {
     public AbpCmsKitProAdminApplicationAutoMapperProfile()
     {
-        CreateMap<NewsletterRecord, NewsletterRecordWithDetailsDto>().ForMember(recordWithDetailsDto => recordWithDetailsDto.Preferences, c => c.MapFrom(newsletterRecord => newsletterRecord.Preferences));
+        CreateMap<NewsletterRecord, NewsletterRecordWithDetailsDto>()
+            .ForMember(recordWithDetailsDto => recordWithDetailsDto.Preferences, c => c.MapFrom(newsletterRecord => newsletterRecord.Preferences))
+            .MapExtraProperties();
         CreateMap<NewsletterPreference, NewsletterPreferenceDto>();
-        CreateMap<NewsletterSummaryQueryResultItem, NewsletterRecordDto>();
-        CreateMap<NewsletterSummaryQueryResultItem, NewsletterRecordCsvDto>().Ignore(newsletterRecordCsvDto => newsletterRecordCsvDto.SecurityCode);
-        CreateMap<TagDto, TagCreateDto>();
-        CreateMap<TagDto, TagUpdateDto>();
-        CreateMap<TagCreateDto, Tag>(MemberList.Source).Ignore(p => p.Id);
-        CreateMap<TagUpdateDto, Tag>(MemberList.Source);
+        CreateMap<NewsletterSummaryQueryResultItem, NewsletterRecordDto>().Ignore(newsletterRecordDto => newsletterRecordDto.ExtraProperties);
+        CreateMap<TagDto, TagCreateDto>().MapExtraProperties();
+        CreateMap<TagDto, TagUpdateDto>().MapExtraProperties();
+        CreateMap<TagCreateDto, Tag>(MemberList.Source).Ignore(tag => tag.Id).MapExtraProperties();
+        CreateMap<TagUpdateDto, Tag>(MemberList.Source).MapExtraProperties();
         CreateMap<ShortenedUrl, ShortenedUrlDto>();
-        CreateMap<Poll, PollDto>();
-        CreateMap<Poll, PollWithDetailsDto>();
+
+        CreateMap<Poll, PollDto>().MapExtraProperties();
+        CreateMap<Poll, PollWithDetailsDto>().MapExtraProperties();
         CreateMap<PollOption, PollOptionDto>();
+        CreateMap<PageFeedback, PageFeedbackDto>();
+        CreateMap<PageFeedbackDto, UpdatePageFeedbackDto>();
+        CreateMap<PageFeedbackSetting, PageFeedbackSettingDto>();
+        CreateMap<FaqSection, FaqSectionDto>();
+        CreateMap<FaqSectionWithQuestionCount, FaqSectionWithQuestionCountDto>();
+        CreateMap<FaqQuestion, FaqQuestionDto>();
+        CreateMap<FaqGroupInfo, FaqGroupInfoDto>();
     }
 }

@@ -41,7 +41,7 @@ namespace AbpVnext.Pro;
 
 // [DependsOn(typeof(AbpBasicDataApplicationModule))]
 [DependsOn(typeof(AbpChatApplicationModule))]
-[DependsOn(typeof(CmsKitProApplicationModule))]
+[DependsOn(typeof(AbpCmsKitProApplicationModule))]
 [DependsOn(typeof(AbpFileManagementApplicationModule))]
 [DependsOn(typeof(AbpFormsApplicationModule))]
 [DependsOn(typeof(AbpGdprApplicationModule))]

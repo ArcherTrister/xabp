@@ -10,7 +10,7 @@ using Volo.Abp.Auditing;
 namespace X.Abp.CmsKit.Admin.Polls;
 
 [Serializable]
-public class PollDto : EntityDto<Guid>, IHasCreationTime
+public class PollDto : ExtensibleEntityDto<Guid>, IHasCreationTime
 {
     public string Question { get; set; }
 

@@ -16,8 +16,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace X.Abp.LanguageManagement.EntityFrameworkCore;
 
-public class EfCoreLanguageRepository : EfCoreRepository<ILanguageManagementDbContext, Language, Guid>,
-    ILanguageRepository
+public class EfCoreLanguageRepository : EfCoreRepository<ILanguageManagementDbContext, Language, Guid>, ILanguageRepository
 {
   public EfCoreLanguageRepository(IDbContextProvider<ILanguageManagementDbContext> dbContextProvider)
       : base(dbContextProvider)

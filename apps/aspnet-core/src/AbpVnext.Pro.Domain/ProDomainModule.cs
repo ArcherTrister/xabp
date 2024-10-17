@@ -68,7 +68,7 @@ namespace AbpVnext.Pro;
 [DependsOn(typeof(AbpChatDomainModule))]
 [DependsOn(typeof(AbpFileManagementDomainModule))]
 [DependsOn(typeof(AbpFormsDomainModule))]
-[DependsOn(typeof(CmsKitProDomainModule))]
+[DependsOn(typeof(AbpCmsKitProDomainModule))]
 [DependsOn(typeof(AbpPaymentDomainModule))]
 [DependsOn(typeof(AbpVersionManagementDomainModule))]
 public class ProDomainModule : AbpModule

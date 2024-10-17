@@ -40,7 +40,7 @@ namespace AbpVnext.Pro;
 
 // [DependsOn(typeof(AbpBasicDataHttpApiModule))]
 [DependsOn(typeof(AbpChatHttpApiModule))]
-[DependsOn(typeof(CmsKitProHttpApiModule))]
+[DependsOn(typeof(AbpCmsKitProHttpApiModule))]
 [DependsOn(typeof(AbpFileManagementHttpApiModule))]
 [DependsOn(typeof(AbpFormsHttpApiModule))]
 [DependsOn(typeof(AbpGdprHttpApiModule))]

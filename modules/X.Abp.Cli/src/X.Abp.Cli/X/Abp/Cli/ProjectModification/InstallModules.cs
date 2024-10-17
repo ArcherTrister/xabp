@@ -200,12 +200,6 @@ internal sealed class InstallModules
             NpmPackages = new List<NpmPackageInfo>(),
             NugetPackages = new List<NugetPackageInfo>
             {
-                // new NugetPackageInfo
-                // {
-                //     Name = "X.Abp.CmsKit.Pro.Admin.Web",
-                //     ModuleClass = "X.Abp.CmsKit.Pro.Admin.AbpCmsKitAdminWebModule",
-                //     Target = NuGetPackageTarget.Web
-                // },
                 new NugetPackageInfo
                 {
                     Name = "X.Abp.CmsKit.Pro.Application",
@@ -258,14 +252,8 @@ internal sealed class InstallModules
 
                 // new NugetPackageInfo
                 // {
-                //     Name = "X.Abp.CmsKit.Pro.Public.Web",
-                //     ModuleClass = "X.Abp.CmsKit.Pro.Public.AbpCmsKitPublicWebModule",
-                //     Target = NuGetPackageTarget.Web
-                // },
-                // new NugetPackageInfo
-                // {
                 //     Name = "X.Abp.CmsKit.Pro.Web",
-                //     ModuleClass = "X.Abp.CmsKit.Pro.AbpCmsKitWebModule",
+                //     ModuleClass = "X.Abp.CmsKit.Pro.AbpCmsKitProWebModule",
                 //     Target = NuGetPackageTarget.Web
                 // },
             }
@@ -688,19 +676,19 @@ internal sealed class InstallModules
                     Target = NuGetPackageTarget.ApplicationContracts,
                     TieredTarget = NuGetPackageTarget.ApplicationContracts
                 },
+                new NugetPackageInfo
+                {
+                    Name = "X.Abp.Quartz.Domain",
+                    ModuleClass = "X.Abp.Quartz.AbpQuartzDomainModule",
+                    Target = NuGetPackageTarget.Domain
+                },
+                new NugetPackageInfo
+                {
+                    Name = "X.Abp.Quartz.Domain.Shared",
+                    ModuleClass = "X.Abp.Quartz.AbpQuartzDomainSharedModule",
+                    Target = NuGetPackageTarget.DomainShared
+                },
 
-                // new NugetPackageInfo
-                // {
-                //     Name = "X.Abp.Quartz.Domain",
-                //     ModuleClass = "X.Abp.Quartz.AbpQuartzDomainModule",
-                //     Target = NuGetPackageTarget.Domain
-                // },
-                // new NugetPackageInfo
-                // {
-                //     Name = "X.Abp.Quartz.Domain.Shared",
-                //     ModuleClass = "X.Abp.Quartz.AbpQuartzDomainSharedModule",
-                //     Target = NuGetPackageTarget.DomainShared
-                // },
                 // new NugetPackageInfo
                 // {
                 //     Name = "X.Abp.Quartz.EntityFrameworkCore",

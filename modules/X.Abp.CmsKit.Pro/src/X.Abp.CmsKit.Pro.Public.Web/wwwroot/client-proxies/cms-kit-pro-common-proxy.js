@@ -22,6 +22,21 @@
 
   })();
 
+  // controller x.abp.cmsKit.public.faqs.faqSectionPublic
+
+  (function(){
+
+    abp.utils.createNamespace(window, 'x.abp.cmsKit.public.faqs.faqSectionPublic');
+
+    x.abp.cmsKit.public.faqs.faqSectionPublic.getListSectionWithQuestions = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-public/faq-section' + abp.utils.buildQueryString([{ name: 'groupName', value: input.groupName }, { name: 'sectionName', value: input.sectionName }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+  })();
+
   // controller x.abp.cmsKit.public.newsletters.newsletterRecordPublic
 
   (function(){

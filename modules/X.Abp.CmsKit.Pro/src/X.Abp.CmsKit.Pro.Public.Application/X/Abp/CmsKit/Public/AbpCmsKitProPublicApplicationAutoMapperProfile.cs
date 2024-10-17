@@ -6,9 +6,13 @@ using AutoMapper;
 
 using Volo.Abp.AutoMapper;
 
+using X.Abp.CmsKit.Faqs;
 using X.Abp.CmsKit.Newsletters;
+using X.Abp.CmsKit.PageFeedbacks;
 using X.Abp.CmsKit.Polls;
+using X.Abp.CmsKit.Public.Faqs;
 using X.Abp.CmsKit.Public.Newsletters;
+using X.Abp.CmsKit.Public.PageFeedbacks;
 using X.Abp.CmsKit.Public.Polls;
 using X.Abp.CmsKit.Public.UrlShorting;
 using X.Abp.CmsKit.UrlShorting;
@@ -28,8 +32,14 @@ public class AbpCmsKitProPublicApplicationAutoMapperProfile : Profile
             .Ignore(newsletterEmailOptionsDto => newsletterEmailOptionsDto.DisplayAdditionalPreferences)
             .Ignore(newsletterEmailOptionsDto => newsletterEmailOptionsDto.AdditionalPreferences);
         CreateMap<ShortenedUrl, ShortenedUrlDto>();
+        CreateMap<ShortenedUrl, ShortenedUrlCacheItem>().Ignore(shortenedUrlCacheItem => shortenedUrlCacheItem.Exists);
         CreateMap<ShortenedUrlCacheItem, ShortenedUrlDto>();
+        CreateMap<ShortenedUrlDto, ShortenedUrlCacheItem>().Ignore(shortenedUrlCacheItem => shortenedUrlCacheItem.Exists);
         CreateMap<Poll, PollWithDetailsDto>();
         CreateMap<PollOption, PollOptionDto>();
+        CreateMap<PageFeedback, PageFeedbackDto>();
+        CreateMap<FaqSectionWithQuestions, FaqSectionWithQuestionsDto>();
+        CreateMap<FaqQuestion, FaqQuestionDto>();
+        CreateMap<FaqSection, FaqSectionDto>();
     }
 }

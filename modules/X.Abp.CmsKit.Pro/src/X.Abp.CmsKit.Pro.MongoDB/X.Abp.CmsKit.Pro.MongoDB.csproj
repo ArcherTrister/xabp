@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\..\..\configureawait.props" />
   <Import Project="..\..\..\..\modules.props" />
@@ -6,7 +6,9 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>X.Abp.CmsKit.Pro</RootNamespace>
+    <AssemblyName>X.Abp.CmsKit.Pro.MongoDB</AssemblyName>
+    <PackageId>X.Abp.CmsKit.Pro.MongoDB</PackageId>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>

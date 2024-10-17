@@ -48,11 +48,10 @@ namespace X.Abp.CmsKit.Faqs
           string filter = null,
           CancellationToken cancellationToken = default)
         {
-            EfCoreFaqQuestionRepository questionRepository = this;
-            return await (await questionRepository.GetQueryableAsync())
+            return await (await GetQueryableAsync())
                 .Where(faqQuestion => faqQuestion.SectionId == sectionId)
                 .WhereIf(!string.IsNullOrWhiteSpace(filter), faqQuestion => faqQuestion.Title.Contains(filter) || faqQuestion.Text.Contains(filter))
-                .LongCountAsync(questionRepository.GetCancellationToken(cancellationToken));
+                .LongCountAsync(GetCancellationToken(cancellationToken));
         }
 
         public async Task<bool> AnyAsync(

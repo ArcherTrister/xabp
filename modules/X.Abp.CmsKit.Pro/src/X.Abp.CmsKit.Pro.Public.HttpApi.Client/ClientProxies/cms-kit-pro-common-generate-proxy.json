@@ -76,6 +76,90 @@
             }
           }
         },
+        "X.Abp.CmsKit.Public.Faqs.FaqSectionPublicController": {
+          "controllerName": "FaqSectionPublic",
+          "controllerGroupName": "FaqSectionPublic",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "X.Abp.CmsKit.Public.Faqs.FaqSectionPublicController",
+          "interfaces": [
+            {
+              "type": "X.Abp.CmsKit.Public.Faqs.IFaqSectionPublicAppService",
+              "name": "IFaqSectionPublicAppService",
+              "methods": [
+                {
+                  "name": "GetListSectionWithQuestionsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "X.Abp.CmsKit.Public.Faqs.FaqSectionListFilterInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                      "type": "X.Abp.CmsKit.Public.Faqs.FaqSectionListFilterInput",
+                      "typeSimple": "X.Abp.CmsKit.Public.Faqs.FaqSectionListFilterInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<X.Abp.CmsKit.Public.Faqs.FaqSectionWithQuestionsDto>",
+                    "typeSimple": "[X.Abp.CmsKit.Public.Faqs.FaqSectionWithQuestionsDto]"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetListSectionWithQuestionsAsyncByInput": {
+              "uniqueName": "GetListSectionWithQuestionsAsyncByInput",
+              "name": "GetListSectionWithQuestionsAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit-public/faq-section",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "X.Abp.CmsKit.Public.Faqs.FaqSectionListFilterInput, X.Abp.CmsKit.Pro.Public.Application.Contracts",
+                  "type": "X.Abp.CmsKit.Public.Faqs.FaqSectionListFilterInput",
+                  "typeSimple": "X.Abp.CmsKit.Public.Faqs.FaqSectionListFilterInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "GroupName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SectionName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<X.Abp.CmsKit.Public.Faqs.FaqSectionWithQuestionsDto>",
+                "typeSimple": "[X.Abp.CmsKit.Public.Faqs.FaqSectionWithQuestionsDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "X.Abp.CmsKit.Public.Faqs.IFaqSectionPublicAppService"
+            }
+          }
+        },
         "X.Abp.CmsKit.Public.Newsletters.NewsletterRecordPublicController": {
           "controllerName": "NewsletterRecordPublic",
           "controllerGroupName": "NewsletterRecordPublic",

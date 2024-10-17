@@ -51,7 +51,7 @@
 
     x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getNewsletterRecordsCsvDetail = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/newsletter/csv-detail' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }]) + '',
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/csv-detail' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }, { name: 'emailAddress', value: input.emailAddress }, { name: 'token', value: input.token }]) + '',
         type: 'GET'
       }, ajaxParams));
     };
@@ -65,7 +65,51 @@
 
     x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getCsvResponses = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/cms-kit-admin/newsletter/export-csv' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }]) + '',
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/export-csv' + abp.utils.buildQueryString([{ name: 'preference', value: input.preference }, { name: 'source', value: input.source }, { name: 'emailAddress', value: input.emailAddress }, { name: 'token', value: input.token }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.updatePreferences = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/preferences',
+        type: 'PUT',
+        dataType: null,
+        data: JSON.stringify(input)
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getDownloadToken = function(ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/download-token',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getImportNewslettersSampleFile = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/import-newsletters-sample-file' + abp.utils.buildQueryString([{ name: 'token', value: input.token }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.importNewslettersFromFile = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/import-newsletters-from-file',
+        type: 'POST'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getImportInvalidNewslettersFile = function(input, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/download-import-invalid-newsletters-file' + abp.utils.buildQueryString([{ name: 'token', value: input.token }]) + '',
+        type: 'GET'
+      }, ajaxParams));
+    };
+
+    x.abp.cmsKit.admin.newsletters.newsletterRecordAdmin.getNewsletterPreferencesAsyncByEmailAddress = function(emailAddress, ajaxParams) {
+      return abp.ajax($.extend(true, {
+        url: abp.appPath + 'api/cms-kit-admin/newsletter/preferences/' + emailAddress + '',
         type: 'GET'
       }, ajaxParams));
     };

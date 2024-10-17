@@ -520,9 +520,8 @@
 
     x.abp.identity.identityUser.importUsersFromFile = function(input, ajaxParams) {
       return abp.ajax($.extend(true, {
-        url: abp.appPath + 'api/identity/users/import-users-from-file',
-        type: 'POST',
-        data: JSON.stringify(input)
+        url: abp.appPath + 'api/identity/users/import-users-from-file' + abp.utils.buildQueryString([{ name: 'fileType', value: input.fileType }]) + '',
+        type: 'POST'
       }, ajaxParams));
     };
 

@@ -53,11 +53,7 @@ namespace AbpVnext.Pro;
 [DependsOn(typeof(AbpChatApplicationContractsModule))]
 [DependsOn(typeof(AbpFileManagementApplicationContractsModule))]
 [DependsOn(typeof(AbpFormsApplicationContractsModule))]
-
-// [DependsOn(typeof(CmsKitProAdminApplicationContractsModule))]
-[DependsOn(typeof(CmsKitProApplicationContractsModule))]
-
-// [DependsOn(typeof(CmsKitProPublicApplicationContractsModule))]
+[DependsOn(typeof(AbpCmsKitProApplicationContractsModule))]
 [DependsOn(typeof(AbpPaymentAdminApplicationContractsModule))]
 [DependsOn(typeof(AbpPaymentApplicationContractsModule))]
 [DependsOn(typeof(AbpVersionManagementApplicationContractsModule))]

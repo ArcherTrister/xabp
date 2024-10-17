@@ -336,7 +336,7 @@ public class NewsletterRecordAdminAppService : CmsKitProAdminAppServiceBase, INe
         where T : ImportNewslettersFromFileDto
     {
         CsvConfiguration csvConfiguration = new CsvConfiguration(new CultureInfo(CultureInfo.CurrentUICulture.Name), null);
-        IRemoteStreamContent newslettersFileAsync;
+
         using (MemoryStream memoryStream = new MemoryStream())
         {
             using (StreamWriter streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(true)))
@@ -349,12 +349,10 @@ public class NewsletterRecordAdminAppService : CmsKitProAdminAppServiceBase, INe
                     MemoryStream ms = new MemoryStream();
                     await memoryStream.CopyToAsync(ms);
                     ms.Seek(0L, SeekOrigin.Begin);
-                    newslettersFileAsync = new RemoteStreamContent(ms, fileName + ".csv", "text/csv");
+                    return new RemoteStreamContent(ms, fileName + ".csv", "text/csv");
                 }
             }
         }
-
-        return newslettersFileAsync;
     }
 
     protected virtual async Task CheckDownloadTokenAsync(string token, bool isInvalidNewslettersToken = false)

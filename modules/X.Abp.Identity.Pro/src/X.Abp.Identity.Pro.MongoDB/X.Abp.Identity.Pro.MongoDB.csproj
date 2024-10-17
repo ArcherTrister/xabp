@@ -6,7 +6,9 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <RootNamespace>X.Abp.Identity.Pro.MongoDB</RootNamespace>
+    <AssemblyName>X.Abp.Identity.Pro.MongoDB</AssemblyName>
+    <PackageId>X.Abp.Identity.Pro.MongoDB</PackageId>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>

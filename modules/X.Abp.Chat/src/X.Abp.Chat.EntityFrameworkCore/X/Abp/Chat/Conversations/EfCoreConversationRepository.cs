@@ -44,7 +44,7 @@ public class EfCoreConversationRepository : EfCoreRepository<IChatDbContext, Con
   {
     var query = from chatConversation in await GetDbSetAsync()
                 join targetUser in (await GetDbContextAsync()).ChatUsers on chatConversation.TargetUserId equals targetUser.Id
-                where userId == chatConversation.UserId && (targetUser.Name.Contains(filter) || targetUser.Surname.Contains(filter))
+                where userId == chatConversation.UserId && (filter == default || filter == "" || targetUser.Name.Contains(filter) || targetUser.Surname.Contains(filter))
                 orderby chatConversation.LastMessageDate descending
                 select new ConversationWithTargetUser
                 {

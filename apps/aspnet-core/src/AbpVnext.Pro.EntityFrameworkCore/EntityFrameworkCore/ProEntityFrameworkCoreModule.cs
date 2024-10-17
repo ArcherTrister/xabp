@@ -54,7 +54,7 @@ namespace AbpVnext.Pro.EntityFrameworkCore;
 [DependsOn(typeof(AbpChatEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpFileManagementEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpFormsEntityFrameworkCoreModule))]
-[DependsOn(typeof(CmsKitProEntityFrameworkCoreModule))]
+[DependsOn(typeof(AbpCmsKitProEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpPaymentEntityFrameworkCoreModule))]
 [DependsOn(typeof(AbpVersionManagementEntityFrameworkCoreModule))]
 public class ProEntityFrameworkCoreModule : AbpModule

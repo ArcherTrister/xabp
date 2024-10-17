@@ -10,7 +10,7 @@ using Volo.Abp.Auditing;
 
 namespace X.Abp.CmsKit.Admin.Newsletters;
 
-public class NewsletterRecordWithDetailsDto : EntityDto<Guid>, IHasCreationTime
+public class NewsletterRecordWithDetailsDto : ExtensibleEntityDto<Guid>, IHasCreationTime
 {
     public string EmailAddress { get; set; }
 
