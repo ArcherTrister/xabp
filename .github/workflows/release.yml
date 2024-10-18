@@ -22,11 +22,6 @@ jobs:
               with:
                   ref: ${{ github.event.inputs.branchName }}
 
-            - name: "✏️ Generate release changelog"
-              uses: janheinrichmerker/action-github-changelog-generator@v2.4
-              with:
-                  token: ${{ secrets.GITHUBTOKEN }}
-
             - name: Create Release
               id: create_release
               uses: actions/create-release@v1
@@ -35,17 +30,5 @@ jobs:
               with:
                   tag_name: ${{ github.event.inputs.tag_name }}
                   release_name: ${{ github.event.inputs.tag_name }}
-                  body: |
-                      ${{ steps.generate_changelog.outputs.changelog }}
                   draft: false
                   prerelease: ${{ github.event.inputs.prerelease }}
-
-            - name: Checkout code at tag
-              uses: actions/checkout@v2
-              with:
-                  ref: ${{ github.event.inputs.tag_name }}
-
-            - name: Build Project
-              run: |
-                  # add your build commands here, depending on your project's requirements.
-                  echo "Build project here"

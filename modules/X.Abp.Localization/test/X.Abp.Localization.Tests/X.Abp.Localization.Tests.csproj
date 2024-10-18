@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\..\..\configureawait.props" />
-  <Import Project="..\..\..\..\modules.props" />
+  <Import Project="..\..\..\..\common.test.props" />
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
