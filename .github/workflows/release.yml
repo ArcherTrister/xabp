@@ -22,6 +22,12 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branchName }}
 
+      - name: Generate Changelog
+        id: generate_changelog
+        uses: juliangruber/github-action-changelog-generator@v2
+        with:
+          token: ${{ secrets.GITHUBTOKEN }}
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -30,6 +36,8 @@ jobs:
         with:
           tag_name: ${{ github.event.inputs.tag_name }}
           release_name: ${{ github.event.inputs.tag_name }}
+          body: |
+            ${{ steps.generate_changelog.outputs.changelog }}
           draft: false
           prerelease: ${{ github.event.inputs.prerelease }}
 

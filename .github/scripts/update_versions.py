@@ -20,7 +20,7 @@ def update_latest_versions():
 
 def create_pr():
     g = Github(os.environ["GITHUB_TOKEN"])
-    repo = g.get_repo("abpframework/abp")
+    repo = g.get_repo("ArcherTrister/xabp")
 
     branch_name = f"update-latest-versions-{os.environ['GITHUB_REF'].split('/')[-1]}"
     base = repo.get_branch("dev")
