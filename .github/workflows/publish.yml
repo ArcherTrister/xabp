@@ -15,7 +15,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.200
+        global-json-file: ./global.json
 
     - name: Install NuGet
       uses: nuget/setup-nuget@v1
@@ -23,11 +23,13 @@ jobs:
         nuget-version: '5.x'
 
     - name: Pack All Packages
+    - if: (github.ref == 'refs/heads/dev' || contains(github.ref, 'refs/tags/'))
       run: .\nuget-pack.ps1 -f
       working-directory: .\deploy
       shell: powershell
 
     - name: Publish All Packages
+    - if: (github.ref == 'refs/heads/dev' || contains(github.ref, 'refs/tags/'))
       run: .\nuget-push.ps1 -url "https://api.nuget.org/v3/index.json" -key ${{ secrets.NUGETKEY }} -f
       working-directory: .\deploy
       shell: powershell
