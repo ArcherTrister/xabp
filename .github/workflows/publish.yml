@@ -1,35 +1,33 @@
 name: "Publish"
 
 on:
-  push:
-    tags:
-        - "*.*.*"
+    push:
+        tags:
+            - "*.*.*"
 
 jobs:
-  publish:
-    name: "Publish"
-    runs-on: "windows-latest"
-    steps:
-    - uses: actions/checkout@v3
-  
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        global-json-file: ./global.json
+    publish:
+        name: "Publish"
+        runs-on: "windows-latest"
+        steps:
+            - uses: actions/checkout@v3
 
-    - name: Install NuGet
-      uses: nuget/setup-nuget@v1
-      with:
-        nuget-version: '5.x'
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v3
+              with:
+                  global-json-file: ./global.json
 
-    - name: Pack All Packages
-    - if: (github.ref == 'refs/heads/dev' || contains(github.ref, 'refs/tags/'))
-      run: .\nuget-pack.ps1 -f
-      working-directory: .\deploy
-      shell: powershell
+            - name: Install NuGet
+              uses: nuget/setup-nuget@v1
+              with:
+                  nuget-version: "5.x"
 
-    - name: Publish All Packages
-    - if: (github.ref == 'refs/heads/dev' || contains(github.ref, 'refs/tags/'))
-      run: .\nuget-push.ps1 -url "https://api.nuget.org/v3/index.json" -key ${{ secrets.NUGETKEY }} -f
-      working-directory: .\deploy
-      shell: powershell
+            - name: Pack All Packages
+              run: .\nuget-pack.ps1 -f
+              working-directory: .\deploy
+              shell: powershell
+
+            - name: Publish All Packages
+              run: .\nuget-push.ps1 -url "https://api.nuget.org/v3/index.json" -key ${{ secrets.NUGETKEY }} -f
+              working-directory: .\deploy
+              shell: powershell
