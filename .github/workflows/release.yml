@@ -15,6 +15,9 @@ on:
 
 jobs:
     build:
+        permissions:
+            contents: write # for release-drafter/release-drafter to create a github release
+            pull-requests: write # for release-drafter/release-drafter to add label to PR
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -22,13 +25,24 @@ jobs:
               with:
                   ref: ${{ github.event.inputs.branchName }}
 
+            # - name: Create Release
+            #   id: create_release
+            #   uses: actions/create-release@v1
+            #   env:
+            #       GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+            #   with:
+            #       tag_name: ${{ github.event.inputs.tag_name }}
+            #       release_name: ${{ github.event.inputs.tag_name }}
+            #       draft: false
+            #       prerelease: ${{ github.event.inputs.prerelease }}
+
             - name: Create Release
               id: create_release
-              uses: actions/create-release@v1
+              uses: release-drafter/release-drafter@v6
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
               with:
-                  tag_name: ${{ github.event.inputs.tag_name }}
-                  release_name: ${{ github.event.inputs.tag_name }}
-                  draft: false
+                  tag: ${{ github.event.inputs.tag_name }}
+                  name: ${{ github.event.inputs.tag_name }}
+                  publish: true
                   prerelease: ${{ github.event.inputs.prerelease }}
