@@ -88,7 +88,7 @@ Love XAbp? **Please give a star** to this repository :star:
 ### 💖💖 If you find this framework useful, maybe you can buy me a coffee. 💖💖
 
 <p align="center">
-  <img alt="pay" src="https://cdn.jsdelivr.net/gh/ArcherTrister/ArcherTrister@master/assets/pay.jpg" onerror="this.src='https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg'" />
+  <img alt="pay" src="https://ghp.ci/https://raw.githubusercontent.com/ArcherTrister/ArcherTrister/main/assets/pay.jpg" onerror="this.src='https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg'" />
 </p>
 
 Donate money by [PayPal](https://www.paypal.me/archertrister/) to my account [archertrister@outlook.com](https://www.paypal.me/archertrister/)
@@ -154,3 +154,21 @@ Donate money by [PayPal](https://www.paypal.me/archertrister/) to my account [ar
 -   [x] X.Abp.MultiLayer.SeparateAuthServer(xamlsas)
 -   [ ] X.Abp.MultiLayer.SeparatedTenantSchema(xamlsts)
 -   [x] X.Abp.SingleLayer(xasl)
+
+## Git contribution commit specification
+
+-   See ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
+
+    -   `feat` Add new features
+    -   `fix` FIX ISSUES/BUGS
+    -   `style` The code style does not affect the running result
+    -   `perf` Optimizations/performance improvements
+    -   `refactor` reconstitution
+    -   `revert` Undo the modification
+    -   `test` Test-related
+    -   `docs` Documents/Notes
+    -   `chore` Dependency updates/scaffolding configuration modifications, etc
+    -   `workflow` Workflow improvements
+    -   `ci` Continuous integration
+    -   `types` Type definition file changes
+    -   `wip` Under development

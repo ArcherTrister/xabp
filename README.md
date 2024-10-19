@@ -91,7 +91,7 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 ### 💖💖 If you find this framework useful, maybe you can buy me a coffee. 💖💖
 
 <p align="center">
-  <img alt="pay" src="https://cdn.jsdelivr.net/gh/ArcherTrister/ArcherTrister@master/assets/pay.jpg" onerror="this.src='https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg'" />
+  <img alt="pay" src="https://ghp.ci/https://raw.githubusercontent.com/ArcherTrister/ArcherTrister/main/assets/pay.jpg" onerror="this.src='https://gcore.jsdelivr.net/gh/ArcherTrister/ArcherTrister@main/assets/pay.jpg'" />
 </p>
 
 ## 计划
@@ -159,18 +159,18 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 
 ## Git 贡献提交规范
 
-- 参考([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
+-   参考([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
 
-  - `feat` 增加新功能
-  - `fix` 修复问题/BUG
-  - `style` 代码风格相关无影响运行结果的
-  - `perf` 优化/性能提升
-  - `refactor` 重构
-  - `revert` 撤销修改
-  - `test` 测试相关
-  - `docs` 文档/注释
-  - `chore` 依赖更新/脚手架配置修改等
-  - `workflow` 工作流改进
-  - `ci` 持续集成
-  - `types` 类型定义文件更改
-  - `wip` 开发中
+    -   `feat` 增加新功能
+    -   `fix` 修复问题/BUG
+    -   `style` 代码风格相关无影响运行结果的
+    -   `perf` 优化/性能提升
+    -   `refactor` 重构
+    -   `revert` 撤销修改
+    -   `test` 测试相关
+    -   `docs` 文档/注释
+    -   `chore` 依赖更新/脚手架配置修改等
+    -   `workflow` 工作流改进
+    -   `ci` 持续集成
+    -   `types` 类型定义文件更改
+    -   `wip` 开发中
