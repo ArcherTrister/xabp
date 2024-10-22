@@ -8,7 +8,7 @@ assignees: ""
 
 ### Documentation
 
-Please check the official documentation before asking questions: https://docs.abp.io
+Please check the official documentation before asking questions: https://github.com/ArcherTrister/xabp/issues
 
 ### GitHub Issues
 
@@ -16,11 +16,11 @@ GitHub issues are for bug reports, feature requests, and other discussions about
 
 If you're creating a bug/problem report, please include the followings:
 
-- Your **ABP Framework version**.
-- Your **User Interface** type (Angular/MVC/React... etc.) if the issue is related to a specific UI
-- Your database provider(EF Core/MongoDB)
-- Exception message and **stack trace** if available (check the logs).
-- Steps needed to **reproduce** the problem.
+-   Your **Framework version**.
+    ~~- Your **User Interface** type (Angular/MVC/React... etc.) if the issue is related to a specific UI~~
+-   Your database provider(EF Core/MongoDB)
+-   Exception message and **stack trace** if available (check the logs).
+-   Steps needed to **reproduce** the problem.
 
 Please **write in Chinese**.
 
@@ -28,6 +28,6 @@ Please **write in Chinese**.
 
 Please use Stack Overflow for your questions about using the framework, templates, and samples:
 
-https://stackoverflow.com/questions/tagged/abp
+https://stackoverflow.com/questions/tagged/xabp
 
-Use **abp** tag in your questions.
+Use **xabp** tag in your questions.

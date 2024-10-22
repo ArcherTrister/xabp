@@ -21,7 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configs", "configs", "{5C3E
 		docfx.json = docfx.json
 		.github\FUNDING.yml = .github\FUNDING.yml
 		global.json = global.json
-		latest-versions.json = latest-versions.json
 		LICENSE = LICENSE
 		modules.props = modules.props
 		deploy\nuget-api-key.txt = deploy\nuget-api-key.txt
