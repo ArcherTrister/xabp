@@ -354,10 +354,10 @@ public class TemplateCreateProjectService : ICreateProjectService, ISingletonDep
             case AbpTemplateConsts.IdentityServer.SeparatedAuthServer:
             case AbpTemplateConsts.IdentityServer.SeparatedTenantSchema:
             case AbpTemplateConsts.IdentityServer.SeparatedAuthServerSeparatedTenantSchema:
-            case AbpTemplateConsts.Openiddict.Default:
-            case AbpTemplateConsts.Openiddict.SeparatedAuthServer:
-            case AbpTemplateConsts.Openiddict.SeparatedTenantSchema:
-            case AbpTemplateConsts.Openiddict.SeparatedAuthServerSeparatedTenantSchema:
+            case AbpTemplateConsts.OpenIddict.Default:
+            case AbpTemplateConsts.OpenIddict.SeparatedAuthServer:
+            case AbpTemplateConsts.OpenIddict.SeparatedTenantSchema:
+            case AbpTemplateConsts.OpenIddict.SeparatedAuthServerSeparatedTenantSchema:
                 efCoreProjectPath = Directory.GetFiles(projectArgs.OutputFolder, "*EntityFrameworkCore.csproj", SearchOption.AllDirectories).FirstOrDefault();
                 isLayeredTemplate = true;
                 break;

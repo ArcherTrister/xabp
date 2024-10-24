@@ -1,9 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "ArcherTrister",
-  "classifications": ["Abp Vnext Pro/Openiddict/Web/WebAPI"],
-  "name": "Abp Vnext Pro Openiddict Microservice Ocelot Template",
-  "identity": "X.Abp.Openiddict.Microservice.Ocelot",
+  "classifications": ["Abp Vnext Pro/OpenIddict/Web/WebAPI"],
+  "name": "Abp Vnext Pro OpenIddict Microservice Ocelot Template",
+  "identity": "X.Abp.OpenIddict.Microservice.Ocelot",
   "shortName": "xaodmo",
   "tags": {
     "language": "C#",

@@ -1,9 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "ArcherTrister",
-  "classifications": [ "Abp Vnext Pro/Openiddict/Web/WebAPI" ],
-  "name": "Abp Vnext Pro Openiddict Template",
-  "identity": "X.Abp.Openiddict",
+  "classifications": ["Abp Vnext Pro/OpenIddict/Web/WebAPI"],
+  "name": "Abp Vnext Pro OpenIddict Template",
+  "identity": "X.Abp.OpenIddict",
   "shortName": "xaod",
   "tags": {
     "language": "C#",
@@ -103,10 +103,10 @@
         {
           "type": "conditional",
           "configuration": {
-            "if": [ "---#if" ],
-            "else": [ "---#else" ],
-            "elseif": [ "---#elseif", "---#elif" ],
-            "endif": [ "---#endif" ],
+            "if": ["---#if"],
+            "else": ["---#else"],
+            "elseif": ["---#elseif", "---#elif"],
+            "endif": ["---#endif"],
             "trim": "true",
             "wholeLine": "true"
           }
@@ -119,7 +119,7 @@
       "modifiers": [
         {
           "condition": "(!IncludeVue)",
-          "exclude": [ "vue/**/*" ]
+          "exclude": ["vue/**/*"]
         },
         {
           "condition": "(!EnableSwaggerEnumFilter)",

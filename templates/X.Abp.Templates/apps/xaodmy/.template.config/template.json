@@ -1,9 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "ArcherTrister",
-  "classifications": ["Abp Vnext Pro/Openiddict/Web/WebAPI"],
-  "name": "Abp Vnext Pro Openiddict Microservice Yarp Template",
-  "identity": "X.Abp.Openiddict.Microservice.Yarp",
+  "classifications": ["Abp Vnext Pro/OpenIddict/Web/WebAPI"],
+  "name": "Abp Vnext Pro OpenIddict Microservice Yarp Template",
+  "identity": "X.Abp.OpenIddict.Microservice.Yarp",
   "shortName": "xaodmy",
   "tags": {
     "language": "C#",

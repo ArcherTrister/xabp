@@ -8,33 +8,54 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.Chat\src\X.Abp.Chat.Domain\X.Abp.Chat.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.CmsKit.Pro\src\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.FileManagement\src\X.Abp.FileManagement.Domain\X.Abp.FileManagement.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.Forms\src\X.Abp.Forms.Domain\X.Abp.Forms.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.Gdpr\src\X.Abp.Gdpr.Domain\X.Abp.Gdpr.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.Domain\X.Abp.Identity.Pro.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.IdentityServer.Pro\src\X.Abp.IdentityServer.Pro.Domain\X.Abp.IdentityServer.Pro.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.LanguageManagement\src\X.Abp.LanguageManagement.Domain\X.Abp.LanguageManagement.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.Notification\src\X.Abp.Notification.Domain\X.Abp.Notification.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.OpenIddict.Pro\src\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.Payment\src\X.Abp.Payment.Domain\X.Abp.Payment.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.Saas\src\X.Abp.Saas.Domain\X.Abp.Saas.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.TextTemplateManagement\src\X.Abp.TextTemplateManagement.Domain\X.Abp.TextTemplateManagement.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\modules\X.Abp.VersionManagement\src\X.Abp.VersionManagement.Domain\X.Abp.VersionManagement.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.Chat\src\X.Abp.Chat.Domain\X.Abp.Chat.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.CmsKit.Pro\src\X.Abp.CmsKit.Pro.Domain\X.Abp.CmsKit.Pro.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.FileManagement\src\X.Abp.FileManagement.Domain\X.Abp.FileManagement.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.Forms\src\X.Abp.Forms.Domain\X.Abp.Forms.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.Gdpr\src\X.Abp.Gdpr.Domain\X.Abp.Gdpr.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.Identity.Pro\src\X.Abp.Identity.Pro.Domain\X.Abp.Identity.Pro.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.IdentityServer.Pro\src\X.Abp.IdentityServer.Pro.Domain\X.Abp.IdentityServer.Pro.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.LanguageManagement\src\X.Abp.LanguageManagement.Domain\X.Abp.LanguageManagement.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.Notification\src\X.Abp.Notification.Domain\X.Abp.Notification.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.OpenIddict.Pro\src\X.Abp.OpenIddict.Pro.Domain\X.Abp.OpenIddict.Pro.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.Payment\src\X.Abp.Payment.Domain\X.Abp.Payment.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.Saas\src\X.Abp.Saas.Domain\X.Abp.Saas.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.TextTemplateManagement\src\X.Abp.TextTemplateManagement.Domain\X.Abp.TextTemplateManagement.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\modules\X.Abp.VersionManagement\src\X.Abp.VersionManagement.Domain\X.Abp.VersionManagement.Domain.csproj" />
     <ProjectReference Include="..\AbpVnext.Pro.Domain.Shared\AbpVnext.Pro.Domain.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Emailing" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.AuditLogging.Domain" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain" VersionOverride="$(AbpPackageVersion)" />
-    <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain"
+      VersionOverride="$(AbpPackageVersion)" />
     <PackageReference Include="Volo.Abp.Sms" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 

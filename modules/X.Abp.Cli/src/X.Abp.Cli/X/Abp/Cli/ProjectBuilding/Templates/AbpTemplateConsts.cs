@@ -25,7 +25,7 @@ public class AbpTemplateConsts
         public const string Microservices = "xais4m";
     }
 
-    public class Openiddict
+    public class OpenIddict
     {
         public const string Default = "xaod";
         public const string SeparatedTenantSchema = "xaodsts";

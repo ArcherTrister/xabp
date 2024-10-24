@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\..\..\configureawait.props" />
-  <Import Project="..\..\..\..\modules.props" />
+  <Import Project="..\..\..\..\common.test.props" />
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -26,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\src\X.Abp.OpenIddict.Pro.Domain\X.Abp.OpenIddict.Pro.Domain.csproj" />
   </ItemGroup>
 
 </Project>

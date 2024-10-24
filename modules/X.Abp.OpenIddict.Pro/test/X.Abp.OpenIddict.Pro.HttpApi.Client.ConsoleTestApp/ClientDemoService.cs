@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -13,126 +17,124 @@ namespace X.Abp.OpenIddict;
 
 public class ClientDemoService : ITransientDependency
 {
-  //private readonly ISampleAppService _sampleAppService;
-  private readonly IIdentityModelAuthenticationService _authenticationService;
-  private readonly IConfiguration _configuration;
+    // private readonly ISampleAppService _sampleAppService;
+    private readonly IIdentityModelAuthenticationService _authenticationService;
 
-  public ClientDemoService(
-      //ISampleAppService sampleAppService,
-      IIdentityModelAuthenticationService authenticationService,
-      IConfiguration configuration)
-  {
-    //_sampleAppService = sampleAppService;
-    _authenticationService = authenticationService;
-    _configuration = configuration;
-  }
+    private readonly IConfiguration _configuration;
 
-  public virtual async Task RunAsync()
-  {
-    await TestWithHttpClientAndIdentityModelAuthenticationServiceAsync();
-    await TestAllManuallyAsync();
-  }
-
-  /* Shows how to use HttpClient to perform a request to the HTTP API.
-   * It uses ABP's IIdentityModelAuthenticationService to simplify obtaining access tokens.
-   */
-  private async Task TestWithHttpClientAndIdentityModelAuthenticationServiceAsync()
-  {
-    Console.WriteLine();
-    Console.WriteLine($"***** {nameof(TestWithHttpClientAndIdentityModelAuthenticationServiceAsync)} *****");
-
-    //Get access token using ABP's IIdentityModelAuthenticationService
-
-    var accessToken = await _authenticationService.GetAccessTokenAsync(
-        new IdentityClientConfiguration(
-            _configuration["IdentityClients:Default:Authority"],
-            _configuration["IdentityClients:Default:Scope"],
-            _configuration["IdentityClients:Default:ClientId"],
-            _configuration["IdentityClients:Default:ClientSecret"],
-            _configuration["IdentityClients:Default:GrantType"],
-            _configuration["IdentityClients:Default:UserName"],
-            _configuration["IdentityClients:Default:UserPassword"]
-        )
-    );
-
-    //Perform the actual HTTP request
-
-    using (var httpClient = new HttpClient())
+    public ClientDemoService(
+        // ISampleAppService sampleAppService,
+        IIdentityModelAuthenticationService authenticationService,
+        IConfiguration configuration)
     {
-      httpClient.SetBearerToken(accessToken);
-
-      var url = _configuration["RemoteServices:Pro:BaseUrl"] +
-                "api/Pro/sample/authorized";
-
-      var responseMessage = await httpClient.GetAsync(url);
-      if (responseMessage.IsSuccessStatusCode)
-      {
-        var responseString = await responseMessage.Content.ReadAsStringAsync();
-        Console.WriteLine("Result: " + responseString);
-      }
-      else
-      {
-        throw new Exception("Remote server returns error code: " + responseMessage.StatusCode);
-      }
-    }
-  }
-
-  /* Shows how to use HttpClient to perform a request to the HTTP API.
-   */
-  private async Task TestAllManuallyAsync()
-  {
-    Console.WriteLine();
-    Console.WriteLine($"***** {nameof(TestAllManuallyAsync)} *****");
-
-    //Obtain access token from the IDS4 server
-
-    // discover endpoints from metadata
-    var client = new HttpClient();
-    var disco = await client.GetDiscoveryDocumentAsync(_configuration["IdentityClients:Default:Authority"]);
-    if (disco.IsError)
-    {
-      Console.WriteLine(disco.Error);
-      return;
+        // _sampleAppService = sampleAppService;
+        _authenticationService = authenticationService;
+        _configuration = configuration;
     }
 
-    // request token
-    var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+    public virtual async Task RunAsync()
     {
-      Address = disco.TokenEndpoint,
-      ClientId = _configuration["IdentityClients:Default:ClientId"],
-      ClientSecret = _configuration["IdentityClients:Default:ClientSecret"],
-      UserName = _configuration["IdentityClients:Default:UserName"],
-      Password = _configuration["IdentityClients:Default:UserPassword"],
-      Scope = _configuration["IdentityClients:Default:Scope"]
-    });
-
-    if (tokenResponse.IsError)
-    {
-      Console.WriteLine(tokenResponse.Error);
-      return;
+        await TestWithHttpClientAndIdentityModelAuthenticationServiceAsync();
+        await TestAllManuallyAsync();
     }
 
-    Console.WriteLine(tokenResponse.Json);
+    /* Shows how to use HttpClient to perform a request to the HTTP API.
+     * It uses ABP's IIdentityModelAuthenticationService to simplify obtaining access tokens.
+     */
 
-    //Perform the actual HTTP request
-
-    using (var httpClient = new HttpClient())
+    private async Task TestWithHttpClientAndIdentityModelAuthenticationServiceAsync()
     {
-      httpClient.SetBearerToken(tokenResponse.AccessToken);
+        Console.WriteLine();
+        Console.WriteLine($"***** {nameof(TestWithHttpClientAndIdentityModelAuthenticationServiceAsync)} *****");
 
-      var url = _configuration["RemoteServices:Pro:BaseUrl"] +
-                "api/Pro/sample/authorized";
+        // Get access token using ABP's IIdentityModelAuthenticationService
+        var accessToken = await _authenticationService.GetAccessTokenAsync(
+            new IdentityClientConfiguration(
+                _configuration["IdentityClients:Default:Authority"],
+                _configuration["IdentityClients:Default:Scope"],
+                _configuration["IdentityClients:Default:ClientId"],
+                _configuration["IdentityClients:Default:ClientSecret"],
+                _configuration["IdentityClients:Default:GrantType"],
+                _configuration["IdentityClients:Default:UserName"],
+                _configuration["IdentityClients:Default:UserPassword"]));
 
-      var responseMessage = await httpClient.GetAsync(url);
-      if (responseMessage.IsSuccessStatusCode)
-      {
-        var responseString = await responseMessage.Content.ReadAsStringAsync();
-        Console.WriteLine("Result: " + responseString);
-      }
-      else
-      {
-        throw new Exception("Remote server returns error code: " + responseMessage.StatusCode);
-      }
+        // Perform the actual HTTP request
+        using (var httpClient = new HttpClient())
+        {
+            httpClient.SetBearerToken(accessToken);
+
+            var url = _configuration["RemoteServices:Pro:BaseUrl"] +
+                      "api/Pro/sample/authorized";
+
+            var responseMessage = await httpClient.GetAsync(url);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var responseString = await responseMessage.Content.ReadAsStringAsync();
+                Console.WriteLine("Result: " + responseString);
+            }
+            else
+            {
+                throw new Exception("Remote server returns error code: " + responseMessage.StatusCode);
+            }
+        }
     }
-  }
+
+    /* Shows how to use HttpClient to perform a request to the HTTP API.
+     */
+
+    private async Task TestAllManuallyAsync()
+    {
+        Console.WriteLine();
+        Console.WriteLine($"***** {nameof(TestAllManuallyAsync)} *****");
+
+        // Obtain access token from the IDS4 server
+
+        // discover endpoints from metadata
+        var client = new HttpClient();
+        var disco = await client.GetDiscoveryDocumentAsync(_configuration["IdentityClients:Default:Authority"]);
+        if (disco.IsError)
+        {
+            Console.WriteLine(disco.Error);
+            return;
+        }
+
+        // request token
+        var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+        {
+            Address = disco.TokenEndpoint,
+            ClientId = _configuration["IdentityClients:Default:ClientId"],
+            ClientSecret = _configuration["IdentityClients:Default:ClientSecret"],
+            UserName = _configuration["IdentityClients:Default:UserName"],
+            Password = _configuration["IdentityClients:Default:UserPassword"],
+            Scope = _configuration["IdentityClients:Default:Scope"]
+        });
+
+        if (tokenResponse.IsError)
+        {
+            Console.WriteLine(tokenResponse.Error);
+            return;
+        }
+
+        Console.WriteLine(tokenResponse.Json);
+
+        // Perform the actual HTTP request
+        using (var httpClient = new HttpClient())
+        {
+            httpClient.SetBearerToken(tokenResponse.AccessToken);
+
+            var url = _configuration["RemoteServices:Pro:BaseUrl"] +
+                      "api/Pro/sample/authorized";
+
+            var responseMessage = await httpClient.GetAsync(url);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var responseString = await responseMessage.Content.ReadAsStringAsync();
+                Console.WriteLine("Result: " + responseString);
+            }
+            else
+            {
+                throw new Exception("Remote server returns error code: " + responseMessage.StatusCode);
+            }
+        }
+    }
 }

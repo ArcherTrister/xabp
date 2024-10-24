@@ -21,7 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configs", "configs", "{5C3E
 		docfx.json = docfx.json
 		.github\FUNDING.yml = .github\FUNDING.yml
 		global.json = global.json
-		latest-versions.json = latest-versions.json
 		LICENSE = LICENSE
 		modules.props = modules.props
 		deploy\nuget-api-key.txt = deploy\nuget-api-key.txt
@@ -184,11 +183,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{FEB5FB
 		build\test-all.ps1 = build\test-all.ps1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Openiddict.Pro.Domain", "modules\X.Abp.OpenIddict.Pro\src\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj", "{D1630945-5922-4704-B58A-A5C65FAD6981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.OpenIddict.Pro.Domain", "modules\X.Abp.OpenIddict.Pro\src\X.Abp.OpenIddict.Pro.Domain\X.Abp.OpenIddict.Pro.Domain.csproj", "{D1630945-5922-4704-B58A-A5C65FAD6981}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Openiddict.Pro.Domain.Shared", "modules\X.Abp.OpenIddict.Pro\src\X.Abp.Openiddict.Pro.Domain.Shared\X.Abp.Openiddict.Pro.Domain.Shared.csproj", "{476C901B-6CE8-48B7-A83B-B475FDCDDE1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.OpenIddict.Pro.Domain.Shared", "modules\X.Abp.OpenIddict.Pro\src\X.Abp.OpenIddict.Pro.Domain.Shared\X.Abp.OpenIddict.Pro.Domain.Shared.csproj", "{476C901B-6CE8-48B7-A83B-B475FDCDDE1A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Openiddict.Pro.EntityFrameworkCore", "modules\X.Abp.OpenIddict.Pro\src\X.Abp.Openiddict.Pro.EntityFrameworkCore\X.Abp.Openiddict.Pro.EntityFrameworkCore.csproj", "{B76F2BA3-E74D-4D72-AF47-D3DA92E0B681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.OpenIddict.Pro.EntityFrameworkCore", "modules\X.Abp.OpenIddict.Pro\src\X.Abp.OpenIddict.Pro.EntityFrameworkCore\X.Abp.OpenIddict.Pro.EntityFrameworkCore.csproj", "{B76F2BA3-E74D-4D72-AF47-D3DA92E0B681}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Account.Pro.Public.Web.Shared", "modules\X.Abp.Account.Pro\src\X.Abp.Account.Pro.Public.Web.Shared\X.Abp.Account.Pro.Public.Web.Shared.csproj", "{5863BDD5-397D-4529-BED5-7B8A960ACC0F}"
 EndProject
