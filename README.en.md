@@ -131,20 +131,20 @@ Donate money by [PayPal](https://www.paypal.me/archertrister/) to my account [ar
 
 -   [x] IdentityServer4
 
--   [ ] Openiddict
+-   [ ] OpenIddict
 
 ### Templates
 
 -   [x] ~~X.Abp.IdentityServer4(xais4)~~
--   [x] ~~X.Abp.Openiddict(xaod)~~
+-   [x] ~~X.Abp.OpenIddict(xaod)~~
 -   [x] X.Abp.IdentityServer4.SeparatedTenantSchema(xais4sts)
--   [x] X.Abp.Openiddict.SeparatedTenantSchema(xaodsts)
+-   [x] X.Abp.OpenIddict.SeparatedTenantSchema(xaodsts)
 -   [ ] ~~X.Abp.IdentityServer4.SeparatedAuthServer~~
--   [ ] ~~X.Abp.Openiddict.SeparatedAuthServer~~
+-   [ ] ~~X.Abp.OpenIddict.SeparatedAuthServer~~
 -   [ ] ~~X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema~~
--   [ ] ~~X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema~~
+-   [ ] ~~X.Abp.OpenIddict.SeparatedAuthServer.SeparatedTenantSchema~~
 -   [x] X.Abp.IdentityServer4.Microservices(xais4mo or xais4my)
--   [x] X.Abp.Openiddict.Microservices(xaodmo or xaodmy)
+-   [x] X.Abp.OpenIddict.Microservices(xaodmo or xaodmy)
 -   [ ] vue
 
 ---

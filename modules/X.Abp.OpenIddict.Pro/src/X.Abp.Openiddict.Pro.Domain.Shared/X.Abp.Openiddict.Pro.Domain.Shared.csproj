@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Openiddict.Domain.Shared" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain.Shared" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>

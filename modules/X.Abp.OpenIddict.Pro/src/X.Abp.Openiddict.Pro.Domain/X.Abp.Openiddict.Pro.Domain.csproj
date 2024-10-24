@@ -11,12 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Openiddict.Domain" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain" VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X.Abp.OpenIddict.Pro.Domain.Shared\X.Abp.OpenIddict.Pro.Domain.Shared.csproj" />
+    <ProjectReference Include="..\X.Abp.OpenIddict.Pro.Domain.Shared\X.Abp.OpenIddict.Pro.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

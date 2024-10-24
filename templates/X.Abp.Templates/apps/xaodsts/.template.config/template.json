@@ -1,9 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "ArcherTrister",
-  "classifications": ["Abp Vnext Pro/Openiddict/Web/WebAPI"],
-  "name": "Abp Vnext Pro Openiddict SeparatedTenantSchema Template",
-  "identity": "X.Abp.Openiddict.SeparatedTenantSchema",
+  "classifications": ["Abp Vnext Pro/OpenIddict/Web/WebAPI"],
+  "name": "Abp Vnext Pro OpenIddict SeparatedTenantSchema Template",
+  "identity": "X.Abp.OpenIddict.SeparatedTenantSchema",
   "shortName": "xaodsts",
   "tags": {
     "language": "C#",

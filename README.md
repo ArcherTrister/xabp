@@ -133,20 +133,20 @@ XAbp 是一个基于**ABP Framework**框架的完整**基础架构**。通过遵
 
 -   [x] IdentityServer4
 
--   [ ] Openiddict
+-   [ ] OpenIddict
 
 ### 模板
 
 -   [x] ~~X.Abp.IdentityServer4(xais4)~~
--   [x] ~~X.Abp.Openiddict(xaod)~~
+-   [x] ~~X.Abp.OpenIddict(xaod)~~
 -   [x] X.Abp.IdentityServer4.SeparatedTenantSchema(xais4sts)
--   [x] X.Abp.Openiddict.SeparatedTenantSchema(xaodsts)
+-   [x] X.Abp.OpenIddict.SeparatedTenantSchema(xaodsts)
 -   [ ] ~~X.Abp.IdentityServer4.SeparatedAuthServer~~
--   [ ] ~~X.Abp.Openiddict.SeparatedAuthServer~~
+-   [ ] ~~X.Abp.OpenIddict.SeparatedAuthServer~~
 -   [ ] ~~X.Abp.IdentityServer4.SeparatedAuthServer.SeparatedTenantSchema~~
--   [ ] ~~X.Abp.Openiddict.SeparatedAuthServer.SeparatedTenantSchema~~
+-   [ ] ~~X.Abp.OpenIddict.SeparatedAuthServer.SeparatedTenantSchema~~
 -   [x] X.Abp.IdentityServer4.Microservices(xais4mo or xais4my)
--   [x] X.Abp.Openiddict.Microservices(xaodmo or xaodmy)
+-   [x] X.Abp.OpenIddict.Microservices(xaodmo or xaodmy)
 -   [ ] vue
 
 ---
