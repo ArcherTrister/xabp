@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\X.Abp.Openiddict.Pro.Domain.Shared\X.Abp.Openiddict.Pro.Domain.Shared.csproj" />
+    <ProjectReference
+      Include="..\X.Abp.OpenIddict.Pro.Domain.Shared\X.Abp.OpenIddict.Pro.Domain.Shared.csproj" />
   </ItemGroup>
 
 </Project>

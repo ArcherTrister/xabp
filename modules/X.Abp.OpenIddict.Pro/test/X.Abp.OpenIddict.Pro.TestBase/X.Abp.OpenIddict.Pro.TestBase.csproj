@@ -25,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj" />
+    <ProjectReference
+      Include="..\..\src\X.Abp.OpenIddict.Pro.Domain\X.Abp.OpenIddict.Pro.Domain.csproj" />
   </ItemGroup>
 
 </Project>

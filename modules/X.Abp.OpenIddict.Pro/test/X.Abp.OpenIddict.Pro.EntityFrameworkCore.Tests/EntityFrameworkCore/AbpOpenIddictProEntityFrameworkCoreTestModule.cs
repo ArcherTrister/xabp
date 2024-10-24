@@ -1,4 +1,8 @@
-﻿using Microsoft.Data.Sqlite;
+﻿// Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+// See https://github.com/ArcherTrister/xabp
+// for more information concerning the license and the contributors participating to this project.
+
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -15,8 +19,7 @@ namespace X.Abp.OpenIddict.EntityFrameworkCore;
     typeof(AbpOpenIddictProTestBaseModule),
     typeof(AbpOpenIddictProEntityFrameworkCoreModule),
     typeof(AbpIdentityProEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqliteModule)
-    )]
+    typeof(AbpEntityFrameworkCoreSqliteModule))]
 public class AbpOpenIddictProEntityFrameworkCoreTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

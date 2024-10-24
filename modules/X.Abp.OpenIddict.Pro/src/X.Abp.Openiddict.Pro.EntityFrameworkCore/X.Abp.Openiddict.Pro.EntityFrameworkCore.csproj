@@ -11,11 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Openiddict.EntityFrameworkCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Openiddict.EntityFrameworkCore"
+      VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj" />
+    <ProjectReference Include="..\X.Abp.OpenIddict.Pro.Domain\X.Abp.OpenIddict.Pro.Domain.csproj" />
   </ItemGroup>
 
 </Project>

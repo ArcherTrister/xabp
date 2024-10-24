@@ -31,11 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.OpenIddict.Pro.HttpAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.OpenIddict.Pro.AspNetCore", "src\X.Abp.OpenIddict.Pro.AspNetCore\X.Abp.OpenIddict.Pro.AspNetCore.csproj", "{4211350A-A9BC-4A26-BAA4-133EB0C96D31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Openiddict.Pro.Domain", "src\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj", "{CD068F37-49D7-446E-9BBB-7EE5622BAAF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.OpenIddict.Pro.Domain", "src\X.Abp.OpenIddict.Pro.Domain\X.Abp.OpenIddict.Pro.Domain.csproj", "{CD068F37-49D7-446E-9BBB-7EE5622BAAF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Openiddict.Pro.Domain.Shared", "src\X.Abp.Openiddict.Pro.Domain.Shared\X.Abp.Openiddict.Pro.Domain.Shared.csproj", "{52807BF7-0E57-4691-82D4-D698E9ADF345}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.OpenIddict.Pro.Domain.Shared", "src\X.Abp.OpenIddict.Pro.Domain.Shared\X.Abp.OpenIddict.Pro.Domain.Shared.csproj", "{52807BF7-0E57-4691-82D4-D698E9ADF345}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.Openiddict.Pro.EntityFrameworkCore", "src\X.Abp.Openiddict.Pro.EntityFrameworkCore\X.Abp.Openiddict.Pro.EntityFrameworkCore.csproj", "{69617CF6-33CB-42A2-84F0-DC223427240C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Abp.OpenIddict.Pro.EntityFrameworkCore", "src\X.Abp.OpenIddict.Pro.EntityFrameworkCore\X.Abp.OpenIddict.Pro.EntityFrameworkCore.csproj", "{69617CF6-33CB-42A2-84F0-DC223427240C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Abp.OpenIddict.Pro.MongoDB", "src\X.Abp.OpenIddict.Pro.MongoDB\X.Abp.OpenIddict.Pro.MongoDB.csproj", "{0D6A839B-5C09-4F9A-A828-91A6EC10D50D}"
 EndProject

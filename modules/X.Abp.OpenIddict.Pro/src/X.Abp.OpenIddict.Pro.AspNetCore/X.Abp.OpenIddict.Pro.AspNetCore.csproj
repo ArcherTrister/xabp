@@ -5,19 +5,20 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <AssemblyName>X.Abp.Openiddict.Pro.AspNetCore</AssemblyName>
-    <PackageId>X.Abp.Openiddict.Pro.AspNetCore</PackageId>
+    <AssemblyName>X.Abp.OpenIddict.Pro.AspNetCore</AssemblyName>
+    <PackageId>X.Abp.OpenIddict.Pro.AspNetCore</PackageId>
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
     <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.OpenIddict.AspNetCore" VersionOverride="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.OpenIddict.AspNetCore"
+      VersionOverride="$(AbpPackageVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\X.Abp.Openiddict.Pro.Domain\X.Abp.Openiddict.Pro.Domain.csproj" />
+    <ProjectReference Include="..\X.Abp.OpenIddict.Pro.Domain\X.Abp.OpenIddict.Pro.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
