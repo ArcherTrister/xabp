@@ -43,7 +43,7 @@ jobs:
 
     - name: chown
       run: |
-        sudo chown -R $USER:$USER /home/runneradmin
+        sudo chown -R ${USER}:${USER} /home/runneradmin
 
     - name: Build All
       run: .\build-all.ps1 -f
