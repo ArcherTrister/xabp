@@ -104,7 +104,7 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Account.UpdateExternalProviderDto, X.Abp.Account.Pro.Admin.Application.Contracts, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Account.UpdateExternalProviderDto, X.Abp.Account.Pro.Admin.Application.Contracts, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                       "type": "System.Collections.Generic.List<X.Abp.Account.UpdateExternalProviderDto>",
                       "typeSimple": "[X.Abp.Account.UpdateExternalProviderDto]",
                       "isOptional": false,
@@ -300,7 +300,7 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Account.UpdateExternalProviderDto, X.Abp.Account.Pro.Admin.Application.Contracts, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Account.UpdateExternalProviderDto, X.Abp.Account.Pro.Admin.Application.Contracts, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                   "type": "System.Collections.Generic.List<X.Abp.Account.UpdateExternalProviderDto>",
                   "typeSimple": "[X.Abp.Account.UpdateExternalProviderDto]",
                   "isOptional": false,

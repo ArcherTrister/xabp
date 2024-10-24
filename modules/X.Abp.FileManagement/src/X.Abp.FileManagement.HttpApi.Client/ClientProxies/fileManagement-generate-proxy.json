@@ -612,7 +612,7 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.FileManagement.Files.FileUploadPreInfoRequest, X.Abp.FileManagement.Application.Contracts, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.FileManagement.Files.FileUploadPreInfoRequest, X.Abp.FileManagement.Application.Contracts, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                       "type": "System.Collections.Generic.List<X.Abp.FileManagement.Files.FileUploadPreInfoRequest>",
                       "typeSimple": "[X.Abp.FileManagement.Files.FileUploadPreInfoRequest]",
                       "isOptional": false,
@@ -851,7 +851,7 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.FileManagement.Files.FileUploadPreInfoRequest, X.Abp.FileManagement.Application.Contracts, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.FileManagement.Files.FileUploadPreInfoRequest, X.Abp.FileManagement.Application.Contracts, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                   "type": "System.Collections.Generic.List<X.Abp.FileManagement.Files.FileUploadPreInfoRequest>",
                   "typeSimple": "[X.Abp.FileManagement.Files.FileUploadPreInfoRequest]",
                   "isOptional": false,

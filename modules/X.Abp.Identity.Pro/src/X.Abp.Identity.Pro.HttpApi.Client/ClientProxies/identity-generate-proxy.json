@@ -455,7 +455,7 @@
                     },
                     {
                       "name": "input",
-                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityRoleClaimUpdateDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityRoleClaimUpdateDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                       "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimUpdateDto>",
                       "typeSimple": "[X.Abp.Identity.IdentityRoleClaimUpdateDto]",
                       "isOptional": false,
@@ -862,7 +862,7 @@
                 },
                 {
                   "name": "input",
-                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityRoleClaimUpdateDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityRoleClaimUpdateDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                   "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityRoleClaimUpdateDto>",
                   "typeSimple": "[X.Abp.Identity.IdentityRoleClaimUpdateDto]",
                   "isOptional": false,
@@ -2190,7 +2190,7 @@
                     },
                     {
                       "name": "input",
-                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityUserClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                      "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityUserClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                       "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityUserClaimDto>",
                       "typeSimple": "[X.Abp.Identity.IdentityUserClaimDto]",
                       "isOptional": false,
@@ -3335,7 +3335,7 @@
                 },
                 {
                   "name": "input",
-                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityUserClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.3.1.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "typeAsString": "System.Collections.Generic.List`1[[X.Abp.Identity.IdentityUserClaimDto, X.Abp.Identity.Pro.Application.Contracts, Version=8.3.2.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
                   "type": "System.Collections.Generic.List<X.Abp.Identity.IdentityUserClaimDto>",
                   "typeSimple": "[X.Abp.Identity.IdentityUserClaimDto]",
                   "isOptional": false,
