@@ -48,7 +48,7 @@ jobs:
     - name: Build All
       run: ./build-all.ps1
       working-directory: ./build
-      shell: pow
+      shell: pwsh
 
     - name: Test All
       run: ./test-all.ps1
